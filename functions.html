@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. Functions in finite element spaces &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="next" title="6. Assembling and solving finite element problems" href="finite_element_problems.html" />
+    <link rel="prev" title="4. Function spaces: associating data with meshes" href="function_spaces.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://bitbucket.org/finiteelement/finite_element_course" title="Bitbucket">Bitbucket</a></li>
+<!--          <li class="page_item"><a href="documentation.html" title="Documentation for FInAT">Documentation</a></li>
+          <li class="page_item"><a href="download.html" title="Obtain the FInAT code">Download</a></li>
+          <li class="page_item"><a href="team.html" title="The guilty parties">Team</a></li>
+          <li class="page_item"><a href="publications.html" title="Publications">Publications</a></li>
+          <li class="page_item"><a href="funding.html" title="Our financial supporters">Funding</a></li>
+          <li class="page_item"><a href="contact.html" title="Getting in touch">Contact</a></li>
+          <li class="page_item"><a href="http://buildbot-ocean.ese.ic.ac.uk:8080/builders/FInAT-trunk" title="Buildbot">Buildbot</a></li>-->
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="functions-in-finite-element-spaces">
+<h1>5. Functions in finite element spaces<a class="headerlink" href="#functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h1>
+<p>Recall that the general form of a function in a finite element space is:</p>
+<div class="math" id="equation-function">
+<span class="eqno">(1)</span>\[f(x) = \sum_i f_i \phi_i(x)\]</div>
+<p>Where the <span class="math">\(\phi_i(x)\)</span> are now the global basis functions achieved by
+stitching together the local basis functions defined by the
+<a class="reference internal" href="finite_elements.html#secfinitelement"><em>finite element</em></a>.</p>
+<div class="section" id="a-python-implementation-of-functions-in-finite-element-spaces">
+<h2>5.1. A python implementation of functions in finite element spaces<a class="headerlink" href="#a-python-implementation-of-functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> class provides a
+simple implementation of function storage. The input is a
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a> which defines the
+mesh and finite element to be employed, to which the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> adds an array of degree of
+freedom values, one for each node in the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a>.</p>
+</div>
+<div class="section" id="interpolating-values-into-finite-element-spaces">
+<h2>5.2. Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have a function <span class="math">\(g(x): \mathbb{R}^n \rightarrow \mathbb{R}\)</span>
+which we wish to approximate in as a function <span class="math">\(f(x)\)</span> in some finite
+element space <span class="math">\(V\)</span>. In other words, we want to find the <span class="math">\(f_i\)</span> such that:</p>
+<div class="math">
+<span class="eqno">(2)</span>\[\sum_i f_i \phi_i(x) \approx g(x)\]</div>
+<p>The simplest way to do this is to <em>interpolate</em> <span class="math">\(g(x)\)</span> onto <span class="math">\(V\)</span>. In
+other words, we evaluate:</p>
+<div class="math">
+<span class="eqno">(3)</span>\[f_i = n_i(g(x))\]</div>
+<p>where <span class="math">\(n_i\)</span> is the node associated with <span class="math">\(\phi_i\)</span>. Since we are only
+concerned with point evaluation nodes, this is equivalent to:</p>
+<div class="math">
+<span class="eqno">(4)</span>\[f_i = g(x_i)\]</div>
+<p>where <span class="math">\(x_i\)</span> is the coordinate vector of the point defining the node
+<span class="math">\(n_i\)</span>. This looks straightforward, however the <span class="math">\(x_i\)</span> are the <em>global</em>
+node points, and so far we have only defined the node points in
+<em>local</em> coordinates on the reference element.</p>
+<div class="section" id="changing-coordinates-between-reference-and-physical-space">
+<span id="coordinates"></span><h3>5.2.1. Changing coordinates between reference and physical space<a class="headerlink" href="#changing-coordinates-between-reference-and-physical-space" title="Permalink to this headline">¶</a></h3>
+<p>We&#8217;ll refer to coordinates on the global mesh as being in <em>physical
+space</em> while those on the reference element are in <em>local
+space</em>. We&#8217;ll use case to distinguish local and global objects, so
+local coordinates will be written as <span class="math">\(X\)</span> and global coordinates as
+<span class="math">\(x\)</span>. The key observation is that within each cell, the global
+coordinates are the linear interpolation of the global coordinate
+values at the cell vertices. In other words, if <span class="math">\(\{\Psi_j\}\)</span> is the
+local basis for the <strong>linear</strong> lagrange elements on the reference cell and
+<span class="math">\(\hat{x}_j\)</span> are the corresponding global vertex locations on a cell <span class="math">\(c\)</span>
+then:</p>
+<div class="math" id="equation-change">
+<span class="eqno">(5)</span>\[x = \sum_j \hat{x}_j \Psi_j(X) \quad \forall x \in c.\]</div>
+<p>Remember that we know the location of the nodes in local coordinates,
+and we have the
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal"><span class="pre">tabulate()</span></code></a> method to
+evaluate all the basis functions of an element at a known set of
+points. So if we write:</p>
+<div class="math" id="equation-foo0">
+<span class="eqno">(6)</span>\[A_{i,j} = \Psi_j(X_i)\]</div>
+<p>where {X_i} are the node points of our finite element, then:</p>
+<div class="math" id="equation-foo1">
+<span class="eqno">(7)</span>\[x = A\cdot \hat{x}\]</div>
+<p>Where <span class="math">\(\hat{x}\)</span> is the <span class="math">\((\dim+1, \dim)\)</span> array whose rows are the current
+element vertex coordinates, and <span class="math">\(x\)</span> is the <span class="math">\((\textrm{nodes}, \dim)\)</span> array whose
+rows are the global coordinates of the nodes in the current
+element. We can then apply <span class="math">\(g()\)</span> to each row of <span class="math">\(x\)</span> in turn and record
+the result as the <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> value
+for that node.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">The observant reader will notice that this algorithm is inefficient
+because the function values at nodes on the boundaries of elements
+are evaluated more than once. This can be avoided with a little
+tedious bookkeeping but we will not concern ourselves with that
+here.</p>
+</div>
+</div>
+<div class="section" id="looking-up-cell-coordinates-and-values">
+<h3>5.2.2. Looking up cell coordinates and values<a class="headerlink" href="#looking-up-cell-coordinates-and-values" title="Permalink to this headline">¶</a></h3>
+<p>In the previous section we used the vertex coordinates of a cell to
+find the node coordinates, and then we calculated
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> values at those
+points. The coordinates are stored in a single long list associated
+with the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>, and the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> contains a single long
+list of values. We need to use <em>indirect addressing</em> to access these
+values. This is best illustrated using some Python code.</p>
+<p>Suppose <code class="docutils literal"><span class="pre">f</span></code> is a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>.
+For brevity, we write <code class="docutils literal"><span class="pre">fs</span> <span class="pre">=</span> <span class="pre">f.function_space</span></code>, the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a> associated with
+<code class="docutils literal"><span class="pre">f</span></code>. Now, we first need a linear element and a corresponding
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cg1</span> <span class="o">=</span> <span class="n">fe_utils</span><span class="o">.</span><span class="n">LagrangeElement</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">cg1fs</span> <span class="o">=</span> <span class="n">fe_utils</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cg1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then the vertex indices of cell number <code class="docutils literal"><span class="pre">c</span></code> in the correct order for the linear Lagrange element are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cg1fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+<p>and therefore the set of coordinate vectors for the vertices of
+element <code class="docutils literal"><span class="pre">c</span></code> are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">vertex_coords</span><span class="p">[</span><span class="n">cg1fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:],</span> <span class="p">:]</span>
+</pre></div>
+</div>
+<p>That is, the <code class="docutils literal"><span class="pre">cg1fs.cell_nodes</span></code> array is used to look up the right
+vertex coordinates. By a similar process we can access the values
+associated with the nodes of element <code class="docutils literal"><span class="pre">c</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">f</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-python-implementation-of-interpolation">
+<h3>5.2.3. A Python implementation of interpolation<a class="headerlink" href="#a-python-implementation-of-interpolation" title="Permalink to this headline">¶</a></h3>
+<p>Putting together the change of coordinates with the right indirect
+addressing, we can provide the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> class with a
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a> method which
+interpolates a user-provided function onto the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>.</p>
+<div class="theoremenv exercise">
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">13</span></div><div class="theoremenv_body exercise_body">Read and understand the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a> method. Use
+<code class="docutils literal"><span class="pre">test/plot_sin_function.py</span></code> to investigate interpolating different
+functions onto finite element spaces at differering resolutions and
+polynomial degrees.</div></div><div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">There is no implementation work associated with this exercise, but
+the programming constructs used in
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a> will be
+needed when you implement integration.</p>
+</div>
+</div>
+</div>
+<div class="section" id="integration">
+<span id="id1"></span><h2>5.3. Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
+<p>We now come to one of the fundamental operations in the finite element
+method: integrating a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> over
+the domain. The full finite element method actually requires the
+integration of expressions of unknown test and trial functions, but we
+will start with the more straightforward case of integrating a single,
+known, <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> over a domain
+<span class="math">\(\Omega\)</span>:</p>
+<div class="math">
+<span class="eqno">(8)</span>\[\int_\Omega f \mathrm{d} x \quad f \in V\]</div>
+<p>where <span class="math">\(\mathrm{d}x\)</span> should be understood as being the volume measure
+with the correct dimension for the domain and <span class="math">\(V\)</span> is some finite
+element space over <span class="math">\(\Omega\)</span>. We can express this integral as a sum of
+integrals over individual cells:</p>
+<div class="math" id="equation-integral_sum">
+<span class="eqno">(9)</span>\[\int_\Omega f \mathrm{d} x = \sum_{c\in\Omega} \int_c f \mathrm{d} x.\]</div>
+<p>So we have in fact reduced the integration problem to the problem of
+integrating <span class="math">\(f\)</span> over each cell. In <a class="reference internal" href="quadrature.html"><em>a previous part</em></a>
+of the module we implemented quadrature rules which enable us to
+integrate over specified reference cells. If we can express the
+integral over some arbitrary cell <span class="math">\(c\)</span> as an integral over a reference
+cell <span class="math">\(c_0\)</span> then we are done. In fact this simply requires us to employ
+the change of variables formula for integration:</p>
+<div class="math">
+<span class="eqno">(10)</span>\[\int_{c} f(x) \mathrm{d} x = \int_{c_0} f(X) |J|\mathrm{d} X\]</div>
+<p>where <span class="math">\(|J|\)</span> is the absolute value of the determinant of the Jacobian
+matrix. <span class="math">\(J\)</span> is given by:</p>
+<div class="math" id="equation-jacobian_def">
+<span class="eqno">(11)</span>\[J_{\alpha\beta} = \frac{\partial x_\alpha}{\partial X_\beta}.\]</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">We will generally adopt the convention of using Greek letters to
+indicate indices in spatial dimensions, while we will use Roman
+letters in the sequence <span class="math">\(i,j,\ldots\)</span> for basis function indices. We
+will continue to use <span class="math">\(q\)</span> for the index over the quadrature points.</p>
+</div>
+<p>Evaluating <a href="#equation-jacobian_def">(11)</a> depends on having an expression for <span class="math">\(x\)</span> in
+terms of <span class="math">\(X\)</span>. Fortunately, <a href="#equation-change">(5)</a> is exactly this expression,
+and applying the usual rule for differentiating functions in finite
+element spaces produces:</p>
+<div class="math" id="equation-jacobian">
+<span class="eqno">(12)</span>\[J_{\alpha\beta} = \sum_j (\tilde{x}_j)_\alpha \nabla_\beta\Psi_j(X)\]</div>
+<p>where <span class="math">\(\{\Psi_j\}\)</span> is once again the degree 1 Lagrange basis and
+<span class="math">\(\{\tilde{x}_j\}\)</span> are the coordinates of the corresponding vertices of
+cell <span class="math">\(c\)</span>. The presence of <span class="math">\(X\)</span> in <a href="#equation-jacobian">(12)</a> implies that the
+Jacobian varies spatially across the reference cell. However since
+<span class="math">\(\{\Psi_j\}\)</span> is the degree 1 Lagrange basis, the gradients of the
+basis functions are constant over the cell and so it does not matter
+at which point in the cell the Jacobian is evaluated. For example we
+might choose to evaluate the Jacobian at the cell origin <span class="math">\(X=0\)</span>.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">When using simplices with curved sides, and on all but the simplest
+quadrilateral or hexahedral meshes, the change of coordinates
+will not be affine. In that case, to preserve full accuracy it will be
+necessary to compute the Jacobian at every quadrature
+point. However, non-affine coordinate transforms are beyond the
+scope of this course.</p>
+</div>
+<div class="section" id="expressing-the-function-in-the-finite-element-basis">
+<h3>5.3.1. Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math">\(\{\Phi_i(X)\}\)</span> be a <strong>local</strong> basis for <span class="math">\(V\)</span> on the reference element
+<span class="math">\(c_0\)</span>. Then our integral becomes:</p>
+<div class="math">
+<span class="eqno">(13)</span>\[\int_c f(x)\mathrm{d}x  = \int_{c_0} \sum_i F(M(c,i))\,\Phi_i(X)\, |J|\,\mathrm{d} X\]</div>
+<p>where <span class="math">\(F\)</span> is the vector of global coefficient values of <span class="math">\(f\)</span>, and <span class="math">\(M\)</span> is <a class="reference internal" href="function_spaces.html#cell-node"><em>the cell node map</em></a>.</p>
+</div>
+<div class="section" id="numerical-quadrature">
+<h3>5.3.2. Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h3>
+<p>The actual evaluation of the integral will employ the quadrature rules
+we discussed in <a class="reference internal" href="quadrature.html"><em>a previous section</em></a>. Let <span class="math">\(\{X_q\},
+\{w_q\}\)</span> be a quadrature rule of sufficient degree of precision that
+the quadrature is exact. Then:</p>
+<div class="math" id="equation-integration">
+<span class="eqno">(14)</span>\[\int_c f(x)\mathrm{d}x  = \sum_q \sum_i F(M(c,i))\,\Phi_i(X_q)\, |J|\,w_q\]</div>
+</div>
+<div class="section" id="implementing-integration">
+<h3>5.3.3. Implementing integration<a class="headerlink" href="#implementing-integration" title="Permalink to this headline">¶</a></h3>
+<div class="theoremenv exercise">
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">14</span></div><div class="theoremenv_body exercise_body">Use <a href="#equation-jacobian">(12)</a> to implement the
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal"><span class="pre">jacobian()</span></code></a> method of
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>. <code class="docutils literal"><span class="pre">test/test_jacobian.py</span></code> is
+available for you to test your results.</div></div><div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">The <span class="math">\(\nabla_\beta\Psi_j(X)\)</span> factor in <a href="#equation-jacobian">(12)</a> is the same
+for every cell in the mesh. You could make your implementation more
+efficient by precalculating this term in the <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code>
+method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>.</p>
+</div>
+<div class="theoremenv exercise">
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">15</span></div><div class="theoremenv_body exercise_body">Use <a href="#equation-integral_sum">(9)</a> and <a href="#equation-integration">(14)</a> to implement
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a>.
+<code class="docutils literal"><span class="pre">test/test_integrate_function.py</span></code> may be used to test your
+implementation.</div></div><div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p>Your method will need to:</p>
+<ol class="last arabic simple">
+<li>Construct a suitable <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal"><span class="pre">QuadratureRule</span></code></a>.</li>
+<li><a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal"><span class="pre">tabulate()</span></code></a> the
+basis functions at each quadrature point.</li>
+<li>Visit each cell in turn.</li>
+<li>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal"><span class="pre">jacobian()</span></code></a> for that cell
+and take the absolute value of its determinant (<code class="xref py py-func docutils literal"><span class="pre">numpy.abs()</span></code>
+and <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.11)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
+<li>Sum all of the arrays you have constructed over the correct
+indices to a contribution to the integral (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.11)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a>
+may be useful for this).</li>
+</ol>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You might choose to read ahead before implementing
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a>, since the
+<code class="xref py py-func docutils literal"><span class="pre">errornorm()</span></code> function is very similar and may provide a useful
+template for your work.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>

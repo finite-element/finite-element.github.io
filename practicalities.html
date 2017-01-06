@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Practical matters &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="next" title="Computational tools" href="tools.html" />
+    <link rel="prev" title="Finite elements, analysis and implementation" href="index.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://bitbucket.org/finiteelement/finite_element_course" title="Bitbucket">Bitbucket</a></li>
+<!--          <li class="page_item"><a href="documentation.html" title="Documentation for FInAT">Documentation</a></li>
+          <li class="page_item"><a href="download.html" title="Obtain the FInAT code">Download</a></li>
+          <li class="page_item"><a href="team.html" title="The guilty parties">Team</a></li>
+          <li class="page_item"><a href="publications.html" title="Publications">Publications</a></li>
+          <li class="page_item"><a href="funding.html" title="Our financial supporters">Funding</a></li>
+          <li class="page_item"><a href="contact.html" title="Getting in touch">Contact</a></li>
+          <li class="page_item"><a href="http://buildbot-ocean.ese.ic.ac.uk:8080/builders/FInAT-trunk" title="Buildbot">Buildbot</a></li>-->
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="practical-matters">
+<h1>Practical matters<a class="headerlink" href="#practical-matters" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="lecturers">
+<h2>Lecturers<a class="headerlink" href="#lecturers" title="Permalink to this headline">¶</a></h2>
+<p>The module is led by <a class="reference external" href="http://www.imperial.ac.uk/people/colin.cotter">Dr Colin Cotter</a> and <a class="reference external" href="http://www.imperial.ac.uk/people/david.ham">Dr David Ham</a>.</p>
+</div>
+<div class="section" id="accreditation">
+<h2>Accreditation<a class="headerlink" href="#accreditation" title="Permalink to this headline">¶</a></h2>
+<p>This module is an accredited elective in the <a class="reference external" href="http://www.imperial.ac.uk/study/pg/courses/mathematics/applied-mathematics/">MSc in Applied
+Mathematics</a>
+and the <a class="reference external" href="http://mpecdt.org">MRes in Mathematics of Planet Earth</a>. It
+is also an approved elective for second and third year PhD students in
+the <a class="reference external" href="http://www3.imperial.ac.uk/fluidscdt">CDT in Fluid Dymanics Accross Scales</a>. Other masters and PhD
+students wishing to take the module should contact the lecturers in
+the first instance.</p>
+</div>
+<div class="section" id="assumed-knowledge">
+<h2>Assumed knowledge<a class="headerlink" href="#assumed-knowledge" title="Permalink to this headline">¶</a></h2>
+<p>The theory component of the module will assume only a familiarity with
+PDEs, vector calculus and basic undergraduate analysis. The
+implementation part of the module additionally assumes some ability to
+program in a high level language (for example Python, Matlab, Java, C
+or C++). The implementation will be in Python, a very high level and
+simple language with similarities to Matlab. Students who are not
+familiar with Python will need to acquire some familiarity with the
+language, for example by doing one of the suggested tutorials.</p>
+</div>
+<div class="section" id="assessment">
+<h2>Assessment<a class="headerlink" href="#assessment" title="Permalink to this headline">¶</a></h2>
+<p>The theory part of the module will be assessed by an exam worth 50% of
+the module. The implementation part of the module will be assessed by
+submission of your working code implementing finite element in two
+dimensions. This will also be worth 50%</p>
+<div class="section" id="submitting-code-for-feedback">
+<h3>Submitting code for feedback<a class="headerlink" href="#submitting-code-for-feedback" title="Permalink to this headline">¶</a></h3>
+<p>The assessment of your finite element implementation will occur in a
+single submission at the end of term. However feedback on your
+progress will be available during the term. Informal feedback will be
+available during the labs, and you will have the opportunity to submit
+your code for formal feedback every two weeks during the term. The
+deadline for formal feedback submissions will be midnight on Sunday
+nights and feedback will be provided before the next Friday lab.</p>
+</div>
+<div class="section" id="mastery">
+<h3>Mastery<a class="headerlink" href="#mastery" title="Permalink to this headline">¶</a></h3>
+<p>All Department of Mathematics fourth year and masters courses must
+contain a mastery component.</p>
+<p>The mastery component of this module will be the extension exercise to
+the implementation project. The mastery project will be handed out
+approximately half way through term.</p>
+</div>
+</div>
+<div class="section" id="course-email-list">
+<h2>Course email list<a class="headerlink" href="#course-email-list" title="Permalink to this headline">¶</a></h2>
+<p>There is an email list for this module which will be used to
+communicate during the term and to which you need to subscribe. Please
+subscribe <a class="reference external" href="https://mailman.ic.ac.uk/mailman/listinfo/finite-element-course">here</a>. Failure
+to subscribe to the email list will not be regarded as an excuse!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>

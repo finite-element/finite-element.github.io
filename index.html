@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Finite elements, analysis and implementation &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="#" />
+    <link rel="next" title="Practical matters" href="practicalities.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="#"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://bitbucket.org/finiteelement/finite_element_course" title="Bitbucket">Bitbucket</a></li>
+<!--          <li class="page_item"><a href="documentation.html" title="Documentation for FInAT">Documentation</a></li>
+          <li class="page_item"><a href="download.html" title="Obtain the FInAT code">Download</a></li>
+          <li class="page_item"><a href="team.html" title="The guilty parties">Team</a></li>
+          <li class="page_item"><a href="publications.html" title="Publications">Publications</a></li>
+          <li class="page_item"><a href="funding.html" title="Our financial supporters">Funding</a></li>
+          <li class="page_item"><a href="contact.html" title="Getting in touch">Contact</a></li>
+          <li class="page_item"><a href="http://buildbot-ocean.ese.ic.ac.uk:8080/builders/FInAT-trunk" title="Buildbot">Buildbot</a></li>-->
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p>This is the webpage for the <a class="reference external" href="http://www.imperial.ac.uk/maths">Imperial College London Mathematics</a> final year and masters module
+M4A47/M5A47 Finite Elements: numerical analysis and
+implementation. Other people are welcome to make use of the
+material here. The authors welcome feedback and would particularly
+appreciate an <a class="reference external" href="mailto:david&#46;ham&#37;&#52;&#48;imperial&#46;ac&#46;uk">email</a> if this
+material is used to teach anywhere.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="practicalities.html">Practical matters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="practicalities.html#lecturers">Lecturers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practicalities.html#accreditation">Accreditation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practicalities.html#assumed-knowledge">Assumed knowledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practicalities.html#assessment">Assessment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="practicalities.html#submitting-code-for-feedback">Submitting code for feedback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="practicalities.html#mastery">Mastery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="practicalities.html#course-email-list">Course email list</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<a class="reference internal image-reference" href="_images/brenner_scott.png"><img alt="_images/brenner_scott.png" class="align-right" src="_images/brenner_scott.png" style="width: 20ex;" /></a>
+<div class="section" id="part-1-numerical-analysis">
+<h1>Part 1: Numerical analysis<a class="headerlink" href="#part-1-numerical-analysis" title="Permalink to this headline">¶</a></h1>
+<p>The theory part of the module will consist of two hours per week
+primarily composed of lectures, with occasional tutorials. This part of
+the module will be led by <a class="reference external" href="http://www.imperial.ac.uk/people/colin.cotter">Dr Colin Cotter</a>.</p>
+<p>The text for this part of the module is Brenner and Scott <em>The
+Mathematical Theory of Finite Element Methods</em>. Imperial College has
+fortunately paid for PDF access to this book, so it is accessible from
+the Imperial College network at <a class="reference external" href="http://link.springer.com/book/10.1007%2F978-0-387-75934-0">Springer Link</a>.</p>
+<div class="section" id="exercises">
+<h2>Exercises:<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="_static/FE_examples1.pdf">Examples sheet 1</a> and <a class="reference external" href="_static/FE_examples1_solns.pdf">solutions</a></li>
+<li><a class="reference external" href="_static/FE_examples2.pdf">Examples sheet 2</a> and <a class="reference external" href="_static/FE_examples2_solns.pdf">solutions</a></li>
+<li><a class="reference external" href="_static/FE_examples3.pdf">Examples sheet 3</a> and <a class="reference external" href="_static/FE_examples3_solns.pdf">solutions</a></li>
+</ul>
+</div>
+<div class="section" id="past-exam-papers">
+<h2>Past exam papers<a class="headerlink" href="#past-exam-papers" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="_static/FE2015-exam-revised.pdf">2015 exam paper</a> and <a class="reference external" href="_static/FE2015-exam-soln.pdf">solutions</a></li>
+<li><a class="reference external" href="_static/FE_mock_paper.pdf">Mock exam paper</a></li>
+<li><a class="reference external" href="_static/revision-checklist.pdf">revision checklist</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="part-2-implementation">
+<h1>Part 2: Implementation<a class="headerlink" href="#part-2-implementation" title="Permalink to this headline">¶</a></h1>
+<p>The implementation part of the module aims to give the students a
+deeper understanding of the finite element method through writing
+software to solve finite element problems in one and two dimensions.</p>
+<p>This part of the module will be taught by <a class="reference external" href="http://www.imperial.ac.uk/people/david.ham">Dr David Ham</a> in two hours per week
+of computer laboratory time.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Computational tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#access-to-computers">Access to computers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools.html#using-the-windows-machines-in-huxley-410">Using the Windows machines in Huxley 410</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html#using-your-own-windows-machine">Using your own Windows machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html#using-your-own-linux-machine">Using your own Linux machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html#using-your-own-mac">Using your own Mac</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#the-command-line">The command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bitbucket-and-git">Bitbucket and git</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools.html#getting-started-with-git-and-bitbucket">Getting started with git and Bitbucket</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#sharing-your-problems-with-gists">Sharing your problems with gists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#raising-hell-issues">Raising <span class="strikethrough">hell</span> issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">The implementation exercise</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#formalities-and-marking-scheme">Formalities and marking scheme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#extension-mastery-exercise">Extension (mastery) exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#obtaining-the-skeleton-code">Obtaining the skeleton code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-up-your-bitbucket-fork">Setting up your Bitbucket fork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#cloning-a-local-copy">Cloning a local copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#pointing-python-at-the-code-on-windows">Pointing Python at the code on Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#pointing-python-at-the-code-on-os-x-or-linux">Pointing Python at the code on OS X or Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#watching-for-updates-and-issues">Watching for updates and issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#updating-your-fork">Updating your fork</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#skeleton-code-documentation">Skeleton code documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#how-to-do-the-implementation-exercises">How to do the implementation exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#pull-requests-for-feedback">Pull requests for feedback</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#creating-your-pull-request">Creating your pull request</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#testing-your-work">Testing your work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#coding-style-and-commenting">Coding style and commenting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#tips-and-tricks-for-the-implementation-exercise">Tips and tricks for the implementation exercise</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Implementation exercise contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quadrature.html">1. Numerical quadrature</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#exact-and-incomplete-quadrature">1.1. Exact and incomplete quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#examples-in-one-dimension">1.2. Examples in one dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#reference-elements">1.3. Reference elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#python-implementations-of-reference-elements">1.4. Python implementations of reference elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#quadrature-rules-on-reference-elements">1.5. Quadrature rules on reference elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#legendre-gausz-quadrature-in-one-dimension">1.6. Legendre-Gauß quadrature in one dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#extending-legendre-gausz-quadrature-to-two-dimensions">1.7. Extending Legendre-Gauß quadrature to two dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quadrature.html#implementing-quadrature-rules-in-python">1.8. Implementing quadrature rules in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finite_elements.html">2. Constructing finite elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#a-worked-example">2.1. A worked example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#types-of-node">2.2. Types of node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#the-lagrange-element-nodes">2.3. The Lagrange element nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#solving-for-basis-functions">2.4. Solving for basis functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#implementing-finite-elements-in-python">2.5. Implementing finite elements in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#implementing-the-lagrange-elements">2.6. Implementing the Lagrange Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#tabulating-basis-functions">2.7. Tabulating basis functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#gradients-of-basis-functions">2.8. Gradients of basis functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_elements.html#interpolating-functions-to-the-finite-element-nodes">2.9. Interpolating functions to the finite element nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meshes.html">3. Meshes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meshes.html#mesh-entities">3.1. Mesh entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshes.html#reference-cell-entities">3.2. Reference cell entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshes.html#adjacency">3.3. Adjacency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshes.html#mesh-geometry">3.4. Mesh geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshes.html#a-mesh-implementation-in-python">3.5. A mesh implementation in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="function_spaces.html">4. Function spaces: associating data with meshes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_spaces.html#local-numbering-and-continuity">4.1. Local numbering and continuity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_spaces.html#implementing-local-numbering">4.2. Implementing local numbering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_spaces.html#global-numbering">4.3. Global numbering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_spaces.html#the-cell-node-map">4.4. The cell-node map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_spaces.html#implementing-function-spaces-in-python">4.5. Implementing function spaces in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">5. Functions in finite element spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#a-python-implementation-of-functions-in-finite-element-spaces">5.1. A python implementation of functions in finite element spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#interpolating-values-into-finite-element-spaces">5.2. Interpolating values into finite element spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#integration">5.3. Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finite_element_problems.html">6. Assembling and solving finite element problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finite_element_problems.html#assembling-the-right-hand-side">6.1. Assembling the right hand side</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_element_problems.html#assembling-the-left-hand-side-matrix">6.2. Assembling the left hand side matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_element_problems.html#the-method-of-manufactured-solutions">6.3. The method of manufactured solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_element_problems.html#errors-and-convergence">6.4. Errors and convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite_element_problems.html#implementing-finite-element-problems">6.5. Implementing finite element problems</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">7. Dirichlet boundary conditions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#an-algorithm-for-homogeneous-dirichlet-conditions">7.1. An algorithm for homogeneous Dirichlet conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#implementing-boundary-conditions">7.2. Implementing boundary conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#inhomogeneous-dirichlet-conditions">7.3. Inhomogeneous Dirichlet conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nonlinear_problems.html">8. Nonlinear problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nonlinear_problems.html#a-model-problem">8.1. A model problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nonlinear_problems.html#residual-form">8.2. Residual form</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nonlinear_problems.html#linearisation-and-gateaux-derivatives">8.3. Linearisation and Gâteaux Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nonlinear_problems.html#a-taylor-expansion-and-newton-s-method">8.4. A Taylor expansion and Newton&#8217;s method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nonlinear_problems.html#implementing-a-nonlinear-problem">8.5. Implementing a nonlinear problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zbibliography.html">9. References</a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>

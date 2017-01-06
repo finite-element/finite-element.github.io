@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The implementation exercise &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="next" title="1. Numerical quadrature" href="quadrature.html" />
+    <link rel="prev" title="Computational tools" href="tools.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://bitbucket.org/finiteelement/finite_element_course" title="Bitbucket">Bitbucket</a></li>
+<!--          <li class="page_item"><a href="documentation.html" title="Documentation for FInAT">Documentation</a></li>
+          <li class="page_item"><a href="download.html" title="Obtain the FInAT code">Download</a></li>
+          <li class="page_item"><a href="team.html" title="The guilty parties">Team</a></li>
+          <li class="page_item"><a href="publications.html" title="Publications">Publications</a></li>
+          <li class="page_item"><a href="funding.html" title="Our financial supporters">Funding</a></li>
+          <li class="page_item"><a href="contact.html" title="Getting in touch">Contact</a></li>
+          <li class="page_item"><a href="http://buildbot-ocean.ese.ic.ac.uk:8080/builders/FInAT-trunk" title="Buildbot">Buildbot</a></li>-->
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-implementation-exercise">
+<h1>The implementation exercise<a class="headerlink" href="#the-implementation-exercise" title="Permalink to this headline">¶</a></h1>
+<p>The object of the implementation exercise is to gain an understanding
+of the finite element method by producing a working one and two
+dimensional finite element solver library. Along the way you will have
+the opportunity to pick up valuable scientific computing skills in
+coding, software engineering and rigorous testing.</p>
+<p>There will be no conventional lectures for this part of the
+module. Instead, there will be eigteen 1 hour computer lab sessions
+during the term. Some of this time will involve explanations at the
+board, but much of the time will be an opportunity to develop your
+finite element implementation and receive help on how to do so.</p>
+<div class="section" id="formalities-and-marking-scheme">
+<h2>Formalities and marking scheme<a class="headerlink" href="#formalities-and-marking-scheme" title="Permalink to this headline">¶</a></h2>
+<p>The implementation exercise is due at the end of term. That is, by
+1700 on Wednesday 23 March. You must submit your work by emailing the
+lecturer the git commit code for the version of the code you would
+like marked. You can convenently find this code on the commits page
+for your repository on bitbucket. For the avoidance of doubt, the
+commit you submit must date from before the deadline!</p>
+<p>The marking scheme will be as follows:</p>
+<dl class="docutils">
+<dt>High first (80-100)</dt>
+<dd>As for bare first, but additionally the extension (mastery)
+component of the implementaton exercise has been completed correctly
+and clearly.</dd>
+<dt>Bare first (75-80)</dt>
+<dd>All parts of the implementation are correct and all tests pass. The
+code style is always very clear and the implementation of every
+exercise is transparent and elegant.</dd>
+<dt>Upper second (60-75)</dt>
+<dd>The implementation is correct but let down somewhat by poor coding
+style. Alternatively, submissions which are correct and well
+written up to and including solving the Helmholtz problem but
+which do not include a correct solution to boundary conditions will
+earn an upper second.</dd>
+<dt>Lower second (45-60)</dt>
+<dd>Most of the exercise is correctly implemented, but there are some
+test failures, or there are significant failures in coding style or
+in the transparency and elegance of solutions.</dd>
+<dt>Third (30-45)</dt>
+<dd>There are significant failings in the implementation resulting in
+many test failures, and/or the coding style and elegance are
+sufficiently poor that the code is hard to understand.</dd>
+<dt>Fail (0-30)</dt>
+<dd>The implementation is substantially incomplete. Correct
+implementations may have been provided for some of the earlier exercises but
+the more advanced parts of the implementation exercise have not been
+attempted or do not work.</dd>
+</dl>
+</div>
+<div class="section" id="extension-mastery-exercise">
+<h2>Extension (mastery) exercise<a class="headerlink" href="#extension-mastery-exercise" title="Permalink to this headline">¶</a></h2>
+<p>Completing the core implementation exercise will result in (at most) a
+mark of 80% for the implementation part of the module. The remaining
+20% will be allocated to an extension exercise which will be issued in
+the middle of the term. This is intended to enable the students who
+are doing best in the module to demonstrate their mastery of the
+material by implementing work which goes beyond the main body of work.</p>
+</div>
+<div class="section" id="obtaining-the-skeleton-code">
+<h2>Obtaining the skeleton code<a class="headerlink" href="#obtaining-the-skeleton-code" title="Permalink to this headline">¶</a></h2>
+<p>This section assumes you&#8217;ve already done the <a class="reference internal" href="tools.html#bitbucket-git"><em>Bitbucket tutorial</em></a>.</p>
+<div class="section" id="setting-up-your-bitbucket-fork">
+<h3>Setting up your Bitbucket fork<a class="headerlink" href="#setting-up-your-bitbucket-fork" title="Permalink to this headline">¶</a></h3>
+<p>You&#8217;ll need your own fork of the finite element repository so that you
+can add your implementation. First, <a class="reference external" href="https://bitbucket.org/account/signin/">log in to bitbucket</a>. Next you can <a class="reference external" href="https://bitbucket.org/finiteelement/finite_element_course/fork">create a fork
+of the repository</a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Select</strong> <code class="docutils literal"><span class="pre">This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">private</span> <span class="pre">repository</span></code> (this prevents plagiarism)</li>
+<li><strong>Unselect</strong> <code class="docutils literal"><span class="pre">Issue</span> <span class="pre">tracking</span></code> (all issues should go to the main project)</li>
+<li>Click <code class="docutils literal"><span class="pre">Fork</span> <span class="pre">repository</span></code> to create your own repository.</li>
+<li>On the right, click on <code class="docutils literal"><span class="pre">Send</span> <span class="pre">invitation</span></code> and invite <code class="docutils literal"><span class="pre">David_Ham</span></code>
+to your repository. This will ensure that the lecturer can see your
+work to provide help, feedback and marking.</li>
+</ul>
+</div></blockquote>
+<p>Your new fork only has a master branch. You&#8217;ll want to leave that
+alone to collect any updates which happen on the main repository. You
+will actually work on a branch, which we will call <code class="docutils literal"><span class="pre">implementation</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Click on the branch icon <a class="reference internal" href="_images/git-branch.svg"><img alt="git-branch" height="20px" src="_images/git-branch.svg" width="3ex" /></a> on the left.</li>
+<li>Now click on <code class="docutils literal"><span class="pre">create</span> <span class="pre">branch</span></code> on the extreme right.</li>
+<li>Enter <code class="docutils literal"><span class="pre">implementation</span></code> as the branch name.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="cloning-a-local-copy">
+<h3>Cloning a local copy<a class="headerlink" href="#cloning-a-local-copy" title="Permalink to this headline">¶</a></h3>
+<p>At the command line on your working machine type:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone &lt;url&gt;
+</pre></div>
+</div>
+<p>Substituting your git repository url for &lt;url&gt;. Your git repository
+url is at the top right of your repository page on Bitbucket. Next:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd finite_element_course
+git checkout implementation
+</pre></div>
+</div>
+<p>Your working directory is now a current checkout of your
+implementation branch.</p>
+</div>
+<div class="section" id="pointing-python-at-the-code-on-windows">
+<h3>Pointing Python at the code on Windows<a class="headerlink" href="#pointing-python-at-the-code-on-windows" title="Permalink to this headline">¶</a></h3>
+<p>By far the easiest way to have your Python find the code is to ensure
+your working directory is the right one. Type the following at the
+Python command line:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd h:\finite_element_course
+</pre></div>
+</div>
+</div>
+<div class="section" id="pointing-python-at-the-code-on-os-x-or-linux">
+<h3>Pointing Python at the code on OS X or Linux<a class="headerlink" href="#pointing-python-at-the-code-on-os-x-or-linux" title="Permalink to this headline">¶</a></h3>
+<p>You&#8217;ll need Python to be able to find the <code class="docutils literal"><span class="pre">fe_utils</span></code> package from
+wherever it is running. To do this, you need to add your repository
+directory to the <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variable. <strong>In your
+repository directory</strong> type the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>cat &gt;&gt; ~/.bashrc &lt;&lt; foo
+export PYTHONPATH=\$PYTHONPATH:$PWD
+foo
+</pre></div>
+</div>
+<p>The above line will update your <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> every time you log
+in. <strong>Just this once</strong> you need to update it for the current session:</p>
+<div class="highlight-python"><div class="highlight"><pre>export PYTHONPATH=$PYTHONPATH:$PWD
+</pre></div>
+</div>
+</div>
+<div class="section" id="watching-for-updates-and-issues">
+<h3>Watching for updates and issues<a class="headerlink" href="#watching-for-updates-and-issues" title="Permalink to this headline">¶</a></h3>
+<p>You should make sure you are notified of all updates on the main
+repository and all issues anyone raises. For this, you should navigate
+to <a class="reference external" href="https://bitbucket.org/finiteelement/finite_element_course">the main repository</a>. On the
+top right there is an eye icon. Select the drop-down box and ensure
+that <code class="docutils literal"><span class="pre">All</span> <span class="pre">issues</span></code> and <code class="docutils literal"><span class="pre">all</span> <span class="pre">commits</span></code> are selected.</p>
+</div>
+<div class="section" id="updating-your-fork">
+<h3>Updating your fork<a class="headerlink" href="#updating-your-fork" title="Permalink to this headline">¶</a></h3>
+<p>When you see that the main repository has been updated, you&#8217;ll need to
+update your fork to incorporate those changes. It is possible to do
+this using git commands on the command line, but there is a more
+simple graphical way to do it:</p>
+<ol class="arabic simple">
+<li>Make sure you have commited all your local changes <strong>and</strong> pushed
+them to bitbucket.</li>
+<li>Navigate to the bitbucket overview page for your repository. If
+there are changes to the main repository which are not yet in your
+fork, there will be a blue box on the right saying <code class="docutils literal"><span class="pre">This</span> <span class="pre">fork</span> <span class="pre">is</span> <span class="pre">n</span>
+<span class="pre">commits</span> <span class="pre">behind</span> <span class="pre">finiteelement/finite_element_course.</span></code> You should
+click on <code class="docutils literal"><span class="pre">Sync</span> <span class="pre">now.</span></code></li>
+<li>A window will appear confirming that you want to sync the
+repositories. Click <code class="docutils literal"><span class="pre">Sync</span></code>.</li>
+<li>Click on the branches icon: <a class="reference internal" href="_images/git-branch.svg"><img alt="git-branch" height="20px" src="_images/git-branch.svg" width="3ex" /></a>. Move your mouse over the
+<code class="docutils literal"><span class="pre">implementation</span></code> row and an elipsis (...) will appear on the
+right. Click on the elipsis and select <code class="docutils literal"><span class="pre">Sync</span> <span class="pre">branch</span></code> from the
+menu that appears.</li>
+<li>A window will appear confirming that you want to sync the
+branches. Click <code class="docutils literal"><span class="pre">Sync</span></code>.</li>
+<li>Update your local copy of the repository by typing <code class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></code>.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="skeleton-code-documentation">
+<h2>Skeleton code documentation<a class="headerlink" href="#skeleton-code-documentation" title="Permalink to this headline">¶</a></h2>
+<p>There is web documentation for the complete <a class="reference internal" href="fe_utils.html"><em>fe_utils package</em></a>. There is
+also an <a class="reference internal" href="genindex.html"><em>alphabetical index</em></a> and a <a class="reference internal" href="search.html"><em>search page</em></a>.</p>
+</div>
+<div class="section" id="how-to-do-the-implementation-exercises">
+<h2>How to do the implementation exercises<a class="headerlink" href="#how-to-do-the-implementation-exercises" title="Permalink to this headline">¶</a></h2>
+<p>The implementation exercises build up a finite element library from
+its component parts. Quite a lot of the coding infrastructure you will
+need is provided already. Your task is to write the crucial
+mathematical operations at key points. The mathematical operations
+required are described on this website, interspersed with exercises
+which require you to implement and test parts of the mathematics.</p>
+<p>The code on which you will build is in the <code class="docutils literal"><span class="pre">fe_utils</span></code> directory of
+your repository. The code has embedded documentation which is used to
+build the <a class="reference internal" href="fe_utils.html"><em>fe_utils package</em></a> web documentation.</p>
+<p>As you do the exercises, <strong>commit your code</strong> to your repository. This
+will build up your finite element library. You should commit code
+early and often - small commits are easier to understand and debug
+than large ones. <strong>Never</strong> commit back to the <code class="docutils literal"><span class="pre">master</span></code> branch of your
+fork, that should always remain a clean copy of the main repository.</p>
+</div>
+<div class="section" id="pull-requests-for-feedback">
+<h2>Pull requests for feedback<a class="headerlink" href="#pull-requests-for-feedback" title="Permalink to this headline">¶</a></h2>
+<p>There will be a formal opportunity to recieve feedback on your code
+progress every two weeks. To take part, you should set up a pull
+request from your <code class="docutils literal"><span class="pre">implementation</span></code> branch to the <code class="docutils literal"><span class="pre">master</span></code> branch
+of your repository. This will enable the lecturer to write line by
+line comments on your code. Make sure the pull request is against the
+<code class="docutils literal"><span class="pre">master</span></code> branch of your private fork - if you pull request against
+the main repository then the whole class will be able to plagiarise
+your work and laugh at your mistakes!</p>
+<div class="section" id="creating-your-pull-request">
+<h3>Creating your pull request<a class="headerlink" href="#creating-your-pull-request" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Click on the pull request icon <a class="reference internal" href="_images/pullrequest.png"><img alt="pullrequest" src="_images/pullrequest.png" style="width: 3ex; height: 20px;" /></a> on the left of your
+fork&#8217;s bitbucket page.</li>
+<li>On the top right of the pull requests screen click on <code class="docutils literal"><span class="pre">Create</span> <span class="pre">pull</span>
+<span class="pre">request</span></code>.</li>
+<li>Change the <strong>left</strong> dropdown box to <code class="docutils literal"><span class="pre">implementation</span></code>.</li>
+<li>Change the <strong>top right</strong> dropdown box to list your fork instead of
+the main repository. Leave the bottom right box set to <code class="docutils literal"><span class="pre">master</span></code>.</li>
+<li>Type a suitable title in the title box. For example
+<code class="docutils literal"><span class="pre">Request</span> <span class="pre">for</span> <span class="pre">feedback</span> <span class="pre">30/1/15</span></code>.</li>
+<li>If you have any comments you would like to pass on to the lecturer
+(for example questions about how you should have done a particular
+exercise) then type these in the <code class="docutils literal"><span class="pre">Description</span></code> box.</li>
+<li>Click <code class="docutils literal"><span class="pre">Create</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="testing-your-work">
+<h2>Testing your work<a class="headerlink" href="#testing-your-work" title="Permalink to this headline">¶</a></h2>
+<p>As you complete the exercises, there will often be test scripts which
+exercise the code you have just written. These are located in the
+<code class="docutils literal"><span class="pre">test</span></code> directory and employ the <a class="reference external" href="http://pytest.org/">pytest</a>
+testing framework. You run the tests with:</p>
+<div class="highlight-python"><div class="highlight"><pre>py.test test_script.py
+</pre></div>
+</div>
+<p>on the Bash command line or:</p>
+<div class="highlight-python"><div class="highlight"><pre>!py.test test/test_script.py
+</pre></div>
+</div>
+<p>from within Python, replacing <code class="docutils literal"><span class="pre">test_script.py</span></code> with the appropriate
+test file name. The <code class="docutils literal"><span class="pre">-x</span></code> option to <code class="docutils literal"><span class="pre">py.test</span></code> will cause the test
+to stop at the first failure it finds, which is often the best place
+to start fixing a problem. For those familiar with debuggers, the
+<code class="docutils literal"><span class="pre">--pdb</span></code> option will drop you into the Python debugger at the first
+error.</p>
+</div>
+<div class="section" id="coding-style-and-commenting">
+<h2>Coding style and commenting<a class="headerlink" href="#coding-style-and-commenting" title="Permalink to this headline">¶</a></h2>
+<p>Computer code is not just functional, it also conveys information to
+the reader. It is important to write clear, intelligible code. <strong>The
+readability and clarity of your code will count for marks</strong>.</p>
+<p>The Python community has agreed standards for coding, which are
+documented in <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>. There are programs and
+editor modes which can help you with this. The skeleton implementation
+follows PEP8 quite closely. You are encouraged, especially if you are
+a more experienced programmer, to follow PEP8 in your
+implementation. However nobody is going to lose marks for PEP8
+failures.</p>
+</div>
+<div class="section" id="tips-and-tricks-for-the-implementation-exercise">
+<h2>Tips and tricks for the implementation exercise<a class="headerlink" href="#tips-and-tricks-for-the-implementation-exercise" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Work from the documentation.</dt>
+<dd>The notes, and particularly the exercise specifications, contain
+important information about how and what to implement. If you just
+read the source code then you will miss out on important
+information.</dd>
+<dt>Read the hints</dt>
+<dd>The pink sections in the notes starting with a lightbulb are
+hints. Usually they contain suggestions about how to go about
+writing your answer, or suggest Python functions which you might
+find useful.</dd>
+<dt>Don&#8217;t forget the 1D case</dt>
+<dd>Your finite element library needs to work in one and two dimensions.</dd>
+<dt>Return a <code class="xref py py-class docutils literal"><span class="pre">numpy.array</span></code></dt>
+<dd>Many of the functions you have to write return arrays. Make sure
+you actually return an array and not a list (it&#8217;s usually fine to
+build the answer as a list, but convert it to an array before you
+return it).</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>

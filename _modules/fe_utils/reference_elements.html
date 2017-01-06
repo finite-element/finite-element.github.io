@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fe_utils.reference_elements &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="../../_static/featured.css">
+
+
+<link rel="shortcut icon" href="../../_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="../../index.html"><img src="../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://bitbucket.org/finiteelement/finite_element_course" title="Bitbucket">Bitbucket</a></li>
+<!--          <li class="page_item"><a href="../../documentation.html" title="Documentation for FInAT">Documentation</a></li>
+          <li class="page_item"><a href="../../download.html" title="Obtain the FInAT code">Download</a></li>
+          <li class="page_item"><a href="../../team.html" title="The guilty parties">Team</a></li>
+          <li class="page_item"><a href="../../publications.html" title="Publications">Publications</a></li>
+          <li class="page_item"><a href="../../funding.html" title="Our financial supporters">Funding</a></li>
+          <li class="page_item"><a href="../../contact.html" title="Getting in touch">Contact</a></li>
+          <li class="page_item"><a href="http://buildbot-ocean.ese.ic.ac.uk:8080/builders/FInAT-trunk" title="Buildbot">Buildbot</a></li>-->
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fe_utils.reference_elements</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="ReferenceCell"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.reference_elements.ReferenceCell">[docs]</a><span class="k">class</span> <span class="nc">ReferenceCell</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An object storing the geometry and topology of the reference cell.</span>
+
+<span class="sd">        :param vertices: a list of coordinate vectors corresponding to</span>
+<span class="sd">          the coordinates of the vertices of the cell.</span>
+<span class="sd">        :param topology: a dictionary of dictionaries such that topology[d][i]</span>
+<span class="sd">          is the list of vertices incident to the `i`-th `d`-entity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c">#: The vertices making up each topological entity of the reference cell.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topology</span> <span class="o">=</span> <span class="n">topology</span>
+
+        <span class="c">#: The list of coordinate veritices of the reference cell.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="c">#: The geometric and topological dimension of the reference cell.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Dimension mismatch between vertices and topology.&quot;</span><span class="p">)</span>
+
+        <span class="c">#: The number of entities of each dimension.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+
+<div class="viewcode-block" id="ReferenceCell.point_in_entity"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.reference_elements.ReferenceCell.point_in_entity">[docs]</a>    <span class="k">def</span> <span class="nf">point_in_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return true if the point x lies on the entity e.</span>
+
+<span class="sd">        :param x: The coordinate vector of the point.</span>
+<span class="sd">        :param e: The (d, i) pair describing the entity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">vertices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+        <span class="c"># Offset from first vertex.</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+        <span class="c"># Project onto space spanned by remaining vertices.</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">dv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="n">dx</span> <span class="o">-=</span> <span class="n">dv</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dv</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dv</span><span class="p">,</span> <span class="n">dv</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<span class="c">#: A :class:`ReferenceCell` storing the geometry and topology of the interval [0, 1].</span></div>
+<span class="n">ReferenceInterval</span> <span class="o">=</span> <span class="n">ReferenceCell</span><span class="p">(</span><span class="n">vertices</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]],</span>
+                                  <span class="n">topology</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span>
+                                            <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}},</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="s">&quot;ReferenceInterval&quot;</span><span class="p">)</span>
+
+<span class="c">#: A :class:`ReferenceCell` storing the geometry and topology of the triangle</span>
+<span class="c">#: with vertices [[0., 0.], [1., 0.], [0., 1.]].</span>
+<span class="n">ReferenceTriangle</span> <span class="o">=</span> <span class="n">ReferenceCell</span><span class="p">(</span><span class="n">vertices</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]],</span>
+                                  <span class="n">topology</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]},</span>
+                                            <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                                                <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                                                <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]},</span>
+                                            <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]}},</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="s">&quot;ReferenceTriangle&quot;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>

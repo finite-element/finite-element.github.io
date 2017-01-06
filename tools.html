@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Computational tools &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="next" title="The implementation exercise" href="implementation.html" />
+    <link rel="prev" title="Practical matters" href="practicalities.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://bitbucket.org/finiteelement/finite_element_course" title="Bitbucket">Bitbucket</a></li>
+<!--          <li class="page_item"><a href="documentation.html" title="Documentation for FInAT">Documentation</a></li>
+          <li class="page_item"><a href="download.html" title="Obtain the FInAT code">Download</a></li>
+          <li class="page_item"><a href="team.html" title="The guilty parties">Team</a></li>
+          <li class="page_item"><a href="publications.html" title="Publications">Publications</a></li>
+          <li class="page_item"><a href="funding.html" title="Our financial supporters">Funding</a></li>
+          <li class="page_item"><a href="contact.html" title="Getting in touch">Contact</a></li>
+          <li class="page_item"><a href="http://buildbot-ocean.ese.ic.ac.uk:8080/builders/FInAT-trunk" title="Buildbot">Buildbot</a></li>-->
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="computational-tools">
+<h1>Computational tools<a class="headerlink" href="#computational-tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="access-to-computers">
+<h2>Access to computers<a class="headerlink" href="#access-to-computers" title="Permalink to this headline">¶</a></h2>
+<p>You&#8217;ll need access to a suitable computer for the implementation
+work. The machines in Huxley 410 have suitable software installed, or you can use your own laptop running Windows, Linux, or OS X.</p>
+<div class="section" id="using-the-windows-machines-in-huxley-410">
+<h3>Using the Windows machines in Huxley 410<a class="headerlink" href="#using-the-windows-machines-in-huxley-410" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">From the start menu run <cite>Git Bash</cite>. This provides you with a Bash
+(Unix) command line from which you can run the git revision
+control software to manage your source code.</p>
+</li>
+<li><p class="first">Run <cite>Enthought Canopy</cite>. There should be a shortcut link on the left
+hand side of the desktop. Alternatively, you can find it via the
+start menu. The first time you run Canopy on a particular machine,
+one or two popup windows will appear. You should agree to whatever
+they ask!</p>
+</li>
+<li><p class="first">Launch the editor by clicking on the <cite>Editor</cite> button.</p>
+</li>
+<li><p class="first">Once you have cloned your git repositiory (more on this later), you
+will need to type the following command on the Python
+command line at the beginning of each session in order to ensure
+you are running from the correct directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd H:\finite_element_course
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="using-your-own-windows-machine">
+<h3>Using your own Windows machine<a class="headerlink" href="#using-your-own-windows-machine" title="Permalink to this headline">¶</a></h3>
+<p>In order to use your own Windows machine, you&#8217;ll simply need Python
+(with the right packages) and git. We recommend you install Enthought
+Canopy, but other Windows Python distributions should also work.</p>
+<ol class="arabic simple">
+<li>Download and install <cite>Enthought Canopy Express</cite> from <a class="reference external" href="https://store.enthought.com/#canopy-individual">here</a>.</li>
+<li>Download and install <cite>git</cite> from <a class="reference external" href="https://git-scm.com/download/win">here</a>.</li>
+<li>You should now be able to use git and Python exactly as in Huxley
+410, except that the directory where your finite element source
+code lives will be different (and may depend on how your Windows
+machine is set up).</li>
+</ol>
+</div>
+<div class="section" id="using-your-own-linux-machine">
+<h3>Using your own Linux machine<a class="headerlink" href="#using-your-own-linux-machine" title="Permalink to this headline">¶</a></h3>
+<p>If you plan to use your own machine for the module, you will need a
+basic scientific Python toolchain and the visualisation package
+Paraview. On Ubuntu and its relatives, this can be achieved with:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install ipython python-scipy python-pytest python-matplotlib paraview
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-your-own-mac">
+<h3>Using your own Mac<a class="headerlink" href="#using-your-own-mac" title="Permalink to this headline">¶</a></h3>
+<p>This is an experimental set of instructions for obtaining the software
+you need on Mac. Please say if you encounter any trouble.</p>
+<p>We recommend using <a class="reference external" href="http://brew.sh">Homebrew</a> as a package manager
+for the required packages on Mac OS systems.  Obtaining a build
+environment for PyOP2 consists of the following:</p>
+<ol class="arabic">
+<li><p class="first">Install Xcode.  For OS X 10.9 (Mavericks)  and later, this is possible through
+the App Store.  For earlier versions, try
+<a class="reference external" href="https://developer.apple.com/downloads">https://developer.apple.com/downloads</a> (note that on OS X 10.7
+(Lion) you will need to obtain Xcode 4.6 rather than Xcode 5)</p>
+</li>
+<li><p class="first">If you did not install Xcode 5, you will need to additionally
+install the Xcode command line tools through the downloads section
+of Xcode&#8217;s preferences</p>
+</li>
+<li><p class="first">Install homebrew, following the instructions at <a class="reference external" href="http://brew.sh">http://brew.sh</a></p>
+</li>
+<li><p class="first">Install an up-to-date Python via homebrew:</p>
+<div class="highlight-python"><div class="highlight"><pre>brew install python
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install numpy via homebrew:</p>
+<div class="highlight-python"><div class="highlight"><pre>brew tap homebrew/python
+brew install numpy
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install python dependencies via pip:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install decorator
+pip install ipython
+pip install matplotlib
+pip install pytest
+pip install flake8
+pip install scipy
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="the-command-line">
+<h2>The command line<a class="headerlink" href="#the-command-line" title="Permalink to this headline">¶</a></h2>
+<p>A lot of the routine activity involved in this module revolves around
+executing commands on the Bash command line. For example you use the
+command line to work with the revision control system. If you&#8217;re not
+familiar with the Linux command line, then a brief guide <a class="reference external" href="http://www.tuxarena.com/static/intro_linux_cli.php">is available
+here</a>. That
+guide focusses on the Bash shell, which is the one we will use.</p>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>Your implementation will be written in Python based on a code skeleton
+provided. This means that you&#8217;ll need a certain familiarity with the
+Python language. But don&#8217;t panic! Python is a very easy language to
+work with.</p>
+<p>If you haven&#8217;t done any Python before, then go through <a class="reference external" href="https://docs.python.org/2/tutorial/index.html">the official
+Python tutorial</a>. If
+you have done a little Python, one feature we will be using a lot is
+classes, so if that is new to you you should at least review <a class="reference external" href="https://docs.python.org/2/tutorial/classes.html">the
+classes chapter</a>.</p>
+<p>The Matlab-like array features of Python are provided by <a class="reference external" href="http://www.numpy.org/">Numpy</a> for which there is a <a class="reference external" href="http://wiki.scipy.org/Tentative_NumPy_Tutorial">helpful tutorial</a>. There is also a
+handy <a class="reference external" href="http://wiki.scipy.org/NumPy_for_Matlab_Users">guide for Matlab users</a>. In that context, the
+code provided in this course will always use Numpy arrays, and never
+Numpy matrices.</p>
+</div>
+<div class="section" id="bitbucket-and-git">
+<span id="bitbucket-git"></span><h2>Bitbucket and git<a class="headerlink" href="#bitbucket-and-git" title="Permalink to this headline">¶</a></h2>
+<p>Revision control is a mechanism for recording and managing different
+versions of changing software. This enables changes to be tracked and
+helps in the process of debugging code, and in managing conflicts when
+more than one person is working on the same project. Revision control
+can be combined with online hosting to provide secure backups and to
+enable you to work on code from different locations.</p>
+<p>In this module, you&#8217;ll use revision control to access the skeleton
+files, and to update those files if and when they change. You&#8217;ll also
+use the same revision control system to record the edits you make over
+time and to submit your work for feedback and, eventually, marking.</p>
+<p>We will be using the revision control system <a class="reference external" href="http://git-scm.com/">git</a>, which is the current state of the art and is
+widely adopted. We&#8217;ll be combining git with the online hosting service
+<a class="reference external" href="http://bitbucket.org">Bitbucket</a>. Bitbucket is one of the two
+leading revision control hosting services, the other is <a class="reference external" href="http://github.org">GitHub</a>. We&#8217;ve chosen Bitbucket for teaching because it
+offers unlimited private repositories to academic users.</p>
+<div class="section" id="getting-started-with-git-and-bitbucket">
+<h3>Getting started with git and Bitbucket<a class="headerlink" href="#getting-started-with-git-and-bitbucket" title="Permalink to this headline">¶</a></h3>
+<p>The very first thing you&#8217;ll need is a Bitbucket account. Follow the tutorial <a class="reference external" href="https://confluence.atlassian.com/bitbucket/sign-up-for-bitbucket-cloud-728138044.html">here</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure you use your Imperial College email address on
+Bitbucket. This will get you an academic account with unlimited
+private repositories.</p>
+</div>
+<p>Next you need to do just a little Git setup. At the <cite>Git Bash</cite> command
+line, type the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>git config --global user.name &quot;Jane Bloggs&quot;
+</pre></div>
+</div>
+<p>Obviously you put in your own name rather than &#8220;Jane Bloggs&#8221;. Similarly, you need to set your email:</p>
+<div class="highlight-python"><div class="highlight"><pre>git config --global user.email &quot;Jane.Bloggs12@imperial.ac.uk&quot;
+</pre></div>
+</div>
+<p>Once again, you obviously use your own email address. Now there is a
+small setting which makes the output of git colourful and therefore a
+lot easier to read:</p>
+<div class="highlight-python"><div class="highlight"><pre>git config --global color.ui &quot;auto&quot;
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">If you are a more confident computer user, you could go ahead and
+set up git to work with ssh, the secure shell. This will save a lot
+of password typing but it&#8217;s not essential so if you are not so
+confident with computers, you can skip this bit. The instructions
+are <a class="reference external" href="https://confluence.atlassian.com/bitbucket/set-up-ssh-for-git-728138079.html">here</a>.</p>
+</div>
+<p>Now go and do the <a class="reference external" href="https://confluence.atlassian.com/bitbucket/git-tutorial-keep-track-of-your-space-station-locations-759857287.html">git tutorial</a> over at Bitbucket. You also need to do the <a class="reference external" href="https://confluence.atlassian.com/bitbucket/tutorial-request-to-update-a-teammate-s-repository-774243385.html">collaboration tutorial</a>.</p>
+</div>
+</div>
+<div class="section" id="sharing-your-problems-with-gists">
+<h2>Sharing your problems with gists<a class="headerlink" href="#sharing-your-problems-with-gists" title="Permalink to this headline">¶</a></h2>
+<p>At some points during the module, you&#8217;re sure to create bugs in your
+code that you don&#8217;t know how to fix. If you&#8217;re not in class at the
+time, you&#8217;ll need a convenient way to share a piece of code or output
+with the lecturer and the class. GitHub (the other hosting service)
+provides this facility, which they call <cite>gists</cite>. For this you&#8217;ll want
+a GitHub account so head over there and <a class="reference external" href="https://github.com">sign up</a>.</p>
+<p>Once you&#8217;ve signed up and logged in, you can navigate to <a class="reference external" href="https://gist.github.com">https://gist.github.com</a> and there&#8217;s a very simple webpage into which
+you can paste your code or output. You should also set the language so
+that GitHub formats your gist correctly. Click <cite>create public gist</cite>
+and you&#8217;re done. You can then paste the URL of your gist page into an
+email or into a Bitbucket issue.</p>
+</div>
+<div class="section" id="raising-hell-issues">
+<h2>Raising <span class="strikethrough">hell</span> issues<a class="headerlink" href="#raising-hell-issues" title="Permalink to this headline">¶</a></h2>
+<p>If you have problems you can&#8217;t solve yourself, you can share them with
+the class by <a class="reference external" href="https://bitbucket.org/finiteelement/finite_element_course/issues/new">raising an issue on Bitbucket</a>. When you do this, here are
+some tips which will help get your problem fixed:</p>
+<dl class="docutils">
+<dt>Be precise</dt>
+<dd>&#8220;It didn&#8217;t work&#8221; is useless. &#8220;I typed <code class="docutils literal"><span class="pre">import</span> <span class="pre">fe_utils''</span> <span class="pre">and</span>
+<span class="pre">recieved</span> <span class="pre">the</span> <span class="pre">following</span> <span class="pre">error.</span></code> is much better.</dd>
+<dt>Provide a minimal failing example</dt>
+<dd>Post the smallest piece of code which exhibits the problem. This
+makes finding the issue much easier.</dd>
+<dt>Use gists</dt>
+<dd>Copy exactly what happened, complete with error messages,
+into a gist and post the link in the issue.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>

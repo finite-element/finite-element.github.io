@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fe_utils.function_spaces &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="../../_static/featured.css">
+
+
+<link rel="shortcut icon" href="../../_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="../../index.html"><img src="../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://bitbucket.org/finiteelement/finite_element_course" title="Bitbucket">Bitbucket</a></li>
+<!--          <li class="page_item"><a href="../../documentation.html" title="Documentation for FInAT">Documentation</a></li>
+          <li class="page_item"><a href="../../download.html" title="Obtain the FInAT code">Download</a></li>
+          <li class="page_item"><a href="../../team.html" title="The guilty parties">Team</a></li>
+          <li class="page_item"><a href="../../publications.html" title="Publications">Publications</a></li>
+          <li class="page_item"><a href="../../funding.html" title="Our financial supporters">Funding</a></li>
+          <li class="page_item"><a href="../../contact.html" title="Getting in touch">Contact</a></li>
+          <li class="page_item"><a href="http://buildbot-ocean.ese.ic.ac.uk:8080/builders/FInAT-trunk" title="Buildbot">Buildbot</a></li>-->
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fe_utils.function_spaces</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">ReferenceTriangle</span><span class="p">,</span> <span class="n">ReferenceInterval</span>
+<span class="kn">from</span> <span class="nn">.finite_elements</span> <span class="kn">import</span> <span class="n">LagrangeElement</span><span class="p">,</span> <span class="n">lagrange_points</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">matplotlib.tri</span> <span class="kn">import</span> <span class="n">Triangulation</span>
+
+
+<div class="viewcode-block" id="FunctionSpace"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.FunctionSpace">[docs]</a><span class="k">class</span> <span class="nc">FunctionSpace</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A finite element space.</span>
+
+<span class="sd">        :param mesh: The :class:`~.mesh.Mesh` on which this space is built.</span>
+<span class="sd">        :param element: The :class:`~.finite_elements.FiniteElement` of this space.</span>
+
+<span class="sd">        Most of the implementation of this class is left as an :ref:`exercise</span>
+<span class="sd">        &lt;ex-function-space&gt;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c">#: The :class:`~.mesh.Mesh` on which this space is built.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span> <span class="o">=</span> <span class="n">mesh</span>
+        <span class="c">#: The :class:`~.finite_elements.FiniteElement` of this space.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">element</span> <span class="o">=</span> <span class="n">element</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+        <span class="c"># Implement global numbering in order to produce the global</span>
+        <span class="c"># cell node list for this space.</span>
+        <span class="c">#: The global cell node list. This is a two-dimensional array in</span>
+        <span class="c">#: which each row lists the global nodes incident to the corresponding</span>
+        <span class="c">#: cell. The implementation of this member is left as an</span>
+        <span class="c">#: :ref:`exercise &lt;ex-function-space&gt;`</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell_nodes</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c">#: The total number of nodes in the function space.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">nodes_per_entity</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Function"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.Function">[docs]</a><span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_space</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A function in a finite element space. The main role of this object</span>
+<span class="sd">        is to store the basis function coefficients associated with the nodes</span>
+<span class="sd">        of the underlying function space.</span>
+
+<span class="sd">        :param function_space: The :class:`FunctionSpace` in which</span>
+<span class="sd">            this :class:`Function` lives.</span>
+<span class="sd">        :param name: An optional label for this :class:`Function`</span>
+<span class="sd">            which will be used in output and is useful for debugging.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c">#: The :class:`FunctionSpace` in which this :class:`Function` lives.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function_space</span> <span class="o">=</span> <span class="n">function_space</span>
+
+        <span class="c">#: The (optional) name of this :class:`Function`</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="c">#: The basis function coefficient values for this :class:`Function`</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">function_space</span><span class="o">.</span><span class="n">node_count</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Function.interpolate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.Function.interpolate">[docs]</a>    <span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Interpolate a given Python function onto this finite element</span>
+<span class="sd">        :class:`Function`.</span>
+
+<span class="sd">        :param fn: A function ``fn(X)`` which takes a coordinate</span>
+<span class="sd">          vector and returns a scalar value.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_space</span>
+
+        <span class="c"># Create a map from the vertices to the element nodes on the</span>
+        <span class="c"># reference cell.</span>
+        <span class="n">cg1</span> <span class="o">=</span> <span class="n">LagrangeElement</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">coord_map</span> <span class="o">=</span> <span class="n">cg1</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+        <span class="n">cg1fs</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cg1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="c"># Interpolate the coordinates to the cell nodes.</span>
+            <span class="n">vertex_coords</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">vertex_coords</span><span class="p">[</span><span class="n">cg1fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:],</span> <span class="p">:]</span>
+            <span class="n">node_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">coord_map</span><span class="p">,</span> <span class="n">vertex_coords</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">node_coords</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="Function.plot"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.Function.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subdivisions</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot the value of this :class:`Function`. This is quite a low</span>
+<span class="sd">        performance plotting routine so it will perform poorly on</span>
+<span class="sd">        larger meshes, but it has the advantage of supporting higher</span>
+<span class="sd">        order function spaces than many widely available libraries.</span>
+
+<span class="sd">        :param subdivisions: The number of points in each direction to</span>
+<span class="sd">          use in representing each element. The default is</span>
+<span class="sd">          :math:`2d+1` where :math:`d` is the degree of the</span>
+<span class="sd">          :class:`FunctionSpace`. Higher values produce prettier plots</span>
+<span class="sd">          which render more slowly!</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_space</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="n">subdivisions</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">degree</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceInterval</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+            <span class="c"># Interpolation rule for element values.</span>
+            <span class="n">local_coords</span> <span class="o">=</span> <span class="n">lagrange_points</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceTriangle</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s">&#39;3d&#39;</span><span class="p">)</span>
+            <span class="n">local_coords</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lagrange_triangles</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Unknown reference cell: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span><span class="p">)</span>
+
+        <span class="n">function_map</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">local_coords</span><span class="p">)</span>
+
+        <span class="c"># Interpolation rule for coordinates.</span>
+        <span class="n">cg1</span> <span class="o">=</span> <span class="n">LagrangeElement</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">coord_map</span> <span class="o">=</span> <span class="n">cg1</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">local_coords</span><span class="p">)</span>
+        <span class="n">cg1fs</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cg1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">vertex_coords</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">vertex_coords</span><span class="p">[</span><span class="n">cg1fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:],</span> <span class="p">:]</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">coord_map</span><span class="p">,</span> <span class="n">vertex_coords</span><span class="p">)</span>
+
+            <span class="n">local_function_coefs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">function_map</span><span class="p">,</span> <span class="n">local_function_coefs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceInterval</span><span class="p">:</span>
+
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;k&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">triangles</span><span class="p">),</span>
+                                <span class="n">v</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</div>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_lagrange_triangles</span><span class="p">(</span><span class="n">degree</span><span class="p">):</span>
+        <span class="c"># Triangles linking the Lagrange points.</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">i</span> <span class="o">/</span> <span class="n">degree</span><span class="p">,</span> <span class="n">j</span> <span class="o">/</span> <span class="n">degree</span><span class="p">]</span>
+                          <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">)]),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                    <span class="c"># Up triangles</span>
+                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)),</span>
+                            <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">))</span>
+                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="n">j</span><span class="p">)]</span>
+                    <span class="c"># Down triangles.</span>
+                    <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)),</span>
+                              <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">))</span>
+                       <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">)]))</span>
+
+<div class="viewcode-block" id="Function.integrate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.Function.integrate">[docs]</a>    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Integrate this :class:`Function` over the domain.</span>
+
+<span class="sd">        :result: The integral (a scalar).&quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>
