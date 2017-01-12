@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8. Nonlinear problems &mdash; Finite element course 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="next" title="9. References" href="zbibliography.html" />
+    <link rel="prev" title="7. Dirichlet boundary conditions" href="7_boundary_conditions.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head>
+  <body role="document">
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nonlinear-problems">
+<h1>8. Nonlinear problems<a class="headerlink" href="#nonlinear-problems" title="Permalink to this headline">¶</a></h1>
+<p>The finite element method may also be employed to numerically solve
+<em>nonlinear</em> PDEs. In order to do this, we can employ the classical
+technique for solving nonlinear systems: we employ an iterative scheme
+such as Newton&#8217;s method to create a sequence of linear problems whose
+solutions converge to the correct solution to the
+nonlinear problem.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section is the mastery exercise for this module. This exercise
+is explicitly intended to test whether you can bring together what
+has been learned in the rest of the module in order to go beyond
+what has been covered in lectures and labs.</p>
+</div>
+<div class="section" id="a-model-problem">
+<h2>8.1. A model problem<a class="headerlink" href="#a-model-problem" title="Permalink to this headline">¶</a></h2>
+<p>As a simple case of a non-linear PDE, we can consider a steady
+non-linear diffusion equation. This is similar to the Poisson problem,
+except that the diffusion rate now depends on the value of the
+solution:</p>
+<div class="math" id="equation-diffusion">
+<span class="eqno">(1)</span>\[-\nabla\cdot\left((u+1)\nabla u\right) = g\]\[u = b \textrm{ on } \Gamma\]</div>
+<p>where <span class="math">\(g\)</span> and <span class="math">\(b\)</span> are given functions defined over <span class="math">\(\Omega\)</span> and
+<span class="math">\(\Gamma\)</span> respectively.</p>
+<p>We can create the weak form of <a href="#equation-diffusion">(1)</a> by integrating by parts
+and taking the boundary conditions into account. The problem becomes,
+find <span class="math">\(u\in V\)</span> such that:</p>
+<div class="math" id="equation-weakdiffusion">
+<span class="eqno">(2)</span>\[\int_\Omega \nabla v_0 \cdot (u + 1) \nabla u \, \mathrm{d} x = \int_\Omega vg \, \mathrm{d} x \qquad \forall v_0 \in V_0\]\[u_\Gamma = b.\]</div>
+<p>Once more, <span class="math">\(V_0\)</span> is the subspace of <span class="math">\(V\)</span> spanned by basis functions which
+vanish on the boundary, <span class="math">\(V = V_0 \oplus V_\Gamma\)</span>, and <span class="math">\(u = u_0 +
+u_\Gamma\)</span> with <span class="math">\(u_0\in V_0\)</span> and <span class="math">\(u_\Gamma\in V_\Gamma\)</span>. This is
+corresponds directly with the weak form of the Poisson equation we
+already met. However, <a href="#equation-weakdiffusion">(2)</a> is still nonlinear in <span class="math">\(u\)</span> so
+we cannot simply substitute <span class="math">\(u = u_i\phi_i\)</span> in order to obtain a
+linear matrix system to solve.</p>
+</div>
+<div class="section" id="residual-form">
+<h2>8.2. Residual form<a class="headerlink" href="#residual-form" title="Permalink to this headline">¶</a></h2>
+<p>The general weak form of a non-linear problem is, find <span class="math">\(u\in V\)</span> such that:</p>
+<div class="math">
+<span class="eqno">(3)</span>\[f(u; v) = 0 \qquad \forall v \in V\]</div>
+<p>The use of a semicolon is a common convention to indicate that <span class="math">\(f\)</span> is
+assumed to be linear in the arguments after the semicolon, but might
+be nonlinear in the arguments before the semicolon. In this case,
+we observe that <span class="math">\(f\)</span> may be nonlinear in <span class="math">\(u\)</span> but is (by
+construction) linear in <span class="math">\(v\)</span>.</p>
+<p>The function <span class="math">\(f\)</span> is called the <em>residual</em> of the nonlinear system. In
+essence, if <span class="math">\(u\)</span> is not a solution to the nonlinear problem, then <span class="math">\(f(u;
+v)\)</span> will be nonzero for some <span class="math">\(v\in V\)</span>. Since the residual is linear in
+<span class="math">\(v\)</span>, it suffices to define the residual for each <span class="math">\(\phi_i\)</span> in the basis
+of <span class="math">\(V\)</span>. For <span class="math">\(\phi_i\in V_0\)</span>, the residual is just the weak form of the
+equation, but what do we do for the boundary? The simple answer is
+that we need a linear functional which is zero if the boundary
+condition is satisfied at this test function, and nonzero
+otherwise. The simplest example of such a functional is:</p>
+<div class="math">
+<span class="eqno">(4)</span>\[f(u; \phi_i) = n_i(u) - n_i(b)\]</div>
+<p>where <span class="math">\(n_i\)</span> is the node associated with basis function <span class="math">\(\phi_i\)</span>. For
+point evaluation nodes, <span class="math">\(n_i(u)\)</span> is the value of the proposed solution
+at node point <span class="math">\(i\)</span> and <span class="math">\(n_i(b)\)</span> is just the boundary condition
+evaluated at that same point.</p>
+<p>So for our model problem, we now have a full statement of the residual in terms of a basis function <span class="math">\(\phi_i\)</span>:</p>
+<div class="math" id="equation-residual">
+<span class="eqno">(5)</span>\[\begin{split}f(u; \phi_i) = \begin{cases}
+   \displaystyle\int_\Omega \nabla \phi_i \cdot \left((u + 1) \nabla u\right) - \phi_i g \, \mathrm{d} x &amp; \phi_i\in V_0\\
+   n_i(u) - n_i(b) &amp; \phi_i\in V_\Gamma
+\end{cases}\end{split}\]</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Evaluating the residual requires that the boundary condition be
+evaluated at the boundary nodes. A simple (if slightly inefficient)
+way to achieve this is to interpolate the boundary condition onto a
+function <span class="math">\(\hat{b}\in V\)</span>.</p>
+</div>
+</div>
+<div class="section" id="linearisation-and-gateaux-derivatives">
+<h2>8.3. Linearisation and Gâteaux Derivatives<a class="headerlink" href="#linearisation-and-gateaux-derivatives" title="Permalink to this headline">¶</a></h2>
+<p>Having stated our PDE in residual form, we now need to linearise the
+problem and thereby employ a technique such as Newton&#8217;s method. In
+order to linearise the residual, we need to differentiate it with
+respect to <span class="math">\(u\)</span>. Since <span class="math">\(u\)</span> is not a scalar real variable, but is
+instead a function in <span class="math">\(V\)</span>, the appropriate form of differentiation is
+the Gâteaux Derivative, given by:</p>
+<div class="math">
+<span class="eqno">(6)</span>\[J(u; v, \hat{u}) = \lim_{\epsilon\rightarrow 0}\frac{f(u+\epsilon\hat{u}; v)-f(u; v)}{\epsilon}.\]</div>
+<p>Here, the new argument <span class="math">\(\hat{u}\in V\)</span> indicates the &#8220;direction&#8221; in
+which the derivative is to be taken. Let&#8217;s work through the Gâteaux
+Derivative for the residual of our model problem. Assume first that
+<span class="math">\(v\in V_0\)</span>. Then:</p>
+<div class="math">
+<span class="eqno">(7)</span>\[\begin{split}\begin{split}
+J(u; v, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Omega \nabla v \cdot \left((u +\epsilon\hat{u} + 1) \nabla (u + \epsilon\hat{u})\right) - vg \, \mathrm{d} x - \displaystyle\int_\Omega \nabla v \cdot \left((u + 1) \nabla u\right) - vg \, \mathrm{d} x}{\epsilon}\\
+&amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Omega \nabla v \cdot \left(\epsilon\hat{u} \nabla u + (u + 1) \nabla (\epsilon\hat{u}) + \epsilon\hat{u} \nabla (\epsilon\hat{u})\right) \, \mathrm{d} x}{\epsilon}\\
+&amp;= \int_\Omega \nabla v \cdot \left(\hat{u} \nabla u + (u + 1) \nabla \hat{u} \right) \, \mathrm{d} x.\\
+\end{split}\end{split}\]</div>
+<p>Note that, as expected, <span class="math">\(J\)</span> is linear in <span class="math">\(\hat{u}\)</span>.</p>
+<p>Next, we can work out the boundary case by assuming <span class="math">\(v=\phi_i\)</span>, one of the basis functions of <span class="math">\(V_\Gamma\)</span>:</p>
+<div class="math">
+<span class="eqno">(8)</span>\[\begin{split}\begin{split}
+J(u; \phi_i, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{n_i(u+\epsilon\hat{u}) - n_i(b) - \left(n_i(u) - n_i(b)\right)}{\epsilon}\\
+&amp;= n_i(\hat{u}) \qquad \textrm{since } n_i(\cdot) \textrm{ is linear.}
+\end{split}\end{split}\]</div>
+<p>Once again, we can observe that <span class="math">\(J\)</span> is linear in <span class="math">\(\hat{u}\)</span>. Indeed, if
+we choose <span class="math">\(\hat{u} = \phi_j\)</span> for some <span class="math">\(\phi_j\)</span> in the basis if <span class="math">\(V\)</span>
+then the definition of a nodal basis gives us:</p>
+<div class="math">
+<span class="eqno">(9)</span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
+</div>
+<div class="section" id="a-taylor-expansion-and-newton-s-method">
+<h2>8.4. A Taylor expansion and Newton&#8217;s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
+<p>Since we now have the derivative of the residual with respect to a
+perturbation to the prospective solution <span class="math">\(u\)</span>, we can write the first
+terms of a Taylor series approximation for the value of the residual at a perturbed solution <span class="math">\(u+\hat{u}\)</span>:</p>
+<div class="math">
+<span class="eqno">(10)</span>\[f(u+\hat{u}; v) = f(u; v) + J(u; v, \hat{u}) +\ldots \qquad \forall v\in V.\]</div>
+<p>Now, just as in the scalar case, Newton&#8217;s method consists of
+approximating the function (the residual) by the first two terms and
+solving for the update that will set these terms to zero. In other
+words:</p>
+<div class="math">
+<span class="eqno">(11)</span>\[u^{n+1} = u^n + \hat{u}\]</div>
+<p>where <span class="math">\(\hat{u} \in V\)</span> is the solution to:</p>
+<div class="math" id="equation-newton_update">
+<span class="eqno">(12)</span>\[J(u^n; v, \hat{u}) = - f(u^n; v) \qquad \forall v \in V.\]</div>
+<p>In fact, <a href="#equation-newton_update">(12)</a> is simply a linear finite element
+problem! To make this explicit, we can expand <span class="math">\(v\)</span> and <span class="math">\(\hat{u}\)</span> in
+terms of basis functions:</p>
+<div class="math">
+<span class="eqno">(13)</span>\[J(u^n; \phi_i, \phi_j) \hat{u}_j = - f(u^n; \phi_i).\]</div>
+<p>For our nonlinear diffusion problem, the matrix <span class="math">\(J\)</span> is given by:</p>
+<div class="math">
+<span class="eqno">(14)</span>\[\begin{split}J(u^n; \phi_i, \phi_j) =
+\begin{cases}
+\displaystyle\int_\Omega \nabla \phi_i \cdot \left(\phi_j \nabla u^n + (u^n + 1) \nabla \phi_j \right) \, \mathrm{d} x &amp; \phi_i\in V_0\\
+\delta_{ij} &amp; \phi_i \in V_\Gamma,
+\end{cases}\end{split}\]</div>
+<p>and the right hand side vector <span class="math">\(f\)</span> is given by <a href="#equation-residual">(5)</a>. This
+matrix, <span class="math">\(J\)</span>, is termed the <em>Jacobian matrix</em> of <span class="math">\(f\)</span>.</p>
+<div class="section" id="stopping-criteria-for-newton-s-method">
+<h3>8.4.1. Stopping criteria for Newton&#8217;s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
+<p>Since Newton&#8217;s method is an iterative algorithm, it creates a
+(hopefully convergent) sequence of approximations to the correct
+solution to the original nonlinear problem. How do we know when to
+accept the solution and terminate the algorithm?</p>
+<p>The answer is that the update, <span class="math">\(\hat{u}\)</span> which is calculated at each
+step of Newton&#8217;s method is itself an approximation to the error in the
+solution. It is therefore appropriate to stop Newton&#8217;s method when
+this error estimate becomes sufficiently small in the <span class="math">\(L^2\)</span> norm.</p>
+<p>The observant reader will observe that <span class="math">\(\hat{u}\)</span> is in fact
+an estimate of the error in the <em>previous</em> step. This is indeed true:
+the Newton step is both an estimate of the previous error and a
+correction to that error. However, having calculated the error
+estimate, it is utterly unreasonable to not apply the corresponding
+correction.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Another commonly employed stopping mechanism is to consider the
+size of the residual <span class="math">\(f\)</span>. However, the residual is not actually a
+function in <span class="math">\(V\)</span>, but is actually a linear operator in <span class="math">\(V^*\)</span>. Common
+practice would be to identify <span class="math">\(f\)</span> with a function in <span class="math">\(V\)</span> by simply
+taking the function whose coefficients match those of <span class="math">\(f\)</span>. The
+<span class="math">\(L^2\)</span> or <span class="math">\(l^2\)</span> norm is then taken of this function and this value
+is used to determine when convergence has occured.</p>
+<p>This approach effectively assumes that the Riesz map on <span class="math">\(V\)</span> is the
+trivial operator which identifies the basis function
+coefficients. This would be legitimate were the inner product on
+<span class="math">\(V\)</span> the <span class="math">\(l^2\)</span> dot product. However, since the inner product on <span class="math">\(V\)</span>
+is defined by an integral, the mesh resolution is effectively
+encoded into <span class="math">\(f\)</span>. This means that this approach produces
+convergence rates which depend on the level of mesh refinement.</p>
+<p class="last">Avoiding this mesh dependency requires the evaluation of an
+operator norm or, equivalently, the solution of a linear system in
+order to find the Riesz representer of <span class="math">\(f\)</span> in <span class="math">\(V\)</span>. However, since
+the error-estimator approach given above is both an actual estimate
+of the error in the solution, and requires no additional linear
+solves, it should be regarded as a preferable approach. For a full
+treatment of Newton methods, see <a class="reference internal" href="zbibliography.html#deuflhard2011" id="id1">[Deu11]</a>.</p>
+</div>
+</div>
+<div class="section" id="stopping-threshold-values">
+<h3>8.4.2. Stopping threshold values<a class="headerlink" href="#stopping-threshold-values" title="Permalink to this headline">¶</a></h3>
+<p>What, then, qualifies as a sufficiently small value of our error
+estimate? There are two usual approaches:</p>
+<dl class="docutils">
+<dt>relative tolerance</dt>
+<dd>Convergence is deemed to occur when the estimate
+becomes sufficiently small compared with the first error estimate
+calculated.  This is generally the more defensible approach since
+it takes into account the overall scale of the solution. <span class="math">\(10^{-6}\)</span>
+would be a reasonably common relative tolerance.</dd>
+<dt>absolute tolerance</dt>
+<dd>Computers employ finite precision arithmetic, so there is a limit
+to the accuracy which can ever be achieved. This is a difficult
+value to estimate, since it depends on the number and nature of
+operations undertaken in the algorithm. A common approach is to set
+this to a very small value (e.g. <span class="math">\(10^{-50}\)</span>) initially, in order to
+attempt to ensure that the relative tolerance threshold is
+hit. Only if it becomes apparent that the problem being solved is
+in a regime for which machine precision is a problem is a higher
+absolute tolerance set.</dd>
+</dl>
+<p>It is important to realise that both of these criteria involve making
+essentially arbitrary judgements about the scale of error which is
+tolerable. There is also a clear trade-off between the level of error
+tolerated and the cost of performing a large number of Newton
+steps. For realistic problems, it is therefore frequently expedient
+and/or necessary to tune the convergence criteria to the particular
+case.</p>
+<p>In making these judgements, it is also important to remember that the
+error in the Newton solver is just one of the many sources of error in
+a calculation. It is pointless to expend computational effort in an
+attempt to drive the level of error in this component of the solver to
+a level which will be swamped by a larger error occurring somewhere
+else in the process.</p>
+</div>
+<div class="section" id="failure-modes">
+<h3>8.4.3. Failure modes<a class="headerlink" href="#failure-modes" title="Permalink to this headline">¶</a></h3>
+<p>Just as with the Newton method for scalar problems, Newton iteration
+is not guaranteed to converge for all nonlinear problems or for all
+initial guesses. If Newton&#8217;s method fails to converge, then the
+algorithm presented so far constitutes an infinite loop. It is
+therefore necessary to define some circumstances in which the
+algorithm should terminate having failed to find a solution. Two such
+circumstances are commonly employed:</p>
+<dl class="docutils">
+<dt>maximum iterations</dt>
+<dd>It is a reasonable heuristic that Newton&#8217;s method has failed if it
+takes a very large number of iterations. What constitutes &#8220;too
+many&#8221; is once again a somewhat arbitrary judgement, although if the
+approach takes many tens of iterations this should always be cause
+for reconsideration!</dd>
+<dt>diverged error estimate</dt>
+<dd>Newton&#8217;s method is not guaranteed to produce a sequence of
+iterations which monotonically decrease the error, however if the
+error estimate has increased to, say, hundreds or thousands of
+times its initial value, this would once again be grounds for the
+algorithm to fail.</dd>
+</dl>
+<p>Note that these failure modes are heuristic: having the algorithm
+terminate for these reasons is really an instruction to the user to
+think again about the problem, the solver, and the initial guess.</p>
+</div>
+</div>
+<div class="section" id="implementing-a-nonlinear-problem">
+<h2>8.5. Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This problem is intentionally stated in more general terms than the
+previous ones. It is your responsibility to decide on a code
+structure, to derive a method of manufactured solutions answer, and
+to create the convergence tests which demonstrate that your
+solution is correct.</p>
+</div>
+<div class="theoremenv exercise">
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">17</span></div><div class="theoremenv_body exercise_body"><p class="first">Write a Python program which solves the following problem using
+degree 1 Lagrange elements over the unit square domain.</p>
+<div class="math" id="equation-mastery">
+<span class="eqno">(15)</span>\[-\nabla\cdot\nabla u\right + \sin(u) = g\]\[u = b \textrm{ on } \Gamma\]</div>
+<p>Select a solution and compute the required forcing function <span class="math">\(g\)</span> so
+that your solution solves the equations. Make sure your boundary
+condition function <span class="math">\(b\)</span> is consistent with your chosen solution!</p>
+<p>Your submitted answer will consist of:</p>
+<ol class="arabic">
+<li><p class="first">A written component containing your derivation of:</p>
+<ol class="loweralpha simple">
+<li>The weak form of <a href="#equation-mastery">(15)</a>; and</li>
+<li>the Jacobian; and</li>
+<li>the forcing term required by your choice of manufactured solution.</li>
+</ol>
+<p>A neatly hand-written or a typed submission are equally acceptable.</p>
+</li>
+<li><p class="first">A file named <code class="docutils literal"><span class="pre">mastery.py</span></code> in the <code class="docutils literal"><span class="pre">test</span></code> directory of your
+implementation. Running:</p>
+<div class="highlight-python"><div class="highlight"><pre>python mastery.py
+</pre></div>
+</div>
+<p>should solve <a href="#equation-mastery">(15)</a> at a number of mesh resolutions and
+print out the convergence of the error in the solution. This
+should approach second order as the mesh is refined. Submit by
+email the git sha for the version of the implementation you wish
+to have marked.</p>
+</li>
+</ol>
+<p class="last">Provide test code which demonstrates that your solution converges
+at the correct rate.</p>
+</div></div><div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">When employing the method of manufactured solutions, it is
+expeditious to choose a very simple solution. However, in order to
+avoid unfortunate corner cases which will not fully test your code,
+you should avoid linear solution functions, and also functions
+which are constant in either the <span class="math">\(x[0]\)</span> or <span class="math">\(x[1]\)</span> direction.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You can either implement your own Newton solver, or install the
+<code class="xref py py-mod docutils literal"><span class="pre">scipy</span></code> package and work out how to use the
+<a class="reference external" href="http://docs.scipy.org/doc/scipy-dev/reference/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v0.19.0.dev0+1c8759b)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
+case, a hand-coded Newton solver is probably the simplest
+approach. However, for problems which are larger and more complex,
+it will be advantageous to employ a technique more advanced than
+simple Newton and the case for using a well-engineered third party
+implementation is strong.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">It is an exceptionally useful aid to debugging to have your Newton
+iteration print out the value of the error norm and the iteration
+number for each iteration.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You could insert a parameter of <span class="math">\(\alpha\)</span> in front of the <span class="math">\(\sin(u)\)</span> term
+in the equation. By setting <span class="math">\(\alpha\)</span> to 0, you reduce your problem
+to the linear case. You can use the linear case to test your code
+initially, before setting <span class="math">\(\alpha=1\)</span> for the actual exercise. Note
+that, in the linear case, Newton&#8217;s method will converge in exactly
+one iteration (although your algorithm will have to actually
+calculate two steps in order to know that convergence has occurred).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+    </div>
+  </body>
+</html>
