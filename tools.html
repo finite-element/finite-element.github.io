@@ -88,9 +88,10 @@ they ask!</p>
 will need to type the following command on the Python
 command line at the beginning of each session in order to ensure
 you are running from the correct directory:</p>
-<div class="highlight-python"><div class="highlight"><pre>cd H:\finite_element_course
+<div class="highlight-python"><div class="highlight"><pre>cd H:\finite-element-course
 </pre></div>
 </div>
+<p>replacing username with your GitHub username.</p>
 </li>
 </ol>
 </div>
@@ -111,9 +112,8 @@ machine is set up).</li>
 <div class="section" id="using-your-own-linux-machine">
 <h3>Using your own Linux machine<a class="headerlink" href="#using-your-own-linux-machine" title="Permalink to this headline">¶</a></h3>
 <p>If you plan to use your own machine for the module, you will need a
-basic scientific Python toolchain and the visualisation package
-Paraview. On Ubuntu and its relatives, this can be achieved with:</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install ipython python-scipy python-pytest python-matplotlib paraview
+basic scientific Python toolchain. On Ubuntu and its relatives, this can be achieved with:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install ipython python-scipy python-pytest python-matplotlib
 </pre></div>
 </div>
 </div>
@@ -185,8 +185,8 @@ handy <a class="reference external" href="http://wiki.scipy.org/NumPy_for_Matlab
 code provided in this course will always use Numpy arrays, and never
 Numpy matrices.</p>
 </div>
-<div class="section" id="bitbucket-and-git">
-<span id="bitbucket-git"></span><h2>Bitbucket and git<a class="headerlink" href="#bitbucket-and-git" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="github-and-git">
+<span id="bitbucket-git"></span><h2>GitHub and git<a class="headerlink" href="#github-and-git" title="Permalink to this headline">¶</a></h2>
 <p>Revision control is a mechanism for recording and managing different
 versions of changing software. This enables changes to be tracked and
 helps in the process of debugging code, and in managing conflicts when
@@ -198,18 +198,20 @@ files, and to update those files if and when they change. You&#8217;ll also
 use the same revision control system to record the edits you make over
 time and to submit your work for feedback and, eventually, marking.</p>
 <p>We will be using the revision control system <a class="reference external" href="http://git-scm.com/">git</a>, which is the current state of the art and is
-widely adopted. We&#8217;ll be combining git with the online hosting service
-<a class="reference external" href="http://bitbucket.org">Bitbucket</a>. Bitbucket is one of the two
-leading revision control hosting services, the other is <a class="reference external" href="http://github.org">GitHub</a>. We&#8217;ve chosen Bitbucket for teaching because it
-offers unlimited private repositories to academic users.</p>
-<div class="section" id="getting-started-with-git-and-bitbucket">
-<h3>Getting started with git and Bitbucket<a class="headerlink" href="#getting-started-with-git-and-bitbucket" title="Permalink to this headline">¶</a></h3>
-<p>The very first thing you&#8217;ll need is a Bitbucket account. Follow the tutorial <a class="reference external" href="https://confluence.atlassian.com/bitbucket/sign-up-for-bitbucket-cloud-728138044.html">here</a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Make sure you use your Imperial College email address on
-Bitbucket. This will get you an academic account with unlimited
-private repositories.</p>
+widely adopted. We&#8217;ll be combining git with the online hosting service</p>
+<blockquote>
+<div><a class="reference external" href="http://github.org">GitHub</a>.</div></blockquote>
+<div class="section" id="getting-started-with-git-and-github">
+<h3>Getting started with git and GitHub<a class="headerlink" href="#getting-started-with-git-and-github" title="Permalink to this headline">¶</a></h3>
+<p>The very first thing you&#8217;ll need is a GitHub account. Navigate to <a class="reference external" href="https://github.com/">GitHub</a> and sign up.
+.. note:</p>
+<div class="highlight-python"><div class="highlight"><pre>Make sure you use your Imperial College email address on
+GitHub. This enables you to request unlimited free private GitHub
+repositories and other goodies by `applying here
+&lt;https://education.github.com/pack&gt;`_. You don&#39;t strictly need this
+for this module, but there are some nice things in there that you
+might want anyway.
+</pre></div>
 </div>
 <p>Next you need to do just a little Git setup. At the <cite>Git Bash</cite> command
 line, type the following:</p>
@@ -232,9 +234,9 @@ lot easier to read:</p>
 set up git to work with ssh, the secure shell. This will save a lot
 of password typing but it&#8217;s not essential so if you are not so
 confident with computers, you can skip this bit. The instructions
-are <a class="reference external" href="https://confluence.atlassian.com/bitbucket/set-up-ssh-for-git-728138079.html">here</a>.</p>
+are <a class="reference external" href="https://help.github.com/articles/generating-an-ssh-key/">here</a>.</p>
 </div>
-<p>Now go and do the <a class="reference external" href="https://confluence.atlassian.com/bitbucket/git-tutorial-keep-track-of-your-space-station-locations-759857287.html">git tutorial</a> over at Bitbucket. You also need to do the <a class="reference external" href="https://confluence.atlassian.com/bitbucket/tutorial-request-to-update-a-teammate-s-repository-774243385.html">collaboration tutorial</a>.</p>
+<p>Now go and do the <a class="reference external" href="https://swcarpentry.github.io/git-novice/">git tutorial</a> over at Software Carpentry.</p>
 </div>
 </div>
 <div class="section" id="sharing-your-problems-with-gists">
@@ -242,19 +244,18 @@ are <a class="reference external" href="https://confluence.atlassian.com/bitbuck
 <p>At some points during the module, you&#8217;re sure to create bugs in your
 code that you don&#8217;t know how to fix. If you&#8217;re not in class at the
 time, you&#8217;ll need a convenient way to share a piece of code or output
-with the lecturer and the class. GitHub (the other hosting service)
-provides this facility, which they call <cite>gists</cite>. For this you&#8217;ll want
-a GitHub account so head over there and <a class="reference external" href="https://github.com">sign up</a>.</p>
+with the lecturer and the class. GitHub
+provides this facility, which they call <cite>gists</cite>.</p>
 <p>Once you&#8217;ve signed up and logged in, you can navigate to <a class="reference external" href="https://gist.github.com">https://gist.github.com</a> and there&#8217;s a very simple webpage into which
 you can paste your code or output. You should also set the language so
 that GitHub formats your gist correctly. Click <cite>create public gist</cite>
 and you&#8217;re done. You can then paste the URL of your gist page into an
-email or into a Bitbucket issue.</p>
+email or into a GitHub issue.</p>
 </div>
 <div class="section" id="raising-hell-issues">
 <h2>Raising <span class="strikethrough">hell</span> issues<a class="headerlink" href="#raising-hell-issues" title="Permalink to this headline">¶</a></h2>
 <p>If you have problems you can&#8217;t solve yourself, you can share them with
-the class by <a class="reference external" href="https://bitbucket.org/finiteelement/finite_element_course/issues/new">raising an issue on Bitbucket</a>. When you do this, here are
+the class by <a class="reference external" href="https://github.com/finite-element/finite-element-course/issues">raising an issue on GitHub</a>. When you do this, here are
 some tips which will help get your problem fixed:</p>
 <dl class="docutils">
 <dt>Be precise</dt>
