@@ -69,14 +69,14 @@ finite element method.</p>
 <p>A mesh is composed of <em>topological entities</em>, such as vertices, edges,
 polygons and polyhedra.</p>
 <div class="theoremenv definition">
-<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">2</span></div><div class="theoremenv_body definition_body">The <em>(topological) dimension</em> of a mesh is the largest
+<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">4</span></div><div class="theoremenv_body definition_body">The <em>(topological) dimension</em> of a mesh is the largest
 dimension among all of the topological entities in a mesh.</div></div><p>In this course we will not consider meshes of manifolds immersed in
 higher dimensional spaces (for example the surface of a sphere
 immersed in <span class="math">\(\mathbb{R}^3\)</span>) so the topological dimension of the
 mesh will always match the geometric dimension of space in which we
 are working, so we will simply refer to the <em>dimension</em> of the mesh.</p>
 <div class="theoremenv definition">
-<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">3</span></div><div class="theoremenv_body definition_body">A topological entity of <em>codimension</em> <span class="math">\(n\)</span> is a topological
+<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">5</span></div><div class="theoremenv_body definition_body">A topological entity of <em>codimension</em> <span class="math">\(n\)</span> is a topological
 entity of dimension <span class="math">\(d-n\)</span> where <span class="math">\(d\)</span> is the dimension of the
 mesh.</div></div><p>Armed with these definitions we are able to define names for
 topological entities of various dimension and codimension:</p>
@@ -165,7 +165,7 @@ the cell itself. One of the roles of the mesh is therefore to provide
 a lookup facility for the lower-dimensional mesh entities adjacent to
 a given cell.</p>
 <div class="theoremenv definition">
-<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">4</span></div><div class="theoremenv_body definition_body"><p class="first">Given a mesh <span class="math">\(M\)</span>, then for each <span class="math">\(\dim(M) \geq d_1 &gt; d_2 \geq 0\)</span>
+<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">6</span></div><div class="theoremenv_body definition_body"><p class="first">Given a mesh <span class="math">\(M\)</span>, then for each <span class="math">\(\dim(M) \geq d_1 &gt; d_2 \geq 0\)</span>
 the <em>adjacency</em> function <span class="math">\(\operatorname{Adj}_{d_1,d_2}:\,
 \mathbb{N}\rightarrow \mathbb{N}^k\)</span> is the function such that:</p>
 <div class="math">
@@ -184,7 +184,7 @@ ascending order <a class="footnote-reference" href="#simplexnumbering" id="id2">
 all the entities making up a cell also matches their local
 orientation.</p>
 </div></div><div class="theoremenv example">
-<div class="theoremenv_caption example_caption">Example<span class="theoremenv_counter example_counter">5</span></div><div class="theoremenv_body example_body"><p class="first">In the mesh shown in <a class="reference internal" href="#figmesh"><em>Fig. 3.1</em></a> we have:</p>
+<div class="theoremenv_caption example_caption">Example<span class="theoremenv_counter example_counter">7</span></div><div class="theoremenv_body example_body"><p class="first">In the mesh shown in <a class="reference internal" href="#figmesh"><em>Fig. 3.1</em></a> we have:</p>
 <div class="math">
 \[\operatorname{Adj}_{2,0}(3) = (1,5,8).\]</div>
 <p>In other words, vertices 1, 5 and 8 are adjacent to cell 3. Similarly:</p>

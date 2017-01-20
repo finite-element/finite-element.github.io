@@ -176,7 +176,7 @@ addressing, we can provide the
 interpolates a user-provided function onto the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>.</p>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">10</span></div><div class="theoremenv_body exercise_body">Read and understand the
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">12</span></div><div class="theoremenv_body exercise_body">Read and understand the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a> method. Use
 <code class="docutils literal"><span class="pre">test/plot_sin_function.py</span></code> to investigate interpolating different
 functions onto finite element spaces at differering resolutions and
@@ -269,7 +269,7 @@ the quadrature is exact. Then:</p>
 <div class="section" id="implementing-integration">
 <h3>5.3.3. Implementing integration<a class="headerlink" href="#implementing-integration" title="Permalink to this headline">¶</a></h3>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">11</span></div><div class="theoremenv_body exercise_body">Use <a href="#equation-jacobian">(12)</a> to implement the
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">13</span></div><div class="theoremenv_body exercise_body">Use <a href="#equation-jacobian">(12)</a> to implement the
 <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal"><span class="pre">jacobian()</span></code></a> method of
 <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>. <code class="docutils literal"><span class="pre">test/test_jacobian.py</span></code> is
 available for you to test your results.</div></div><div class="admonition hint">
@@ -280,7 +280,7 @@ efficient by precalculating this term in the <code class="xref py py-meth docuti
 method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>.</p>
 </div>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">12</span></div><div class="theoremenv_body exercise_body">Use <a href="#equation-integral_sum">(9)</a> and <a href="#equation-integration">(14)</a> to implement
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">14</span></div><div class="theoremenv_body exercise_body">Use <a href="#equation-integral_sum">(9)</a> and <a href="#equation-integration">(14)</a> to implement
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a>.
 <code class="docutils literal"><span class="pre">test/test_integrate_function.py</span></code> may be used to test your
 implementation.</div></div><div class="admonition hint">
@@ -293,9 +293,9 @@ basis functions at each quadrature point.</li>
 <li>Visit each cell in turn.</li>
 <li>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal"><span class="pre">jacobian()</span></code></a> for that cell
 and take the absolute value of its determinant (<code class="xref py py-func docutils literal"><span class="pre">numpy.abs()</span></code>
-and <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.11)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
+and <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
 <li>Sum all of the arrays you have constructed over the correct
-indices to a contribution to the integral (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.11)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a>
+indices to a contribution to the integral (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a>
 may be useful for this).</li>
 </ol>
 </div>

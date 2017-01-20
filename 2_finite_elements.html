@@ -176,7 +176,7 @@ comprehensions</a>.</p>
 </div>
 </div>
 <div class="section" id="solving-for-basis-functions">
-<h2>2.4. Solving for basis functions<a class="headerlink" href="#solving-for-basis-functions" title="Permalink to this headline">¶</a></h2>
+<span id="sec-vandermonde"></span><h2>2.4. Solving for basis functions<a class="headerlink" href="#solving-for-basis-functions" title="Permalink to this headline">¶</a></h2>
 <p>The matrix in <a href="#equation-phimat">(3)</a> is a <em>generalised Vandermonde</em> <a class="footnote-reference" href="#vandermonde" id="id3">[1]</a>
 matrix . Given a list of points <span class="math">\((x_i,y_i) \in \mathbb{R}^2, 0\leq i&lt; m\)</span>
 the corresponding degree <span class="math">\(n\)</span> generalised Vandermonde matrix is given by:</p>
@@ -245,7 +245,7 @@ invert it to create the basis function coefs. Store these as
 <code class="docutils literal"><span class="pre">test/test_init_finite_element.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.11)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
+<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
 used to invert the matrix.</p>
 </div>
 </div>
@@ -315,7 +315,7 @@ extension. You should also ensure that you still pass
 <code class="docutils literal"><span class="pre">test/test_vandermonde_matrix.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.11)"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
+<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.12)"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
 generalised transposes swapping any dimensions.</p>
 </div>
 <div class="theoremenv exercise">
@@ -335,7 +335,7 @@ extension. Once again, make sure you still pass
 <code class="docutils literal"><span class="pre">test/test_tabulate.py</span></code></p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.11)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
+<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
 contractions using <a class="reference external" href="http://mathworld.wolfram.com/EinsteinSummation.html">Einstein summation notation</a>. For
 example, <code class="docutils literal"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">numpy.einsum(&quot;ijk,jl-&gt;ilk&quot;,</span> <span class="pre">T,</span> <span class="pre">C)</span></code> is equivalent to
 <span class="math">\(A_{ilk} = \sum_j T_{ijk} C_{jl}\)</span>.</p>
