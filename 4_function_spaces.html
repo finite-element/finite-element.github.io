@@ -116,7 +116,7 @@ associated with a local topological entity of degree <span class="math">\(d\)</s
 <p><a class="reference internal" href="#figlagrange-nodes"><em>Fig. 4.1</em></a> illustrates the association of nodes with
 reference entities for Lagrange elements on triangles. The numbering
 of nodes will depend on how
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal"><span class="pre">lagrange_points()</span></code></a> is implemented. The
+<code class="xref py py-func docutils literal"><span class="pre">lagrange_points()</span></code> is implemented. The
 numbering used here is just one of the obvious choices.</p>
 <div class="figure" id="id2">
 <span id="figlagrange-nodes"></span><a class="reference internal image-reference" href="_images/lagrange_nodes.svg"><img src="_images/lagrange_nodes.svg" width="70%" /></a>
@@ -129,12 +129,12 @@ the cell (face). The numbering of the nodes is arbitrary.</span><a class="header
 <div class="section" id="implementing-local-numbering">
 <h2>4.2. Implementing local numbering<a class="headerlink" href="#implementing-local-numbering" title="Permalink to this headline">¶</a></h2>
 <p>Local numbering can be implemented by adding an additional data
-structure to the <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a>
+structure to the <code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code>
 class. For each local entity this must record the local nodes
 associated with that entity. This can be achieved using a dictionary
 of dictionaries structure. For example employing the local numbering
 of nodes employed in <a class="reference internal" href="#figlagrange-nodes"><em>Fig. 4.1</em></a>, the <code class="docutils literal"><span class="pre">entity_node</span></code>
-list for the degree three equispaced Lagrange element on a triangle is
+dictionary for the degree three equispaced Lagrange element on a triangle is
 given by:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">entity_node</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                    <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span>
@@ -150,22 +150,27 @@ always consistently reflect the orientation of the relevant entity in
 order that all the cells which share that entity consistently
 interpret the nodes. In this case this has been achieved by listing
 the nodes in order given by the direction of the orientation of each edge.</p>
+<p>The following animation illustrates the construction of the <code class="docutils literal"><span class="pre">entity_node</span></code> dictionary.</p>
+<div class="youtube container">
+<div style="padding-bottom: 56.250000%; padding-top: 30px; position: relative; width: 100%">
+<iframe src="http://www.youtube.com/embed/DtmdYaeTGGg?modestbranding=1;controls=0;rel=0" style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%">
+</iframe></div></div>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">10</span></div><div class="theoremenv_body exercise_body"><p class="first">Extend the <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code> method of
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.LagrangeElement" title="fe_utils.finite_elements.LagrangeElement"><code class="xref py py-class docutils literal"><span class="pre">LagrangeElement</span></code></a> so that it
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">1</span></div><div class="theoremenv_body exercise_body"><p class="first">Extend the <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code> method of
+<code class="xref py py-class docutils literal"><span class="pre">LagrangeElement</span></code> so that it
 passes the correct <code class="docutils literal"><span class="pre">entity_node</span></code> dictionary to the
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> it creates.</p>
+<code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code> it creates.</p>
 <p class="last">The <code class="docutils literal"><span class="pre">test/test_entity_nodes.py</span></code> script tests this functionality.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p>You can either work out the right algorithm to generate
 <code class="docutils literal"><span class="pre">entity_nodes</span></code> with the right node indices, or you can modify
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal"><span class="pre">lagrange_points()</span></code></a> so that it
+<code class="xref py py-func docutils literal"><span class="pre">lagrange_points()</span></code> so that it
 produces the nodes in entity order, thus making the construction of
 <code class="docutils literal"><span class="pre">entity_nodes</span></code> straightforward.</p>
 <p class="last">You may find the
-<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell.point_in_entity" title="fe_utils.reference_elements.ReferenceCell.point_in_entity"><code class="xref py py-meth docutils literal"><span class="pre">point_in_entity()</span></code></a>
-method of the <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
+<code class="xref py py-meth docutils literal"><span class="pre">point_in_entity()</span></code>
+method of the <code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code>
 class useful.</p>
 </div>
 </div>
@@ -227,10 +232,10 @@ of <span class="math">\(M\)</span> for each <span class="math">\(\delta\)</span>
 <p>As noted above, a finite element space associates a mesh and a finite
 element, and contains (in some form) a global numbering of the nodes.</p>
 <div class="theoremenv exercise" id="ex-function-space">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">11</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement the <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code> method of
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">fe_utils.function_spaces.FunctionSpace</span></code></a>. The key operation
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">2</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement the <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code> method of
+<code class="xref py py-class docutils literal"><span class="pre">fe_utils.function_spaces.FunctionSpace</span></code>. The key operation
 is to set
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal"><span class="pre">cell_nodes</span></code></a> using
+<code class="xref py py-attr docutils literal"><span class="pre">cell_nodes</span></code> using
 <a href="#equation-eqcellnode">(2)</a>.</p>
 <p class="last">You can plot the numbering you have created with the
 <code class="docutils literal"><span class="pre">test/plot_function_space_nodes.py</span></code> script. As usual, run the
@@ -239,14 +244,14 @@ arguments.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p>Many of the terms in <a href="#equation-eqcellnode">(2)</a> are implemented in the
-objects in <a class="reference internal" href="fe_utils.html#module-fe_utils" title="fe_utils"><code class="xref py py-mod docutils literal"><span class="pre">fe_utils</span></code></a>. For example:</p>
+objects in <code class="xref py py-mod docutils literal"><span class="pre">fe_utils</span></code>. For example:</p>
 <ul class="last">
 <li><p class="first"><span class="math">\(\operatorname{Adj}_{\dim(c), \delta}\)</span> is implemented by the
 <code class="xref py py-meth docutils literal"><span class="pre">adjacency()</span></code> method of the
 <code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code>.</p>
 </li>
 <li><p class="first">You have <span class="math">\(e(\delta, \epsilon)\)</span> as
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.entity_nodes" title="fe_utils.finite_elements.FiniteElement.entity_nodes"><code class="xref py py-data docutils literal"><span class="pre">entity_nodes</span></code></a>. Note
+<code class="xref py py-data docutils literal"><span class="pre">entity_nodes</span></code>. Note
 that in this case you need separate square brackets for each
 index:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">element</span><span class="o">.</span><span class="n">entity_nodes</span><span class="p">[</span><span class="n">delta</span><span class="p">][</span><span class="n">epsilon</span><span class="p">]</span>
@@ -257,7 +262,7 @@ index:</p>
 </div>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last"><a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal"><span class="pre">cell_nodes</span></code></a> needs to
+<p class="last"><code class="xref py py-attr docutils literal"><span class="pre">cell_nodes</span></code> needs to
 be integer-valued. If you choose to use <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.zeros()</span></code></a>
 to create a matrix which you then populate with values, you
 need to explicitly specify that you want a matrix of
