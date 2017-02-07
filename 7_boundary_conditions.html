@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7. Dirichlet boundary conditions &mdash; Finite element course 0.1 documentation</title>
+    <title>7. Dirichlet boundary conditions &#8212; Finite element course 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,14 +17,16 @@
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="8. Nonlinear problems" href="8_nonlinear_problems.html" />
     <link rel="prev" title="6. Assembling and solving finite element problems" href="6_finite_element_problems.html" />
 <!--[if lte IE 6]>
@@ -66,11 +68,11 @@ conditions. Instead of the Helmholtz problem we solved before, let us
 now specify a Poisson problem with homogeneous Dirichlet conditions, find <span class="math">\(u\)</span> in
 some finite element space <span class="math">\(V\)</span> such that:</p>
 <div class="math" id="equation-poisson">
-<span class="eqno">(1)</span>\[-\nabla^2 u = f\]\[u = 0  \textrm{ on }\Gamma\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-poisson" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla^2 u = f\\u = 0  \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
 <p>In order to implement the Dirichlet conditions, we need to decompose
 <span class="math">\(V\)</span> into two parts:</p>
-<div class="math">
-<span class="eqno">(2)</span>\[V = V_0 \oplus V_\Gamma\]</div>
+<div class="math" id="equation-7_boundary_conditions:0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-7_boundary_conditions:0" title="Permalink to this equation">¶</a></span>\[V = V_0 \oplus V_\Gamma\]</div>
 <p>where <span class="math">\(V_\Gamma\)</span> is the space spanned by those functions in the basis
 of <span class="math">\(V\)</span> which are non-zero on <span class="math">\(\Gamma\)</span>, and <span class="math">\(V_0\)</span> is the space spanned
 by the remaining basis functions (i.e.  those basis functions which
@@ -78,13 +80,13 @@ vanish on <span class="math">\(\Gamma\)</span>). It is a direct consequence of t
 the basis that the basis functions for <span class="math">\(V_\Gamma\)</span> are those
 corresponding to the nodes on <span class="math">\(\Gamma\)</span> while the basis for <span class="math">\(V_0\)</span> is
 composed of all the other functions.</p>
-<p>We now write the weak form of <a href="#equation-poisson">(1)</a>, find <span class="math">\(u=u_0 + u_\Gamma\)</span>
+<p>We now write the weak form of <a class="reference internal" href="#equation-poisson">(1)</a>, find <span class="math">\(u=u_0 + u_\Gamma\)</span>
 with <span class="math">\(u_0 \in V_0\)</span> and <span class="math">\(u_\Gamma \in V_\Gamma\)</span> such that:</p>
-<div class="math">
-<span class="eqno">(3)</span>\[\int_\Omega \nabla v_0 \cdot \nabla (u_0+u_\Gamma) \, \mathrm{d} x
+<div class="math" id="equation-7_boundary_conditions:1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-7_boundary_conditions:1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla (u_0+u_\Gamma) \, \mathrm{d} x
 - \underbrace{\int_\Gamma v_0 \nabla (u_0+u_\Gamma) \cdot
 \mathbf{n}\, \mathrm{d} s}_{=0} = \int_\Omega v_0\, f\, \mathrm{d} x
-\qquad \forall v_0 \in V_0\]\[u_\Gamma = 0 \textrm{ on } \Gamma\]</div>
+\qquad \forall v_0 \in V_0\\u_\Gamma = 0 \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
 <p>There are a number of features of this equation which require some explanation:</p>
 <ol class="arabic simple">
 <li>We only test with functions from <span class="math">\(V_0\)</span>. This is because it is only
@@ -98,9 +100,9 @@ everywhere, since all of the nodes in <span class="math">\(V_\Gamma\)</span> lie
 </ol>
 <p>This means that the weak form is actually:</p>
 <div class="math" id="equation-weakpoisson">
-<span class="eqno">(4)</span>\[\int_\Omega \nabla v \cdot \nabla u \, \mathrm{d} x
+<span class="eqno">(4)<a class="headerlink" href="#equation-weakpoisson" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v \cdot \nabla u \, \mathrm{d} x
  = \int_\Omega v_0\, f\, \mathrm{d} x
-\qquad \forall v_0 \in V_0\]\[u_\Gamma = 0\]</div>
+\qquad \forall v_0 \in V_0\\u_\Gamma = 0\end{aligned}\end{align} \]</div>
 <div class="section" id="an-algorithm-for-homogeneous-dirichlet-conditions">
 <h2>7.1. An algorithm for homogeneous Dirichlet conditions<a class="headerlink" href="#an-algorithm-for-homogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
 <p>The implementation of homogeneous Dirichlet conditions is actually
@@ -129,7 +131,7 @@ but that is beyond the scope of this module.</p>
 <p>Let:</p>
 <div class="math">
 \[f = \left(16 \pi^2 (x_1 - 1)^2 x_1^2 - 2 (x_1 - 1)^2 - 8 (x_1 - 1) x_1 - 2 x_1^2\right) \sin(4 \pi x_0)\]</div>
-<p>With this definition, <a href="#equation-weakpoisson">(4)</a> has solution:</p>
+<p>With this definition, <a class="reference internal" href="#equation-weakpoisson">(4)</a> has solution:</p>
 <div class="math">
 \[u = \sin(4 \pi x_0) (x_1 - 1)^2 x_1^2\]</div>
 <div class="theoremenv exercise">
@@ -141,7 +143,7 @@ in the equation, and the boundary conditions. The
 <code class="xref py py-func docutils literal"><span class="pre">boundary_nodes()</span></code> function in <code class="docutils literal"><span class="pre">test/solve_poisson.py</span></code> is
 likely to be helpful in implementing the boundary conditions. As
 before, run:</p>
-<div class="highlight-python"><div class="highlight"><pre>py.test test/solve_poisson.py --help
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test</span><span class="o">/</span><span class="n">solve_poisson</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
 </pre></div>
 </div>
 <p class="last">for instructions (they are the same as for
@@ -166,8 +168,8 @@ more detail in the next section.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computational tools &mdash; Finite element course 0.1 documentation</title>
+    <title>Computational tools &#8212; Finite element course 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,14 +17,16 @@
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The implementation exercise" href="implementation.html" />
     <link rel="prev" title="Practical matters" href="practicalities.html" />
 <!--[if lte IE 6]>
@@ -81,7 +83,7 @@ they ask!</p>
 will need to type the following command on the Python
 command line at the beginning of each session in order to ensure
 you are running from the correct directory:</p>
-<div class="highlight-python"><div class="highlight"><pre>cd H:\finite-element-course
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">H</span><span class="p">:</span>\<span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
 </pre></div>
 </div>
 <p>replacing username with your GitHub username.</p>
@@ -106,7 +108,7 @@ machine is set up).</li>
 <h3>Using your own Linux machine<a class="headerlink" href="#using-your-own-linux-machine" title="Permalink to this headline">¶</a></h3>
 <p>If you plan to use your own machine for the module, you will need a
 basic scientific Python toolchain. On Ubuntu and its relatives, this can be achieved with:</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install ipython python-scipy python-pytest python-matplotlib
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">ipython</span> <span class="n">python</span><span class="o">-</span><span class="n">scipy</span> <span class="n">python</span><span class="o">-</span><span class="n">pytest</span> <span class="n">python</span><span class="o">-</span><span class="n">matplotlib</span>
 </pre></div>
 </div>
 </div>
@@ -130,23 +132,23 @@ of Xcode&#8217;s preferences</p>
 <li><p class="first">Install homebrew, following the instructions at <a class="reference external" href="http://brew.sh">http://brew.sh</a></p>
 </li>
 <li><p class="first">Install an up-to-date Python via homebrew:</p>
-<div class="highlight-python"><div class="highlight"><pre>brew install python
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install numpy via homebrew:</p>
-<div class="highlight-python"><div class="highlight"><pre>brew tap homebrew/python
-brew install numpy
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">tap</span> <span class="n">homebrew</span><span class="o">/</span><span class="n">python</span>
+<span class="n">brew</span> <span class="n">install</span> <span class="n">numpy</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install python dependencies via pip:</p>
-<div class="highlight-python"><div class="highlight"><pre>pip install decorator
-pip install ipython
-pip install matplotlib
-pip install pytest
-pip install flake8
-pip install scipy
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">decorator</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">ipython</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pytest</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">flake8</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
 </pre></div>
 </div>
 </li>
@@ -198,7 +200,7 @@ widely adopted. We&#8217;ll be combining git with the online hosting service</p>
 <h3>Getting started with git and GitHub<a class="headerlink" href="#getting-started-with-git-and-github" title="Permalink to this headline">¶</a></h3>
 <p>The very first thing you&#8217;ll need is a GitHub account. Navigate to <a class="reference external" href="https://github.com/">GitHub</a> and sign up.
 .. note:</p>
-<div class="highlight-python"><div class="highlight"><pre>Make sure you use your Imperial College email address on
+<div class="highlight-default"><div class="highlight"><pre><span></span>Make sure you use your Imperial College email address on
 GitHub. This enables you to request unlimited free private GitHub
 repositories and other goodies by `applying here
 &lt;https://education.github.com/pack&gt;`_. You don&#39;t strictly need this
@@ -208,17 +210,17 @@ might want anyway.
 </div>
 <p>Next you need to do just a little Git setup. At the <cite>Git Bash</cite> command
 line, type the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global user.name &quot;Jane Bloggs&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Jane Bloggs&quot;</span>
 </pre></div>
 </div>
 <p>Obviously you put in your own name rather than &#8220;Jane Bloggs&#8221;. Similarly, you need to set your email:</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global user.email &quot;Jane.Bloggs12@imperial.ac.uk&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;Jane.Bloggs12@imperial.ac.uk&quot;</span>
 </pre></div>
 </div>
 <p>Once again, you obviously use your own email address. Now there is a
 small setting which makes the output of git colourful and therefore a
 lot easier to read:</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global color.ui &quot;auto&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">color</span><span class="o">.</span><span class="n">ui</span> <span class="s2">&quot;auto&quot;</span>
 </pre></div>
 </div>
 <div class="admonition hint">
@@ -271,8 +273,8 @@ into a gist and post the link in the issue.</dd>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

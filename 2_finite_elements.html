@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2. Constructing finite elements &mdash; Finite element course 0.1 documentation</title>
+    <title>2. Constructing finite elements &#8212; Finite element course 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,14 +17,16 @@
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="3. Meshes" href="3_meshes.html" />
     <link rel="prev" title="1. Numerical quadrature" href="1_quadrature.html" />
 <!--[if lte IE 6]>
@@ -62,14 +64,14 @@
 finite-dimensional function spaces over elements. This concept was
 formalised by <a class="reference internal" href="zbibliography.html#ciarlet2002" id="id1">[Cia02]</a>:</p>
 <div class="theoremenv definition" id="def-ciarlet">
-<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">2</span></div><div class="theoremenv_body definition_body">A <em>finite element</em> is a triple <span class="math">\((K, P, N)\)</span> in which <span class="math">\(K\)</span> is a cell,
+<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">1</span></div><div class="theoremenv_body definition_body">A <em>finite element</em> is a triple <span class="math">\((K, P, N)\)</span> in which <span class="math">\(K\)</span> is a cell,
 <span class="math">\(P\)</span> is a space of functions <span class="math">\(K\rightarrow\mathbb{R}^n\)</span> and <span class="math">\(N\)</span>, the
 set of <em>nodes</em>, is a basis for <span class="math">\(P^*\)</span>, the <a class="reference external" href="http://mathworld.wolfram.com/DualVectorSpace.html">dual space</a> to <span class="math">\(P\)</span>.</div></div><p>Note that this definition includes a basis for <span class="math">\(P^*\)</span>, but not a
 basis for <span class="math">\(P\)</span>. It turns out to be most convenient to specify the set
 of nodes for an element, and then derive an appropriate basis for
 <span class="math">\(P\)</span> from that. In particular:</p>
 <div class="theoremenv definition">
-<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">3</span></div><div class="theoremenv_body definition_body">Let <span class="math">\(N = \{n_j\}\)</span> be a basis for <span class="math">\(P^*\)</span>.  A <em>nodal
+<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter">2</span></div><div class="theoremenv_body definition_body">Let <span class="math">\(N = \{n_j\}\)</span> be a basis for <span class="math">\(P^*\)</span>.  A <em>nodal
 basis</em>, <span class="math">\(\{\phi_i\}\)</span> for <span class="math">\(P\)</span> is a basis for <span class="math">\(P\)</span>
 with the property that <span class="math">\(n_j(\phi_i) = \delta_{ij}\)</span>.</div></div><div class="section" id="a-worked-example">
 <h2>2.1. A worked example<a class="headerlink" href="#a-worked-example" title="Permalink to this headline">¶</a></h2>
@@ -82,13 +84,13 @@ function space has three unknown parameters, and its basis (and dual
 basis) will therefore have three members. In order to ensure the correct
 continuity between elements, the dual basis we need to use is the
 evaluation of the function at each of the cell vertices. That is:</p>
-<div class="math">
-<span class="eqno">(1)</span>\[n_0(f) = f\left((0,0)\right)\]\[n_1(f) = f\left((1,0)\right)\]\[n_2(f) = f\left((0,1)\right)\]</div>
+<div class="math" id="equation-2_finite_elements:0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-2_finite_elements:0" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}n_0(f) = f\left((0,0)\right)\\n_1(f) = f\left((1,0)\right)\\n_2(f) = f\left((0,1)\right)\end{aligned}\end{align} \]</div>
 <p>We know that <span class="math">\(\phi_i\)</span> has the form <span class="math">\(a + bx + cy\)</span> so now we can
 use the definition of the nodal basis to determine the unknown
 coefficients:</p>
-<div class="math">
-<span class="eqno">(2)</span>\[\begin{split}\begin{pmatrix}
+<div class="math" id="equation-2_finite_elements:1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-2_finite_elements:1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{pmatrix}
 n_0(\phi_i)\\
 n_1(\phi_i)\\
 n_2(\phi_i)
@@ -101,7 +103,7 @@ n_2(\phi_i)
 \end{pmatrix}\end{split}\]</div>
 <p>So for <span class="math">\(\phi_0\)</span> we have:</p>
 <div class="math" id="equation-phimat">
-<span class="eqno">(3)</span>\[\begin{split}\begin{bmatrix}
+<span class="eqno">(3)<a class="headerlink" href="#equation-phimat" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
 1 &amp; 0 &amp; 0\\
 1 &amp; 1 &amp; 0\\
 1 &amp; 0 &amp; 1\\
@@ -119,8 +121,8 @@ c\\
 \end{bmatrix}\end{split}\]</div>
 <p>Which has solution <span class="math">\(\phi_0 = 1 - x - y\)</span>. By a similar process,
 we can establish that the full basis is given by:</p>
-<div class="math">
-<span class="eqno">(4)</span>\[\phi_0 = 1 - x - y\]\[\phi_1 = x\]\[\phi_2 = y\]</div>
+<div class="math" id="equation-2_finite_elements:2">
+<span class="eqno">(4)<a class="headerlink" href="#equation-2_finite_elements:2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\phi_0 = 1 - x - y\\\phi_1 = x\\\phi_2 = y\end{aligned}\end{align} \]</div>
 </div>
 <div class="section" id="types-of-node">
 <h2>2.2. Types of node<a class="headerlink" href="#types-of-node" title="Permalink to this headline">¶</a></h2>
@@ -144,7 +146,7 @@ trinomial coefficients and Pascal&#8217;s pyramid), it is unsurprising that
 this produces the correct number of nodes.</p>
 <p>The set of equally spaced points of degree <span class="math">\(p\)</span> on the triangle is:</p>
 <div class="math" id="equation-lattice">
-<span class="eqno">(5)</span>\[\left\{\left(\frac{i}{p}, \frac{j}{p}\right)\middle| 0 \leq i+j \leq p\right\}\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-lattice" title="Permalink to this equation">¶</a></span>\[\left\{\left(\frac{i}{p}, \frac{j}{p}\right)\middle| 0 \leq i+j \leq p\right\}\]</div>
 <p>The finite elements with this set of nodes are called the <em>equispaced
 Lagrange</em> elements and are the most commonly used elements for
 relatively low order computations.</p>
@@ -155,17 +157,17 @@ and creates unwanted oscillations in the solutions. However for
 this course Lagrange elements will be sufficient.</p>
 </div>
 <div class="theoremenv exercise" id="ex-lagrange-points">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">2</span></div><div class="theoremenv_body exercise_body"><p class="first">Use <a href="#equation-lattice">(5)</a> to implement
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">1</span></div><div class="theoremenv_body exercise_body"><p class="first">Use <a class="reference internal" href="#equation-lattice">(5)</a> to implement
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal"><span class="pre">lagrange_points()</span></code></a>. Make sure your
 algorithm also works for one-dimensional elements. Some basic tests
 for your code are to be found in
 <code class="docutils literal"><span class="pre">test/test_lagrange_points.py</span></code>. You can also test your lagrange
 points on the triangle by running:</p>
-<div class="highlight-python"><div class="highlight"><pre>python test/plot_lagrange_points.py degree
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_lagrange_points</span><span class="o">.</span><span class="n">py</span> <span class="n">degree</span>
 </pre></div>
 </div>
 <p>From the Enthought Canopy Python command line, you would instead write:</p>
-<div class="highlight-python"><div class="highlight"><pre>run test/plot_lagrange_points.py degree
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_lagrange_points</span><span class="o">.</span><span class="n">py</span> <span class="n">degree</span>
 </pre></div>
 </div>
 <p class="last">Where degree is the degree of the points to plot.</p>
@@ -177,11 +179,11 @@ comprehensions</a>.</p>
 </div>
 <div class="section" id="solving-for-basis-functions">
 <span id="sec-vandermonde"></span><h2>2.4. Solving for basis functions<a class="headerlink" href="#solving-for-basis-functions" title="Permalink to this headline">¶</a></h2>
-<p>The matrix in <a href="#equation-phimat">(3)</a> is a <em>generalised Vandermonde</em> <a class="footnote-reference" href="#vandermonde" id="id3">[1]</a>
+<p>The matrix in <a class="reference internal" href="#equation-phimat">(3)</a> is a <em>generalised Vandermonde</em> <a class="footnote-reference" href="#vandermonde" id="id3">[1]</a>
 matrix . Given a list of points <span class="math">\((x_i,y_i) \in \mathbb{R}^2, 0\leq i&lt; m\)</span>
 the corresponding degree <span class="math">\(n\)</span> generalised Vandermonde matrix is given by:</p>
 <div class="math" id="equation-Vandermonde">
-<span class="eqno">(6)</span>\[\begin{split}\mathrm{V} =
+<span class="eqno">(6)<a class="headerlink" href="#equation-Vandermonde" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathrm{V} =
 \begin{bmatrix}
 1 &amp; x_0 &amp; y_0 &amp; x_0^2 &amp; x_0y_0 &amp; y_0^2 &amp; \ldots &amp; x_0^n &amp; x_0^{n-1}y_0 &amp; \ldots &amp; x_0y_0^{n-1} &amp; y_0^n \\
 1 &amp; x_1 &amp; y_1 &amp; x_1^2 &amp; x_1y_1 &amp; y_1^2 &amp; \ldots &amp; x_1^n &amp; x_1^{n-1}y_1 &amp; \ldots &amp; x_1y_1^{n-1} &amp; y_1^n \\
@@ -192,14 +194,14 @@ the corresponding degree <span class="math">\(n\)</span> generalised Vandermonde
 element, then the equation for the complete set of basis function
 polynomial coefficients is:</p>
 <div class="math" id="equation-vdm-equation">
-<span class="eqno">(7)</span>\[\mathrm{V}\mathrm{C} = \mathrm{I}\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-vdm-equation" title="Permalink to this equation">¶</a></span>\[\mathrm{V}\mathrm{C} = \mathrm{I}\]</div>
 <p>where the <span class="math">\(j\)</span>-th column of <span class="math">\(C\)</span> contains the polynomial coefficients of
 the basis function corresponding to the <span class="math">\(j\)</span>-th node. For
-<a href="#equation-vdm-equation">(7)</a> to be well-posed, there must be a number of nodes
+<a class="reference internal" href="#equation-vdm-equation">(7)</a> to be well-posed, there must be a number of nodes
 equal to the number of coefficients of a degree <span class="math">\(n\)</span> polynomial. If
 this is the case, then it follows immediately that:</p>
-<div class="math">
-<span class="eqno">(8)</span>\[\mathrm{C} = \mathrm{V}^{-1}\]</div>
+<div class="math" id="equation-2_finite_elements:3">
+<span class="eqno">(8)<a class="headerlink" href="#equation-2_finite_elements:3" title="Permalink to this equation">¶</a></span>\[\mathrm{C} = \mathrm{V}^{-1}\]</div>
 <p>The same process applies to the construction of basis functions for
 elements in one or three dimensions, except that the Vandermonde
 matrix must be modified to exclude powers of <span class="math">\(y\)</span> (in one dimension) or
@@ -212,7 +214,7 @@ advantageous to employ a different basis in the construction of the
 Vandermonde matrix. See <a class="reference internal" href="zbibliography.html#kirby2004" id="id4">[Kir04]</a> for an example.</p>
 </div>
 <div class="theoremenv exercise" id="ex-vandermonde">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">3</span></div><div class="theoremenv_body exercise_body"><p class="first">Use <a href="#equation-Vandermonde">(6)</a> to implement
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">2</span></div><div class="theoremenv_body exercise_body"><p class="first">Use <a class="reference internal" href="#equation-Vandermonde">(6)</a> to implement
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-func docutils literal"><span class="pre">vandermonde_matrix()</span></code></a>. Think
 carefully about how to loop over each row to construct the correct
 powers of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. For the purposes of this exercise you should
@@ -226,7 +228,7 @@ the matrix at once.</p>
 </div>
 <div class="section" id="implementing-finite-elements-in-python">
 <h2>2.5. Implementing finite elements in Python<a class="headerlink" href="#implementing-finite-elements-in-python" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="#def-ciarlet"><em>Ciarlet triple</em></a> <span class="math">\((K, P, N)\)</span> also provides a
+<p>The <a class="reference internal" href="#def-ciarlet"><span class="std std-ref">Ciarlet triple</span></a> <span class="math">\((K, P, N)\)</span> also provides a
 good abstraction for the implementation of software objects
 corresponding to finite elements. In our case <span class="math">\(K\)</span> will be a
 <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>. In this course we
@@ -236,7 +238,7 @@ degree of the polynomials in the space. Since we will only deal with
 point evaluation nodes, we can represent <span class="math">\(N\)</span> by a series of points at
 which the evaluation should occur.</p>
 <div class="theoremenv exercise" id="ex-finite-element">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">4</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement the rest of the
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">3</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement the rest of the
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code>
 method. You should construct a Vandermonde matrix for the nodes and
 invert it to create the basis function coefs. Store these as
@@ -245,7 +247,7 @@ invert it to create the basis function coefs. Store these as
 <code class="docutils literal"><span class="pre">test/test_init_finite_element.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
+<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
 used to invert the matrix.</p>
 </div>
 </div>
@@ -259,7 +261,7 @@ polynomial, degree and nodes. The
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> which will implement
 the particular case of the equispaced Lagrange elements.</p>
 <div class="theoremenv exercise" id="ex-lagrange-element">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">5</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement the <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code> method of
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">4</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement the <code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code> method of
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.LagrangeElement" title="fe_utils.finite_elements.LagrangeElement"><code class="xref py py-class docutils literal"><span class="pre">LagrangeElement</span></code></a>. Use
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal"><span class="pre">lagrange_points()</span></code></a> to obtain the
 nodes. For the purpose of this exercise, you may ignore the
@@ -274,12 +276,12 @@ Lagrange basis functions.</p>
 <h2>2.7. Tabulating basis functions<a class="headerlink" href="#tabulating-basis-functions" title="Permalink to this headline">¶</a></h2>
 <p>A core operation in the finite element method is integrating
 expressions involving functions in finite element spaces. This is
-usually accomplished using <a class="reference internal" href="1_quadrature.html"><em>numerical quadrature</em></a>. This means that we need to be able to evaluate the
+usually accomplished using <a class="reference internal" href="1_quadrature.html"><span class="doc">numerical quadrature</span></a>. This means that we need to be able to evaluate the
 basis functions at a set of quadrature points. The operation of
 evaluating a set of basis functions at a set of points is called
 <em>tabulation</em>.</p>
 <div class="theoremenv exercise" id="ex-tabulate">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">6</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal"><span class="pre">tabulate()</span></code></a>.
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">5</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal"><span class="pre">tabulate()</span></code></a>.
 You can use a Vandermonde matrix to evaluate the polynomial terms
 and take the matrix product of this with the basis function
 coefficients. The method should have at most two executable
@@ -303,23 +305,23 @@ apply to the basis functions:</p>
 <p>This means that we will need to be able to evaluate the gradient of
 the basis functions at quadrature points.</p>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">7</span></div><div class="theoremenv_body exercise_body"><p class="first">Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal"><span class="pre">vandermonde_matrix()</span></code></a> so that
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">6</span></div><div class="theoremenv_body exercise_body"><p class="first">Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal"><span class="pre">vandermonde_matrix()</span></code></a> so that
 setting <code class="docutils literal"><span class="pre">grad</span></code> to <code class="docutils literal"><span class="pre">True</span></code> produces a rank 3 generalised
 Vandermonde tensor whose indices represent points, gradient
 component and basis function respectively. That is, each entry of
 <span class="math">\(V\)</span> is replaced by a vector of the gradient of that polynomial
 term. For example, the entry <span class="math">\(x^2y^3\)</span> would be replaced by the
-vector <span class="math">\([ 2xy^2, 3x^2y^2 ]\)</span>.</p>
+vector <span class="math">\([ 2xy^3, 3x^2y^2 ]\)</span>.</p>
 <p class="last">The <code class="docutils literal"><span class="pre">test/test_vandermonde_matrix_grad.py</span></code> file has tests of this
 extension. You should also ensure that you still pass
 <code class="docutils literal"><span class="pre">test/test_vandermonde_matrix.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.12)"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
+<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.12)"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
 generalised transposes swapping any dimensions.</p>
 </div>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">8</span></div><div class="theoremenv_body exercise_body"><p class="first">Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal"><span class="pre">tabulate()</span></code></a> to
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">7</span></div><div class="theoremenv_body exercise_body"><p class="first">Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal"><span class="pre">tabulate()</span></code></a> to
 pass the <code class="docutils literal"><span class="pre">grad</span></code> argument through to
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal"><span class="pre">vandermonde_matrix()</span></code></a>. Then
 generalise the matrix product in
@@ -335,7 +337,7 @@ extension. Once again, make sure you still pass
 <code class="docutils literal"><span class="pre">test/test_tabulate.py</span></code></p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
+<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
 contractions using <a class="reference external" href="http://mathworld.wolfram.com/EinsteinSummation.html">Einstein summation notation</a>. For
 example, <code class="docutils literal"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">numpy.einsum(&quot;ijk,jl-&gt;ilk&quot;,</span> <span class="pre">T,</span> <span class="pre">C)</span></code> is equivalent to
 <span class="math">\(A_{ilk} = \sum_j T_{ijk} C_{jl}\)</span>.</p>
@@ -356,21 +358,21 @@ evaluation of their function input, we know that:</p>
 \[f_i = f(X_i)\]</div>
 <p>where <span class="math">\(X_i\)</span> is the point associated with the <span class="math">\(i\)</span>-th node.</p>
 <div class="theoremenv exercise" id="ex-interpolate">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">9</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate" title="fe_utils.finite_elements.FiniteElement.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a>.</p>
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">8</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate" title="fe_utils.finite_elements.FiniteElement.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a>.</p>
 <p>Once you have done this, you can use the script provided to plot
 functions of your choice interpolated onto any of the finite
 elements you can make:</p>
-<div class="highlight-python"><div class="highlight"><pre>python test/plot_interpolate_lagrange.py &quot;sin(2*pi*x[0])&quot; 2 5
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_interpolate_lagrange</span><span class="o">.</span><span class="n">py</span> <span class="s2">&quot;sin(2*pi*x[0])&quot;</span> <span class="mi">2</span> <span class="mi">5</span>
 </pre></div>
 </div>
 <p>From the Enthought Canopy Python command line, you would instead write:</p>
-<div class="highlight-python"><div class="highlight"><pre>run test/plot_interpolate_lagrange.py &quot;sin(2*pi*x[0])&quot; 2 5
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_interpolate_lagrange</span><span class="o">.</span><span class="n">py</span> <span class="s2">&quot;sin(2*pi*x[0])&quot;</span> <span class="mi">2</span> <span class="mi">5</span>
 </pre></div>
 </div>
 <div class="last admonition hint">
 <p class="first admonition-title">Hint</p>
 <p>You can find help on the arguments to this function with:</p>
-<div class="last highlight-python"><div class="highlight"><pre>python test/plot_interpolate_lagrange.py -h
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_interpolate_lagrange</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </div>
@@ -393,8 +395,8 @@ is the one-dimensional case of the generalised Vandermonde matrix.</td></tr>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

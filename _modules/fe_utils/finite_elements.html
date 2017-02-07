@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fe_utils.finite_elements &mdash; Finite element course 0.1 documentation</title>
+    <title>fe_utils.finite_elements &#8212; Finite element course 0.1 documentation</title>
     
     <link rel="stylesheet" href="../../_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,15 +17,16 @@
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Finite element course 0.1 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="../../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
@@ -56,11 +57,11 @@
           <div class="body" role="main">
             
   <h1>Source code for fe_utils.finite_elements</h1><div class="highlight"><pre>
-<span class="c"># Cause division to always mean floating point division.</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="kn">import</span> <span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">ReferenceTriangle</span>
-<span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">divide</span><span class="o">=</span><span class="s">&#39;ignore&#39;</span><span class="p">)</span>
+<span></span><span class="c1"># Cause division to always mean floating point division.</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="k">import</span> <span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">ReferenceTriangle</span>
+<span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="lagrange_points"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.lagrange_points">[docs]</a><span class="k">def</span> <span class="nf">lagrange_points</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
@@ -77,10 +78,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-</div>
-<div class="viewcode-block" id="vandermonde_matrix"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.vandermonde_matrix">[docs]</a><span class="k">def</span> <span class="nf">vandermonde_matrix</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="vandermonde_matrix"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.vandermonde_matrix">[docs]</a><span class="k">def</span> <span class="nf">vandermonde_matrix</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Construct the generalised Vandermonde matrix for polynomials of the</span>
 <span class="sd">    specified degree on the cell provided.</span>
 
@@ -95,11 +96,11 @@
 <span class="sd">    &lt;ex-vandermonde&gt;`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-</div>
+
 <div class="viewcode-block" id="FiniteElement"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement">[docs]</a><span class="k">class</span> <span class="nc">FiniteElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">entity_nodes</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">entity_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;A finite element defined over cell.</span>
 
 <span class="sd">        :param cell: the :class:`~.reference_elements.ReferenceCell`</span>
@@ -115,34 +116,34 @@
 <span class="sd">        Most of the implementation of this class is left as exercises.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c">#: The :class:`~.reference_elements.ReferenceCell`</span>
-        <span class="c">#: over which the element is defined.</span>
+        <span class="c1">#: The :class:`~.reference_elements.ReferenceCell`</span>
+        <span class="c1">#: over which the element is defined.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="n">cell</span>
-        <span class="c">#: The polynomial degree of the element. We assume the element</span>
-        <span class="c">#: spans the complete polynomial space.</span>
+        <span class="c1">#: The polynomial degree of the element. We assume the element</span>
+        <span class="c1">#: spans the complete polynomial space.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">degree</span>
-        <span class="c">#: The list of coordinate tuples corresponding to the nodes of</span>
-        <span class="c">#: the element.</span>
+        <span class="c1">#: The list of coordinate tuples corresponding to the nodes of</span>
+        <span class="c1">#: the element.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">nodes</span>
-        <span class="c">#: A dictionary of dictionaries such that ``entity_nodes[d][i]``</span>
-        <span class="c">#: is the list of nodes associated with entity `(d, i)`.</span>
+        <span class="c1">#: A dictionary of dictionaries such that ``entity_nodes[d][i]``</span>
+        <span class="c1">#: is the list of nodes associated with entity `(d, i)`.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entity_nodes</span> <span class="o">=</span> <span class="n">entity_nodes</span>
 
         <span class="k">if</span> <span class="n">entity_nodes</span><span class="p">:</span>
-            <span class="c">#: ``nodes_per_entity[d]`` is the number of entities</span>
-            <span class="c">#: associated with an entity of dimension d.</span>
+            <span class="c1">#: ``nodes_per_entity[d]`` is the number of entities</span>
+            <span class="c1">#: associated with an entity of dimension d.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nodes_per_entity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">entity_nodes</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
                                               <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
 
-        <span class="c"># Replace this exception with some code which sets</span>
-        <span class="c"># self.basis_coefs</span>
-        <span class="c"># to an array of polynomial coefficients defining the basis functions.</span>
+        <span class="c1"># Replace this exception with some code which sets</span>
+        <span class="c1"># self.basis_coefs</span>
+        <span class="c1"># to an array of polynomial coefficients defining the basis functions.</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-        <span class="c">#: The number of nodes in this element.</span>
+        <span class="c1">#: The number of nodes in this element.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_count</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<div class="viewcode-block" id="FiniteElement.tabulate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="FiniteElement.tabulate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Evaluate the basis functions of this finite element at the points</span>
 <span class="sd">        provided.</span>
 
@@ -163,8 +164,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-</div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="FiniteElement.interpolate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate">[docs]</a>    <span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Interpolate fn onto this finite element by evaluating it</span>
 <span class="sd">        at each of the nodes.</span>
@@ -180,14 +181,14 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-</div>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
-                               <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span>
-                               <span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="LagrangeElement"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.LagrangeElement">[docs]</a><span class="k">class</span> <span class="nc">LagrangeElement</span><span class="p">(</span><span class="n">FiniteElement</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;An equispaced Lagrange finite element.</span>
@@ -203,11 +204,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-        <span class="c"># Use lagrange_points to obtain the set of nodes.  Once you</span>
-        <span class="c"># have obtained nodes, the following line will call the</span>
-        <span class="c"># __init__ method on the FiniteElement class to set up the</span>
-        <span class="c"># basis coefficients.</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">LagrangeElement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span></div>
+        <span class="c1"># Use lagrange_points to obtain the set of nodes.  Once you</span>
+        <span class="c1"># have obtained nodes, the following line will call the</span>
+        <span class="c1"># __init__ method on the FiniteElement class to set up the</span>
+        <span class="c1"># basis coefficients.</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LagrangeElement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -216,8 +217,8 @@
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

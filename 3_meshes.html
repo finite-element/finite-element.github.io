@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3. Meshes &mdash; Finite element course 0.1 documentation</title>
+    <title>3. Meshes &#8212; Finite element course 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,14 +17,16 @@
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="4. Function spaces: associating data with meshes" href="4_function_spaces.html" />
     <link rel="prev" title="2. Constructing finite elements" href="2_finite_elements.html" />
 <!--[if lte IE 6]>
@@ -124,18 +126,18 @@ numbers in order that degrees of freedom can later be associated with
 them. We will identify topological entities by an index pair <span class="math">\((d, i)\)</span>
 where <span class="math">\(i\)</span> is the index of the entity within the set of <span class="math">\(d\)</span>-dimensional
 entities. For example, entity <span class="math">\((0, 10)\)</span> is vertex number 10, and
-entity <span class="math">\((1, 10)\)</span> is edge 10. <a class="reference internal" href="#figmesh"><em>Fig. 3.1</em></a> shows an example
+entity <span class="math">\((1, 10)\)</span> is edge 10. <a class="reference internal" href="#figmesh"><span class="std std-numref">Fig. 3.1</span></a> shows an example
 mesh with the topological entities labelled.</p>
 <div class="figure" id="id3">
-<span id="figmesh"></span><a class="reference internal image-reference" href="_images/mesh.svg"><img src="_images/mesh.svg" width="80%" /></a>
+<span id="figmesh"></span><a class="reference internal image-reference" href="_images/mesh.svg"><img alt="_images/mesh.svg" src="_images/mesh.svg" width="80%" /></a>
 <p class="caption"><span class="caption-number">Fig. 3.1 </span><span class="caption-text">A triangular mesh showing labelled topological entities: vertices
-(black), edges (red), and cells (blue).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+(black), edges (red), and cells (blue).</span></p>
 </div>
 </div>
 <div class="section" id="reference-cell-entities">
 <h2>3.2. Reference cell entities<a class="headerlink" href="#reference-cell-entities" title="Permalink to this headline">¶</a></h2>
 <p>The reference cells similarly have locally numbered topological
-entities, these are shown in <a class="reference internal" href="#figreferenceentities"><em>Fig. 3.2</em></a>. The
+entities, these are shown in <a class="reference internal" href="#figreferenceentities"><span class="std std-numref">Fig. 3.2</span></a>. The
 numbering is a matter of convention: that adopted here is that edges
 share the number of the opposite vertex. The orientation of the edges
 is also shown, this is always from the lower numbered vertex to the
@@ -145,12 +147,12 @@ local topology of the reference cell. <a class="reference external" href="_modul
 understand the way in which this information is encoded.</p>
 <p>The following animation of the numbering of the topological entities
 on the reference cell may help in understanding this.</p>
-<div class="youtube container">
-<iframe src="http://www.youtube.com/embed/7A7JU7bGw0E?modestbranding=1;controls=0;rel=0" style="border: 0; height: 367px; width: 600px">
+<div class="youtube docutils container">
+<iframe src="https://www.youtube.com/embed/7A7JU7bGw0E?modestbranding=1;controls=0;rel=0" style="border: 0; height: 367px; width: 600px">
 </iframe></div>
 <div class="figure" id="id4">
-<span id="figreferenceentities"></span><a class="reference internal image-reference" href="_images/entities.svg"><img src="_images/entities.svg" width="50%" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Local numbering and orientation of the reference entities.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<span id="figreferenceentities"></span><a class="reference internal image-reference" href="_images/entities.svg"><img alt="_images/entities.svg" src="_images/entities.svg" width="50%" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Local numbering and orientation of the reference entities.</span></p>
 </div>
 </div>
 <div class="section" id="adjacency">
@@ -179,12 +181,12 @@ the entity <span class="math">\((d_1, i)\)</span> and the reference cell of dime
 established by specifying that the vertices are numbered in
 ascending order <a class="footnote-reference" href="#simplexnumbering" id="id2">[1]</a>. That is, for any entity <span class="math">\((d_1, i)\)</span>:</p>
 <div class="math">
-\[\begin{split}(i_0, \ldots i_k) = \operatorname{Adj}_{d_1,0}(i) \quad \Longrightarrow \quad i_0 &lt; \ldots &lt;i_k\end{split}\]</div>
+\[(i_0, \ldots i_k) = \operatorname{Adj}_{d_1,0}(i) \quad \Longrightarrow \quad i_0 &lt; \ldots &lt;i_k\]</div>
 <p class="last">A consequence of this convention is that the global orientation of
 all the entities making up a cell also matches their local
 orientation.</p>
 </div></div><div class="theoremenv example">
-<div class="theoremenv_caption example_caption">Example<span class="theoremenv_counter example_counter">7</span></div><div class="theoremenv_body example_body"><p class="first">In the mesh shown in <a class="reference internal" href="#figmesh"><em>Fig. 3.1</em></a> we have:</p>
+<div class="theoremenv_caption example_caption">Example<span class="theoremenv_counter example_counter">7</span></div><div class="theoremenv_body example_body"><p class="first">In the mesh shown in <a class="reference internal" href="#figmesh"><span class="std std-numref">Fig. 3.1</span></a> we have:</p>
 <div class="math">
 \[\operatorname{Adj}_{2,0}(3) = (1,5,8).\]</div>
 <p>In other words, vertices 1, 5 and 8 are adjacent to cell 3. Similarly:</p>
@@ -217,7 +219,7 @@ corresponding (rather trivial) function for a unit one dimensional
 mesh.</p>
 <p>You can observe the numbering of mesh entities in these meshes using
 the <code class="docutils literal"><span class="pre">test/plot_mesh.py</span></code> script. Run:</p>
-<div class="highlight-python"><div class="highlight"><pre>py.test test/plot_mesh.py -h
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_mesh</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 <p>for usage instructions.</p>
@@ -243,8 +245,8 @@ meshes.</td></tr>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

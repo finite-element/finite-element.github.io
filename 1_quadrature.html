@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1. Numerical quadrature &mdash; Finite element course 0.1 documentation</title>
+    <title>1. Numerical quadrature &#8212; Finite element course 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,14 +17,16 @@
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Finite element course 0.1 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2. Constructing finite elements" href="2_finite_elements.html" />
     <link rel="prev" title="The implementation exercise" href="implementation.html" />
 <!--[if lte IE 6]>
@@ -71,7 +73,7 @@ integration.</p>
 <span class="math">\(f(X)\)</span> over an element <span class="math">\(e\)</span> can be approximated as
 a weighted sum of function values evaluated at particular points:</p>
 <div class="math" id="equation-quadrature">
-<span class="eqno">(1)</span>\[\int_e f(X)  = \sum_{q} f(X_q) w_q + O(h^n)\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-quadrature" title="Permalink to this equation">¶</a></span>\[\int_e f(X)  = \sum_{q} f(X_q) w_q + O(h^n)\]</div>
 <p>we term the set <span class="math">\(\{X_q\}\)</span> the set of <em>quadrature points</em> and the
 corresponding set <span class="math">\(\{w_q\}\)</span> the set of <em>quadrature weights</em>. A set of
 quadrature points and their corresponding quadrature weights together
@@ -108,7 +110,7 @@ error, then incomplete quadrature may be advantageous.</p>
 taught in introductory integration courses. The first of these is the
 midpoint rule:</p>
 <div class="math" id="equation-midpoint">
-<span class="eqno">(2)</span>\[\int_0^h f(X) \mathrm{d} X = hf(0.5h) + O(h^3)\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-midpoint" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = hf(0.5h) + O(h^3)\]</div>
 <p>In other words, an approximation to the integral of
 <span class="math">\(f\)</span> over an interval can be calculated by multiplying the value
 of <span class="math">\(f\)</span> at the mid-point of the interval by the length of the
@@ -117,10 +119,10 @@ by a constant value.</p>
 <p>If we improve our approximation of <span class="math">\(f\)</span> to a straight line over
 the interval, then we arrive at the trapezoidal (or trapezium) rule:</p>
 <div class="math" id="equation-trapezoidal">
-<span class="eqno">(3)</span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-trapezoidal" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
 <p>while if we employ a quadratic function then we arrive at Simpson&#8217;s rule:</p>
-<div class="math">
-<span class="eqno">(4)</span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
+<div class="math" id="equation-1_quadrature:0">
+<span class="eqno">(4)<a class="headerlink" href="#equation-1_quadrature:0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
 </div>
 <div class="section" id="reference-elements">
 <h2>1.3. Reference elements<a class="headerlink" href="#reference-elements" title="Permalink to this headline">¶</a></h2>
@@ -149,7 +151,7 @@ vertex numbering are possible.</p>
 Python objects encoding the geometry and topology of the reference
 cell. At this stage, the relevant information is the dimension of the
 reference cell and the list of vertices. The topology will become
-important when we consider <a class="reference internal" href="3_meshes.html"><em>meshes</em></a>. The reference cells we will
+important when we consider <a class="reference internal" href="3_meshes.html"><span class="doc">meshes</span></a>. The reference cells we will
 require for this course are the
 <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceInterval" title="fe_utils.reference_elements.ReferenceInterval"><code class="xref py py-data docutils literal"><span class="pre">ReferenceInterval</span></code></a> and
 <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceTriangle" title="fe_utils.reference_elements.ReferenceTriangle"><code class="xref py py-data docutils literal"><span class="pre">ReferenceTriangle</span></code></a>.</p>
@@ -159,15 +161,15 @@ require for this course are the
 <p>Having adopted a convention for the reference element, we can simply
 express quadrature rules as lists of quadrature points with
 corresponding quadrature weights. For example Simpson&#8217;s rule becomes:</p>
-<div class="math">
-<span class="eqno">(5)</span>\[w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\]\[X = \left[ (0), (0.5), (1)\right].\]</div>
+<div class="math" id="equation-1_quadrature:1">
+<span class="eqno">(5)<a class="headerlink" href="#equation-1_quadrature:1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
 <p>We choose to write the quadrature points as 1-tuples for consistency
 with the <span class="math">\(n\)</span>-dimensional case, in which the points will be
 <span class="math">\(n\)</span>-tuples.</p>
 <p>The lowest order quadrature rule on the reference triangle is a single point
 quadrature:</p>
-<div class="math">
-<span class="eqno">(6)</span>\[w = \left[ \frac{1}{2} \right]\]\[X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\]</div>
+<div class="math" id="equation-1_quadrature:2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-1_quadrature:2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{2} \right]\\X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\end{aligned}\end{align} \]</div>
 <p>This rule has a degree of precision of 1.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
@@ -187,8 +189,8 @@ which we are able to adopt. The Legendre-Gauß quadrature rules are
 usually defined for the interval <span class="math">\([-1, 1]\)</span> so we need to change
 coordinates in order to arrive at a quadrature rule for our reference
 interval:</p>
-<div class="math">
-<span class="eqno">(7)</span>\[X_q = \frac{X'_q + 1}{2}\]\[w_q = \frac{w'_q}{2}\]</div>
+<div class="math" id="equation-1_quadrature:3">
+<span class="eqno">(7)<a class="headerlink" href="#equation-1_quadrature:3" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_q = \frac{X'_q + 1}{2}\\w_q = \frac{w'_q}{2}\end{aligned}\end{align} \]</div>
 <p>where <span class="math">\((\{X'_q\}, \{w'_q\})\)</span> is the quadrature rule on the interval
 <span class="math">\([-1, 1]\)</span> and <span class="math">\((\{X_q\}, \{w_q\})\)</span> is the rule on the unit interval.</p>
 <p>Legendre-Gauß quadrature on the interval is optimal in the sense that it uses the
@@ -201,24 +203,24 @@ intervals: <span class="math">\((0, 1)\otimes (0, 1)\)</span>. Similarly, we can
 rule on a unit square by taking the product of two interval quadrature
 rules:</p>
 <div class="math" id="equation-squarequad">
-<span class="eqno">(8)</span>\[X_\textrm{sq} = \left\{ (x_p, x_q)\ \middle|\ x_p, x_q \in X \right\}\]\[w_\textrm{sq} = \left\{ w_p w_q\ \middle|\ w_p, w_q \in w \right\}\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-squarequad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{sq} = \left\{ (x_p, x_q)\ \middle|\ x_p, x_q \in X \right\}\\w_\textrm{sq} = \left\{ w_p w_q\ \middle|\ w_p, w_q \in w \right\}\end{aligned}\end{align} \]</div>
 <p>where <span class="math">\((X, w)\)</span> is an interval quadrature rule. Furthermore, the degree
 of accuracy of <span class="math">\((X_\textrm{sq}, w_\textrm{sq})\)</span> will be the same as
 that of the one-dimensional rule.</p>
 <p>However, we need a quadrature rule for the unit triangle. We can
 achieve this by treating the triangle as a square with a zero length
 edge. The Duffy transform maps the unit square to the unit triangle:</p>
-<div class="math">
-<span class="eqno">(9)</span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
+<div class="math" id="equation-1_quadrature:4">
+<span class="eqno">(9)<a class="headerlink" href="#equation-1_quadrature:4" title="Permalink to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
   \left(x_\textrm{sq},\ y_\textrm{sq}(1 - x_\textrm{sq})\right)\]</div>
 <div class="figure" id="id1">
-<span id="figduffy"></span><a class="reference internal image-reference" href="_images/duffy.svg"><img src="_images/duffy.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<span id="figduffy"></span><a class="reference internal image-reference" href="_images/duffy.svg"><img alt="_images/duffy.svg" src="_images/duffy.svg" width="60%" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span></p>
 </div>
-<p>By composing the Duffy transform with <a href="#equation-squarequad">(8)</a> we can arrive
+<p>By composing the Duffy transform with <a class="reference internal" href="#equation-squarequad">(8)</a> we can arrive
 at a quadrature rule for the triangle:</p>
 <div class="math" id="equation-triquad">
-<span class="eqno">(10)</span>\[X_\textrm{tri} =\left\{ \left(x_p, x_q(1 - x_p)\right)\ \middle|\ x_p \in X_h, x_q \in X_v \right\}\]\[w_\textrm{tri} = \left\{ w_p w_q(1 - x_p)\ \middle|\ w_p \in w_h, w_q \in w_v \right\}\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-triquad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{tri} =\left\{ \left(x_p, x_q(1 - x_p)\right)\ \middle|\ x_p \in X_h, x_q \in X_v \right\}\\w_\textrm{tri} = \left\{ w_p w_q(1 - x_p)\ \middle|\ w_p \in w_h, w_q \in w_v \right\}\end{aligned}\end{align} \]</div>
 <p>where <span class="math">\((X_v, w_v)\)</span> is a reference interval quadrature rule with degree
 of precision <span class="math">\(n\)</span> and <span class="math">\((X_h, w_h)\)</span> is a reference interval quadrature
 rule with degree of precision <span class="math">\(n+1\)</span>. The combined quadrature rule
@@ -238,14 +240,14 @@ quadrature rules for a prescribed degree of precision and reference
 cell.</p>
 <div class="theoremenv exercise" id="ex-integrate">
 <div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">1</span></div><div class="theoremenv_body exercise_body"><p class="first">The <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a> method is
-left unimplemented. Using <a href="#equation-quadrature">(1)</a>, implement this method.</p>
+left unimplemented. Using <a class="reference internal" href="#equation-quadrature">(1)</a>, implement this method.</p>
 <p>A test script for your method is provided in the <code class="docutils literal"><span class="pre">test</span></code> directory
 as <code class="docutils literal"><span class="pre">test_integrate.py</span></code>. Run this script to test your code:</p>
-<div class="highlight-python"><div class="highlight"><pre>py.test test/test_integrate.py
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test</span><span class="o">/</span><span class="n">test_integrate</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>from the Bash command line or:</p>
-<div class="highlight-python"><div class="highlight"><pre>!py.test test/test_integrate.py
+<div class="highlight-default"><div class="highlight"><pre><span></span>!py.test test/test_integrate.py
 </pre></div>
 </div>
 <p class="last">from Python. Make sure you commit your modifications and push them
@@ -254,8 +256,8 @@ to your fork of the course repository.</p>
 <p class="first admonition-title">Hint</p>
 <p class="last">You can implement
 <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a> in one line
-using the Python intrinsic function <a class="reference external" href="http://docs.python.org/library/functions.html#map" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">map()</span></code></a> and
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.dot()</span></code></a>.</p>
+using the Python intrinsic function <a class="reference external" href="https://docs.python.org/2/library/functions.html#map" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">map()</span></code></a> and
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.dot()</span></code></a>.</p>
 </div>
 </div>
 </div>
@@ -267,8 +269,8 @@ using the Python intrinsic function <a class="reference external" href="http://d
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b3.
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>
