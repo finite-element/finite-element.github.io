@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>The implementation exercise &#8212; Finite element course 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -40,7 +37,7 @@
 
 
   </head>
-  <body role="document">
+  <body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -66,7 +63,7 @@ dimensional finite element solver library. Along the way you will have
 the opportunity to pick up valuable scientific computing skills in
 coding, software engineering and rigorous testing.</p>
 <p>There will be no conventional lectures for this part of the
-module. Instead, there will be eigteen 1 hour computer lab sessions
+module. Instead, there will be twice weekly 1 hour computer lab sessions
 during the term. Some of this time will involve explanations at the
 board, but much of the time will be an opportunity to develop your
 finite element implementation and receive help on how to do so.</p>
@@ -119,10 +116,10 @@ material by implementing work which goes beyond the main body of work.</p>
 </div>
 <div class="section" id="obtaining-the-skeleton-code">
 <h2>Obtaining the skeleton code<a class="headerlink" href="#obtaining-the-skeleton-code" title="Permalink to this headline">¶</a></h2>
-<p>This section assumes you&#8217;ve already done the <a class="reference internal" href="tools.html#bitbucket-git"><span class="std std-ref">Git tutorial</span></a>.</p>
-<div class="section" id="setting-uo-your-repository">
-<h3>Setting uo your repository<a class="headerlink" href="#setting-uo-your-repository" title="Permalink to this headline">¶</a></h3>
-<p>We&#8217;re using a tool called <a class="reference external" href="https://classroom.github.com">GitHub classroom</a> to automate the creation of your
+<p>This section assumes you’ve already done the <a class="reference internal" href="tools.html#bitbucket-git"><span class="std std-ref">Git tutorial</span></a>.</p>
+<div class="section" id="setting-up-your-repository">
+<h3>Setting up your repository<a class="headerlink" href="#setting-up-your-repository" title="Permalink to this headline">¶</a></h3>
+<p>We’re using a tool called <a class="reference external" href="https://classroom.github.com">GitHub classroom</a> to automate the creation of your
 copies of the repository. To obtain your copy click <a class="reference external" href="https://classroom.github.com/assignment-invitations/ed47949f8a828bfc57b563ce0a4c1a7c">here</a>.</p>
 </div>
 <div class="section" id="cloning-a-local-copy">
@@ -139,42 +136,52 @@ url can be found by clicking on <cite>clone or download</cite> at the top right 
 </div>
 <div class="section" id="setting-up-an-implementation-branch">
 <h3>Setting up an implementation branch<a class="headerlink" href="#setting-up-an-implementation-branch" title="Permalink to this headline">¶</a></h3>
-<p>We&#8217;ll keep the master branch of your repository in the original
+<p>We’ll keep the master branch of your repository in the original
 condition so we can compare to it later, and collect any updates which
-occur during the term. Instead, we&#8217;ll create an implementation branch
+occur during the term. Instead, we’ll create an implementation branch
 to actually work on:</p>
 <blockquote>
 <div>git checkout -b implementation</div></blockquote>
 <p>Your working directory is now a current checkout of your
-implementation branch. You&#8217;ll also want to push this branch to GitHub:</p>
+implementation branch. You’ll also want to push this branch to GitHub:</p>
 <blockquote>
-<div>git push &#8211;set-upstream origin implementation</div></blockquote>
+<div>git push –set-upstream origin implementation</div></blockquote>
 </div>
-<div class="section" id="pointing-python-at-the-code-on-windows">
-<h3>Pointing Python at the code on Windows<a class="headerlink" href="#pointing-python-at-the-code-on-windows" title="Permalink to this headline">¶</a></h3>
-<p>By far the easiest way to have your Python find the code is to ensure
-your working directory is the right one. Type the following at the
-Python command line:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">h</span><span class="p">:</span>\<span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
+<div class="section" id="setting-up-your-venv">
+<h3>Setting up your venv<a class="headerlink" href="#setting-up-your-venv" title="Permalink to this headline">¶</a></h3>
+<p>We’re going to use a Python venv. This is a private Python environment
+in which we’ll install the packages we need, including our own
+implementation exercise. This minimises interference between this
+project and anything else which might be using Python on the
+system. We don’t want to install the venv inside our git repository,
+so type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>Now we can run a script from the git repository to make the venv:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv</span> <span class="n">venv</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="pointing-python-at-the-code-on-os-x-or-linux">
-<h3>Pointing Python at the code on OS X or Linux<a class="headerlink" href="#pointing-python-at-the-code-on-os-x-or-linux" title="Permalink to this headline">¶</a></h3>
-<p>You&#8217;ll need Python to be able to find the <code class="docutils literal"><span class="pre">fe_utils</span></code> package from
-wherever it is running. To do this, you need to add your repository
-directory to the <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variable. <strong>In your
-repository directory</strong> type the following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>cat &gt;&gt; ~/.bashrc &lt;&lt; foo
-export PYTHONPATH=\$PYTHONPATH:$PWD
-foo
+<div class="section" id="activating-your-venv">
+<h3>Activating your venv<a class="headerlink" href="#activating-your-venv" title="Permalink to this headline">¶</a></h3>
+<p><strong>Every time</strong> you want to work on the implementation exercise, you need
+to activate the venv. You do this with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
-<p>The above line will update your <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> every time you log
-in. <strong>Just this once</strong> you need to update it for the current session:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>export PYTHONPATH=$PYTHONPATH:$PWD
+<p>Obviously if you are typing this in a directory other than the one
+containing the venv, you need to modify the path accordingly.</p>
+</div>
+<div class="section" id="installing-your-implementation-exercise">
+<h3>Installing your implementation exercise<a class="headerlink" href="#installing-your-implementation-exercise" title="Permalink to this headline">¶</a></h3>
+<p>Your implementation exercise is also a Python package so <strong>just once</strong>
+after creating the venv, you need to install it. <a href="#id1"><span class="problematic" id="id2">**</span></a>With the venv active ** type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
 </pre></div>
 </div>
+<p>Dont forget that dot, it’s important! (The dot tells Python to install the package in the current directory).</p>
 </div>
 <div class="section" id="watching-for-updates-and-issues">
 <h3>Watching for updates and issues<a class="headerlink" href="#watching-for-updates-and-issues" title="Permalink to this headline">¶</a></h3>
@@ -186,7 +193,7 @@ top right there is an eye icon. Select the drop-down box and switch to
 </div>
 <div class="section" id="updating-your-fork">
 <h3>Updating your fork<a class="headerlink" href="#updating-your-fork" title="Permalink to this headline">¶</a></h3>
-<p>When you see that the main repository has been updated, you&#8217;ll need to
+<p>When you see that the main repository has been updated, you’ll need to
 update your repository to incorporate those changes. <em>Just this once</em>,
 you need to tell your local git repo about the main repository:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">.</span><span class="n">git</span>
@@ -242,8 +249,8 @@ line comments on your code.</p>
 <ol class="arabic simple">
 <li>Click on the <code class="docutils literal"><span class="pre">New</span> <span class="pre">pull</span> <span class="pre">request</span></code> button at the top of your
 repository page on GitHub.</li>
-<li>Make sure <strong>left</strong> dropdown box (&#8220;base&#8221;) is set to <code class="docutils literal"><span class="pre">master</span></code>.</li>
-<li>Make sure <strong>right</strong> dropdown box (&#8220;compare&#8221;) is set to <code class="docutils literal"><span class="pre">implementation</span></code>.</li>
+<li>Make sure <strong>left</strong> dropdown box (“base”) is set to <code class="docutils literal"><span class="pre">master</span></code>.</li>
+<li>Make sure <strong>right</strong> dropdown box (“compare”) is set to <code class="docutils literal"><span class="pre">implementation</span></code>.</li>
 <li>Type a suitable title in the title box. For example
 <code class="docutils literal"><span class="pre">Request</span> <span class="pre">for</span> <span class="pre">feedback</span> <span class="pre">30/1/15</span></code>.</li>
 <li>If you have any comments you would like to pass on to the lecturer
@@ -299,11 +306,11 @@ information.</dd>
 hints. Usually they contain suggestions about how to go about
 writing your answer, or suggest Python functions which you might
 find useful.</dd>
-<dt>Don&#8217;t forget the 1D case</dt>
+<dt>Don’t forget the 1D case</dt>
 <dd>Your finite element library needs to work in one and two dimensions.</dd>
 <dt>Return a <code class="xref py py-class docutils literal"><span class="pre">numpy.array</span></code></dt>
 <dd>Many of the functions you have to write return arrays. Make sure
-you actually return an array and not a list (it&#8217;s usually fine to
+you actually return an array and not a list (it’s usually fine to
 build the answer as a list, but convert it to an array before you
 return it).</dd>
 </dl>
@@ -318,7 +325,7 @@ return it).</dd>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

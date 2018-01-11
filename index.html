@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Finite elements, analysis and implementation &#8212; Finite element course 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -39,7 +36,7 @@
 
 
   </head>
-  <body role="document">
+  <body>
 <div class="wrapper">
   <a href="#"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -91,23 +88,17 @@ fortunately paid for PDF access to this book, so it is accessible from
 the Imperial College network at <a class="reference external" href="http://link.springer.com/book/10.1007%2F978-0-387-75934-0">Springer Link</a>.</p>
 <div class="section" id="lecture-slides">
 <h2>Lecture slides:<a class="headerlink" href="#lecture-slides" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference external" href="_static/Lecture1.pdf">Lectures part 1</a></li>
-<li><a class="reference external" href="_static/Lecture2.pdf">Lectures part 2</a></li>
-<li><a class="reference external" href="_static/Lecture3.pdf">Lectures part 3</a></li>
-</ul>
+<p>Slides will be made available as the module progresses.</p>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises:<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference external" href="_static/FE_examples1.pdf">Exercise 1</a></li>
-<li><a class="reference external" href="_static/FE_examples1_solns.pdf">Exercise 1 with solutions</a></li>
-</ul>
+<p>Exercises will be posted ahead of the first problems class.</p>
 </div>
 <div class="section" id="past-exam-papers">
 <h2>Past exam papers<a class="headerlink" href="#past-exam-papers" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="_static/FE2015-exam-revised.pdf">2015 exam paper</a> and <a class="reference external" href="_static/FE2015-exam-soln.pdf">solutions</a></li>
+<li><a class="reference external" href="_static/FE2016-exam.pdf">2016 exam paper</a> and <a class="reference external" href="_static/FE2016-exam-soln.pdf">solutions</a></li>
 <li><a class="reference external" href="_static/FE_mock_paper.pdf">Mock exam paper</a></li>
 <li><a class="reference external" href="_static/revision-checklist.pdf">revision checklist</a></li>
 </ul>
@@ -145,11 +136,12 @@ of computer laboratory time.</p>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#formalities-and-marking-scheme">Formalities and marking scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#extension-mastery-exercise">Extension (mastery) exercise</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#obtaining-the-skeleton-code">Obtaining the skeleton code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-uo-your-repository">Setting uo your repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-up-your-repository">Setting up your repository</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#cloning-a-local-copy">Cloning a local copy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-up-an-implementation-branch">Setting up an implementation branch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="implementation.html#pointing-python-at-the-code-on-windows">Pointing Python at the code on Windows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="implementation.html#pointing-python-at-the-code-on-os-x-or-linux">Pointing Python at the code on OS X or Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-up-your-venv">Setting up your venv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#activating-your-venv">Activating your venv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#installing-your-implementation-exercise">Installing your implementation exercise</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#watching-for-updates-and-issues">Watching for updates and issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#updating-your-fork">Updating your fork</a></li>
 </ul>
@@ -233,7 +225,7 @@ of computer laboratory time.</p>
 <li class="toctree-l2"><a class="reference internal" href="8_nonlinear_problems.html#a-model-problem">8.1. A model problem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8_nonlinear_problems.html#residual-form">8.2. Residual form</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8_nonlinear_problems.html#linearisation-and-gateaux-derivatives">8.3. Linearisation and Gâteaux Derivatives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="8_nonlinear_problems.html#a-taylor-expansion-and-newton-s-method">8.4. A Taylor expansion and Newton&#8217;s method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8_nonlinear_problems.html#a-taylor-expansion-and-newton-s-method">8.4. A Taylor expansion and Newton’s method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8_nonlinear_problems.html#implementing-a-nonlinear-problem">8.5. Implementing a nonlinear problem</a></li>
 </ul>
 </li>
@@ -249,7 +241,7 @@ of computer laboratory time.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>8. Nonlinear problems &#8212; Finite element course 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -40,7 +37,7 @@
 
 
   </head>
-  <body role="document">
+  <body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -63,7 +60,7 @@
 <p>The finite element method may also be employed to numerically solve
 <em>nonlinear</em> PDEs. In order to do this, we can employ the classical
 technique for solving nonlinear systems: we employ an iterative scheme
-such as Newton&#8217;s method to create a sequence of linear problems whose
+such as Newton’s method to create a sequence of linear problems whose
 solutions converge to the correct solution to the
 nonlinear problem.</p>
 <div class="admonition note">
@@ -138,15 +135,15 @@ function <span class="math">\(\hat{b}\in V\)</span>.</p>
 <div class="section" id="linearisation-and-gateaux-derivatives">
 <h2>8.3. Linearisation and Gâteaux Derivatives<a class="headerlink" href="#linearisation-and-gateaux-derivatives" title="Permalink to this headline">¶</a></h2>
 <p>Having stated our PDE in residual form, we now need to linearise the
-problem and thereby employ a technique such as Newton&#8217;s method. In
+problem and thereby employ a technique such as Newton’s method. In
 order to linearise the residual, we need to differentiate it with
 respect to <span class="math">\(u\)</span>. Since <span class="math">\(u\)</span> is not a scalar real variable, but is
 instead a function in <span class="math">\(V\)</span>, the appropriate form of differentiation is
 the Gâteaux Derivative, given by:</p>
 <div class="math" id="equation-8_nonlinear_problems:2">
 <span class="eqno">(6)<a class="headerlink" href="#equation-8_nonlinear_problems:2" title="Permalink to this equation">¶</a></span>\[J(u; v, \hat{u}) = \lim_{\epsilon\rightarrow 0}\frac{f(u+\epsilon\hat{u}; v)-f(u; v)}{\epsilon}.\]</div>
-<p>Here, the new argument <span class="math">\(\hat{u}\in V\)</span> indicates the &#8220;direction&#8221; in
-which the derivative is to be taken. Let&#8217;s work through the Gâteaux
+<p>Here, the new argument <span class="math">\(\hat{u}\in V\)</span> indicates the “direction” in
+which the derivative is to be taken. Let’s work through the Gâteaux
 Derivative for the residual of our model problem. Assume first that
 <span class="math">\(v\in V_0\)</span>. Then:</p>
 <div class="math" id="equation-8_nonlinear_problems:3">
@@ -169,13 +166,13 @@ then the definition of a nodal basis gives us:</p>
 <span class="eqno">(9)<a class="headerlink" href="#equation-8_nonlinear_problems:5" title="Permalink to this equation">¶</a></span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
 </div>
 <div class="section" id="a-taylor-expansion-and-newton-s-method">
-<h2>8.4. A Taylor expansion and Newton&#8217;s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
+<h2>8.4. A Taylor expansion and Newton’s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
 <p>Since we now have the derivative of the residual with respect to a
 perturbation to the prospective solution <span class="math">\(u\)</span>, we can write the first
 terms of a Taylor series approximation for the value of the residual at a perturbed solution <span class="math">\(u+\hat{u}\)</span>:</p>
 <div class="math" id="equation-8_nonlinear_problems:6">
 <span class="eqno">(10)<a class="headerlink" href="#equation-8_nonlinear_problems:6" title="Permalink to this equation">¶</a></span>\[f(u+\hat{u}; v) = f(u; v) + J(u; v, \hat{u}) +\ldots \qquad \forall v\in V.\]</div>
-<p>Now, just as in the scalar case, Newton&#8217;s method consists of
+<p>Now, just as in the scalar case, Newton’s method consists of
 approximating the function (the residual) by the first two terms and
 solving for the update that will set these terms to zero. In other
 words:</p>
@@ -199,14 +196,14 @@ terms of basis functions:</p>
 <p>and the right hand side vector <span class="math">\(f\)</span> is given by <a class="reference internal" href="#equation-residual">(5)</a>. This
 matrix, <span class="math">\(J\)</span>, is termed the <em>Jacobian matrix</em> of <span class="math">\(f\)</span>.</p>
 <div class="section" id="stopping-criteria-for-newton-s-method">
-<h3>8.4.1. Stopping criteria for Newton&#8217;s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
-<p>Since Newton&#8217;s method is an iterative algorithm, it creates a
+<h3>8.4.1. Stopping criteria for Newton’s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
+<p>Since Newton’s method is an iterative algorithm, it creates a
 (hopefully convergent) sequence of approximations to the correct
 solution to the original nonlinear problem. How do we know when to
 accept the solution and terminate the algorithm?</p>
 <p>The answer is that the update, <span class="math">\(\hat{u}\)</span> which is calculated at each
-step of Newton&#8217;s method is itself an approximation to the error in the
-solution. It is therefore appropriate to stop Newton&#8217;s method when
+step of Newton’s method is itself an approximation to the error in the
+solution. It is therefore appropriate to stop Newton’s method when
 this error estimate becomes sufficiently small in the <span class="math">\(L^2\)</span> norm.</p>
 <p>The observant reader will observe that <span class="math">\(\hat{u}\)</span> is in fact
 an estimate of the error in the <em>previous</em> step. This is indeed true:
@@ -279,20 +276,20 @@ else in the process.</p>
 <h3>8.4.3. Failure modes<a class="headerlink" href="#failure-modes" title="Permalink to this headline">¶</a></h3>
 <p>Just as with the Newton method for scalar problems, Newton iteration
 is not guaranteed to converge for all nonlinear problems or for all
-initial guesses. If Newton&#8217;s method fails to converge, then the
+initial guesses. If Newton’s method fails to converge, then the
 algorithm presented so far constitutes an infinite loop. It is
 therefore necessary to define some circumstances in which the
 algorithm should terminate having failed to find a solution. Two such
 circumstances are commonly employed:</p>
 <dl class="docutils">
 <dt>maximum iterations</dt>
-<dd>It is a reasonable heuristic that Newton&#8217;s method has failed if it
-takes a very large number of iterations. What constitutes &#8220;too
-many&#8221; is once again a somewhat arbitrary judgement, although if the
+<dd>It is a reasonable heuristic that Newton’s method has failed if it
+takes a very large number of iterations. What constitutes “too
+many” is once again a somewhat arbitrary judgement, although if the
 approach takes many tens of iterations this should always be cause
 for reconsideration!</dd>
 <dt>diverged error estimate</dt>
-<dd>Newton&#8217;s method is not guaranteed to produce a sequence of
+<dd>Newton’s method is not guaranteed to produce a sequence of
 iterations which monotonically decrease the error, however if the
 error estimate has increased to, say, hundreds or thousands of
 times its initial value, this would once again be grounds for the
@@ -357,7 +354,7 @@ which are constant in either the <span class="math">\(x[0]\)</span> or <span cla
 <p class="first admonition-title">Hint</p>
 <p class="last">You can either implement your own Newton solver, or install the
 <code class="xref py py-mod docutils literal"><span class="pre">scipy</span></code> package and work out how to use the
-<a class="reference external" href="http://scipy.github.io/devdocs/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v0.19.0.dev0+766a27f)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
+<a class="reference external" href="http://scipy.github.io/devdocs/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v1.1.0.dev0+59cabc8)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
 case, a hand-coded Newton solver is probably the simplest
 approach. However, for problems which are larger and more complex,
 it will be advantageous to employ a technique more advanced than
@@ -376,7 +373,7 @@ number for each iteration.</p>
 in the equation. By setting <span class="math">\(\alpha\)</span> to 0, you reduce your problem
 to the linear case. You can use the linear case to test your code
 initially, before setting <span class="math">\(\alpha=1\)</span> for the actual exercise. Note
-that, in the linear case, Newton&#8217;s method will converge in exactly
+that, in the linear case, Newton’s method will converge in exactly
 one iteration (although your algorithm will have to actually
 calculate two steps in order to know that convergence has occurred).</p>
 </div>
@@ -391,7 +388,7 @@ calculate two steps in order to know that convergence has occurred).</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

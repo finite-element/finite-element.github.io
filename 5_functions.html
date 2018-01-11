@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>5. Functions in finite element spaces &#8212; Finite element course 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -40,7 +37,7 @@
 
 
   </head>
-  <body role="document">
+  <body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -97,9 +94,9 @@ node points, and so far we have only defined the node points in
 <em>local</em> coordinates on the reference element.</p>
 <div class="section" id="changing-coordinates-between-reference-and-physical-space">
 <span id="coordinates"></span><h3>5.2.1. Changing coordinates between reference and physical space<a class="headerlink" href="#changing-coordinates-between-reference-and-physical-space" title="Permalink to this headline">¶</a></h3>
-<p>We&#8217;ll refer to coordinates on the global mesh as being in <em>physical
+<p>We’ll refer to coordinates on the global mesh as being in <em>physical
 space</em> while those on the reference element are in <em>local
-space</em>. We&#8217;ll use case to distinguish local and global objects, so
+space</em>. We’ll use case to distinguish local and global objects, so
 local coordinates will be written as <span class="math">\(X\)</span> and global coordinates as
 <span class="math">\(x\)</span>. The key observation is that within each cell, the global
 coordinates are the linear interpolation of the global coordinate
@@ -295,9 +292,9 @@ basis functions at each quadrature point.</li>
 <li>Visit each cell in turn.</li>
 <li>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal"><span class="pre">jacobian()</span></code></a> for that cell
 and take the absolute value of its determinant (<code class="xref py py-func docutils literal"><span class="pre">numpy.abs()</span></code>
-and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
+and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
 <li>Sum all of the arrays you have constructed over the correct
-indices to a contribution to the integral (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a>
+indices to a contribution to the integral (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a>
 may be useful for this).</li>
 </ol>
 </div>
@@ -320,7 +317,7 @@ template for your work.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

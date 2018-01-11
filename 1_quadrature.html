@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1. Numerical quadrature &#8212; Finite element course 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -40,7 +37,7 @@
 
 
   </head>
-  <body role="document">
+  <body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -62,12 +59,12 @@
 <h1>1. Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h1>
 <p>The core computational operation with which we are concerned in the
 finite element method is the integration of a function over a known
-reference element. It&#8217;s no big surprise, therefore, that this
+reference element. It’s no big surprise, therefore, that this
 operation will be at the heart of our finite element implementation.</p>
 <p>The usual way to efficiently evaluate arbitrary integrals numerically
 is numerical quadrature. This basic idea will already be familiar to
 you from undergraduate maths (or maybe even high school calculus) as
-it&#8217;s the generalisation of the trapezoidal rule and Simpson&#8217;s rule for
+it’s the generalisation of the trapezoidal rule and Simpson’s rule for
 integration.</p>
 <p>The core idea of quadrature is that the integral of a function
 <span class="math">\(f(X)\)</span> over an element <span class="math">\(e\)</span> can be approximated as
@@ -120,7 +117,7 @@ by a constant value.</p>
 the interval, then we arrive at the trapezoidal (or trapezium) rule:</p>
 <div class="math" id="equation-trapezoidal">
 <span class="eqno">(3)<a class="headerlink" href="#equation-trapezoidal" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
-<p>while if we employ a quadratic function then we arrive at Simpson&#8217;s rule:</p>
+<p>while if we employ a quadratic function then we arrive at Simpson’s rule:</p>
 <div class="math" id="equation-1_quadrature:0">
 <span class="eqno">(4)<a class="headerlink" href="#equation-1_quadrature:0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
 </div>
@@ -160,7 +157,7 @@ require for this course are the
 <h2>1.5. Quadrature rules on reference elements<a class="headerlink" href="#quadrature-rules-on-reference-elements" title="Permalink to this headline">¶</a></h2>
 <p>Having adopted a convention for the reference element, we can simply
 express quadrature rules as lists of quadrature points with
-corresponding quadrature weights. For example Simpson&#8217;s rule becomes:</p>
+corresponding quadrature weights. For example Simpson’s rule becomes:</p>
 <div class="math" id="equation-1_quadrature:1">
 <span class="eqno">(5)<a class="headerlink" href="#equation-1_quadrature:1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
 <p>We choose to write the quadrature points as 1-tuples for consistency
@@ -256,8 +253,11 @@ to your fork of the course repository.</p>
 <p class="first admonition-title">Hint</p>
 <p class="last">You can implement
 <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a> in one line
-using the Python intrinsic function <a class="reference external" href="https://docs.python.org/2/library/functions.html#map" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">map()</span></code></a> and
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.dot()</span></code></a>.</p>
+using <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.vectorize.html#numpy.vectorize" title="(in NumPy v1.14)"><code class="xref py py-class docutils literal"><span class="pre">numpy.vectorize</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.dot()</span></code></a>.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Don’t forget to activate your Python venv!</p>
 </div>
 </div>
 </div>
@@ -270,7 +270,7 @@ using the Python intrinsic function <a class="reference external" href="https://
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

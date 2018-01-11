@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>6. Assembling and solving finite element problems &#8212; Finite element course 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -40,7 +37,7 @@
 
 
   </head>
-  <body role="document">
+  <body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -208,11 +205,11 @@ code might look like:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="n">nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">]</span> <span class="o">+=</span> <span class="n">m</span> <span class="c1"># DON&#39;T DO THIS!</span>
 </pre></div>
 </div>
-<p>Unfortunately, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.12)"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a> interprets this as an instruction to
+<p>Unfortunately, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.14)"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a> interprets this as an instruction to
 insert a vector into the diagonal of <code class="docutils literal"><span class="pre">A</span></code>, and will complain that
 the two-dimensional right hand side does not match the
 one-dimensional left hand side. Instead, one has to employ the
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ix_.html#numpy.ix_" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.ix_()</span></code></a> function:</p>
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ix_.html#numpy.ix_" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.ix_()</span></code></a> function:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">m</span> <span class="c1"># DO THIS!</span>
 </pre></div>
 </div>
@@ -256,13 +253,13 @@ matrix system will also be vastly reduced since operations on zeros
 are avoided.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v0.19.0.dev0+766a27f)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
+<p class="last">The <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.1.0.dev0+59cabc8)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
 which enable Python code to employ a variety of sparse matrix
 formats using essentially identical operations to the dense matrix
 case. The skeleton code already contains commands to construct
 empty sparse matrices and to solve the resulting linear system. You
 may, if you wish, experiment with choosing other sparse formats
-from <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v0.19.0.dev0+766a27f)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
+from <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.1.0.dev0+59cabc8)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
 you do <strong>not</strong> switch to a dense numpy array; unless, that is, you
 particularly enjoy running out of memory on your computer!</p>
 </div>
@@ -383,7 +380,7 @@ rather fine meshes in order to check convergence.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

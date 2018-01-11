@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>fe_utils package &#8212; Finite element course 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -38,7 +35,7 @@
 
 
   </head>
-  <body role="document">
+  <body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -73,14 +70,14 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cell</strong> &#8211; the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
 over which the element is defined.</li>
-<li><strong>degree</strong> &#8211; the
+<li><strong>degree</strong> – the
 polynomial degree of the element. We assume the element
 spans the complete polynomial space.</li>
-<li><strong>nodes</strong> &#8211; a list of coordinate tuples corresponding to
+<li><strong>nodes</strong> – a list of coordinate tuples corresponding to
 the nodes of the element.</li>
-<li><strong>entity_nodes</strong> &#8211; a dictionary of dictionaries such that
+<li><strong>entity_nodes</strong> – a dictionary of dictionaries such that
 entity_nodes[d][i] is the list of nodes associated with entity <cite>(d, i)</cite>.</li>
 </ul>
 </td>
@@ -118,7 +115,7 @@ at each of the nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> &#8211; A function <code class="docutils literal"><span class="pre">fn(X)</span></code> which takes a coordinate
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – A function <code class="docutils literal"><span class="pre">fn(X)</span></code> which takes a coordinate
 vector and returns a scalar value.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A vector containing the value of <code class="docutils literal"><span class="pre">fn</span></code> at each node
@@ -159,9 +156,9 @@ provided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>points</strong> &#8211; a list of coordinate tuples at which to
+<li><strong>points</strong> – a list of coordinate tuples at which to
 tabulate the basis.</li>
-<li><strong>grad</strong> &#8211; whether to return the tabulation of the basis or the
+<li><strong>grad</strong> – whether to return the tabulation of the basis or the
 tabulation of the gradient of the basis.</li>
 </ul>
 </td>
@@ -191,9 +188,9 @@ is <code class="docutils literal"><span class="pre">True</span></code>.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cell</strong> &#8211; the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
 over which the element is defined.</li>
-<li><strong>degree</strong> &#8211; the
+<li><strong>degree</strong> – the
 polynomial degree of the element. We assume the element
 spans the complete polynomial space.</li>
 </ul>
@@ -213,8 +210,8 @@ spans the complete polynomial space.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cell</strong> &#8211; the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a></li>
-<li><strong>degree</strong> &#8211; the degree of polynomials for which to construct nodes.</li>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a></li>
+<li><strong>degree</strong> – the degree of polynomials for which to construct nodes.</li>
 </ul>
 </td>
 </tr>
@@ -237,10 +234,10 @@ specified degree on the cell provided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cell</strong> &#8211; the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a></li>
-<li><strong>degree</strong> &#8211; the degree of polynomials for which to construct the matrix.</li>
-<li><strong>points</strong> &#8211; a list of coordinate tuples corresponding to the points.</li>
-<li><strong>grad</strong> &#8211; whether to evaluate the Vandermonde matrix or its gradient.</li>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a></li>
+<li><strong>degree</strong> – the degree of polynomials for which to construct the matrix.</li>
+<li><strong>points</strong> – a list of coordinate tuples corresponding to the points.</li>
+<li><strong>grad</strong> – whether to evaluate the Vandermonde matrix or its gradient.</li>
 </ul>
 </td>
 </tr>
@@ -267,9 +264,9 @@ of the underlying function space.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>function_space</strong> &#8211; The <a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a> in which
+<li><strong>function_space</strong> – The <a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a> in which
 this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> lives.</li>
-<li><strong>name</strong> &#8211; An optional label for this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>
+<li><strong>name</strong> – An optional label for this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>
 which will be used in output and is useful for debugging.</li>
 </ul>
 </td>
@@ -305,7 +302,7 @@ which will be used in output and is useful for debugging.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> &#8211; A function <code class="docutils literal"><span class="pre">fn(X)</span></code> which takes a coordinate
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – A function <code class="docutils literal"><span class="pre">fn(X)</span></code> which takes a coordinate
 vector and returns a scalar value.</td>
 </tr>
 </tbody>
@@ -329,7 +326,7 @@ order function spaces than many widely available libraries.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subdivisions</strong> &#8211; The number of points in each direction to
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subdivisions</strong> – The number of points in each direction to
 use in representing each element. The default is
 <span class="math">\(2d+1\)</span> where <span class="math">\(d\)</span> is the degree of the
 <a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a>. Higher values produce prettier plots
@@ -357,8 +354,8 @@ which render more slowly!</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mesh</strong> &#8211; The <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a> on which this space is built.</li>
-<li><strong>element</strong> &#8211; The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> of this space.</li>
+<li><strong>mesh</strong> – The <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a> on which this space is built.</li>
+<li><strong>element</strong> – The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> of this space.</li>
 </ul>
 </td>
 </tr>
@@ -408,9 +405,9 @@ respectively.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vertex_coords</strong> &#8211; an vertex_count x dim array of the coordinates of
+<li><strong>vertex_coords</strong> – an vertex_count x dim array of the coordinates of
 the vertices in the mesh.</li>
-<li><strong>cell_vertices</strong> &#8211; an cell_count x (dim+1) array of the
+<li><strong>cell_vertices</strong> – an cell_count x (dim+1) array of the
 indices of the vertices of which each cell is made up.</li>
 </ul>
 </td>
@@ -481,7 +478,7 @@ mesh.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>c</strong> &#8211; The number of the cell for which to return the Jacobian.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>c</strong> – The number of the cell for which to return the Jacobian.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">The Jacobian for cell <code class="docutils literal"><span class="pre">c</span></code>.</td>
 </tr>
@@ -506,7 +503,7 @@ mesh.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nx</strong> &#8211; The number of cells.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nx</strong> – The number of cells.</td>
 </tr>
 </tbody>
 </table>
@@ -522,8 +519,8 @@ mesh.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>nx</strong> &#8211; The number of cells in the x direction.</li>
-<li><strong>ny</strong> &#8211; The number of cells in the y direction.</li>
+<li><strong>nx</strong> – The number of cells in the x direction.</li>
+<li><strong>ny</strong> – The number of cells in the y direction.</li>
 </ul>
 </td>
 </tr>
@@ -545,9 +542,9 @@ provided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cell</strong> &#8211; the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
 rule is defined.</li>
-<li><strong>degree</strong> &#8211; the <a class="reference internal" href="1_quadrature.html#degree-of-precision"><span class="std std-ref">degree of precision</span></a>
+<li><strong>degree</strong> – the <a class="reference internal" href="1_quadrature.html#degree-of-precision"><span class="std std-ref">degree of precision</span></a>
 of this quadrature rule.</li>
 </ul>
 </td>
@@ -581,7 +578,7 @@ rule is defined.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; A Python function taking a position vector as
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> – A Python function taking a position vector as
 its single argument and returning a scalar value.</td>
 </tr>
 </tbody>
@@ -613,9 +610,9 @@ vectors of the quadrature points.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cell</strong> &#8211; the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
 rule is defined.</li>
-<li><strong>degree</strong> &#8211; the <a class="reference internal" href="1_quadrature.html#degree-of-precision"><span class="std std-ref">degree of precision</span></a>
+<li><strong>degree</strong> – the <a class="reference internal" href="1_quadrature.html#degree-of-precision"><span class="std std-ref">degree of precision</span></a>
 of this quadrature rule.</li>
 </ul>
 </td>
@@ -637,9 +634,9 @@ of this quadrature rule.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vertices</strong> &#8211; a list of coordinate vectors corresponding to
+<li><strong>vertices</strong> – a list of coordinate vectors corresponding to
 the coordinates of the vertices of the cell.</li>
-<li><strong>topology</strong> &#8211; a dictionary of dictionaries such that topology[d][i]
+<li><strong>topology</strong> – a dictionary of dictionaries such that topology[d][i]
 is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.</li>
 </ul>
 </td>
@@ -667,8 +664,8 @@ is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; The coordinate vector of the point.</li>
-<li><strong>e</strong> &#8211; The (d, i) pair describing the entity.</li>
+<li><strong>x</strong> – The coordinate vector of the point.</li>
+<li><strong>e</strong> – The (d, i) pair describing the entity.</li>
 </ul>
 </td>
 </tr>
@@ -717,7 +714,7 @@ with vertices [[0., 0.], [1., 0.], [0., 1.]].</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>
