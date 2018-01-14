@@ -169,17 +169,6 @@ to activate the venv. You do this with:</p>
 <p>Obviously if you are typing this in a directory other than the one
 containing the venv, you need to modify the path accordingly.</p>
 </div>
-<div class="section" id="installing-your-implementation-exercise">
-<h3>Installing your implementation exercise<a class="headerlink" href="#installing-your-implementation-exercise" title="Permalink to this headline">¶</a></h3>
-<p>Your implementation exercise is also a Python package so <strong>just once</strong>
-after creating the venv, you need to install it. <strong>With the venv active</strong> type:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span>
-</pre></div>
-</div>
-<p>Dont forget that slash, it’s important! (The slash tells Python to
-install the package in the given directory rather than searching the
-Python package archives for a package by that name).</p>
-</div>
 <div class="section" id="watching-for-updates-and-issues">
 <h3>Watching for updates and issues<a class="headerlink" href="#watching-for-updates-and-issues" title="Permalink to this headline">¶</a></h3>
 <p>You should make sure you are notified of all updates on the main
@@ -283,7 +272,7 @@ testing framework. You run the tests with:</p>
 </pre></div>
 </div>
 <p>on the Bash command line or:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>!py.test test/test_script.py
+<div class="highlight-default"><div class="highlight"><pre><span></span>!py.test test_script.py
 </pre></div>
 </div>
 <p>from within Python, replacing <code class="docutils literal"><span class="pre">test_script.py</span></code> with the appropriate
@@ -292,6 +281,13 @@ to stop at the first failure it finds, which is often the best place
 to start fixing a problem. For those familiar with debuggers, the
 <code class="docutils literal"><span class="pre">--pdb</span></code> option will drop you into the Python debugger at the first
 error.</p>
+<p>You can also run all the tests by running <code class="docutils literal"><span class="pre">py.test</span></code> on the tests
+directory. This works particularly well with the -x option, resulting
+in the tests being run in course order and stopping at the first
+failing test:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">x</span> <span class="n">tests</span><span class="o">/</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="coding-style-and-commenting">
 <h2>Coding style and commenting<a class="headerlink" href="#coding-style-and-commenting" title="Permalink to this headline">¶</a></h2>
