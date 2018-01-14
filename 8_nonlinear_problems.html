@@ -104,14 +104,14 @@ be nonlinear in the arguments before the semicolon. In this case,
 we observe that <span class="math">\(f\)</span> may be nonlinear in <span class="math">\(u\)</span> but is (by
 construction) linear in <span class="math">\(v\)</span>.</p>
 <p>The function <span class="math">\(f\)</span> is called the <em>residual</em> of the nonlinear system. In
-essence, if <span class="math">\(u\)</span> is not a solution to the nonlinear problem, then <span class="math">\(f(u;
-v)\)</span> will be nonzero for some <span class="math">\(v\in V\)</span>. Since the residual is linear in
-<span class="math">\(v\)</span>, it suffices to define the residual for each <span class="math">\(\phi_i\)</span> in the basis
-of <span class="math">\(V\)</span>. For <span class="math">\(\phi_i\in V_0\)</span>, the residual is just the weak form of the
-equation, but what do we do for the boundary? The simple answer is
-that we need a linear functional which is zero if the boundary
-condition is satisfied at this test function, and nonzero
-otherwise. The simplest example of such a functional is:</p>
+essence, <span class="math">\(f(u; v) = 0 \ \forall v\in V\)</span> if and only if <span class="math">\(u\)</span> is a weak
+solution to the PDE. Since the residual is linear in <span class="math">\(v\)</span>, it suffices
+to define the residual for each <span class="math">\(\phi_i\)</span> in the basis of <span class="math">\(V\)</span>. For
+<span class="math">\(\phi_i\in V_0\)</span>, the residual is just the weak form of the equation,
+but what do we do for the boundary? The simple answer is that we need
+a linear functional which is zero if the boundary condition is
+satisfied at this test function, and nonzero otherwise. The simplest
+example of such a functional is:</p>
 <div class="math" id="equation-8_nonlinear_problems:1">
 <span class="eqno">(4)<a class="headerlink" href="#equation-8_nonlinear_problems:1" title="Permalink to this equation">¶</a></span>\[f(u; \phi_i) = n_i(u) - n_i(b)\]</div>
 <p>where <span class="math">\(n_i\)</span> is the node associated with basis function <span class="math">\(\phi_i\)</span>. For
@@ -311,73 +311,7 @@ to create the convergence tests which demonstrate that your
 solution is correct.</p>
 </div>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">17</span></div><div class="theoremenv_body exercise_body"><p class="first">Write a Python program which solves the following problem using
-degree 1 Lagrange elements over the unit square domain.</p>
-<div class="math" id="equation-mastery">
-<span class="eqno">(15)<a class="headerlink" href="#equation-mastery" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla\cdot\nabla u + \sin(u) = g\\u = b \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
-<p>Select a solution and compute the required forcing function <span class="math">\(g\)</span> so
-that your solution solves the equations. Make sure your boundary
-condition function <span class="math">\(b\)</span> is consistent with your chosen solution!</p>
-<p>Your submitted answer will consist of:</p>
-<ol class="arabic">
-<li><p class="first">A written component containing your derivation of:</p>
-<ol class="loweralpha simple">
-<li>The weak form of <a class="reference internal" href="#equation-mastery">(15)</a>; and</li>
-<li>the Jacobian; and</li>
-<li>the forcing term required by your choice of manufactured solution.</li>
-</ol>
-<p>A neatly hand-written or a typed submission are equally acceptable.</p>
-</li>
-<li><p class="first">A file named <code class="docutils literal"><span class="pre">mastery.py</span></code> in the <code class="docutils literal"><span class="pre">test</span></code> directory of your
-implementation. Running:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">mastery</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-</div>
-<p>should solve <a class="reference internal" href="#equation-mastery">(15)</a> at a number of mesh resolutions and
-print out the convergence of the error in the solution. This
-should approach second order as the mesh is refined. Submit by
-email the git sha for the version of the implementation you wish
-to have marked.</p>
-</li>
-</ol>
-<p class="last">Provide test code which demonstrates that your solution converges
-at the correct rate.</p>
-</div></div><div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">When employing the method of manufactured solutions, it is
-expeditious to choose a very simple solution. However, in order to
-avoid unfortunate corner cases which will not fully test your code,
-you should avoid linear solution functions, and also functions
-which are constant in either the <span class="math">\(x[0]\)</span> or <span class="math">\(x[1]\)</span> direction.</p>
-</div>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">You can either implement your own Newton solver, or install the
-<code class="xref py py-mod docutils literal"><span class="pre">scipy</span></code> package and work out how to use the
-<a class="reference external" href="http://scipy.github.io/devdocs/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v1.1.0.dev0+59cabc8)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
-case, a hand-coded Newton solver is probably the simplest
-approach. However, for problems which are larger and more complex,
-it will be advantageous to employ a technique more advanced than
-simple Newton and the case for using a well-engineered third party
-implementation is strong.</p>
-</div>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">It is an exceptionally useful aid to debugging to have your Newton
-iteration print out the value of the error norm and the iteration
-number for each iteration.</p>
-</div>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">You could insert a parameter of <span class="math">\(\alpha\)</span> in front of the <span class="math">\(\sin(u)\)</span> term
-in the equation. By setting <span class="math">\(\alpha\)</span> to 0, you reduce your problem
-to the linear case. You can use the linear case to test your code
-initially, before setting <span class="math">\(\alpha=1\)</span> for the actual exercise. Note
-that, in the linear case, Newton’s method will converge in exactly
-one iteration (although your algorithm will have to actually
-calculate two steps in order to know that convergence has occurred).</p>
-</div>
-</div>
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">17</span></div><div class="theoremenv_body exercise_body">The 2018 mastery exercise will be released by week 5 of the term.</div></div></div>
 </div>
 
 
@@ -388,7 +322,7 @@ calculate two steps in order to know that convergence has occurred).</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

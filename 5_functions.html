@@ -76,7 +76,7 @@ freedom values, one for each node in the
 <div class="section" id="interpolating-values-into-finite-element-spaces">
 <h2>5.2. Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
 <p>Suppose we have a function <span class="math">\(g(x): \mathbb{R}^n \rightarrow \mathbb{R}\)</span>
-which we wish to approximate in as a function <span class="math">\(f(x)\)</span> in some finite
+which we wish to approximate as a function <span class="math">\(f(x)\)</span> in some finite
 element space <span class="math">\(V\)</span>. In other words, we want to find the <span class="math">\(f_i\)</span> such that:</p>
 <div class="math" id="equation-5_functions:0">
 <span class="eqno">(2)<a class="headerlink" href="#equation-5_functions:0" title="Permalink to this equation">¶</a></span>\[\sum_i f_i \phi_i(x) \approx g(x)\]</div>
@@ -177,7 +177,7 @@ interpolates a user-provided function onto the
 <div class="theoremenv exercise">
 <div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">12</span></div><div class="theoremenv_body exercise_body">Read and understand the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a> method. Use
-<code class="docutils literal"><span class="pre">test/plot_sin_function.py</span></code> to investigate interpolating different
+<code class="docutils literal"><span class="pre">plot_sin_function</span></code> to investigate interpolating different
 functions onto finite element spaces at differering resolutions and
 polynomial degrees.</div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
@@ -270,7 +270,7 @@ the quadrature is exact. Then:</p>
 <div class="theoremenv exercise">
 <div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">13</span></div><div class="theoremenv_body exercise_body">Use <a class="reference internal" href="#equation-jacobian">(12)</a> to implement the
 <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal"><span class="pre">jacobian()</span></code></a> method of
-<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>. <code class="docutils literal"><span class="pre">test/test_jacobian.py</span></code> is
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>. <code class="docutils literal"><span class="pre">test/test_09_jacobian.py</span></code> is
 available for you to test your results.</div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p class="last">The <span class="math">\(\nabla_\beta\Psi_j(X)\)</span> factor in <a class="reference internal" href="#equation-jacobian">(12)</a> is the same
@@ -281,7 +281,7 @@ method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" 
 <div class="theoremenv exercise">
 <div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">14</span></div><div class="theoremenv_body exercise_body">Use <a class="reference internal" href="#equation-integral_sum">(9)</a> and <a class="reference internal" href="#equation-integration">(14)</a> to implement
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a>.
-<code class="docutils literal"><span class="pre">test/test_integrate_function.py</span></code> may be used to test your
+<code class="docutils literal"><span class="pre">test/test_10_integrate_function.py</span></code> may be used to test your
 implementation.</div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p>Your method will need to:</p>
@@ -291,7 +291,7 @@ implementation.</div></div><div class="admonition hint">
 basis functions at each quadrature point.</li>
 <li>Visit each cell in turn.</li>
 <li>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal"><span class="pre">jacobian()</span></code></a> for that cell
-and take the absolute value of its determinant (<code class="xref py py-func docutils literal"><span class="pre">numpy.abs()</span></code>
+and take the absolute value of its determinant (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal"><span class="pre">numpy.absolute</span></code></a>
 and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
 <li>Sum all of the arrays you have constructed over the correct
 indices to a contribution to the integral (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a>
@@ -302,7 +302,7 @@ may be useful for this).</li>
 <p class="first admonition-title">Hint</p>
 <p class="last">You might choose to read ahead before implementing
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a>, since the
-<code class="xref py py-func docutils literal"><span class="pre">errornorm()</span></code> function is very similar and may provide a useful
+<a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal"><span class="pre">errornorm()</span></code></a> function is very similar and may provide a useful
 template for your work.</p>
 </div>
 </div>
@@ -317,7 +317,7 @@ template for your work.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

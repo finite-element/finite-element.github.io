@@ -200,7 +200,9 @@ entities in space. Provided we restrict our attention to meshes in
 which the element edges are straight (ie not curved), we can represent
 the geometry of the mesh by simply recording the coordinates of the
 vertices. The positions of the higher dimensional entities then just
-interpolate the vertices of which they are composed.</p>
+interpolate the vertices of which they are composed. We will later
+observe that this is equivalent to representing the geometry in a
+vector-valued piecewise linear finite element space.</p>
 </div>
 <div class="section" id="a-mesh-implementation-in-python">
 <h2>3.5. A mesh implementation in Python<a class="headerlink" href="#a-mesh-implementation-in-python" title="Permalink to this headline">¶</a></h2>
@@ -215,8 +217,8 @@ triangular mesh of a unit square. Similarly, the
 corresponding (rather trivial) function for a unit one dimensional
 mesh.</p>
 <p>You can observe the numbering of mesh entities in these meshes using
-the <code class="docutils literal"><span class="pre">test/plot_mesh.py</span></code> script. Run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_mesh</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+the <code class="docutils literal"><span class="pre">plot_mesh</span></code> script. Run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">plot_mesh</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 <p>for usage instructions.</p>
@@ -243,7 +245,7 @@ meshes.</td></tr>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

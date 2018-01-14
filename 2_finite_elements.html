@@ -158,19 +158,15 @@ this course Lagrange elements will be sufficient.</p>
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal"><span class="pre">lagrange_points()</span></code></a>. Make sure your
 algorithm also works for one-dimensional elements. Some basic tests
 for your code are to be found in
-<code class="docutils literal"><span class="pre">test/test_lagrange_points.py</span></code>. You can also test your lagrange
+<code class="docutils literal"><span class="pre">test/test_02_lagrange_points.py</span></code>. You can also test your lagrange
 points on the triangle by running:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_lagrange_points</span><span class="o">.</span><span class="n">py</span> <span class="n">degree</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">plot_lagrange_points</span> <span class="n">degree</span>
 </pre></div>
 </div>
-<p>From the Enthought Canopy Python command line, you would instead write:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_lagrange_points</span><span class="o">.</span><span class="n">py</span> <span class="n">degree</span>
-</pre></div>
-</div>
-<p class="last">Where degree is the degree of the points to plot.</p>
+<p class="last">Where <code class="xref py py-data docutils literal"><span class="pre">degree</span></code> is the degree of the points to plot.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The lagrange points can be generated very simply using <a class="reference external" href="https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions">list
+<p class="last">The lagrange points can be generated very simply using <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list
 comprehensions</a>.</p>
 </div>
 </div>
@@ -216,7 +212,7 @@ Vandermonde matrix. See <a class="reference internal" href="zbibliography.html#k
 carefully about how to loop over each row to construct the correct
 powers of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. For the purposes of this exercise you should
 ignore the <code class="docutils literal"><span class="pre">grad</span></code> argument.</p>
-<p class="last">Tests for this function are in <code class="docutils literal"><span class="pre">test/test_vandermonde_matrix.py</span></code></p>
+<p class="last">Tests for this function are in <code class="docutils literal"><span class="pre">test/test_03_vandermonde_matrix.py</span></code></p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p class="last">You can use numpy array operations to construct whole columns of
@@ -241,7 +237,7 @@ method. You should construct a Vandermonde matrix for the nodes and
 invert it to create the basis function coefs. Store these as
 <code class="docutils literal"><span class="pre">self.basis_coefs</span></code>.</p>
 <p class="last">Some basic tests of your implementation are in
-<code class="docutils literal"><span class="pre">test/test_init_finite_element.py</span></code>.</p>
+<code class="docutils literal"><span class="pre">test/test_04_init_finite_element.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
@@ -254,7 +250,7 @@ used to invert the matrix.</p>
 a general finite element object assuming we have provided the cell,
 polynomial, degree and nodes. The
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.LagrangeElement" title="fe_utils.finite_elements.LagrangeElement"><code class="xref py py-class docutils literal"><span class="pre">LagrangeElement</span></code></a> class is a
-<a class="reference external" href="https://docs.python.org/2/tutorial/classes.html#inheritance">subclass</a> of
+<a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#inheritance">subclass</a> of
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> which will implement
 the particular case of the equispaced Lagrange elements.</p>
 <div class="theoremenv exercise" id="ex-lagrange-element">
@@ -266,7 +262,7 @@ nodes. For the purpose of this exercise, you may ignore the
 <p class="last"><strong>After</strong> you have implemented
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal"><span class="pre">tabulate()</span></code></a> in the
 next exercise, you can use
-<code class="docutils literal"><span class="pre">plot_lagrange_basis_functions.py</span></code> to visualise your
+<code class="docutils literal"><span class="pre">plot_lagrange_basis_functions</span></code> to visualise your
 Lagrange basis functions.</p>
 </div></div></div>
 <div class="section" id="tabulating-basis-functions">
@@ -284,7 +280,7 @@ and take the matrix product of this with the basis function
 coefficients. The method should have at most two executable
 lines. For the purposes of this exercise, ignore the <code class="docutils literal"><span class="pre">grad</span></code>
 argument.</p>
-<p class="last">The test file <code class="docutils literal"><span class="pre">test/test_tabulate.py</span></code> checks that tabulating the
+<p class="last">The test file <code class="docutils literal"><span class="pre">test/test_05_tabulate.py</span></code> checks that tabulating the
 nodes of a finite element produces the identity matrix.</p>
 </div></div></div>
 <div class="section" id="gradients-of-basis-functions">
@@ -309,9 +305,9 @@ component and basis function respectively. That is, each entry of
 <span class="math">\(V\)</span> is replaced by a vector of the gradient of that polynomial
 term. For example, the entry <span class="math">\(x^2y^3\)</span> would be replaced by the
 vector <span class="math">\([ 2xy^3, 3x^2y^2 ]\)</span>.</p>
-<p class="last">The <code class="docutils literal"><span class="pre">test/test_vandermonde_matrix_grad.py</span></code> file has tests of this
+<p class="last">The <code class="docutils literal"><span class="pre">test/test_06_vandermonde_matrix_grad.py</span></code> file has tests of this
 extension. You should also ensure that you still pass
-<code class="docutils literal"><span class="pre">test/test_vandermonde_matrix.py</span></code>.</p>
+<code class="docutils literal"><span class="pre">test/test_03_vandermonde_matrix.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.14)"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
@@ -329,15 +325,18 @@ tensor:</p>
 \[\mathrm{T}_{ijk} = \nabla(\phi_j(X_i))\cdot \mathbf{e}_k\]</div>
 <p>where <span class="math">\(\mathbf{e}_0\ldots\mathbf{e}_{\dim -1}\)</span> is the coordinate
 basis on the reference cell.</p>
-<p class="last">The <code class="docutils literal"><span class="pre">test/test_tabulate_grad.py</span></code> script tests this
+<p class="last">The <code class="docutils literal"><span class="pre">test/test_07_tabulate_grad.py</span></code> script tests this
 extension. Once again, make sure you still pass
-<code class="docutils literal"><span class="pre">test/test_tabulate.py</span></code></p>
+<code class="docutils literal"><span class="pre">test/test_05_tabulate.py</span></code></p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
 contractions using <a class="reference external" href="http://mathworld.wolfram.com/EinsteinSummation.html">Einstein summation notation</a>. For
-example, <code class="docutils literal"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">numpy.einsum(&quot;ijk,jl-&gt;ilk&quot;,</span> <span class="pre">T,</span> <span class="pre">C)</span></code> is equivalent to
-<span class="math">\(A_{ilk} = \sum_j T_{ijk} C_{jl}\)</span>.</p>
+example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ijk,jl-&gt;ilk&quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">is equivalent to <span class="math">\(A_{ilk} = \sum_j T_{ijk} C_{jl}\)</span>.</p>
 </div>
 </div>
 <div class="section" id="interpolating-functions-to-the-finite-element-nodes">
@@ -355,25 +354,20 @@ evaluation of their function input, we know that:</p>
 \[f_i = f(X_i)\]</div>
 <p>where <span class="math">\(X_i\)</span> is the point associated with the <span class="math">\(i\)</span>-th node.</p>
 <div class="theoremenv exercise" id="ex-interpolate">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">9</span></div><div class="theoremenv_body exercise_body"><p class="first">Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate" title="fe_utils.finite_elements.FiniteElement.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a>.</p>
-<p>Once you have done this, you can use the script provided to plot
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">9</span></div><div class="theoremenv_body exercise_body">Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate" title="fe_utils.finite_elements.FiniteElement.interpolate"><code class="xref py py-meth docutils literal"><span class="pre">interpolate()</span></code></a>.</div></div><p>Once you have done this, you can use the script provided to plot
 functions of your choice interpolated onto any of the finite
 elements you can make:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_interpolate_lagrange</span><span class="o">.</span><span class="n">py</span> <span class="s2">&quot;sin(2*pi*x[0])&quot;</span> <span class="mi">2</span> <span class="mi">5</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">plot_interpolate_lagrange</span> <span class="s2">&quot;sin(2*pi*x[0])&quot;</span> <span class="mi">2</span> <span class="mi">5</span>
 </pre></div>
 </div>
-<p>From the Enthought Canopy Python command line, you would instead write:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_interpolate_lagrange</span><span class="o">.</span><span class="n">py</span> <span class="s2">&quot;sin(2*pi*x[0])&quot;</span> <span class="mi">2</span> <span class="mi">5</span>
-</pre></div>
-</div>
-<div class="last admonition hint">
+<div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p>You can find help on the arguments to this function with:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test</span><span class="o">/</span><span class="n">plot_interpolate_lagrange</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">plot_interpolate_lagrange</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </div>
-</div></div><p class="rubric">Footnotes</p>
+<p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="vandermonde" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -393,7 +387,7 @@ is the one-dimensional case of the generalised Vandermonde matrix.</td></tr>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

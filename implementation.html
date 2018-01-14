@@ -76,29 +76,25 @@ commits page for your repository on github. For the avoidance of
 doubt, the commit you submit must date from before the deadline!</p>
 <p>The marking scheme will be as follows:</p>
 <dl class="docutils">
-<dt>High first (80-100)</dt>
+<dt>High first/distinction (80-100)</dt>
 <dd>As for bare first, but additionally the extension (mastery)
 component of the implementaton exercise has been completed correctly
 and clearly.</dd>
-<dt>Bare first (75-80)</dt>
+<dt>Bare first/distinction (70-80)</dt>
 <dd>All parts of the implementation are correct and all tests pass. The
 code style is always very clear and the implementation of every
 exercise is transparent and elegant.</dd>
-<dt>Upper second (60-75)</dt>
+<dt>Upper second/merit (60-70)</dt>
 <dd>The implementation is correct but let down somewhat by poor coding
 style. Alternatively, submissions which are correct and well
 written up to and including solving the Helmholtz problem but
 which do not include a correct solution to boundary conditions will
 earn an upper second.</dd>
-<dt>Lower second (45-60)</dt>
-<dd>Most of the exercise is correctly implemented, but there are some
-test failures, or there are significant failures in coding style or
-in the transparency and elegance of solutions.</dd>
-<dt>Third (30-45)</dt>
+<dt>Lower second/pass (50-60)</dt>
 <dd>There are significant failings in the implementation resulting in
-many test failures, and/or the coding style and elegance are
+many test failures, and/or the coding style is
 sufficiently poor that the code is hard to understand.</dd>
-<dt>Fail (0-30)</dt>
+<dt>Fail (0-50)</dt>
 <dd>The implementation is substantially incomplete. Correct
 implementations may have been provided for some of the earlier exercises but
 the more advanced parts of the implementation exercise have not been
@@ -176,12 +172,13 @@ containing the venv, you need to modify the path accordingly.</p>
 <div class="section" id="installing-your-implementation-exercise">
 <h3>Installing your implementation exercise<a class="headerlink" href="#installing-your-implementation-exercise" title="Permalink to this headline">¶</a></h3>
 <p>Your implementation exercise is also a Python package so <strong>just once</strong>
-after creating the venv, you need to install it. <a href="#id1"><span class="problematic" id="id2">**</span></a>With the venv active ** type:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+after creating the venv, you need to install it. <strong>With the venv active</strong> type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span>
 </pre></div>
 </div>
-<p>Dont forget that dot, it’s important! (The dot tells Python to install the package in the current directory).</p>
+<p>Dont forget that slash, it’s important! (The slash tells Python to
+install the package in the given directory rather than searching the
+Python package archives for a package by that name).</p>
 </div>
 <div class="section" id="watching-for-updates-and-issues">
 <h3>Watching for updates and issues<a class="headerlink" href="#watching-for-updates-and-issues" title="Permalink to this headline">¶</a></h3>
@@ -205,14 +202,30 @@ you need to tell your local git repo about the main repository:</p>
 them to GitHub.</p>
 </li>
 <li><p class="first">Execute the following commands:</p>
-<p>git checkout master          # Switch to the master branch.
-git pull upstream master     # Update from the main repository.
-git push                     # Push the updated master branch to GitHub.
-git checkout implementation  # Switch back to the implementation branch.
-git merge master             # Merge the new changes from master into implementation.
-git push                     # Push the updated implementation branch to GitHub.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>          <span class="c1"># Switch to the master branch.</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="n">upstream</span> <span class="n">master</span>     <span class="c1"># Update from the main repository.</span>
+<span class="n">git</span> <span class="n">push</span>                     <span class="c1"># Push the updated master branch to GitHub.</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">implementation</span>  <span class="c1"># Switch back to the implementation branch.</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">master</span>             <span class="c1"># Merge the new changes from master into implementation.</span>
+<span class="n">git</span> <span class="n">push</span>                     <span class="c1"># Push the updated implementation branch to GitHub.</span>
+</pre></div>
+</div>
 </li>
 </ol>
+</div>
+<div class="section" id="editing-code">
+<h3>Editing code<a class="headerlink" href="#editing-code" title="Permalink to this headline">¶</a></h3>
+<p>In order to write the code required for the implementation exercise,
+you’ll need to use a Python-aware text editor. There are many such
+editors available and you can use any you like. The script which set
+up the virtual environment installed <a class="reference external" href="https://pythonhosted.org/spyder/">Spyder</a>, which is one good option. Other
+editors are <a class="reference external" href="https://wiki.python.org/moin/PythonEditors">listed here</a>. With your venv active,
+you can launch spyder by typing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">spyder3</span>
+</pre></div>
+</div>
+<p>Don’t forget the 3. If you leave that off you’ll end up running an old
+Python 2 version of Spyder which won’t know anything about your venv.</p>
 </div>
 </div>
 <div class="section" id="skeleton-code-documentation">
@@ -308,7 +321,7 @@ writing your answer, or suggest Python functions which you might
 find useful.</dd>
 <dt>Don’t forget the 1D case</dt>
 <dd>Your finite element library needs to work in one and two dimensions.</dd>
-<dt>Return a <code class="xref py py-class docutils literal"><span class="pre">numpy.array</span></code></dt>
+<dt>Return a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.array()</span></code></a></dt>
 <dd>Many of the functions you have to write return arrays. Make sure
 you actually return an array and not a list (it’s usually fine to
 build the answer as a list, but convert it to an array before you
@@ -325,7 +338,7 @@ return it).</dd>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

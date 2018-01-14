@@ -109,9 +109,9 @@ required to be associated with the face itself is actually the
 number required to represent a degree <span class="math">\(p-2\)</span> polynomial in two
 dimensions: <span class="math">\(\begin{pmatrix}p-1\\ 2\end{pmatrix}\)</span>.</dd>
 </dl>
-<p>This pattern holds more generally: the number of nodes which must be
-associated with a local topological entity of degree <span class="math">\(d\)</span> is
-<span class="math">\(\begin{pmatrix}p-1\\ d\end{pmatrix}\)</span>.</p>
+<p>This pattern holds more generally: for a <span class="math">\(C_0\)</span> function space, the
+number of nodes which must be associated with a local topological
+entity of degree <span class="math">\(d\)</span> is <span class="math">\(\begin{pmatrix}p-1\\ d\end{pmatrix}\)</span>.</p>
 <p><a class="reference internal" href="#figlagrange-nodes"><span class="std std-numref">Fig. 4.1</span></a> illustrates the association of nodes with
 reference entities for Lagrange elements on triangles. The numbering
 of nodes will depend on how
@@ -159,7 +159,7 @@ the nodes in order given by the direction of the orientation of each edge.</p>
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.LagrangeElement" title="fe_utils.finite_elements.LagrangeElement"><code class="xref py py-class docutils literal"><span class="pre">LagrangeElement</span></code></a> so that it
 passes the correct <code class="docutils literal"><span class="pre">entity_node</span></code> dictionary to the
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> it creates.</p>
-<p class="last">The <code class="docutils literal"><span class="pre">test/test_entity_nodes.py</span></code> script tests this functionality.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">test/test_08_entity_nodes.py</span></code> script tests this functionality.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p>You can either work out the right algorithm to generate
@@ -237,7 +237,7 @@ is to set
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal"><span class="pre">cell_nodes</span></code></a> using
 <a class="reference internal" href="#equation-eqcellnode">(2)</a>.</p>
 <p class="last">You can plot the numbering you have created with the
-<code class="docutils literal"><span class="pre">test/plot_function_space_nodes.py</span></code> script. As usual, run the
+<code class="docutils literal"><span class="pre">plot_function_space_nodes</span></code> script. As usual, run the
 script passing the <code class="docutils literal"><span class="pre">-h</span></code> option to discover the required
 arguments.</p>
 </div></div><div class="admonition hint">
@@ -246,8 +246,8 @@ arguments.</p>
 objects in <a class="reference internal" href="fe_utils.html#module-fe_utils" title="fe_utils"><code class="xref py py-mod docutils literal"><span class="pre">fe_utils</span></code></a>. For example:</p>
 <ul class="last">
 <li><p class="first"><span class="math">\(\operatorname{Adj}_{\dim(c), \delta}\)</span> is implemented by the
-<code class="xref py py-meth docutils literal"><span class="pre">adjacency()</span></code> method of the
-<code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code>.</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.adjacency" title="fe_utils.mesh.Mesh.adjacency"><code class="xref py py-meth docutils literal"><span class="pre">adjacency()</span></code></a> method of the
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>.</p>
 </li>
 <li><p class="first">You have <span class="math">\(e(\delta, \epsilon)\)</span> as
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.entity_nodes" title="fe_utils.finite_elements.FiniteElement.entity_nodes"><code class="xref py py-data docutils literal"><span class="pre">entity_nodes</span></code></a>. Note
@@ -265,7 +265,7 @@ index:</p>
 be integer-valued. If you choose to use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.zeros()</span></code></a>
 to create a matrix which you then populate with values, you
 need to explicitly specify that you want a matrix of
-zeros. This can be achieved by passing the <code class="docutils literal"><span class="pre">dtype</span></code> argument
+integers. This can be achieved by passing the <code class="docutils literal"><span class="pre">dtype</span></code> argument
 to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.zeros()</span></code></a>. For example <code class="docutils literal"><span class="pre">numpy.zeros((nrows,</span> <span class="pre">ncols),</span> <span class="pre">dtype=int)</span></code>.</p>
 </div>
 <p class="rubric">Footnotes</p>
@@ -289,7 +289,7 @@ layout of the resulting data.</td></tr>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

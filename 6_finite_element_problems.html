@@ -58,10 +58,10 @@
   <div class="section" id="assembling-and-solving-finite-element-problems">
 <h1>6. Assembling and solving finite element problems<a class="headerlink" href="#assembling-and-solving-finite-element-problems" title="Permalink to this headline">¶</a></h1>
 <p>Having constructed functions in finite element spaces and integrated
-them, over the domain, we now have the tools in place to actually
+them over the domain, we now have the tools in place to actually
 assemble and solve a simple finite element problem. To avoid having to
 explicitly deal with boundary conditions, we choose in the first
-instance to solve a Helmholtz problem, find <span class="math">\(u\)</span> in some finite element
+instance to solve a Helmholtz problem <a class="footnote-reference" href="#helmholtz" id="id1">[1]</a>, find <span class="math">\(u\)</span> in some finite element
 space <span class="math">\(V\)</span> such that:</p>
 <div class="math" id="equation-helmholtz">
 <span class="eqno">(1)<a class="headerlink" href="#equation-helmholtz" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}- \nabla^2 u + u = f\\\nabla u \cdot \mathbf{n} = 0 \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
@@ -189,7 +189,7 @@ J^{-1}_{\gamma\alpha}\left(\nabla_X \Phi_{\hat{j}}(X_q)\right)_\gamma + \Phi_{\h
 function, trial function pair on the current element. This is then
 added to the global matrix at the row and column pairs given by the
 cell node map <span class="math">\(M(c, \hat{i})\)</span> and <span class="math">\(M(c, \hat{j})\)</span>.</p>
-<div class="figure" id="id1">
+<div class="figure" id="id2">
 <span id="figmatrix-insertion"></span><a class="reference internal image-reference" href="_images/global_assembly.svg"><img alt="_images/global_assembly.svg" src="_images/global_assembly.svg" width="70%" /></a>
 <p class="caption"><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Computing integrals for each local test and trial function produces
 a local dense (in this case, <span class="math">\(3\times 3\)</span>) matrix. The entries in
@@ -253,13 +253,13 @@ matrix system will also be vastly reduced since operations on zeros
 are avoided.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.1.0.dev0+59cabc8)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
+<p class="last">The <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.1.0.dev0+ccd8349)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
 which enable Python code to employ a variety of sparse matrix
 formats using essentially identical operations to the dense matrix
 case. The skeleton code already contains commands to construct
 empty sparse matrices and to solve the resulting linear system. You
 may, if you wish, experiment with choosing other sparse formats
-from <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.1.0.dev0+59cabc8)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
+from <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.1.0.dev0+ccd8349)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
 you do <strong>not</strong> switch to a dense numpy array; unless, that is, you
 particularly enjoy running out of memory on your computer!</p>
 </div>
@@ -345,31 +345,41 @@ solutions, produces an estimate of the rate of convergence:</p>
 <div class="section" id="implementing-finite-element-problems">
 <h2>6.5. Implementing finite element problems<a class="headerlink" href="#implementing-finite-element-problems" title="Permalink to this headline">¶</a></h2>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">15</span></div><div class="theoremenv_body exercise_body"><p class="first"><code class="docutils literal"><span class="pre">test/solve_helmholtz.py</span></code> contains a partial implementation of
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">15</span></div><div class="theoremenv_body exercise_body"><p class="first"><code class="docutils literal"><span class="pre">fe_utils/solvers/helmholtz.py</span></code> contains a partial implementation of
 the finite element method to solve <a class="reference internal" href="#equation-weak_helmholtz">(2)</a> with <span class="math">\(f\)</span>
 chosen as in <a class="reference internal" href="#equation-f_def">(22)</a>. Your task is to implement the
-<code class="xref py py-func docutils literal"><span class="pre">assemble()</span></code> function using <a class="reference internal" href="#equation-rhs_index">(12)</a>, and
+<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble" title="fe_utils.solvers.helmholtz.assemble"><code class="xref py py-func docutils literal"><span class="pre">assemble()</span></code></a> function using <a class="reference internal" href="#equation-rhs_index">(12)</a>, and
 <a class="reference internal" href="#equation-lhs_assemble">(18)</a> or <a class="reference internal" href="#equation-lhs_index">(19)</a>. The comments in the
-<code class="xref py py-func docutils literal"><span class="pre">assemble()</span></code> function provide some guidance as to the steps
-involved. You may also wish to consult the <code class="xref py py-func docutils literal"><span class="pre">errornorm()</span></code>
-function in <code class="docutils literal"><span class="pre">test/solve_helmholtz.py</span></code> as a guide to the
+<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble" title="fe_utils.solvers.helmholtz.assemble"><code class="xref py py-func docutils literal"><span class="pre">assemble()</span></code></a> function provide some guidance as to the steps
+involved. You may also wish to consult the <a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal"><span class="pre">errornorm()</span></code></a>
+function as a guide to the
 structure of the code required.</p>
 <p>Run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test</span><span class="o">/</span><span class="n">solve_helmholtz</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">fe_utils</span><span class="o">/</span><span class="n">solvers</span><span class="o">/</span><span class="n">helmholtz</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
 </pre></div>
 </div>
 <p>for guidance on using the script to view the solution, the analytic
 solution and the error in your solution. In addition,
-<code class="docutils literal"><span class="pre">test/test_helmholtz_convergence.py</span></code> contains tests that the
+<code class="docutils literal"><span class="pre">test/test_12_helmholtz_convergence.py</span></code> contains tests that the
 helmholtz solver converges at the correct rate for degree 1, 2 and
 3 polynomials.</p>
 <div class="last admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last"><code class="docutils literal"><span class="pre">test/test_helmholtz_convergence.py</span></code> may take many seconds or
+<p><code class="docutils literal"><span class="pre">test/test_12_helmholtz_convergence.py</span></code> may take many seconds or
 even a couple of minutes to run, as it has to solve on some
 rather fine meshes in order to check convergence.</p>
+<p class="last rubric">Footnotes</p>
 </div>
-</div></div></div>
+</div></div><table class="docutils footnote" frame="void" id="helmholtz" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Strictly speaking this is the positive definite Helmholtz
+problem. Changing the sign on <span class="math">\(u\)</span> produces the
+indefinite Helmholtz problem, which is significantly
+harder to solve.</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
@@ -380,7 +390,7 @@ rather fine meshes in order to check convergence.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>
