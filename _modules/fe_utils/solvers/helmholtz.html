@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>fe_utils.solvers.helmholtz &#8212; Finite element course 0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../../../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="../../../_static/featured.css">
+
+
+<link rel="shortcut icon" href="../../../_static/icon.ico" />
+
+
+  </head>
+  <body>
+<div class="wrapper">
+  <a href="../../../index.html"><img src="../../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fe_utils.solvers.helmholtz</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Solve a model helmholtz problem using the finite element method.</span>
+<span class="sd">If run as a script, the result is plotted. This file can also be</span>
+<span class="sd">imported as a module and convergence tests run on the solver.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">fe_utils</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse.linalg</span> <span class="k">as</span> <span class="nn">splinalg</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">ArgumentParser</span>
+
+
+<div class="viewcode-block" id="assemble"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble">[docs]</a><span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Assemble the finite element system for the Helmholtz problem given</span>
+<span class="sd">    the function space in which to solve and the right hand side</span>
+<span class="sd">    function.&quot;&quot;&quot;</span>
+
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="c1"># Create an appropriate (complete) quadrature rule.</span>
+
+    <span class="c1"># Tabulate the basis functions and their gradients at the quadrature points.</span>
+
+    <span class="c1"># Create the left hand side matrix and right hand side vector.</span>
+    <span class="c1"># This creates a sparse matrix because creating a dense one may</span>
+    <span class="c1"># well run your machine out of memory!</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">((</span><span class="n">fs</span><span class="o">.</span><span class="n">node_count</span><span class="p">,</span> <span class="n">fs</span><span class="o">.</span><span class="n">node_count</span><span class="p">))</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">node_count</span><span class="p">)</span>
+
+    <span class="c1"># Now loop over all the cells and assemble A and l</span>
+
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">l</span></div>
+
+
+<div class="viewcode-block" id="solve_helmholtz"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.helmholtz.solve_helmholtz">[docs]</a><span class="k">def</span> <span class="nf">solve_helmholtz</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solve a model Helmholtz problem on a unit square mesh with</span>
+<span class="sd">    ``resolution`` elements in each direction, using equispaced</span>
+<span class="sd">    Lagrange elements of degree ``degree``.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Set up the mesh, finite element and function space required.</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">UnitSquareMesh</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+    <span class="n">fe</span> <span class="o">=</span> <span class="n">LagrangeElement</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">fe</span><span class="p">)</span>
+
+    <span class="c1"># Create a function to hold the analytic solution for comparison purposes.</span>
+    <span class="n">analytic_answer</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+    <span class="n">analytic_answer</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mf">1.</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># If the analytic answer has been requested then bail out now.</span>
+    <span class="k">if</span> <span class="n">analytic</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">analytic_answer</span><span class="p">,</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Create the right hand side function and populate it with the</span>
+    <span class="c1"># correct values.</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">((</span><span class="mi">16</span><span class="o">*</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">12</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">12</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span>
+                  <span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1"># Assemble the finite element system.</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># Create the function to hold the solution.</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+
+    <span class="c1"># Cast the matrix to a sparse format and use a sparse solver for</span>
+    <span class="c1"># the linear system. This is vastly faster than the dense</span>
+    <span class="c1"># alternative.</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">u</span><span class="o">.</span><span class="n">values</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">splinalg</span><span class="o">.</span><span class="n">spsolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+
+    <span class="c1"># Compute the L^2 error in the solution for testing purposes.</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">errornorm</span><span class="p">(</span><span class="n">analytic_answer</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">return_error</span><span class="p">:</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">values</span> <span class="o">-=</span> <span class="n">analytic_answer</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="c1"># Return the solution and the error in the solution.</span>
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">error</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Solve a Helmholtz problem on the unit square.&quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--analytic&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the analytic solution instead of solving the finite element problem.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--error&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the error instead of the solution.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;resolution&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The number of cells in each direction on the mesh.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;degree&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The degree of the polynomial basis for the function space.&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">resolution</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">resolution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">degree</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">degree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">analytic</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">analytic</span>
+    <span class="n">plot_error</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">error</span>
+
+    <span class="n">u</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">solve_helmholtz</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="p">,</span> <span class="n">plot_error</span><span class="p">)</span>
+
+    <span class="n">u</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>fe_utils.utils &#8212; Finite element course 0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="../../_static/featured.css">
+
+
+<link rel="shortcut icon" href="../../_static/icon.ico" />
+
+
+  </head>
+  <body>
+<div class="wrapper">
+  <a href="../../index.html"><img src="../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fe_utils.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">.quadrature</span> <span class="k">import</span> <span class="n">gauss_quadrature</span>
+
+
+<div class="viewcode-block" id="errornorm"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.utils.errornorm">[docs]</a><span class="k">def</span> <span class="nf">errornorm</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the L^2 norm of the difference between f1 and f2.&quot;&quot;&quot;</span>
+
+    <span class="n">fs1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">function_space</span>
+    <span class="n">fs2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">function_space</span>
+
+    <span class="n">fe1</span> <span class="o">=</span> <span class="n">fs1</span><span class="o">.</span><span class="n">element</span>
+    <span class="n">fe2</span> <span class="o">=</span> <span class="n">fs2</span><span class="o">.</span><span class="n">element</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">fs1</span><span class="o">.</span><span class="n">mesh</span>
+
+    <span class="c1"># Create a quadrature rule which is exact for (f1-f2)**2.</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">gauss_quadrature</span><span class="p">(</span><span class="n">fe1</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">fe1</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">fe2</span><span class="o">.</span><span class="n">degree</span><span class="p">))</span>
+
+    <span class="c1"># Evaluate the local basis functions at the quadrature points.</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">fe1</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="n">fe2</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="c1"># Find the appropriate global node numbers for this cell.</span>
+        <span class="n">nodes1</span> <span class="o">=</span> <span class="n">fs1</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">nodes2</span> <span class="o">=</span> <span class="n">fs2</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="c1"># Compute the change of coordinates.</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">detJ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">J</span><span class="p">))</span>
+
+        <span class="c1"># Compute the actual cell quadrature.</span>
+        <span class="n">norm</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">nodes1</span><span class="p">],</span> <span class="n">phi</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">nodes2</span><span class="p">],</span> <span class="n">psi</span><span class="o">.</span><span class="n">T</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+                       <span class="n">Q</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span> <span class="o">*</span> <span class="n">detJ</span>
+
+    <span class="k">return</span> <span class="n">norm</span><span class="o">**</span><span class="mf">0.5</span></div>
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

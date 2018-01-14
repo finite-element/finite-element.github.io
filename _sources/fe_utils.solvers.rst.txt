@@ -1,0 +1,30 @@
+fe\_utils\.solvers package
+==========================
+
+Submodules
+----------
+
+fe\_utils\.solvers\.helmholtz module
+------------------------------------
+
+.. automodule:: fe_utils.solvers.helmholtz
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fe\_utils\.solvers\.poisson module
+----------------------------------
+
+.. automodule:: fe_utils.solvers.poisson
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: fe_utils.solvers
+    :members:
+    :undoc-members:
+    :show-inheritance:
