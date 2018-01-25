@@ -125,23 +125,7 @@ copies of the repository. To obtain your copy click <a class="reference external
 </pre></div>
 </div>
 <p>Substituting your git repository url for &lt;url&gt;. Your git repository
-url can be found by clicking on <cite>clone or download</cite> at the top right of your repository page on GitHub. Next:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="setting-up-an-implementation-branch">
-<h3>Setting up an implementation branch<a class="headerlink" href="#setting-up-an-implementation-branch" title="Permalink to this headline">¶</a></h3>
-<p>We’ll keep the master branch of your repository in the original
-condition so we can compare to it later, and collect any updates which
-occur during the term. Instead, we’ll create an implementation branch
-to actually work on:</p>
-<blockquote>
-<div>git checkout -b implementation</div></blockquote>
-<p>Your working directory is now a current checkout of your
-implementation branch. You’ll also want to push this branch to GitHub:</p>
-<blockquote>
-<div>git push –set-upstream origin implementation</div></blockquote>
+url can be found by clicking on <cite>clone or download</cite> at the top right of your repository page on GitHub.</p>
 </div>
 <div class="section" id="setting-up-your-venv">
 <h3>Setting up your venv<a class="headerlink" href="#setting-up-your-venv" title="Permalink to this headline">¶</a></h3>
@@ -149,15 +133,12 @@ implementation branch. You’ll also want to push this branch to GitHub:</p>
 in which we’ll install the packages we need, including our own
 implementation exercise. This minimises interference between this
 project and anything else which might be using Python on the
-system. We don’t want to install the venv inside our git repository,
-so type:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
-</pre></div>
-</div>
-<p>Now we can run a script from the git repository to make the venv:</p>
+system. We can run a script from the git repository to make the venv:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv</span> <span class="n">venv</span>
 </pre></div>
 </div>
+<p>This has to install several packages in the venv, so it might take a
+few minutes to run.</p>
 </div>
 <div class="section" id="activating-your-venv">
 <h3>Activating your venv<a class="headerlink" href="#activating-your-venv" title="Permalink to this headline">¶</a></h3>
@@ -168,6 +149,22 @@ to activate the venv. You do this with:</p>
 </div>
 <p>Obviously if you are typing this in a directory other than the one
 containing the venv, you need to modify the path accordingly.</p>
+</div>
+<div class="section" id="setting-up-an-implementation-branch">
+<h3>Setting up an implementation branch<a class="headerlink" href="#setting-up-an-implementation-branch" title="Permalink to this headline">¶</a></h3>
+<p>We’ll keep the master branch of your repository in the original
+condition so we can compare to it later, and collect any updates which
+occur during the term. Instead, we’ll create an implementation branch
+to actually work on:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">implementation</span>
+</pre></div>
+</div>
+<p>Your working directory is now a current checkout of your
+implementation branch. You’ll also want to push this branch to GitHub:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">origin</span> <span class="n">implementation</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="watching-for-updates-and-issues">
 <h3>Watching for updates and issues<a class="headerlink" href="#watching-for-updates-and-issues" title="Permalink to this headline">¶</a></h3>
@@ -206,15 +203,11 @@ them to GitHub.</p>
 <h3>Editing code<a class="headerlink" href="#editing-code" title="Permalink to this headline">¶</a></h3>
 <p>In order to write the code required for the implementation exercise,
 you’ll need to use a Python-aware text editor. There are many such
-editors available and you can use any you like. The script which set
-up the virtual environment installed <a class="reference external" href="https://pythonhosted.org/spyder/">Spyder</a>, which is one good option. Other
-editors are <a class="reference external" href="https://wiki.python.org/moin/PythonEditors">listed here</a>. With your venv active,
-you can launch spyder by typing:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">spyder3</span>
+editors available and you can use any you like. One good option is
+called <cite>atom</cite> and is already installed in Huxley 410. You run it buy typing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">atom</span>
 </pre></div>
 </div>
-<p>Don’t forget the 3. If you leave that off you’ll end up running an old
-Python 2 version of Spyder which won’t know anything about your venv.</p>
 </div>
 </div>
 <div class="section" id="skeleton-code-documentation">

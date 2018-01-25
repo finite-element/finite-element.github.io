@@ -63,7 +63,46 @@
 work. The machines in Huxley 410 have suitable software installed, or you can use your own laptop running Windows, Linux, or macOS.</p>
 <div class="section" id="using-the-windows-machines-in-huxley-410">
 <h3>Using the Windows machines in Huxley 410<a class="headerlink" href="#using-the-windows-machines-in-huxley-410" title="Permalink to this headline">¶</a></h3>
-<p>A new Python environment is in development by ICT. The instructions here will be updated before the first lab session.</p>
+<p>The Python installations on the department’s Windows machines are
+limited in functionality and don’t support everything we need. We’re
+therefore going to use the Linux Virtual Machines which are installed
+on the lab machines.</p>
+<ol class="arabic">
+<li><p class="first">Double click the “OEL7” icon on the Windows desktop.</p>
+</li>
+<li><p class="first">When the login window appears, log in using your Imperial College
+username and password. You probably also want to select full screen
+mode from the <cite>view</cite> menu.</p>
+</li>
+<li><p class="first">Open <cite>firefox</cite> from the <cite>Applications</cite> menu and navigate to this
+page so that you can copy and paste commands straight into the
+terminal.</p>
+</li>
+<li><p class="first">Open <cite>terminal</cite> from the <cite>Applications</cite> menu and run the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">python_venvs</span><span class="o">/</span><span class="n">setup</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">We also need to set one configuration variable to enable plotting from Python:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;backend: Qt5Agg&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">config</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">matplotlibrc</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>There should now be a directory called <cite>pythonhome</cite> in your home
+directory (type <cite>ls</cite> to check). <cite>pythonhome</cite> is a network file share
+which persists between logins, you need to do all your work in this
+directory, because your home directory is specific to each machine and
+gets wiped when the machine reboots.</p>
+<p>There is also a file called <cite>pythonhome/imp-config</cite>. This file
+contains a list of configuration directories which will be stored on
+the network share. If you need any additional files to persist between
+logins, you can add them here.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you save work anywhere other than in <cite>pythonhome</cite>, it is likely
+that that work will be irevocably lost!</p>
+</div>
 </div>
 <div class="section" id="using-your-own-windows-machine">
 <h3>Using your own Windows machine<a class="headerlink" href="#using-your-own-windows-machine" title="Permalink to this headline">¶</a></h3>
@@ -73,10 +112,6 @@ Canopy, but other Windows Python distributions should also work.</p>
 <ol class="arabic simple">
 <li>Download and install <cite>Enthought Canopy Express</cite> from <a class="reference external" href="https://store.enthought.com/#canopy-individual">here</a>.</li>
 <li>Download and install <cite>git</cite> from <a class="reference external" href="https://git-scm.com/download/win">here</a>.</li>
-<li>You should now be able to use git and Python exactly as in Huxley
-410, except that the directory where your finite element source
-code lives will be different (and may depend on how your Windows
-machine is set up).</li>
 </ol>
 </div>
 <div class="section" id="using-your-own-linux-machine">
