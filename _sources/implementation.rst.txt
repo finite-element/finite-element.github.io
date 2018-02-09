@@ -111,7 +111,7 @@ to activate the venv. On Linux or Mac do this with::
 while on Windows the command is::
 
   source venv/Scripts/activate
-  
+
 Obviously if you are typing this in a directory other than the one
 containing the venv, you need to modify the path accordingly.
 
