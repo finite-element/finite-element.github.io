@@ -139,12 +139,21 @@ system. We can run a script from the git repository to make the venv:</p>
 </div>
 <p>This has to install several packages in the venv, so it might take a
 few minutes to run.</p>
+<p>On Windows, the set of commands is somewhat different. In this case
+you would run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv_win</span> <span class="n">venv</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="activating-your-venv">
 <h3>Activating your venv<a class="headerlink" href="#activating-your-venv" title="Permalink to this headline">¶</a></h3>
 <p><strong>Every time</strong> you want to work on the implementation exercise, you need
-to activate the venv. You do this with:</p>
+to activate the venv. On Linux or Mac do this with:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p>while on Windows the command is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="n">Scripts</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
 <p>Obviously if you are typing this in a directory other than the one
@@ -327,7 +336,7 @@ return it).</dd>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>
