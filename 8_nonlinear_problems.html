@@ -96,8 +96,8 @@ linear matrix system to solve.</p>
 <div class="section" id="residual-form">
 <h2>8.2. Residual form<a class="headerlink" href="#residual-form" title="Permalink to this headline">¶</a></h2>
 <p>The general weak form of a non-linear problem is, find <span class="math">\(u\in V\)</span> such that:</p>
-<div class="math" id="equation-8_nonlinear_problems:0">
-<span class="eqno">(3)<a class="headerlink" href="#equation-8_nonlinear_problems:0" title="Permalink to this equation">¶</a></span>\[f(u; v) = 0 \qquad \forall v \in V\]</div>
+<div class="math" id="equation-8-nonlinear-problems-0">
+<span class="eqno">(3)<a class="headerlink" href="#equation-8-nonlinear-problems-0" title="Permalink to this equation">¶</a></span>\[f(u; v) = 0 \qquad \forall v \in V\]</div>
 <p>The use of a semicolon is a common convention to indicate that <span class="math">\(f\)</span> is
 assumed to be linear in the arguments after the semicolon, but might
 be nonlinear in the arguments before the semicolon. In this case,
@@ -112,8 +112,8 @@ but what do we do for the boundary? The simple answer is that we need
 a linear functional which is zero if the boundary condition is
 satisfied at this test function, and nonzero otherwise. The simplest
 example of such a functional is:</p>
-<div class="math" id="equation-8_nonlinear_problems:1">
-<span class="eqno">(4)<a class="headerlink" href="#equation-8_nonlinear_problems:1" title="Permalink to this equation">¶</a></span>\[f(u; \phi_i) = n_i(u) - n_i(b)\]</div>
+<div class="math" id="equation-8-nonlinear-problems-1">
+<span class="eqno">(4)<a class="headerlink" href="#equation-8-nonlinear-problems-1" title="Permalink to this equation">¶</a></span>\[f(u; \phi_i) = n_i(u) - n_i(b)\]</div>
 <p>where <span class="math">\(n_i\)</span> is the node associated with basis function <span class="math">\(\phi_i\)</span>. For
 point evaluation nodes, <span class="math">\(n_i(u)\)</span> is the value of the proposed solution
 at node point <span class="math">\(i\)</span> and <span class="math">\(n_i(b)\)</span> is just the boundary condition
@@ -140,55 +140,55 @@ order to linearise the residual, we need to differentiate it with
 respect to <span class="math">\(u\)</span>. Since <span class="math">\(u\)</span> is not a scalar real variable, but is
 instead a function in <span class="math">\(V\)</span>, the appropriate form of differentiation is
 the Gâteaux Derivative, given by:</p>
-<div class="math" id="equation-8_nonlinear_problems:2">
-<span class="eqno">(6)<a class="headerlink" href="#equation-8_nonlinear_problems:2" title="Permalink to this equation">¶</a></span>\[J(u; v, \hat{u}) = \lim_{\epsilon\rightarrow 0}\frac{f(u+\epsilon\hat{u}; v)-f(u; v)}{\epsilon}.\]</div>
+<div class="math" id="equation-8-nonlinear-problems-2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-8-nonlinear-problems-2" title="Permalink to this equation">¶</a></span>\[J(u; v, \hat{u}) = \lim_{\epsilon\rightarrow 0}\frac{f(u+\epsilon\hat{u}; v)-f(u; v)}{\epsilon}.\]</div>
 <p>Here, the new argument <span class="math">\(\hat{u}\in V\)</span> indicates the “direction” in
 which the derivative is to be taken. Let’s work through the Gâteaux
 Derivative for the residual of our model problem. Assume first that
 <span class="math">\(v\in V_0\)</span>. Then:</p>
-<div class="math" id="equation-8_nonlinear_problems:3">
-<span class="eqno">(7)<a class="headerlink" href="#equation-8_nonlinear_problems:3" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<div class="math" id="equation-8-nonlinear-problems-3">
+<span class="eqno">(7)<a class="headerlink" href="#equation-8-nonlinear-problems-3" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
 J(u; v, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Omega \nabla v \cdot \left((u +\epsilon\hat{u} + 1) \nabla (u + \epsilon\hat{u})\right) - vg \, \mathrm{d} x - \displaystyle\int_\Omega \nabla v \cdot \left((u + 1) \nabla u\right) - vg \, \mathrm{d} x}{\epsilon}\\
 &amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Omega \nabla v \cdot \left(\epsilon\hat{u} \nabla u + (u + 1) \nabla (\epsilon\hat{u}) + \epsilon\hat{u} \nabla (\epsilon\hat{u})\right) \, \mathrm{d} x}{\epsilon}\\
 &amp;= \int_\Omega \nabla v \cdot \left(\hat{u} \nabla u + (u + 1) \nabla \hat{u} \right) \, \mathrm{d} x.\\
 \end{split}\end{split}\]</div>
 <p>Note that, as expected, <span class="math">\(J\)</span> is linear in <span class="math">\(\hat{u}\)</span>.</p>
 <p>Next, we can work out the boundary case by assuming <span class="math">\(v=\phi_i\)</span>, one of the basis functions of <span class="math">\(V_\Gamma\)</span>:</p>
-<div class="math" id="equation-8_nonlinear_problems:4">
-<span class="eqno">(8)<a class="headerlink" href="#equation-8_nonlinear_problems:4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<div class="math" id="equation-8-nonlinear-problems-4">
+<span class="eqno">(8)<a class="headerlink" href="#equation-8-nonlinear-problems-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
 J(u; \phi_i, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{n_i(u+\epsilon\hat{u}) - n_i(b) - \left(n_i(u) - n_i(b)\right)}{\epsilon}\\
 &amp;= n_i(\hat{u}) \qquad \textrm{since } n_i(\cdot) \textrm{ is linear.}
 \end{split}\end{split}\]</div>
 <p>Once again, we can observe that <span class="math">\(J\)</span> is linear in <span class="math">\(\hat{u}\)</span>. Indeed, if
 we choose <span class="math">\(\hat{u} = \phi_j\)</span> for some <span class="math">\(\phi_j\)</span> in the basis if <span class="math">\(V\)</span>
 then the definition of a nodal basis gives us:</p>
-<div class="math" id="equation-8_nonlinear_problems:5">
-<span class="eqno">(9)<a class="headerlink" href="#equation-8_nonlinear_problems:5" title="Permalink to this equation">¶</a></span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
+<div class="math" id="equation-8-nonlinear-problems-5">
+<span class="eqno">(9)<a class="headerlink" href="#equation-8-nonlinear-problems-5" title="Permalink to this equation">¶</a></span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
 </div>
 <div class="section" id="a-taylor-expansion-and-newton-s-method">
 <h2>8.4. A Taylor expansion and Newton’s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
 <p>Since we now have the derivative of the residual with respect to a
 perturbation to the prospective solution <span class="math">\(u\)</span>, we can write the first
 terms of a Taylor series approximation for the value of the residual at a perturbed solution <span class="math">\(u+\hat{u}\)</span>:</p>
-<div class="math" id="equation-8_nonlinear_problems:6">
-<span class="eqno">(10)<a class="headerlink" href="#equation-8_nonlinear_problems:6" title="Permalink to this equation">¶</a></span>\[f(u+\hat{u}; v) = f(u; v) + J(u; v, \hat{u}) +\ldots \qquad \forall v\in V.\]</div>
+<div class="math" id="equation-8-nonlinear-problems-6">
+<span class="eqno">(10)<a class="headerlink" href="#equation-8-nonlinear-problems-6" title="Permalink to this equation">¶</a></span>\[f(u+\hat{u}; v) = f(u; v) + J(u; v, \hat{u}) +\ldots \qquad \forall v\in V.\]</div>
 <p>Now, just as in the scalar case, Newton’s method consists of
 approximating the function (the residual) by the first two terms and
 solving for the update that will set these terms to zero. In other
 words:</p>
-<div class="math" id="equation-8_nonlinear_problems:7">
-<span class="eqno">(11)<a class="headerlink" href="#equation-8_nonlinear_problems:7" title="Permalink to this equation">¶</a></span>\[u^{n+1} = u^n + \hat{u}\]</div>
+<div class="math" id="equation-8-nonlinear-problems-7">
+<span class="eqno">(11)<a class="headerlink" href="#equation-8-nonlinear-problems-7" title="Permalink to this equation">¶</a></span>\[u^{n+1} = u^n + \hat{u}\]</div>
 <p>where <span class="math">\(\hat{u} \in V\)</span> is the solution to:</p>
-<div class="math" id="equation-newton_update">
-<span class="eqno">(12)<a class="headerlink" href="#equation-newton_update" title="Permalink to this equation">¶</a></span>\[J(u^n; v, \hat{u}) = - f(u^n; v) \qquad \forall v \in V.\]</div>
-<p>In fact, <a class="reference internal" href="#equation-newton_update">(12)</a> is simply a linear finite element
+<div class="math" id="equation-newton-update">
+<span class="eqno">(12)<a class="headerlink" href="#equation-newton-update" title="Permalink to this equation">¶</a></span>\[J(u^n; v, \hat{u}) = - f(u^n; v) \qquad \forall v \in V.\]</div>
+<p>In fact, <a class="reference internal" href="#equation-newton-update">(12)</a> is simply a linear finite element
 problem! To make this explicit, we can expand <span class="math">\(v\)</span> and <span class="math">\(\hat{u}\)</span> in
 terms of basis functions:</p>
-<div class="math" id="equation-8_nonlinear_problems:8">
-<span class="eqno">(13)<a class="headerlink" href="#equation-8_nonlinear_problems:8" title="Permalink to this equation">¶</a></span>\[J(u^n; \phi_i, \phi_j) \hat{u}_j = - f(u^n; \phi_i).\]</div>
+<div class="math" id="equation-8-nonlinear-problems-8">
+<span class="eqno">(13)<a class="headerlink" href="#equation-8-nonlinear-problems-8" title="Permalink to this equation">¶</a></span>\[J(u^n; \phi_i, \phi_j) \hat{u}_j = - f(u^n; \phi_i).\]</div>
 <p>For our nonlinear diffusion problem, the matrix <span class="math">\(J\)</span> is given by:</p>
-<div class="math" id="equation-8_nonlinear_problems:9">
-<span class="eqno">(14)<a class="headerlink" href="#equation-8_nonlinear_problems:9" title="Permalink to this equation">¶</a></span>\[\begin{split}J(u^n; \phi_i, \phi_j) =
+<div class="math" id="equation-8-nonlinear-problems-9">
+<span class="eqno">(14)<a class="headerlink" href="#equation-8-nonlinear-problems-9" title="Permalink to this equation">¶</a></span>\[\begin{split}J(u^n; \phi_i, \phi_j) =
 \begin{cases}
 \displaystyle\int_\Omega \nabla \phi_i \cdot \left(\phi_j \nabla u^n + (u^n + 1) \nabla \phi_j \right) \, \mathrm{d} x &amp; \phi_i\in V_0\\
 \delta_{ij} &amp; \phi_i \in V_\Gamma,
@@ -321,8 +321,8 @@ solution is correct.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+        &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

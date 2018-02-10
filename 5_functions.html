@@ -78,16 +78,16 @@ freedom values, one for each node in the
 <p>Suppose we have a function <span class="math">\(g(x): \mathbb{R}^n \rightarrow \mathbb{R}\)</span>
 which we wish to approximate as a function <span class="math">\(f(x)\)</span> in some finite
 element space <span class="math">\(V\)</span>. In other words, we want to find the <span class="math">\(f_i\)</span> such that:</p>
-<div class="math" id="equation-5_functions:0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-5_functions:0" title="Permalink to this equation">¶</a></span>\[\sum_i f_i \phi_i(x) \approx g(x)\]</div>
+<div class="math" id="equation-5-functions-0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-5-functions-0" title="Permalink to this equation">¶</a></span>\[\sum_i f_i \phi_i(x) \approx g(x)\]</div>
 <p>The simplest way to do this is to <em>interpolate</em> <span class="math">\(g(x)\)</span> onto <span class="math">\(V\)</span>. In
 other words, we evaluate:</p>
-<div class="math" id="equation-5_functions:1">
-<span class="eqno">(3)<a class="headerlink" href="#equation-5_functions:1" title="Permalink to this equation">¶</a></span>\[f_i = n_i(g(x))\]</div>
+<div class="math" id="equation-5-functions-1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-5-functions-1" title="Permalink to this equation">¶</a></span>\[f_i = n_i(g(x))\]</div>
 <p>where <span class="math">\(n_i\)</span> is the node associated with <span class="math">\(\phi_i\)</span>. Since we are only
 concerned with point evaluation nodes, this is equivalent to:</p>
-<div class="math" id="equation-5_functions:2">
-<span class="eqno">(4)<a class="headerlink" href="#equation-5_functions:2" title="Permalink to this equation">¶</a></span>\[f_i = g(x_i)\]</div>
+<div class="math" id="equation-5-functions-2">
+<span class="eqno">(4)<a class="headerlink" href="#equation-5-functions-2" title="Permalink to this equation">¶</a></span>\[f_i = g(x_i)\]</div>
 <p>where <span class="math">\(x_i\)</span> is the coordinate vector of the point defining the node
 <span class="math">\(n_i\)</span>. This looks straightforward, however the <span class="math">\(x_i\)</span> are the <em>global</em>
 node points, and so far we have only defined the node points in
@@ -197,14 +197,14 @@ integration of expressions of unknown test and trial functions, but we
 will start with the more straightforward case of integrating a single,
 known, <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> over a domain
 <span class="math">\(\Omega\)</span>:</p>
-<div class="math" id="equation-5_functions:3">
-<span class="eqno">(8)<a class="headerlink" href="#equation-5_functions:3" title="Permalink to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x \quad f \in V\]</div>
+<div class="math" id="equation-5-functions-3">
+<span class="eqno">(8)<a class="headerlink" href="#equation-5-functions-3" title="Permalink to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x \quad f \in V\]</div>
 <p>where <span class="math">\(\mathrm{d}x\)</span> should be understood as being the volume measure
 with the correct dimension for the domain and <span class="math">\(V\)</span> is some finite
 element space over <span class="math">\(\Omega\)</span>. We can express this integral as a sum of
 integrals over individual cells:</p>
-<div class="math" id="equation-integral_sum">
-<span class="eqno">(9)<a class="headerlink" href="#equation-integral_sum" title="Permalink to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x = \sum_{c\in\Omega} \int_c f \mathrm{d} x.\]</div>
+<div class="math" id="equation-integral-sum">
+<span class="eqno">(9)<a class="headerlink" href="#equation-integral-sum" title="Permalink to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x = \sum_{c\in\Omega} \int_c f \mathrm{d} x.\]</div>
 <p>So we have in fact reduced the integration problem to the problem of
 integrating <span class="math">\(f\)</span> over each cell. In <a class="reference internal" href="1_quadrature.html"><span class="doc">a previous part</span></a>
 of the module we implemented quadrature rules which enable us to
@@ -212,12 +212,12 @@ integrate over specified reference cells. If we can express the
 integral over some arbitrary cell <span class="math">\(c\)</span> as an integral over a reference
 cell <span class="math">\(c_0\)</span> then we are done. In fact this simply requires us to employ
 the change of variables formula for integration:</p>
-<div class="math" id="equation-5_functions:4">
-<span class="eqno">(10)<a class="headerlink" href="#equation-5_functions:4" title="Permalink to this equation">¶</a></span>\[\int_{c} f(x) \mathrm{d} x = \int_{c_0} f(X) |J|\mathrm{d} X\]</div>
+<div class="math" id="equation-5-functions-4">
+<span class="eqno">(10)<a class="headerlink" href="#equation-5-functions-4" title="Permalink to this equation">¶</a></span>\[\int_{c} f(x) \mathrm{d} x = \int_{c_0} f(X) |J|\mathrm{d} X\]</div>
 <p>where <span class="math">\(|J|\)</span> is the absolute value of the determinant of the Jacobian
 matrix. <span class="math">\(J\)</span> is given by:</p>
-<div class="math" id="equation-jacobian_def">
-<span class="eqno">(11)<a class="headerlink" href="#equation-jacobian_def" title="Permalink to this equation">¶</a></span>\[J_{\alpha\beta} = \frac{\partial x_\alpha}{\partial X_\beta}.\]</div>
+<div class="math" id="equation-jacobian-def">
+<span class="eqno">(11)<a class="headerlink" href="#equation-jacobian-def" title="Permalink to this equation">¶</a></span>\[J_{\alpha\beta} = \frac{\partial x_\alpha}{\partial X_\beta}.\]</div>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p class="last">We will generally adopt the convention of using Greek letters to
@@ -225,7 +225,7 @@ indicate indices in spatial dimensions, while we will use Roman
 letters in the sequence <span class="math">\(i,j,\ldots\)</span> for basis function indices. We
 will continue to use <span class="math">\(q\)</span> for the index over the quadrature points.</p>
 </div>
-<p>Evaluating <a class="reference internal" href="#equation-jacobian_def">(11)</a> depends on having an expression for <span class="math">\(x\)</span> in
+<p>Evaluating <a class="reference internal" href="#equation-jacobian-def">(11)</a> depends on having an expression for <span class="math">\(x\)</span> in
 terms of <span class="math">\(X\)</span>. Fortunately, <a class="reference internal" href="#equation-change">(5)</a> is exactly this expression,
 and applying the usual rule for differentiating functions in finite
 element spaces produces:</p>
@@ -252,8 +252,8 @@ scope of this course.</p>
 <h3>5.3.1. Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Permalink to this headline">¶</a></h3>
 <p>Let <span class="math">\(\{\Phi_i(X)\}\)</span> be a <strong>local</strong> basis for <span class="math">\(V\)</span> on the reference element
 <span class="math">\(c_0\)</span>. Then our integral becomes:</p>
-<div class="math" id="equation-5_functions:5">
-<span class="eqno">(13)<a class="headerlink" href="#equation-5_functions:5" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \int_{c_0} \sum_i F(M(c,i))\,\Phi_i(X)\, |J|\,\mathrm{d} X\]</div>
+<div class="math" id="equation-5-functions-5">
+<span class="eqno">(13)<a class="headerlink" href="#equation-5-functions-5" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \int_{c_0} \sum_i F(M(c,i))\,\Phi_i(X)\, |J|\,\mathrm{d} X\]</div>
 <p>where <span class="math">\(F\)</span> is the vector of global coefficient values of <span class="math">\(f\)</span>, and <span class="math">\(M\)</span> is <a class="reference internal" href="4_function_spaces.html#cell-node"><span class="std std-ref">the cell node map</span></a>.</p>
 </div>
 <div class="section" id="numerical-quadrature">
@@ -279,7 +279,7 @@ efficient by precalculating this term in the <code class="xref py py-meth docuti
 method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a>.</p>
 </div>
 <div class="theoremenv exercise">
-<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">14</span></div><div class="theoremenv_body exercise_body">Use <a class="reference internal" href="#equation-integral_sum">(9)</a> and <a class="reference internal" href="#equation-integration">(14)</a> to implement
+<div class="theoremenv_caption exercise_caption">Exercise<span class="theoremenv_counter exercise_counter">14</span></div><div class="theoremenv_body exercise_body">Use <a class="reference internal" href="#equation-integral-sum">(9)</a> and <a class="reference internal" href="#equation-integration">(14)</a> to implement
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal"><span class="pre">integrate()</span></code></a>.
 <code class="docutils literal"><span class="pre">test/test_10_integrate_function.py</span></code> may be used to test your
 implementation.</div></div><div class="admonition hint">
@@ -316,8 +316,8 @@ template for your work.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+        &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

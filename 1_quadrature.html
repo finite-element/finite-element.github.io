@@ -118,8 +118,8 @@ the interval, then we arrive at the trapezoidal (or trapezium) rule:</p>
 <div class="math" id="equation-trapezoidal">
 <span class="eqno">(3)<a class="headerlink" href="#equation-trapezoidal" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
 <p>while if we employ a quadratic function then we arrive at Simpson’s rule:</p>
-<div class="math" id="equation-1_quadrature:0">
-<span class="eqno">(4)<a class="headerlink" href="#equation-1_quadrature:0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
+<div class="math" id="equation-1-quadrature-0">
+<span class="eqno">(4)<a class="headerlink" href="#equation-1-quadrature-0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
 </div>
 <div class="section" id="reference-elements">
 <h2>1.3. Reference elements<a class="headerlink" href="#reference-elements" title="Permalink to this headline">¶</a></h2>
@@ -158,15 +158,15 @@ require for this course are the
 <p>Having adopted a convention for the reference element, we can simply
 express quadrature rules as lists of quadrature points with
 corresponding quadrature weights. For example Simpson’s rule becomes:</p>
-<div class="math" id="equation-1_quadrature:1">
-<span class="eqno">(5)<a class="headerlink" href="#equation-1_quadrature:1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
+<div class="math" id="equation-1-quadrature-1">
+<span class="eqno">(5)<a class="headerlink" href="#equation-1-quadrature-1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
 <p>We choose to write the quadrature points as 1-tuples for consistency
 with the <span class="math">\(n\)</span>-dimensional case, in which the points will be
 <span class="math">\(n\)</span>-tuples.</p>
 <p>The lowest order quadrature rule on the reference triangle is a single point
 quadrature:</p>
-<div class="math" id="equation-1_quadrature:2">
-<span class="eqno">(6)<a class="headerlink" href="#equation-1_quadrature:2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{2} \right]\\X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\end{aligned}\end{align} \]</div>
+<div class="math" id="equation-1-quadrature-2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-1-quadrature-2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{2} \right]\\X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\end{aligned}\end{align} \]</div>
 <p>This rule has a degree of precision of 1.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
@@ -186,8 +186,8 @@ which we are able to adopt. The Legendre-Gauß quadrature rules are
 usually defined for the interval <span class="math">\([-1, 1]\)</span> so we need to change
 coordinates in order to arrive at a quadrature rule for our reference
 interval:</p>
-<div class="math" id="equation-1_quadrature:3">
-<span class="eqno">(7)<a class="headerlink" href="#equation-1_quadrature:3" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_q = \frac{X'_q + 1}{2}\\w_q = \frac{w'_q}{2}\end{aligned}\end{align} \]</div>
+<div class="math" id="equation-1-quadrature-3">
+<span class="eqno">(7)<a class="headerlink" href="#equation-1-quadrature-3" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_q = \frac{X'_q + 1}{2}\\w_q = \frac{w'_q}{2}\end{aligned}\end{align} \]</div>
 <p>where <span class="math">\((\{X'_q\}, \{w'_q\})\)</span> is the quadrature rule on the interval
 <span class="math">\([-1, 1]\)</span> and <span class="math">\((\{X_q\}, \{w_q\})\)</span> is the rule on the unit interval.</p>
 <p>Legendre-Gauß quadrature on the interval is optimal in the sense that it uses the
@@ -207,8 +207,8 @@ that of the one-dimensional rule.</p>
 <p>However, we need a quadrature rule for the unit triangle. We can
 achieve this by treating the triangle as a square with a zero length
 edge. The Duffy transform maps the unit square to the unit triangle:</p>
-<div class="math" id="equation-1_quadrature:4">
-<span class="eqno">(9)<a class="headerlink" href="#equation-1_quadrature:4" title="Permalink to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
+<div class="math" id="equation-1-quadrature-4">
+<span class="eqno">(9)<a class="headerlink" href="#equation-1-quadrature-4" title="Permalink to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
   \left(x_\textrm{sq},\ y_\textrm{sq}(1 - x_\textrm{sq})\right)\]</div>
 <div class="figure" id="id1">
 <span id="figduffy"></span><a class="reference internal image-reference" href="_images/duffy.svg"><img alt="_images/duffy.svg" src="_images/duffy.svg" width="60%" /></a>
@@ -269,8 +269,8 @@ using <a class="reference external" href="https://docs.scipy.org/doc/numpy/refer
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+        &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

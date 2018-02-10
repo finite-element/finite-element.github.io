@@ -68,8 +68,8 @@ some finite element space <span class="math">\(V\)</span> such that:</p>
 <span class="eqno">(1)<a class="headerlink" href="#equation-poisson" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla^2 u = f\\u = 0  \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
 <p>In order to implement the Dirichlet conditions, we need to decompose
 <span class="math">\(V\)</span> into two parts:</p>
-<div class="math" id="equation-7_boundary_conditions:0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-7_boundary_conditions:0" title="Permalink to this equation">¶</a></span>\[V = V_0 \oplus V_\Gamma\]</div>
+<div class="math" id="equation-7-boundary-conditions-0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-7-boundary-conditions-0" title="Permalink to this equation">¶</a></span>\[V = V_0 \oplus V_\Gamma\]</div>
 <p>where <span class="math">\(V_\Gamma\)</span> is the space spanned by those functions in the basis
 of <span class="math">\(V\)</span> which are non-zero on <span class="math">\(\Gamma\)</span>, and <span class="math">\(V_0\)</span> is the space spanned
 by the remaining basis functions (i.e.  those basis functions which
@@ -79,8 +79,8 @@ corresponding to the nodes on <span class="math">\(\Gamma\)</span> while the bas
 composed of all the other functions.</p>
 <p>We now write the weak form of <a class="reference internal" href="#equation-poisson">(1)</a>, find <span class="math">\(u=u_0 + u_\Gamma\)</span>
 with <span class="math">\(u_0 \in V_0\)</span> and <span class="math">\(u_\Gamma \in V_\Gamma\)</span> such that:</p>
-<div class="math" id="equation-7_boundary_conditions:1">
-<span class="eqno">(3)<a class="headerlink" href="#equation-7_boundary_conditions:1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla (u_0+u_\Gamma) \, \mathrm{d} x
+<div class="math" id="equation-7-boundary-conditions-1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-7-boundary-conditions-1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla (u_0+u_\Gamma) \, \mathrm{d} x
 - \underbrace{\int_\Gamma v_0 \nabla (u_0+u_\Gamma) \cdot
 \mathbf{n}\, \mathrm{d} s}_{=0} = \int_\Omega v_0\, f\, \mathrm{d} x
 \qquad \forall v_0 \in V_0\\u_\Gamma = 0 \qquad \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
@@ -165,8 +165,8 @@ more detail in the next section.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+        &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

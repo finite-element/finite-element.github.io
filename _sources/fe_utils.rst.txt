@@ -1,6 +1,13 @@
 fe\_utils package
 =================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    fe_utils.solvers
+
 Submodules
 ----------
 

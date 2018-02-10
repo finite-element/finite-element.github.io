@@ -188,8 +188,8 @@ entity. The formula for the first global node associated with entity
 associates with each entity of dimension <span class="math">\(d\)</span>, and <span class="math">\(E_d\)</span> is the number
 of dimension <span class="math">\(d\)</span> entities in the mesh. The full list of nodes
 associated with entity <span class="math">\((d, i)\)</span> is therefore:</p>
-<div class="math" id="equation-4_function_spaces:0">
-<span class="eqno">(1)<a class="headerlink" href="#equation-4_function_spaces:0" title="Permalink to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
+<div class="math" id="equation-4-function-spaces-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-4-function-spaces-0" title="Permalink to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
 </div>
 <div class="section" id="the-cell-node-map">
 <span id="cell-node"></span><h2>4.4. The cell-node map<a class="headerlink" href="#the-cell-node-map" title="Permalink to this headline">¶</a></h2>
@@ -208,16 +208,16 @@ local node numbers. The entries in this map will have the following values:</p>
 <div class="math" id="equation-eqcellnode">
 <span class="eqno">(2)<a class="headerlink" href="#equation-eqcellnode" title="Permalink to this equation">¶</a></span>\[M[c, e(\delta, \epsilon)] = [G(\delta, i), \ldots, G(\delta,i) + N_\delta - 1] \qquad\forall 0\leq\delta\leq\dim(c), \forall 0\leq\epsilon &lt; \hat{E}_\delta\]</div>
 <p>where:</p>
-<div class="math" id="equation-4_function_spaces:1">
-<span class="eqno">(3)<a class="headerlink" href="#equation-4_function_spaces:1" title="Permalink to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
+<div class="math" id="equation-4-function-spaces-1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-4-function-spaces-1" title="Permalink to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
 <p><span class="math">\(e(\delta, \epsilon)\)</span> is the local entity-node list for this finite
 element for the <span class="math">\((\delta, \epsilon)\)</span> local entity,
 <span class="math">\(\operatorname{Adj}\)</span> has the meaning given under <a class="reference internal" href="3_meshes.html#secadjacency"><span class="std std-ref">Adjacency</span></a>,
 <span class="math">\(\hat{E}_\delta\)</span> is the number of dimension <span class="math">\(\delta\)</span> entities in each
 cell, and <span class="math">\(G\)</span> and <span class="math">\(N\)</span> have the meanings given above. This algorithm
 requires a trivial extension to adjacency:</p>
-<div class="math" id="equation-4_function_spaces:2">
-<span class="eqno">(4)<a class="headerlink" href="#equation-4_function_spaces:2" title="Permalink to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
+<div class="math" id="equation-4-function-spaces-2">
+<span class="eqno">(4)<a class="headerlink" href="#equation-4-function-spaces-2" title="Permalink to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
 <p class="last">In <a class="reference internal" href="#equation-eqcellnode">(2)</a>, notice that for each value of <span class="math">\(\delta\)</span> and
@@ -288,8 +288,8 @@ layout of the resulting data.</td></tr>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+        &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>
