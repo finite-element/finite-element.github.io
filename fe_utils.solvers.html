@@ -58,6 +58,25 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="module-fe_utils.solvers.burgers">
+<span id="fe-utils-solvers-burgers-module"></span><h2>fe_utils.solvers.burgers module<a class="headerlink" href="#module-fe_utils.solvers.burgers" title="Permalink to this headline">¶</a></h2>
+<p>Solve a model Burgers problem using the finite element method.
+If run as a script, the result is plotted. This file can also be
+imported as a module and convergence tests run on the solver.</p>
+<dl class="function">
+<dt id="fe_utils.solvers.burgers.solve_burgers">
+<code class="descclassname">fe_utils.solvers.burgers.</code><code class="descname">solve_burgers</code><span class="sig-paren">(</span><em>resolution</em>, <em>analytic=False</em>, <em>plot_error=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/burgers.html#solve_burgers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.solvers.burgers.solve_burgers" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function should solve Burgers’ equation on a
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.UnitIntervalMesh" title="fe_utils.mesh.UnitIntervalMesh"><code class="xref py py-class docutils literal"><span class="pre">UnitIntervalMesh</span></code></a> with the given resolution. It
+should return both the solution <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> and
+the <span class="math">\(L^2\)</span> error in the solution.</p>
+<p>If <code class="docutils literal"><span class="pre">analytic</span></code> is <code class="docutils literal"><span class="pre">True</span></code> then it should not solve the equation
+but instead return the analytic solution. If <code class="docutils literal"><span class="pre">plot_error</span></code> is
+true then the difference between the analytic solution and the
+numerical solution should be returned in place of the solution.</p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-fe_utils.solvers.helmholtz">
 <span id="fe-utils-solvers-helmholtz-module"></span><h2>fe_utils.solvers.helmholtz module<a class="headerlink" href="#module-fe_utils.solvers.helmholtz" title="Permalink to this headline">¶</a></h2>
 <p>Solve a model helmholtz problem using the finite element method.

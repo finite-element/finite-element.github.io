@@ -1,0 +1,110 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>fe_utils.solvers.burgers &#8212; Finite element course 0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../../../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="../../../_static/featured.css">
+
+
+<link rel="shortcut icon" href="../../../_static/icon.ico" />
+
+
+  </head>
+  <body>
+<div class="wrapper">
+  <a href="../../../index.html"><img src="../../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fe_utils.solvers.burgers</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Solve a model Burgers problem using the finite element method.</span>
+<span class="sd">If run as a script, the result is plotted. This file can also be</span>
+<span class="sd">imported as a module and convergence tests run on the solver.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">ArgumentParser</span>
+
+
+<div class="viewcode-block" id="solve_burgers"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.burgers.solve_burgers">[docs]</a><span class="k">def</span> <span class="nf">solve_burgers</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function should solve Burgers&#39; equation on a</span>
+<span class="sd">    :class:`~fe_utils.mesh.UnitIntervalMesh` with the given resolution. It</span>
+<span class="sd">    should return both the solution :class:`~fe_utils.function_spaces.Function` and</span>
+<span class="sd">    the :math:`L^2` error in the solution.</span>
+
+<span class="sd">    If ``analytic`` is ``True`` then it should not solve the equation</span>
+<span class="sd">    but instead return the analytic solution. If ``plot_error`` is</span>
+<span class="sd">    true then the difference between the analytic solution and the</span>
+<span class="sd">    numerical solution should be returned in place of the solution.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+    <span class="c1"># return u, error</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Solve a Burgers problem on the unit interval.&quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--analytic&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the analytic solution instead of solving the finite element problem.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--error&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the error instead of the solution.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;resolution&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The number of cells in each direction on the mesh.&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">resolution</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">resolution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">analytic</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">analytic</span>
+    <span class="n">plot_error</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">error</span>
+
+    <span class="n">u</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">solve_burgers</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="p">,</span> <span class="n">plot_error</span><span class="p">)</span>
+
+    <span class="n">u</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

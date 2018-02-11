@@ -4,6 +4,14 @@ fe\_utils\.solvers package
 Submodules
 ----------
 
+fe\_utils\.solvers\.burgers module
+----------------------------------
+
+.. automodule:: fe_utils.solvers.burgers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 fe\_utils\.solvers\.helmholtz module
 ------------------------------------
 
