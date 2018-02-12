@@ -318,8 +318,8 @@ dimension.</p>
 the following problem using degree 1 Lagrange elements over the
 unit interval domain:</p>
 <div class="math" id="equation-mastery">
-<span class="eqno">(15)<a class="headerlink" href="#equation-mastery" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}  \frac{1}{2}\frac{\partial}{\partial x}\left(u^2\right) - \nabla\cdot\nabla u = g\\  u = 1 \quad \textrm{at } x=0\\  \frac{\partial u}{\partial x} = 0 \left( = \nabla u \cdot
-  \mathbf{n}\right) \quad \textrm{at } x=1.\end{aligned}\end{align} \]</div>
+<span class="eqno">(15)<a class="headerlink" href="#equation-mastery" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}  \frac{1}{2}\frac{\partial}{\partial x}\left(u^2\right) -
+  \frac{\partial^2 u}{\partial x^2} = g\\  u = 1 \quad \textrm{at } x=0\\  \frac{\partial u}{\partial x} = 0  \quad \textrm{at } x=1.\end{aligned}\end{align} \]</div>
 <p>Select the solution:</p>
 <div class="math">
 \[u = (1 - x)^2\]</div>
@@ -356,7 +356,7 @@ be integrated by parts.</p>
 <p class="first admonition-title">Hint</p>
 <p class="last">You can either implement your own Newton solver, or install the
 <code class="xref py py-mod docutils literal"><span class="pre">scipy</span></code> package and work out how to use the
-<a class="reference external" href="http://scipy.github.io/devdocs/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v1.1.0.dev0+460571f)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
+<a class="reference external" href="http://scipy.github.io/devdocs/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v1.1.0.dev0+69cc87b)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
 case, a hand-coded Newton solver is probably the simplest
 approach. However, for problems which are larger and more complex,
 it will be advantageous to employ a technique more advanced than
