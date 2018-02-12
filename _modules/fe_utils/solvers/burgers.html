@@ -61,14 +61,14 @@
 <span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">ArgumentParser</span>
 
 
-<div class="viewcode-block" id="solve_burgers"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.burgers.solve_burgers">[docs]</a><span class="k">def</span> <span class="nf">solve_burgers</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="solve_burgers"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.burgers.solve_burgers">[docs]</a><span class="k">def</span> <span class="nf">solve_burgers</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function should solve Burgers&#39; equation on a</span>
 <span class="sd">    :class:`~fe_utils.mesh.UnitIntervalMesh` with the given resolution. It</span>
 <span class="sd">    should return both the solution :class:`~fe_utils.function_spaces.Function` and</span>
 <span class="sd">    the :math:`L^2` error in the solution.</span>
 
 <span class="sd">    If ``analytic`` is ``True`` then it should not solve the equation</span>
-<span class="sd">    but instead return the analytic solution. If ``plot_error`` is</span>
+<span class="sd">    but instead return the analytic solution. If ``return_error`` is</span>
 <span class="sd">    true then the difference between the analytic solution and the</span>
 <span class="sd">    numerical solution should be returned in place of the solution.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
