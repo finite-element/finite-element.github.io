@@ -4,24 +4,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Computational tools &#8212; Finite element course 0.1 documentation</title>
+    <title>Computational tools &#8212; Finite element course 2018.0 documentation</title>
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/proof.js"></script>
+    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The implementation exercise" href="implementation.html" />
@@ -36,8 +30,7 @@
 <link rel="shortcut icon" href="_static/icon.ico" />
 
 
-  </head>
-  <body>
+  </head><body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -60,57 +53,22 @@
 <div class="section" id="access-to-computers">
 <h2>Access to computers<a class="headerlink" href="#access-to-computers" title="Permalink to this headline">¶</a></h2>
 <p>You’ll need access to a suitable computer for the implementation
-work. The machines in Huxley 410 have suitable software installed, or you can use your own laptop running Windows, Linux, or macOS.</p>
-<div class="section" id="using-the-windows-machines-in-huxley-410">
-<h3>Using the Windows machines in Huxley 410<a class="headerlink" href="#using-the-windows-machines-in-huxley-410" title="Permalink to this headline">¶</a></h3>
-<p>The Python installations on the department’s Windows machines are
-limited in functionality and don’t support everything we need. We’re
-therefore going to use the Linux Virtual Machines which are installed
-on the lab machines.</p>
-<ol class="arabic">
-<li><p class="first">Double click the “OEL7” icon on the Windows desktop.</p>
-</li>
-<li><p class="first">When the login window appears, log in using your Imperial College
-username and password. You probably also want to select full screen
-mode from the <cite>view</cite> menu.</p>
-</li>
-<li><p class="first">Open <cite>firefox</cite> from the <cite>Applications</cite> menu and navigate to this
-page so that you can copy and paste commands straight into the
-terminal.</p>
-</li>
-<li><p class="first">Open <cite>terminal</cite> from the <cite>Applications</cite> menu and run the following command:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">python_venvs</span><span class="o">/</span><span class="n">setup</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">We also need to set one configuration variable to enable plotting from Python:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;backend: Qt5Agg&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">config</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">matplotlibrc</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p>There should now be a directory called <cite>pythonhome</cite> in your home
-directory (type <cite>ls</cite> to check). <cite>pythonhome</cite> is a network file share
-which persists between logins, you need to do all your work in this
-directory, because your home directory is specific to each machine and
-gets wiped when the machine reboots.</p>
-<p>There is also a file called <cite>pythonhome/imp-config</cite>. This file
-contains a list of configuration directories which will be stored on
-the network share. If you need any additional files to persist between
-logins, you can add them here.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If you save work anywhere other than in <cite>pythonhome</cite>, it is likely
-that that work will be irevocably lost!</p>
-</div>
+work. You can either use the machines in the maths department labs, or you can use your own laptop running Windows, Linux, or macOS.
+The core requirements are Python 3, git, and a Python-aware text editor.</p>
+<div class="section" id="using-the-windows-machines-in-the-computer-labs">
+<h3>Using the Windows machines in the computer labs<a class="headerlink" href="#using-the-windows-machines-in-the-computer-labs" title="Permalink to this headline">¶</a></h3>
+<p>Imperial’s lab machines have the software you need installed, in some
+cases via the <cite>Software Hub</cite>. To get started, double click the
+<cite>Software Hub</cite> icon on the desktop or <a class="reference external" href="https://softwarehub.imperial.ac.uk/">click here</a>. From there you can run <cite>git</cite>,
+which will give you a terminal to run git and Python commands, and
+<cite>atom</cite>, which will provide you with an editor.</p>
 </div>
 <div class="section" id="using-your-own-windows-machine">
 <h3>Using your own Windows machine<a class="headerlink" href="#using-your-own-windows-machine" title="Permalink to this headline">¶</a></h3>
 <p>In order to use your own Windows machine, you’ll simply need Python 3
-(with the right packages) and git. One option is to install Enthought
-Canopy, but other Windows Python distributions should also work.</p>
+(with the right packages) and git. One option is to install Anaconda, but other Windows Python distributions should also work.</p>
 <ol class="arabic simple">
-<li>Download and install <cite>Enthought Canopy Express</cite> from <a class="reference external" href="https://store.enthought.com/#canopy-individual">here</a>.</li>
+<li>Download and install <cite>Anaconda</cite> from <a class="reference external" href="https://www.anaconda.com">here</a>.</li>
 <li>Download and install <cite>git</cite> from <a class="reference external" href="https://git-scm.com/download/win">here</a>.</li>
 </ol>
 </div>
@@ -118,35 +76,31 @@ Canopy, but other Windows Python distributions should also work.</p>
 <h3>Using your own Linux machine<a class="headerlink" href="#using-your-own-linux-machine" title="Permalink to this headline">¶</a></h3>
 <p>If you plan to use your own machine for the module, you will need a
 basic  Python toolchain. On Ubuntu and its relatives, this can be achieved with:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">git</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">git</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="using-your-own-mac">
 <h3>Using your own Mac<a class="headerlink" href="#using-your-own-mac" title="Permalink to this headline">¶</a></h3>
-<p>This is an experimental set of instructions for obtaining the software
-you need on Mac. Please say if you encounter any trouble.</p>
 <p>We recommend using <a class="reference external" href="http://brew.sh">Homebrew</a> as a package manager
-for the required packages on Mac OS systems.  Obtaining a build
-environment for PyOP2 consists of the following:</p>
+for the required packages on Mac OS systems, however other ways of getting Python 3 may well work.</p>
 <ol class="arabic">
-<li><p class="first">Install Xcode.  For OS X 10.9 (Mavericks)  and later, this is possible through
-the App Store.  For earlier versions, try
-<a class="reference external" href="https://developer.apple.com/downloads">https://developer.apple.com/downloads</a> (note that on OS X 10.7
-(Lion) you will need to obtain Xcode 4.6 rather than Xcode 5)</p>
-</li>
-<li><p class="first">If you did not install Xcode 5, you will need to additionally
-install the Xcode command line tools through the downloads section
-of Xcode’s preferences</p>
-</li>
-<li><p class="first">Install homebrew, following the instructions at <a class="reference external" href="http://brew.sh">http://brew.sh</a></p>
+<li><p class="first">Install homebrew, following the instructions at <a class="reference external" href="http://brew.sh">http://brew.sh</a>.</p>
 </li>
 <li><p class="first">Install an up-to-date Python via homebrew:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
 </pre></div>
 </div>
 </li>
 </ol>
+</div>
+<div class="section" id="editing-code">
+<h3>Editing code<a class="headerlink" href="#editing-code" title="Permalink to this headline">¶</a></h3>
+<p>In order to write the code required for the implementation exercise,
+you’ll need to use a Python-aware text editor. There are many such
+editors available and you can use any you like. One good option is
+called <cite>atom</cite> which is available on the <a class="reference external" href="https://softwarehub.imperial.ac.uk/">software hub</a> At Imperial or can be
+downloaded <a class="reference external" href="http://atom.io">here</a>.</p>
 </div>
 </div>
 <div class="section" id="the-command-line">
@@ -187,14 +141,12 @@ files, and to update those files if and when they change. You’ll also
 use the same revision control system to record the edits you make over
 time and to submit your work for feedback and, eventually, marking.</p>
 <p>We will be using the revision control system <a class="reference external" href="http://git-scm.com/">git</a>, which is the current state of the art and is
-widely adopted. We’ll be combining git with the online hosting service</p>
-<blockquote>
-<div><a class="reference external" href="http://github.org">GitHub</a>.</div></blockquote>
+widely adopted. We’ll be combining git with the online hosting service <a class="reference external" href="http://github.org">GitHub</a>.</p>
 <div class="section" id="getting-started-with-git-and-github">
 <h3>Getting started with git and GitHub<a class="headerlink" href="#getting-started-with-git-and-github" title="Permalink to this headline">¶</a></h3>
 <p>The very first thing you’ll need is a GitHub account. Navigate to <a class="reference external" href="https://github.com/">GitHub</a> and sign up.
 .. note:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>Make sure you use your Imperial College email address on
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Make sure you use your Imperial College email address on
 GitHub. This enables you to request unlimited free private GitHub
 repositories and other goodies by `applying here
 &lt;https://education.github.com/pack&gt;`_. You don&#39;t strictly need this
@@ -204,17 +156,17 @@ might want anyway.
 </div>
 <p>Next you need to do just a little Git setup. At the <cite>Git Bash</cite> command
 line, type the following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Jane Bloggs&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Jane Bloggs&quot;</span>
 </pre></div>
 </div>
 <p>Obviously you put in your own name rather than “Jane Bloggs”. Similarly, you need to set your email:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;Jane.Bloggs12@imperial.ac.uk&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;Jane.Bloggs12@imperial.ac.uk&quot;</span>
 </pre></div>
 </div>
 <p>Once again, you obviously use your own email address. Now there is a
 small setting which makes the output of git colourful and therefore a
 lot easier to read:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">color</span><span class="o">.</span><span class="n">ui</span> <span class="s2">&quot;auto&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">color</span><span class="o">.</span><span class="n">ui</span> <span class="s2">&quot;auto&quot;</span>
 </pre></div>
 </div>
 <div class="admonition hint">
@@ -248,8 +200,8 @@ the class by <a class="reference external" href="https://github.com/finite-eleme
 some tips which will help get your problem fixed:</p>
 <dl class="docutils">
 <dt>Be precise</dt>
-<dd>“It didn’t work” is useless. “I typed <code class="docutils literal"><span class="pre">import</span> <span class="pre">fe_utils''</span> <span class="pre">and</span>
-<span class="pre">recieved</span> <span class="pre">the</span> <span class="pre">following</span> <span class="pre">error.</span></code> is much better.</dd>
+<dd>“It didn’t work” is useless. “I typed <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">fe_utils</span></code> and
+recieved the following error.” is much better.</dd>
 <dt>Provide a minimal failing example</dt>
 <dd>Post the smallest piece of code which exhibits the problem. This
 makes finding the issue much easier.</dd>
@@ -268,7 +220,7 @@ into a gist and post the link in the issue.</dd>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>

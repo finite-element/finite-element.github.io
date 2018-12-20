@@ -11,48 +11,48 @@ Subpackages
 Submodules
 ----------
 
-fe\_utils\.finite\_elements module
-----------------------------------
+fe\_utils.finite\_elements module
+---------------------------------
 
 .. automodule:: fe_utils.finite_elements
     :members:
     :undoc-members:
     :show-inheritance:
 
-fe\_utils\.function\_spaces module
-----------------------------------
+fe\_utils.function\_spaces module
+---------------------------------
 
 .. automodule:: fe_utils.function_spaces
     :members:
     :undoc-members:
     :show-inheritance:
 
-fe\_utils\.mesh module
-----------------------
+fe\_utils.mesh module
+---------------------
 
 .. automodule:: fe_utils.mesh
     :members:
     :undoc-members:
     :show-inheritance:
 
-fe\_utils\.quadrature module
-----------------------------
+fe\_utils.quadrature module
+---------------------------
 
 .. automodule:: fe_utils.quadrature
     :members:
     :undoc-members:
     :show-inheritance:
 
-fe\_utils\.reference\_elements module
--------------------------------------
+fe\_utils.reference\_elements module
+------------------------------------
 
 .. automodule:: fe_utils.reference_elements
     :members:
     :undoc-members:
     :show-inheritance:
 
-fe\_utils\.utils module
------------------------
+fe\_utils.utils module
+----------------------
 
 .. automodule:: fe_utils.utils
     :members:

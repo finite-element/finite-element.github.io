@@ -64,7 +64,7 @@ This means that the weak form is actually:
 .. math::
    :label: weakpoisson
 
-   \int_\Omega \nabla v \cdot \nabla u \, \mathrm{d} x
+   \int_\Omega \nabla v_0 \cdot \nabla u \, \mathrm{d} x
     = \int_\Omega v_0\, f\, \mathrm{d} x
    \qquad \forall v_0 \in V_0
 
@@ -110,7 +110,7 @@ With this definition, :eq:`weakpoisson` has solution:
 
    u = \sin(4 \pi x_0) (x_1 - 1)^2 x_1^2
 
-.. exercise::
+.. proof:exercise::
 
    ``fe_utils/solvers/poisson.py`` contains a partial implementation of
    this problem. You need to implement the :func:`assemble`

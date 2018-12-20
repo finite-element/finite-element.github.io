@@ -4,24 +4,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>fe_utils package &#8212; Finite element course 0.1 documentation</title>
+    <title>fe_utils package &#8212; Finite element course 2018.0 documentation</title>
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/proof.js"></script>
+    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
 <!--[if lte IE 6]>
@@ -34,8 +28,7 @@
 <link rel="shortcut icon" href="_static/icon.ico" />
 
 
-  </head>
-  <body>
+  </head><body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -61,8 +54,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="fe_utils.solvers.html">fe_utils.solvers package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.burgers">fe_utils.solvers.burgers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.helmholtz">fe_utils.solvers.helmholtz module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.mastery">fe_utils.solvers.mastery module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.poisson">fe_utils.solvers.poisson module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers">Module contents</a></li>
 </ul>
@@ -78,14 +71,14 @@
 <dl class="class">
 <dt id="fe_utils.finite_elements.FiniteElement">
 <em class="property">class </em><code class="descclassname">fe_utils.finite_elements.</code><code class="descname">FiniteElement</code><span class="sig-paren">(</span><em>cell</em>, <em>degree</em>, <em>nodes</em>, <em>entity_nodes=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#FiniteElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A finite element defined over cell.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>
 over which the element is defined.</li>
 <li><strong>degree</strong> – the
 polynomial degree of the element. We assume the element
@@ -103,7 +96,7 @@ entity_nodes[d][i] is the list of nodes associated with entity <cite>(d, i)</cit
 <dl class="attribute">
 <dt id="fe_utils.finite_elements.FiniteElement.cell">
 <code class="descname">cell</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement.cell" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
+<dd><p>The <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>
 over which the element is defined.</p>
 </dd></dl>
 
@@ -117,7 +110,7 @@ spans the complete polynomial space.</p>
 <dl class="attribute">
 <dt id="fe_utils.finite_elements.FiniteElement.entity_nodes">
 <code class="descname">entity_nodes</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement.entity_nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>A dictionary of dictionaries such that <code class="docutils literal"><span class="pre">entity_nodes[d][i]</span></code>
+<dd><p>A dictionary of dictionaries such that <code class="docutils literal notranslate"><span class="pre">entity_nodes[d][i]</span></code>
 is the list of nodes associated with entity <cite>(d, i)</cite>.</p>
 </dd></dl>
 
@@ -130,10 +123,10 @@ at each of the nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – A function <code class="docutils literal"><span class="pre">fn(X)</span></code> which takes a coordinate
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – A function <code class="docutils literal notranslate"><span class="pre">fn(X)</span></code> which takes a coordinate
 vector and returns a scalar value.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A vector containing the value of <code class="docutils literal"><span class="pre">fn</span></code> at each node
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A vector containing the value of <code class="docutils literal notranslate"><span class="pre">fn</span></code> at each node
 of this element.</td>
 </tr>
 </tbody>
@@ -157,7 +150,7 @@ the element.</p>
 <dl class="attribute">
 <dt id="fe_utils.finite_elements.FiniteElement.nodes_per_entity">
 <code class="descname">nodes_per_entity</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement.nodes_per_entity" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal"><span class="pre">nodes_per_entity[d]</span></code> is the number of entities
+<dd><p><code class="docutils literal notranslate"><span class="pre">nodes_per_entity[d]</span></code> is the number of entities
 associated with an entity of dimension d.</p>
 </dd></dl>
 
@@ -182,8 +175,8 @@ tabulation of the gradient of the basis.</li>
 at each point. If <cite>grad</cite> is <cite>True</cite>, the gradient vector of
 each basis vector at each point is returned as a rank 3
 array. The shape of the array is (points, nodes) if
-<code class="docutils literal"><span class="pre">grad</span></code> is <code class="docutils literal"><span class="pre">False</span></code> and (points, nodes, dim) if <code class="docutils literal"><span class="pre">grad</span></code>
-is <code class="docutils literal"><span class="pre">True</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">grad</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> and (points, nodes, dim) if <code class="docutils literal notranslate"><span class="pre">grad</span></code>
+is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </td>
 </tr>
 </tbody>
@@ -196,14 +189,14 @@ is <code class="docutils literal"><span class="pre">True</span></code>.</p>
 <dl class="class">
 <dt id="fe_utils.finite_elements.LagrangeElement">
 <em class="property">class </em><code class="descclassname">fe_utils.finite_elements.</code><code class="descname">LagrangeElement</code><span class="sig-paren">(</span><em>cell</em>, <em>degree</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#LagrangeElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.finite_elements.LagrangeElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">fe_utils.finite_elements.FiniteElement</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.finite_elements.FiniteElement</span></code></a></p>
 <p>An equispaced Lagrange finite element.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>
 over which the element is defined.</li>
 <li><strong>degree</strong> – the
 polynomial degree of the element. We assume the element
@@ -225,12 +218,12 @@ spans the complete polynomial space.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a></li>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a></li>
 <li><strong>degree</strong> – the degree of polynomials for which to construct nodes.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a rank 2 <code class="xref py py-class docutils literal"><span class="pre">array</span></code> whose rows are the
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a rank 2 <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code> whose rows are the
 coordinates of the nodes.</p>
 </td>
 </tr>
@@ -249,7 +242,7 @@ specified degree on the cell provided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a></li>
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a></li>
 <li><strong>degree</strong> – the degree of polynomials for which to construct the matrix.</li>
 <li><strong>points</strong> – a list of coordinate tuples corresponding to the points.</li>
 <li><strong>grad</strong> – whether to evaluate the Vandermonde matrix or its gradient.</li>
@@ -270,7 +263,7 @@ specified degree on the cell provided.</p>
 <dl class="class">
 <dt id="fe_utils.function_spaces.Function">
 <em class="property">class </em><code class="descclassname">fe_utils.function_spaces.</code><code class="descname">Function</code><span class="sig-paren">(</span><em>function_space</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.function_spaces.Function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A function in a finite element space. The main role of this object
 is to store the basis function coefficients associated with the nodes
 of the underlying function space.</p>
@@ -279,9 +272,9 @@ of the underlying function space.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>function_space</strong> – The <a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a> in which
-this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> lives.</li>
-<li><strong>name</strong> – An optional label for this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>
+<li><strong>function_space</strong> – The <a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> in which
+this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> lives.</li>
+<li><strong>name</strong> – An optional label for this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>
 which will be used in output and is useful for debugging.</li>
 </ul>
 </td>
@@ -291,13 +284,13 @@ which will be used in output and is useful for debugging.</li>
 <dl class="attribute">
 <dt id="fe_utils.function_spaces.Function.function_space">
 <code class="descname">function_space</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.function_spaces.Function.function_space" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a> in which this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> lives.</p>
+<dd><p>The <a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> in which this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> lives.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="fe_utils.function_spaces.Function.integrate">
 <code class="descname">integrate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function.integrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.integrate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Integrate this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> over the domain.</p>
+<dd><p>Integrate this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over the domain.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -312,12 +305,12 @@ which will be used in output and is useful for debugging.</li>
 <dt id="fe_utils.function_spaces.Function.interpolate">
 <code class="descname">interpolate</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function.interpolate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolate a given Python function onto this finite element
-<a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>.</p>
+<a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – A function <code class="docutils literal"><span class="pre">fn(X)</span></code> which takes a coordinate
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – A function <code class="docutils literal notranslate"><span class="pre">fn(X)</span></code> which takes a coordinate
 vector and returns a scalar value.</td>
 </tr>
 </tbody>
@@ -327,13 +320,13 @@ vector and returns a scalar value.</td>
 <dl class="attribute">
 <dt id="fe_utils.function_spaces.Function.name">
 <code class="descname">name</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.function_spaces.Function.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>The (optional) name of this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a></p>
+<dd><p>The (optional) name of this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="fe_utils.function_spaces.Function.plot">
 <code class="descname">plot</code><span class="sig-paren">(</span><em>subdivisions=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the value of this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>. This is quite a low
+<dd><p>Plot the value of this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>. This is quite a low
 performance plotting routine so it will perform poorly on
 larger meshes, but it has the advantage of supporting higher
 order function spaces than many widely available libraries.</p>
@@ -343,8 +336,8 @@ order function spaces than many widely available libraries.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subdivisions</strong> – The number of points in each direction to
 use in representing each element. The default is
-<span class="math">\(2d+1\)</span> where <span class="math">\(d\)</span> is the degree of the
-<a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal"><span class="pre">FunctionSpace</span></code></a>. Higher values produce prettier plots
+<span class="math notranslate nohighlight">\(2d+1\)</span> where <span class="math notranslate nohighlight">\(d\)</span> is the degree of the
+<a class="reference internal" href="#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a>. Higher values produce prettier plots
 which render more slowly!</td>
 </tr>
 </tbody>
@@ -354,7 +347,7 @@ which render more slowly!</td>
 <dl class="attribute">
 <dt id="fe_utils.function_spaces.Function.values">
 <code class="descname">values</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.function_spaces.Function.values" title="Permalink to this definition">¶</a></dt>
-<dd><p>The basis function coefficient values for this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a></p>
+<dd><p>The basis function coefficient values for this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -362,15 +355,15 @@ which render more slowly!</td>
 <dl class="class">
 <dt id="fe_utils.function_spaces.FunctionSpace">
 <em class="property">class </em><code class="descclassname">fe_utils.function_spaces.</code><code class="descname">FunctionSpace</code><span class="sig-paren">(</span><em>mesh</em>, <em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#FunctionSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.function_spaces.FunctionSpace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A finite element space.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mesh</strong> – The <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a> on which this space is built.</li>
-<li><strong>element</strong> – The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> of this space.</li>
+<li><strong>mesh</strong> – The <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> on which this space is built.</li>
+<li><strong>element</strong> – The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> of this space.</li>
 </ul>
 </td>
 </tr>
@@ -389,13 +382,13 @@ cell. The implementation of this member is left as an
 <dl class="attribute">
 <dt id="fe_utils.function_spaces.FunctionSpace.element">
 <code class="descname">element</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.function_spaces.FunctionSpace.element" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal"><span class="pre">FiniteElement</span></code></a> of this space.</p>
+<dd><p>The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> of this space.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="fe_utils.function_spaces.FunctionSpace.mesh">
 <code class="descname">mesh</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.function_spaces.FunctionSpace.mesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a> on which this space is built.</p>
+<dd><p>The <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> on which this space is built.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -412,7 +405,7 @@ cell. The implementation of this member is left as an
 <dl class="class">
 <dt id="fe_utils.mesh.Mesh">
 <em class="property">class </em><code class="descclassname">fe_utils.mesh.</code><code class="descname">Mesh</code><span class="sig-paren">(</span><em>vertex_coords</em>, <em>cell_vertices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#Mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.mesh.Mesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A one or two dimensional mesh composed of intervals or triangles
 respectively.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -435,19 +428,19 @@ indices of the vertices of which each cell is made up.</li>
 <dd><p>Return the set of <cite>dim2</cite> entities adjacent to each <cite>dim1</cite>
 entity. For example if <cite>dim1==2</cite> and <cite>dim2==1</cite> then return the list of
 edges (1D entities) adjacent to each triangle (2D entity).</p>
-<p>The return value is a rank 2 <code class="xref py py-class docutils literal"><span class="pre">numpy.array</span></code> such that
-<code class="docutils literal"><span class="pre">adjacency(dim1,</span> <span class="pre">dim2)[e1,</span> <span class="pre">:]</span></code> is the list of dim2 entities
-adjacent to entity <code class="docutils literal"><span class="pre">(dim1,</span> <span class="pre">e1)</span></code>.</p>
+<p>The return value is a rank 2 <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.array</span></code> such that
+<code class="docutils literal notranslate"><span class="pre">adjacency(dim1,</span> <span class="pre">dim2)[e1,</span> <span class="pre">:]</span></code> is the list of dim2 entities
+adjacent to entity <code class="docutils literal notranslate"><span class="pre">(dim1,</span> <span class="pre">e1)</span></code>.</p>
 <p>This operation is only defined where <cite>self.dim &gt;= dim1 &gt; dim2</cite>.</p>
 <p>This method is simply a more systematic way of accessing
-<a class="reference internal" href="#fe_utils.mesh.Mesh.edge_vertices" title="fe_utils.mesh.Mesh.edge_vertices"><code class="xref py py-attr docutils literal"><span class="pre">edge_vertices</span></code></a>, <a class="reference internal" href="#fe_utils.mesh.Mesh.cell_edges" title="fe_utils.mesh.Mesh.cell_edges"><code class="xref py py-attr docutils literal"><span class="pre">cell_edges</span></code></a> and <a class="reference internal" href="#fe_utils.mesh.Mesh.cell_vertices" title="fe_utils.mesh.Mesh.cell_vertices"><code class="xref py py-attr docutils literal"><span class="pre">cell_vertices</span></code></a>.</p>
+<a class="reference internal" href="#fe_utils.mesh.Mesh.edge_vertices" title="fe_utils.mesh.Mesh.edge_vertices"><code class="xref py py-attr docutils literal notranslate"><span class="pre">edge_vertices</span></code></a>, <a class="reference internal" href="#fe_utils.mesh.Mesh.cell_edges" title="fe_utils.mesh.Mesh.cell_edges"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_edges</span></code></a> and <a class="reference internal" href="#fe_utils.mesh.Mesh.cell_vertices" title="fe_utils.mesh.Mesh.cell_vertices"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_vertices</span></code></a>.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="fe_utils.mesh.Mesh.cell">
 <code class="descname">cell</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.mesh.Mesh.cell" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> of which this
-<a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a> is composed.</p>
+<dd><p>The <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> of which this
+<a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> is composed.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -481,7 +474,7 @@ meshes).</p>
 <dt id="fe_utils.mesh.Mesh.entity_counts">
 <code class="descname">entity_counts</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.mesh.Mesh.entity_counts" title="Permalink to this definition">¶</a></dt>
 <dd><p>The number of entities of each dimension in the mesh. So
-<code class="xref py py-attr docutils literal"><span class="pre">entity_counts[0]</span></code> is the number of vertices in the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">entity_counts[0]</span></code> is the number of vertices in the
 mesh.</p>
 </dd></dl>
 
@@ -495,7 +488,7 @@ mesh.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>c</strong> – The number of the cell for which to return the Jacobian.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">The Jacobian for cell <code class="docutils literal"><span class="pre">c</span></code>.</td>
+<tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">The Jacobian for cell <code class="docutils literal notranslate"><span class="pre">c</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -512,7 +505,7 @@ mesh.</p>
 <dl class="class">
 <dt id="fe_utils.mesh.UnitIntervalMesh">
 <em class="property">class </em><code class="descclassname">fe_utils.mesh.</code><code class="descname">UnitIntervalMesh</code><span class="sig-paren">(</span><em>nx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#UnitIntervalMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.mesh.UnitIntervalMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">fe_utils.mesh.Mesh</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.mesh.Mesh</span></code></a></p>
 <p>A mesh of the unit interval.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -527,8 +520,8 @@ mesh.</p>
 <dl class="class">
 <dt id="fe_utils.mesh.UnitSquareMesh">
 <em class="property">class </em><code class="descclassname">fe_utils.mesh.</code><code class="descname">UnitSquareMesh</code><span class="sig-paren">(</span><em>nx</em>, <em>ny</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#UnitSquareMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.mesh.UnitSquareMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">fe_utils.mesh.Mesh</span></code></a></p>
-<p>A triangulated <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal"><span class="pre">Mesh</span></code></a> of the unit square.</p>
+<dd><p>Bases: <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.mesh.Mesh</span></code></a></p>
+<p>A triangulated <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> of the unit square.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -549,7 +542,7 @@ mesh.</p>
 <dl class="class">
 <dt id="fe_utils.quadrature.QuadratureRule">
 <em class="property">class </em><code class="descclassname">fe_utils.quadrature.</code><code class="descname">QuadratureRule</code><span class="sig-paren">(</span><em>cell</em>, <em>degree</em>, <em>points</em>, <em>weights</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/quadrature.html#QuadratureRule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.quadrature.QuadratureRule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A quadrature rule implementing integration of the reference cell
 provided.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -557,7 +550,7 @@ provided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
 rule is defined.</li>
 <li><strong>degree</strong> – the <a class="reference internal" href="1_quadrature.html#degree-of-precision"><span class="std std-ref">degree of precision</span></a>
 of this quadrature rule.</li>
@@ -575,7 +568,7 @@ of this quadrature rule.</li>
 <dl class="attribute">
 <dt id="fe_utils.quadrature.QuadratureRule.cell">
 <code class="descname">cell</code><em class="property"> = None</em><a class="headerlink" href="#fe_utils.quadrature.QuadratureRule.cell" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
+<dd><p>The <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
 rule is defined.</p>
 </dd></dl>
 
@@ -619,13 +612,13 @@ vectors of the quadrature points.</p>
 <dl class="function">
 <dt id="fe_utils.quadrature.gauss_quadrature">
 <code class="descclassname">fe_utils.quadrature.</code><code class="descname">gauss_quadrature</code><span class="sig-paren">(</span><em>cell</em>, <em>degree</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/quadrature.html#gauss_quadrature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.quadrature.gauss_quadrature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a Gauss-Legendre <a class="reference internal" href="#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal"><span class="pre">QuadratureRule</span></code></a>.</p>
+<dd><p>Return a Gauss-Legendre <a class="reference internal" href="#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
+<li><strong>cell</strong> – the <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> over which this quadrature
 rule is defined.</li>
 <li><strong>degree</strong> – the <a class="reference internal" href="1_quadrature.html#degree-of-precision"><span class="std std-ref">degree of precision</span></a>
 of this quadrature rule.</li>
@@ -642,7 +635,7 @@ of this quadrature rule.</li>
 <dl class="class">
 <dt id="fe_utils.reference_elements.ReferenceCell">
 <em class="property">class </em><code class="descclassname">fe_utils.reference_elements.</code><code class="descname">ReferenceCell</code><span class="sig-paren">(</span><em>vertices</em>, <em>topology</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/reference_elements.html#ReferenceCell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fe_utils.reference_elements.ReferenceCell" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>An object storing the geometry and topology of the reference cell.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -705,13 +698,13 @@ is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.
 <dl class="data">
 <dt id="fe_utils.reference_elements.ReferenceInterval">
 <code class="descclassname">fe_utils.reference_elements.</code><code class="descname">ReferenceInterval</code><em class="property"> = ReferenceInterval</em><a class="headerlink" href="#fe_utils.reference_elements.ReferenceInterval" title="Permalink to this definition">¶</a></dt>
-<dd><p>A <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> storing the geometry and topology of the interval [0, 1].</p>
+<dd><p>A <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> storing the geometry and topology of the interval [0, 1].</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="fe_utils.reference_elements.ReferenceTriangle">
 <code class="descclassname">fe_utils.reference_elements.</code><code class="descname">ReferenceTriangle</code><em class="property"> = ReferenceTriangle</em><a class="headerlink" href="#fe_utils.reference_elements.ReferenceTriangle" title="Permalink to this definition">¶</a></dt>
-<dd><p>A <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal"><span class="pre">ReferenceCell</span></code></a> storing the geometry and topology of the triangle
+<dd><p>A <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> storing the geometry and topology of the triangle
 with vertices [[0., 0.], [1., 0.], [0., 1.]].</p>
 </dd></dl>
 
@@ -738,7 +731,7 @@ with vertices [[0., 0.], [1., 0.], [0., 1.]].</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>

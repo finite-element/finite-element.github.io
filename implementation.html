@@ -4,24 +4,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>The implementation exercise &#8212; Finite element course 0.1 documentation</title>
+    <title>The implementation exercise &#8212; Finite element course 2018.0 documentation</title>
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/proof.js"></script>
+    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. Numerical quadrature" href="1_quadrature.html" />
@@ -36,8 +30,7 @@
 <link rel="shortcut icon" href="_static/icon.ico" />
 
 
-  </head>
-  <body>
+  </head><body>
 <div class="wrapper">
   <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
@@ -70,17 +63,13 @@ finite element implementation and receive help on how to do so.</p>
 <div class="section" id="formalities-and-marking-scheme">
 <h2>Formalities and marking scheme<a class="headerlink" href="#formalities-and-marking-scheme" title="Permalink to this headline">¶</a></h2>
 <p>The implementation exercise is due at the end of term. That is, by
-1600 on Friday 24 March. You must submit your work uploading the git
+1600 on Friday 22 March. You must submit your work uploading the git
 commit code on Blackboard. You can convenently find this code on the
 commits page for your repository on github. For the avoidance of
 doubt, the commit you submit must date from before the deadline!</p>
 <p>The marking scheme will be as follows:</p>
 <dl class="docutils">
-<dt>High first/distinction (80-100)</dt>
-<dd>As for bare first, but additionally the extension (mastery)
-component of the implementaton exercise has been completed correctly
-and clearly.</dd>
-<dt>Bare first/distinction (70-80)</dt>
+<dt>First/distinction (70-100)</dt>
 <dd>All parts of the implementation are correct and all tests pass. The
 code style is always very clear and the implementation of every
 exercise is transparent and elegant.</dd>
@@ -103,12 +92,10 @@ attempted or do not work.</dd>
 </div>
 <div class="section" id="extension-mastery-exercise">
 <h2>Extension (mastery) exercise<a class="headerlink" href="#extension-mastery-exercise" title="Permalink to this headline">¶</a></h2>
-<p>Completing the core implementation exercise will result in (at most) a
-mark of 80% for the implementation part of the module. The remaining
-20% will be allocated to an extension exercise which will be issued in
-the middle of the term. This is intended to enable the students who
-are doing best in the module to demonstrate their mastery of the
-material by implementing work which goes beyond the main body of work.</p>
+<p>Fourth year and masters students must also complete the mastery
+exercise, which will be issued half way through the term. This will be
+worth 20% of the implementation exercise marks and will be marked on
+the same scheme as above.</p>
 </div>
 <div class="section" id="obtaining-the-skeleton-code">
 <h2>Obtaining the skeleton code<a class="headerlink" href="#obtaining-the-skeleton-code" title="Permalink to this headline">¶</a></h2>
@@ -116,12 +103,12 @@ material by implementing work which goes beyond the main body of work.</p>
 <div class="section" id="setting-up-your-repository">
 <h3>Setting up your repository<a class="headerlink" href="#setting-up-your-repository" title="Permalink to this headline">¶</a></h3>
 <p>We’re using a tool called <a class="reference external" href="https://classroom.github.com">GitHub classroom</a> to automate the creation of your
-copies of the repository. To obtain your copy click <a class="reference external" href="https://classroom.github.com/a/4GWLuxoA">here</a>.</p>
+copies of the repository. To create your repository, <a class="reference external" href="https://classroom.github.com/a/p7YGdXBw">click here</a>.</p>
 </div>
 <div class="section" id="cloning-a-local-copy">
 <h3>Cloning a local copy<a class="headerlink" href="#cloning-a-local-copy" title="Permalink to this headline">¶</a></h3>
 <p>At the command line on your working machine type:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
 </pre></div>
 </div>
 <p>Substituting your git repository url for &lt;url&gt;. Your git repository
@@ -134,14 +121,14 @@ in which we’ll install the packages we need, including our own
 implementation exercise. This minimises interference between this
 project and anything else which might be using Python on the
 system. We can run a script from the git repository to make the venv:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv</span> <span class="n">venv</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv</span> <span class="n">venv</span>
 </pre></div>
 </div>
 <p>This has to install several packages in the venv, so it might take a
 few minutes to run.</p>
 <p>On Windows, the set of commands is somewhat different. In this case
 you would run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv_win</span> <span class="n">venv</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv_win</span> <span class="n">venv</span>
 </pre></div>
 </div>
 </div>
@@ -149,11 +136,11 @@ you would run:</p>
 <h3>Activating your venv<a class="headerlink" href="#activating-your-venv" title="Permalink to this headline">¶</a></h3>
 <p><strong>Every time</strong> you want to work on the implementation exercise, you need
 to activate the venv. On Linux or Mac do this with:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
 <p>while on Windows the command is:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="n">Scripts</span><span class="o">/</span><span class="n">activate</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="n">Scripts</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
 <p>Obviously if you are typing this in a directory other than the one
@@ -165,13 +152,13 @@ containing the venv, you need to modify the path accordingly.</p>
 condition so we can compare to it later, and collect any updates which
 occur during the term. Instead, we’ll create an implementation branch
 to actually work on:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
 <span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">implementation</span>
 </pre></div>
 </div>
 <p>Your working directory is now a current checkout of your
 implementation branch. You’ll also want to push this branch to GitHub:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">origin</span> <span class="n">implementation</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">origin</span> <span class="n">implementation</span>
 </pre></div>
 </div>
 </div>
@@ -181,14 +168,14 @@ implementation branch. You’ll also want to push this branch to GitHub:</p>
 repository and all issues anyone raises. For this, you should navigate
 to <a class="reference external" href="https://github.com/finite-element/finite-element-course">the main repository</a>. On the
 top right there is an eye icon. Select the drop-down box and switch to
-<code class="docutils literal"><span class="pre">watching</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">watching</span></code>.</p>
 </div>
 <div class="section" id="updating-your-fork">
 <h3>Updating your fork<a class="headerlink" href="#updating-your-fork" title="Permalink to this headline">¶</a></h3>
 <p>When you see that the main repository has been updated, you’ll need to
 update your repository to incorporate those changes. <em>Just this once</em>,
 you need to tell your local git repo about the main repository:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 <p>Now, <em>every time</em> you want to update you do the following:</p>
@@ -197,7 +184,7 @@ you need to tell your local git repo about the main repository:</p>
 them to GitHub.</p>
 </li>
 <li><p class="first">Execute the following commands:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>          <span class="c1"># Switch to the master branch.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>          <span class="c1"># Switch to the master branch.</span>
 <span class="n">git</span> <span class="n">pull</span> <span class="n">upstream</span> <span class="n">master</span>     <span class="c1"># Update from the main repository.</span>
 <span class="n">git</span> <span class="n">push</span>                     <span class="c1"># Push the updated master branch to GitHub.</span>
 <span class="n">git</span> <span class="n">checkout</span> <span class="n">implementation</span>  <span class="c1"># Switch back to the implementation branch.</span>
@@ -207,16 +194,6 @@ them to GitHub.</p>
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="editing-code">
-<h3>Editing code<a class="headerlink" href="#editing-code" title="Permalink to this headline">¶</a></h3>
-<p>In order to write the code required for the implementation exercise,
-you’ll need to use a Python-aware text editor. There are many such
-editors available and you can use any you like. One good option is
-called <cite>atom</cite> and is already installed in Huxley 410. You run it buy typing:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">atom</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="skeleton-code-documentation">
@@ -232,35 +209,35 @@ need is provided already. Your task is to write the crucial
 mathematical operations at key points. The mathematical operations
 required are described on this website, interspersed with exercises
 which require you to implement and test parts of the mathematics.</p>
-<p>The code on which you will build is in the <code class="docutils literal"><span class="pre">fe_utils</span></code> directory of
+<p>The code on which you will build is in the <code class="docutils literal notranslate"><span class="pre">fe_utils</span></code> directory of
 your repository. The code has embedded documentation which is used to
 build the <a class="reference internal" href="fe_utils.html"><span class="doc">fe_utils package</span></a> web documentation.</p>
 <p>As you do the exercises, <strong>commit your code</strong> to your repository. This
 will build up your finite element library. You should commit code
 early and often - small commits are easier to understand and debug
-than large ones. <strong>Never</strong> commit back to the <code class="docutils literal"><span class="pre">master</span></code> branch of your
+than large ones. <strong>Never</strong> commit back to the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of your
 fork, that should always remain a clean copy of the main repository.</p>
 </div>
 <div class="section" id="pull-requests-for-feedback">
 <h2>Pull requests for feedback<a class="headerlink" href="#pull-requests-for-feedback" title="Permalink to this headline">¶</a></h2>
 <p>There will be a formal opportunity to recieve feedback on your code
 progress twice during the term. To take part, you should set up a pull
-request from your <code class="docutils literal"><span class="pre">implementation</span></code> branch to the <code class="docutils literal"><span class="pre">master</span></code> branch
+request from your <code class="docutils literal notranslate"><span class="pre">implementation</span></code> branch to the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch
 of your repository. This will enable the lecturer to write line by
 line comments on your code.</p>
 <div class="section" id="creating-your-pull-request">
 <h3>Creating your pull request<a class="headerlink" href="#creating-your-pull-request" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Click on the <code class="docutils literal"><span class="pre">New</span> <span class="pre">pull</span> <span class="pre">request</span></code> button at the top of your
+<li>Click on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">pull</span> <span class="pre">request</span></code> button at the top of your
 repository page on GitHub.</li>
-<li>Make sure <strong>left</strong> dropdown box (“base”) is set to <code class="docutils literal"><span class="pre">master</span></code>.</li>
-<li>Make sure <strong>right</strong> dropdown box (“compare”) is set to <code class="docutils literal"><span class="pre">implementation</span></code>.</li>
+<li>Make sure <strong>left</strong> dropdown box (“base”) is set to <code class="docutils literal notranslate"><span class="pre">master</span></code>.</li>
+<li>Make sure <strong>right</strong> dropdown box (“compare”) is set to <code class="docutils literal notranslate"><span class="pre">implementation</span></code>.</li>
 <li>Type a suitable title in the title box. For example
-<code class="docutils literal"><span class="pre">Request</span> <span class="pre">for</span> <span class="pre">feedback</span> <span class="pre">30/1/15</span></code>.</li>
+<code class="docutils literal notranslate"><span class="pre">Request</span> <span class="pre">for</span> <span class="pre">feedback</span> <span class="pre">30/1/19</span></code>.</li>
 <li>If you have any comments you would like to pass on to the lecturer
 (for example questions about how you should have done a particular
-exercise) then type these in the <code class="docutils literal"><span class="pre">Description</span></code> box.</li>
-<li>Click <code class="docutils literal"><span class="pre">Create</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</li>
+exercise) then type these in the <code class="docutils literal notranslate"><span class="pre">Description</span></code> box.</li>
+<li>Click <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</li>
 </ol>
 </div>
 </div>
@@ -268,26 +245,22 @@ exercise) then type these in the <code class="docutils literal"><span class="pre
 <h2>Testing your work<a class="headerlink" href="#testing-your-work" title="Permalink to this headline">¶</a></h2>
 <p>As you complete the exercises, there will often be test scripts which
 exercise the code you have just written. These are located in the
-<code class="docutils literal"><span class="pre">test</span></code> directory and employ the <a class="reference external" href="http://pytest.org/">pytest</a>
+<code class="docutils literal notranslate"><span class="pre">test</span></code> directory and employ the <a class="reference external" href="http://pytest.org/">pytest</a>
 testing framework. You run the tests with:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test_script</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test_script</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>on the Bash command line or:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>!py.test test_script.py
-</pre></div>
-</div>
-<p>from within Python, replacing <code class="docutils literal"><span class="pre">test_script.py</span></code> with the appropriate
-test file name. The <code class="docutils literal"><span class="pre">-x</span></code> option to <code class="docutils literal"><span class="pre">py.test</span></code> will cause the test
+<p>from the bash command line, replacing <code class="docutils literal notranslate"><span class="pre">test_script.py</span></code> with the appropriate
+test file name. The <code class="docutils literal notranslate"><span class="pre">-x</span></code> option to <code class="docutils literal notranslate"><span class="pre">py.test</span></code> will cause the test
 to stop at the first failure it finds, which is often the best place
 to start fixing a problem. For those familiar with debuggers, the
-<code class="docutils literal"><span class="pre">--pdb</span></code> option will drop you into the Python debugger at the first
+<code class="docutils literal notranslate"><span class="pre">--pdb</span></code> option will drop you into the Python debugger at the first
 error.</p>
-<p>You can also run all the tests by running <code class="docutils literal"><span class="pre">py.test</span></code> on the tests
+<p>You can also run all the tests by running <code class="docutils literal notranslate"><span class="pre">py.test</span></code> on the tests
 directory. This works particularly well with the -x option, resulting
 in the tests being run in course order and stopping at the first
 failing test:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">x</span> <span class="n">tests</span><span class="o">/</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">x</span> <span class="n">tests</span><span class="o">/</span>
 </pre></div>
 </div>
 </div>
@@ -319,7 +292,7 @@ writing your answer, or suggest Python functions which you might
 find useful.</dd>
 <dt>Don’t forget the 1D case</dt>
 <dd>Your finite element library needs to work in one and two dimensions.</dd>
-<dt>Return a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal"><span class="pre">numpy.array()</span></code></a></dt>
+<dt>Return a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array()</span></code></a></dt>
 <dd>Many of the functions you have to write return arrays. Make sure
 you actually return an array and not a list (it’s usually fine to
 build the answer as a list, but convert it to an array before you
@@ -336,7 +309,7 @@ return it).</dd>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>

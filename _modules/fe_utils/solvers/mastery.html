@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>fe_utils.solvers.burgers &#8212; Finite element course 0.1 documentation</title>
+    <title>fe_utils.solvers.mastery &#8212; Finite element course 2018.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
@@ -46,17 +46,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for fe_utils.solvers.burgers</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Solve a model Burgers problem using the finite element method.</span>
+  <h1>Source code for fe_utils.solvers.mastery</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Solve a nonlinear problem using the finite element method.</span>
 <span class="sd">If run as a script, the result is plotted. This file can also be</span>
 <span class="sd">imported as a module and convergence tests run on the solver.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">ArgumentParser</span>
 
 
-<div class="viewcode-block" id="solve_burgers"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.burgers.solve_burgers">[docs]</a><span class="k">def</span> <span class="nf">solve_burgers</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function should solve Burgers&#39; equation on a</span>
-<span class="sd">    :class:`~fe_utils.mesh.UnitIntervalMesh` with the given resolution. It</span>
+<div class="viewcode-block" id="solve_mastery"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery">[docs]</a><span class="k">def</span> <span class="nf">solve_mastery</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function should solve the mastery problem with the given resolution. It</span>
 <span class="sd">    should return both the solution :class:`~fe_utils.function_spaces.Function` and</span>
 <span class="sd">    the :math:`L^2` error in the solution.</span>
 
@@ -73,7 +72,7 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Solve a Burgers problem on the unit interval.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Solve the mastery problem.&quot;&quot;&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--analytic&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the analytic solution instead of solving the finite element problem.&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--error&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
@@ -85,7 +84,7 @@
     <span class="n">analytic</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">analytic</span>
     <span class="n">plot_error</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">error</span>
 
-    <span class="n">u</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">solve_burgers</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="p">,</span> <span class="n">plot_error</span><span class="p">)</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">solve_mastery</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="p">,</span> <span class="n">plot_error</span><span class="p">)</span>
 
     <span class="n">u</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
