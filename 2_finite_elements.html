@@ -51,10 +51,14 @@
             
   <div class="section" id="constructing-finite-elements">
 <span id="secfinitelement"></span><h1>2. Constructing finite elements<a class="headerlink" href="#constructing-finite-elements" title="Permalink to this headline">¶</a></h1>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of the introduction to this chapter is available <a class="reference external" href="https://www.youtube.com/embed/FIYq9EjXsRo">here</a></p>
+</div>
 <p>At the core of the finite element method is the representation of
 finite-dimensional function spaces over elements. This concept was
 formalised by <a class="reference internal" href="zbibliography.html#ciarlet2002" id="id1">[Cia02]</a>:</p>
-<div class="proof proof-type-definition" id="id5">
+<div class="proof proof-type-definition" id="id12">
 <span id="def-ciarlet"></span>
     <div class="proof-title">
         <span class="proof-type">Definition 2.1</span>
@@ -66,7 +70,7 @@ set of <em>nodes</em>, is a basis for <span class="math notranslate nohighlight"
 basis for <span class="math notranslate nohighlight">\(P\)</span>. It turns out to be most convenient to specify the set
 of nodes for an element, and then derive an appropriate basis for
 <span class="math notranslate nohighlight">\(P\)</span> from that. In particular:</p>
-<div class="proof proof-type-definition" id="id6">
+<div class="proof proof-type-definition" id="id13">
 
     <div class="proof-title">
         <span class="proof-type">Definition 2.2</span>
@@ -76,6 +80,10 @@ Let <span class="math notranslate nohighlight">\(N = \{n_j\}\)</span> be a basis
 basis</em>, <span class="math notranslate nohighlight">\(\{\phi_i\}\)</span> for <span class="math notranslate nohighlight">\(P\)</span> is a basis for <span class="math notranslate nohighlight">\(P\)</span>
 with the property that <span class="math notranslate nohighlight">\(n_j(\phi_i) = \delta_{ij}\)</span>.</div></div><div class="section" id="a-worked-example">
 <h2>2.1. A worked example<a class="headerlink" href="#a-worked-example" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/Zztjq_fQynU">here</a></p>
+</div>
 <p>To illustrate the construction of a nodal basis, let’s consider the
 linear polynomials on a triangle. We first need to define our
 reference cell. The obvious choice is the triangle with vertices
@@ -134,10 +142,14 @@ over the cell or some sub-entity and the evaluation of the gradient
 of the function at some point. For some vector-valued function spaces,
 the nodes may be given by the evaluation of the components of the
 function normal or tangent to the boundary of the cell at some point.</p>
-<p>In this course we will only consider point evaluation nodes. The implementation of several other forms of node are covered in <a class="reference internal" href="zbibliography.html#kirby2004" id="id2">[Kir04]</a>.</p>
+<p>In this course we will only consider point evaluation nodes. The implementation of several other forms of node are covered in <a class="reference internal" href="zbibliography.html#kirby2004" id="id3">[Kir04]</a>.</p>
 </div>
 <div class="section" id="the-lagrange-element-nodes">
 <h2>2.3. The Lagrange element nodes<a class="headerlink" href="#the-lagrange-element-nodes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/_YeZ7k7cAYw">here</a></p>
+</div>
 <p>The number of coefficients of a degree <span class="math notranslate nohighlight">\(p\)</span> polynomial in <span class="math notranslate nohighlight">\(d\)</span>
 dimensions is given by <span class="math notranslate nohighlight">\(\begin{pmatrix}p+d\\ d\end{pmatrix}\)</span>. The
 simplest set of nodes which we can employ is simply to place these
@@ -157,7 +169,7 @@ relatively low order computations.</p>
 and creates unwanted oscillations in the solutions. However for
 this course Lagrange elements will be sufficient.</p>
 </div>
-<div class="proof proof-type-exercise" id="id7">
+<div class="proof proof-type-exercise" id="id14">
 <span id="ex-lagrange-points"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.3</span>
@@ -176,7 +188,11 @@ points on the triangle by running:</p>
 </div></div></div>
 <div class="section" id="solving-for-basis-functions">
 <span id="sec-vandermonde"></span><h2>2.4. Solving for basis functions<a class="headerlink" href="#solving-for-basis-functions" title="Permalink to this headline">¶</a></h2>
-<p>The matrix in <a class="reference internal" href="#equation-phimat">(2.3)</a> is a <em>generalised Vandermonde</em> <a class="footnote-reference" href="#vandermonde" id="id3">[1]</a>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/lPI5Th5w-54">here</a></p>
+</div>
+<p>The matrix in <a class="reference internal" href="#equation-phimat">(2.3)</a> is a <em>generalised Vandermonde</em> <a class="footnote-reference" href="#vandermonde" id="id6">[1]</a>
 matrix . Given a list of points <span class="math notranslate nohighlight">\((x_i,y_i) \in \mathbb{R}^2, 0\leq i&lt; m\)</span>
 the corresponding degree <span class="math notranslate nohighlight">\(n\)</span> generalised Vandermonde matrix is given by:</p>
 <div class="math notranslate nohighlight" id="equation-vandermonde">
@@ -197,20 +213,20 @@ the basis function corresponding to the <span class="math notranslate nohighligh
 <a class="reference internal" href="#equation-vdm-equation">(2.7)</a> to be well-posed, there must be a number of nodes
 equal to the number of coefficients of a degree <span class="math notranslate nohighlight">\(n\)</span> polynomial. If
 this is the case, then it follows immediately that:</p>
-<div class="math notranslate nohighlight" id="equation-2-finite-elements-3">
-<span class="eqno">(2.8)<a class="headerlink" href="#equation-2-finite-elements-3" title="Permalink to this equation">¶</a></span>\[\mathrm{C} = \mathrm{V}^{-1}\]</div>
+<div class="math notranslate nohighlight" id="equation-coef-definition">
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-coef-definition" title="Permalink to this equation">¶</a></span>\[\mathrm{C} = \mathrm{V}^{-1}\]</div>
 <p>The same process applies to the construction of basis functions for
 elements in one or three dimensions, except that the Vandermonde
 matrix must be modified to exclude powers of <span class="math notranslate nohighlight">\(y\)</span> (in one dimension) or
 to include powers of <span class="math notranslate nohighlight">\(z\)</span>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The power series basis for polynomial spaces employed here becomes
+<p class="last">The monomial basis for polynomial spaces employed here becomes
 increasingly ill-conditioned at higher order, so it may be
 advantageous to employ a different basis in the construction of the
-Vandermonde matrix. See <a class="reference internal" href="zbibliography.html#kirby2004" id="id4">[Kir04]</a> for an example.</p>
+Vandermonde matrix. See <a class="reference internal" href="zbibliography.html#kirby2004" id="id7">[Kir04]</a> for an example.</p>
 </div>
-<div class="proof proof-type-exercise" id="id8">
+<div class="proof proof-type-exercise" id="id15">
 <span id="ex-vandermonde"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.4</span>
@@ -230,6 +246,10 @@ the matrix at once.</p>
 </div>
 <div class="section" id="implementing-finite-elements-in-python">
 <h2>2.5. Implementing finite elements in Python<a class="headerlink" href="#implementing-finite-elements-in-python" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/u4WVv6VxZzA">here</a></p>
+</div>
 <p>The <a class="reference internal" href="#def-ciarlet"><span class="std std-ref">Ciarlet triple</span></a> <span class="math notranslate nohighlight">\((K, P, N)\)</span> also provides a
 good abstraction for the implementation of software objects
 corresponding to finite elements. In our case <span class="math notranslate nohighlight">\(K\)</span> will be a
@@ -239,7 +259,7 @@ polynomial spaces so we will specify <span class="math notranslate nohighlight">
 degree of the polynomials in the space. Since we will only deal with
 point evaluation nodes, we can represent <span class="math notranslate nohighlight">\(N\)</span> by a series of points at
 which the evaluation should occur.</p>
-<div class="proof proof-type-exercise" id="id9">
+<div class="proof proof-type-exercise" id="id16">
 <span id="ex-finite-element"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.5</span>
@@ -260,6 +280,10 @@ used to invert the matrix.</p>
 </div>
 <div class="section" id="implementing-the-lagrange-elements">
 <h2>2.6. Implementing the Lagrange Elements<a class="headerlink" href="#implementing-the-lagrange-elements" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/Y4Cn0sO9Rl4">here</a></p>
+</div>
 <p>The <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> class implements
 a general finite element object assuming we have provided the cell,
 polynomial, degree and nodes. The
@@ -267,7 +291,7 @@ polynomial, degree and nodes. The
 <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#inheritance">subclass</a> of
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> which will implement
 the particular case of the equispaced Lagrange elements.</p>
-<div class="proof proof-type-exercise" id="id10">
+<div class="proof proof-type-exercise" id="id17">
 <span id="ex-lagrange-element"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.6</span>
@@ -286,13 +310,27 @@ Lagrange basis functions.</p>
 </div></div></div>
 <div class="section" id="tabulating-basis-functions">
 <h2>2.7. Tabulating basis functions<a class="headerlink" href="#tabulating-basis-functions" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/R7Pln8NJEZQ">here</a></p>
+</div>
 <p>A core operation in the finite element method is integrating
 expressions involving functions in finite element spaces. This is
 usually accomplished using <a class="reference internal" href="1_quadrature.html"><span class="doc">numerical quadrature</span></a>. This means that we need to be able to evaluate the
 basis functions at a set of quadrature points. The operation of
 evaluating a set of basis functions at a set of points is called
 <em>tabulation</em>.</p>
-<div class="proof proof-type-exercise" id="id11">
+<p>Recall that the coefficients of the basis functions are defined with
+respect to the monomial basis in <a class="reference internal" href="#equation-coef-definition">(2.8)</a>. To tabulate
+the basis functions at a particular set of points therefore requires
+that the monomial basis be evaluated at that set of points. In other
+words, the Vandermonde matrix needs to be evaluated at the quadrature
+points. Suppose we have a set of points <span class="math notranslate nohighlight">\(\{X_i\}\)</span> and a set of basis
+functions <span class="math notranslate nohighlight">\(\{\phi_j\}\)</span> with coefficents with respect to the monomial
+basis given by the matrix <span class="math notranslate nohighlight">\(C\)</span>. Then the tabulation matrix is given by:</p>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-3">
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-2-finite-elements-3" title="Permalink to this equation">¶</a></span>\[   T_{ij} = \phi_j(X_i) = \sum_b V(X_i)_b C_{bj} = (V(X_:) \cdot C)_{ij}\]</div>
+<div class="proof proof-type-exercise" id="id18">
 <span id="ex-tabulate"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.7</span>
@@ -309,19 +347,32 @@ nodes of a finite element produces the identity matrix.</p>
 </div></div></div>
 <div class="section" id="gradients-of-basis-functions">
 <h2>2.8. Gradients of basis functions<a class="headerlink" href="#gradients-of-basis-functions" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/oC-0i4XHl4U">here</a></p>
+</div>
 <p>A function <span class="math notranslate nohighlight">\(f\)</span> defined over a single finite element with basis
 <span class="math notranslate nohighlight">\(\{\phi_i\}\)</span> is represented by a weighted sum of that basis:</p>
-<div class="math notranslate nohighlight">
-\[f = \sum_i f_i\phi_i\]</div>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-4">
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-2-finite-elements-4" title="Permalink to this equation">¶</a></span>\[f = \sum_i f_i\phi_i\]</div>
 <p>In order to be able to represent and solve PDEs, we will naturally
 also have terms incorporating derivatives. Since the coefficients
 <span class="math notranslate nohighlight">\(f_i\)</span> are spatially constant, derivative operators pass through to
 apply to the basis functions:</p>
-<div class="math notranslate nohighlight">
-\[\nabla f  = \sum_i f_i\nabla\phi_i\]</div>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-5">
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-2-finite-elements-5" title="Permalink to this equation">¶</a></span>\[\nabla f  = \sum_i f_i\nabla\phi_i\]</div>
 <p>This means that we will need to be able to evaluate the gradient of
-the basis functions at quadrature points.</p>
-<div class="proof proof-type-exercise" id="id12">
+the basis functions at quadrature points. Recall once again that the
+basis functions are evaluated by multiplying the Vandermonde matrix
+evaluated at the relevant points by the matrix of basis function
+coefficients. Hence:</p>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-6">
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-2-finite-elements-6" title="Permalink to this equation">¶</a></span>\[   \nabla\phi(X) = \nabla\left( V(X) \cdot C \right) = \left(\nabla V(X)\right) \cdot C\]</div>
+<p>The last step follows because <span class="math notranslate nohighlight">\(C\)</span> is not a function of <span class="math notranslate nohighlight">\(X\)</span>, so it passes
+through <span class="math notranslate nohighlight">\(\nabla\)</span>. The effect of this is that evaluating the gradient
+of a function in a finite element field just requires the evaluation
+of the gradient of the Vandermonde matrix.</p>
+<div class="proof proof-type-exercise" id="id19">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 2.8</span>
@@ -349,7 +400,7 @@ results in a whole load of <code class="xref py py-data docutils literal notrans
 Vandermonde matrix. In this case, you might find
 <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
 </div>
-<div class="proof proof-type-exercise" id="id13">
+<div class="proof proof-type-exercise" id="id20">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 2.9</span>
@@ -394,7 +445,7 @@ evaluation of their function input, we know that:</p>
 <div class="math notranslate nohighlight">
 \[f_i = f(X_i)\]</div>
 <p>where <span class="math notranslate nohighlight">\(X_i\)</span> is the point associated with the <span class="math notranslate nohighlight">\(i\)</span>-th node.</p>
-<div class="proof proof-type-exercise" id="id14">
+<div class="proof proof-type-exercise" id="id21">
 <span id="ex-interpolate"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.10</span>
@@ -417,7 +468,7 @@ elements you can make:</p>
 <table class="docutils footnote" frame="void" id="vandermonde" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>A <a class="reference external" href="http://mathworld.wolfram.com/VandermondeMatrix.html">Vandermonde
+<tr><td class="label"><a class="fn-backref" href="#id6">[1]</a></td><td>A <a class="reference external" href="http://mathworld.wolfram.com/VandermondeMatrix.html">Vandermonde
 matrix</a>
 is the one-dimensional case of the generalised Vandermonde matrix.</td></tr>
 </tbody>
