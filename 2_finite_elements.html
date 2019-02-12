@@ -58,7 +58,7 @@
 <p>At the core of the finite element method is the representation of
 finite-dimensional function spaces over elements. This concept was
 formalised by <a class="reference internal" href="zbibliography.html#ciarlet2002" id="id1">[Cia02]</a>:</p>
-<div class="proof proof-type-definition" id="id12">
+<div class="proof proof-type-definition" id="id14">
 <span id="def-ciarlet"></span>
     <div class="proof-title">
         <span class="proof-type">Definition 2.1</span>
@@ -70,15 +70,15 @@ set of <em>nodes</em>, is a basis for <span class="math notranslate nohighlight"
 basis for <span class="math notranslate nohighlight">\(P\)</span>. It turns out to be most convenient to specify the set
 of nodes for an element, and then derive an appropriate basis for
 <span class="math notranslate nohighlight">\(P\)</span> from that. In particular:</p>
-<div class="proof proof-type-definition" id="id13">
+<div class="proof proof-type-definition" id="id15">
 
     <div class="proof-title">
         <span class="proof-type">Definition 2.2</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(N = \{n_j\}\)</span> be a basis for <span class="math notranslate nohighlight">\(P^*\)</span>.  A <em>nodal
+Let <span class="math notranslate nohighlight">\(N = \{\phi^*_j\}\)</span> be a basis for <span class="math notranslate nohighlight">\(P^*\)</span>.  A <em>nodal
 basis</em>, <span class="math notranslate nohighlight">\(\{\phi_i\}\)</span> for <span class="math notranslate nohighlight">\(P\)</span> is a basis for <span class="math notranslate nohighlight">\(P\)</span>
-with the property that <span class="math notranslate nohighlight">\(n_j(\phi_i) = \delta_{ij}\)</span>.</div></div><div class="section" id="a-worked-example">
+with the property that <span class="math notranslate nohighlight">\(\phi^*_j(\phi_i) = \delta_{ij}\)</span>.</div></div><div class="section" id="a-worked-example">
 <h2>2.1. A worked example<a class="headerlink" href="#a-worked-example" title="Permalink to this headline">¶</a></h2>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
@@ -94,15 +94,15 @@ basis) will therefore have three members. In order to ensure the correct
 continuity between elements, the dual basis we need to use is the
 evaluation of the function at each of the cell vertices. That is:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-0">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-2-finite-elements-0" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}n_0(f) = f\left((0,0)\right)\\n_1(f) = f\left((1,0)\right)\\n_2(f) = f\left((0,1)\right)\end{aligned}\end{align} \]</div>
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-2-finite-elements-0" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\phi^*_0(f) = f\left((0,0)\right)\\\phi^*_1(f) = f\left((1,0)\right)\\\phi^*_2(f) = f\left((0,1)\right)\end{aligned}\end{align} \]</div>
 <p>We know that <span class="math notranslate nohighlight">\(\phi_i\)</span> has the form <span class="math notranslate nohighlight">\(a + bx + cy\)</span> so now we can
 use the definition of the nodal basis to determine the unknown
 coefficients:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-1">
 <span class="eqno">(2.2)<a class="headerlink" href="#equation-2-finite-elements-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{pmatrix}
-n_0(\phi_i)\\
-n_1(\phi_i)\\
-n_2(\phi_i)
+\phi^*_0(\phi_i)\\
+\phi^*_1(\phi_i)\\
+\phi^*_2(\phi_i)
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -118,9 +118,9 @@ n_2(\phi_i)
 1 &amp; 0 &amp; 1\\
 \end{bmatrix}
 \begin{bmatrix}
-a\\
-b\\
-c\\
+a_0\\
+b_0\\
+c_0\\
 \end{bmatrix}
 =
 \begin{bmatrix}
@@ -128,8 +128,26 @@ c\\
 0 \\
 0
 \end{bmatrix}\end{split}\]</div>
-<p>Which has solution <span class="math notranslate nohighlight">\(\phi_0 = 1 - x - y\)</span>. By a similar process,
-we can establish that the full basis is given by:</p>
+<p>Which has solution <span class="math notranslate nohighlight">\(\phi_0 = 1 - x - y\)</span>. We can write the equations
+for all the basis functions at once as a single matrix equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+1 &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1\\
+\end{bmatrix}
+\begin{bmatrix}
+a_0 &amp; a_1 &amp; a_2\\
+b_0 &amp; b_1 &amp; b_2\\
+c_0 &amp; c_1 &amp; c_2\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<p>By which we establish that the full basis is given by:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-2">
 <span class="eqno">(2.4)<a class="headerlink" href="#equation-2-finite-elements-2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\phi_0 = 1 - x - y\\\phi_1 = x\\\phi_2 = y\end{aligned}\end{align} \]</div>
 </div>
@@ -169,7 +187,7 @@ relatively low order computations.</p>
 and creates unwanted oscillations in the solutions. However for
 this course Lagrange elements will be sufficient.</p>
 </div>
-<div class="proof proof-type-exercise" id="id14">
+<div class="proof proof-type-exercise" id="id16">
 <span id="ex-lagrange-points"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.3</span>
@@ -226,7 +244,7 @@ increasingly ill-conditioned at higher order, so it may be
 advantageous to employ a different basis in the construction of the
 Vandermonde matrix. See <a class="reference internal" href="zbibliography.html#kirby2004" id="id7">[Kir04]</a> for an example.</p>
 </div>
-<div class="proof proof-type-exercise" id="id15">
+<div class="proof proof-type-exercise" id="id17">
 <span id="ex-vandermonde"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.4</span>
@@ -259,7 +277,7 @@ polynomial spaces so we will specify <span class="math notranslate nohighlight">
 degree of the polynomials in the space. Since we will only deal with
 point evaluation nodes, we can represent <span class="math notranslate nohighlight">\(N\)</span> by a series of points at
 which the evaluation should occur.</p>
-<div class="proof proof-type-exercise" id="id16">
+<div class="proof proof-type-exercise" id="id18">
 <span id="ex-finite-element"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.5</span>
@@ -274,7 +292,7 @@ invert it to create the basis function coefs. Store these as
 <code class="docutils literal notranslate"><span class="pre">test/test_04_init_finite_element.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
+<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.16)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
 used to invert the matrix.</p>
 </div>
 </div>
@@ -291,7 +309,7 @@ polynomial, degree and nodes. The
 <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#inheritance">subclass</a> of
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> which will implement
 the particular case of the equispaced Lagrange elements.</p>
-<div class="proof proof-type-exercise" id="id17">
+<div class="proof proof-type-exercise" id="id19">
 <span id="ex-lagrange-element"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.6</span>
@@ -330,7 +348,7 @@ functions <span class="math notranslate nohighlight">\(\{\phi_j\}\)</span> with 
 basis given by the matrix <span class="math notranslate nohighlight">\(C\)</span>. Then the tabulation matrix is given by:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-3">
 <span class="eqno">(2.9)<a class="headerlink" href="#equation-2-finite-elements-3" title="Permalink to this equation">¶</a></span>\[   T_{ij} = \phi_j(X_i) = \sum_b V(X_i)_b C_{bj} = (V(X_:) \cdot C)_{ij}\]</div>
-<div class="proof proof-type-exercise" id="id18">
+<div class="proof proof-type-exercise" id="id20">
 <span id="ex-tabulate"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.7</span>
@@ -372,7 +390,7 @@ coefficients. Hence:</p>
 through <span class="math notranslate nohighlight">\(\nabla\)</span>. The effect of this is that evaluating the gradient
 of a function in a finite element field just requires the evaluation
 of the gradient of the Vandermonde matrix.</p>
-<div class="proof proof-type-exercise" id="id19">
+<div class="proof proof-type-exercise" id="id21">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 2.8</span>
@@ -380,8 +398,11 @@ of the gradient of the Vandermonde matrix.</p>
     </div><div class="proof-content">
 <p>Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code></a> so that
 setting <code class="docutils literal notranslate"><span class="pre">grad</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> produces a rank 3 generalised
-Vandermonde tensor whose indices represent points, gradient
-component and basis function respectively. That is, each entry of
+Vandermonde tensor whose indices represent points, monomial basis function,
+and gradient component respectively. That is:</p>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-7">
+<span class="eqno">(2.13)<a class="headerlink" href="#equation-2-finite-elements-7" title="Permalink to this equation">¶</a></span>\[   \nabla V_{ijk} = \frac{\partial V_j(X_i)}{\partial x_k}\]</div>
+<p>In other words, each entry of
 <span class="math notranslate nohighlight">\(V\)</span> is replaced by a vector of the gradient of that polynomial
 term. For example, the entry <span class="math notranslate nohighlight">\(x^2y^3\)</span> would be replaced by the
 vector <span class="math notranslate nohighlight">\([ 2xy^3, 3x^2y^2 ]\)</span>.</p>
@@ -390,7 +411,7 @@ extension. You should also ensure that you still pass
 <code class="docutils literal notranslate"><span class="pre">test/test_03_vandermonde_matrix.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.15)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
+<p class="last">The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.16)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
 generalised transposes swapping any dimensions.</p>
 </div>
 <div class="admonition hint">
@@ -398,9 +419,9 @@ generalised transposes swapping any dimensions.</p>
 <p class="last">At least one of the natural ways of implementing this function
 results in a whole load of <code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code> values in the generalised
 Vandermonde matrix. In this case, you might find
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.16)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
 </div>
-<div class="proof proof-type-exercise" id="id20">
+<div class="proof proof-type-exercise" id="id22">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 2.9</span>
@@ -413,8 +434,8 @@ generalise the matrix product in
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> so that
 the result of this function (when <code class="docutils literal notranslate"><span class="pre">grad</span></code> is true) is a rank 3
 tensor:</p>
-<div class="math notranslate nohighlight">
-\[\mathrm{T}_{ijk} = \nabla(\phi_j(X_i))\cdot \mathbf{e}_k\]</div>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-8">
+<span class="eqno">(2.14)<a class="headerlink" href="#equation-2-finite-elements-8" title="Permalink to this equation">¶</a></span>\[\mathrm{T}_{ijk} = \nabla(\phi_j(X_i))\cdot \mathbf{e}_k\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{e}_0\ldots\mathbf{e}_{\dim -1}\)</span> is the coordinate
 basis on the reference cell.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">test/test_07_tabulate_grad.py</span></code> script tests this
@@ -422,7 +443,11 @@ extension. Once again, make sure you still pass
 <code class="docutils literal notranslate"><span class="pre">test/test_05_tabulate.py</span></code></p>
 </div></div><div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
+<p class="last">A video recording of this exercise is available <a class="reference external" href="https://www.youtube.com/embed/wWHLhEti_mQ">here</a></p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.16)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
 contractions using <a class="reference external" href="http://mathworld.wolfram.com/EinsteinSummation.html">Einstein summation notation</a>. For
 example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ijk,jl-&gt;ilk&quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
@@ -433,19 +458,23 @@ example:</p>
 </div>
 <div class="section" id="interpolating-functions-to-the-finite-element-nodes">
 <h2>2.9. Interpolating functions to the finite element nodes<a class="headerlink" href="#interpolating-functions-to-the-finite-element-nodes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/cQaylSfRcRI">here</a></p>
+</div>
 <p>Recall once again that a function can be represented on a single finite element as:</p>
-<div class="math notranslate nohighlight">
-\[f = \sum_i f_i\phi_i\]</div>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-9">
+<span class="eqno">(2.15)<a class="headerlink" href="#equation-2-finite-elements-9" title="Permalink to this equation">¶</a></span>\[f = \sum_i f_i\phi_i\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\{\phi_i\}\)</span> is a nodal basis, it follows immediately that:</p>
-<div class="math notranslate nohighlight">
-\[f_i = \phi_i^*(f)\]</div>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-10">
+<span class="eqno">(2.16)<a class="headerlink" href="#equation-2-finite-elements-10" title="Permalink to this equation">¶</a></span>\[f_i = \phi_i^*(f)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_i^*\)</span> is the node associated with the basis function
 <span class="math notranslate nohighlight">\(\phi_i\)</span>. Since we are only interested in nodes which are the point
 evaluation of their function input, we know that:</p>
-<div class="math notranslate nohighlight">
-\[f_i = f(X_i)\]</div>
+<div class="math notranslate nohighlight" id="equation-2-finite-elements-11">
+<span class="eqno">(2.17)<a class="headerlink" href="#equation-2-finite-elements-11" title="Permalink to this equation">¶</a></span>\[f_i = f(X_i)\]</div>
 <p>where <span class="math notranslate nohighlight">\(X_i\)</span> is the point associated with the <span class="math notranslate nohighlight">\(i\)</span>-th node.</p>
-<div class="proof proof-type-exercise" id="id21">
+<div class="proof proof-type-exercise" id="id23">
 <span id="ex-interpolate"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 2.10</span>
