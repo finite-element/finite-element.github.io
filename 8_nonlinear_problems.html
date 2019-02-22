@@ -108,16 +108,16 @@ a linear functional which is zero if the boundary condition is
 satisfied at this test function, and nonzero otherwise. The simplest
 example of such a functional is:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-1">
-<span class="eqno">(8.4)<a class="headerlink" href="#equation-8-nonlinear-problems-1" title="Permalink to this equation">¶</a></span>\[f(u; \phi_i) = n_i(u) - n_i(b)\]</div>
-<p>where <span class="math notranslate nohighlight">\(n_i\)</span> is the node associated with basis function <span class="math notranslate nohighlight">\(\phi_i\)</span>. For
-point evaluation nodes, <span class="math notranslate nohighlight">\(n_i(u)\)</span> is the value of the proposed solution
-at node point <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(n_i(b)\)</span> is just the boundary condition
+<span class="eqno">(8.4)<a class="headerlink" href="#equation-8-nonlinear-problems-1" title="Permalink to this equation">¶</a></span>\[f(u; \phi_i) = \phi^*_i(u) - \phi^*_i(b)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi^*_i\)</span> is the node associated with basis function <span class="math notranslate nohighlight">\(\phi_i\)</span>. For
+point evaluation nodes, <span class="math notranslate nohighlight">\(\phi^*_i(u)\)</span> is the value of the proposed solution
+at node point <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(\phi^*_i(b)\)</span> is just the boundary condition
 evaluated at that same point.</p>
 <p>So for our model problem, we now have a full statement of the residual in terms of a basis function <span class="math notranslate nohighlight">\(\phi_i\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-residual">
 <span class="eqno">(8.5)<a class="headerlink" href="#equation-residual" title="Permalink to this equation">¶</a></span>\[\begin{split}f(u; \phi_i) = \begin{cases}
    \displaystyle\int_\Omega \nabla \phi_i \cdot \left((u + 1) \nabla u\right) - \phi_i g \, \mathrm{d} x &amp; \phi_i\in V_0\\
-   n_i(u) - n_i(b) &amp; \phi_i\in V_\Gamma
+   \phi^*_i(u) - \phi^*_i(b) &amp; \phi_i\in V_\Gamma
 \end{cases}\end{split}\]</div>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
@@ -151,8 +151,8 @@ J(u; v, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Ome
 <p>Next, we can work out the boundary case by assuming <span class="math notranslate nohighlight">\(v=\phi_i\)</span>, one of the basis functions of <span class="math notranslate nohighlight">\(V_\Gamma\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-4">
 <span class="eqno">(8.8)<a class="headerlink" href="#equation-8-nonlinear-problems-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
-J(u; \phi_i, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{n_i(u+\epsilon\hat{u}) - n_i(b) - \left(n_i(u) - n_i(b)\right)}{\epsilon}\\
-&amp;= n_i(\hat{u}) \qquad \textrm{since } n_i(\cdot) \textrm{ is linear.}
+J(u; \phi_i, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\phi^*_i(u+\epsilon\hat{u}) - \phi^*_i(b) - \left(\phi^*_i(u) - \phi^*_i(b)\right)}{\epsilon}\\
+&amp;= \phi^*_i(\hat{u}) \qquad \textrm{since } \phi^*_i(\cdot) \textrm{ is linear.}
 \end{split}\end{split}\]</div>
 <p>Once again, we can observe that <span class="math notranslate nohighlight">\(J\)</span> is linear in <span class="math notranslate nohighlight">\(\hat{u}\)</span>. Indeed, if
 we choose <span class="math notranslate nohighlight">\(\hat{u} = \phi_j\)</span> for some <span class="math notranslate nohighlight">\(\phi_j\)</span> in the basis if <span class="math notranslate nohighlight">\(V\)</span>
@@ -208,6 +208,7 @@ estimate, it is utterly unreasonable to not apply the corresponding
 correction.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
+<p>Note!</p>
 <p>Another commonly employed stopping mechanism is to consider the
 size of the residual <span class="math notranslate nohighlight">\(f\)</span>. However, the residual is not actually a
 function in <span class="math notranslate nohighlight">\(V\)</span>, but is actually a linear operator in <span class="math notranslate nohighlight">\(V^*\)</span>. Common
@@ -297,8 +298,82 @@ think again about the problem, the solver, and the initial guess.</p>
 </div>
 <div class="section" id="implementing-a-nonlinear-problem">
 <h2>8.5. Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Permalink to this headline">¶</a></h2>
-<p>This problem will be released in the middle of the term.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This problem is intentionally stated in more general terms than the
+previous ones. It is your responsibility to decide on a code
+structure, to derive a method of manufactured solutions answer, and
+to create the convergence tests which demonstrate that your
+solution is correct.</p>
 </div>
+<div class="proof proof-type-exercise" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 8.1</span>
+        
+    </div><div class="proof-content">
+<p>Implement <code class="xref py py-func docutils literal notranslate"><span class="pre">solve_burgers()</span></code> so that it solves
+the following problem using degree 1 Lagrange elements over the
+unit square domain:</p>
+<div class="math notranslate nohighlight" id="equation-mastery">
+<span class="eqno">(8.15)<a class="headerlink" href="#equation-mastery" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla\cdot\left((u^2+1)\nabla u\right) = g\\u = b \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
+<p>Select the solution <span class="math notranslate nohighlight">\(u=x^2y^2\)</span> and compute the required forcing function <span class="math notranslate nohighlight">\(g\)</span> so
+that your solution solves the equations. Make sure your boundary
+condition function <span class="math notranslate nohighlight">\(b\)</span> is consistent with your chosen solution!</p>
+<p>Your submitted answer will consist of:</p>
+<ol class="arabic simple">
+<li>A written component containing your derivation of:<ol class="loweralpha">
+<li>The weak form of <a class="reference internal" href="#equation-mastery">(8.15)</a>; and</li>
+<li>the Jacobian; and</li>
+</ol>
+</li>
+</ol>
+<ol class="loweralpha" start="3">
+<li><p class="first">the forcing term implied by the specified manufactured solution.</p>
+<p>A neatly hand-written or a typed submission are equally acceptable.</p>
+</li>
+</ol>
+<ol class="arabic" start="2">
+<li><p class="first">The code to implement the solution. This should be in
+<code class="docutils literal notranslate"><span class="pre">fe_utils.solvers.mastery.py</span></code> in your implementation. A
+convergence test for your code is provided in
+<code class="docutils literal notranslate"><span class="pre">test/test_13_mastery_convergence.py</span></code>.</p>
+<p>The submission of your mastery exercise, and indeed the entire
+implementation exercise will be on Blackboard. You will submit a
+PDF containing the derivations above, and the git sha1 for the
+commit you would like to have marked.</p>
+</li>
+</ol>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You can either implement your own Newton solver, or install the
+<a class="reference external" href="http://scipy.github.io/devdocs/index.html#module-scipy" title="(in SciPy v1.3.0.dev0+446cf44)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> package and work out how to use the
+<a class="reference external" href="http://scipy.github.io/devdocs/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v1.3.0.dev0+446cf44)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
+case, a hand-coded Newton solver is probably the simplest
+approach. However, for problems which are larger and more complex,
+it will be advantageous to employ a technique more advanced than
+simple Newton and the case for using a well-engineered third party
+implementation is strong.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">It is an exceptionally useful aid to debugging to have your
+Newton iteration print out the value of the error norm and the
+iteration number for each iteration. If you wish to see the
+printed output while running the test, you can pass the <code class="docutils literal notranslate"><span class="pre">-s</span></code>
+option to <code class="docutils literal notranslate"><span class="pre">py.test</span></code>.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You could insert a parameter of <span class="math notranslate nohighlight">\(\alpha\)</span> in front of the quadratic term
+in the equation. By setting <span class="math notranslate nohighlight">\(\alpha\)</span> to 0, you reduce your problem
+to the linear case. You can use the linear case to test your code
+initially, before setting <span class="math notranslate nohighlight">\(\alpha=1\)</span> for the actual exercise. Note
+that, in the linear case, Newton’s method will converge in exactly
+one iteration (although your algorithm will have to actually
+calculate two steps in order to know that convergence has occurred).</p>
+</div>
+</div></div></div>
 </div>
 
 

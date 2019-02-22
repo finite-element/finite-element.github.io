@@ -51,6 +51,10 @@
             
   <div class="section" id="assembling-and-solving-finite-element-problems">
 <h1>6. Assembling and solving finite element problems<a class="headerlink" href="#assembling-and-solving-finite-element-problems" title="Permalink to this headline">¶</a></h1>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/Dn_xGn2WayY">here</a></p>
+</div>
 <p>Having constructed functions in finite element spaces and integrated
 them over the domain, we now have the tools in place to actually
 assemble and solve a simple finite element problem. To avoid having to
@@ -91,6 +95,10 @@ each function in the basis then the problem is now, find coefficients <span clas
 <span class="eqno">(6.8)<a class="headerlink" href="#equation-eq-rhs" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = \int_\Omega \phi_i\,\sum_k f_k\phi_k\, \mathrm{d} x\]</div>
 <div class="section" id="assembling-the-right-hand-side">
 <h2>6.1. Assembling the right hand side<a class="headerlink" href="#assembling-the-right-hand-side" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/H-eLGYwzpcI">here</a></p>
+</div>
 <p>The assembly of these integrals exploits the same decomposition
 property we exploited previously to integrate functions in finite
 element spaces. For example, <a class="reference internal" href="#equation-eq-rhs">(6.8)</a> can be rewritten as:</p>
@@ -118,6 +126,10 @@ write this as:</p>
 </div>
 <div class="section" id="assembling-the-left-hand-side-matrix">
 <h2>6.2. Assembling the left hand side matrix<a class="headerlink" href="#assembling-the-left-hand-side-matrix" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/yQ5vJpCeJaU">here</a></p>
+</div>
 <p>The left hand side matrix follows a similar pattern, however there are
 two new complications. First, we have two unbound indices (<span class="math notranslate nohighlight">\(i\)</span> and
 <span class="math notranslate nohighlight">\(j\)</span>), and second, the integral involves derivatives. We will address
@@ -153,6 +165,10 @@ inverse of the cell Jacobian matrix.</p>
 </div>
 <div class="section" id="the-assembly-algorithm">
 <h3>6.2.2. The assembly algorithm<a class="headerlink" href="#the-assembly-algorithm" title="Permalink to this headline">¶</a></h3>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/e20G9pjr7IA">here</a></p>
+</div>
 <p>We can start by pulling back <a class="reference internal" href="#equation-eq-lhs">(6.6)</a> to local coordinates:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-10">
 <span class="eqno">(6.17)<a class="headerlink" href="#equation-6-finite-element-problems-10" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathrm{A}_{ij} = 0.\\\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
@@ -183,7 +199,7 @@ J^{-1}_{\gamma\alpha}\left(\nabla_X \Phi_{\hat{j}}(X_q)\right)_\gamma + \Phi_{\h
 function, trial function pair on the current element. This is then
 added to the global matrix at the row and column pairs given by the
 cell node map <span class="math notranslate nohighlight">\(M(c, \hat{i})\)</span> and <span class="math notranslate nohighlight">\(M(c, \hat{j})\)</span>.</p>
-<div class="figure" id="id2">
+<div class="figure" id="id6">
 <span id="figmatrix-insertion"></span><a class="reference internal image-reference" href="_images/global_assembly.svg"><img alt="_images/global_assembly.svg" src="_images/global_assembly.svg" width="70%" /></a>
 <p class="caption"><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Computing integrals for each local test and trial function produces
 a local dense (in this case, <span class="math notranslate nohighlight">\(3\times 3\)</span>) matrix. The entries in
@@ -218,6 +234,10 @@ following will work just fine:</p>
 </div>
 <div class="section" id="sparse-matrices">
 <h3>6.2.4. Sparse matrices<a class="headerlink" href="#sparse-matrices" title="Permalink to this headline">¶</a></h3>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/YYyDOTrrgzU">here</a></p>
+</div>
 <p>Each row of the global matrix corresponds to a single global basis
 function. The number of non-zeros in this row is equal to the number
 of other basis functions which are non-zero in the elements where the
@@ -247,13 +267,13 @@ matrix system will also be vastly reduced since operations on zeros
 are avoided.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.3.0.dev0+2327d9e)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
+<p class="last">The <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.3.0.dev0+446cf44)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
 which enable Python code to employ a variety of sparse matrix
 formats using essentially identical operations to the dense matrix
 case. The skeleton code already contains commands to construct
 empty sparse matrices and to solve the resulting linear system. You
 may, if you wish, experiment with choosing other sparse formats
-from <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.3.0.dev0+2327d9e)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
+from <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.3.0.dev0+446cf44)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
 you do <strong>not</strong> switch to a dense numpy array; unless, that is, you
 particularly enjoy running out of memory on your computer!</p>
 </div>
@@ -338,7 +358,7 @@ solutions, produces an estimate of the rate of convergence:</p>
 </div>
 <div class="section" id="implementing-finite-element-problems">
 <h2>6.5. Implementing finite element problems<a class="headerlink" href="#implementing-finite-element-problems" title="Permalink to this headline">¶</a></h2>
-<div class="proof proof-type-exercise" id="id3">
+<div class="proof proof-type-exercise" id="id7">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 6.1</span>

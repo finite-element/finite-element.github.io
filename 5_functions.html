@@ -59,6 +59,10 @@ stitching together the local basis functions defined by the
 <a class="reference internal" href="2_finite_elements.html#secfinitelement"><span class="std std-ref">finite element</span></a>.</p>
 <div class="section" id="a-python-implementation-of-functions-in-finite-element-spaces">
 <h2>5.1. A python implementation of functions in finite element spaces<a class="headerlink" href="#a-python-implementation-of-functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/HTTCzLZw-ao">here</a></p>
+</div>
 <p>The <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class provides a
 simple implementation of function storage. The input is a
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> which defines the
@@ -69,6 +73,10 @@ freedom values, one for each node in the
 </div>
 <div class="section" id="interpolating-values-into-finite-element-spaces">
 <h2>5.2. Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/WXiE8Yx_m0Q">here</a></p>
+</div>
 <p>Suppose we have a function <span class="math notranslate nohighlight">\(g(x): \mathbb{R}^n \rightarrow \mathbb{R}\)</span>
 which we wish to approximate as a function <span class="math notranslate nohighlight">\(f(x)\)</span> in some finite
 element space <span class="math notranslate nohighlight">\(V\)</span>. In other words, we want to find the <span class="math notranslate nohighlight">\(f_i\)</span> such that:</p>
@@ -127,6 +135,10 @@ here.</p>
 </div>
 <div class="section" id="looking-up-cell-coordinates-and-values">
 <h3>5.2.2. Looking up cell coordinates and values<a class="headerlink" href="#looking-up-cell-coordinates-and-values" title="Permalink to this headline">¶</a></h3>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/ZmUPyydAasY">here</a></p>
+</div>
 <p>In the previous section we used the vertex coordinates of a cell to
 find the node coordinates, and then we calculated
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> values at those
@@ -162,13 +174,17 @@ associated with the nodes of element <code class="docutils literal notranslate">
 </div>
 <div class="section" id="a-python-implementation-of-interpolation">
 <h3>5.2.3. A Python implementation of interpolation<a class="headerlink" href="#a-python-implementation-of-interpolation" title="Permalink to this headline">¶</a></h3>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/Bb_9iRsTUgc">here</a></p>
+</div>
 <p>Putting together the change of coordinates with the right indirect
 addressing, we can provide the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class with a
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method which
 interpolates a user-provided function onto the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.</p>
-<div class="proof proof-type-exercise" id="id2">
+<div class="proof proof-type-exercise" id="id9">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 5.1</span>
@@ -188,7 +204,11 @@ needed when you implement integration.</p>
 </div>
 </div>
 <div class="section" id="integration">
-<span id="id1"></span><h2>5.3. Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2>5.3. Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/hvPR8CUwq3Q">here</a></p>
+</div>
 <p>We now come to one of the fundamental operations in the finite element
 method: integrating a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over
 the domain. The full finite element method actually requires the
@@ -249,6 +269,10 @@ scope of this course.</p>
 </div>
 <div class="section" id="expressing-the-function-in-the-finite-element-basis">
 <h3>5.3.1. Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Permalink to this headline">¶</a></h3>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/qKX3BGbbj58">here</a></p>
+</div>
 <p>Let <span class="math notranslate nohighlight">\(\{\Phi_i(X)\}\)</span> be a <strong>local</strong> basis for <span class="math notranslate nohighlight">\(V\)</span> on the reference element
 <span class="math notranslate nohighlight">\(c_0\)</span>. Then our integral becomes:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-5">
@@ -257,6 +281,10 @@ scope of this course.</p>
 </div>
 <div class="section" id="numerical-quadrature">
 <h3>5.3.2. Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h3>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/5zby5uZUye0">here</a></p>
+</div>
 <p>The actual evaluation of the integral will employ the quadrature rules
 we discussed in <a class="reference internal" href="1_quadrature.html"><span class="doc">a previous section</span></a>. Let <span class="math notranslate nohighlight">\(\{X_q\},
 \{w_q\}\)</span> be a quadrature rule of sufficient degree of precision that
@@ -266,7 +294,11 @@ the quadrature is exact. Then:</p>
 </div>
 <div class="section" id="implementing-integration">
 <h3>5.3.3. Implementing integration<a class="headerlink" href="#implementing-integration" title="Permalink to this headline">¶</a></h3>
-<div class="proof proof-type-exercise" id="id3">
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/XTUc2VcWKMU">here</a></p>
+</div>
+<div class="proof proof-type-exercise" id="id10">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 5.2</span>
@@ -282,7 +314,7 @@ for every cell in the mesh. You could make your implementation more
 efficient by precalculating this term in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>
 method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>.</p>
 </div>
-<div class="proof proof-type-exercise" id="id4">
+<div class="proof proof-type-exercise" id="id11">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 5.3</span>
