@@ -332,10 +332,10 @@ implementation.</div></div><div class="admonition hint">
 basis functions at each quadrature point.</li>
 <li>Visit each cell in turn.</li>
 <li>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> for that cell
-and take the absolute value of its determinant (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.16)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
-and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.16)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
+and take the absolute value of its determinant (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.17)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
+and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
 <li>Sum all of the arrays you have constructed over the correct
-indices to a contribution to the integral (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.16)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
+indices to a contribution to the integral (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
 may be useful for this).</li>
 </ol>
 </div>
