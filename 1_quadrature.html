@@ -68,7 +68,7 @@ integration.</p>
 <span class="math notranslate nohighlight">\(f(X)\)</span> over an element <span class="math notranslate nohighlight">\(e\)</span> can be approximated as
 a weighted sum of function values evaluated at particular points:</p>
 <div class="math notranslate nohighlight" id="equation-quadrature">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-quadrature" title="Permalink to this equation">¶</a></span>\[\int_e f(X)  = \sum_{q} f(X_q) w_q + O(h^n)\]</div>
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-quadrature" title="Permalink to this equation">¶</a></span>\[\int_e f(X)  = \sum_{q} f(X_q) w_q + O(h^n)\]</div>
 <p>we term the set <span class="math notranslate nohighlight">\(\{X_q\}\)</span> the set of <em>quadrature points</em> and the
 corresponding set <span class="math notranslate nohighlight">\(\{w_q\}\)</span> the set of <em>quadrature weights</em>. A set of
 quadrature points and their corresponding quadrature weights together
@@ -82,7 +82,7 @@ quadrature rule of degree <span class="math notranslate nohighlight">\(n\)</span
 <div class="proof proof-type-definition" id="id1">
 <span id="degree-of-precision"></span>
     <div class="proof-title">
-        <span class="proof-type">Definition 1.1</span>
+        <span class="proof-type">Definition 1.12</span>
         
     </div><div class="proof-content">
 The <em>degree of precision</em> of a quadrature rule is the largest <span class="math notranslate nohighlight">\(p\)</span>
@@ -110,7 +110,7 @@ error, then incomplete quadrature may be advantageous.</p>
 taught in introductory integration courses. The first of these is the
 midpoint rule:</p>
 <div class="math notranslate nohighlight" id="equation-midpoint">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-midpoint" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = hf(0.5h) + O(h^3)\]</div>
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-midpoint" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = hf(0.5h) + O(h^3)\]</div>
 <p>In other words, an approximation to the integral of
 <span class="math notranslate nohighlight">\(f\)</span> over an interval can be calculated by multiplying the value
 of <span class="math notranslate nohighlight">\(f\)</span> at the mid-point of the interval by the length of the
@@ -119,10 +119,10 @@ by a constant value.</p>
 <p>If we improve our approximation of <span class="math notranslate nohighlight">\(f\)</span> to a straight line over
 the interval, then we arrive at the trapezoidal (or trapezium) rule:</p>
 <div class="math notranslate nohighlight" id="equation-trapezoidal">
-<span class="eqno">(1.3)<a class="headerlink" href="#equation-trapezoidal" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-trapezoidal" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
 <p>while if we employ a quadratic function then we arrive at Simpson’s rule:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-0">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-1-quadrature-0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-1-quadrature-0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
 </div>
 <div class="section" id="reference-elements">
 <h2>1.3. Reference elements<a class="headerlink" href="#reference-elements" title="Permalink to this headline">¶</a></h2>
@@ -162,14 +162,14 @@ require for this course are the
 express quadrature rules as lists of quadrature points with
 corresponding quadrature weights. For example Simpson’s rule becomes:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-1">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-1-quadrature-1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-1-quadrature-1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
 <p>We choose to write the quadrature points as 1-tuples for consistency
 with the <span class="math notranslate nohighlight">\(n\)</span>-dimensional case, in which the points will be
 <span class="math notranslate nohighlight">\(n\)</span>-tuples.</p>
 <p>The lowest order quadrature rule on the reference triangle is a single point
 quadrature:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-2">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-1-quadrature-2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{2} \right]\\X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-1-quadrature-2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{2} \right]\\X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\end{aligned}\end{align} \]</div>
 <p>This rule has a degree of precision of 1.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
@@ -190,7 +190,7 @@ usually defined for the interval <span class="math notranslate nohighlight">\([-
 coordinates in order to arrive at a quadrature rule for our reference
 interval:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-3">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-1-quadrature-3" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_q = \frac{X'_q + 1}{2}\\w_q = \frac{w'_q}{2}\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-1-quadrature-3" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_q = \frac{X'_q + 1}{2}\\w_q = \frac{w'_q}{2}\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\((\{X'_q\}, \{w'_q\})\)</span> is the quadrature rule on the interval
 <span class="math notranslate nohighlight">\([-1, 1]\)</span> and <span class="math notranslate nohighlight">\((\{X_q\}, \{w_q\})\)</span> is the rule on the unit interval.</p>
 <p>Legendre-Gauß quadrature on the interval is optimal in the sense that it uses the
@@ -203,7 +203,7 @@ intervals: <span class="math notranslate nohighlight">\((0, 1)\otimes (0, 1)\)</
 rule on a unit square by taking the product of two interval quadrature
 rules:</p>
 <div class="math notranslate nohighlight" id="equation-squarequad">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-squarequad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{sq} = \left\{ (x_p, x_q)\ \middle|\ x_p, x_q \in X \right\}\\w_\textrm{sq} = \left\{ w_p w_q\ \middle|\ w_p, w_q \in w \right\}\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-squarequad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{sq} = \left\{ (x_p, x_q)\ \middle|\ x_p, x_q \in X \right\}\\w_\textrm{sq} = \left\{ w_p w_q\ \middle|\ w_p, w_q \in w \right\}\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\((X, w)\)</span> is an interval quadrature rule. Furthermore, the degree
 of accuracy of <span class="math notranslate nohighlight">\((X_\textrm{sq}, w_\textrm{sq})\)</span> will be the same as
 that of the one-dimensional rule.</p>
@@ -211,16 +211,16 @@ that of the one-dimensional rule.</p>
 achieve this by treating the triangle as a square with a zero length
 edge. The Duffy transform maps the unit square to the unit triangle:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-4">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-1-quadrature-4" title="Permalink to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-1-quadrature-4" title="Permalink to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
   \left(x_\textrm{sq},\ y_\textrm{sq}(1 - x_\textrm{sq})\right)\]</div>
 <div class="figure" id="id2">
 <span id="figduffy"></span><a class="reference internal image-reference" href="_images/duffy.svg"><img alt="_images/duffy.svg" src="_images/duffy.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span></p>
+<p class="caption"><span class="caption-number">Fig. 1.5 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span></p>
 </div>
-<p>By composing the Duffy transform with <a class="reference internal" href="#equation-squarequad">(1.8)</a> we can arrive
+<p>By composing the Duffy transform with <a class="reference internal" href="#equation-squarequad">(1.11)</a> we can arrive
 at a quadrature rule for the triangle:</p>
 <div class="math notranslate nohighlight" id="equation-triquad">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-triquad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{tri} =\left\{ \left(x_p, x_q(1 - x_p)\right)\ \middle|\ x_p \in X_h, x_q \in X_v \right\}\\w_\textrm{tri} = \left\{ w_p w_q(1 - x_p)\ \middle|\ w_p \in w_h, w_q \in w_v \right\}\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-triquad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{tri} =\left\{ \left(x_p, x_q(1 - x_p)\right)\ \middle|\ x_p \in X_h, x_q \in X_v \right\}\\w_\textrm{tri} = \left\{ w_p w_q(1 - x_p)\ \middle|\ w_p \in w_h, w_q \in w_v \right\}\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\((X_v, w_v)\)</span> is a reference interval quadrature rule with degree
 of precision <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\((X_h, w_h)\)</span> is a reference interval quadrature
 rule with degree of precision <span class="math notranslate nohighlight">\(n+1\)</span>. The combined quadrature rule
@@ -241,11 +241,11 @@ cell.</p>
 <div class="proof proof-type-exercise" id="id3">
 <span id="ex-integrate"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 1.2</span>
+        <span class="proof-type">Exercise 1.13</span>
         
     </div><div class="proof-content">
 <p>The <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a> method is
-left unimplemented. Using <a class="reference internal" href="#equation-quadrature">(1.1)</a>, implement this method.</p>
+left unimplemented. Using <a class="reference internal" href="#equation-quadrature">(1.4)</a>, implement this method.</p>
 <p>A test script for your method is provided in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory
 as <code class="docutils literal notranslate"><span class="pre">test_01_integrate.py</span></code>. Run this script to test your code:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test</span><span class="o">/</span><span class="n">test_01_integrate</span><span class="o">.</span><span class="n">py</span>

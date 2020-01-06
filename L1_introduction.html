@@ -1,0 +1,422 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1. Introduction &#8212; Finite element course 2018.0 documentation</title>
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/proof.js"></script>
+    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Computational tools" href="tools.html" />
+    <link rel="prev" title="Practical matters" href="practicalities.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>In this section we provide an introduction that establishes some
+initial ideas about how the finite element method works and what it is
+about.</p>
+<p>The finite element method is an approach to solving partial
+differential equations (PDEs) on complicated domains. It has the
+flexibility to build discretisations that can increase the order of
+accuracy, and match the numerical discretisation to the physical
+problem being modelled. It has an elegant mathematical formulation
+that lends itself both to mathematical analysis and to flexible code
+implementation. In this course we blend these two directions together.</p>
+<div class="section" id="poisson-s-equation-in-the-unit-square">
+<h2>1.1. Poisson’s equation in the unit square<a class="headerlink" href="#poisson-s-equation-in-the-unit-square" title="Permalink to this headline">¶</a></h2>
+<p>In this introduction we concentrate on the specific model problem of
+Poisson’s equation in the unit square.</p>
+<div class="proof proof-type-definition" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.1</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Omega=[0,1]\times[0,1]\)</span>. For a given function <span class="math notranslate nohighlight">\(f\)</span>, we seek <span class="math notranslate nohighlight">\(u\)</span> such
+that</p>
+<div class="math notranslate nohighlight" id="equation-eq-strong-poisson">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-eq-strong-poisson" title="Permalink to this equation">¶</a></span>\[-\left(\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}\right)u:=-\nabla^2 u = f, \quad
+u(0,y)=u(1,y)=0, \, \frac{\partial u}{\partial y}(x,0)=\frac{\partial u}{\partial y}(x,1)=0.\]</div>
+</div></div><p>In this problem, the idea is that we are given a specific known
+function <span class="math notranslate nohighlight">\(f\)</span> (for example, <span class="math notranslate nohighlight">\(f = sin(2\pi x)sin(2 \pi y)\)</span>), and we have
+to find the corresponding unknown function <span class="math notranslate nohighlight">\(u\)</span> that satisfies the
+equation (including the boundary conditions). Here we have combined a
+mixture of Dirichlet boundary conditions specifying the value of the
+function <span class="math notranslate nohighlight">\(u\)</span>, and Neumann boundary conditions specifying the value of
+the normal derivative <span class="math notranslate nohighlight">\(\partial u/\partial n\)</span>. This is because these
+two types of boundary conditions are treated differently in the finite
+element method, and we would like to expose both treatments in the
+same example. The treatment of boundary conditions is one of the
+strengths of the finite element method.</p>
+</div>
+<div class="section" id="triangulations">
+<h2>1.2. Triangulations<a class="headerlink" href="#triangulations" title="Permalink to this headline">¶</a></h2>
+<p>The description of our finite element method starts by considering
+a triangulation.</p>
+<div class="proof proof-type-definition" id="id4">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.2</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be a polygonal subdomain of <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span>. A triangulation
+<span class="math notranslate nohighlight">\(\mathcal{T}\)</span> of <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of triangles <span class="math notranslate nohighlight">\(\{K_i\}_{i=1}^N\)</span>, such
+that:</p>
+<ol class="arabic simple">
+<li><span class="math notranslate nohighlight">\(\mathrm{int}\, K_i \cap K_j = \emptyset, \quad i\neq j\)</span>, where <span class="math notranslate nohighlight">\(\mathrm{int }\)</span> denotes the interior of a set (no overlaps).</li>
+<li><span class="math notranslate nohighlight">\(\cup K_i = \bar{\Omega}\)</span>, the closure of <span class="math notranslate nohighlight">\(\Omega\)</span> (triangulation covers
+<span class="math notranslate nohighlight">\(\Omega\)</span>).</li>
+<li>No vertex of the interior of any triangle is located in the interior of any other triangle in <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> (triangle vertices only meet other triangle vertices).</li>
+</ol>
+</div></div></div>
+<div class="section" id="our-first-finite-element-space">
+<h2>1.3. Our first finite element space<a class="headerlink" href="#our-first-finite-element-space" title="Permalink to this headline">¶</a></h2>
+<p>The idea is that we will approximate functions which are polynomial
+(at some chosen degree) when restricted to each triangle, with some
+chosen continuity conditions between triangles. We shall call the
+space of possible functions under these choices a finite element
+space.  In this introduction, we will just consider the following
+space.</p>
+<div class="proof proof-type-definition" id="id5">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.3</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span>. Then the P1 finite
+element space is a space <span class="math notranslate nohighlight">\(V_h\)</span> containing all functions <span class="math notranslate nohighlight">\(v\)</span> such that</p>
+<ol class="arabic simple">
+<li><span class="math notranslate nohighlight">\(v\in C^0(\Omega)\)</span>,</li>
+<li><span class="math notranslate nohighlight">\(v|_{K_i}\)</span> is a linear function for each <span class="math notranslate nohighlight">\(K_i\in \mathcal{T}\)</span>.</li>
+</ol>
+<p>We also define the following subspace,</p>
+<div class="math notranslate nohighlight" id="equation-eq-bcs-subspace">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-eq-bcs-subspace" title="Permalink to this equation">¶</a></span>\[\mathring{V}_h = \left\{
+  v\in V_h: v(0,y)=v(1,y)=0
+  \right\}.\]</div>
+</div></div><p>This is the subspace of the P1 finite element space <span class="math notranslate nohighlight">\(V_h\)</span> of functions
+that satisfy the Dirichlet boundary conditions. We will search only
+amongst <span class="math notranslate nohighlight">\(\mathring{V}_h\)</span> for our approximate solution to the Poisson
+equation. This is referred to as strong boundary conditions. Note that
+we do not consider any subspaces related to the Neumann
+conditions. These will emerge later.</p>
+</div>
+<div class="section" id="integral-formulations-and-l-2">
+<h2>1.4. Integral formulations and <span class="math notranslate nohighlight">\(L_2\)</span><a class="headerlink" href="#integral-formulations-and-l-2" title="Permalink to this headline">¶</a></h2>
+<p>The finite element method is based upon integral formulations of
+partial differential equations. Rather than checking if two functions
+are equal by checking their value at every point, we will just check
+that they are equal in an integral sense. We do  this by introducing
+the <span class="math notranslate nohighlight">\(L^2\)</span> norm, which is a way of measuring the “magnitude” of a function.</p>
+<div class="proof proof-type-definition" id="id6">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.4</span>
+        
+    </div><div class="proof-content">
+<p>For a real-valued function <span class="math notranslate nohighlight">\(f\)</span> on a domain <span class="math notranslate nohighlight">\(\Omega\)</span>, with Lebesgue integral</p>
+<div class="math notranslate nohighlight">
+\[\int_\Omega f(x)\,dx,\]</div>
+<p>we define the <span class="math notranslate nohighlight">\(L^2\)</span> norm of <span class="math notranslate nohighlight">\(f\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\|f\|_{L^2}(\Omega) = \left(\int_\Omega |f(x)|^2\,dx \right)^{1/2}.\]</div>
+</div></div><p>This motivates us to say that two functions are equal if the <span class="math notranslate nohighlight">\(L^2\)</span>
+norm of their difference is zero. It only makes sense to do that if
+the functions individually have finite <span class="math notranslate nohighlight">\(L^2\)</span> norm, which then also
+motivates the <span class="math notranslate nohighlight">\(L^2\)</span> function space.</p>
+<div class="proof proof-type-definition" id="id7">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.5</span>
+        
+    </div><div class="proof-content">
+<blockquote>
+<div><p>We define <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> as the set of functions</p>
+<div class="math notranslate nohighlight">
+\[L^2(\Omega) = \left\{ f:\|f\|_{L^2}(\Omega)&lt;\infty\right\},\]</div>
+</div></blockquote>
+<p>and identify two functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> if <span class="math notranslate nohighlight">\(\|f-g\|_{L^2(\Omega)}=0\)</span>,
+in which case we write <span class="math notranslate nohighlight">\(f\equiv g\)</span> in <span class="math notranslate nohighlight">\(L^2\)</span>.</p>
+</div></div><div class="proof proof-type-example" id="id8">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 1.6</span>
+        
+    </div><div class="proof-content">
+<p>Consider the two functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> defined on
+<span class="math notranslate nohighlight">\(\Omega=[0,1]\times[0,1]\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x,y) = \left\{\begin{array}{cc}
+1 &amp; x\geq 0.5, \\
+0 &amp; x &lt; 0.5, \\
+\end{array}\right. \,
+g(x,y) = \left\{\begin{array}{cc}
+1 &amp; x&gt; 0.5, \\
+0 &amp; x \leq 0.5. \\
+\end{array}\right.\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> only differ on the line <span class="math notranslate nohighlight">\(x=0.5\)</span> which has zero
+area, then <span class="math notranslate nohighlight">\(\|f-g\|_{L^2(\Omega)}=0\)</span>, and so <span class="math notranslate nohighlight">\(f\equiv g\)</span> in <span class="math notranslate nohighlight">\(L^2\)</span>.</p>
+</div></div></div>
+<div class="section" id="finite-element-derivative">
+<h2>1.5. Finite element derivative<a class="headerlink" href="#finite-element-derivative" title="Permalink to this headline">¶</a></h2>
+<p>Functions in <span class="math notranslate nohighlight">\(V_h\)</span> do not have derivatives everywhere. This means that
+we have to work with a more general definition (and later we shall
+learn when it does and does not work).</p>
+<div class="proof proof-type-definition" id="id9">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.7</span>
+        
+    </div><div class="proof-content">
+<p>The finite element partial derivative
+<span class="math notranslate nohighlight">\(\frac{\partial^{FE}}{\partial x_i}u\)</span> of <span class="math notranslate nohighlight">\(u\)</span> is defined in
+<span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> such that restricted to <span class="math notranslate nohighlight">\(K_i\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^{FE}u}{\partial x_i}|_{K_i}= \frac{\partial u}{\partial x_i}.\]</div>
+</div></div><p>Here we see why we needed to introduce <span class="math notranslate nohighlight">\(L^2\)</span>: we have a definition
+that does give have a unique value on the edge between two adjacent
+triangles. This is verified in the following exercises.</p>
+<div class="proof proof-type-exercise" id="id10">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 1.8</span>
+        
+    </div><div class="proof-content">
+Let <span class="math notranslate nohighlight">\(V_h\)</span> be a P1 finite element space for a triangulation
+<span class="math notranslate nohighlight">\(\mathcal{T}\)</span> of <span class="math notranslate nohighlight">\(\Omega\)</span>. For all <span class="math notranslate nohighlight">\(u\in V_h\)</span>, show that the
+definition above uniquely defines <span class="math notranslate nohighlight">\(\frac{\partial^{FE}u}{\partial
+x_i}\)</span> in <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span>.</div></div><div class="proof proof-type-exercise" id="id11">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 1.9</span>
+        
+    </div><div class="proof-content">
+Let <span class="math notranslate nohighlight">\(u\in C^1(\Omega)\)</span> (the space of functions with finite-valued
+partial derivatives at every point in <span class="math notranslate nohighlight">\(\Omega\)</span>). Show that the
+finite element partial derivative and the usual derivative are
+equal in <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span>.</div></div><p>In view of this second exercise, in this section we will consider all
+derivatives to be finite element derivatives. In later sections we
+shall consider an even more general definition of the derivative which
+contains both of these definitions.</p>
+</div>
+<div class="section" id="towards-the-finite-element-discretisation">
+<h2>1.6. Towards the finite element discretisation<a class="headerlink" href="#towards-the-finite-element-discretisation" title="Permalink to this headline">¶</a></h2>
+<p>We will now use the finite element derivative to develop the finite
+element discretisation. We assume that we have a solution <span class="math notranslate nohighlight">\(u\)</span> to
+Equation <a class="reference internal" href="#equation-eq-strong-poisson">(1.1)</a> that is smooth (i.e. <span class="math notranslate nohighlight">\(u\in C^1\)</span>).</p>
+<p>We take <span class="math notranslate nohighlight">\(v\in \mathring{V}_h\)</span>, multiply by Equation <a class="reference internal" href="#equation-eq-strong-poisson">(1.1)</a>, and integrate over the domain. Integration by parts in each triangle then gives</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i}\left(\int_{K_i} \nabla
+v\cdot \nabla u \, d x
+- \int_{\partial K_i} vn\cdot \nabla u \, d S\right)  =
+\int_\Omega vf \, d x,\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the unit outward pointing normal to <span class="math notranslate nohighlight">\(K_i\)</span>.</p>
+<p>Next, we consider each interior edge <span class="math notranslate nohighlight">\(f\)</span> in the triangulation, formed
+as the intersection between two neighbouring triangles <span class="math notranslate nohighlight">\(K_i\cap
+K_j\)</span>. If <span class="math notranslate nohighlight">\(i&gt;j\)</span>, then we label the <span class="math notranslate nohighlight">\(K_i\)</span> side of <span class="math notranslate nohighlight">\(f\)</span> with a <span class="math notranslate nohighlight">\(+\)</span>, and
+the <span class="math notranslate nohighlight">\(K_j\)</span> side with a <span class="math notranslate nohighlight">\(-\)</span>. Then, denoting <span class="math notranslate nohighlight">\(\Gamma\)</span> as the union of all
+such interior edges, we can rewrite our equation as</p>
+<div class="math notranslate nohighlight">
+\[\int_\Omega \nabla v \cdot \nabla u \, d x - \int_\Gamma vn^+\cdot\nabla u
++ vn^-\cdot\nabla u \, d S
+- \int_{\partial\Omega} vn\cdot \nabla u \, d S
+ = \int_\Omega vf \, d x,\]</div>
+<p>where <span class="math notranslate nohighlight">\(n^{\pm}\)</span> is the unit normal to <span class="math notranslate nohighlight">\(f\)</span> pointing from the <span class="math notranslate nohighlight">\(\pm\)</span> side
+into the <span class="math notranslate nohighlight">\(\mp\)</span> side. Since <span class="math notranslate nohighlight">\(n^-=-n^+\)</span>, the interior edge integrals
+vanish.</p>
+<p>Further, on the boundary, either <span class="math notranslate nohighlight">\(v\)</span> vanishes (at <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(x=1\)</span>) or
+<span class="math notranslate nohighlight">\(n\cdot\nabla u\)</span> vanishes (at <span class="math notranslate nohighlight">\(y=0\)</span> and <span class="math notranslate nohighlight">\(y=1\)</span>), and we obtain</p>
+<div class="math notranslate nohighlight">
+\[\int_\Omega \nabla v \cdot \nabla u \, d x
+= \int_\Omega vf \, d x.\]</div>
+<p>The finite element approximation is then defined by requiring that
+this equation holds for all <span class="math notranslate nohighlight">\(v\in \mathring{V}_h\)</span> and when we restrict
+<span class="math notranslate nohighlight">\(u\in \mathring{V}_h\)</span>.</p>
+<div class="proof proof-type-definition" id="id12">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.10</span>
+        
+    </div><div class="proof-content">
+<p>The finite element approximation <span class="math notranslate nohighlight">\(u_h \in \mathring{V}_h\)</span> to the
+solution <span class="math notranslate nohighlight">\(u\)</span> of Poisson’s equation is defined by</p>
+<div class="math notranslate nohighlight" id="equation-eq-fe-poisson">
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-eq-fe-poisson" title="Permalink to this equation">¶</a></span>\[\int_\Omega \nabla v \cdot \nabla u_h \, d x =
+\int_\Omega vf \, d x, \quad \forall v\in \mathring{V}_h.\]</div>
+</div></div><p>We now present some numerical results for the case <a href="#id1"><span class="problematic" id="id2">`</span></a>f = 2pi^2sin(pi
+x)sin(pi y)’.</p>
+<div class="figure" id="id13">
+<span id="figplots"></span><a class="reference internal image-reference" href="_images/level2.png"><img alt="_images/level2.png" src="_images/level2.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(4\times 4\)</span> mesh.</span></p>
+</div>
+<div class="figure" id="id14">
+<a class="reference internal image-reference" href="_images/level4.png"><img alt="_images/level4.png" src="_images/level4.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(16\times 16\)</span> mesh.</span></p>
+</div>
+<div class="figure" id="id15">
+<a class="reference internal image-reference" href="_images/level7.png"><img alt="_images/level7.png" src="_images/level7.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(128\times 128\)</span> mesh.</span></p>
+</div>
+<div class="figure" id="id16">
+<a class="reference internal image-reference" href="_images/poisson_error.png"><img alt="_images/poisson_error.png" src="_images/poisson_error.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Plot showing error versus mesh resolution. We observe
+the error decreases proportionally to <span class="math notranslate nohighlight">\(h^2\)</span>, where <span class="math notranslate nohighlight">\(h\)</span> is
+the maximum triangle edge size in the triangulation.</span></p>
+</div>
+<p>We see that for this example, the error is decreasing as we increase
+the number of triangles, for the meshes considered.</p>
+<p>In general, our formulation raises a number of questions.</p>
+<ol class="arabic simple">
+<li>Is <span class="math notranslate nohighlight">\(u_h\)</span> unique?</li>
+<li>What is the size of the error <span class="math notranslate nohighlight">\(u-u_h\)</span>?</li>
+<li>Does this error go to zero as the mesh is refined?</li>
+<li>For what types of functions <span class="math notranslate nohighlight">\(f\)</span> can these questions be answered?</li>
+<li>What other kinds of finite element spaces are there?</li>
+<li>How do we extend this approach to other PDEs?</li>
+<li>How can we calculate <span class="math notranslate nohighlight">\(u_h\)</span> using a computer?</li>
+</ol>
+<p>We shall aim to address these questions, at least partially, through
+the rest of this course. For now, we concentrate on the final
+question, in general terms.</p>
+<p>In this course we shall mostly concentrate on finite element methods
+for elliptic PDEs, of which Poisson’s equation is an example, using
+continuous finite element spaces, of which <span class="math notranslate nohighlight">\(P1\)</span> is an example. The
+design, analysis and implementation of finite methods for PDEs is a
+huge field of current research, and includes parabolic and elliptic
+PDEs and other PDEs from elasticity, fluid dynamics, electromagnetism,
+mathematical biology, mathematical finance, astrophysics and
+cosmology, etc. This course is intended as a starting point to
+introduce the general concepts that can be applied in all of these
+areas.</p>
+</div>
+<div class="section" id="computer-implementation">
+<h2>1.7. Computer implementation<a class="headerlink" href="#computer-implementation" title="Permalink to this headline">¶</a></h2>
+<p>The finite element approximation above is only useful if we can
+actually compute it. To do this, we need to construct an efficient
+basis for <span class="math notranslate nohighlight">\(P1\)</span>, which we call the nodal basis.</p>
+<div class="proof proof-type-definition" id="id17">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.11</span>
+        
+    </div><div class="proof-content">
+<blockquote>
+<div><p>Let <span class="math notranslate nohighlight">\(\{z_i\}_{i=1}^{M}\)</span> indicate the vertices in the triangulation
+<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>. For each vertex <span class="math notranslate nohighlight">\(z_i\)</span>, we define a basis function
+<span class="math notranslate nohighlight">\(\phi_i\in V_h\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\phi_i(z_j) = \delta_{ij} :=
+\left\{
+\begin{array}{cc}
+1 &amp; i=j, \\
+0 &amp; i\ne j.
+\end{array}
+\right.\end{split}\]</div>
+</div></blockquote>
+<p>We can define a similar basis for <span class="math notranslate nohighlight">\(\mathring{V}_h\)</span> by removing
+the basis functions <span class="math notranslate nohighlight">\(\phi_i\)</span> corresponding to vertices <span class="math notranslate nohighlight">\(z_i\)</span> on
+the Dirichlet boundaries <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(x=1\)</span>.</p>
+<p>If we expand <span class="math notranslate nohighlight">\(u_h\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in the basis for <span class="math notranslate nohighlight">\(\mathring{V}_h\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[u_h(x) = \sum_iu_i\phi_i(x), \quad v(x) = \sum_iv_i\phi_i(x),\]</div>
+</div></div><p>into Equation <a class="reference internal" href="#equation-eq-fe-poisson">(1.3)</a>, then we obtain</p>
+<div class="math notranslate nohighlight">
+\[\sum_iv_i\left(\sum_j\int_\Omega \nabla \phi_i\cdot \nabla \phi_j
+\,dx x v_j - \int_\Omega \phi_if\,dx x\right) = 0.\]</div>
+<p>Since this equation must hold for all <span class="math notranslate nohighlight">\(v\in \mathring{V}_h\)</span>, then
+it must hold for all basis coefficients <span class="math notranslate nohighlight">\(v_i\)</span>, and we obtain
+the matrix-vector system</p>
+<div class="math notranslate nohighlight">
+\[K\mathrm{u} = \mathrm{f},\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}K_{ij} = \int_\Omega \nabla\phi_i\cdot\nabla\phi_j\, d x,\\\mathrm{u}  = \left(u_1,u_2,\ldots,u_{\bar{M}}\right)^T,\\\mathrm{f}  = \left(f_1,f_2,\ldots,f_{\bar{M}}\right)^T, \quad f_i = \int_\Omega \phi_i f\, d x.\end{aligned}\end{align} \]</div>
+<p>Once we have solved for <span class="math notranslate nohighlight">\(\mathrm{u}\)</span>, we can use these basis
+coefficients to reconstruct the solution <span class="math notranslate nohighlight">\(u_h\)</span>. The system is square,
+but we do not currently know that <span class="math notranslate nohighlight">\(K\)</span> is invertible. This is
+equivalent to the finite element approximation having a unique
+solution <span class="math notranslate nohighlight">\(u_h\)</span>, which we shall establish in later sections. This
+motivates why we care that <span class="math notranslate nohighlight">\(u_h\)</span> exists and is unique.</p>
+<p>Putting solvability aside for the moment, the goal of the
+implementation sections of this course is to explain how to
+efficiently form <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(\mathrm{f}\)</span>, and solve this system.  For now
+we note a few following aspects that suggest that this might be
+possible. First, the matrix <span class="math notranslate nohighlight">\(K\)</span> and vector <span class="math notranslate nohighlight">\(\mathrm{f}\)</span> can be written
+as sums over elements,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}K_{ij} = \sum_{K\in\mathcal{T}}\int_K \nabla \phi_i\cdot\nabla \phi_j \, d x,\\\mathrm{where}\,f_i = \sum_{K\in\mathcal{T}}\int_K \phi_i f \, d x.\end{aligned}\end{align} \]</div>
+<p>For each entry in the sum for <span class="math notranslate nohighlight">\(K_{ij}\)</span>, the integrand is composed
+entirely of polynomials (actually constants in this particular case,
+but we shall shortly consider finite element spaces using polynomials
+of higher degree). This motivates our starting point in exposing the
+computer implementation, namely the integration of polynomials over
+triangles using quadrature rules. This will also motivate an efficient
+way to construct derivatives of polynomials evaluated at quadrature
+points. Further, we shall shortly develop an interpolation operator
+<span class="math notranslate nohighlight">\(\mathcal{I}\)</span> such that <span class="math notranslate nohighlight">\(\mathcal{I}_f\in V_h\)</span>.  If we replace <span class="math notranslate nohighlight">\(f\)</span> by
+<span class="math notranslate nohighlight">\(\mathcal{I}_f\)</span> in the approximations above, then the evaluation of <span class="math notranslate nohighlight">\(f_i\)</span> can also be performed via quadrature rules.</p>
+<p>Even further, the matrix <span class="math notranslate nohighlight">\(K\)</span> is very sparse, since in most triangles,
+both <span class="math notranslate nohighlight">\(\phi_i\)</span> and <span class="math notranslate nohighlight">\(\phi_j\)</span> are zero. Any efficient implementation must
+make use of this and avoid computing integrals that return zero.
+item This motivates the concept of global assembly, the process of
+looping over elements, computing only the contributions to <span class="math notranslate nohighlight">\(K\)</span> that
+are non-zero from that element.  item Finally, the sparsity of <span class="math notranslate nohighlight">\(K\)</span>
+means that the system should be solved using numerical linear algebra
+algorithms that can exploit this sparsity.</p>
+<p>Having set out the main challenges of the computational
+implementation, we now move on to define and discuss a broader
+range of possible finite element spaces.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2018, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    </div>
+  </body>
+</html>
