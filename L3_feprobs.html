@@ -19,7 +19,7 @@
     <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Computational tools" href="tools.html" />
+    <link rel="next" title="4. Convergence of finite element approximations" href="L4_convergence.html" />
     <link rel="prev" title="2. Finite element spaces: local to global" href="L2_fespaces.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
@@ -574,8 +574,8 @@ we say that the finite element discretisation is stable.</p>
 of <span class="math notranslate nohighlight">\(\|\cdot\|_V\)</span> (such as the <span class="math notranslate nohighlight">\(L^2\)</span> and <span class="math notranslate nohighlight">\(H^1\)</span> norms), which is why we
 introduced them.</p>
 </div>
-<div class="section" id="solveability-of-some-finite-element-discretisations">
-<h2>3.4. Solveability of some finite element discretisations<a class="headerlink" href="#solveability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="solveability-and-stability-of-some-finite-element-discretisations">
+<h2>3.4. Solveability and stability of some finite element discretisations<a class="headerlink" href="#solveability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
 <p>In this section we will introduce some tools for showing coercivity
 and continuity of bilinear forms, illustrated with finite element
 approximations of some linear PDEs where they may be applied.</p>
@@ -738,7 +738,8 @@ discretisation is stable in the <span class="math notranslate nohighlight">\(H^1
 <p>Continuity follows from Schwarz inequality,</p>
 <div class="math notranslate nohighlight">
 \[|b(u,v)| \leq |u|_{H^1}|v|_{H^1} \leq \|u\|_{H^1}\|v\|_{H^1}.\]</div>
-</div></div><p>Proving the coercivity for the Poisson problem with Dirichlet or
+</div></div><p>The coercivity constant is independent of <span class="math notranslate nohighlight">\(h\)</span>, so the approximation is stable.</p>
+<p>Proving the coercivity for the Poisson problem with Dirichlet or
 partial Dirichlet boundary conditions requires some additional
 results. We start by showing that the divergence theorem also applies
 to finite element derivatives of <span class="math notranslate nohighlight">\(C^0\)</span> finite element functions.</p>
@@ -821,7 +822,8 @@ defined on a triangulation <span class="math notranslate nohighlight">\(\mathcal
 <p>and hence coercivity,</p>
 <div class="math notranslate nohighlight">
 \[\|v\|_{H^1(\Omega)}^2 \leq (1+C_1^2)b(v,v).\]</div>
-</div></div><p>In this section, We have developed some techniques for showing that
+</div></div><p>The coercivity constant is independent of <span class="math notranslate nohighlight">\(h\)</span>, so the approximation is stable.</p>
+<p>In this section, We have developed some techniques for showing that
 variational problems arising from finite element discretisations for
 Helmholtz and Poisson problems have unique solutions, that are stable
 in the <span class="math notranslate nohighlight">\(H^1\)</span>-norm. This means that we can be confident that we can
