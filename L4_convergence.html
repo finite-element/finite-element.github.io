@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>4. Weak derivatives &#8212; Finite element course 2018.0 documentation</title>
+    <title>4. Convergence of finite element approximations &#8212; Finite element course 2018.0 documentation</title>
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -49,21 +49,22 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <hr class="docutils" />
+  <div class="section" id="convergence-of-finite-element-approximations">
+<h1>4. Convergence of finite element approximations<a class="headerlink" href="#convergence-of-finite-element-approximations" title="Permalink to this headline">¶</a></h1>
 <p>In this section we develop tools to prove convergence of finite
 element approximations to the exact solutions of PDEs.</p>
 <div class="section" id="weak-derivatives">
-<h1>4. Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Permalink to this headline">¶</a></h1>
-<p>Consider a triangulation <cite>mathcal{T}</cite> with recursively refined
-triangulations <cite>mathcal{T}_h</cite> and corresponding finite element spaces
-<cite>V_h</cite>.  Given stable finite element variational problems, we have a
-sequence of solutions <cite>u_h</cite> as <cite>hto 0</cite>, satisfying the
-<cite>h</cite>-independent bound</p>
+<h2>4.1. Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Permalink to this headline">¶</a></h2>
+<p>Consider a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> with recursively refined
+triangulations <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span> and corresponding finite element spaces
+<span class="math notranslate nohighlight">\(V_h\)</span>.  Given stable finite element variational problems, we have a
+sequence of solutions <span class="math notranslate nohighlight">\(u_h\)</span> as <span class="math notranslate nohighlight">\(h\to 0\)</span>, satisfying the
+<span class="math notranslate nohighlight">\(h\)</span>-independent bound</p>
 <div class="math notranslate nohighlight">
 \[\|u_h\|_{H^1(\Omega)} \leq C.\]</div>
 <p>What are these solutions converging to? We need to find a Hilbert
-space that contains all <cite>V_h</cite> as <cite>hto0</cite>, that extends the <cite>H^1</cite> norm
-to the <cite>hto 0</cite> limit of finite element functions.</p>
+space that contains all <span class="math notranslate nohighlight">\(V_h\)</span> as <span class="math notranslate nohighlight">\(h\to0\)</span>, that extends the <span class="math notranslate nohighlight">\(H^1\)</span> norm
+to the <span class="math notranslate nohighlight">\(h\to 0\)</span> limit of finite element functions.</p>
 <p>Our first task is to define a derivative that works for all finite
 element functions, without reference to a mesh. This requires some
 preliminary definitions, starting by considering some very smooth
@@ -77,8 +78,8 @@ derivatives (so that we can integrate by parts as much as we like).</p>
             <span class="proof-title-name">(Compact support on `\Omega`)</span>
         
     </div><div class="proof-content">
-A function <cite>u</cite> has compact support on <cite>Omega</cite> if there exists <cite>epsilon&gt;0</cite>
-such that <cite>u(x)=0</cite> when <cite>min_{yinpartialOmega}|x-y|&lt;epsilon</cite>.</div></div><div class="proof proof-type-definition" id="id4">
+A function <span class="math notranslate nohighlight">\(u\)</span> has compact support on <span class="math notranslate nohighlight">\(\Omega\)</span> if there exists <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span>
+such that <span class="math notranslate nohighlight">\(u(x)=0\)</span> when <span class="math notranslate nohighlight">\(\min_{y\in\partial\Omega}|x-y|&lt;\epsilon\)</span>.</div></div><div class="proof proof-type-definition" id="id4">
 
     <div class="proof-title">
         <span class="proof-type">Definition 4.2</span>
@@ -86,9 +87,9 @@ such that <cite>u(x)=0</cite> when <cite>min_{yinpartialOmega}|x-y|&lt;epsilon</
             <span class="proof-title-name">(`C^\infty_0(\Omega)`)</span>
         
     </div><div class="proof-content">
-We denote by <cite>C^infty_0(Omega)</cite> the subset of <cite>C^infty(Omega)</cite>
+We denote by <span class="math notranslate nohighlight">\(C^\infty_0(\Omega)\)</span> the subset of <span class="math notranslate nohighlight">\(C^\infty(\Omega)\)</span>
 corresponding to functions that have emph{compact support} on
-<cite>Omega</cite>.</div></div><p>Next we will define a space containing the generalised derivative.</p>
+<span class="math notranslate nohighlight">\(\Omega\)</span>.</div></div><p>Next we will define a space containing the generalised derivative.</p>
 <div class="proof proof-type-definition" id="id5">
 
     <div class="proof-title">
@@ -97,7 +98,7 @@ corresponding to functions that have emph{compact support} on
             <span class="proof-title-name">(`L^1_{loc}`)</span>
         
     </div><div class="proof-content">
-<p>For triangles <cite>K subset mathrm{int},(Omega)</cite>, we define</p>
+<p>For triangles <span class="math notranslate nohighlight">\(K \subset \mathrm{int}\,(\Omega)\)</span>, we define</p>
 <div class="math notranslate nohighlight">
 \[\|u\|_{L^1(K)} = \int_K |u|\, d x,\]</div>
 <p>and</p>
@@ -118,10 +119,10 @@ f: f \in L^1(K) \quad \forall K\subset\mathrm{int}\,(\Omega)
             <span class="proof-title-name">(Multi-index.)</span>
         
     </div><div class="proof-content">
-For <cite>d</cite>-dimensional space, a multi-index <cite>alpha=(alpha_1,ldots,alpha_d)</cite>
+For <span class="math notranslate nohighlight">\(d\)</span>-dimensional space, a multi-index <span class="math notranslate nohighlight">\(\alpha=(\alpha_1,\ldots,\alpha_d)\)</span>
 assigns the number of partial derivatives in each Cartesian direction.
-We write <cite>|alpha|=sum_{i=1}^dalpha_i</cite>.</div></div><p>This means we can write mixed partial derivatives, for example if
-<cite>alpha=(1,2)</cite> then</p>
+We write <span class="math notranslate nohighlight">\(|\alpha|=\sum_{i=1}^d\alpha_i\)</span>.</div></div><p>This means we can write mixed partial derivatives, for example if
+<span class="math notranslate nohighlight">\(\alpha=(1,2)\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[D^\alpha u = \frac{\partial^3 u}{\partial x\partial y^2}.\]</div>
 <p>Finally we are in a position to introduce the generalisation of the
@@ -134,11 +135,11 @@ derivative itself.</p>
             <span class="proof-title-name">(Weak derivative)</span>
         
     </div><div class="proof-content">
-<p>The weak derivative <cite>D_w^alpha fin L^1_{loc}(Omega)</cite> of a function <cite>fin L^1_{loc}(Omega)</cite> is defined by</p>
+<p>The weak derivative <span class="math notranslate nohighlight">\(D_w^\alpha f\in L^1_{loc}(\Omega)\)</span> of a function <span class="math notranslate nohighlight">\(f\in L^1_{loc}(\Omega)\)</span> is defined by</p>
 <div class="math notranslate nohighlight">
 \[\int_\Omega \phi D_w^\alpha f \, d x = (-1)^{|\alpha|}
 \int_\Omega D^\alpha \phi f \, d x, \quad \forall \phi\in C^\infty_0(\Omega).\]</div>
-</div></div><p>Not that we do not see any boundary terms since <cite>phi</cite> vanishes at the
+</div></div><p>Not that we do not see any boundary terms since <span class="math notranslate nohighlight">\(\phi\)</span> vanishes at the
 boundary along with all derivatives.</p>
 <p>Now we check that the derivative agrees with our finite element derivative
 definition.</p>
@@ -148,15 +149,15 @@ definition.</p>
         <span class="proof-type">Lemma 4.6</span>
         
     </div><div class="proof-content">
-Let <cite>V</cite> be a <cite>C^0</cite> finite element space. Then, for <cite>uin V</cite>, the finite
+Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^0\)</span> finite element space. Then, for <span class="math notranslate nohighlight">\(u\in V\)</span>, the finite
 element derivative of u is equal to the weak
-derivative of <cite>u</cite>.</div></div><div class="proof proof-type-proof">
+derivative of <span class="math notranslate nohighlight">\(u\)</span>.</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-<p>Taking any <cite>phiin C_0^infty(Omega)</cite>, we have</p>
+<p>Taking any <span class="math notranslate nohighlight">\(\phi\in C_0^\infty(\Omega)\)</span>, we have</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\int_\Omega
 \phi \frac{\partial}{\partial x_i}|_{FE}u \, d x  = \sum_{K}\int_K \phi \frac{\partial u}{\partial x_i}\, d x,\\= \sum_K\left(-\int_K \frac{\partial \phi}{\partial x_i} u \, d x + \int_{\partial K}
@@ -169,15 +170,15 @@ derivative of <cite>u</cite>.</div></div><div class="proof proof-type-proof">
         <span class="proof-type">Exercise 4.7</span>
         
     </div><div class="proof-content">
-Let <cite>V</cite> be a <cite>C^1</cite> finite element space. For <cite>uin V</cite>, show that the finite
+Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^1\)</span> finite element space. For <span class="math notranslate nohighlight">\(u\in V\)</span>, show that the finite
 second derivatives of u is equal to the weak
-second derivative of <cite>u</cite>.</div></div><div class="proof proof-type-exercise" id="id10">
+second derivative of <span class="math notranslate nohighlight">\(u\)</span>.</div></div><div class="proof proof-type-exercise" id="id10">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 4.8</span>
         
     </div><div class="proof-content">
-Let <cite>V</cite> be a discontinuous finite element space. For <cite>uin V</cite>, show
+Let <span class="math notranslate nohighlight">\(V\)</span> be a discontinuous finite element space. For <span class="math notranslate nohighlight">\(u\in V\)</span>, show
 that the weak derivative does not coincide with the finite element
 derivative in general (find a counter-example).</div></div><div class="proof proof-type-lemma" id="id11">
 
@@ -185,31 +186,31 @@ derivative in general (find a counter-example).</div></div><div class="proof pro
         <span class="proof-type">Lemma 4.9</span>
         
     </div><div class="proof-content">
-For <cite>uin C^{|alpha|}(Omega)</cite>, the usual <a href="#id1"><span class="problematic" id="id2">``</span></a>strong’’ derivative
-<cite>D^alpha</cite> of u is equal to the weak derivative <cite>D_w^alpha</cite> of <cite>u</cite>.</div></div><div class="proof proof-type-proof">
+For <span class="math notranslate nohighlight">\(u\in C^{|\alpha|}(\Omega)\)</span>, the usual <a href="#id1"><span class="problematic" id="id2">``</span></a>strong’’ derivative
+<span class="math notranslate nohighlight">\(D^\alpha\)</span> of u is equal to the weak derivative <span class="math notranslate nohighlight">\(D_w^\alpha\)</span> of <span class="math notranslate nohighlight">\(u\)</span>.</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
 Exercise. [very similar to previous proof]</div></div><p>Due to these equivalences, we do not need to distinguish between
-strong, weak and finite element first derivatives for <cite>C^0</cite> finite
+strong, weak and finite element first derivatives for <span class="math notranslate nohighlight">\(C^0\)</span> finite
 element functions. All derivatives are assumed to be weak from now on.</p>
 </div>
 <div class="section" id="sobolev-spaces">
-<h1>5. Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Permalink to this headline">¶</a></h1>
-<p>We are now in a position to define a space that contains all <cite>C^0</cite>
+<h2>4.2. Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Permalink to this headline">¶</a></h2>
+<p>We are now in a position to define a space that contains all <span class="math notranslate nohighlight">\(C^0\)</span>
 finite element spaces. This means that we can consider the limit
-of finite element approximations as <cite>hto 0</cite>.</p>
+of finite element approximations as <span class="math notranslate nohighlight">\(h\to 0\)</span>.</p>
 <div class="proof proof-type-definition" id="id12">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.1</span>
+        <span class="proof-type">Definition 4.10</span>
         
             <span class="proof-title-name">(The Sobolev space `H^1`)</span>
         
     </div><div class="proof-content">
-<p><cite>H^1(Omega)</cite> is the function space defined by</p>
+<p><span class="math notranslate nohighlight">\(H^1(\Omega)\)</span> is the function space defined by</p>
 <div class="math notranslate nohighlight">
 \[H^1(\Omega) = \left\{
 u\in L^1_{loc}: \|u\|_{H^1(\Omega)}&lt;\infty\right\}.\]</div>
@@ -217,31 +218,31 @@ u\in L^1_{loc}: \|u\|_{H^1(\Omega)}&lt;\infty\right\}.\]</div>
 <div class="proof proof-type-definition" id="id13">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.2</span>
+        <span class="proof-type">Definition 4.11</span>
         
             <span class="proof-title-name">(`H^k` seminorm and norm)</span>
         
     </div><div class="proof-content">
-<p>The <cite>H^k</cite> seminorm is defined as</p>
+<p>The <span class="math notranslate nohighlight">\(H^k\)</span> seminorm is defined as</p>
 <div class="math notranslate nohighlight">
 \[|u|_{H^k}^2 = \sum_{|\alpha|=k}\int_\Omega |D^\alpha u|^2 \, dx,\]</div>
-<p>where the sum is taken over all multi-indices of size <cite>k</cite> i.e. all the
-derivatives are of degree <cite>k</cite>.</p>
-<p>The <cite>H^k</cite> norm is defined as</p>
+<p>where the sum is taken over all multi-indices of size <span class="math notranslate nohighlight">\(k\)</span> i.e. all the
+derivatives are of degree <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>The <span class="math notranslate nohighlight">\(H^k\)</span> norm is defined as</p>
 <div class="math notranslate nohighlight">
 \[\|u\|_{H^k}^2 = \sum_{i=0}^k |u|_{H^i}^2.\]</div>
-<p>where we conventionally write <cite>|u|_{H^0}=|u|_{L^2}</cite>.</p>
-</div></div><p>The Sobolev space <cite>H^k</cite> is then the space of all functions
-with finite <cite>H^k</cite> norm.</p>
+<p>where we conventionally write <span class="math notranslate nohighlight">\(|u|_{H^0}=\|u\|_{L^2}\)</span>.</p>
+</div></div><p>The Sobolev space <span class="math notranslate nohighlight">\(H^k\)</span> is then the space of all functions
+with finite <span class="math notranslate nohighlight">\(H^k\)</span> norm.</p>
 <div class="proof proof-type-definition" id="id14">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.3</span>
+        <span class="proof-type">Definition 4.12</span>
         
             <span class="proof-title-name">(The Sobolev space `H^k`)</span>
         
     </div><div class="proof-content">
-<p><cite>H^k(Omega)</cite> is the function space defined by</p>
+<p><span class="math notranslate nohighlight">\(H^k(\Omega)\)</span> is the function space defined by</p>
 <div class="math notranslate nohighlight">
 \[H^k(\Omega) = \left\{
 u\in L^1_{loc}: \|u\|_{H^k(\Omega)}&lt;\infty\right\}\]</div>
@@ -251,145 +252,146 @@ limits remain in the spaces.</p>
 <div class="proof proof-type-lemma" id="id15">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.4</span>
+        <span class="proof-type">Lemma 4.13</span>
         
             <span class="proof-title-name">(`H^k` spaces are Hilbert spaces)</span>
         
     </div><div class="proof-content">
-<p>The space <cite>H^k(Omega)</cite> is closed.</p>
-<p>Let <cite>{u_i}</cite> be a Cauchy sequence in <cite>H^k</cite>. Then <cite>{D^alpha u_i}</cite>
-is a Cauchy sequence in <cite>L^2(Omega)</cite> (which is closed), so <cite>exists
-v^alpha in L^2(Omega)</cite> such that <cite>D^alpha u_ito v^alpha</cite> for
-<cite>|alpha|leq k</cite>.  If <cite>w_jto w</cite> in <cite>L^2(Omega)</cite>, then for <cite>phiin
-C^infty_0(Omega)</cite>,</p>
+<p>The space <span class="math notranslate nohighlight">\(H^k(\Omega)\)</span> is closed.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{u_i\}\)</span> be a Cauchy sequence in <span class="math notranslate nohighlight">\(H^k\)</span>. Then <span class="math notranslate nohighlight">\(\{D^\alpha u_i\}\)</span>
+is a Cauchy sequence in <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> (which is closed), so <span class="math notranslate nohighlight">\(\exists
+v^\alpha \in L^2(\Omega)\)</span> such that <span class="math notranslate nohighlight">\(D^\alpha u_i\to v^\alpha\)</span> for
+<span class="math notranslate nohighlight">\(|\alpha|\leq k\)</span>.  If <span class="math notranslate nohighlight">\(w_j\to w\)</span> in <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span>, then for <span class="math notranslate nohighlight">\(\phi\in
+C^\infty_0(\Omega)\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\int_\Omega (w_j-w)\phi \, d x \leq \|w_j-w\|_{L^2(\Omega)}\|\phi\|_{L^\infty}\to 0.\]</div>
 <p>We use this equation to get</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\int_\Omega v^\alpha \phi \, d x  = \lim_{i\to \infty} \int_\Omega
 \phi D^\alpha u_i \, d x,\\= \lim_{i\to \infty} (-1)^{|\alpha|}\int_\Omega u_i D^\alpha\phi \, d x ,\\= (-1)^{|\alpha|} \int_\Omega v D^\alpha \phi \, d x,\end{aligned}\end{align} \]</div>
-<p>i.e. <cite>v^alpha</cite> is the weak derivative of <cite>u</cite> as required.</p>
+<p>i.e. <span class="math notranslate nohighlight">\(v^\alpha\)</span> is the weak derivative of <span class="math notranslate nohighlight">\(u\)</span> as required.</p>
 </div></div><p>We quote the following much deeper results without proof.</p>
 <div class="proof proof-type-theorem" id="id16">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.5</span>
+        <span class="proof-type">Theorem 4.14</span>
         
             <span class="proof-title-name">(`H=W`)</span>
         
     </div><div class="proof-content">
-Let <cite>Omega</cite> be any open set. Then <cite>H^k(Omega)cap C^infty(Omega)</cite></div></div><p>is dense in <cite>H^k(Omega)</cite>.</p>
-<p>The interpretation is that for any function <cite>uin H^k(Omega)</cite>,
-we can find a sequence of <cite>C^infty</cite> functions <cite>u_i</cite> converging
-to <cite>u</cite>. This is very useful as we can compute many things using
-<cite>C^infty</cite> functions and take the limit.</p>
+Let <span class="math notranslate nohighlight">\(\Omega\)</span> be any open set. Then <span class="math notranslate nohighlight">\(H^k(\Omega)\cap C^\infty(\Omega)\)</span></div></div><p>is dense in <span class="math notranslate nohighlight">\(H^k(\Omega)\)</span>.</p>
+<p>The interpretation is that for any function <span class="math notranslate nohighlight">\(u\in H^k(\Omega)\)</span>,
+we can find a sequence of <span class="math notranslate nohighlight">\(C^\infty\)</span> functions <span class="math notranslate nohighlight">\(u_i\)</span> converging
+to <span class="math notranslate nohighlight">\(u\)</span>. This is very useful as we can compute many things using
+<span class="math notranslate nohighlight">\(C^\infty\)</span> functions and take the limit.</p>
 <div class="proof proof-type-theorem" id="id17">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.6</span>
+        <span class="proof-type">Theorem 4.15</span>
         
             <span class="proof-title-name">(Sobolev's inequality)</span>
         
     </div><div class="proof-content">
-<p>Let <cite>Omega</cite> be an <cite>n</cite>-dimensional domain with Lipschitz boundary, let
-<cite>k</cite> be an integer with <cite>k&gt;n/2</cite>. Then there exists a constant
-<cite>C</cite> such that</p>
+<p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional domain with Lipschitz boundary, let
+<span class="math notranslate nohighlight">\(k\)</span> be an integer with <span class="math notranslate nohighlight">\(k&gt;n/2\)</span>. Then there exists a constant
+<span class="math notranslate nohighlight">\(C\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[\|u\|_{L^\infty(\Omega)} = \ess\sup_{x\in \Omega}|u(x)|
 \leq C\|u\|_{H^k(\Omega)}.\]</div>
-<p>Further, there is a <cite>C^0</cite> continuous function in the <cite>L^infty(Omega)</cite>
-equivalence class of <cite>u</cite>.</p>
-<p>The interpretation is that if <cite>uin H^k</cite> then there is a continuous
-function <cite>u_0</cite> such that the set of points where <cite>uneq u_0</cite> has
+<p>Further, there is a <span class="math notranslate nohighlight">\(C^0\)</span> continuous function in the <span class="math notranslate nohighlight">\(L^\infty(\Omega)\)</span>
+equivalence class of <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<p>The interpretation is that if <span class="math notranslate nohighlight">\(u\in H^k\)</span> then there is a continuous
+function <span class="math notranslate nohighlight">\(u_0\)</span> such that the set of points where <span class="math notranslate nohighlight">\(u\neq u_0\)</span> has
 zero area/volume.</p>
 </div></div><div class="proof proof-type-corollary" id="id18">
 
     <div class="proof-title">
-        <span class="proof-type">Corollary 5.7</span>
+        <span class="proof-type">Corollary 4.16</span>
         
             <span class="proof-title-name">(Sobolev's inequality for derivatives)</span>
         
     </div><div class="proof-content">
-<p>Let <cite>Omega</cite> be a <cite>n</cite>-dimensional domain with Lipschitz boundary, let
-<cite>k</cite> be an integer with <cite>k-m&gt;n/2</cite>. Then there exists a constant
-<cite>C</cite> such that</p>
+<p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be a <span class="math notranslate nohighlight">\(n\)</span>-dimensional domain with Lipschitz boundary, let
+<span class="math notranslate nohighlight">\(k\)</span> be an integer with <span class="math notranslate nohighlight">\(k-m&gt;n/2\)</span>. Then there exists a constant
+<span class="math notranslate nohighlight">\(C\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[\|u\|_{W_\infty^m(\Omega)} :=
 \sum_{|\alpha|\leq m}\|D^\alpha u\|_{L^\infty(\Omega)}
 \leq C\|u\|_{H^k(\Omega)}.\]</div>
-<p>Further, there is a <cite>C^m</cite> continuous function in the <cite>L^infty(Omega)</cite>
-equivalence class of <cite>u</cite>.</p>
+<p>Further, there is a <span class="math notranslate nohighlight">\(C^m\)</span> continuous function in the <span class="math notranslate nohighlight">\(L^\infty(\Omega)\)</span>
+equivalence class of <span class="math notranslate nohighlight">\(u\)</span>.</p>
 </div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Just apply Sobolev’s inequality to the <cite>m</cite> derivatives of <cite>u</cite>.</div></div><p>We can now consider linear variational problems defined on <cite>H^k</cite>
-spaces, by taking a bilinear form <cite>b(u,v)</cite> and linear form
-<cite>F(v)</cite>, seeking <cite>uin H^k</cite> (for chosen <cite>H^k</cite>) such that</p>
+Just apply Sobolev’s inequality to the <span class="math notranslate nohighlight">\(m\)</span> derivatives of <span class="math notranslate nohighlight">\(u\)</span>.</div></div><p>We can now consider linear variational problems defined on <span class="math notranslate nohighlight">\(H^k\)</span>
+spaces, by taking a bilinear form <span class="math notranslate nohighlight">\(b(u,v)\)</span> and linear form
+<span class="math notranslate nohighlight">\(F(v)\)</span>, seeking <span class="math notranslate nohighlight">\(u\in H^k\)</span> (for chosen <span class="math notranslate nohighlight">\(H^k\)</span>) such that</p>
 <div class="math notranslate nohighlight">
 \[b(u,v) = F(v), \quad \forall v \in H^k.\]</div>
-<p>Since <cite>H^k</cite> is a Hilbert space, the Lax-Milgram theorem can be used to
-analyse, the existence of a unique solution to an <cite>H^k</cite> linear
+<p>Since <span class="math notranslate nohighlight">\(H^k\)</span> is a Hilbert space, the Lax-Milgram theorem can be used to
+analyse, the existence of a unique solution to an <span class="math notranslate nohighlight">\(H^k\)</span> linear
 variational problem. For example, the Helmholtz problem solveability
 is immediate.</p>
 <div class="proof proof-type-theorem" id="id19">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.8</span>
+        <span class="proof-type">Theorem 4.17</span>
         
             <span class="proof-title-name">(Well-posedness for (modified) Helmholtz))</span>
         
     </div><div class="proof-content">
-The Helmholtz variational problem on <cite>H^1</cite> satisfies the conditions</div></div><p>of the Lax-Milgram theorem.</p>
+The Helmholtz variational problem on <span class="math notranslate nohighlight">\(H^1\)</span> satisfies the conditions</div></div><p>of the Lax-Milgram theorem.</p>
 <div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-The proof for <cite>C^0</cite> finite element spaces extends immediately
-to <cite>H^1</cite>.</div></div><p>Functions in <cite>H^k</cite> make boundary conditions hard to interpret
+The proof for <span class="math notranslate nohighlight">\(C^0\)</span> finite element spaces extends immediately
+to <span class="math notranslate nohighlight">\(H^1\)</span>.</div></div><p>Functions in <span class="math notranslate nohighlight">\(H^k\)</span> make boundary conditions hard to interpret
 since they are not guaranteed to have defined values on the boundary.
 We make the following definition.</p>
 <div class="proof proof-type-definition" id="id20">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.9</span>
+        <span class="proof-type">Definition 4.18</span>
         
             <span class="proof-title-name">(Trace of `H^1` functions)</span>
         
     </div><div class="proof-content">
-Let <cite>uin H^1(Omega)</cite> and choose <cite>u_iin C^infty(Omega)</cite> such
-that <cite>u_ito u</cite>. We define the emph{trace} <cite>u|_{partialOmega}</cite>
-on <cite>partialOmega</cite> as the limit of the restriction of <cite>u_i</cite> to
-<cite>partialOmega</cite>. This definition is unique from the uniqueness of
+Let <span class="math notranslate nohighlight">\(u\in H^1(\Omega)\)</span> and choose <span class="math notranslate nohighlight">\(u_i\in C^\infty(\Omega)\)</span> such
+that <span class="math notranslate nohighlight">\(u_i\to u\)</span>. We define the emph{trace} <span class="math notranslate nohighlight">\(u|_{\partial\Omega}\)</span>
+on <span class="math notranslate nohighlight">\(\partial\Omega\)</span> as the limit of the restriction of <span class="math notranslate nohighlight">\(u_i\)</span> to
+<span class="math notranslate nohighlight">\(\partial\Omega\)</span>. This definition is unique from the uniqueness of
 limits.</div></div><p>We can extend our trace inequality for finite element functions directly
-to <cite>H^1</cite> functions.</p>
+to <span class="math notranslate nohighlight">\(H^1\)</span> functions.</p>
 <div class="proof proof-type-lemma" id="id21">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.10</span>
+        <span class="proof-type">Lemma 4.19</span>
         
             <span class="proof-title-name">(Trace theorem for `H^1` functions)</span>
         
     </div><div class="proof-content">
-<p>Let <cite>u in H^1(Omega)</cite> for a polygonal domain <cite>Omega</cite>. Then the
-trace <cite>u|_{partialOmega}</cite> satisfies</p>
+<p>Let <span class="math notranslate nohighlight">\(u \in H^1(\Omega)\)</span> for a polygonal domain <span class="math notranslate nohighlight">\(\Omega\)</span>. Then the
+trace <span class="math notranslate nohighlight">\(u|_{\partial\Omega}\)</span> satisfies</p>
 <div class="math notranslate nohighlight">
 \[\|
 u\|_{L^2(\partial\Omega)} \leq C\|u\|_{H^1(\Omega)}.\]</div>
-</div></div><p>The interpretation of this result is that if <cite>uin H^1(Omega)</cite> then
-<cite>u|_{partialOmega}in L^2(partialOmega)</cite>.</p>
+</div></div><p>The interpretation of this result is that if <span class="math notranslate nohighlight">\(u\in H^1(\Omega)\)</span> then
+<span class="math notranslate nohighlight">\(u|_{\partial\Omega}\in L^2(\partial\Omega)\)</span>.</p>
 <div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Adapt the proof for <cite>C^0</cite> finite element functions, choosing <cite>uin
-C^infty(Omega)</cite>, and pass to the limit in <cite>H^1(Omega)</cite>.</div></div></div>
+Adapt the proof for <span class="math notranslate nohighlight">\(C^0\)</span> finite element functions, choosing <span class="math notranslate nohighlight">\(u\in
+C^\infty(\Omega)\)</span>, and pass to the limit in <span class="math notranslate nohighlight">\(H^1(\Omega)\)</span>.</div></div></div>
+</div>
 
 
           </div>

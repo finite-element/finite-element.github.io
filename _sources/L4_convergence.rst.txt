@@ -1,7 +1,7 @@
 .. default-role:: math
 
- Convergence of finite element approximations
-==============================================
+Convergence of finite element approximations
+============================================
 
 In this section we develop tools to prove convergence of finite
 element approximations to the exact solutions of PDEs.
