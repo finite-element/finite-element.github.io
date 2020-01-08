@@ -49,7 +49,7 @@
           <div class="body" role="main">
             
   <p>This is the webpage for the <a class="reference external" href="http://www.imperial.ac.uk/maths">Imperial College London Mathematics</a>  module
-M345A47 Finite Elements: numerical analysis and
+MATH96063/MATH97017/MATH97095 Finite Elements: numerical analysis and
 implementation. Other people are welcome to make use of the
 material here. The authors welcome feedback and would particularly
 appreciate an <a class="reference external" href="mailto:david&#46;ham&#37;&#52;&#48;imperial&#46;ac&#46;uk">email</a> if this
@@ -91,7 +91,7 @@ the Imperial College network at <a class="reference external" href="http://link.
 <li class="toctree-l2"><a class="reference internal" href="L1_introduction.html#integral-formulations-and-l-2">1.4. Integral formulations and <span class="math notranslate nohighlight">\(L_2\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="L1_introduction.html#finite-element-derivative">1.5. Finite element derivative</a></li>
 <li class="toctree-l2"><a class="reference internal" href="L1_introduction.html#towards-the-finite-element-discretisation">1.6. Towards the finite element discretisation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L1_introduction.html#computer-implementation">1.7. Computer implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L1_introduction.html#practical-implementation">1.7. Practical implementation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="L2_fespaces.html">2. Finite element spaces: local to global</a><ul>
@@ -100,39 +100,39 @@ the Imperial College network at <a class="reference external" href="http://link.
 <li class="toctree-l2"><a class="reference internal" href="L2_fespaces.html#d-and-3d-finite-elements">2.3. 2D and 3D finite elements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="L2_fespaces.html#some-more-exotic-elements">2.4. Some more exotic elements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="L2_fespaces.html#global-continuity">2.5. Global continuity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L2_fespaces.html#interpolation-operators">2.6. Interpolation operators</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="L3_feprobs.html">3. Finite element problems: solveability and stability</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="L3_feprobs.html#finite-element-spaces-and-other-hilbert-spaces">3.1. Finite element spaces and other Hilbert spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L3_feprobs.html#linear-forms-on-hilbert-spaces">3.2. Linear forms on Hilbert spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L3_feprobs.html#variational-problems-on-hilbert-spaces">3.3. Variational problems on Hilbert spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L3_feprobs.html#solveability-and-stability-of-some-finite-element-discretisations">3.4. Solveability and stability of some finite element discretisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L3_interpolation.html">3. Interpolation operators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="L3_interpolation.html#local-and-global-interpolation-operators">3.1. Local and global interpolation operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L3_interpolation.html#measuring-interpolation-errors">3.2. Measuring interpolation errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L3_interpolation.html#approximation-by-averaged-taylor-polynomials">3.3. Approximation by averaged Taylor polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L3_interpolation.html#local-and-global-interpolation-errors">3.4. Local and global interpolation errors</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="L4_convergence.html">4. Convergence of finite element approximations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="L4_convergence.html#weak-derivatives">4.1. Weak derivatives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L4_convergence.html#sobolev-spaces">4.2. Sobolev spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L4_convergence.html#variational-formulations-of-pdes">4.3. Variational formulations of PDEs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="L4_convergence.html#galerkin-approximations-of-linear-variational-problems">4.4. Galerkin approximations of linear variational problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L4_feprobs.html">4. Finite element problems: solveability and stability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="L4_feprobs.html#finite-element-spaces-and-other-hilbert-spaces">4.1. Finite element spaces and other Hilbert spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L4_feprobs.html#linear-forms-on-hilbert-spaces">4.2. Linear forms on Hilbert spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L4_feprobs.html#variational-problems-on-hilbert-spaces">4.3. Variational problems on Hilbert spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L4_feprobs.html#solveability-and-stability-of-some-finite-element-discretisations">4.4. Solveability and stability of some finite element discretisations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="L5_convergence.html">5. Convergence of finite element approximations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#weak-derivatives">5.1. Weak derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#sobolev-spaces">5.2. Sobolev spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#variational-formulations-of-pdes">5.3. Variational formulations of PDEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#galerkin-approximations-of-linear-variational-problems">5.4. Galerkin approximations of linear variational problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#interpolation-error-in-h-k-spaces">5.5. Interpolation error in <span class="math notranslate nohighlight">\(H^k\)</span> spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#convergence-of-the-finite-element-approximation-to-the-helmholtz-problem">5.6. Convergence of the finite element approximation to the Helmholtz problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#epilogue">5.7. Epilogue</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="lecture-slides">
-<h2>Lecture slides:<a class="headerlink" href="#lecture-slides" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference external" href="_static/Lecture1.pdf">The first set of lecture slides</a></li>
-<li><a class="reference external" href="_static/Lecture2.pdf">The second set of lecture slides</a></li>
-<li><a class="reference external" href="_static/Lecture3.pdf">The third set of lecture slides</a></li>
-<li><a class="reference external" href="_static/Lecture4.pdf">The fourth set of lecture slides</a></li>
-</ul>
 </div>
 <div class="section" id="past-exam-papers">
 <h2>Past exam papers<a class="headerlink" href="#past-exam-papers" title="Permalink to this headline">¶</a></h2>
 <p>Please note that for 2015-2018, there was no mastery component in the
-examination, and so there were four questions. In 2019 there will be
+examination, and so there were four questions. From 2019 on there are
 four questions plus one mastery question for 4th year/Masters credits.</p>
 <ul class="simple">
 <li><a class="reference external" href="_static/FE2015-exam-revised.pdf">2015 exam paper</a> and <a class="reference external" href="_static/FE2015-exam-soln.pdf">solutions</a></li>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3. Finite element problems: solveability and stability &#8212; Finite element course 2018.0 documentation</title>
+    <title>4. Finite element problems: solveability and stability &#8212; Finite element course 2018.0 documentation</title>
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -19,8 +19,8 @@
     <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Convergence of finite element approximations" href="L4_convergence.html" />
-    <link rel="prev" title="2. Finite element spaces: local to global" href="L2_fespaces.html" />
+    <link rel="next" title="5. Convergence of finite element approximations" href="L5_convergence.html" />
+    <link rel="prev" title="3. Interpolation operators" href="L3_interpolation.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
@@ -50,13 +50,13 @@
           <div class="body" role="main">
             
   <div class="section" id="finite-element-problems-solveability-and-stability">
-<h1>3. Finite element problems: solveability and stability<a class="headerlink" href="#finite-element-problems-solveability-and-stability" title="Permalink to this headline">¶</a></h1>
+<h1>4. Finite element problems: solveability and stability<a class="headerlink" href="#finite-element-problems-solveability-and-stability" title="Permalink to this headline">¶</a></h1>
 <p>In section 1, we saw the example of a finite element approximation
 for Poisson’s equation in the unit square, which we now recall below.</p>
-<div class="proof proof-type-definition" id="id3">
+<div class="proof proof-type-definition" id="id1">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.1</span>
+        <span class="proof-type">Definition 4.1</span>
         
     </div><div class="proof-content">
 <p>The finite element approximation <span class="math notranslate nohighlight">\(u_h \in \mathring{V}_h\)</span> to the
@@ -74,15 +74,15 @@ defined on Hilbert spaces. It will turn out that this machinery will
 also help us show that the approximation <span class="math notranslate nohighlight">\(u_h\)</span> converges to the exact
 solution <span class="math notranslate nohighlight">\(u\)</span> (and in what sense).</p>
 <div class="section" id="finite-element-spaces-and-other-hilbert-spaces">
-<h2>3.1. Finite element spaces and other Hilbert spaces<a class="headerlink" href="#finite-element-spaces-and-other-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<h2>4.1. Finite element spaces and other Hilbert spaces<a class="headerlink" href="#finite-element-spaces-and-other-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <p>In the previous sections, we introduced the concept of finite element
-spaces, which contain certain functions defined on a domain $Omega$.
+spaces, which contain certain functions defined on a domain <span class="math notranslate nohighlight">\(\Omega\)</span>.
 Finite element spaces are examples of vector spaces (hence the use
-of the word <a href="#id1"><span class="problematic" id="id2">``</span></a>space’‘).</p>
-<div class="proof proof-type-definition" id="id4">
+of the word “space”).</p>
+<div class="proof proof-type-definition" id="id2">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.2</span>
+        <span class="proof-type">Definition 4.2</span>
         
             <span class="proof-title-name">(Vector space)</span>
         
@@ -107,14 +107,13 @@ that:</div></blockquote>
 </ol>
 <blockquote>
 <div><span class="math notranslate nohighlight">\(au + v\in V\)</span> for all <span class="math notranslate nohighlight">\(u,v\in V\)</span>, <span class="math notranslate nohighlight">\(a\in \mathbb{R}\)</span>.</div></blockquote>
-</div></div><div class="proof proof-type-lemma" id="id5">
+</div></div><div class="proof proof-type-lemma" id="id3">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 3.3</span>
+        <span class="proof-type">Lemma 4.3</span>
         
     </div><div class="proof-content">
-</div></div><p>Let <span class="math notranslate nohighlight">\(V\)</span> be a finite element space. Then <span class="math notranslate nohighlight">\(V\)</span> is a vector space.</p>
-<div class="proof proof-type-proof">
+Let <span class="math notranslate nohighlight">\(V\)</span> be a finite element space. Then <span class="math notranslate nohighlight">\(V\)</span> is a vector space.</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
@@ -128,10 +127,10 @@ variables agree, i.e. <span class="math notranslate nohighlight">\(N_{i,j}[u+av]
 nodal variables. Therefore, <span class="math notranslate nohighlight">\(u+av\in V\)</span>.</div></div><p>We now introduce bilinear forms on vector spaces. Bilinear forms are
 important because they will represent the left hand side of finite
 element approximations of linear PDEs.</p>
-<div class="proof proof-type-definition" id="id6">
+<div class="proof proof-type-definition" id="id4">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.4</span>
+        <span class="proof-type">Definition 4.4</span>
         
             <span class="proof-title-name">(Bilinear form)</span>
         
@@ -146,22 +145,22 @@ element approximations of linear PDEs.</p>
 </div></blockquote>
 <p>It is a symmetric bilinear form if in addition, <span class="math notranslate nohighlight">\(b(v,w)=b(w,v)\)</span>, for all <span class="math notranslate nohighlight">\(v,w\in V\)</span>.</p>
 </div></div><p>Here are two important examples of bilinear forms on finite element spaces.</p>
-<div class="proof proof-type-example" id="id7">
+<div class="proof proof-type-example" id="id5">
 
     <div class="proof-title">
-        <span class="proof-type">Example 3.5</span>
+        <span class="proof-type">Example 4.5</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(V_h\)</span> be a finite element space. The following are bilinear
-forms on <span class="math notranslate nohighlight">\(V_h\)</span>,</div></div><div class="math notranslate nohighlight">
-\[b(u,v) = \int_\Omega u  v \, d x,
-b(u,v) = \int_\Omega \nabla u \cdot \nabla v \, d x.\]</div>
-<p>To turn a vector space into a Hilbert space, we need to select an
+<p>Let <span class="math notranslate nohighlight">\(V_h\)</span> be a finite element space. The following are bilinear
+forms on <span class="math notranslate nohighlight">\(V_h\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}b(u,v) &amp;= \int_\Omega u  v \, d x,\\b(u,v) &amp;= \int_\Omega \nabla u \cdot \nabla v \, d x.\end{aligned}\end{align} \]</div>
+</div></div><p>To turn a vector space into a Hilbert space, we need to select an
 inner product.</p>
-<div class="proof proof-type-definition" id="id8">
+<div class="proof proof-type-definition" id="id6">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.6</span>
+        <span class="proof-type">Definition 4.6</span>
         
             <span class="proof-title-name">(Inner product)</span>
         
@@ -173,10 +172,10 @@ a symmetric bilinear form on a vector space <span class="math notranslate nohigh
 <li><span class="math notranslate nohighlight">\((v,v)=0\iff v=0\)</span>.</li>
 </ol>
 </div></div><p>This enables the following definition.</p>
-<div class="proof proof-type-definition" id="id9">
+<div class="proof proof-type-definition" id="id7">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.7</span>
+        <span class="proof-type">Definition 4.7</span>
         
             <span class="proof-title-name">(Inner product space)</span>
         
@@ -184,10 +183,10 @@ a symmetric bilinear form on a vector space <span class="math notranslate nohigh
 We call a vector space <span class="math notranslate nohighlight">\((V, (\cdot,\cdot))\)</span> equipped with an inner product</div></div><p>an inner product space.</p>
 <p>We now introduce two important examples of inner products for finite
 element spaces.</p>
-<div class="proof proof-type-definition" id="id10">
+<div class="proof proof-type-definition" id="id8">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.8</span>
+        <span class="proof-type">Definition 4.8</span>
         
             <span class="proof-title-name">(`L^2` inner product)</span>
         
@@ -200,10 +199,10 @@ product between <span class="math notranslate nohighlight">\(f\)</span> and <spa
 understand functions in <span class="math notranslate nohighlight">\(L^2\)</span> as being equivalence classes of
 functions under the relation <span class="math notranslate nohighlight">\(f\equiv g \iff \int_\Omega (f-g)^2\, d
 x=0\)</span>.</p>
-<div class="proof proof-type-definition" id="id11">
+<div class="proof proof-type-definition" id="id9">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.9</span>
+        <span class="proof-type">Definition 4.9</span>
         
             <span class="proof-title-name">(`H^1` inner product)</span>
         
@@ -217,10 +216,10 @@ product between <span class="math notranslate nohighlight">\(f\)</span> and <spa
 \[( f,f)_{L^2} \leq  ( f,f)_{H^1}.\]</div>
 <p>The Schwarz inequality is a useful tool for bounding the size of inner
 products.</p>
-<div class="proof proof-type-theorem" id="id12">
+<div class="proof proof-type-theorem" id="id10">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.10</span>
+        <span class="proof-type">Theorem 4.10</span>
         
             <span class="proof-title-name">(Schwarz inequality)</span>
         
@@ -238,10 +237,10 @@ products.</p>
 See a course on vector spaces.</div></div><p>Our solveability conditions will make use of norms that measure the
 size of elements of a vector space (the size of finite element
 functions, in our case).</p>
-<div class="proof proof-type-definition" id="id13">
+<div class="proof proof-type-definition" id="id11">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.11</span>
+        <span class="proof-type">Definition 4.11</span>
         
             <span class="proof-title-name">(Norm)</span>
         
@@ -250,49 +249,65 @@ functions, in our case).</p>
 <ol class="arabic simple">
 <li><span class="math notranslate nohighlight">\(\|v\|\geq 0,\,\forall v \in V\)</span>,</li>
 <li><span class="math notranslate nohighlight">\(\|v\| = 0 \iff v=0\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(\|cv\|=|c|\|v\| \forall c\in \mathbb{R}, v\in V\)</span>,</li>
+<li><span class="math notranslate nohighlight">\(\|cv\|=|c|\|v\| \,\forall c\in \mathbb{R}, v\in V\)</span>,</li>
 <li><span class="math notranslate nohighlight">\(\|v+w\| \leq \|v\|+\|w\|\)</span>.</li>
 </ol>
 </div></div><p>For inner product spaces, there is a natural choice of norm.</p>
-<div class="proof proof-type-lemma" id="id14">
+<div class="proof proof-type-lemma" id="id12">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 3.12</span>
+        <span class="proof-type">Lemma 4.12</span>
         
     </div><div class="proof-content">
 Let <span class="math notranslate nohighlight">\((V,(\cdot,\cdot))\)</span> be an inner product space. Then <span class="math notranslate nohighlight">\(\|v\|=\sqrt{(v,v)}\)</span>
-defines a norm on <span class="math notranslate nohighlight">\(V\)</span>.</div></div><p>We introduce the following useful term.</p>
-<div class="proof proof-type-definition" id="id15">
+defines a norm on <span class="math notranslate nohighlight">\(V\)</span>.</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.13</span>
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>From bilinearity we have</p>
+<div class="math notranslate nohighlight">
+\[\|\alpha v\| = \sqrt{(\alpha v,\alpha v)} = \sqrt{\alpha^2( v,v)}=|\alpha|\|v\|,\]</div>
+<p>from bilinearity, hence property 3.</p>
+<p><span class="math notranslate nohighlight">\(\|v\|=( v,v)^{1/2} \geq 0\)</span>, hence property 1.</p>
+<p>If <span class="math notranslate nohighlight">\(0=\|v\|=( v,v)^{1/2} \implies (v,v)=0 \implies v=0\)</span>, hence property 2.</p>
+<p>We finally check the triangle inequality (property 4).</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\|u+v\|^2  &amp;= (u+v,u+v)\\&amp;= (u,u) + 2(u,v) + (v,v)\\&amp;= \|u\|^2 + 2(u,v) + \|v\|^2\\&amp;\leq \|u\|^2 + 2\|u\|\|v\| + \|v\|^2 \quad \mbox{[Schwarz]},\\&amp;= (\|u\|+\|v\|)^2,\end{aligned}\end{align} \]</div>
+<p>hence <span class="math notranslate nohighlight">\(\|u+v\|\leq \|u\|+\|v\|\)</span>.</p>
+</div></div><p>We introduce the following useful term.</p>
+<div class="proof proof-type-definition" id="id13">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 4.13</span>
         
             <span class="proof-title-name">(Normed space)</span>
         
     </div><div class="proof-content">
-A vector space <span class="math notranslate nohighlight">\(V\)</span> with a norm <span class="math notranslate nohighlight">\(\|\cdot\|\)</span> is called a normed</div></div><p>vector space, written <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span>.</p>
-<p>To finish our discussion of Hilbert spaces, we need to review the
-concept of completeness (encountered in an analysis course). This
-seems not so important since finite element spaces are finite
-dimensional, but later we shall consider sequences of finite element
-spaces with smaller and smaller triangles, where completeness becomes
-important.</p>
+A vector space <span class="math notranslate nohighlight">\(V\)</span> with a norm <span class="math notranslate nohighlight">\(\|\cdot\|\)</span> is called a normed
+vector space, written <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span>.</div></div><p>To finish our discussion of Hilbert spaces, we need to review the
+concept of completeness (which you might have encountered in an
+analysis course). This seems not so important since finite element
+spaces are finite dimensional, but later we shall consider sequences
+of finite element spaces with smaller and smaller triangles, where
+completeness becomes important.</p>
 <p>Completeness depends on the notion of a Cauchy sequence.</p>
-<div class="proof proof-type-definition" id="id16">
+<div class="proof proof-type-definition" id="id14">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.14</span>
+        <span class="proof-type">Definition 4.14</span>
         
             <span class="proof-title-name">(Cauchy sequence)</span>
         
     </div><div class="proof-content">
-A Cauchy sequence on a normed vector space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is a</div></div><p>sequence <span class="math notranslate nohighlight">\(\{v_i\}_{i=1}^{\infty}\)</span> satisfying <span class="math notranslate nohighlight">\(\|v_j-v_k\|\to 0\)</span> as
-<span class="math notranslate nohighlight">\(j,k\to \infty\)</span>.</p>
-<p>This definition leads to the definition of completeness.</p>
-<div class="proof proof-type-definition" id="id17">
+A Cauchy sequence on a normed vector space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is a
+sequence <span class="math notranslate nohighlight">\(\{v_i\}_{i=1}^{\infty}\)</span> satisfying <span class="math notranslate nohighlight">\(\|v_j-v_k\|\to 0\)</span> as
+<span class="math notranslate nohighlight">\(j,k\to \infty\)</span>.</div></div><p>This definition leads to the definition of completeness.</p>
+<div class="proof proof-type-definition" id="id15">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.15</span>
+        <span class="proof-type">Definition 4.15</span>
         
             <span class="proof-title-name">(Complete normed vector space)</span>
         
@@ -300,10 +315,10 @@ A Cauchy sequence on a normed vector space <span class="math notranslate nohighl
 A normed vector space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is complete if all Cauchy
 sequences have a limit <span class="math notranslate nohighlight">\(v\in V\)</span> such that <span class="math notranslate nohighlight">\(\|v-v_j\|\to 0\)</span>
 as <span class="math notranslate nohighlight">\(j\to\infty\)</span>.</div></div><p>Finally, we reach the definition of a Hilbert space.</p>
-<div class="proof proof-type-definition" id="id18">
+<div class="proof proof-type-definition" id="id16">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.16</span>
+        <span class="proof-type">Definition 4.16</span>
         
             <span class="proof-title-name">(Hilbert space)</span>
         
@@ -315,16 +330,16 @@ Hilbert spaces. Later we shall understand our finite element
 spaces as subspaces of infinite dimensional Hilbert spaces.</p>
 </div>
 <div class="section" id="linear-forms-on-hilbert-spaces">
-<h2>3.2. Linear forms on Hilbert spaces<a class="headerlink" href="#linear-forms-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<h2>4.2. Linear forms on Hilbert spaces<a class="headerlink" href="#linear-forms-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <p>We will now build some structures on Hilbert spaces that allow us to
 discuss variational problems on them, which includes finite element
 approximations such as the Poisson example discussed so far.</p>
 <p>Linear functionals are important as they will represent the right-hand
 side of finite element approximations of PDEs.</p>
-<div class="proof proof-type-definition" id="id19">
+<div class="proof proof-type-definition" id="id17">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.17</span>
+        <span class="proof-type">Definition 4.17</span>
         
             <span class="proof-title-name">(Continuous linear functional)</span>
         
@@ -341,10 +356,10 @@ side of finite element approximations of PDEs.</p>
 </li>
 </ol>
 </div></div><p>It is important that linear functionals are “nice” in the following sense.</p>
-<div class="proof proof-type-definition" id="id20">
+<div class="proof proof-type-definition" id="id18">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.18</span>
+        <span class="proof-type">Definition 4.18</span>
         
             <span class="proof-title-name">(Bounded functional)</span>
         
@@ -354,10 +369,10 @@ side of finite element approximations of PDEs.</p>
 \[|L(u)| \leq C\|u\|_H, \quad \forall u\in H.\]</div>
 </div></div><p>For linear functionals we have the following relationship between boundedness
 and continuity.</p>
-<div class="proof proof-type-lemma" id="id21">
+<div class="proof proof-type-lemma" id="id19">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 3.19</span>
+        <span class="proof-type">Lemma 4.19</span>
         
     </div><div class="proof-content">
 Let <span class="math notranslate nohighlight">\(L:H\to\mathbb{R}\)</span> be a linear functional. Then <span class="math notranslate nohighlight">\(L\)</span> is continuous if and only if it is bounded.</div></div><div class="proof proof-type-proof">
@@ -371,19 +386,19 @@ Let <span class="math notranslate nohighlight">\(L:H\to\mathbb{R}\)</span> be a 
 \quad \forall u,v\in H\)</span>. Pick <span class="math notranslate nohighlight">\(v=0\)</span>, then <span class="math notranslate nohighlight">\(|L(u)| = |L(u-0)| \leq
 C|u-0|_H = C|u|_H\)</span>, i.e. <span class="math notranslate nohighlight">\(L\)</span> is bounded.</p>
 </div></div><p>We can also interpret bounded linear functionals as elements of a vector space.</p>
-<div class="proof proof-type-definition" id="id22">
+<div class="proof proof-type-definition" id="id20">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.20</span>
+        <span class="proof-type">Definition 4.20</span>
         
             <span class="proof-title-name">(Dual space)</span>
         
     </div><div class="proof-content">
 Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space. The dual space <span class="math notranslate nohighlight">\(H'\)</span> is the space of continuous (or bounded) linear functionals <span class="math notranslate nohighlight">\(L:H\to \mathbb{R}\)</span>.</div></div><p>This dual space can also be equipped with a norm.</p>
-<div class="proof proof-type-definition" id="id23">
+<div class="proof proof-type-definition" id="id21">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.21</span>
+        <span class="proof-type">Definition 4.21</span>
         
             <span class="proof-title-name">(Dual norm)</span>
         
@@ -392,10 +407,10 @@ Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space. 
 <div class="math notranslate nohighlight">
 \[\|L\|_{H'} = \sup_{0\neq v\in H}\frac{L(v)}{\|v\|_H}.\]</div>
 </div></div><p>There is a simple mapping from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(H'\)</span>.</p>
-<div class="proof proof-type-lemma" id="id24">
+<div class="proof proof-type-lemma" id="id22">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 3.22</span>
+        <span class="proof-type">Lemma 4.22</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(u\in H\)</span>. Then the functional <span class="math notranslate nohighlight">\(L_u:H\to \mathbb{R}\)</span> defined by</p>
@@ -417,10 +432,10 @@ Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space. 
 <div class="math notranslate nohighlight">
 \[|L_u(v)| = |(u,v)| \leq C\|v\|_H \mbox{ with }C=\|u\|_H.\]</div>
 </div></div><p>The following famous theorem states that the converse is also true.</p>
-<div class="proof proof-type-theorem" id="id25">
+<div class="proof proof-type-theorem" id="id23">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.23</span>
+        <span class="proof-type">Theorem 4.23</span>
         
             <span class="proof-title-name">(Riesz representation theorem)</span>
         
@@ -439,13 +454,13 @@ Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space. 
     </div><div class="proof-content">
 See a course or textbook on Hilbert spaces.</div></div></div>
 <div class="section" id="variational-problems-on-hilbert-spaces">
-<h2>3.3. Variational problems on Hilbert spaces<a class="headerlink" href="#variational-problems-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<h2>4.3. Variational problems on Hilbert spaces<a class="headerlink" href="#variational-problems-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <p>We will consider finite element methods that can be formulated in the
 following way.</p>
-<div class="proof proof-type-definition" id="id26">
+<div class="proof proof-type-definition" id="id24">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.24</span>
+        <span class="proof-type">Definition 4.24</span>
         
             <span class="proof-title-name">(Linear variational problem)</span>
         
@@ -457,44 +472,44 @@ a linear form on <span class="math notranslate nohighlight">\(V\)</span>. This d
 \[b(u,v) = F(v), \quad \forall v\in V.\]</div>
 </div></div><p>We now discuss some important examples from finite element discretisations
 of linear PDEs.</p>
-<div class="proof proof-type-example" id="id27">
+<div class="proof proof-type-example" id="id25">
 
     <div class="proof-title">
-        <span class="proof-type">Example 3.25</span>
+        <span class="proof-type">Example 4.25</span>
         
             <span class="proof-title-name">(Pk discretisation of (modified) Helmholtz problem with Neumann bcs)</span>
         
     </div><div class="proof-content">
 <p>For some known function <span class="math notranslate nohighlight">\(f\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}b(u,v) = \int_\Omega uv + \nabla u \cdot \nabla v \, d x,\\F(v) = \int_\Omega vf \, d x,\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}b(u,v) &amp;= \int_\Omega uv + \nabla u \cdot \nabla v \, d x,\\F(v) &amp;= \int_\Omega vf \, d x,\end{aligned}\end{align} \]</div>
 <p>and <span class="math notranslate nohighlight">\(V\)</span> is the Pk continuous finite element space on a triangulation
 of <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
-</div></div><div class="proof proof-type-example" id="id28">
+</div></div><div class="proof proof-type-example" id="id26">
 
     <div class="proof-title">
-        <span class="proof-type">Example 3.26</span>
+        <span class="proof-type">Example 4.26</span>
         
             <span class="proof-title-name">(Pk discretisation of Poisson equation with partial Dirichlet bcs)</span>
         
     </div><div class="proof-content">
 <p>For some known function <span class="math notranslate nohighlight">\(f\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}b(u,v) = \int_\Omega \nabla u \cdot \nabla v \, d x,\\F(v) = \int_\Omega vf \, d x,\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}b(u,v) &amp;= \int_\Omega \nabla u \cdot \nabla v \, d x,\\F(v) &amp;= \int_\Omega vf \, d x,\end{aligned}\end{align} \]</div>
 <p>and <span class="math notranslate nohighlight">\(V\)</span> is the subspace of the Pk continuous finite element space on a
 triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> such that functions vanishes on
 <span class="math notranslate nohighlight">\(\Gamma_0\subseteq \partial \Omega\)</span>.</p>
-</div></div><div class="proof proof-type-example" id="id29">
+</div></div><div class="proof proof-type-example" id="id27">
 
     <div class="proof-title">
-        <span class="proof-type">Example 3.27</span>
+        <span class="proof-type">Example 4.27</span>
         
             <span class="proof-title-name">(Pk discretisation of Poisson equation with pure Neumann bcs)</span>
         
     </div><div class="proof-content">
 <p>For some known function <span class="math notranslate nohighlight">\(f\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}b(u,v) = \int_\Omega \nabla u \cdot \nabla v \, d x,\\F(v) = \int_\Omega vf \, d x,\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}b(u,v) &amp;= \int_\Omega \nabla u \cdot \nabla v \, d x,\\F(v) &amp;= \int_\Omega vf \, d x,\end{aligned}\end{align} \]</div>
 <p>and <span class="math notranslate nohighlight">\(V\)</span> is the subspace of the Pk continuous finite element space on a
 triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> such that functions satisfy</p>
 <div class="math notranslate nohighlight">
@@ -502,10 +517,10 @@ triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> su
 </div></div><p>We now introduce two important properties of bilinear forms that determine
 whether a linear variational problem is solveable or not. The first is
 continuity.</p>
-<div class="proof proof-type-definition" id="id30">
+<div class="proof proof-type-definition" id="id28">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.28</span>
+        <span class="proof-type">Definition 4.28</span>
         
             <span class="proof-title-name">(Continuous bilinear form)</span>
         
@@ -515,10 +530,10 @@ constant <span class="math notranslate nohighlight">\(0&lt;M&lt;\infty\)</span> 
 <div class="math notranslate nohighlight">
 \[|b(u,v)| \leq M\|u\|_V\|v\|_V.\]</div>
 </div></div><p>The second is coercivity.</p>
-<div class="proof proof-type-definition" id="id31">
+<div class="proof proof-type-definition" id="id29">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.29</span>
+        <span class="proof-type">Definition 4.29</span>
         
             <span class="proof-title-name">(Coercive bilinear form)</span>
         
@@ -530,10 +545,10 @@ constant <span class="math notranslate nohighlight">\(0&lt;\gamma&lt;\infty\)</s
 </div></div><p>These two properties combine in the following theorem providing sufficient
 conditions for existence and uniqueness for solutions of linear variational
 problems.</p>
-<div class="proof proof-type-theorem" id="id32">
+<div class="proof proof-type-theorem" id="id30">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.30</span>
+        <span class="proof-type">Theorem 4.30</span>
         
             <span class="proof-title-name">(Lax-Milgram theorem)</span>
         
@@ -555,10 +570,10 @@ element discretisations. In particular, we also want to know that our
 finite element discretisation continues to be solveable as the maximum
 triangle edge diameter <span class="math notranslate nohighlight">\(h\)</span> goes to zero. This motivates the following
 definition.</p>
-<div class="proof proof-type-definition" id="id33">
+<div class="proof proof-type-definition" id="id31">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.31</span>
+        <span class="proof-type">Definition 4.31</span>
         
             <span class="proof-title-name">(Stability)</span>
         
@@ -575,16 +590,16 @@ of <span class="math notranslate nohighlight">\(\|\cdot\|_V\)</span> (such as th
 introduced them.</p>
 </div>
 <div class="section" id="solveability-and-stability-of-some-finite-element-discretisations">
-<h2>3.4. Solveability and stability of some finite element discretisations<a class="headerlink" href="#solveability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
+<h2>4.4. Solveability and stability of some finite element discretisations<a class="headerlink" href="#solveability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
 <p>In this section we will introduce some tools for showing coercivity
 and continuity of bilinear forms, illustrated with finite element
 approximations of some linear PDEs where they may be applied.</p>
 <p>We start with the simplest example, for which continuity and
 coercivity are immediate.</p>
-<div class="proof proof-type-theorem" id="id34">
+<div class="proof proof-type-theorem" id="id32">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.32</span>
+        <span class="proof-type">Theorem 4.32</span>
         
             <span class="proof-title-name">(Solving the (modified) Helmholtz problem)</span>
         
@@ -621,26 +636,16 @@ continuity and coercivity immediate.</p>
 <p>For the Poisson problem, we have</p>
 <div class="math notranslate nohighlight">
 \[b(u,v) = \int_\Omega |\nabla u|^2 \, d x = |u|^2_{H^1} \neq \|u\|^2_{H^1}.\]</div>
-<p>Where we introduce the <span class="math notranslate nohighlight">\(H^1\)</span> seminorm from the following definition.</p>
-<div class="proof proof-type-definition" id="id35">
+<p>Where we recall the <span class="math notranslate nohighlight">\(H^1\)</span> seminorm from the interpolation
+section. Some additional results are required to show coercivity, as
+<span class="math notranslate nohighlight">\(b(u,u)\)</span> is not the <span class="math notranslate nohighlight">\(H^1\)</span> norm squared any more. A seminorm has all
+the properties of a norm except <span class="math notranslate nohighlight">\(|u|= 0 \nRightarrow u=0\)</span>, which is
+precisely what is needed in the Lax-Milgram theorem.  For the Poisson
+problem, coercivity comes instead from the following mean estimate.</p>
+<div class="proof proof-type-lemma" id="id33">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.33</span>
-        
-            <span class="proof-title-name">(`H^1` seminorm)</span>
-        
-    </div><div class="proof-content">
-<p>The <span class="math notranslate nohighlight">\(H^1\)</span> seminorm is defined as</p>
-<div class="math notranslate nohighlight">
-\[|u|_{H^1(\Omega)}^2 = \int_\Omega |\nabla u |^2 \, dx.\]</div>
-</div></div><p>A seminorm has all the properties of a norm except <span class="math notranslate nohighlight">\(|u|= 0 \nRightarrow
-u=0\)</span>.  Some additional results are required to show coercivity, as
-<span class="math notranslate nohighlight">\(b(u,u)\)</span> is not the <span class="math notranslate nohighlight">\(H^1\)</span> norm squared any more. For the Poisson
-problem this comes from the following mean estimate.</p>
-<div class="proof proof-type-lemma" id="id36">
-
-    <div class="proof-title">
-        <span class="proof-type">Lemma 3.34</span>
+        <span class="proof-type">Lemma 4.33</span>
         
             <span class="proof-title-name">(Mean estimate for finite element spaces)</span>
         
@@ -658,13 +663,14 @@ triangulation but dependent on (convex) <span class="math notranslate nohighligh
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
+<p>(Very similar to the proof of the estimate for averaged Taylor polynomials.)</p>
 <p>Let <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> be two points in <span class="math notranslate nohighlight">\(\Omega\)</span>. We note that
 <span class="math notranslate nohighlight">\(f(s)=u(y+s(x-y))\)</span> is a <span class="math notranslate nohighlight">\(C^0\)</span>, piecewise polynomial function of
 <span class="math notranslate nohighlight">\(s\)</span>. Let <span class="math notranslate nohighlight">\(s_0 = 0 &lt; s_1 &lt; s_2 &lt; \ldots &lt; s_{k-1} &lt; s_k = 1\)</span> denote the points
 where <span class="math notranslate nohighlight">\(y+s(x-y)\)</span> intersects a triangle edge or vertex. Then
 <span class="math notranslate nohighlight">\(f\)</span> is a continuous function when restricted to each interval <span class="math notranslate nohighlight">\([s_i,s_i+1]\)</span>, <span class="math notranslate nohighlight">\(i=0,\ldots,k-1\)</span>. This means that</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}f(s_{i+1}) - f(s_i) = \int_{s_i}^{s_{i+1}} f'(s) \, ds\\= \int_{s_i}^{s_{i+1}} \nabla u(y+s(x-y)) \, ds,\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}f(s_{i+1}) - f(s_i) &amp;= \int_{s_i}^{s_{i+1}} f'(s) \, ds\\&amp;= \int_{s_i}^{s_{i+1}} \nabla u(y+s(x-y)) \, ds,\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\(\nabla u\)</span> is the finite element derivative of <span class="math notranslate nohighlight">\(u\)</span>. Summing
 this up from <span class="math notranslate nohighlight">\(i=0\)</span> to <span class="math notranslate nohighlight">\(i=k-1\)</span>, we obtain</p>
 <div class="math notranslate nohighlight">
@@ -672,15 +678,15 @@ this up from <span class="math notranslate nohighlight">\(i=0\)</span> to <span 
 (x-y)\cdot\nabla u(y+s(x-y))\, d s.\]</div>
 <p>Then</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}u(x)-\bar{u} = \frac{1}{|\Omega|}\int_{\Omega}u(x)-u(y)\, d y\\= \frac{1}{|\Omega|}\int_{\Omega}(x-y)\cdot \int_{s=0}^1 \nabla u(y + s(x-y)) \, d s\, d y,\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}u(x)-\bar{u} &amp;= \frac{1}{|\Omega|}\int_{\Omega}u(x)-u(y)\, d y\\&amp;= \frac{1}{|\Omega|}\int_{\Omega}(x-y)\cdot \int_{s=0}^1 \nabla u(y + s(x-y)) \, d s\, d y,\end{aligned}\end{align} \]</div>
 <p>Therefore</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\|u-\bar{u}\|^2_{L^2(\Omega)}  =  \frac{1}{|\Omega|^2}\int_{\Omega}
+\[ \begin{align}\begin{aligned}\|u-\bar{u}\|^2_{L^2(\Omega)}  &amp;=  \frac{1}{|\Omega|^2}\int_{\Omega}
 \left(\int_\Omega (x-y)\cdot\int_{s=0}^1 \nabla u(y + s(x-y))\, d s
-\, d y\right)^2 \, d x,\\\leq  \frac{1}{|\Omega|^2}\int_{\Omega}
+\, d y\right)^2 \, d x,\\&amp;\leq  \frac{1}{|\Omega|^2}\int_{\Omega}
 \int_\Omega |x-y|^2 \, d y
 \int_\Omega  \int_{s=0}^1 |\nabla u(y + s(x-y))|^2\, d s
-\, d y \, d x,\\\leq  C\int_{\Omega}
+\, d y \, d x,\\&amp;\leq  C\int_{\Omega}
 \int_\Omega  \int_{s=0}^1 |\nabla u(y + s(x-y))|^2\, d s
 \, d y \, d x.\end{aligned}\end{align} \]</div>
 <p>We split this final quantity into two parts (to avoid singularities),</p>
@@ -688,24 +694,24 @@ this up from <span class="math notranslate nohighlight">\(i=0\)</span> to <span 
 \[\|u-\bar{u}\|^2_{L^2(\Omega)} \leq C(I + II),\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}I  = \int_\Omega \int_{s=0}^{1/2} \int_\Omega
-| \nabla u(y+s(x-y))|^2 \, d y \, d s \, d x,\\II  = \int_\Omega \int_{s=1/2}^2 \int_\Omega
+\[ \begin{align}\begin{aligned}I  &amp;= \int_\Omega \int_{s=0}^{1/2} \int_\Omega
+| \nabla u(y+s(x-y))|^2 \, d y \, d s \, d x,\\II  &amp;= \int_\Omega \int_{s=1/2}^2 \int_\Omega
 | \nabla u(y+s(x-y))|^2 \, d x \, d s \, d y,\end{aligned}\end{align} \]</div>
 <p>which we will now estimate separately.</p>
 <p>To evaluate <span class="math notranslate nohighlight">\(I\)</span>, change variables <span class="math notranslate nohighlight">\(y \to y' = y + s(x-y)\)</span>,
 defining <span class="math notranslate nohighlight">\(\Omega'_s\subset \Omega\)</span> as the image of <span class="math notranslate nohighlight">\(\Omega\)</span>
 under this transformation. Then,</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}I = \int_\Omega \int_{s=0}^{1/2} \frac{1}{(1-s)^2}
-\int_{\Omega'_s} |\nabla u(y')|^2 \, d y' \, d s \, d x,\\\leq \int_\Omega \int_{s=0}^{1/2} \frac{1}{(1-s)^2}
-\int_{\Omega} |\nabla u(y')|^2 \, d y' \, d s \, d x,\\= \frac{|\Omega|}{2} |\nabla u|^2_{H^1(\Omega)}.\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}I &amp;= \int_\Omega \int_{s=0}^{1/2} \frac{1}{(1-s)^2}
+\int_{\Omega'_s} |\nabla u(y')|^2 \, d y' \, d s \, d x,\\&amp;\leq \int_\Omega \int_{s=0}^{1/2} \frac{1}{(1-s)^2}
+\int_{\Omega} |\nabla u(y')|^2 \, d y' \, d s \, d x,\\&amp;= \frac{|\Omega|}{2} |\nabla u|^2_{H^1(\Omega)}.\end{aligned}\end{align} \]</div>
 <p>To evaluate <span class="math notranslate nohighlight">\(II\)</span>, change variables <span class="math notranslate nohighlight">\(x \to x' = y + s(x-y)\)</span>,
 defining <span class="math notranslate nohighlight">\(\Omega'_s\subset \Omega\)</span> as the image of <span class="math notranslate nohighlight">\(\Omega\)</span>
 under this transformation. Then,</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}II = \int_\Omega \int_{s=1/2}^2 \frac{1}{s^2}
-\int_{\Omega'_s} |\nabla u(x')|^2 \, d x' \, d s \, d y,\\\leq \int_\Omega \int_{s=0}^{1/2} \frac{1}{s^2}
-\int_{\Omega} |\nabla u(x')|^2 \, d x' \, d s \, d y,\\=|\Omega| |\nabla u|^2_{H^1(\Omega)}.\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}II &amp;= \int_\Omega \int_{s=1/2}^2 \frac{1}{s^2}
+\int_{\Omega'_s} |\nabla u(x')|^2 \, d x' \, d s \, d y,\\&amp;\leq \int_\Omega \int_{s=0}^{1/2} \frac{1}{s^2}
+\int_{\Omega} |\nabla u(x')|^2 \, d x' \, d s \, d y,\\&amp;=|\Omega| |\nabla u|^2_{H^1(\Omega)}.\end{aligned}\end{align} \]</div>
 <p>Combining,</p>
 <div class="math notranslate nohighlight">
 \[\|u-\bar{u}\|^2_{L^2(\Omega)} \leq C(I + II) = \frac{3C|\Omega|}{2}
@@ -713,10 +719,10 @@ under this transformation. Then,</p>
 <p>which has the required form.</p>
 </div></div><p>The mean estimate can now be used to show solveability for the Poisson
 problem with pure Neumann conditions.</p>
-<div class="proof proof-type-theorem" id="id37">
+<div class="proof proof-type-theorem" id="id34">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.35</span>
+        <span class="proof-type">Theorem 4.34</span>
         
             <span class="proof-title-name">(Solving the Poisson problem with pure Neumann conditions)</span>
         
@@ -729,6 +735,12 @@ defined on a triangulation <span class="math notranslate nohighlight">\(\mathcal
 \[\bar{V}_h = \{u\in V_h:\bar{u}=0\}.\]</div>
 <p>Then for <span class="math notranslate nohighlight">\(\bar{V}_h\)</span>, the finite element approximation <span class="math notranslate nohighlight">\(u_h\)</span> exists and the
 discretisation is stable in the <span class="math notranslate nohighlight">\(H^1\)</span> norm.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
 <p>Using the mean estimate, for <span class="math notranslate nohighlight">\(u\in\bar{V}_h\)</span>, we have</p>
 <div class="math notranslate nohighlight">
 \[\|u\|_{L^2}^2=\|u-\underbrace{\bar{u}}_{=0}\|^2_{L^2} \leq C^2|u|_{H^1}^2.\]</div>
@@ -743,10 +755,10 @@ discretisation is stable in the <span class="math notranslate nohighlight">\(H^1
 partial Dirichlet boundary conditions requires some additional
 results. We start by showing that the divergence theorem also applies
 to finite element derivatives of <span class="math notranslate nohighlight">\(C^0\)</span> finite element functions.</p>
-<div class="proof proof-type-lemma" id="id38">
+<div class="proof proof-type-lemma" id="id35">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 3.36</span>
+        <span class="proof-type">Lemma 4.35</span>
         
             <span class="proof-title-name">(Finite element divergence theorem)</span>
         
@@ -764,16 +776,16 @@ and <span class="math notranslate nohighlight">\(u\in V\)</span> be a member of 
         
     </div><div class="proof-content">
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\int_\Omega\nabla\cdot(\phi u)\, d x  = \sum_{K\in \mathcal{T}}
-\int_K \nabla\cdot(\phi u)\, d x,\\= \sum_{K\in \mathcal{T}} \int_{\partial K}\phi\cdot n_K u\, d S,\\= \int_{\partial\Omega} \phi\cdot n u\, d S
+\[ \begin{align}\begin{aligned}\int_\Omega\nabla\cdot(\phi u)\, d x  &amp;= \sum_{K\in \mathcal{T}}
+\int_K \nabla\cdot(\phi u)\, d x,\\&amp;= \sum_{K\in \mathcal{T}} \int_{\partial K}\phi\cdot n_K u\, d S,\\&amp;= \int_{\partial\Omega} \phi\cdot n u\, d S
 + \underbrace{\int_\Gamma \phi\cdot(n^++n^-)u\, d S}_{=0}.\end{aligned}\end{align} \]</div>
 </div></div><p>This allows us to prove the finite element trace theorem, which
 relates the <span class="math notranslate nohighlight">\(H^1\)</span> norm of a <span class="math notranslate nohighlight">\(C^0\)</span> finite element function to the <span class="math notranslate nohighlight">\(L^2\)</span>
 norm of the function restricted to the boundary.</p>
-<div class="proof proof-type-theorem" id="id39">
+<div class="proof proof-type-theorem" id="id36">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.37</span>
+        <span class="proof-type">Theorem 4.36</span>
         
             <span class="proof-title-name">(Trace theorem for continuous finite elements)</span>
         
@@ -783,12 +795,35 @@ norm of the function restricted to the boundary.</p>
 \[\|u\|_{L^2(\partial\Omega)} \leq C\|u\|_{H^1(\Omega)},\]</div>
 <p>where <span class="math notranslate nohighlight">\(C\)</span> is a constant that depends only on the geometry of
 <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
-</div></div><p>We can now use the trace inequality to estabilish solveability for the
-Poisson problem with (full or partial) Dirichlet conditions.</p>
-<div class="proof proof-type-theorem" id="id40">
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.38</span>
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>The first step is to construct a <span class="math notranslate nohighlight">\(C^1\)</span> function <span class="math notranslate nohighlight">\(\xi\)</span> satisfying
+<span class="math notranslate nohighlight">\(\xi\cdot n=1\)</span> on <span class="math notranslate nohighlight">\(\Omega\)</span>. We do this by finding a triangulation
+<span class="math notranslate nohighlight">\(\mathcal{T}_0\)</span> (unrelated to <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>), and defining an <span class="math notranslate nohighlight">\(C^1\)</span>
+Argyris finite element space <span class="math notranslate nohighlight">\(V_0\)</span> on it. We then choose <span class="math notranslate nohighlight">\(\xi\)</span> so that
+both Cartesian components are in <span class="math notranslate nohighlight">\(V_0\)</span>, satisfying the boundary
+condition.</p>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\|u\|_{L^2(\partial\Omega)}^2 &amp;=
+\int_{\partial\Omega} u^2 \, d S  = \int_{\partial\Omega}\xi\cdot n u^2\, d S,\\&amp;= \int_\Omega \nabla\cdot (\xi u^2)\, d x,\\&amp;= \int_\Omega u^2 \nabla\cdot \xi + 2u\xi\cdot\nabla u \, d x,\\&amp;\leq \|u\|_{L^2}^2\|\nabla\cdot\xi\|_{\infty} + 2|\xi|_{\infty}
+\|u\|_{L^2}|u|_{H^1},\end{aligned}\end{align} \]</div>
+<p>So,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\|u\|_{L^2(\partial\Omega)}^2   &amp;\leq \|u\|_{L^2}^2\|\nabla\cdot\xi\|_{\infty} + |\xi|_{\infty}
+\left(\|u\|_{L^2}^2 + |u|_{H^1}^2\right),\\&amp;\leq C\|u\|_{H^1}^2,\end{aligned}\end{align} \]</div>
+<p>where we have used the geometric-arithmetic mean inequality <span class="math notranslate nohighlight">\(2ab \leq
+a^2+b^2\)</span>.</p>
+</div></div><p>We can now use the trace inequality to estabilish solveability for the
+Poisson problem with (full or partial) Dirichlet conditions.</p>
+<div class="proof proof-type-theorem" id="id37">
+
+    <div class="proof-title">
+        <span class="proof-type">Theorem 4.37</span>
         
             <span class="proof-title-name">(Solving the Poisson problem with partial Dirichlet conditions)</span>
         
@@ -808,8 +843,8 @@ defined on a triangulation <span class="math notranslate nohighlight">\(\mathcal
     </div><div class="proof-content">
 <p>[Proof taken from Brenner and Scott]. We have</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\|v\|_{L^2(\Omega)}  \leq \|v-\bar{v}\|_{L^2(\Omega)} + \|\bar{v}\|_{L^2(\Omega)},\\\leq C|v|_{H^1(\Omega)} + \frac{|\Omega|^{1/2}}{|\Gamma_0|}
-\left|\int_{\Gamma_0}\bar{v}\, d S\right|,\\\leq C|v|_{H^1(\Omega)} + \frac{|\Omega|^{1/2}}{|\Gamma_0|}
+\[ \begin{align}\begin{aligned}\|v\|_{L^2(\Omega)}  &amp;\leq \|v-\bar{v}\|_{L^2(\Omega)} + \|\bar{v}\|_{L^2(\Omega)},\\&amp;\leq C|v|_{H^1(\Omega)} + \frac{|\Omega|^{1/2}}{|\Gamma_0|}
+\left|\int_{\Gamma_0}\bar{v}\, d S\right|,\\&amp;\leq C|v|_{H^1(\Omega)} + \frac{|\Omega|^{1/2}}{|\Gamma_0|}
 \left(\left|\int_{\Gamma_0}v\, d S + \int_{\Gamma_0}\bar{v}-v\, d S\right|\right).\end{aligned}\end{align} \]</div>
 <p>We have</p>
 <div class="math notranslate nohighlight">

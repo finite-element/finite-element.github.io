@@ -298,82 +298,8 @@ think again about the problem, the solver, and the initial guess.</p>
 </div>
 <div class="section" id="implementing-a-nonlinear-problem">
 <h2>8.5. Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This problem is intentionally stated in more general terms than the
-previous ones. It is your responsibility to decide on a code
-structure, to derive a method of manufactured solutions answer, and
-to create the convergence tests which demonstrate that your
-solution is correct.</p>
+<p>The mastery exercise will be released by the middle of the term.</p>
 </div>
-<div class="proof proof-type-exercise" id="id2">
-
-    <div class="proof-title">
-        <span class="proof-type">Exercise 8.1</span>
-        
-    </div><div class="proof-content">
-<p>Implement <a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery" title="fe_utils.solvers.mastery.solve_mastery"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a> so that it solves
-the following problem using degree 1 Lagrange elements over the
-unit square domain:</p>
-<div class="math notranslate nohighlight" id="equation-mastery">
-<span class="eqno">(8.15)<a class="headerlink" href="#equation-mastery" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla\cdot\left((u^2+1)\nabla u\right) = g\\u = b \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
-<p>Select the solution <span class="math notranslate nohighlight">\(u=x^2y^2\)</span> and compute the required forcing function <span class="math notranslate nohighlight">\(g\)</span> so
-that your solution solves the equations. Make sure your boundary
-condition function <span class="math notranslate nohighlight">\(b\)</span> is consistent with your chosen solution!</p>
-<p>Your submitted answer will consist of:</p>
-<ol class="arabic simple">
-<li>A written component containing your derivation of:<ol class="loweralpha">
-<li>The weak form of <a class="reference internal" href="#equation-mastery">(8.15)</a>; and</li>
-<li>the Jacobian; and</li>
-</ol>
-</li>
-</ol>
-<ol class="loweralpha" start="3">
-<li><p class="first">the forcing term implied by the specified manufactured solution.</p>
-<p>A neatly hand-written or a typed submission are equally acceptable.</p>
-</li>
-</ol>
-<ol class="arabic" start="2">
-<li><p class="first">The code to implement the solution. This should be in
-<code class="docutils literal notranslate"><span class="pre">fe_utils.solvers.mastery.py</span></code> in your implementation. A
-convergence test for your code is provided in
-<code class="docutils literal notranslate"><span class="pre">test/test_12_mastery_convergence.py</span></code>.</p>
-<p>The submission of your mastery exercise, and indeed the entire
-implementation exercise will be on Blackboard. You will submit a
-PDF containing the derivations above, and the git sha1 for the
-commit you would like to have marked.</p>
-</li>
-</ol>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">You can either implement your own Newton solver, or install the
-<a class="reference external" href="http://scipy.github.io/devdocs/index.html#module-scipy" title="(in SciPy v1.5.0.dev0+977ee7e)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> package and work out how to use the
-<a class="reference external" href="http://scipy.github.io/devdocs/generated/scipy.optimize.newton_krylov.html#scipy.optimize.newton_krylov" title="(in SciPy v1.5.0.dev0+977ee7e)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.newton_krylov()</span></code></a> function. For this simple
-case, a hand-coded Newton solver is probably the simplest
-approach. However, for problems which are larger and more complex,
-it will be advantageous to employ a technique more advanced than
-simple Newton and the case for using a well-engineered third party
-implementation is strong.</p>
-</div>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">It is an exceptionally useful aid to debugging to have your
-Newton iteration print out the value of the error norm and the
-iteration number for each iteration. If you wish to see the
-printed output while running the test, you can pass the <code class="docutils literal notranslate"><span class="pre">-s</span></code>
-option to <code class="docutils literal notranslate"><span class="pre">py.test</span></code>.</p>
-</div>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">You could insert a parameter of <span class="math notranslate nohighlight">\(\alpha\)</span> in front of the quadratic term
-in the equation. By setting <span class="math notranslate nohighlight">\(\alpha\)</span> to 0, you reduce your problem
-to the linear case. You can use the linear case to test your code
-initially, before setting <span class="math notranslate nohighlight">\(\alpha=1\)</span> for the actual exercise. Note
-that, in the linear case, Newton’s method will converge in exactly
-one iteration (although your algorithm will have to actually
-calculate two steps in order to know that convergence has occurred).</p>
-</div>
-</div></div></div>
 </div>
 
 
