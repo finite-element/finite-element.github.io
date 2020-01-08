@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>4. Finite element problems: solveability and stability &#8212; Finite element course 2018.0 documentation</title>
+    <title>4. Finite element problems: solvability and stability &#8212; Finite element course 2018.0 documentation</title>
     <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -49,8 +49,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="finite-element-problems-solveability-and-stability">
-<h1>4. Finite element problems: solveability and stability<a class="headerlink" href="#finite-element-problems-solveability-and-stability" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="finite-element-problems-solvability-and-stability">
+<h1>4. Finite element problems: solvability and stability<a class="headerlink" href="#finite-element-problems-solvability-and-stability" title="Permalink to this headline">¶</a></h1>
 <p>In section 1, we saw the example of a finite element approximation
 for Poisson’s equation in the unit square, which we now recall below.</p>
 <div class="proof proof-type-definition" id="id1">
@@ -67,7 +67,7 @@ solution <span class="math notranslate nohighlight">\(u_h\)</span> of Poisson’
 </div></div><p>A fundamental question is whether the solution <span class="math notranslate nohighlight">\(u_h\)</span> exists and is
 unique. This question is of practical interest because if these
 conditions are not satisfied, then the matrix-vector system for the
-basis coefficients of <span class="math notranslate nohighlight">\(u_h\)</span> will not be solveable. To answer this
+basis coefficients of <span class="math notranslate nohighlight">\(u_h\)</span> will not be solvable. To answer this
 question for this approximation (and others for related equations), we
 will use some general mathematical machinery about linear problems
 defined on Hilbert spaces. It will turn out that this machinery will
@@ -234,7 +234,7 @@ products.</p>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-See a course on vector spaces.</div></div><p>Our solveability conditions will make use of norms that measure the
+See a course on vector spaces.</div></div><p>Our solvability conditions will make use of norms that measure the
 size of elements of a vector space (the size of finite element
 functions, in our case).</p>
 <div class="proof proof-type-definition" id="id11">
@@ -515,7 +515,7 @@ triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> su
 <div class="math notranslate nohighlight">
 \[\int_\Omega u \, d x = 0.\]</div>
 </div></div><p>We now introduce two important properties of bilinear forms that determine
-whether a linear variational problem is solveable or not. The first is
+whether a linear variational problem is solvable or not. The first is
 continuity.</p>
 <div class="proof proof-type-definition" id="id28">
 
@@ -565,9 +565,9 @@ with</p>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-See a course or textbook on Hilbert spaces.</div></div><p>We are going to use this result to show solveability for finite
+See a course or textbook on Hilbert spaces.</div></div><p>We are going to use this result to show solvability for finite
 element discretisations. In particular, we also want to know that our
-finite element discretisation continues to be solveable as the maximum
+finite element discretisation continues to be solvable as the maximum
 triangle edge diameter <span class="math notranslate nohighlight">\(h\)</span> goes to zero. This motivates the following
 definition.</p>
 <div class="proof proof-type-definition" id="id31">
@@ -589,8 +589,8 @@ we say that the finite element discretisation is stable.</p>
 of <span class="math notranslate nohighlight">\(\|\cdot\|_V\)</span> (such as the <span class="math notranslate nohighlight">\(L^2\)</span> and <span class="math notranslate nohighlight">\(H^1\)</span> norms), which is why we
 introduced them.</p>
 </div>
-<div class="section" id="solveability-and-stability-of-some-finite-element-discretisations">
-<h2>4.4. Solveability and stability of some finite element discretisations<a class="headerlink" href="#solveability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="solvability-and-stability-of-some-finite-element-discretisations">
+<h2>4.4. Solvability and stability of some finite element discretisations<a class="headerlink" href="#solvability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
 <p>In this section we will introduce some tools for showing coercivity
 and continuity of bilinear forms, illustrated with finite element
 approximations of some linear PDEs where they may be applied.</p>
@@ -717,7 +717,7 @@ under this transformation. Then,</p>
 \[\|u-\bar{u}\|^2_{L^2(\Omega)} \leq C(I + II) = \frac{3C|\Omega|}{2}
 |u|_{H^1(\Omega)}^2,\]</div>
 <p>which has the required form.</p>
-</div></div><p>The mean estimate can now be used to show solveability for the Poisson
+</div></div><p>The mean estimate can now be used to show solvability for the Poisson
 problem with pure Neumann conditions.</p>
 <div class="proof proof-type-theorem" id="id34">
 
@@ -818,7 +818,7 @@ condition.</p>
 \left(\|u\|_{L^2}^2 + |u|_{H^1}^2\right),\\&amp;\leq C\|u\|_{H^1}^2,\end{aligned}\end{align} \]</div>
 <p>where we have used the geometric-arithmetic mean inequality <span class="math notranslate nohighlight">\(2ab \leq
 a^2+b^2\)</span>.</p>
-</div></div><p>We can now use the trace inequality to estabilish solveability for the
+</div></div><p>We can now use the trace inequality to estabilish solvability for the
 Poisson problem with (full or partial) Dirichlet conditions.</p>
 <div class="proof proof-type-theorem" id="id37">
 
