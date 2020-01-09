@@ -75,7 +75,7 @@ derivatives (so that we can integrate by parts as much as we like).</p>
     <div class="proof-title">
         <span class="proof-type">Definition 5.1</span>
         
-            <span class="proof-title-name">(Compact support on `\Omega`)</span>
+            <span class="proof-title-name">(Compact support on \(\Omega\))</span>
         
     </div><div class="proof-content">
 A function <span class="math notranslate nohighlight">\(u\)</span> has compact support on <span class="math notranslate nohighlight">\(\Omega\)</span> if there exists <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span>
@@ -84,7 +84,7 @@ such that <span class="math notranslate nohighlight">\(u(x)=0\)</span> when <spa
     <div class="proof-title">
         <span class="proof-type">Definition 5.2</span>
         
-            <span class="proof-title-name">(`C^\infty_0(\Omega)`)</span>
+            <span class="proof-title-name">(\(C^\infty_0(\Omega)\))</span>
         
     </div><div class="proof-content">
 We denote by <span class="math notranslate nohighlight">\(C^\infty_0(\Omega)\)</span> the subset of <span class="math notranslate nohighlight">\(C^\infty(\Omega)\)</span>
@@ -95,7 +95,7 @@ corresponding to functions that have emph{compact support} on
     <div class="proof-title">
         <span class="proof-type">Definition 5.3</span>
         
-            <span class="proof-title-name">(`L^1_{loc}`)</span>
+            <span class="proof-title-name">(\(L^1_{loc}\))</span>
         
     </div><div class="proof-content">
 <p>For triangles <span class="math notranslate nohighlight">\(K \subset \mathrm{int}\,(\Omega)\)</span>, we define</p>
@@ -192,7 +192,7 @@ of finite element approximations as <span class="math notranslate nohighlight">\
     <div class="proof-title">
         <span class="proof-type">Definition 5.9</span>
         
-            <span class="proof-title-name">(The Sobolev space `H^1`)</span>
+            <span class="proof-title-name">(The Sobolev space \(H^1\))</span>
         
     </div><div class="proof-content">
 <p><span class="math notranslate nohighlight">\(H^1(\Omega)\)</span> is the function space defined by</p>
@@ -206,7 +206,7 @@ with finite <span class="math notranslate nohighlight">\(H^k\)</span> norm.</p>
     <div class="proof-title">
         <span class="proof-type">Definition 5.10</span>
         
-            <span class="proof-title-name">(The Sobolev space `H^k`)</span>
+            <span class="proof-title-name">(The Sobolev space \(H^k\))</span>
         
     </div><div class="proof-content">
 <p><span class="math notranslate nohighlight">\(H^k(\Omega)\)</span> is the function space defined by</p>
@@ -223,7 +223,7 @@ limits remain in the spaces.</p>
     <div class="proof-title">
         <span class="proof-type">Lemma 5.11</span>
         
-            <span class="proof-title-name">(`H^k` spaces are Hilbert spaces)</span>
+            <span class="proof-title-name">(\(H^k\) spaces are Hilbert spaces)</span>
         
     </div><div class="proof-content">
 <p>The space <span class="math notranslate nohighlight">\(H^k(\Omega)\)</span> is closed.</p>
@@ -245,7 +245,7 @@ C^\infty_0(\Omega)\)</span>,</p>
     <div class="proof-title">
         <span class="proof-type">Theorem 5.12</span>
         
-            <span class="proof-title-name">(`H=W`)</span>
+            <span class="proof-title-name">(\(H=W\))</span>
         
     </div><div class="proof-content">
 Let <span class="math notranslate nohighlight">\(\Omega\)</span> be any open set. Then <span class="math notranslate nohighlight">\(H^k(\Omega)\cap C^\infty(\Omega)\)</span>
@@ -341,7 +341,7 @@ boundary.  We make the following definition.</p>
     <div class="proof-title">
         <span class="proof-type">Definition 5.16</span>
         
-            <span class="proof-title-name">(Trace of `H^1` functions)</span>
+            <span class="proof-title-name">(Trace of \(H^1\) functions)</span>
         
     </div><div class="proof-content">
 Let <span class="math notranslate nohighlight">\(u\in H^1(\Omega)\)</span> and choose <span class="math notranslate nohighlight">\(u_i\in C^\infty(\Omega)\)</span> such
@@ -355,7 +355,7 @@ to <span class="math notranslate nohighlight">\(H^1\)</span> functions.</p>
     <div class="proof-title">
         <span class="proof-type">Lemma 5.17</span>
         
-            <span class="proof-title-name">(Trace theorem for `H^1` functions)</span>
+            <span class="proof-title-name">(Trace theorem for \(H^1\) functions)</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(u \in H^1(\Omega)\)</span> for a polygonal domain <span class="math notranslate nohighlight">\(\Omega\)</span>. Then the
@@ -830,45 +830,49 @@ operator.</li>
 element methods, for which research continues to grow in both theory
 and application. There are many methods and approaches that go beyond
 the basic Galerkin approach described above. These include</p>
-<ul class="simple">
-<li>Discontinuous Galerkin methods, which use discontinuous finite
+<ul>
+<li><p class="first">Discontinuous Galerkin methods, which use discontinuous finite
 element spaces with jump conditions between cells to compensate for
 not having the required continuity. These problems do not fit into the
 standard Galerkin framework and new techniques have been developed to
-derive and analyse them.</li>
-<li>Mixed finite element methods, which consider systems of partial
+derive and analyse them.</p>
+</li>
+<li><p class="first">Mixed finite element methods, which consider systems of partial
 differential equations such as the Poisson equation in first-order
-form,</li>
-</ul>
+form,</p>
 <div class="math notranslate nohighlight">
 \[u - \nabla p = 0, \quad \nabla\cdot u = f.\]</div>
 <p>The variational forms corresponding to these systems are not coercive,
 but they are well-posed anyway, and additional techniques have been
 developed.</p>
-<ul class="simple">
-<li>Non-conforming methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
+</li>
+<li><p class="first">Non-conforming methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
 H^k\)</span>. For example, the Crouzeix-Raviart element uses linear functions
 that are only continuous at edge centres, so the functions are not
 in <span class="math notranslate nohighlight">\(C^0\)</span> and the functions do not have a weak derivative. However,
 using the finite element derivative in the weak form for <span class="math notranslate nohighlight">\(H^1\)</span> elliptic
 problems still gives a solvable system that converges at the optimal
 rate. Additional techniques have been
-developed to analyse this.</li>
-<li>Interior penalty methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
+developed to analyse this.</p>
+</li>
+<li><p class="first">Interior penalty methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
 H^k\)</span>. These methods are used to solve <span class="math notranslate nohighlight">\(H^k\)</span> elliptic problems using
 <span class="math notranslate nohighlight">\(H^l\)</span> finite element spaces with <span class="math notranslate nohighlight">\(l&lt;k\)</span>, using jump conditions to
 obtain a stable discretisation. Additional techniques have been
-developed to analyse this.</li>
-<li>Stabilised and multiscale methods for finite element approximation
+developed to analyse this.</p>
+</li>
+<li><p class="first">Stabilised and multiscale methods for finite element approximation
 of PDEs whose solutions have a wide range of scales, for example
 they might have boundary layers, turbulent structures or other
 phenomena. Resolving this features is often too expensive, so the
 goal is to find robust methods that behave well when the solution is
 not well resolved.  Additional techniques have been developed to
-analyse this.</li>
-<li>Hybridisable methods that involve flux functions that are supported
-only on cell facets.</li>
-<li>Currently there is a lot of activity around discontinuous
+analyse this.</p>
+</li>
+<li><p class="first">Hybridisable methods that involve flux functions that are supported
+only on cell facets.</p>
+</li>
+<li><p class="first">Currently there is a lot of activity around discontinuous
 Petrov-Galerkin methods, which select optimal test functions to
 maximise the stability of the discrete operator. This means that
 they can be applied to problems such as wave propagation which are
@@ -878,7 +882,8 @@ adaptive meshing starting from very coarse meshes. Another new and
 active area is virtual element methods, where the basis functions
 are not explicitly defined everywhere (perhaps just on the boundary
 of cells). This facilitates the use of arbitrary polyhedra as cells,
-leading to very flexible mesh choices.</li>
+leading to very flexible mesh choices.</p>
+</li>
 </ul>
 <p>All of these methods are driven by the requirements of different physical
 applications.</p>
