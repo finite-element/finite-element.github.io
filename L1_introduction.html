@@ -351,8 +351,7 @@ basis for <span class="math notranslate nohighlight">\(P1\)</span>, which we cal
             <span class="proof-title-name">(P1 nodal basis)</span>
         
     </div><div class="proof-content">
-<blockquote>
-<div><p>Let <span class="math notranslate nohighlight">\(\{z_i\}_{i=1}^{M}\)</span> indicate the vertices in the triangulation
+<p>Let <span class="math notranslate nohighlight">\(\{z_i\}_{i=1}^{M}\)</span> indicate the vertices in the triangulation
 <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>. For each vertex <span class="math notranslate nohighlight">\(z_i\)</span>, we define a basis function
 <span class="math notranslate nohighlight">\(\phi_i\in V_h\)</span> by</p>
 <div class="math notranslate nohighlight">
@@ -363,17 +362,19 @@ basis for <span class="math notranslate nohighlight">\(P1\)</span>, which we cal
 0 &amp; i\ne j.
 \end{array}
 \right.\end{split}\]</div>
-</div></blockquote>
 <p>We can define a similar basis for <span class="math notranslate nohighlight">\(\mathring{V}_h\)</span> by removing
 the basis functions <span class="math notranslate nohighlight">\(\phi_i\)</span> corresponding to vertices <span class="math notranslate nohighlight">\(z_i\)</span> on
-the Dirichlet boundaries <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(x=1\)</span>.</p>
-<p>If we expand <span class="math notranslate nohighlight">\(u_h\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in the basis for <span class="math notranslate nohighlight">\(\mathring{V}_h\)</span>,</p>
-<div class="math notranslate nohighlight">
+the Dirichlet boundaries <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(x=1\)</span>; the dimension of the
+resulting basis is <span class="math notranslate nohighlight">\(\bar{M}\)</span>.</p>
+</div></div><p>If we expand <span class="math notranslate nohighlight">\(u_h\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in the basis for <span class="math notranslate nohighlight">\(\mathring{V}_h\)</span>,</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
 \[u_h(x) = \sum_iu_i\phi_i(x), \quad v(x) = \sum_iv_i\phi_i(x),\]</div>
-</div></div><p>into Equation <a class="reference internal" href="#equation-eq-fe-poisson">(1.3)</a>, then we obtain</p>
+</div></blockquote>
+<p>into Equation <a class="reference internal" href="#equation-eq-fe-poisson">(1.3)</a>, then we obtain</p>
 <div class="math notranslate nohighlight">
-\[\sum_iv_i\left(\sum_j\int_\Omega \nabla \phi_i\cdot \nabla \phi_j
-\,dx x v_j - \int_\Omega \phi_if\,dx x\right) = 0.\]</div>
+\[\sum_{i=1}^{\bar{M}}v_i\left(\sum_{j=1}^{\bar{M}}\int_\Omega \nabla \phi_i\cdot \nabla \phi_j
+\,dx v_j - \int_\Omega \phi_if\,dx\right) = 0.\]</div>
 <p>Since this equation must hold for all <span class="math notranslate nohighlight">\(v\in \mathring{V}_h\)</span>, then
 it must hold for all basis coefficients <span class="math notranslate nohighlight">\(v_i\)</span>, and we obtain
 the matrix-vector system</p>
@@ -411,7 +412,7 @@ both <span class="math notranslate nohighlight">\(\phi_i\)</span> and <span clas
 make use of this and avoid computing integrals that return zero.
 item This motivates the concept of global assembly, the process of
 looping over elements, computing only the contributions to <span class="math notranslate nohighlight">\(K\)</span> that
-are non-zero from that element.  item Finally, the sparsity of <span class="math notranslate nohighlight">\(K\)</span>
+are non-zero from that element. Finally, the sparsity of <span class="math notranslate nohighlight">\(K\)</span>
 means that the system should be solved using numerical linear algebra
 algorithms that can exploit this sparsity.</p>
 <p>Having set out the main challenges of the computational
