@@ -107,7 +107,7 @@ This enables the following definition.
 .. proof:definition:: Inner product space
 		      
    We call a vector space `(V, (\cdot,\cdot))` equipped with an inner product
-an inner product space.
+   an inner product space.
 
 We now introduce two important examples of inner products for finite
 element spaces.
@@ -186,7 +186,7 @@ For inner product spaces, there is a natural choice of norm.
 
       \|\alpha v\| = \sqrt{(\alpha v,\alpha v)} = \sqrt{\alpha^2( v,v)}=|\alpha|\|v\|,
 
-   from bilinearity, hence property 3.
+   hence property 3.
    
    `\|v\|=( v,v)^{1/2} \geq 0`, hence property 1.
 
