@@ -39,15 +39,16 @@ of the word "space").
 
    A vector space over the real numbers `\mathbb{R}` is a set `V`,
    with an addition operator `+:V\times V\to V`, plus a scalar
-   multiplication operator `*:\mathbb{R}\times V \to V`, such
+   multiplication operator `\times:\mathbb{R}\times V \to V`, such
    that:
 
   #. There exists a unique zero element `e\in V` such that:
-    * `ke = e` for all `k\in \mathbb{R}`,
-    * `0v = e` for all `v \in V`,
+    * `k\times e = e` for all `k\in \mathbb{R}`,
+    * `0\times v = e` for all `v \in V`,
     * `e+v = v` for all `v \in V`.
-  #. `V` is closed under addition and multiplication, \emph{i.e.},
-    `au + v\in V` for all `u,v\in V`, `a\in \mathbb{R}`.
+
+  #. `V` is closed under addition and multiplication, i.e.,
+    `a\times u + v\in V` for all `u,v\in V`, `a\in \mathbb{R}`.
 
 .. proof:lemma::
 
