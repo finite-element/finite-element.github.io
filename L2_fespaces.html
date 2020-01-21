@@ -314,7 +314,7 @@ so</p>
 \[c_{i_1,\ldots,i_{d-1},0} = 0, \quad \forall |i_1+\ldots+i_{d-1}|\leq k.\]</div>
 <p>This means we may rewrite</p>
 <div class="math notranslate nohighlight">
-\[P(x) = \underbrace{x_d}_{L(x)}\underbrace{\left(\sum_{i_d=1}^d\sum_{|i_1+\ldots+i_{d-1}|\leq k - i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d-1}\prod_{l=1}^{d-1} x_{l}^{i_l}\right)}_{Q(x)},\]</div>
+\[ \begin{align}\begin{aligned}P(x) = {L(x)}\underbrace{\left(\sum_{i_d=1}^k\sum_{|i_1+\ldots+i_{d-1}|\leq k - i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d-1}\prod_{l=1}^{d-1} x_{l}^{i_l}\right)},\\P(x) = \underbrace{x_d}_{L(x)}\underbrace{\left(\sum_{i_d=0}^{k-1}\sum_{|i_1+\ldots+i_{d-1}|\leq k - i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d-1}\prod_{l=1}^{d-1} x_{l}^{i_l}\right)}_{Q(x)},\end{aligned}\end{align} \]</div>
 <p>with <span class="math notranslate nohighlight">\(\deg(Q)=k-1\)</span>.</p>
 </div></div><p>Equipped with this tool we can consider some finite elements in two
 dimensions.</p>
