@@ -181,7 +181,7 @@ integral sense.
 .. proof:definition:: Averaged Taylor polynomial
 
    Let `\Omega\subset \mathbb{R}^n` be a domain with diameter `d`, that
-   is star-shaped with respect to a ball `B` with radius `\epsilon`,
+   is star-shaped with respect to a ball `B` with radius `\epsilon<d`,
    contained within `\Omega`. For `f\in C^{k,\infty}` the
    averaged Taylor polynomial `Q_{k,B}f\in \mathcal{P}_k` is defined
    as
