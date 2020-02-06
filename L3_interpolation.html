@@ -190,7 +190,8 @@ important result (which we will return to much later).</p>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional domain with Lipschitz boundary,
-and let <span class="math notranslate nohighlight">\(u\)</span> be a continuous function.
+and let <span class="math notranslate nohighlight">\(u\)</span> be a continuous function with <span class="math notranslate nohighlight">\(k\)</span> continuous derivatives,
+i.e. <span class="math notranslate nohighlight">\(u \in C^{k,\infty}(\Omega)\)</span>.
 Let
 <span class="math notranslate nohighlight">\(k\)</span> be an integer with <span class="math notranslate nohighlight">\(k&gt;n/2\)</span>. Then there exists a constant
 <span class="math notranslate nohighlight">\(C\)</span> (depending only on <span class="math notranslate nohighlight">\(\Omega\)</span>) such that</p>
@@ -207,7 +208,7 @@ See a functional analysis course or textbook.</div></div><p>This is extremely us
 <span class="math notranslate nohighlight">\(H^k\)</span> norm by integrating and know that it gives an upper bound on the
 value of <span class="math notranslate nohighlight">\(u\)</span> at each point. We say that <span class="math notranslate nohighlight">\(u\)</span> is in <span class="math notranslate nohighlight">\(C^\infty(\Omega)\)</span>
 if <span class="math notranslate nohighlight">\(\|u\|_{C^\infty(\Omega)}&lt;\infty\)</span>, and Sobolev’s inequality tells
-us that this is the case if <span class="math notranslate nohighlight">\(\|u\|_{H^k(\Omega)}&lt;\infty\)</span></p>
+us that this is the case if <span class="math notranslate nohighlight">\(\|u\|_{H^k(\Omega)}&lt;\infty\)</span>.</p>
 <p>This result can be easily extended to
 derivatives.</p>
 <div class="proof proof-type-corollary" id="id9">
@@ -219,8 +220,7 @@ derivatives.</p>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be a <span class="math notranslate nohighlight">\(n\)</span>-dimensional domain with Lipschitz boundary,
-and let <span class="math notranslate nohighlight">\(u\)</span> be a continuous function with continuous derivatives
-up to degree <span class="math notranslate nohighlight">\(m\)</span>.
+and let <span class="math notranslate nohighlight">\(u \in C^{k,\infty}(\Omega)\)</span>
 Let
 <span class="math notranslate nohighlight">\(k\)</span> be an integer with <span class="math notranslate nohighlight">\(k-m&gt;n/2\)</span>. Then there exists a constant
 <span class="math notranslate nohighlight">\(C\)</span> (depending only on <span class="math notranslate nohighlight">\(\Omega\)</span>) such that</p>
@@ -253,7 +253,7 @@ integral sense.</p>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\Omega\subset \mathbb{R}^n\)</span> be a domain with diameter <span class="math notranslate nohighlight">\(d\)</span>, that
-is star-shaped with respect to a ball <span class="math notranslate nohighlight">\(B\)</span> with radius <span class="math notranslate nohighlight">\(\epsilon&lt;d\)</span>,
+is star-shaped with respect to a ball <span class="math notranslate nohighlight">\(B\)</span>
 contained within <span class="math notranslate nohighlight">\(\Omega\)</span>. For <span class="math notranslate nohighlight">\(f\in C^{k,\infty}\)</span> the
 averaged Taylor polynomial <span class="math notranslate nohighlight">\(Q_{k,B}f\in \mathcal{P}_k\)</span> is defined
 as</p>
@@ -261,8 +261,7 @@ as</p>
 \[Q_{k,B} f(x) = \frac{1}{|B|}\int_{B} T^kf(y,x) \, d y,\]</div>
 <p>where <span class="math notranslate nohighlight">\(T^kf\)</span> is the Taylor polynomial of degree <span class="math notranslate nohighlight">\(k\)</span> of <span class="math notranslate nohighlight">\(f\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[T^k f(y,x) =
-\sum_{|\alpha|\leq k} D^\alpha f(y)\frac{(x-y)^\alpha}{\alpha!},\]</div>
+\[ \begin{align}\begin{aligned}T^k f(y,x) = \sum_{|\alpha|\leq k} D^\alpha f(y)\frac{(x-y)^\alpha}{\alpha!},\\\alpha! = \prod_{i=1}^n \alpha_i!,\\x^\alpha = \prod_{i=1}^n x_i^{\alpha_i}.\end{aligned}\end{align} \]</div>
 </div></div><p>Now we develop an estimate of the error <span class="math notranslate nohighlight">\(T^kf - f\)</span>.</p>
 <div class="proof proof-type-theorem" id="id11">
 <span id="taylorerror"></span>
@@ -270,14 +269,13 @@ as</p>
         <span class="proof-type">Theorem 3.11</span>
         
     </div><div class="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(\Omega\subset \mathbb{R}^n\)</span> be a domain with diameter <span class="math notranslate nohighlight">\(d\)</span>, that
-is star-shaped with respect to a ball <span class="math notranslate nohighlight">\(B\)</span> with radius <span class="math notranslate nohighlight">\(\epsilon\)</span>,
-contained within <span class="math notranslate nohighlight">\(\Omega\)</span>. Let <span class="math notranslate nohighlight">\(k\)</span> be an integer with <span class="math notranslate nohighlight">\(k-m &lt; n/2\)</span>.
-Then there exists a constant <span class="math notranslate nohighlight">\(C(k,n)\)</span> such that
-for <span class="math notranslate nohighlight">\(0\leq |\beta| \leq k+1\)</span> and all <span class="math notranslate nohighlight">\(f \in C^{m,\infty}(\Omega)\)</span>,</p>
+<p>Let <span class="math notranslate nohighlight">\(\Omega\subset \mathbb{R}^n\)</span> be a domain with diameter <span class="math notranslate nohighlight">\(d\)</span>,
+that is star-shaped with respect to a ball <span class="math notranslate nohighlight">\(B\)</span> contained within
+<span class="math notranslate nohighlight">\(\Omega\)</span>.  Then there exists a constant <span class="math notranslate nohighlight">\(C(k,n)\)</span> such that for
+<span class="math notranslate nohighlight">\(0\leq |\beta| \leq k+1\)</span> and all <span class="math notranslate nohighlight">\(f \in C^{k+1,\infty}(\Omega)\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\|D^\beta(f-Q_{k,B}f)\|_{L^2} \leq C\frac{|\Omega|^{1/2}}{|B|^{1/2}}
-d^{k+1-|\beta|}\|\nabla^{k+1}f\|_{L^2(\Omega)}.\]</div>
+d^{k+1-|\beta|}\|f\|_{L^2(\Omega)}.\]</div>
 </div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
@@ -289,10 +287,7 @@ d^{k+1-|\beta|}\|\nabla^{k+1}f\|_{L^2(\Omega)}.\]</div>
 \[f(x) - T_kf(y,x) =
 (k+1)\sum_{|\alpha|=k+1}\frac{(x-y)^\alpha}{\alpha!}
 \int_0^1 D^\alpha f(ty + (1-t)x)t^k\, d t,\]</div>
-<p>where</p>
-<div class="math notranslate nohighlight">
-\[\alpha! = \prod_{i=1}^n \alpha_i!,\]</div>
-<p>when <span class="math notranslate nohighlight">\(f \in C^{m,\infty}\)</span> for <span class="math notranslate nohighlight">\(m&gt;k\)</span>.</p>
+<p>when <span class="math notranslate nohighlight">\(f \in C^{k+1,\infty}\)</span>.</p>
 <p>Integration over <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(B\)</span> and dividing by <span class="math notranslate nohighlight">\(|B|\)</span> gives</p>
 <div class="math notranslate nohighlight">
 \[f(x) - Q_{k,B}f(x) = \frac{k+1}{|B|}\sum_{|\alpha|=k+1}
@@ -352,7 +347,7 @@ of the triangle we are interpolating to.</p>
 <p>Let <span class="math notranslate nohighlight">\(K_1\)</span> be a triangle with diameter <span class="math notranslate nohighlight">\(1\)</span>.
 There exists a constant <span class="math notranslate nohighlight">\(C(k,n)\)</span> such that</p>
 <div class="math notranslate nohighlight">
-\[\|f-Q_{k,B}f\|_{H^k(K_1)} \leq C|\nabla^{k+1}f|_{H^{k+1}(K_1)}.\]</div>
+\[\|f-Q_{k,B}f\|_{H^k(K_1)} \leq C|f|_{H^{k+1}(K_1)}.\]</div>
 </div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
@@ -383,7 +378,7 @@ evaluations of derivatives of degree <span class="math notranslate nohighlight">
 \[\|N_i\|_{C^{l,\infty}(K_1)'} = \sup_{\|u\|_{C^{l,\infty}(K_1)}&gt;0}
 \frac{|N_i(u)|}{\|u\|_{W_\infty^l(K_1)}} \qquad \qquad
 (\mbox{Dual norm of }N_i)\]</div>
-<p>Let <span class="math notranslate nohighlight">\(u\in C^{l,\infty}(\Omega)\)</span> with <span class="math notranslate nohighlight">\(m\geq m\)</span>, and let <span class="math notranslate nohighlight">\(k-l &gt; n/2\)</span>.
+<p>Let <span class="math notranslate nohighlight">\(k-l &gt; n/2\)</span>, and <span class="math notranslate nohighlight">\(u\in C^{k,\infty}(\Omega)\)</span>.
 Then</p>
 <div class="math notranslate nohighlight">
 \[\|\mathcal{I}_{K_1}u\|_{H^k(K_1)} \leq C\|u\|_{H^k(K_1)}.\]</div>
@@ -411,7 +406,7 @@ adding and subtracting something, in this case the Taylor polynomial.</p>
 <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> involve only evaluations of functions or evaluations
 of derivatives of degree <span class="math notranslate nohighlight">\(\leq l\)</span>, and <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> contain all
 polynomials of degree <span class="math notranslate nohighlight">\(k\)</span> and below, with <span class="math notranslate nohighlight">\(k&gt;l+n/2\)</span>. Let <span class="math notranslate nohighlight">\(u\in
-C^{m,\infty}(K_1)\)</span>, with <span class="math notranslate nohighlight">\(k+1-m&gt;n/2\)</span>. Then for <span class="math notranslate nohighlight">\(i \leq k\)</span>, the
+C^{k+1,\infty}(K_1)\)</span>. Then for <span class="math notranslate nohighlight">\(i \leq k\)</span>, the
 local interpolation operator satisfies</p>
 <div class="math notranslate nohighlight">
 \[|\mathcal{I}_{K_1}u-u|_{H^i(K_1)} \leq C_1|u|_{H^{k+1}(K_1)}.\]</div>
@@ -440,7 +435,7 @@ with diameter <span class="math notranslate nohighlight">\(h\)</span>.</p>
 derivatives of degree <span class="math notranslate nohighlight">\(\leq l\)</span>, and <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> contains all
 polynomials of degree <span class="math notranslate nohighlight">\(k\)</span> and below, with <span class="math notranslate nohighlight">\(k&gt;l+n/2\)</span>.
 Let <span class="math notranslate nohighlight">\(u\in
-C^{m,\infty}(K_1)\)</span>, with <span class="math notranslate nohighlight">\(k+1-m&gt;n/2\)</span>.
+C^{k+1,\infty}(K_1)\)</span>.
 Then for <span class="math notranslate nohighlight">\(i \leq k\)</span>, the local interpolation operator
 satisfies</p>
 <div class="math notranslate nohighlight">
@@ -469,28 +464,26 @@ spaces defined on the whole triangulation.</p>
         <span class="proof-type">Theorem 3.16</span>
         
     </div><div class="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation with finite elements
-<span class="math notranslate nohighlight">\((K_i,\mathcal{P}_i,\mathcal{N}_i)\)</span>, such that the minimum aspect
-ratio <span class="math notranslate nohighlight">\(r\)</span> of the triangles <span class="math notranslate nohighlight">\(K_i\)</span> satisfies <span class="math notranslate nohighlight">\(r&gt;0\)</span>, and such that the
-nodal variables in <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> involve only evaluations of
-functions or evaluations of derivatives of degree <span class="math notranslate nohighlight">\(\leq l\)</span>, and
-<span class="math notranslate nohighlight">\(\mathcal{P}\)</span> contains all polynomials of degree <span class="math notranslate nohighlight">\(k\)</span> and below,
-with <span class="math notranslate nohighlight">\(k&gt;l+n/2\)</span>.  Let <span class="math notranslate nohighlight">\(u\in C^{m,\infty}(K_1)\)</span>, with <span class="math notranslate nohighlight">\(k+1-m&gt;n/2\)</span>.
-Let <span class="math notranslate nohighlight">\(h\)</span> be the maximum over all of the
-triangle diameters, with <span class="math notranslate nohighlight">\(0\leq h&lt;1\)</span>. Let <span class="math notranslate nohighlight">\(V\)</span> be the corresponding
-<span class="math notranslate nohighlight">\(C^r\)</span> finite element space.  Then for <span class="math notranslate nohighlight">\(i\leq k\)</span> and <span class="math notranslate nohighlight">\(i \leq r+1\)</span>, the
-global interpolation operator satisfies</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> with finite
+elements <span class="math notranslate nohighlight">\((K_i,\mathcal{P}_i,\mathcal{N}_i)\)</span>, such that the minimum
+aspect ratio <span class="math notranslate nohighlight">\(\gamma\)</span> of the triangles <span class="math notranslate nohighlight">\(K_i\)</span> satisfies <span class="math notranslate nohighlight">\(\gamma&gt;0\)</span>,
+and such that the nodal variables in <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> involve only
+evaluations of functions or evaluations of derivatives of degree
+<span class="math notranslate nohighlight">\(\leq l\)</span>, and <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> contains all polynomials of degree <span class="math notranslate nohighlight">\(k\)</span>
+and below, with <span class="math notranslate nohighlight">\(k&gt;l+n/2\)</span>.  Let <span class="math notranslate nohighlight">\(u\in C^{k+1,\infty}(K_1)\)</span>.  Let
+<span class="math notranslate nohighlight">\(h\)</span> be the maximum over all of the triangle diameters, with <span class="math notranslate nohighlight">\(0\leq
+h&lt;1\)</span>. Then for <span class="math notranslate nohighlight">\(i\leq k\)</span>, the global interpolation operator
+satisfies</p>
 <div class="math notranslate nohighlight">
 \[\|\mathcal{I}_{h}u-u\|_{H^i(\Omega)} \leq Ch^{k+1-i}|u|_{H^{k+1}(\Omega)}.\]</div>
+<p>(Recalling that we use the “broken” finite element derivative in norms
+for <span class="math notranslate nohighlight">\(\mathcal{I}_hu\)</span> over <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
 </div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-<p>If <span class="math notranslate nohighlight">\(V\)</span> is a <span class="math notranslate nohighlight">\(C^r\)</span> finite element space, then <span class="math notranslate nohighlight">\(\mathcal{I}_hu\)</span> satisfies
-the conditions of the previous result.</p>
-<p>Then we may write</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\|\mathcal{I}_{h}u-u\|_{H^i(\Omega)}^2 &amp;=
 \sum_{K\in\mathcal{T}}\|\mathcal{I}_{K}u-u\|_{H^i(K)}^2,\\&amp;\leq \sum_{K\in\mathcal{T}}C_Kd_K^{2(k+1-i)}|u|_{H^{k+1}(K)}^2,\\&amp;\leq C_{\max}h^{2(k+1-i)}\sum_{K\in\mathcal{T}}|u|_{H^{k+1}(K)}^2,\\&amp;= C_{\max}h^{2(k+1-i)}|u|_{H^{k+1}(\Omega)}^2,\end{aligned}\end{align} \]</div>
