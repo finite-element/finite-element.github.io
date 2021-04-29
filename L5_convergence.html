@@ -1,25 +1,26 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>5. Convergence of finite element approximations &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Convergence of finite element approximations &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Computational tools" href="tools.html" />
+    <link rel="next" title="6. Stokes equation" href="L6_stokes.html" />
     <link rel="prev" title="4. Finite element problems: solvability and stability" href="L4_feprobs.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
@@ -50,11 +51,24 @@
           <div class="body" role="main">
             
   <div class="section" id="convergence-of-finite-element-approximations">
-<h1>5. Convergence of finite element approximations<a class="headerlink" href="#convergence-of-finite-element-approximations" title="Permalink to this headline">¶</a></h1>
+<span id="convergence"></span><h1><span class="section-number">5. </span>Convergence of finite element approximations<a class="headerlink" href="#convergence-of-finite-element-approximations" title="Permalink to this headline">¶</a></h1>
 <p>In this section we develop tools to prove convergence of finite
 element approximations to the exact solutions of PDEs.</p>
-<div class="section" id="weak-derivatives">
-<h2>5.1. Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490669563"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5d2d1721-725f-43ef-bcdd-ac8f01056006">watch this video on Panopto</a></p>
+</div>
+</details><div class="section" id="weak-derivatives">
+<h2><span class="section-number">5.1. </span>Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Permalink to this headline">¶</a></h2>
 <p>Consider a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> with recursively refined
 triangulations <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span> and corresponding finite element spaces
 <span class="math notranslate nohighlight">\(V_h\)</span>.  Given stable finite element variational problems, we have a
@@ -70,32 +84,34 @@ element functions, without reference to a mesh. This requires some
 preliminary definitions, starting by considering some very smooth
 functions that vanish on the boundaries together with their
 derivatives (so that we can integrate by parts as much as we like).</p>
-<div class="proof proof-type-definition" id="id5">
+<div class="proof proof-type-definition" id="id1">
 
     <div class="proof-title">
         <span class="proof-type">Definition 5.1</span>
         
-            <span class="proof-title-name">(Compact support on \(\Omega\))</span>
+            <span class="proof-title-name">(Compact support on (Omega))</span>
         
     </div><div class="proof-content">
-A function <span class="math notranslate nohighlight">\(u\)</span> has compact support on <span class="math notranslate nohighlight">\(\Omega\)</span> if there exists <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span>
-such that <span class="math notranslate nohighlight">\(u(x)=0\)</span> when <span class="math notranslate nohighlight">\(\min_{y\in\partial\Omega}|x-y|&lt;\epsilon\)</span>.</div></div><div class="proof proof-type-definition" id="id6">
+<p>A function <span class="math notranslate nohighlight">\(u\)</span> has compact support on <span class="math notranslate nohighlight">\(\Omega\)</span> if there exists <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span>
+such that <span class="math notranslate nohighlight">\(u(x)=0\)</span> when <span class="math notranslate nohighlight">\(\min_{y\in\partial\Omega}|x-y|&lt;\epsilon\)</span>.</p>
+</div></div><div class="proof proof-type-definition" id="id2">
 
     <div class="proof-title">
         <span class="proof-type">Definition 5.2</span>
         
-            <span class="proof-title-name">(\(C^\infty_0(\Omega)\))</span>
+            <span class="proof-title-name">((C^infty_0(Omega)))</span>
         
     </div><div class="proof-content">
-We denote by <span class="math notranslate nohighlight">\(C^\infty_0(\Omega)\)</span> the subset of <span class="math notranslate nohighlight">\(C^\infty(\Omega)\)</span>
+<p>We denote by <span class="math notranslate nohighlight">\(C^\infty_0(\Omega)\)</span> the subset of <span class="math notranslate nohighlight">\(C^\infty(\Omega)\)</span>
 corresponding to functions that have compact support on
-<span class="math notranslate nohighlight">\(\Omega\)</span>.</div></div><p>Next we will define a space containing the generalised derivative.</p>
-<div class="proof proof-type-definition" id="id7">
+<span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+</div></div><p>Next we will define a space containing the generalised derivative.</p>
+<div class="proof proof-type-definition" id="id3">
 
     <div class="proof-title">
         <span class="proof-type">Definition 5.3</span>
         
-            <span class="proof-title-name">(\(L^1_{loc}\))</span>
+            <span class="proof-title-name">((L^1_{loc}))</span>
         
     </div><div class="proof-content">
 <p>For triangles <span class="math notranslate nohighlight">\(K \subset \mathrm{int}\,(\Omega)\)</span>, we define</p>
@@ -112,7 +128,7 @@ f: f \in L^1(K) \quad \forall K\subset\mathrm{int}\,(\Omega)
 \}.\]</div>
 </div></div><p>Finally we are in a position to introduce the generalisation of the
 derivative itself.</p>
-<div class="proof proof-type-definition" id="id8">
+<div class="proof proof-type-definition" id="id4">
 
     <div class="proof-title">
         <span class="proof-type">Definition 5.4</span>
@@ -128,15 +144,16 @@ derivative itself.</p>
 boundary along with all derivatives.</p>
 <p>Now we check that the derivative agrees with our finite element derivative
 definition.</p>
-<div class="proof proof-type-lemma" id="id9">
+<div class="proof proof-type-lemma" id="id5">
 
     <div class="proof-title">
         <span class="proof-type">Lemma 5.5</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^0\)</span> finite element space. Then, for <span class="math notranslate nohighlight">\(u\in V\)</span>, the finite
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^0\)</span> finite element space. Then, for <span class="math notranslate nohighlight">\(u\in V\)</span>, the finite
 element derivative of u is equal to the weak
-derivative of <span class="math notranslate nohighlight">\(u\)</span>.</div></div><div class="proof proof-type-proof">
+derivative of <span class="math notranslate nohighlight">\(u\)</span>.</p>
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
@@ -149,50 +166,67 @@ derivative of <span class="math notranslate nohighlight">\(u\)</span>.</div></di
 \phi n_i u \, d S\right),\\&amp;= -\sum_K\int_K \frac{\partial\phi}{\partial x_i} u \, d x = -\int_\Omega
 \frac{\partial \phi}{\partial x_i} u \, d x,\end{aligned}\end{align} \]</div>
 <p>as required.</p>
-</div></div><div class="proof proof-type-exercise" id="id10">
+</div></div><div class="proof proof-type-exercise" id="id6">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 5.6</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^1\)</span> finite element space. For <span class="math notranslate nohighlight">\(u\in V\)</span>, show that the finite
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^1\)</span> finite element space. For <span class="math notranslate nohighlight">\(u\in V\)</span>, show that the finite
 second derivatives of u is equal to the weak
-second derivative of <span class="math notranslate nohighlight">\(u\)</span>.</div></div><div class="proof proof-type-exercise" id="id11">
+second derivative of <span class="math notranslate nohighlight">\(u\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id7">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 5.7</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(V\)</span> be a discontinuous finite element space. For <span class="math notranslate nohighlight">\(u\in V\)</span>, show
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a discontinuous finite element space. For <span class="math notranslate nohighlight">\(u\in V\)</span>, show
 that the weak derivative does not coincide with the finite element
-derivative in general (find a counter-example).</div></div><div class="proof proof-type-lemma" id="id12">
+derivative in general (find a counter-example).</p>
+</div></div><div class="proof proof-type-lemma" id="id8">
 
     <div class="proof-title">
         <span class="proof-type">Lemma 5.8</span>
         
     </div><div class="proof-content">
-For <span class="math notranslate nohighlight">\(u\in C^{|\alpha|}(\Omega)\)</span>, the usual <a href="#id1"><span class="problematic" id="id2">``</span></a>strong’’ derivative
-<span class="math notranslate nohighlight">\(D^\alpha\)</span> of u is equal to the weak derivative <span class="math notranslate nohighlight">\(D_w^\alpha\)</span> of <span class="math notranslate nohighlight">\(u\)</span>.</div></div><div class="proof proof-type-proof">
+<p>For <span class="math notranslate nohighlight">\(u\in C^{|\alpha|}(\Omega)\)</span>, the usual “strong” derivative
+<span class="math notranslate nohighlight">\(D^\alpha\)</span> of u is equal to the weak derivative <span class="math notranslate nohighlight">\(D_w^\alpha\)</span> of <span class="math notranslate nohighlight">\(u\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id9">
 
     <div class="proof-title">
-        <span class="proof-type">Proof </span>
+        <span class="proof-type">Exercise 5.9</span>
         
     </div><div class="proof-content">
-Exercise. [very similar to previous proof]</div></div><p>Due to these equivalences, we do not need to distinguish between
+<p>Prove this lemma.</p>
+</div></div><p>Due to these equivalences, we do not need to distinguish between
 strong, weak and finite element first derivatives for <span class="math notranslate nohighlight">\(C^0\)</span> finite
 element functions. All derivatives are assumed to be weak from now on.</p>
 </div>
 <div class="section" id="sobolev-spaces">
-<h2>5.2. Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Permalink to this headline">¶</a></h2>
-<p>We are now in a position to define a space that contains all <span class="math notranslate nohighlight">\(C^0\)</span>
+<h2><span class="section-number">5.2. </span>Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490880876"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ab4667ea-fb50-461e-940f-ac8f010c13fa">watch this video on Panopto</a></p>
+</div>
+</details><p>We are now in a position to define a space that contains all <span class="math notranslate nohighlight">\(C^0\)</span>
 finite element spaces. This means that we can consider the limit
 of finite element approximations as <span class="math notranslate nohighlight">\(h\to 0\)</span>.</p>
-<div class="proof proof-type-definition" id="id13">
+<div class="proof proof-type-definition" id="id10">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.9</span>
+        <span class="proof-type">Definition 5.10</span>
         
-            <span class="proof-title-name">(The Sobolev space \(H^1\))</span>
+            <span class="proof-title-name">(The Sobolev space (H^1))</span>
         
     </div><div class="proof-content">
 <p><span class="math notranslate nohighlight">\(H^1(\Omega)\)</span> is the function space defined by</p>
@@ -201,12 +235,12 @@ of finite element approximations as <span class="math notranslate nohighlight">\
 u\in L^1_{loc}: \|u\|_{H^1(\Omega)}&lt;\infty\right\}.\]</div>
 </div></div><p>Going further, the Sobolev space <span class="math notranslate nohighlight">\(H^k\)</span> is the space of all functions
 with finite <span class="math notranslate nohighlight">\(H^k\)</span> norm.</p>
-<div class="proof proof-type-definition" id="id14">
+<div class="proof proof-type-definition" id="id11">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.10</span>
+        <span class="proof-type">Definition 5.11</span>
         
-            <span class="proof-title-name">(The Sobolev space \(H^k\))</span>
+            <span class="proof-title-name">(The Sobolev space (H^k))</span>
         
     </div><div class="proof-content">
 <p><span class="math notranslate nohighlight">\(H^k(\Omega)\)</span> is the function space defined by</p>
@@ -218,12 +252,12 @@ we have <span class="math notranslate nohighlight">\(H^k \subset H^l\)</span> fo
 <p>If we are to consider limits of finite element functions in these
 Sobolev spaces, then it is important that they are closed, i.e.
 limits remain in the spaces.</p>
-<div class="proof proof-type-lemma" id="id15">
+<div class="proof proof-type-lemma" id="id12">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.11</span>
+        <span class="proof-type">Lemma 5.12</span>
         
-            <span class="proof-title-name">(\(H^k\) spaces are Hilbert spaces)</span>
+            <span class="proof-title-name">((H^k) spaces are Hilbert spaces)</span>
         
     </div><div class="proof-content">
 <p>The space <span class="math notranslate nohighlight">\(H^k(\Omega)\)</span> is closed.</p>
@@ -240,25 +274,26 @@ C^\infty_0(\Omega)\)</span>,</p>
 \phi D^\alpha u_i \, d x,\\&amp;= \lim_{i\to \infty} (-1)^{|\alpha|}\int_\Omega u_i D^\alpha\phi \, d x ,\\&amp;= (-1)^{|\alpha|} \int_\Omega v D^\alpha \phi \, d x,\end{aligned}\end{align} \]</div>
 <p>i.e. <span class="math notranslate nohighlight">\(v^\alpha\)</span> is the weak derivative of <span class="math notranslate nohighlight">\(u\)</span> as required.</p>
 </div></div><p>We quote the following much deeper results without proof.</p>
-<div class="proof proof-type-theorem" id="id16">
+<div class="proof proof-type-theorem" id="id13">
 
-    <div class="proof-title">
-        <span class="proof-type">Theorem 5.12</span>
-        
-            <span class="proof-title-name">(\(H=W\))</span>
-        
-    </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(\Omega\)</span> be any open set. Then <span class="math notranslate nohighlight">\(H^k(\Omega)\cap C^\infty(\Omega)\)</span>
-is dense in <span class="math notranslate nohighlight">\(H^k(\Omega)\)</span>.</div></div><p>The interpretation is that for any function <span class="math notranslate nohighlight">\(u\in H^k(\Omega)\)</span>,
-we can find a sequence of <span class="math notranslate nohighlight">\(C^\infty\)</span> functions <span class="math notranslate nohighlight">\(u_i\)</span> converging
-to <span class="math notranslate nohighlight">\(u\)</span>. This is very useful as we can compute many things using
-<span class="math notranslate nohighlight">\(C^\infty\)</span> functions and take the limit.</p>
-<div class="proof proof-type-theorem" id="id17">
-<span id="sobolev"></span>
     <div class="proof-title">
         <span class="proof-type">Theorem 5.13</span>
         
-            <span class="proof-title-name">(Sobolev's inequality)</span>
+            <span class="proof-title-name">((H=W))</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be any open set. Then <span class="math notranslate nohighlight">\(H^k(\Omega)\cap C^\infty(\Omega)\)</span>
+is dense in <span class="math notranslate nohighlight">\(H^k(\Omega)\)</span>.</p>
+</div></div><p>The interpretation is that for any function <span class="math notranslate nohighlight">\(u\in H^k(\Omega)\)</span>,
+we can find a sequence of <span class="math notranslate nohighlight">\(C^\infty\)</span> functions <span class="math notranslate nohighlight">\(u_i\)</span> converging
+to <span class="math notranslate nohighlight">\(u\)</span>. This is very useful as we can compute many things using
+<span class="math notranslate nohighlight">\(C^\infty\)</span> functions and take the limit.</p>
+<div class="proof proof-type-theorem" id="id14">
+<span id="sobolev"></span>
+    <div class="proof-title">
+        <span class="proof-type">Theorem 5.14</span>
+        
+            <span class="proof-title-name">(Sobolev’s inequality)</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional domain with Lipschitz boundary, let
@@ -275,12 +310,12 @@ existence of a <span class="math notranslate nohighlight">\(C^0\)</span> functio
 interpretation is that if <span class="math notranslate nohighlight">\(u\in H^k\)</span> then there is a continuous
 function <span class="math notranslate nohighlight">\(u_0\)</span> such that the set of points where <span class="math notranslate nohighlight">\(u\neq u_0\)</span> has zero
 area/volume.</p>
-<div class="proof proof-type-corollary" id="id18">
+<div class="proof proof-type-corollary" id="id15">
 
     <div class="proof-title">
-        <span class="proof-type">Corollary 5.14</span>
+        <span class="proof-type">Corollary 5.15</span>
         
-            <span class="proof-title-name">(Sobolev's inequality for derivatives)</span>
+            <span class="proof-title-name">(Sobolev’s inequality for derivatives)</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be a <span class="math notranslate nohighlight">\(n\)</span>-dimensional domain with Lipschitz boundary, let
@@ -298,10 +333,24 @@ equivalence class of <span class="math notranslate nohighlight">\(u\)</span>.</p
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Just apply Sobolev’s inequality to the <span class="math notranslate nohighlight">\(m\)</span> derivatives of <span class="math notranslate nohighlight">\(u\)</span>.</div></div></div>
+<p>Just apply Sobolev’s inequality to the <span class="math notranslate nohighlight">\(m\)</span> derivatives of <span class="math notranslate nohighlight">\(u\)</span>.</p>
+</div></div></div>
 <div class="section" id="variational-formulations-of-pdes">
-<h2>5.3. Variational formulations of PDEs<a class="headerlink" href="#variational-formulations-of-pdes" title="Permalink to this headline">¶</a></h2>
-<p>We can now consider linear variational problems defined on <span class="math notranslate nohighlight">\(H^k\)</span>
+<h2><span class="section-number">5.3. </span>Variational formulations of PDEs<a class="headerlink" href="#variational-formulations-of-pdes" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490669306"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4ac5a081-3109-4b2f-86df-ac8f010fa52c">watch this video on Panopto</a></p>
+</div>
+</details><p>We can now consider linear variational problems defined on <span class="math notranslate nohighlight">\(H^k\)</span>
 spaces, by taking a bilinear form <span class="math notranslate nohighlight">\(b(u,v)\)</span> and linear form
 <span class="math notranslate nohighlight">\(F(v)\)</span>, seeking <span class="math notranslate nohighlight">\(u\in H^k\)</span> (for chosen <span class="math notranslate nohighlight">\(H^k\)</span>) such that</p>
 <div class="math notranslate nohighlight">
@@ -310,23 +359,25 @@ spaces, by taking a bilinear form <span class="math notranslate nohighlight">\(b
 analyse, the existence of a unique solution to an <span class="math notranslate nohighlight">\(H^k\)</span> linear
 variational problem.</p>
 <p>For example, the Helmholtz problem solvability is immediate.</p>
-<div class="proof proof-type-theorem" id="id19">
+<div class="proof proof-type-theorem" id="id16">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.15</span>
+        <span class="proof-type">Theorem 5.16</span>
         
             <span class="proof-title-name">(Well-posedness for (modified) Helmholtz))</span>
         
     </div><div class="proof-content">
-The Helmholtz variational problem on <span class="math notranslate nohighlight">\(H^1\)</span> satisfies the conditions
-of the Lax-Milgram theorem.</div></div><div class="proof proof-type-proof">
+<p>The Helmholtz variational problem on <span class="math notranslate nohighlight">\(H^1\)</span> satisfies the conditions
+of the Lax-Milgram theorem.</p>
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-The proof for <span class="math notranslate nohighlight">\(C^0\)</span> finite element spaces extends immediately
-to <span class="math notranslate nohighlight">\(H^1\)</span>.</div></div><p>Next, we develop the relationship between solutions of the Helmholtz
+<p>The proof for <span class="math notranslate nohighlight">\(C^0\)</span> finite element spaces extends immediately
+to <span class="math notranslate nohighlight">\(H^1\)</span>.</p>
+</div></div><p>Next, we develop the relationship between solutions of the Helmholtz
 variational problem and the strong-form Helmholtz equation,</p>
 <div class="math notranslate nohighlight">
 \[u - \nabla^2 u = f, \quad \frac{\partial u}{\partial n} = 0, \mbox{ on } \partial\Omega.\]</div>
@@ -336,26 +387,27 @@ this makes sense) then you reveal that the solution solves the strong
 form equation. Functions in <span class="math notranslate nohighlight">\(H^k\)</span> make boundary values hard to
 interpret since they are not guaranteed to have defined values on the
 boundary.  We make the following definition.</p>
-<div class="proof proof-type-definition" id="id20">
+<div class="proof proof-type-definition" id="id17">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.16</span>
+        <span class="proof-type">Definition 5.17</span>
         
-            <span class="proof-title-name">(Trace of \(H^1\) functions)</span>
+            <span class="proof-title-name">(Trace of (H^1) functions)</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(u\in H^1(\Omega)\)</span> and choose <span class="math notranslate nohighlight">\(u_i\in C^\infty(\Omega)\)</span> such
+<p>Let <span class="math notranslate nohighlight">\(u\in H^1(\Omega)\)</span> and choose <span class="math notranslate nohighlight">\(u_i\in C^\infty(\Omega)\)</span> such
 that <span class="math notranslate nohighlight">\(u_i\to u\)</span>. We define the trace <span class="math notranslate nohighlight">\(u|_{\partial\Omega}\)</span>
 on <span class="math notranslate nohighlight">\(\partial\Omega\)</span> as the limit of the restriction of <span class="math notranslate nohighlight">\(u_i\)</span> to
 <span class="math notranslate nohighlight">\(\partial\Omega\)</span>. This definition is unique from the uniqueness of
-limits.</div></div><p>We can extend our trace inequality for finite element functions directly
+limits.</p>
+</div></div><p>We can extend our trace inequality for finite element functions directly
 to <span class="math notranslate nohighlight">\(H^1\)</span> functions.</p>
-<div class="proof proof-type-lemma" id="id21">
+<div class="proof proof-type-lemma" id="id18">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.17</span>
+        <span class="proof-type">Lemma 5.18</span>
         
-            <span class="proof-title-name">(Trace theorem for \(H^1\) functions)</span>
+            <span class="proof-title-name">(Trace theorem for (H^1) functions)</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(u \in H^1(\Omega)\)</span> for a polygonal domain <span class="math notranslate nohighlight">\(\Omega\)</span>. Then the
@@ -371,12 +423,13 @@ u\|_{L^2(\partial\Omega)} \leq C\|u\|_{H^1(\Omega)}.\]</div>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Adapt the proof for <span class="math notranslate nohighlight">\(C^0\)</span> finite element functions, choosing <span class="math notranslate nohighlight">\(u\in
-C^\infty(\Omega)\)</span>, and pass to the limit in <span class="math notranslate nohighlight">\(H^1(\Omega)\)</span>.</div></div><p>This tells us when the integration by parts formula makes sense.</p>
-<div class="proof proof-type-lemma" id="id22">
+<p>Adapt the proof for <span class="math notranslate nohighlight">\(C^0\)</span> finite element functions, choosing <span class="math notranslate nohighlight">\(u\in
+C^\infty(\Omega)\)</span>, and pass to the limit in <span class="math notranslate nohighlight">\(H^1(\Omega)\)</span>.</p>
+</div></div><p>This tells us when the integration by parts formula makes sense.</p>
+<div class="proof proof-type-lemma" id="id19">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.18</span>
+        <span class="proof-type">Lemma 5.19</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(u\in H^2(\Omega)\)</span>, <span class="math notranslate nohighlight">\(v\in H^1(\Omega)\)</span>. Then</p>
@@ -396,13 +449,26 @@ Then</p>
 to <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(u\)</span>, respectively, and <span class="math notranslate nohighlight">\(v_i\nabla u_i\in C^\infty(\Omega)\)</span> converges
 to <span class="math notranslate nohighlight">\(v\nabla u\)</span>. These satisfy the equation;
 we obtain the result by passing to the limit.</p>
-</div></div><p>Now we have everything we need to show that solutions of the strong
+</div></div><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490668791"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=11a1d9f5-c1e9-41c1-9207-ac8f01127eac">watch this video on Panopto</a></p>
+</div>
+</details><p>Now we have everything we need to show that solutions of the strong
 form equation also solve the variational problem. It is just a matter
 of substituting into the formula and applying integration by parts.</p>
-<div class="proof proof-type-lemma" id="id23">
+<div class="proof proof-type-lemma" id="id20">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.19</span>
+        <span class="proof-type">Lemma 5.20</span>
         
     </div><div class="proof-content">
 <p>For <span class="math notranslate nohighlight">\(f\in L^2\)</span>,
@@ -428,16 +494,17 @@ previous proposition gives</p>
 problem also solve the strong form equation. To do this, we need to
 assume a bit more smoothness of the solution, that it is in <span class="math notranslate nohighlight">\(H^2\)</span>
 instead of just <span class="math notranslate nohighlight">\(H^1\)</span>.</p>
-<div class="proof proof-type-theorem" id="id24">
+<div class="proof proof-type-theorem" id="id21">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.20</span>
+        <span class="proof-type">Theorem 5.21</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(f\in L^2(\Omega)\)</span> and suppose that <span class="math notranslate nohighlight">\(u\in H^2(\Omega)\)</span> solves the
+<p>Let <span class="math notranslate nohighlight">\(f\in L^2(\Omega)\)</span> and suppose that <span class="math notranslate nohighlight">\(u\in H^2(\Omega)\)</span> solves the
 variational Helmholtz equation on a polygonal domain <span class="math notranslate nohighlight">\(\Omega\)</span>. Then
 <span class="math notranslate nohighlight">\(u\)</span> solves the strong form Helmholtz equation with zero Neumann
-boundary conditions.</div></div><div class="proof proof-type-proof">
+boundary conditions.</p>
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
@@ -461,15 +528,28 @@ We have</p>
 <span class="math notranslate nohighlight">\(\|\frac{\partial u}{\partial n}\|_{L^2(\partial\Omega)}=0\)</span>.</p>
 </div></div></div>
 <div class="section" id="galerkin-approximations-of-linear-variational-problems">
-<h2>5.4. Galerkin approximations of linear variational problems<a class="headerlink" href="#galerkin-approximations-of-linear-variational-problems" title="Permalink to this headline">¶</a></h2>
-<p>Going a bit more general again, assume that we have a well-posed
+<h2><span class="section-number">5.4. </span>Galerkin approximations of linear variational problems<a class="headerlink" href="#galerkin-approximations-of-linear-variational-problems" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490668756"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=63ad7174-ffe3-44bf-bd94-ac8f011498d9">watch this video on Panopto</a></p>
+</div>
+</details><p>Going a bit more general again, assume that we have a well-posed
 linear variational problem on <span class="math notranslate nohighlight">\(H^k\)</span>, connected to a strong form
 PDE. Now we would like to approximate it. This is done in general
 using the Galerkin approximation.</p>
-<div class="proof proof-type-definition" id="id25">
+<div class="proof proof-type-definition" id="id22">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.21</span>
+        <span class="proof-type">Definition 5.22</span>
         
             <span class="proof-title-name">(Galerkin approximation)</span>
         
@@ -491,15 +571,28 @@ continuous and coercive on <span class="math notranslate nohighlight">\(V_h\)</s
 we know that the Galerkin approximation exists, is unique and is
 stable. This means that it will be possible to solve the matrix-vector
 equation.</p>
-<p>Moving on, if we can solve the equation, we would like to know if it is
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490668557"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5c5e4671-ddb4-4cf2-afce-ac8f01165ff0">watch this video on Panopto</a></p>
+</div>
+</details><p>Moving on, if we can solve the equation, we would like to know if it is
 useful. What is the size of the error <span class="math notranslate nohighlight">\(u-u_h\)</span>? For Galerkin approximations
 this question is addressed by Céa’s lemma.</p>
-<div class="proof proof-type-theorem" id="id26">
-
+<div class="proof proof-type-theorem" id="id23">
+<span id="thm-cea"></span>
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.22</span>
+        <span class="proof-type">Theorem 5.23</span>
         
-            <span class="proof-title-name">(Céa's lemma.)</span>
+            <span class="proof-title-name">(Céa’s lemma.)</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V_h\subset V\)</span>, and let <span class="math notranslate nohighlight">\(u\)</span> solve a linear variational problem
@@ -521,7 +614,7 @@ of <span class="math notranslate nohighlight">\(b(u,v)\)</span>, respectively.</
 \[b(u,v) = F(v) \quad \forall v \in V,
 b(u_h,v)  = F(v) \quad \forall v \in V_h.\]</div>
 <p>Choosing <span class="math notranslate nohighlight">\(v\in V_h\subset V\)</span> means we can use it in both equations,
-and subtraction and linearity lead to the <a href="#id3"><span class="problematic" id="id4">``</span></a>Galerkin orthogonality’’
+and subtraction and linearity lead to the “Galerkin orthogonality”
 condition</p>
 <div class="math notranslate nohighlight">
 \[b(u-u_h,v) = 0, \quad \forall v\in V_h.\]</div>
@@ -534,13 +627,26 @@ condition</p>
 <p>Minimising over all <span class="math notranslate nohighlight">\(v\)</span> completes the proof.</p>
 </div></div></div>
 <div class="section" id="interpolation-error-in-h-k-spaces">
-<h2>5.5. Interpolation error in <span class="math notranslate nohighlight">\(H^k\)</span> spaces<a class="headerlink" href="#interpolation-error-in-h-k-spaces" title="Permalink to this headline">¶</a></h2>
-<p>The interpretation of Céa’s lemma is that the error is proportional to
+<h2><span class="section-number">5.5. </span>Interpolation error in <span class="math notranslate nohighlight">\(H^k\)</span> spaces<a class="headerlink" href="#interpolation-error-in-h-k-spaces" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490668426"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b473bf39-8d5b-4d2f-b051-ac8f01192b68">watch this video on Panopto</a></p>
+</div>
+</details><p>The interpretation of Céa’s lemma is that the error is proportional to
 the minimal error in approximating <span class="math notranslate nohighlight">\(u\)</span> in <span class="math notranslate nohighlight">\(V_h\)</span>. To do this, we can
-simply choose <span class="math notranslate nohighlight">\(v = I_hu\)</span> in Céa’s lemma, to get</p>
+simply choose <span class="math notranslate nohighlight">\(v = \mathcal{I}_hu\)</span> in Céa’s lemma, to get</p>
 <div class="math notranslate nohighlight">
 \[\|u-u_h\|_V \leq \frac{M}{\gamma}\min_{v\in V_h}
-\|u-v\|_V \leq \frac{M}{\gamma}\|u - I_hu\|_V.\]</div>
+\|u-v\|_V \leq \frac{M}{\gamma}\|u - \mathcal{I}_hu\|_V.\]</div>
 <p>Hence, Céa’s lemma reduces the problem of estimating the error in the
 numerical solution to estimating error in the interpolation of the
 exact solution.  We have already examined this in the section on
@@ -553,10 +659,10 @@ give the updated result statements and state how to modify the proofs.</p>
 <p>Firstly we recall the averaged Taylor polynomial. Since it involves
 only integrals of the derivatives, we can immediately use weak
 derivatives here.</p>
-<div class="proof proof-type-definition" id="id27">
+<div class="proof proof-type-definition" id="id24">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 5.23</span>
+        <span class="proof-type">Definition 5.24</span>
         
             <span class="proof-title-name">(Averaged Taylor polynomial with weak derivatives)</span>
         
@@ -575,10 +681,10 @@ as</p>
 </div></div><p>This definition makes sense since the Taylor polynomial coefficients
 are in <span class="math notranslate nohighlight">\(L^1_{loc}(\Omega)\)</span> and thus their integrals over <span class="math notranslate nohighlight">\(B\)</span> are defined.</p>
 <p>The next step was to examine the error in the Taylor polynomial.</p>
-<div class="proof proof-type-theorem" id="id28">
+<div class="proof proof-type-theorem" id="id25">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.24</span>
+        <span class="proof-type">Theorem 5.25</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\Omega\subset \mathbb{R}^n\)</span> be a domain with diameter <span class="math notranslate nohighlight">\(d\)</span>, that
@@ -594,14 +700,15 @@ d^{k+1-|\beta|}\|\nabla^{k+1}f\|_{L^2(\Omega)}.\]</div>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-To show this, we assume that <span class="math notranslate nohighlight">\(f\in C^\infty(\Omega)\)</span>, in which case
-the result of <a class="reference internal" href="L3_interpolation.html#taylorerror"><span class="std std-numref">Theorem 3.11</span></a> applies. Then
+<p>To show this, we assume that <span class="math notranslate nohighlight">\(f\in C^\infty(\Omega)\)</span>, in which case
+the result of <a class="reference internal" href="L3_interpolation.html#taylorerror"><span class="std std-numref">Theorem 3.15</span></a> applies. Then
 we obtain the present result by approximating <span class="math notranslate nohighlight">\(f\)</span> by a sequence of
-<span class="math notranslate nohighlight">\(C^\infty(\Omega)\)</span> functions and passing to the limit.</div></div><p>We then repeat the following corollary.</p>
-<div class="proof proof-type-corollary" id="id29">
+<span class="math notranslate nohighlight">\(C^\infty(\Omega)\)</span> functions and passing to the limit.</p>
+</div></div><p>We then repeat the following corollary.</p>
+<div class="proof proof-type-corollary" id="id26">
 
     <div class="proof-title">
-        <span class="proof-type">Corollary 5.25</span>
+        <span class="proof-type">Corollary 5.26</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(K_1\)</span> be a triangle with diameter <span class="math notranslate nohighlight">\(1\)</span>.
@@ -614,13 +721,14 @@ There exists a constant <span class="math notranslate nohighlight">\(C(k,n)\)</s
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Same as <a class="reference internal" href="L3_interpolation.html#unittaylorerr"><span class="std std-numref">Lemma 3.12</span></a>.</div></div><p>The next step was the bound on the interpolation operator. Now we just
+<p>Same as <a class="reference internal" href="L3_interpolation.html#unittaylorerr"><span class="std std-numref">Lemma 3.16</span></a>.</p>
+</div></div><p>The next step was the bound on the interpolation operator. Now we just
 have to replace <span class="math notranslate nohighlight">\(C^{l,\infty}\)</span> with <span class="math notranslate nohighlight">\(W^l_\infty\)</span> as derivatives may not
 exist at every point.</p>
-<div class="proof proof-type-lemma" id="id30">
+<div class="proof proof-type-lemma" id="id27">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.26</span>
+        <span class="proof-type">Lemma 5.27</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((K_1,\mathcal{P},\mathcal{N})\)</span> be a finite element such that
@@ -641,13 +749,14 @@ evaluations of derivatives of degree <span class="math notranslate nohighlight">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Same as <a class="reference internal" href="L3_interpolation.html#ibound"><span class="std std-numref">Lemma 3.13</span></a>. replacing <span class="math notranslate nohighlight">\(C^{l,\infty}\)</span>
+<p>Same as <a class="reference internal" href="L3_interpolation.html#ibound"><span class="std std-numref">Lemma 3.22</span></a>. replacing <span class="math notranslate nohighlight">\(C^{l,\infty}\)</span>
 with <span class="math notranslate nohighlight">\(W^l_\infty\)</span>, and using the full version of the Sobolev
-inequality in <a class="reference internal" href="#sobolev"><span class="std std-numref">Lemma 5.13</span></a>.</div></div><p>The next steps then just follow through.</p>
-<div class="proof proof-type-lemma" id="id31">
+inequality in <a class="reference internal" href="#sobolev"><span class="std std-numref">Lemma 5.14</span></a>.</p>
+</div></div><p>The next steps then just follow through.</p>
+<div class="proof proof-type-lemma" id="id28">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.27</span>
+        <span class="proof-type">Lemma 5.28</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((K_1,\mathcal{P},\mathcal{N})\)</span> be a finite element such that
@@ -665,10 +774,11 @@ satisfies</p>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Same as <a class="reference internal" href="L3_interpolation.html#ierrk1"><span class="std std-numref">Lemma 3.14</span></a>.</div></div><div class="proof proof-type-lemma" id="id32">
+<p>Same as <a class="reference internal" href="L3_interpolation.html#ierrk1"><span class="std std-numref">Lemma 3.23</span></a>.</p>
+</div></div><div class="proof proof-type-lemma" id="id29">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 5.28</span>
+        <span class="proof-type">Lemma 5.29</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be a finite element such that
@@ -688,10 +798,11 @@ the diameter.</p>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Repeat the scaling argument of <a class="reference internal" href="L3_interpolation.html#scaling"><span class="std std-numref">Lemma 3.15</span></a>.</div></div><div class="proof proof-type-theorem" id="id33">
+<p>Repeat the scaling argument of <a class="reference internal" href="L3_interpolation.html#scaling"><span class="std std-numref">Lemma 3.24</span></a>.</p>
+</div></div><div class="proof proof-type-theorem" id="id30">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.29</span>
+        <span class="proof-type">Theorem 5.30</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation with finite elements
@@ -712,22 +823,36 @@ global interpolation operator satisfies</p>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-Identical to <a class="reference internal" href="L3_interpolation.html#iherr"><span class="std std-numref">Theorem 3.16</span></a>.</div></div></div>
+<p>Identical to <a class="reference internal" href="L3_interpolation.html#iherr"><span class="std std-numref">Theorem 3.25</span></a>.</p>
+</div></div></div>
 <div class="section" id="convergence-of-the-finite-element-approximation-to-the-helmholtz-problem">
-<h2>5.6. Convergence of the finite element approximation to the Helmholtz problem<a class="headerlink" href="#convergence-of-the-finite-element-approximation-to-the-helmholtz-problem" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have the required interpolation operator results, we
+<h2><span class="section-number">5.6. </span>Convergence of the finite element approximation to the Helmholtz problem<a class="headerlink" href="#convergence-of-the-finite-element-approximation-to-the-helmholtz-problem" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490668331"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=913ad682-d5b9-4849-8dc8-ac8f0120d5e8">watch this video on Panopto</a></p>
+</div>
+</details><p>Now that we have the required interpolation operator results, we
 can return to applying Céa’s lemma to the convergence of the
 finite element approximation to the Helmholtz problem.</p>
-<div class="proof proof-type-corollary" id="id34">
+<div class="proof proof-type-corollary" id="id31">
 
     <div class="proof-title">
-        <span class="proof-type">Corollary 5.30</span>
+        <span class="proof-type">Corollary 5.31</span>
         
     </div><div class="proof-content">
 <p>The degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange finite element approximation <span class="math notranslate nohighlight">\(u_h\)</span> to the
 solution <span class="math notranslate nohighlight">\(u\)</span> of the variational Helmholtz problem satisfies</p>
 <div class="math notranslate nohighlight">
-\[\|u_h-u\|_{H^1(\Omega)} \leq Ch^k\|u\|_{H^2(\Omega)}.\]</div>
+\[\|u_h-u\|_{H^1(\Omega)} \leq Ch^k\|u\|_{H^{k+1}(\Omega)}.\]</div>
 </div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
@@ -737,20 +862,98 @@ solution <span class="math notranslate nohighlight">\(u\)</span> of the variatio
 <p>We combine Céa’s lemma with the previous estimate, since</p>
 <div class="math notranslate nohighlight">
 \[\min_{v\in V_h}
-\|u-v\|_{H^1(\Omega)} \leq \|u-I_hu\|_{H^1(\Omega)}
-\leq Ch^k\|u\|_{H^2(\Omega)},\]</div>
+\|u-v\|_{H^1(\Omega)} \leq \|u-\mathcal{I}_hu\|_{H^1(\Omega)}
+\leq Ch^k\|u\|_{H^{k+1}}(\Omega),\]</div>
 <p>having chosen <span class="math notranslate nohighlight">\(i=1\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id32">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 5.32</span>
+        
+    </div><div class="proof-content">
+<p>Consider the variational problem of finding <span class="math notranslate nohighlight">\(u\in H^1([0,1])\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 vu + v'u' \, d x = \int_0^1 vx \, d x + v(1) - v(0),
+\quad \forall v \in H^1([0,1]).\]</div>
+<p>After dividing the interval <span class="math notranslate nohighlight">\([0,1]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> equispaced cells and
+forming a <span class="math notranslate nohighlight">\(P1\)</span> <span class="math notranslate nohighlight">\(C^0\)</span> finite element space <span class="math notranslate nohighlight">\(V_N\)</span>, the error
+<span class="math notranslate nohighlight">\(\|u-u_h\|_{H^1}=0\)</span> for any <span class="math notranslate nohighlight">\(N&gt;0\)</span>.</p>
+<p>Explain why this is expected.</p>
+</div></div><div class="proof proof-type-exercise" id="id33">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 5.33</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathring{H}^1([0,1])\)</span> be the subspace of <span class="math notranslate nohighlight">\(H^1([0,1])\)</span> such
+that <span class="math notranslate nohighlight">\(u(0)=0\)</span>.  Consider the variational problem of finding <span class="math notranslate nohighlight">\(u \in
+\mathring{H}^1([0,1])\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 v'u' \, d x = \int_0^{1/2} v \, d x, \quad \forall v \in \mathring{H}([0,1]).\]</div>
+<p>The interval <span class="math notranslate nohighlight">\([0,1]\)</span> is divided into <span class="math notranslate nohighlight">\(3N\)</span> equispaced cells (where
+<span class="math notranslate nohighlight">\(N\)</span> is a positive integer). After forming a <span class="math notranslate nohighlight">\(P2\)</span> <span class="math notranslate nohighlight">\(C^0\)</span> finite
+element space <span class="math notranslate nohighlight">\(V_N\)</span>, the error <span class="math notranslate nohighlight">\(\|u-u_h\|_{H^1}\)</span> only converges at
+a linear rate. Explain why this is expected.</p>
+</div></div><div class="proof proof-type-exercise" id="id34">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 5.34</span>
+        
+    </div><div class="proof-content">
+<dl class="simple">
+<dt>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be a convex polygonal 2D domain. Consider the</dt><dd><p>following two problems.</p>
+</dd>
+</dl>
+<ol class="arabic">
+<li><p>Find <span class="math notranslate nohighlight">\(u \in H^2\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\|\nabla^2 u + f\|_{L^2(\Omega)} = 0, \quad
+\|u\|_{L^2(\partial\Omega)}=0,\]</div>
+<p>which we write in a shorthand as</p>
+<div class="math notranslate nohighlight">
+\[-\nabla^2 u = f, \quad u|_{\partial\Omega} = 0.\]</div>
+</li>
+<li><p>Find <span class="math notranslate nohighlight">\(u \in \mathring{H}^1(\Omega)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\int_\Omega \nabla u \cdot \nabla v \, d x = \int_\Omega f v \, d x,
+\quad \forall v \in \mathring{H}^1(\Omega),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathring{H}^1(\Omega)\)</span> is the subspace of <span class="math notranslate nohighlight">\(H^1(\Omega)\)</span>
+consisting of functions whose trace vanishes on the boundary.</p>
+</li>
+</ol>
+<p>Under assumptions on <span class="math notranslate nohighlight">\(u\)</span> which you should state, show that a solution
+to problem (1.) is a solution to problem (2.).</p>
+<p>Let <span class="math notranslate nohighlight">\(h\)</span> be the maximum triangle diameter of a triangulation
+<span class="math notranslate nohighlight">\(T_h\)</span> of <span class="math notranslate nohighlight">\(\Omega\)</span>, with <span class="math notranslate nohighlight">\(V_h\)</span> the corresponding linear Lagrange
+finite element space. Construct a finite element approximation to
+Problem (2.) above.  Briefly give the main arguments as to why the
+<span class="math notranslate nohighlight">\(H^1(\Omega)\)</span> norm of the error converges to zero linearly in <span class="math notranslate nohighlight">\(h\)</span>
+as <span class="math notranslate nohighlight">\(h\to 0\)</span>, giving your assumptions.</p>
 </div></div><p>Céa’s lemma gives us error estimates in the norm of the space where
 the variational problem is defined, where the continuity and coercivity
 results hold. In the case of the Helmholtz problem, this is <span class="math notranslate nohighlight">\(H^1\)</span>.
 We would also like estimates of the error in the <span class="math notranslate nohighlight">\(L^2\)</span> norm, and
 it will turn out that these will have a more rapid convergence rate
 as <span class="math notranslate nohighlight">\(h\to 0\)</span>.</p>
-<p>To do this we quote the following without proof.</p>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490668178"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=256886bb-d6bd-41fa-916a-ac8f0126b14b">watch this video on Panopto</a></p>
+</div>
+</details><p>To do this we quote the following without proof.</p>
 <div class="proof proof-type-theorem" id="id35">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.31</span>
+        <span class="proof-type">Theorem 5.35</span>
         
             <span class="proof-title-name">(Elliptic regularity)</span>
         
@@ -771,15 +974,15 @@ provided that <span class="math notranslate nohighlight">\(f\in L^2\)</span>.</p
 <p>We now use this to obtain the following result, using the
 Aubin-Nitsche trick.</p>
 <div class="proof proof-type-theorem" id="id36">
-
+<span id="thm-l2-estimates"></span>
     <div class="proof-title">
-        <span class="proof-type">Theorem 5.32</span>
+        <span class="proof-type">Theorem 5.36</span>
         
     </div><div class="proof-content">
-<p>The degree <span class="math notranslate nohighlight">\(m\)</span> Lagrange finite element approximation <span class="math notranslate nohighlight">\(u_h\)</span> to the
+<p>The degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange finite element approximation <span class="math notranslate nohighlight">\(u_h\)</span> to the
 solution <span class="math notranslate nohighlight">\(u\)</span> of the variational Helmholtz problem satisfies</p>
 <div class="math notranslate nohighlight">
-\[\|u_h-u\|_{L^2(\Omega)} \leq Cd^{m+1}\|u\|_{H^2(\Omega)}.\]</div>
+\[\|u_h-u\|_{L^2(\Omega)} \leq Ch^{k+1}\|u\|_{H^{k+1}(\Omega)}.\]</div>
 </div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
@@ -800,44 +1003,43 @@ parts),</p>
 <p>and so</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\|u-u_h\|^2_{L^2(\Omega)} &amp;= (u-u_h,u-u_h) = b(w,u-u_h),
-= b(w-\mathcal{I}_hw,u-u_h) \mbox{ (orthogonality) },\\&amp;\leq C\|u-u_h\|_{H^1(\Omega)}\|w-\mathcal{I}_h w\|_{H^1(\Omega)},\\&amp;\leq Ch\|u-u_h\|_{H^1(\Omega)} |w|_{H^2(\Omega)}\\&amp;\leq C_1 h^{m+1} \|u-u_h\|_{L^2(\Omega)}|u|_{H^2(\Omega)}\end{aligned}\end{align} \]</div>
+= b(w-\mathcal{I}_hw,u-u_h) \mbox{ (orthogonality) },\\&amp;\leq C\|u-u_h\|_{H^1(\Omega)}\|w-\mathcal{I}_h w\|_{H^1(\Omega)},\\&amp;\leq Ch\|u-u_h\|_{H^1(\Omega)} |w|_{H^2(\Omega)}\\&amp;\leq C_1 h^{k+1} |u|_{H^{k+1}(\Omega)\|u-u_h\|_{L^2(\Omega)}}\end{aligned}\end{align} \]</div>
 <p>and dividing both sides by <span class="math notranslate nohighlight">\(\|u-u_h\|_{L^2(\Omega)}\)</span> gives the result.</p>
 </div></div><p>Thus we gain one order of convergence rate with <span class="math notranslate nohighlight">\(h\)</span> by using
 the <span class="math notranslate nohighlight">\(L^2\)</span> norm instead of the <span class="math notranslate nohighlight">\(H^1\)</span> norm.</p>
 </div>
 <div class="section" id="epilogue">
-<h2>5.7. Epilogue<a class="headerlink" href="#epilogue" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.7. </span>Epilogue<a class="headerlink" href="#epilogue" title="Permalink to this headline">¶</a></h2>
 <p>This completes our analysis of the convergence of the Galerkin finite
 element approximation to the Helmholtz problem. Similar approaches can be
 applied to analysis of other elliptic PDEs, using the following programme.</p>
 <ol class="arabic simple">
-<li>Find a variational formulation of the PDE with a bilinear form that
+<li><p>Find a variational formulation of the PDE with a bilinear form that
 is continuous and coercive (and hence well-posed by Lax-Milgram) on
-<span class="math notranslate nohighlight">\(H^k\)</span> for some <span class="math notranslate nohighlight">\(k\)</span>.</li>
-<li>Find a finite element space <span class="math notranslate nohighlight">\(V_h \subset H^k\)</span>. For <span class="math notranslate nohighlight">\(H^1\)</span>, this requires
+<span class="math notranslate nohighlight">\(H^k\)</span> for some <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Find a finite element space <span class="math notranslate nohighlight">\(V_h \subset H^k\)</span>. For <span class="math notranslate nohighlight">\(H^1\)</span>, this requires
 a <span class="math notranslate nohighlight">\(C^0\)</span> finite element space, and for <span class="math notranslate nohighlight">\(H^2\)</span>, a <span class="math notranslate nohighlight">\(C^1\)</span> finite element
-space is required.</li>
-<li>The Galerkin approximation to the variational formulation is obtained
-by restricting the solution and test functions to <span class="math notranslate nohighlight">\(V_h\)</span>.</li>
-<li>Continuity and coercivity (and hence well-posedness) for the Galerkin
+space is required.</p></li>
+<li><p>The Galerkin approximation to the variational formulation is obtained
+by restricting the solution and test functions to <span class="math notranslate nohighlight">\(V_h\)</span>.</p></li>
+<li><p>Continuity and coercivity (and hence well-posedness) for the Galerkin
 approximation is assured since <span class="math notranslate nohighlight">\(V_h \subset H^k\)</span>. This means that
-the Galerkin approximation is solvable and stable.</li>
-<li>The estimate of the error estimate in terms of <span class="math notranslate nohighlight">\(h\)</span> comes from
+the Galerkin approximation is solvable and stable.</p></li>
+<li><p>The estimate of the error estimate in terms of <span class="math notranslate nohighlight">\(h\)</span> comes from
 Céa’s lemma plus the error estimate for the nodal interpolation
-operator.</li>
+operator.</p></li>
 </ol>
 <p>This course only describes the beginning of the subject of finite
 element methods, for which research continues to grow in both theory
 and application. There are many methods and approaches that go beyond
 the basic Galerkin approach described above. These include</p>
 <ul>
-<li><p class="first">Discontinuous Galerkin methods, which use discontinuous finite
+<li><p>Discontinuous Galerkin methods, which use discontinuous finite
 element spaces with jump conditions between cells to compensate for
 not having the required continuity. These problems do not fit into the
 standard Galerkin framework and new techniques have been developed to
-derive and analyse them.</p>
-</li>
-<li><p class="first">Mixed finite element methods, which consider systems of partial
+derive and analyse them.</p></li>
+<li><p>Mixed finite element methods, which consider systems of partial
 differential equations such as the Poisson equation in first-order
 form,</p>
 <div class="math notranslate nohighlight">
@@ -846,33 +1048,29 @@ form,</p>
 but they are well-posed anyway, and additional techniques have been
 developed.</p>
 </li>
-<li><p class="first">Non-conforming methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
+<li><p>Non-conforming methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
 H^k\)</span>. For example, the Crouzeix-Raviart element uses linear functions
 that are only continuous at edge centres, so the functions are not
 in <span class="math notranslate nohighlight">\(C^0\)</span> and the functions do not have a weak derivative. However,
 using the finite element derivative in the weak form for <span class="math notranslate nohighlight">\(H^1\)</span> elliptic
 problems still gives a solvable system that converges at the optimal
 rate. Additional techniques have been
-developed to analyse this.</p>
-</li>
-<li><p class="first">Interior penalty methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
+developed to analyse this.</p></li>
+<li><p>Interior penalty methods, which work even though <span class="math notranslate nohighlight">\(V_h \not\subset
 H^k\)</span>. These methods are used to solve <span class="math notranslate nohighlight">\(H^k\)</span> elliptic problems using
 <span class="math notranslate nohighlight">\(H^l\)</span> finite element spaces with <span class="math notranslate nohighlight">\(l&lt;k\)</span>, using jump conditions to
 obtain a stable discretisation. Additional techniques have been
-developed to analyse this.</p>
-</li>
-<li><p class="first">Stabilised and multiscale methods for finite element approximation
+developed to analyse this.</p></li>
+<li><p>Stabilised and multiscale methods for finite element approximation
 of PDEs whose solutions have a wide range of scales, for example
 they might have boundary layers, turbulent structures or other
 phenomena. Resolving this features is often too expensive, so the
 goal is to find robust methods that behave well when the solution is
 not well resolved.  Additional techniques have been developed to
-analyse this.</p>
-</li>
-<li><p class="first">Hybridisable methods that involve flux functions that are supported
-only on cell facets.</p>
-</li>
-<li><p class="first">Currently there is a lot of activity around discontinuous
+analyse this.</p></li>
+<li><p>Hybridisable methods that involve flux functions that are supported
+only on cell facets.</p></li>
+<li><p>Currently there is a lot of activity around discontinuous
 Petrov-Galerkin methods, which select optimal test functions to
 maximise the stability of the discrete operator. This means that
 they can be applied to problems such as wave propagation which are
@@ -882,35 +1080,35 @@ adaptive meshing starting from very coarse meshes. Another new and
 active area is virtual element methods, where the basis functions
 are not explicitly defined everywhere (perhaps just on the boundary
 of cells). This facilitates the use of arbitrary polyhedra as cells,
-leading to very flexible mesh choices.</p>
-</li>
+leading to very flexible mesh choices.</p></li>
 </ul>
 <p>All of these methods are driven by the requirements of different physical
 applications.</p>
 <p>Other rich areas of finite element research include</p>
 <ul class="simple">
-<li>the development of bespoke, efficient iterative solver algorithms on
+<li><p>the development of bespoke, efficient iterative solver algorithms on
 parallel computers for finite element discretisations of PDEs. Here,
 knowledge of the analysis of the discretisation can lead to solvers
 that converge in a number of iterations that is independent of the
-mesh parameter <span class="math notranslate nohighlight">\(h\)</span>.</li>
-<li>adaptive mesh algorithms that use analytical techniques to estimate
+mesh parameter <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+<li><p>adaptive mesh algorithms that use analytical techniques to estimate
 or bound the numerical error after the numerical solution has been
 computed, in order to guide iterative mesh refinement in particular
-areas of the domain.</li>
+areas of the domain.</p></li>
 </ul>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

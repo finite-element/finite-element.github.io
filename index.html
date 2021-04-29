@@ -1,25 +1,25 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Finite elements, analysis and implementation &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finite elements, analysis and implementation &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Practical matters" href="practicalities.html" />
+    <link rel="next" title="1. Introduction" href="L1_introduction.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
@@ -50,7 +50,8 @@
             
   <p>This is the webpage for the <a class="reference external" href="http://www.imperial.ac.uk/maths">Imperial College London Mathematics</a>  module
 MATH96063/MATH97017/MATH97095 Finite Elements: numerical analysis and
-implementation. Other people are welcome to make use of the
+implementation. There’s an introductory video explaining what the module is about <a class="reference external" href="https://player.vimeo.com/video/426777950?autoplay=1">online here</a>.</p>
+<p>Other people are welcome to make use of the
 material here. The authors welcome feedback and would particularly
 appreciate an <a class="reference external" href="mailto:david&#46;ham&#37;&#52;&#48;imperial&#46;ac&#46;uk">email</a> if this
 material is used to teach anywhere.</p>
@@ -70,13 +71,80 @@ material is used to teach anywhere.</p>
 </li>
 </ul>
 </div>
+<div class="section" id="weekly-material">
+<h1>Weekly material<a class="headerlink" href="#weekly-material" title="Permalink to this headline">¶</a></h1>
+<p>The numerical analysis and implementation parts of the module run in
+parallel. Each has videos and exercises embedded in its notes. This table
+indicates the progress that you should make through each component each week.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 45%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Week</p></th>
+<th class="head"><p>Numerical analysis</p></th>
+<th class="head"><p>Implementation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Up to and including <a class="reference internal" href="L1_introduction.html#def-discrete-poisson"><span class="std std-numref">Definition
+1.10</span></a>.</p></td>
+<td><p>Do the background tutorials and installation work given under
+<a class="reference internal" href="tools.html"><span class="doc">Software tools</span></a> and <a class="reference internal" href="implementation.html"><span class="doc">The implementation exercise</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Up to and including <a class="reference internal" href="L2_fespaces.html#exe-1d-lagrange-basis"><span class="std std-numref">Exercise
+2.6</span></a>.</p></td>
+<td><p>Up to the end of <a class="reference internal" href="1_quadrature.html#quadrature"><span class="std std-numref">Section 1</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Up to and including <a class="reference internal" href="L2_fespaces.html#p1unisolve"><span class="std std-numref">Definition 2.19</span></a>.</p></td>
+<td><p>Up to and including <a class="reference internal" href="2_finite_elements.html#ex-vandermonde"><span class="std std-numref">Exercise 2.47</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Up to and including <a class="reference internal" href="L2_fespaces.html#exer-argyris"><span class="std std-numref">Exercise 2.36</span></a>.</p></td>
+<td><p>Up to and including <a class="reference internal" href="2_finite_elements.html#ex-tabulate"><span class="std std-numref">Exercise 2.50</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Up to and including <a class="reference internal" href="L3_interpolation.html#def-averaged-taylor"><span class="std std-numref">Definition
+3.13</span></a>.</p></td>
+<td><p>Up to the end of <a class="reference internal" href="2_finite_elements.html#secfinitelement"><span class="std std-numref">Section 2</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Up to and including <a class="reference internal" href="L3_interpolation.html#ierrk1"><span class="std std-numref">Lemma 3.23</span></a>.</p></td>
+<td><p>Up to and including <a class="reference internal" href="4_function_spaces.html#ex-local"><span class="std std-numref">Exercise 4.44</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Up to and including <a class="reference internal" href="L4_feprobs.html#exe-pure-neumann"><span class="std std-numref">Exercise 4.36</span></a>.</p></td>
+<td><p>Up to the end of <a class="reference internal" href="4_function_spaces.html#secfunctionspaces"><span class="std std-numref">Section 4</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Up to the end of <a class="reference internal" href="L4_feprobs.html#fe-problems"><span class="std std-numref">Section 4</span></a>.</p></td>
+<td><p>Up to the end of <a class="reference internal" href="5_functions.html#secfunctions"><span class="std std-numref">Section 5</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Up to and including <a class="reference internal" href="L5_convergence.html#thm-cea"><span class="std std-numref">Theorem 5.23</span></a>.</p></td>
+<td><p>Up to the end of <a class="reference internal" href="7_boundary_conditions.html#secdirichlet"><span class="std std-numref">Section 7</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>Up to the end of <a class="reference internal" href="L5_convergence.html#convergence"><span class="std std-numref">Section 5</span></a>. For MSc, 4th year MSci
+and MRes students - read the mastery material.</p></td>
+<td><p>Time for the mastery exercise, (catch up time for year 3).</p></td>
+</tr>
+</tbody>
+</table>
 <a class="reference internal image-reference" href="_images/brenner_scott.png"><img alt="_images/brenner_scott.png" class="align-right" src="_images/brenner_scott.png" style="width: 20ex;" /></a>
 <p>A PDF version of the course notes is <a class="reference external" href="Finiteelementcourse.pdf">available here</a>.</p>
+</div>
 <div class="section" id="part-1-numerical-analysis">
 <h1>Part 1: Numerical analysis<a class="headerlink" href="#part-1-numerical-analysis" title="Permalink to this headline">¶</a></h1>
-<p>The theory part of the module will consist of two hours per week
-primarily composed of lectures, with occasional tutorials. This part of
-the module will be led by <a class="reference external" href="http://www.imperial.ac.uk/people/colin.cotter">Prof. Colin Cotter</a>.</p>
+<p>The theory  part of
+the module will be led by <a class="reference external" href="http://www.imperial.ac.uk/people/colin.cotter">Prof. Colin Cotter</a>. The material is presented
+by means of a set of lecture notes, with lecture videos interspersed in the
+notes.</p>
 <p>The text for this part of the module is Brenner and Scott <em>The
 Mathematical Theory of Finite Element Methods</em>. Imperial College has
 fortunately paid for PDF access to this book, so it is accessible from
@@ -86,9 +154,8 @@ content better between the lecture notes and the implementation
 exercise.</p>
 <div class="section" id="lecture-notes">
 <h2>Lecture notes:<a class="headerlink" href="#lecture-notes" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
-<div class="toctree-wrapper compound">
+<blockquote>
+<div><div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="L1_introduction.html">1. Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="L1_introduction.html#poisson-s-equation-in-the-unit-square">1.1. Poisson’s equation in the unit square</a></li>
@@ -132,77 +199,88 @@ exercise.</p>
 <li class="toctree-l2"><a class="reference internal" href="L5_convergence.html#epilogue">5.7. Epilogue</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="L6_stokes.html">6. Stokes equation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="L6_stokes.html#strong-form-of-the-equations">6.1. Strong form of the equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L6_stokes.html#variational-form-of-the-equations">6.2. Variational form of the equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L6_stokes.html#the-inf-sup-condition">6.3. The inf-sup condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L6_stokes.html#solveability-of-mixed-problems">6.4. Solveability of mixed problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L6_stokes.html#solveability-of-stokes-equation">6.5. Solveability of Stokes equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L6_stokes.html#discretisation-of-stokes-equations">6.6. Discretisation of Stokes equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="L6_stokes.html#the-mini-element">6.7. The MINI element</a></li>
+</ul>
+</li>
 </ul>
 </div>
+</div></blockquote>
+</div>
 <div class="section" id="past-exam-papers">
-<h1>Past exam papers<a class="headerlink" href="#past-exam-papers" title="Permalink to this headline">¶</a></h1>
+<h2>Past exam papers<a class="headerlink" href="#past-exam-papers" title="Permalink to this headline">¶</a></h2>
 <p>Please note that for 2015-2018, there was no mastery component in the
 examination, and so there were four questions. From 2019 on there are
 four questions plus one mastery question for 4th year/Masters credits.</p>
 <ul class="simple">
-<li><a class="reference external" href="_static/FE2015-exam-revised.pdf">2015 exam paper</a> and <a class="reference external" href="_static/FE2015-exam-soln.pdf">solutions</a></li>
-<li><a class="reference external" href="_static/FE2016-exam.pdf">2016 exam paper</a> and <a class="reference external" href="_static/FE2016-exam-soln.pdf">solutions</a></li>
-<li><a class="reference external" href="_static/FEExam-2017.pdf">2017 exam paper</a> and <a class="reference external" href="_static/FEExam-2017-soln.pdf">solutions</a></li>
-<li><a class="reference external" href="_static/FEExam-2018.pdf">2018 exam paper</a> and <a class="reference external" href="_static/FEExam-2018-soln.pdf">solutions</a></li>
-<li><a class="reference external" href="_static/FEExam-2019.pdf">2019 exam paper</a> and <a class="reference external" href="_static/FEExam-2019-solns.pdf">solutions</a></li>
-<li><a class="reference external" href="_static/revision-checklist.pdf">revision checklist</a></li>
+<li><p><a class="reference external" href="_static/FE2015-exam-revised.pdf">2015 exam paper</a> and <a class="reference external" href="_static/FE2015-exam-soln.pdf">solutions</a></p></li>
+<li><p><a class="reference external" href="_static/FE2016-exam.pdf">2016 exam paper</a> and <a class="reference external" href="_static/FE2016-exam-soln.pdf">solutions</a></p></li>
+<li><p><a class="reference external" href="_static/FEExam-2017.pdf">2017 exam paper</a> and <a class="reference external" href="_static/FEExam-2017-soln.pdf">solutions</a></p></li>
+<li><p><a class="reference external" href="_static/FEExam-2018.pdf">2018 exam paper</a> and <a class="reference external" href="_static/FEExam-2018-soln.pdf">solutions</a></p></li>
+<li><p><a class="reference external" href="_static/FEExam-2019.pdf">2019 exam paper</a> and <a class="reference external" href="_static/FEExam-2019-solns.pdf">solutions</a></p></li>
+<li><p><a class="reference external" href="_static/revision-checklist.pdf">revision checklist</a></p></li>
 </ul>
+</div>
+</div>
 <div class="section" id="part-2-implementation">
-<h2>Part 2: Implementation<a class="headerlink" href="#part-2-implementation" title="Permalink to this headline">¶</a></h2>
+<h1>Part 2: Implementation<a class="headerlink" href="#part-2-implementation" title="Permalink to this headline">¶</a></h1>
 <p>The implementation part of the module aims to give the students a
 deeper understanding of the finite element method through writing
 software to solve finite element problems in one and two dimensions.</p>
-<p>This part of the module will be taught by <a class="reference external" href="http://www.imperial.ac.uk/people/david.ham">Dr David Ham</a> in two hours per
-week of computer laboratory time.</p>
+<p>This part of the module will be taught by <a class="reference external" href="http://www.imperial.ac.uk/people/david.ham">Dr David Ham</a>. The key to this part of the
+module is to build up a working finite element implementation over the course
+of the term, and thereby to gain a practical understanding of the method.</p>
+<p>The starting point for the implementation method is the skeleton code, an
+outline of a simple finite element library written in Python. Many of the
+critical algorithms in the skeleton code are left unimplemented, it will be
+your task to implement them over the course of the term.</p>
+<p>Each chapter of the implementation describes how a part of the finite element
+method is implemented. Along the way are videos which explain the text, or
+walk through the algorithms presented. Also interspersed in the text are
+exercises, typically requiring you to implement the algorithm just
+presented. We will look at how to do this in more detail presently.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Computational tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#access-to-computers">Access to computers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools.html#using-the-windows-machines-in-the-computer-labs">Using the Windows machines in the computer labs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools.html#using-your-own-windows-machine">Using your own Windows machine</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools.html#using-your-own-linux-machine">Using your own Linux machine</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools.html#using-your-own-mac">Using your own Mac</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools.html#editing-code">Editing code</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#the-command-line">The command line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Software tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tools.html#python">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#github-and-git">GitHub and git</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools.html#getting-started-with-git-and-github">Getting started with git and GitHub</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#sharing-your-problems-with-gists">Sharing your problems with gists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#raising-hell-issues">Raising <span class="strikethrough">hell</span> issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#git">Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#visual-studio-code">Visual Studio Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#the-command-line">The command line</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="implementation.html">The implementation exercise</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#formalities-and-marking-scheme">Formalities and marking scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#extension-mastery-exercise">Extension (mastery) exercise</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#obtaining-the-skeleton-code">Obtaining the skeleton code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#set-up-a-folder-to-hold-the-repository-and-virtual-environment">Set up a folder to hold the repository and virtual environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-up-your-repository">Setting up your repository</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#cloning-a-local-copy">Cloning a local copy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-up-your-venv">Setting up your venv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="implementation.html#activating-your-venv">Activating your venv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="implementation.html#setting-up-an-implementation-branch">Setting up an implementation branch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="implementation.html#watching-for-updates-and-issues">Watching for updates and issues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="implementation.html#updating-your-fork">Updating your fork</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#skeleton-code-documentation">Skeleton code documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#how-to-do-the-implementation-exercises">How to do the implementation exercises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="implementation.html#pull-requests-for-feedback">Pull requests for feedback</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="implementation.html#creating-your-pull-request">Creating your pull request</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#testing-your-work">Testing your work</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#coding-style-and-commenting">Coding style and commenting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#getting-help">Getting help</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#using-piazza">Using Piazza</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#formulating-a-good-question">Formulating a good question</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#participating-in-the-live-labs">Participating in the live labs</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html#tips-and-tricks-for-the-implementation-exercise">Tips and tricks for the implementation exercise</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <p>Implementation exercise contents:</p>
-</div>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
@@ -273,19 +351,29 @@ week of computer laboratory time.</p>
 <li class="toctree-l2"><a class="reference internal" href="8_nonlinear_problems.html#implementing-a-nonlinear-problem">8.5. Implementing a nonlinear problem</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="zbibliography.html">9. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_mixed_problems.html">9. Mixed problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="9_mixed_problems.html#vector-valued-finite-elements">9.1. Vector-valued finite elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="9_mixed_problems.html#vector-valued-function-spaces">9.2. Vector-valued function spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="9_mixed_problems.html#functions-in-vector-valued-spaces">9.3. Functions in vector-valued spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="9_mixed_problems.html#mixed-function-spaces">9.4. Mixed function spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="9_mixed_problems.html#manufacturing-a-solution-to-the-stokes-equations">9.5. Manufacturing a solution to the Stokes equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="9_mixed_problems.html#implementing-the-stokes-problem">9.6. Implementing the Stokes problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zbibliography.html">10. References</a></li>
 </ul>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

@@ -1,22 +1,23 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>7. Dirichlet boundary conditions &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7. Dirichlet boundary conditions &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="8. Nonlinear problems" href="8_nonlinear_problems.html" />
@@ -50,7 +51,7 @@
           <div class="body" role="main">
             
   <div class="section" id="dirichlet-boundary-conditions">
-<h1>7. Dirichlet boundary conditions<a class="headerlink" href="#dirichlet-boundary-conditions" title="Permalink to this headline">¶</a></h1>
+<span id="secdirichlet"></span><h1><span class="section-number">7. </span>Dirichlet boundary conditions<a class="headerlink" href="#dirichlet-boundary-conditions" title="Permalink to this headline">¶</a></h1>
 <p>The Helmholtz problem we solved in the previous part was chosen to
 have homogeneous Neumann or <em>natural</em> boundary conditions, which can
 be implemented simply by cancelling the zero surface integral. We can
@@ -80,14 +81,14 @@ with <span class="math notranslate nohighlight">\(u_0 \in V_0\)</span> and <span
 \qquad \forall v_0 \in V_0\\u_\Gamma = 0 \qquad \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
 <p>There are a number of features of this equation which require some explanation:</p>
 <ol class="arabic simple">
-<li>We only test with functions from <span class="math notranslate nohighlight">\(V_0\)</span>. This is because it is only
+<li><p>We only test with functions from <span class="math notranslate nohighlight">\(V_0\)</span>. This is because it is only
 necessary that the differential equation is satisfied on the interior
 of the domain: on the boundary of the domain we need only satisfy the
-boundary conditions.</li>
-<li>The surface integral now cancels because <span class="math notranslate nohighlight">\(v_0\)</span> is guaranteed to be
-zero everywhere on the boundary.</li>
-<li>The <span class="math notranslate nohighlight">\(u_\Gamma\)</span> definition actually implies that <span class="math notranslate nohighlight">\(u_\Gamma=0\)</span>
-everywhere, since all of the nodes in <span class="math notranslate nohighlight">\(V_\Gamma\)</span> lie on the boundary.</li>
+boundary conditions.</p></li>
+<li><p>The surface integral now cancels because <span class="math notranslate nohighlight">\(v_0\)</span> is guaranteed to be
+zero everywhere on the boundary.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(u_\Gamma\)</span> definition actually implies that <span class="math notranslate nohighlight">\(u_\Gamma=0\)</span>
+everywhere, since all of the nodes in <span class="math notranslate nohighlight">\(V_\Gamma\)</span> lie on the boundary.</p></li>
 </ol>
 <p>This means that the weak form is actually:</p>
 <div class="math notranslate nohighlight" id="equation-weakpoisson">
@@ -95,22 +96,22 @@ everywhere, since all of the nodes in <span class="math notranslate nohighlight"
  = \int_\Omega v_0\, f\, \mathrm{d} x
 \qquad \forall v_0 \in V_0\\u_\Gamma = 0\end{aligned}\end{align} \]</div>
 <div class="section" id="an-algorithm-for-homogeneous-dirichlet-conditions">
-<h2>7.1. An algorithm for homogeneous Dirichlet conditions<a class="headerlink" href="#an-algorithm-for-homogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.1. </span>An algorithm for homogeneous Dirichlet conditions<a class="headerlink" href="#an-algorithm-for-homogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
 <p>The implementation of homogeneous Dirichlet conditions is actually
 rather straightforward.</p>
 <ol class="arabic simple">
-<li>The system is assembled completely ignoring the Dirichlet conditions.
+<li><p>The system is assembled completely ignoring the Dirichlet conditions.
 This results in a global matrix and vector which are correct on the rows
-corresponding to test functions in <span class="math notranslate nohighlight">\(V_0\)</span>, but incorrect on the <span class="math notranslate nohighlight">\(V_\Gamma\)</span> rows.</li>
-<li>The global vector rows corresponding to boundary nodes are set to 0.</li>
-<li>The global matrix rows corresponding to boundary nodes are set to 0.</li>
-<li>The diagonal entry on each matrix row corresponding to a boundary node is set to 1.</li>
+corresponding to test functions in <span class="math notranslate nohighlight">\(V_0\)</span>, but incorrect on the <span class="math notranslate nohighlight">\(V_\Gamma\)</span> rows.</p></li>
+<li><p>The global vector rows corresponding to boundary nodes are set to 0.</p></li>
+<li><p>The global matrix rows corresponding to boundary nodes are set to 0.</p></li>
+<li><p>The diagonal entry on each matrix row corresponding to a boundary node is set to 1.</p></li>
 </ol>
 <p>This has the effect of replacing the incorrect boundary rows of the
 system with the equation <span class="math notranslate nohighlight">\(u_i = 0\)</span> for all boundary node numbers <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">This algorithm has the unfortunate side effect of making the global
+<p class="admonition-title">Hint</p>
+<p>This algorithm has the unfortunate side effect of making the global
 matrix non-symmetric. If a symmetric matrix is required (for
 example in order to use a symmetric solver), then forward
 substition can be used to zero the boundary columns in the matrix,
@@ -118,7 +119,7 @@ but that is beyond the scope of this module.</p>
 </div>
 </div>
 <div class="section" id="implementing-boundary-conditions">
-<h2>7.2. Implementing boundary conditions<a class="headerlink" href="#implementing-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2. </span>Implementing boundary conditions<a class="headerlink" href="#implementing-boundary-conditions" title="Permalink to this headline">¶</a></h2>
 <p>Let:</p>
 <div class="math notranslate nohighlight">
 \[f = \left(16 \pi^2 (x_1 - 1)^2 x_1^2 - 2 (x_1 - 1)^2 - 8 (x_1 - 1) x_1 - 2 x_1^2\right) \sin(4 \pi x_0)\]</div>
@@ -148,7 +149,7 @@ before, run:</p>
 for this problem.</p>
 </div></div></div>
 <div class="section" id="inhomogeneous-dirichlet-conditions">
-<h2>7.3. Inhomogeneous Dirichlet conditions<a class="headerlink" href="#inhomogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.3. </span>Inhomogeneous Dirichlet conditions<a class="headerlink" href="#inhomogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
 <p>The algorithm described here can be extended to inhomogeneous systems
 by setting the entries in the global vector to the value of the
 boundary condition at the corresponding boundary node. This additional
@@ -158,14 +159,15 @@ more detail in the next section.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

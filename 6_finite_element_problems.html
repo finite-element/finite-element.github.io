@@ -1,22 +1,23 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>6. Assembling and solving finite element problems &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6. Assembling and solving finite element problems &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="7. Dirichlet boundary conditions" href="7_boundary_conditions.html" />
@@ -50,19 +51,28 @@
           <div class="body" role="main">
             
   <div class="section" id="assembling-and-solving-finite-element-problems">
-<h1>6. Assembling and solving finite element problems<a class="headerlink" href="#assembling-and-solving-finite-element-problems" title="Permalink to this headline">¶</a></h1>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/Dn_xGn2WayY">here</a></p>
+<h1><span class="section-number">6. </span>Assembling and solving finite element problems<a class="headerlink" href="#assembling-and-solving-finite-element-problems" title="Permalink to this headline">¶</a></h1>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495444450"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=8f4fd5a1-9bd4-460f-84ea-aca000b6ca27">watch this video on Panopto</a></p>
 </div>
-<p>Having constructed functions in finite element spaces and integrated
+</details><p>Having constructed functions in finite element spaces and integrated
 them over the domain, we now have the tools in place to actually
 assemble and solve a simple finite element problem. To avoid having to
 explicitly deal with boundary conditions, we choose in the first
-instance to solve a Helmholtz problem <a class="footnote-reference" href="#helmholtz" id="id1">[1]</a>, find <span class="math notranslate nohighlight">\(u\)</span> in some finite element
+instance to solve a Helmholtz problem <a class="footnote-reference brackets" href="#helmholtz" id="id1">1</a>, find <span class="math notranslate nohighlight">\(u\)</span> in some finite element
 space <span class="math notranslate nohighlight">\(V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-helmholtz">
-<span class="eqno">(6.1)<a class="headerlink" href="#equation-helmholtz" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}- \nabla^2 u + u = f\\\nabla u \cdot \mathbf{n} = 0 \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.61)<a class="headerlink" href="#equation-helmholtz" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}- \nabla^2 u + u = f\\\nabla u \cdot \mathbf{n} = 0 \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\(\Gamma\)</span> is the domain boundary and <span class="math notranslate nohighlight">\(\mathrm{n}\)</span> is the outward
 pointing normal to that boundary. <span class="math notranslate nohighlight">\(f\)</span> is a known function which, for
 simplicity, we will assume lies in <span class="math notranslate nohighlight">\(V\)</span>. Next, we form the weak form of
@@ -70,49 +80,58 @@ this equation by multiplying by a test function in <span class="math notranslate
 over the domain. We integrate the Laplacian term by parts. The problem
 becomes, find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-weak-helmholtz">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-weak-helmholtz" title="Permalink to this equation">¶</a></span>\[\int_\Omega \nabla v \cdot \nabla u + vu\, \mathrm{d} x
+<span class="eqno">(6.62)<a class="headerlink" href="#equation-weak-helmholtz" title="Permalink to this equation">¶</a></span>\[\int_\Omega \nabla v \cdot \nabla u + vu\, \mathrm{d} x
 - \underbrace{\int_\Gamma v \nabla u \cdot \mathbf{n}\, \mathrm{d} s}_{=0} =
 \int_\Omega v f\, \mathrm{d} x \qquad \forall v \in V\]</div>
 <p>If we write <span class="math notranslate nohighlight">\(\{\phi_i\}_{i=0}^{n-1}\)</span> for our basis for <span class="math notranslate nohighlight">\(V\)</span>, and recall that
-it is sufficient to ensure that <a class="reference internal" href="#equation-weak-helmholtz">(6.2)</a> is satisfied for
+it is sufficient to ensure that <a class="reference internal" href="#equation-weak-helmholtz">(6.62)</a> is satisfied for
 each function in the basis then the problem is now, find coefficients <span class="math notranslate nohighlight">\(u_i\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-0">
-<span class="eqno">(6.3)<a class="headerlink" href="#equation-6-finite-element-problems-0" title="Permalink to this equation">¶</a></span>\[\int_\Omega \sum_{j}\left(\nabla \phi_i \cdot \nabla (u_j\phi_j) + \phi_i u_j\phi_j\right)\, \mathrm{d} x
+<span class="eqno">(6.63)<a class="headerlink" href="#equation-6-finite-element-problems-0" title="Permalink to this equation">¶</a></span>\[\int_\Omega \sum_{j}\left(\nabla \phi_i \cdot \nabla (u_j\phi_j) + \phi_i u_j\phi_j\right)\, \mathrm{d} x
 = \int_\Omega \phi_i\, \sum_k f_k\phi_k\, \mathrm{d} x \qquad \forall\, 0\leq i &lt; n\]</div>
 <p>Since the left hand side is linear in the scalar coefficients <span class="math notranslate nohighlight">\(u_j\)</span>, we can move them out of the integral:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-1">
-<span class="eqno">(6.4)<a class="headerlink" href="#equation-6-finite-element-problems-1" title="Permalink to this equation">¶</a></span>\[\sum_{j}\left(\int_\Omega \nabla \phi_i \cdot \nabla \phi_j + \phi_i\phi_j\, \mathrm{d} x\, u_j\right)
+<span class="eqno">(6.64)<a class="headerlink" href="#equation-6-finite-element-problems-1" title="Permalink to this equation">¶</a></span>\[\sum_{j}\left(\int_\Omega \nabla \phi_i \cdot \nabla \phi_j + \phi_i\phi_j\, \mathrm{d} x\, u_j\right)
 = \int_\Omega \phi_i\,\sum_k f_k\phi_k\, \mathrm{d} x \qquad \forall\, 0\leq i &lt; n\]</div>
 <p>We can write this as a matrix equation:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-2">
-<span class="eqno">(6.5)<a class="headerlink" href="#equation-6-finite-element-problems-2" title="Permalink to this equation">¶</a></span>\[\mathrm{A}\mathbf{u} = \mathbf{f}\]</div>
+<span class="eqno">(6.65)<a class="headerlink" href="#equation-6-finite-element-problems-2" title="Permalink to this equation">¶</a></span>\[\mathrm{A}\mathbf{u} = \mathbf{f}\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lhs">
-<span class="eqno">(6.6)<a class="headerlink" href="#equation-eq-lhs" title="Permalink to this equation">¶</a></span>\[\mathrm{A}_{ij} = \int_\Omega \nabla \phi_i \cdot \nabla \phi_j + \phi_i\phi_j\, \mathrm{d} x\]</div>
+<span class="eqno">(6.66)<a class="headerlink" href="#equation-eq-lhs" title="Permalink to this equation">¶</a></span>\[\mathrm{A}_{ij} = \int_\Omega \nabla \phi_i \cdot \nabla \phi_j + \phi_i\phi_j\, \mathrm{d} x\]</div>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-3">
-<span class="eqno">(6.7)<a class="headerlink" href="#equation-6-finite-element-problems-3" title="Permalink to this equation">¶</a></span>\[\mathbf{u}_j = u_j\]</div>
+<span class="eqno">(6.67)<a class="headerlink" href="#equation-6-finite-element-problems-3" title="Permalink to this equation">¶</a></span>\[\mathbf{u}_j = u_j\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-rhs">
-<span class="eqno">(6.8)<a class="headerlink" href="#equation-eq-rhs" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = \int_\Omega \phi_i\,\sum_k f_k\phi_k\, \mathrm{d} x\]</div>
+<span class="eqno">(6.68)<a class="headerlink" href="#equation-eq-rhs" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = \int_\Omega \phi_i\,\sum_k f_k\phi_k\, \mathrm{d} x\]</div>
 <div class="section" id="assembling-the-right-hand-side">
-<h2>6.1. Assembling the right hand side<a class="headerlink" href="#assembling-the-right-hand-side" title="Permalink to this headline">¶</a></h2>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/H-eLGYwzpcI">here</a></p>
+<h2><span class="section-number">6.1. </span>Assembling the right hand side<a class="headerlink" href="#assembling-the-right-hand-side" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495726683"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=8d403fd1-d0da-4b1d-a032-aca100aef7b7">watch this video on Panopto</a></p>
 </div>
-<p>The assembly of these integrals exploits the same decomposition
+</details><p>The assembly of these integrals exploits the same decomposition
 property we exploited previously to integrate functions in finite
-element spaces. For example, <a class="reference internal" href="#equation-eq-rhs">(6.8)</a> can be rewritten as:</p>
+element spaces. For example, <a class="reference internal" href="#equation-eq-rhs">(6.68)</a> can be rewritten as:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-4">
-<span class="eqno">(6.9)<a class="headerlink" href="#equation-6-finite-element-problems-4" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = \sum_c \int_c \phi_i \,\sum_k f_k\phi_k\,  \mathrm{d} x\]</div>
+<span class="eqno">(6.69)<a class="headerlink" href="#equation-6-finite-element-problems-4" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = \sum_c \int_c \phi_i \,\sum_k f_k\phi_k\,  \mathrm{d} x\]</div>
 <p>This has a practical impact once we realise that only a few basis
 functions are non-zero in each element. This enables us to write an
 efficient algorithm for right hand side assembly. Assume that at the
 start of our algorithm:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-5">
-<span class="eqno">(6.10)<a class="headerlink" href="#equation-6-finite-element-problems-5" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = 0.\]</div>
+<span class="eqno">(6.70)<a class="headerlink" href="#equation-6-finite-element-problems-5" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = 0.\]</div>
 <p>Now for each cell <span class="math notranslate nohighlight">\(c\)</span>, we execute:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-6">
-<span class="eqno">(6.11)<a class="headerlink" href="#equation-6-finite-element-problems-6" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_{M(c, \hat{i})} \stackrel{+}{=} \int_c \Phi_{\hat{i}}\, \left(\sum_{\hat{k}}\,f_{M(c,\hat{k})}\,\Phi_{\hat{k}}\right)\,|J|\,\mathrm{d} X \qquad \forall 0 \leq \hat{i} &lt; N\]</div>
+<span class="eqno">(6.71)<a class="headerlink" href="#equation-6-finite-element-problems-6" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_{M(c, \hat{i})} \stackrel{+}{=} \int_c \Phi_{\hat{i}}\, \left(\sum_{\hat{k}}\,f_{M(c,\hat{k})}\,\Phi_{\hat{k}}\right)\,|J|\,\mathrm{d} X \qquad \forall 0 \leq \hat{i} &lt; N\]</div>
 <p>Where <span class="math notranslate nohighlight">\(M\)</span> is the cell-node map for the finite element space <span class="math notranslate nohighlight">\(V\)</span>, <span class="math notranslate nohighlight">\(N\)</span>
 is the number of nodes per element in <span class="math notranslate nohighlight">\(V\)</span>, and
 <span class="math notranslate nohighlight">\(\{\Phi_{\hat{i}}\}_{\hat{i}=0}^{N-1}\)</span> are the local basis
@@ -122,92 +141,110 @@ the corresponding global basis function.</p>
 <p>By choosing a suitable quadrature rule, <span class="math notranslate nohighlight">\(\{X_q\}, \{w_q\}\)</span>, we can
 write this as:</p>
 <div class="math notranslate nohighlight" id="equation-rhs-index">
-<span class="eqno">(6.12)<a class="headerlink" href="#equation-rhs-index" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_{M(c, \hat{i})} \stackrel{+}{=} \left(\sum_q \Phi(X_q)_{\hat{i}}\, \left(\sum_{\hat{k}}\,f_{M(c,\hat{k})}\,\Phi(X_q)_{\hat{k}}\right)\,w_q\,\right) |J| \qquad \forall 0 \leq \hat{i} &lt; N,\, \forall c\]</div>
+<span class="eqno">(6.72)<a class="headerlink" href="#equation-rhs-index" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_{M(c, \hat{i})} \stackrel{+}{=} \left(\sum_q \Phi(X_q)_{\hat{i}}\, \left(\sum_{\hat{k}}\,f_{M(c,\hat{k})}\,\Phi(X_q)_{\hat{k}}\right)\,w_q\,\right) |J| \qquad \forall 0 \leq \hat{i} &lt; N,\, \forall c\]</div>
 </div>
 <div class="section" id="assembling-the-left-hand-side-matrix">
-<h2>6.2. Assembling the left hand side matrix<a class="headerlink" href="#assembling-the-left-hand-side-matrix" title="Permalink to this headline">¶</a></h2>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/yQ5vJpCeJaU">here</a></p>
+<h2><span class="section-number">6.2. </span>Assembling the left hand side matrix<a class="headerlink" href="#assembling-the-left-hand-side-matrix" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495722122"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=38a9908f-1490-4438-a7b4-aca000b67753">watch this video on Panopto</a></p>
 </div>
-<p>The left hand side matrix follows a similar pattern, however there are
+</details><p>The left hand side matrix follows a similar pattern, however there are
 two new complications. First, we have two unbound indices (<span class="math notranslate nohighlight">\(i\)</span> and
 <span class="math notranslate nohighlight">\(j\)</span>), and second, the integral involves derivatives. We will address
 the question of derivatives first.</p>
 <div class="section" id="pulling-gradients-back-to-the-reference-element">
-<h3>6.2.1. Pulling gradients back to the reference element<a class="headerlink" href="#pulling-gradients-back-to-the-reference-element" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.2.1. </span>Pulling gradients back to the reference element<a class="headerlink" href="#pulling-gradients-back-to-the-reference-element" title="Permalink to this headline">¶</a></h3>
 <p>On element <span class="math notranslate nohighlight">\(c\)</span>, there is a straightforward relationship between the
 local and global bases:</p>
 <div class="math notranslate nohighlight" id="equation-pullback">
-<span class="eqno">(6.13)<a class="headerlink" href="#equation-pullback" title="Permalink to this equation">¶</a></span>\[\phi_{M(c,i)}(x) = \Phi_i(X)\]</div>
+<span class="eqno">(6.73)<a class="headerlink" href="#equation-pullback" title="Permalink to this equation">¶</a></span>\[\phi_{M(c,i)}(x) = \Phi_i(X)\]</div>
 <p>We can also, as we showed in <a class="reference internal" href="5_functions.html#coordinates"><span class="std std-ref">Changing coordinates between reference and physical space</span></a>, express the global
 coordinate <span class="math notranslate nohighlight">\(x\)</span> in terms of the local coordinate <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p>What about <span class="math notranslate nohighlight">\(\nabla\phi\)</span>? We can write the gradient operator in
-component form and apply <a class="reference internal" href="#equation-pullback">(6.13)</a>:</p>
+component form and apply <a class="reference internal" href="#equation-pullback">(6.73)</a>:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-7">
-<span class="eqno">(6.14)<a class="headerlink" href="#equation-6-finite-element-problems-7" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
+<span class="eqno">(6.74)<a class="headerlink" href="#equation-6-finite-element-problems-7" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
 \frac{\partial\Phi_i(X)}{\partial{x_\alpha}}\quad \forall\, 0\leq \alpha &lt; \dim\]</div>
 <p>However, the expression on the right involves the gradient of a local
 basis function with respect to the global coordinate variable <span class="math notranslate nohighlight">\(x\)</span>. We
 employ the chain rule to express this gradient with respect to the
 local coordinates, <span class="math notranslate nohighlight">\(X\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-8">
-<span class="eqno">(6.15)<a class="headerlink" href="#equation-6-finite-element-problems-8" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
+<span class="eqno">(6.75)<a class="headerlink" href="#equation-6-finite-element-problems-8" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
 \sum_{\beta=0}^{\dim-1}\frac{\partial X_\beta}{\partial x_\alpha}\frac{\partial\Phi_i(X)}{\partial{X_\beta}}\quad \forall\, 0\leq \alpha &lt; \dim\]</div>
 <p>Using the <a class="reference internal" href="5_functions.html#integration"><span class="std std-ref">definition of the Jacobian</span></a>, and
 using <span class="math notranslate nohighlight">\(\nabla_x\)</span> and <span class="math notranslate nohighlight">\(\nabla_X\)</span> to indicate the global and local
 gradient operators respectively, we can equivalently write this
 expression as:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-9">
-<span class="eqno">(6.16)<a class="headerlink" href="#equation-6-finite-element-problems-9" title="Permalink to this equation">¶</a></span>\[\nabla_x \phi_{M(c,i)}(x) = J^{-\mathrm{T}}\nabla_X\Phi_i(X)\]</div>
+<span class="eqno">(6.76)<a class="headerlink" href="#equation-6-finite-element-problems-9" title="Permalink to this equation">¶</a></span>\[\nabla_x \phi_{M(c,i)}(x) = J^{-\mathrm{T}}\nabla_X\Phi_i(X)\]</div>
 <p>where <span class="math notranslate nohighlight">\(J^{-\mathrm{T}} = (J^{-1})^\mathrm{T}\)</span> is the transpose of the
 inverse of the cell Jacobian matrix.</p>
 </div>
 <div class="section" id="the-assembly-algorithm">
-<h3>6.2.2. The assembly algorithm<a class="headerlink" href="#the-assembly-algorithm" title="Permalink to this headline">¶</a></h3>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/e20G9pjr7IA">here</a></p>
+<h3><span class="section-number">6.2.2. </span>The assembly algorithm<a class="headerlink" href="#the-assembly-algorithm" title="Permalink to this headline">¶</a></h3>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495723338"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=546633aa-7816-4084-b77f-aca000b64bbd">watch this video on Panopto</a></p>
 </div>
-<p>We can start by pulling back <a class="reference internal" href="#equation-eq-lhs">(6.6)</a> to local coordinates:</p>
+</details><p>We can start by pulling back <a class="reference internal" href="#equation-eq-lhs">(6.66)</a> to local coordinates:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-10">
-<span class="eqno">(6.17)<a class="headerlink" href="#equation-6-finite-element-problems-10" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathrm{A}_{ij} = 0.\\\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
+<span class="eqno">(6.77)<a class="headerlink" href="#equation-6-finite-element-problems-10" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathrm{A}_{ij} = 0.\\\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
  \int_c\left( \left(J^{-T}\nabla_X \Phi_{\hat{i}}\right)
    \cdot \left(J^{-T}\nabla_X \Phi_{\hat{j}}\right) + \Phi_{\hat{i}}\Phi_{\hat{j}}\right)|J|\, \mathrm{d} X
    \quad\forall 0\leq \hat{i},\hat{j}&lt; N,\, \forall c\end{aligned}\end{align} \]</div>
 <p>We now employ a suitable quadrature rule, <span class="math notranslate nohighlight">\(\{X_q\}, \{w_q\}\)</span>, to
 calculate the integral:</p>
 <div class="math notranslate nohighlight" id="equation-lhs-assemble">
-<span class="eqno">(6.18)<a class="headerlink" href="#equation-lhs-assemble" title="Permalink to this equation">¶</a></span>\[\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
+<span class="eqno">(6.78)<a class="headerlink" href="#equation-lhs-assemble" title="Permalink to this equation">¶</a></span>\[\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
 \sum_q \bigg(\left(J^{-T}\nabla_X \Phi_{\hat{i}}(X_q)\right)
 \cdot \left(J^{-T}\nabla_X \Phi_{\hat{j}}(X_q)\right) + \Phi_{\hat{i}}(X_q)\Phi_{\hat{j}}(X_q)\bigg)|J|\,w_q
 \quad\forall 0\leq \hat{i},\hat{j}&lt; N,\, \forall c\]</div>
 <p>Some readers may find this easier to read using index notation over
 the geometric dimensions:</p>
 <div class="math notranslate nohighlight" id="equation-lhs-index">
-<span class="eqno">(6.19)<a class="headerlink" href="#equation-lhs-index" title="Permalink to this equation">¶</a></span>\[\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
+<span class="eqno">(6.79)<a class="headerlink" href="#equation-lhs-index" title="Permalink to this equation">¶</a></span>\[\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
 \sum_q \left(\sum_{\alpha\beta\gamma}J^{-1}_{\beta\alpha}\left(\nabla_X \Phi_{\hat{i}}(X_q)\right)_\beta\,
 J^{-1}_{\gamma\alpha}\left(\nabla_X \Phi_{\hat{j}}(X_q)\right)_\gamma + \Phi_{\hat{i}}(X_q)\Phi_{\hat{j}}(X_q)\right)|J|\,w_q
 \quad\forall 0\leq \hat{i},\hat{j}&lt; N,\, \forall c\]</div>
 </div>
 <div class="section" id="a-note-on-matrix-insertion">
-<h3>6.2.3. A note on matrix insertion<a class="headerlink" href="#a-note-on-matrix-insertion" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.2.3. </span>A note on matrix insertion<a class="headerlink" href="#a-note-on-matrix-insertion" title="Permalink to this headline">¶</a></h3>
 <p>For each cell <span class="math notranslate nohighlight">\(c\)</span>, the right hand sides of equations
-<a class="reference internal" href="#equation-lhs-assemble">(6.18)</a> and <a class="reference internal" href="#equation-lhs-index">(6.19)</a> have two free indices,
+<a class="reference internal" href="#equation-lhs-assemble">(6.78)</a> and <a class="reference internal" href="#equation-lhs-index">(6.79)</a> have two free indices,
 <span class="math notranslate nohighlight">\(\hat{i}\)</span> and <span class="math notranslate nohighlight">\(\hat{j}\)</span>. The equation therefore assembles a local
 <span class="math notranslate nohighlight">\(N\times N\)</span> matrix corresponding to one integral for each test
 function, trial function pair on the current element. This is then
 added to the global matrix at the row and column pairs given by the
 cell node map <span class="math notranslate nohighlight">\(M(c, \hat{i})\)</span> and <span class="math notranslate nohighlight">\(M(c, \hat{j})\)</span>.</p>
-<div class="figure" id="id6">
+<div class="figure align-default" id="id2">
 <span id="figmatrix-insertion"></span><a class="reference internal image-reference" href="_images/global_assembly.svg"><img alt="_images/global_assembly.svg" src="_images/global_assembly.svg" width="70%" /></a>
 <p class="caption"><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Computing integrals for each local test and trial function produces
 a local dense (in this case, <span class="math notranslate nohighlight">\(3\times 3\)</span>) matrix. The entries in
 this matrix are added to the corresponding global row and column
-positions in the global matrix.</span></p>
+positions in the global matrix.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
+<p class="admonition-title">Hint</p>
 <p>One might naïvely expect that if <code class="docutils literal notranslate"><span class="pre">nodes</span></code> is the vector of global
 node numbers for the current cell, <code class="docutils literal notranslate"><span class="pre">m</span></code> is the matrix of local
 integral values and <code class="docutils literal notranslate"><span class="pre">A</span></code> is the global matrix, then the Python
@@ -215,11 +252,11 @@ code might look like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="n">nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">]</span> <span class="o">+=</span> <span class="n">m</span> <span class="c1"># DON&#39;T DO THIS!</span>
 </pre></div>
 </div>
-<p>Unfortunately, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.17)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> interprets this as an instruction to
+<p>Unfortunately, <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v1.20)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> interprets this as an instruction to
 insert a vector into the diagonal of <code class="docutils literal notranslate"><span class="pre">A</span></code>, and will complain that
 the two-dimensional right hand side does not match the
 one-dimensional left hand side. Instead, one has to employ the
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ix_.html#numpy.ix_" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.ix_()</span></code></a> function:</p>
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ix_.html#numpy.ix_" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.ix_()</span></code></a> function:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">m</span> <span class="c1"># DO THIS!</span>
 </pre></div>
 </div>
@@ -227,18 +264,27 @@ one-dimensional left hand side. Instead, one has to employ the
 side vector. If <code class="docutils literal notranslate"><span class="pre">l</span></code> is the global right hand side vector and
 <code class="docutils literal notranslate"><span class="pre">v</span></code> is the vector of local right hand integrals, then the
 following will work just fine:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="p">[</span><span class="n">nodes</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="p">[</span><span class="n">nodes</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="sparse-matrices">
-<h3>6.2.4. Sparse matrices<a class="headerlink" href="#sparse-matrices" title="Permalink to this headline">¶</a></h3>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/YYyDOTrrgzU">here</a></p>
+<h3><span class="section-number">6.2.4. </span>Sparse matrices<a class="headerlink" href="#sparse-matrices" title="Permalink to this headline">¶</a></h3>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495722732"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d2f1a287-46ec-47d4-94af-aca000b6594f">watch this video on Panopto</a></p>
 </div>
-<p>Each row of the global matrix corresponds to a single global basis
+</details><p>Each row of the global matrix corresponds to a single global basis
 function. The number of non-zeros in this row is equal to the number
 of other basis functions which are non-zero in the elements where the
 original basis function is non-zero. The maximum number of non-zeros
@@ -266,21 +312,21 @@ than 25 megabytes to store the matrix. The time taken to solving the
 matrix system will also be vastly reduced since operations on zeros
 are avoided.</p>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">The <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.5.0.dev0+0c7545e)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
+<p class="admonition-title">Hint</p>
+<p>The <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.7.0.dev0+865.f97ce31)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
 which enable Python code to employ a variety of sparse matrix
 formats using essentially identical operations to the dense matrix
 case. The skeleton code already contains commands to construct
 empty sparse matrices and to solve the resulting linear system. You
 may, if you wish, experiment with choosing other sparse formats
-from <a class="reference external" href="http://scipy.github.io/devdocs/sparse.html#module-scipy.sparse" title="(in SciPy v1.5.0.dev0+0c7545e)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
+from <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.7.0.dev0+865.f97ce31)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
 you do <strong>not</strong> switch to a dense numpy array; unless, that is, you
 particularly enjoy running out of memory on your computer!</p>
 </div>
 </div>
 </div>
 <div class="section" id="the-method-of-manufactured-solutions">
-<h2>6.3. The method of manufactured solutions<a class="headerlink" href="#the-method-of-manufactured-solutions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.3. </span>The method of manufactured solutions<a class="headerlink" href="#the-method-of-manufactured-solutions" title="Permalink to this headline">¶</a></h2>
 <p>When the finite element method is employed to solve Helmholtz problems
 arising in science and engineering, the value forcing function <span class="math notranslate nohighlight">\(f\)</span>
 will come from the application data. However for the purpose of
@@ -290,34 +336,34 @@ partial differential equation is known. It turns out that there is a
 straightforward algorithm for this process. This algorithm is known as
 the <em>method of manufactured solutions</em>. It has but two steps:</p>
 <ol class="arabic simple">
-<li>Choose a function <span class="math notranslate nohighlight">\(\tilde{u}\)</span> which satisfies the boundary
-conditions of the PDE.</li>
-<li>Substitute <span class="math notranslate nohighlight">\(\tilde{u}\)</span> into the left hand side of
-<a class="reference internal" href="#equation-helmholtz">(6.1)</a>. Set <span class="math notranslate nohighlight">\(f\)</span> equal to the result of this calculation,
-and now <span class="math notranslate nohighlight">\(\tilde{u}\)</span> is a solution to <a class="reference internal" href="#equation-helmholtz">(6.1)</a>.</li>
+<li><p>Choose a function <span class="math notranslate nohighlight">\(\tilde{u}\)</span> which satisfies the boundary
+conditions of the PDE.</p></li>
+<li><p>Substitute <span class="math notranslate nohighlight">\(\tilde{u}\)</span> into the left hand side of
+<a class="reference internal" href="#equation-helmholtz">(6.61)</a>. Set <span class="math notranslate nohighlight">\(f\)</span> equal to the result of this calculation,
+and now <span class="math notranslate nohighlight">\(\tilde{u}\)</span> is a solution to <a class="reference internal" href="#equation-helmholtz">(6.61)</a>.</p></li>
 </ol>
 <p>To illustrate this algorithm, suppose we wish to construct <span class="math notranslate nohighlight">\(f\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-11">
-<span class="eqno">(6.20)<a class="headerlink" href="#equation-6-finite-element-problems-11" title="Permalink to this equation">¶</a></span>\[\tilde{u} = \cos(4\pi x_0) x_1^2(1 - x_1)^2\]</div>
-<p>is a solution to <a class="reference internal" href="#equation-helmholtz">(6.1)</a>. It is simple to verify that
+<span class="eqno">(6.80)<a class="headerlink" href="#equation-6-finite-element-problems-11" title="Permalink to this equation">¶</a></span>\[\tilde{u} = \cos(4\pi x_0) x_1^2(1 - x_1)^2\]</div>
+<p>is a solution to <a class="reference internal" href="#equation-helmholtz">(6.61)</a>. It is simple to verify that
 <span class="math notranslate nohighlight">\(\tilde{u}\)</span> satisfies the boundary conditions. We then note that:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-12">
-<span class="eqno">(6.21)<a class="headerlink" href="#equation-6-finite-element-problems-12" title="Permalink to this equation">¶</a></span>\[- \nabla^2 \tilde{u} + \tilde{u} = \left((16 \pi^2 + 1) (x_1 - 1)^2 x_1^2 - 12 x_1^2  +12 x_1  - 2\right) \cos(4 \pi x_0)\]</div>
+<span class="eqno">(6.81)<a class="headerlink" href="#equation-6-finite-element-problems-12" title="Permalink to this equation">¶</a></span>\[- \nabla^2 \tilde{u} + \tilde{u} = \left((16 \pi^2 + 1) (x_1 - 1)^2 x_1^2 - 12 x_1^2  +12 x_1  - 2\right) \cos(4 \pi x_0)\]</div>
 <p>If we choose:</p>
 <div class="math notranslate nohighlight" id="equation-f-def">
-<span class="eqno">(6.22)<a class="headerlink" href="#equation-f-def" title="Permalink to this equation">¶</a></span>\[f = \left((16 \pi^2 + 1) (x_1 - 1)^2 x_1^2 - 12 x_1^2  +12 x_1  - 2\right) \cos(4 \pi x_0)\]</div>
-<p>then <span class="math notranslate nohighlight">\(\tilde{u}\)</span> is a solution to <a class="reference internal" href="#equation-helmholtz">(6.1)</a>.</p>
+<span class="eqno">(6.82)<a class="headerlink" href="#equation-f-def" title="Permalink to this equation">¶</a></span>\[f = \left((16 \pi^2 + 1) (x_1 - 1)^2 x_1^2 - 12 x_1^2  +12 x_1  - 2\right) \cos(4 \pi x_0)\]</div>
+<p>then <span class="math notranslate nohighlight">\(\tilde{u}\)</span> is a solution to <a class="reference internal" href="#equation-helmholtz">(6.61)</a>.</p>
 </div>
 <div class="section" id="errors-and-convergence">
-<h2>6.4. Errors and convergence<a class="headerlink" href="#errors-and-convergence" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.4. </span>Errors and convergence<a class="headerlink" href="#errors-and-convergence" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="the-l-2-error">
-<h3>6.4.1. The <span class="math notranslate nohighlight">\(L^2\)</span> error<a class="headerlink" href="#the-l-2-error" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.4.1. </span>The <span class="math notranslate nohighlight">\(L^2\)</span> error<a class="headerlink" href="#the-l-2-error" title="Permalink to this headline">¶</a></h3>
 <p>When studying finite element methods we are freqently concerned with
 convergence in the <span class="math notranslate nohighlight">\(L^2\)</span> norm. That is to say, if <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are
 finite element spaces defined over the same mesh, and <span class="math notranslate nohighlight">\(f\in V, g\in W\)</span>
 then we need to calculate:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-13">
-<span class="eqno">(6.23)<a class="headerlink" href="#equation-6-finite-element-problems-13" title="Permalink to this equation">¶</a></span>\[\sqrt{\int_\Omega (f-g)^2 \mathrm{d} x} = \sqrt{\sum_c\int_c \left(\left(\sum_i f_{M_V(c,i)}\Phi_i\right) - \left(\sum_j g_{M_W(c,j)}\Psi_j\right)\right)^2|J|\mathrm{d} X}\]</div>
+<span class="eqno">(6.83)<a class="headerlink" href="#equation-6-finite-element-problems-13" title="Permalink to this equation">¶</a></span>\[\sqrt{\int_\Omega (f-g)^2 \mathrm{d} x} = \sqrt{\sum_c\int_c \left(\left(\sum_i f_{M_V(c,i)}\Phi_i\right) - \left(\sum_j g_{M_W(c,j)}\Psi_j\right)\right)^2|J|\mathrm{d} X}\]</div>
 <p>where <span class="math notranslate nohighlight">\(M_V\)</span> is the cell-node map for the space <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(M_W\)</span> is the
 cell-node map for the space <span class="math notranslate nohighlight">\(W\)</span>. Likewise <span class="math notranslate nohighlight">\(\{\Phi_i\}\)</span> is the local
 basis for <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(\{\Psi_j\}\)</span> is the local basis for <span class="math notranslate nohighlight">\(W\)</span>.</p>
@@ -326,7 +372,7 @@ in the integrand, require a degree of precision equal to twice the
 greater of the polynomial degrees of <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span>.</p>
 </div>
 <div class="section" id="numerically-estimating-convergence-rates">
-<h3>6.4.2. Numerically estimating convergence rates<a class="headerlink" href="#numerically-estimating-convergence-rates" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.4.2. </span>Numerically estimating convergence rates<a class="headerlink" href="#numerically-estimating-convergence-rates" title="Permalink to this headline">¶</a></h3>
 <p>Using the approximation results from the theory part of the course, we
 know that the error term in the finite element solution of the
 Helmholtz equation is expected to have the form <span class="math notranslate nohighlight">\(\mathcal{O}(h^{p+1})\)</span>
@@ -335,40 +381,40 @@ finite element space employed. That is to say if <span class="math notranslate n
 exact solution to our PDE and <span class="math notranslate nohighlight">\(u_h\)</span> is the solution to our finite
 element problem, then for sufficiently small <span class="math notranslate nohighlight">\(h\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-14">
-<span class="eqno">(6.24)<a class="headerlink" href="#equation-6-finite-element-problems-14" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} &lt; c h^{p+1}\]</div>
+<span class="eqno">(6.84)<a class="headerlink" href="#equation-6-finite-element-problems-14" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} &lt; c h^{p+1}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(c&gt;0\)</span> not dependent on <span class="math notranslate nohighlight">\(h\)</span>. Indeed, for sufficiently small
 <span class="math notranslate nohighlight">\(h\)</span>, there is a <span class="math notranslate nohighlight">\(c\)</span> such that we can write:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-15">
-<span class="eqno">(6.25)<a class="headerlink" href="#equation-6-finite-element-problems-15" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} \approx c h^{p+1}\]</div>
+<span class="eqno">(6.85)<a class="headerlink" href="#equation-6-finite-element-problems-15" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} \approx c h^{p+1}\]</div>
 <p>Suppose we solve the finite element problem for two different (fine)
 mesh spacings, <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span>. Then we have:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-16">
-<span class="eqno">(6.26)<a class="headerlink" href="#equation-6-finite-element-problems-16" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_{h_1} - \tilde{u}\|_{L^2} \approx c h_1^{p+1}\\\|u_{h_2} - \tilde{u}\|_{L^2} \approx c h_2^{p+1}\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.86)<a class="headerlink" href="#equation-6-finite-element-problems-16" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_{h_1} - \tilde{u}\|_{L^2} \approx c h_1^{p+1}\\\|u_{h_2} - \tilde{u}\|_{L^2} \approx c h_2^{p+1}\end{aligned}\end{align} \]</div>
 <p>or equivalently:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-17">
-<span class="eqno">(6.27)<a class="headerlink" href="#equation-6-finite-element-problems-17" title="Permalink to this equation">¶</a></span>\[\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}
+<span class="eqno">(6.87)<a class="headerlink" href="#equation-6-finite-element-problems-17" title="Permalink to this equation">¶</a></span>\[\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}
 \approx \left(\frac{h_1}{h_2}\right)^{p+1}\]</div>
 <p>By taking logarithms and rearranging this equation, we can produce a
 formula which, given the analytic solution and two numerical
 solutions, produces an estimate of the rate of convergence:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-18">
-<span class="eqno">(6.28)<a class="headerlink" href="#equation-6-finite-element-problems-18" title="Permalink to this equation">¶</a></span>\[q = \frac{\ln\left(\displaystyle\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}\right)}
+<span class="eqno">(6.88)<a class="headerlink" href="#equation-6-finite-element-problems-18" title="Permalink to this equation">¶</a></span>\[q = \frac{\ln\left(\displaystyle\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}\right)}
 {\ln\left(\displaystyle\frac{h_1}{h_2}\right)}\]</div>
 </div>
 </div>
 <div class="section" id="implementing-finite-element-problems">
-<h2>6.5. Implementing finite element problems<a class="headerlink" href="#implementing-finite-element-problems" title="Permalink to this headline">¶</a></h2>
-<div class="proof proof-type-exercise" id="id7">
+<h2><span class="section-number">6.5. </span>Implementing finite element problems<a class="headerlink" href="#implementing-finite-element-problems" title="Permalink to this headline">¶</a></h2>
+<div class="proof proof-type-exercise" id="id3">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 6.1</span>
+        <span class="proof-type">Exercise 6.13</span>
         
     </div><div class="proof-content">
 <p><code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/helmholtz.py</span></code> contains a partial implementation of
-the finite element method to solve <a class="reference internal" href="#equation-weak-helmholtz">(6.2)</a> with <span class="math notranslate nohighlight">\(f\)</span>
-chosen as in <a class="reference internal" href="#equation-f-def">(6.22)</a>. Your task is to implement the
-<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble" title="fe_utils.solvers.helmholtz.assemble"><code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code></a> function using <a class="reference internal" href="#equation-rhs-index">(6.12)</a>, and
-<a class="reference internal" href="#equation-lhs-assemble">(6.18)</a> or <a class="reference internal" href="#equation-lhs-index">(6.19)</a>. The comments in the
+the finite element method to solve <a class="reference internal" href="#equation-weak-helmholtz">(6.62)</a> with <span class="math notranslate nohighlight">\(f\)</span>
+chosen as in <a class="reference internal" href="#equation-f-def">(6.82)</a>. Your task is to implement the
+<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble" title="fe_utils.solvers.helmholtz.assemble"><code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code></a> function using <a class="reference internal" href="#equation-rhs-index">(6.72)</a>, and
+<a class="reference internal" href="#equation-lhs-assemble">(6.78)</a> or <a class="reference internal" href="#equation-lhs-index">(6.79)</a>. The comments in the
 <a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble" title="fe_utils.solvers.helmholtz.assemble"><code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code></a> function provide some guidance as to the steps
 involved. You may also wish to consult the <a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code></a>
 function as a guide to the
@@ -383,33 +429,33 @@ solution and the error in your solution. In addition,
 helmholtz solver converges at the correct rate for degree 1, 2 and
 3 polynomials.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">test/test_12_helmholtz_convergence.py</span></code> may take many seconds or
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">test/test_12_helmholtz_convergence.py</span></code> may take many seconds or
 even a couple of minutes to run, as it has to solve on some
 rather fine meshes in order to check convergence.</p>
 </div>
 </div></div><p class="rubric">Footnotes</p>
-<table class="docutils footnote" frame="void" id="helmholtz" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Strictly speaking this is the positive definite Helmholtz
+<dl class="footnote brackets">
+<dt class="label" id="helmholtz"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Strictly speaking this is the positive definite Helmholtz
 problem. Changing the sign on <span class="math notranslate nohighlight">\(u\)</span> produces the
 indefinite Helmholtz problem, which is significantly
-harder to solve.</td></tr>
-</tbody>
-</table>
+harder to solve.</p>
+</dd>
+</dl>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

@@ -1,22 +1,23 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>4. Finite element problems: solvability and stability &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. Finite element problems: solvability and stability &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5. Convergence of finite element approximations" href="L5_convergence.html" />
@@ -50,8 +51,21 @@
           <div class="body" role="main">
             
   <div class="section" id="finite-element-problems-solvability-and-stability">
-<h1>4. Finite element problems: solvability and stability<a class="headerlink" href="#finite-element-problems-solvability-and-stability" title="Permalink to this headline">¶</a></h1>
-<p>In section 1, we saw the example of a finite element approximation
+<span id="fe-problems"></span><h1><span class="section-number">4. </span>Finite element problems: solvability and stability<a class="headerlink" href="#finite-element-problems-solvability-and-stability" title="Permalink to this headline">¶</a></h1>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490671279"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=fd348dc9-840d-41ac-8906-ac8f00b77a93">watch this video on Panopto</a></p>
+</div>
+</details><p>In section 1, we saw the example of a finite element approximation
 for Poisson’s equation in the unit square, which we now recall below.</p>
 <div class="proof proof-type-definition" id="id1">
 
@@ -61,8 +75,8 @@ for Poisson’s equation in the unit square, which we now recall below.</p>
     </div><div class="proof-content">
 <p>The finite element approximation <span class="math notranslate nohighlight">\(u_h \in \mathring{V}_h\)</span> to the
 solution <span class="math notranslate nohighlight">\(u_h\)</span> of Poisson’s equation is defined by</p>
-<div class="math notranslate nohighlight">
-\[\int_\Omega \nabla v \cdot \nabla u_h \, d x =
+<div class="math notranslate nohighlight" id="equation-l4-feprobs-0">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-l4-feprobs-0" title="Permalink to this equation">¶</a></span>\[\int_\Omega \nabla v \cdot \nabla u_h \, d x =
 \int_\Omega vf \, d x, \quad \forall v\in \mathring{V}_h.\]</div>
 </div></div><p>A fundamental question is whether the solution <span class="math notranslate nohighlight">\(u_h\)</span> exists and is
 unique. This question is of practical interest because if these
@@ -74,7 +88,7 @@ defined on Hilbert spaces. It will turn out that this machinery will
 also help us show that the approximation <span class="math notranslate nohighlight">\(u_h\)</span> converges to the exact
 solution <span class="math notranslate nohighlight">\(u\)</span> (and in what sense).</p>
 <div class="section" id="finite-element-spaces-and-other-hilbert-spaces">
-<h2>4.1. Finite element spaces and other Hilbert spaces<a class="headerlink" href="#finite-element-spaces-and-other-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.1. </span>Finite element spaces and other Hilbert spaces<a class="headerlink" href="#finite-element-spaces-and-other-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <p>In the previous sections, we introduced the concept of finite element
 spaces, which contain certain functions defined on a domain <span class="math notranslate nohighlight">\(\Omega\)</span>.
 Finite element spaces are examples of vector spaces (hence the use
@@ -87,44 +101,46 @@ of the word “space”).</p>
             <span class="proof-title-name">(Vector space)</span>
         
     </div><div class="proof-content">
-<blockquote>
-<div>A vector space over the real numbers <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a set <span class="math notranslate nohighlight">\(V\)</span>,
+<p>A vector space over the real numbers <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a set <span class="math notranslate nohighlight">\(V\)</span>,
 with an addition operator <span class="math notranslate nohighlight">\(+:V\times V\to V\)</span>, plus a scalar
 multiplication operator <span class="math notranslate nohighlight">\(\times:\mathbb{R}\times V \to V\)</span>, such
-that:</div></blockquote>
+that:</p>
 <ol class="arabic simple">
-<li>There exists a unique zero element <span class="math notranslate nohighlight">\(e\in V\)</span> such that:</li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li><span class="math notranslate nohighlight">\(k\times e = e\)</span> for all <span class="math notranslate nohighlight">\(k\in \mathbb{R}\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(0\times v = e\)</span> for all <span class="math notranslate nohighlight">\(v \in V\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(e+v = v\)</span> for all <span class="math notranslate nohighlight">\(v \in V\)</span>.</li>
+<li><dl class="simple">
+<dt>There exists a unique zero element <span class="math notranslate nohighlight">\(e\in V\)</span> such that:</dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(k\times e = e\)</span> for all <span class="math notranslate nohighlight">\(k\in \mathbb{R}\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(0\times v = e\)</span> for all <span class="math notranslate nohighlight">\(v \in V\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(e+v = v\)</span> for all <span class="math notranslate nohighlight">\(v \in V\)</span>.</p></li>
 </ul>
-</div></blockquote>
-<ol class="arabic simple">
-<li><span class="math notranslate nohighlight">\(V\)</span> is closed under addition and multiplication, i.e.,</li>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\(V\)</span> is closed under addition and multiplication, i.e.,</dt><dd><p><span class="math notranslate nohighlight">\(a\times u + v\in V\)</span> for all <span class="math notranslate nohighlight">\(u,v\in V\)</span>, <span class="math notranslate nohighlight">\(a\in \mathbb{R}\)</span>.</p>
+</dd>
+</dl>
+</li>
 </ol>
-<blockquote>
-<div><span class="math notranslate nohighlight">\(a\times u + v\in V\)</span> for all <span class="math notranslate nohighlight">\(u,v\in V\)</span>, <span class="math notranslate nohighlight">\(a\in \mathbb{R}\)</span>.</div></blockquote>
 </div></div><div class="proof proof-type-lemma" id="id3">
 
     <div class="proof-title">
         <span class="proof-type">Lemma 4.3</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(V\)</span> be a finite element space. Then <span class="math notranslate nohighlight">\(V\)</span> is a vector space.</div></div><div class="proof proof-type-proof">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a finite element space. Then <span class="math notranslate nohighlight">\(V\)</span> is a vector space.</p>
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-First, we note that the zero function <span class="math notranslate nohighlight">\(u(x):=0\)</span> is in <span class="math notranslate nohighlight">\(V\)</span>, and
+<p>First, we note that the zero function <span class="math notranslate nohighlight">\(u(x):=0\)</span> is in <span class="math notranslate nohighlight">\(V\)</span>, and
 satisfies the above properties. Further, let <span class="math notranslate nohighlight">\(u,v\in V\)</span>, and
 <span class="math notranslate nohighlight">\(a\in\mathbb{R}\)</span>. Then, when restricted to each triangle <span class="math notranslate nohighlight">\(K_i\)</span>,
 <span class="math notranslate nohighlight">\(u+av\in P_i\)</span>. Also, for each shared mesh entity, the shared nodal
 variables agree, i.e. <span class="math notranslate nohighlight">\(N_{i,j}[u+av]=N_{i,j}[u+av]\)</span>, by linearity of
-nodal variables. Therefore, <span class="math notranslate nohighlight">\(u+av\in V\)</span>.</div></div><p>We now introduce bilinear forms on vector spaces. Bilinear forms are
+nodal variables. Therefore, <span class="math notranslate nohighlight">\(u+av\in V\)</span>.</p>
+</div></div><p>We now introduce bilinear forms on vector spaces. Bilinear forms are
 important because they will represent the left hand side of finite
 element approximations of linear PDEs.</p>
 <div class="proof proof-type-definition" id="id4">
@@ -139,8 +155,8 @@ element approximations of linear PDEs.</p>
 <div><p>A bilinear form <span class="math notranslate nohighlight">\(b(\cdot,\cdot)\)</span> on a vector space <span class="math notranslate nohighlight">\(V\)</span> is a mapping
 <span class="math notranslate nohighlight">\(b:V\times V\to \mathbb{R}\)</span>, such that</p>
 <ol class="arabic simple">
-<li><span class="math notranslate nohighlight">\(v\to b(v,w)\)</span> is a linear map in <span class="math notranslate nohighlight">\(v\)</span> for all <span class="math notranslate nohighlight">\(w\)</span>.</li>
-<li><span class="math notranslate nohighlight">\(v\to b(w,v)\)</span> is a linear map in <span class="math notranslate nohighlight">\(v\)</span> for all <span class="math notranslate nohighlight">\(w\)</span>.</li>
+<li><p><span class="math notranslate nohighlight">\(v\to b(v,w)\)</span> is a linear map in <span class="math notranslate nohighlight">\(v\)</span> for all <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(v\to b(w,v)\)</span> is a linear map in <span class="math notranslate nohighlight">\(v\)</span> for all <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
 </ol>
 </div></blockquote>
 <p>It is a symmetric bilinear form if in addition, <span class="math notranslate nohighlight">\(b(v,w)=b(w,v)\)</span>, for all <span class="math notranslate nohighlight">\(v,w\in V\)</span>.</p>
@@ -168,8 +184,8 @@ inner product.</p>
 <p>A real inner product, denoted by <span class="math notranslate nohighlight">\((\cdot,\cdot)\)</span>, is
 a symmetric bilinear form on a vector space <span class="math notranslate nohighlight">\(V\)</span> with</p>
 <ol class="arabic simple">
-<li><span class="math notranslate nohighlight">\((v,v)\geq 0\)</span> <span class="math notranslate nohighlight">\(\forall v\in V\)</span>,</li>
-<li><span class="math notranslate nohighlight">\((v,v)=0\iff v=0\)</span>.</li>
+<li><p><span class="math notranslate nohighlight">\((v,v)\geq 0\)</span> <span class="math notranslate nohighlight">\(\forall v\in V\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\((v,v)=0\iff v=0\)</span>.</p></li>
 </ol>
 </div></div><p>This enables the following definition.</p>
 <div class="proof proof-type-definition" id="id7">
@@ -180,15 +196,16 @@ a symmetric bilinear form on a vector space <span class="math notranslate nohigh
             <span class="proof-title-name">(Inner product space)</span>
         
     </div><div class="proof-content">
-We call a vector space <span class="math notranslate nohighlight">\((V, (\cdot,\cdot))\)</span> equipped with an inner product
-an inner product space.</div></div><p>We now introduce two important examples of inner products for finite
+<p>We call a vector space <span class="math notranslate nohighlight">\((V, (\cdot,\cdot))\)</span> equipped with an inner product
+an inner product space.</p>
+</div></div><p>We now introduce two important examples of inner products for finite
 element spaces.</p>
 <div class="proof proof-type-definition" id="id8">
 
     <div class="proof-title">
         <span class="proof-type">Definition 4.8</span>
         
-            <span class="proof-title-name">(\(L^2\) inner product)</span>
+            <span class="proof-title-name">((L^2) inner product)</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(g\)</span> be two functions in <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span>. The <span class="math notranslate nohighlight">\(L^2\)</span> inner
@@ -204,7 +221,7 @@ x=0\)</span>.</p>
     <div class="proof-title">
         <span class="proof-type">Definition 4.9</span>
         
-            <span class="proof-title-name">(\(H^1\) inner product)</span>
+            <span class="proof-title-name">((H^1) inner product)</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(g\)</span> be two <span class="math notranslate nohighlight">\(C^0\)</span> finite element functions. The <span class="math notranslate nohighlight">\(H^1\)</span> inner
@@ -234,7 +251,8 @@ products.</p>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-See a course on vector spaces.</div></div><p>Our solvability conditions will make use of norms that measure the
+<p>See a course on vector spaces.</p>
+</div></div><p>Our solvability conditions will make use of norms that measure the
 size of elements of a vector space (the size of finite element
 functions, in our case).</p>
 <div class="proof proof-type-definition" id="id11">
@@ -247,10 +265,10 @@ functions, in our case).</p>
     </div><div class="proof-content">
 <p>Given a vector space <span class="math notranslate nohighlight">\(V\)</span>, a norm <span class="math notranslate nohighlight">\(\|\cdot\|\)</span> is a function from <span class="math notranslate nohighlight">\(V\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, with</p>
 <ol class="arabic simple">
-<li><span class="math notranslate nohighlight">\(\|v\|\geq 0,\,\forall v \in V\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(\|v\| = 0 \iff v=0\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(\|cv\|=|c|\|v\| \,\forall c\in \mathbb{R}, v\in V\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(\|v+w\| \leq \|v\|+\|w\|\)</span>.</li>
+<li><p><span class="math notranslate nohighlight">\(\|v\|\geq 0,\,\forall v \in V\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\|v\| = 0 \iff v=0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\|cv\|=|c|\|v\| \,\forall c\in \mathbb{R}, v\in V\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\|v+w\| \leq \|v\|+\|w\|\)</span>.</p></li>
 </ol>
 </div></div><p>For inner product spaces, there is a natural choice of norm.</p>
 <div class="proof proof-type-lemma" id="id12">
@@ -259,8 +277,9 @@ functions, in our case).</p>
         <span class="proof-type">Lemma 4.12</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\((V,(\cdot,\cdot))\)</span> be an inner product space. Then <span class="math notranslate nohighlight">\(\|v\|=\sqrt{(v,v)}\)</span>
-defines a norm on <span class="math notranslate nohighlight">\(V\)</span>.</div></div><div class="proof proof-type-proof">
+<p>Let <span class="math notranslate nohighlight">\((V,(\cdot,\cdot))\)</span> be an inner product space. Then <span class="math notranslate nohighlight">\(\|v\|=\sqrt{(v,v)}\)</span>
+defines a norm on <span class="math notranslate nohighlight">\(V\)</span>.</p>
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
@@ -285,8 +304,9 @@ defines a norm on <span class="math notranslate nohighlight">\(V\)</span>.</div>
             <span class="proof-title-name">(Normed space)</span>
         
     </div><div class="proof-content">
-A vector space <span class="math notranslate nohighlight">\(V\)</span> with a norm <span class="math notranslate nohighlight">\(\|\cdot\|\)</span> is called a normed
-vector space, written <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span>.</div></div><p>To finish our discussion of Hilbert spaces, we need to review the
+<p>A vector space <span class="math notranslate nohighlight">\(V\)</span> with a norm <span class="math notranslate nohighlight">\(\|\cdot\|\)</span> is called a normed
+vector space, written <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span>.</p>
+</div></div><p>To finish our discussion of Hilbert spaces, we need to review the
 concept of completeness (which you might have encountered in an
 analysis course). This seems not so important since finite element
 spaces are finite dimensional, but later we shall consider sequences
@@ -301,9 +321,10 @@ completeness becomes important.</p>
             <span class="proof-title-name">(Cauchy sequence)</span>
         
     </div><div class="proof-content">
-A Cauchy sequence on a normed vector space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is a
+<p>A Cauchy sequence on a normed vector space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is a
 sequence <span class="math notranslate nohighlight">\(\{v_i\}_{i=1}^{\infty}\)</span> satisfying <span class="math notranslate nohighlight">\(\|v_j-v_k\|\to 0\)</span> as
-<span class="math notranslate nohighlight">\(j,k\to \infty\)</span>.</div></div><p>This definition leads to the definition of completeness.</p>
+<span class="math notranslate nohighlight">\(j,k\to \infty\)</span>.</p>
+</div></div><p>This definition leads to the definition of completeness.</p>
 <div class="proof proof-type-definition" id="id15">
 
     <div class="proof-title">
@@ -312,9 +333,10 @@ sequence <span class="math notranslate nohighlight">\(\{v_i\}_{i=1}^{\infty}\)</
             <span class="proof-title-name">(Complete normed vector space)</span>
         
     </div><div class="proof-content">
-A normed vector space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is complete if all Cauchy
+<p>A normed vector space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is complete if all Cauchy
 sequences have a limit <span class="math notranslate nohighlight">\(v\in V\)</span> such that <span class="math notranslate nohighlight">\(\|v-v_j\|\to 0\)</span>
-as <span class="math notranslate nohighlight">\(j\to\infty\)</span>.</div></div><p>Finally, we reach the definition of a Hilbert space.</p>
+as <span class="math notranslate nohighlight">\(j\to\infty\)</span>.</p>
+</div></div><p>Finally, we reach the definition of a Hilbert space.</p>
 <div class="proof proof-type-definition" id="id16">
 
     <div class="proof-title">
@@ -323,15 +345,29 @@ as <span class="math notranslate nohighlight">\(j\to\infty\)</span>.</div></div>
             <span class="proof-title-name">(Hilbert space)</span>
         
     </div><div class="proof-content">
-An inner product space <span class="math notranslate nohighlight">\((V,(\cdot,\cdot))\)</span> is a Hilbert space if
-the corresponding normed space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is complete.</div></div><p>All finite dimensional normed vector spaces are complete. Hence, <span class="math notranslate nohighlight">\(C^0\)</span>
+<p>An inner product space <span class="math notranslate nohighlight">\((V,(\cdot,\cdot))\)</span> is a Hilbert space if
+the corresponding normed space <span class="math notranslate nohighlight">\((V,\|\cdot\|)\)</span> is complete.</p>
+</div></div><p>All finite dimensional normed vector spaces are complete. Hence, <span class="math notranslate nohighlight">\(C^0\)</span>
 finite element spaces equipped with <span class="math notranslate nohighlight">\(L^2\)</span> or <span class="math notranslate nohighlight">\(H^1\)</span> inner products are
 Hilbert spaces. Later we shall understand our finite element
 spaces as subspaces of infinite dimensional Hilbert spaces.</p>
 </div>
 <div class="section" id="linear-forms-on-hilbert-spaces">
-<h2>4.2. Linear forms on Hilbert spaces<a class="headerlink" href="#linear-forms-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
-<p>We will now build some structures on Hilbert spaces that allow us to
+<span id="sec-linearforms"></span><h2><span class="section-number">4.2. </span>Linear forms on Hilbert spaces<a class="headerlink" href="#linear-forms-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490671029"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=723914b3-4d55-476e-a8ef-ac8f00bca305">watch this video on Panopto</a></p>
+</div>
+</details><p>We will now build some structures on Hilbert spaces that allow us to
 discuss variational problems on them, which includes finite element
 approximations such as the Poisson example discussed so far.</p>
 <p>Linear functionals are important as they will represent the right-hand
@@ -346,11 +382,9 @@ side of finite element approximations of PDEs.</p>
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space with norm <span class="math notranslate nohighlight">\(|\cdot|_H\)</span>.</p>
 <ol class="arabic">
-<li><p class="first">A functional <span class="math notranslate nohighlight">\(L\)</span> is a map from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
-</li>
-<li><p class="first">A functional <span class="math notranslate nohighlight">\(L:H\to \mathbb{R}\)</span> is linear if <span class="math notranslate nohighlight">\(u,v\in H\)</span>, <span class="math notranslate nohighlight">\(\alpha\in \mathbb{R}\)</span> <span class="math notranslate nohighlight">\(\implies L(u+\alpha v)=L(u)+\alpha L(v)\)</span>.</p>
-</li>
-<li><p class="first">A functional <span class="math notranslate nohighlight">\(L:H\to\mathbb{R}\)</span> is continuous if there exists <span class="math notranslate nohighlight">\(C&gt;0\)</span> such that</p>
+<li><p>A functional <span class="math notranslate nohighlight">\(L\)</span> is a map from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p></li>
+<li><p>A functional <span class="math notranslate nohighlight">\(L:H\to \mathbb{R}\)</span> is linear if <span class="math notranslate nohighlight">\(u,v\in H\)</span>, <span class="math notranslate nohighlight">\(\alpha\in \mathbb{R}\)</span> <span class="math notranslate nohighlight">\(\implies L(u+\alpha v)=L(u)+\alpha L(v)\)</span>.</p></li>
+<li><p>A functional <span class="math notranslate nohighlight">\(L:H\to\mathbb{R}\)</span> is continuous if there exists <span class="math notranslate nohighlight">\(C&gt;0\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[|L(u)-L(v)| \leq C\|u-v\|_H \quad \forall u,v\in H.\]</div>
 </li>
@@ -375,7 +409,8 @@ and continuity.</p>
         <span class="proof-type">Lemma 4.19</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(L:H\to\mathbb{R}\)</span> be a linear functional. Then <span class="math notranslate nohighlight">\(L\)</span> is continuous if and only if it is bounded.</div></div><div class="proof proof-type-proof">
+<p>Let <span class="math notranslate nohighlight">\(L:H\to\mathbb{R}\)</span> be a linear functional. Then <span class="math notranslate nohighlight">\(L\)</span> is continuous if and only if it is bounded.</p>
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
@@ -394,7 +429,8 @@ C|u-0|_H = C|u|_H\)</span>, i.e. <span class="math notranslate nohighlight">\(L\
             <span class="proof-title-name">(Dual space)</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space. The dual space <span class="math notranslate nohighlight">\(H'\)</span> is the space of continuous (or bounded) linear functionals <span class="math notranslate nohighlight">\(L:H\to \mathbb{R}\)</span>.</div></div><p>This dual space can also be equipped with a norm.</p>
+<p>Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space. The dual space <span class="math notranslate nohighlight">\(H'\)</span> is the space of continuous (or bounded) linear functionals <span class="math notranslate nohighlight">\(L:H\to \mathbb{R}\)</span>.</p>
+</div></div><p>This dual space can also be equipped with a norm.</p>
 <div class="proof proof-type-definition" id="id21">
 
     <div class="proof-title">
@@ -452,10 +488,24 @@ Let <span class="math notranslate nohighlight">\(H\)</span> be a Hilbert space. 
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-See a course or textbook on Hilbert spaces.</div></div></div>
+<p>See a course or textbook on Hilbert spaces.</p>
+</div></div></div>
 <div class="section" id="variational-problems-on-hilbert-spaces">
-<h2>4.3. Variational problems on Hilbert spaces<a class="headerlink" href="#variational-problems-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
-<p>We will consider finite element methods that can be formulated in the
+<h2><span class="section-number">4.3. </span>Variational problems on Hilbert spaces<a class="headerlink" href="#variational-problems-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490670887"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=bd3cfdc3-746d-42f4-96b5-ac8f00c44327">watch this video on Panopto</a></p>
+</div>
+</details><p>We will consider finite element methods that can be formulated in the
 following way.</p>
 <div class="proof proof-type-definition" id="id24">
 
@@ -477,7 +527,7 @@ of linear PDEs.</p>
     <div class="proof-title">
         <span class="proof-type">Example 4.25</span>
         
-            <span class="proof-title-name">(\(Pk\) discretisation of (modified) Helmholtz problem with Neumann bcs)</span>
+            <span class="proof-title-name">((Pk) discretisation of (modified) Helmholtz problem with Neumann bcs)</span>
         
     </div><div class="proof-content">
 <p>For some known function <span class="math notranslate nohighlight">\(f\)</span>,</p>
@@ -490,7 +540,7 @@ of <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
     <div class="proof-title">
         <span class="proof-type">Example 4.26</span>
         
-            <span class="proof-title-name">(\(Pk\) discretisation of Poisson equation with partial Dirichlet bcs)</span>
+            <span class="proof-title-name">((Pk) discretisation of Poisson equation with partial Dirichlet bcs)</span>
         
     </div><div class="proof-content">
 <p>For some known function <span class="math notranslate nohighlight">\(f\)</span>,</p>
@@ -504,7 +554,7 @@ triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> su
     <div class="proof-title">
         <span class="proof-type">Example 4.27</span>
         
-            <span class="proof-title-name">(\(Pk\) discretisation of Poisson equation with pure Neumann bcs)</span>
+            <span class="proof-title-name">((Pk) discretisation of Poisson equation with pure Neumann bcs)</span>
         
     </div><div class="proof-content">
 <p>For some known function <span class="math notranslate nohighlight">\(f\)</span>,</p>
@@ -514,7 +564,20 @@ triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> su
 triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> such that functions satisfy</p>
 <div class="math notranslate nohighlight">
 \[\int_\Omega u \, d x = 0.\]</div>
-</div></div><p>We now introduce two important properties of bilinear forms that determine
+</div></div><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490670764"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=39973b08-a56a-41e6-b1c8-ac8f00c5b325">watch this video on Panopto</a></p>
+</div>
+</details><p>We now introduce two important properties of bilinear forms that determine
 whether a linear variational problem is solvable or not. The first is
 continuity.</p>
 <div class="proof proof-type-definition" id="id28">
@@ -565,7 +628,8 @@ with</p>
         <span class="proof-type">Proof </span>
         
     </div><div class="proof-content">
-See a course or textbook on Hilbert spaces.</div></div><p>We are going to use this result to show solvability for finite
+<p>See a course or textbook on Hilbert spaces.</p>
+</div></div><p>We are going to use this result to show solvability for finite
 element discretisations. In particular, we also want to know that our
 finite element discretisation continues to be solvable as the maximum
 triangle edge diameter <span class="math notranslate nohighlight">\(h\)</span> goes to zero. This motivates the following
@@ -590,25 +654,39 @@ of <span class="math notranslate nohighlight">\(\|\cdot\|_V\)</span> (such as th
 introduced them.</p>
 </div>
 <div class="section" id="solvability-and-stability-of-some-finite-element-discretisations">
-<h2>4.4. Solvability and stability of some finite element discretisations<a class="headerlink" href="#solvability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.4. </span>Solvability and stability of some finite element discretisations<a class="headerlink" href="#solvability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
 <p>In this section we will introduce some tools for showing coercivity
 and continuity of bilinear forms, illustrated with finite element
 approximations of some linear PDEs where they may be applied.</p>
-<p>We start with the simplest example, for which continuity and
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490670624"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=eca48c8e-3823-4653-8b4e-ac8f00c7c5ce">watch this video on Panopto</a></p>
+</div>
+</details><p>We start with the simplest example, for which continuity and
 coercivity are immediate.</p>
 <div class="proof proof-type-theorem" id="id32">
-
+<span id="thm-helm"></span>
     <div class="proof-title">
         <span class="proof-type">Theorem 4.32</span>
         
             <span class="proof-title-name">(Solving the (modified) Helmholtz problem)</span>
         
     </div><div class="proof-content">
-Let <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(L\)</span> be the forms from the Helmholtz problem, with
+<p>Let <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(L\)</span> be the forms from the Helmholtz problem, with
 <span class="math notranslate nohighlight">\(\|f\|_{L^2}&lt;\infty\)</span>.  Let <span class="math notranslate nohighlight">\(V_h\)</span> be a Pk continuous finite element space
 defined on a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>. Then the finite element
 approximation <span class="math notranslate nohighlight">\(u_h\)</span> exists and the discretisation is stable
-in the <span class="math notranslate nohighlight">\(H^1\)</span> norm.</div></div><div class="proof proof-type-proof">
+in the <span class="math notranslate nohighlight">\(H^1\)</span> norm.</p>
+</div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
@@ -628,6 +706,53 @@ Finally we show coercivity of <span class="math notranslate nohighlight">\(b\)</
 \[b(u,u) = \|u\|^2_{H^1} \geq 1\times\|u\|^2_{H^1},\]</div>
 <p>The continuity and coercivity constants are both 1, independent
 of <span class="math notranslate nohighlight">\(h\)</span>, so the discretisation is stable.</p>
+</div></div><div class="proof proof-type-exercise" id="id33">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 4.33</span>
+        
+    </div><div class="proof-content">
+<blockquote>
+<div><p>Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^0\)</span> finite element space on <span class="math notranslate nohighlight">\([0,1]\)</span>, defined
+on a one-dimensional mesh with vertices <span class="math notranslate nohighlight">\(0=x_0&lt;x_1&lt;x_2&lt;\ldots&lt;x_{n-1}&lt;x_n=1\)</span>. Show that
+<span class="math notranslate nohighlight">\(u\in V\)</span> satisfies the fundamental theorem of calculus, <span class="math notranslate nohighlight">\(i.e.\)</span></p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 u' \, d x = u[1] - u[0],\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(u'\)</span> is the usual finite element derivative defined in <span class="math notranslate nohighlight">\(L^2([0,1])\)</span>
+by taking the usual derivative when restricting <span class="math notranslate nohighlight">\(u\)</span> to any subinterval
+<span class="math notranslate nohighlight">\([x_k,x_{k+1}]\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id34">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 4.34</span>
+        
+    </div><div class="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[a(u,v) = \int_0^1\left(u'v' + u'v + uv\right)\, d x.\]</div>
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^0\)</span> finite element space on <span class="math notranslate nohighlight">\([0,1]\)</span> and let
+<span class="math notranslate nohighlight">\(\mathring{V}\)</span> be the subspace of functions that vanish at <span class="math notranslate nohighlight">\(x=0\)</span> and
+<span class="math notranslate nohighlight">\(x=1\)</span>.  Using the finite element version of the fundamental theorem of
+calculus above, prove that</p>
+<div class="math notranslate nohighlight">
+\[a(v,v) = \int_0^1\left((v')^2 + v^2\right)\, d x := \|v\|_{H^1}^2, \quad \forall v\in \mathring{V}.\]</div>
+<p>Hence conclude that the bilinear form is coercive on <span class="math notranslate nohighlight">\(\mathring{V}\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id35">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 4.35</span>
+        
+    </div><div class="proof-content">
+<p>Consider the variational problem with bilinear form</p>
+<div class="math notranslate nohighlight">
+\[a(u,v) = \int_0^1 (u'v' + u'v + uv)\, d x,\]</div>
+<p>corresponding to the differential equation</p>
+<div class="math notranslate nohighlight">
+\[-u'' + u' + u = f.\]</div>
+<p>Prove that <span class="math notranslate nohighlight">\(a(\cdot,\cdot)\)</span> is continuous and coercive on a <span class="math notranslate nohighlight">\(C^0\)</span> finite element space <span class="math notranslate nohighlight">\(V\)</span> defined on <span class="math notranslate nohighlight">\([0,1]\)</span>, with respect to the <span class="math notranslate nohighlight">\(H^1\)</span> inner product.</p>
+<p>Hints: for continuity, just use the triangle inequality and the
+relationship between <span class="math notranslate nohighlight">\(L^2\)</span> and <span class="math notranslate nohighlight">\(H^1\)</span> norms. For coercivity, try completing the square for the integrand in <span class="math notranslate nohighlight">\(a\)</span>.</p>
 </div></div><p>For the Helmholtz problem, we have</p>
 <div class="math notranslate nohighlight">
 \[b(u,v) = \int_\Omega uv + \nabla u\cdot \nabla v \, d x = (u,v)_{H^1},\]</div>
@@ -635,17 +760,49 @@ of <span class="math notranslate nohighlight">\(h\)</span>, so the discretisatio
 continuity and coercivity immediate.</p>
 <p>For the Poisson problem, we have</p>
 <div class="math notranslate nohighlight">
-\[b(u,v) = \int_\Omega |\nabla u|^2 \, d x = |u|^2_{H^1} \neq \|u\|^2_{H^1}.\]</div>
-<p>Where we recall the <span class="math notranslate nohighlight">\(H^1\)</span> seminorm from the interpolation
+\[b(u,u) = \int_\Omega |\nabla u|^2 \, d x = |u|^2_{H^1} \neq \|u\|^2_{H^1},\]</div>
+<p>where we recall the <span class="math notranslate nohighlight">\(H^1\)</span> seminorm from the interpolation
 section. Some additional results are required to show coercivity, as
 <span class="math notranslate nohighlight">\(b(u,u)\)</span> is not the <span class="math notranslate nohighlight">\(H^1\)</span> norm squared any more. A seminorm has all
 the properties of a norm except <span class="math notranslate nohighlight">\(|u|= 0 \nRightarrow u=0\)</span>, which is
-precisely what is needed in the Lax-Milgram theorem.  For the Poisson
-problem, coercivity comes instead from the following mean estimate.</p>
-<div class="proof proof-type-lemma" id="id33">
+precisely what is needed in the Lax-Milgram theorem.</p>
+<div class="proof proof-type-exercise" id="id36">
+<span id="exe-pure-neumann"></span>
+    <div class="proof-title">
+        <span class="proof-type">Exercise 4.36</span>
+        
+    </div><div class="proof-content">
+<blockquote>
+<div><p>Let <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span> be a triangulation on the <span class="math notranslate nohighlight">\(1\times 1\)</span> unit
+square domain <span class="math notranslate nohighlight">\(\Omega\)</span>, and let <span class="math notranslate nohighlight">\(V\)</span> be a <span class="math notranslate nohighlight">\(C^0\)</span> Lagrange finite
+element space of degree <span class="math notranslate nohighlight">\(k\)</span> defined on <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span>. A finite element
+discretisation for the Poisson equation with Neumann boundary conditions
+is given by: find <span class="math notranslate nohighlight">\(u \in V\)</span> such that</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\int_{\Omega} \nabla v \cdot \nabla u \, d x = \int_\Omega v f \, d x,
+\quad \forall v \in V,\]</div>
+<p>for some known function <span class="math notranslate nohighlight">\(f\)</span>. Show that the bilinear form for this
+problem is not coercive in <span class="math notranslate nohighlight">\(V\)</span>.</p>
+</div></div><p>For the Poisson problem, coercivity comes instead from the following
+mean estimate.</p>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490670529"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e17f74a6-97ec-47fd-bcf4-ac8f00c9b784">watch this video on Panopto</a></p>
+</div>
+</details><div class="proof proof-type-lemma" id="id37">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 4.33</span>
+        <span class="proof-type">Lemma 4.37</span>
         
             <span class="proof-title-name">(Mean estimate for finite element spaces)</span>
         
@@ -657,7 +814,33 @@ problem, coercivity comes instead from the following mean estimate.</p>
 triangulation but dependent on (convex) <span class="math notranslate nohighlight">\(\Omega\)</span>, such that</p>
 <div class="math notranslate nohighlight">
 \[\|u-\bar{u}\|_{L^2} \leq C|u|_{H^1}.\]</div>
-</div></div><div class="proof proof-type-proof">
+</div></div><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the first part of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490670428"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=610a0d00-6e89-4e7f-a7d1-ac8f00cc9fe5">watch this video on Panopto</a></p>
+</div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the second part of section is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490670299"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=aac8613a-f8f2-474f-bbe5-ac8f00cdbc26">watch this video on Panopto</a></p>
+</div>
+</details><div class="proof proof-type-proof">
 
     <div class="proof-title">
         <span class="proof-type">Proof </span>
@@ -668,9 +851,9 @@ triangulation but dependent on (convex) <span class="math notranslate nohighligh
 <span class="math notranslate nohighlight">\(f(s)=u(y+s(x-y))\)</span> is a <span class="math notranslate nohighlight">\(C^0\)</span>, piecewise polynomial function of
 <span class="math notranslate nohighlight">\(s\)</span>. Let <span class="math notranslate nohighlight">\(s_0 = 0 &lt; s_1 &lt; s_2 &lt; \ldots &lt; s_{k-1} &lt; s_k = 1\)</span> denote the points
 where <span class="math notranslate nohighlight">\(y+s(x-y)\)</span> intersects a triangle edge or vertex. Then
-<span class="math notranslate nohighlight">\(f\)</span> is a continuous function when restricted to each interval <span class="math notranslate nohighlight">\([s_i,s_i+1]\)</span>, <span class="math notranslate nohighlight">\(i=0,\ldots,k-1\)</span>. This means that</p>
+<span class="math notranslate nohighlight">\(f\)</span> is a continuous function when restricted to each interval <span class="math notranslate nohighlight">\([s_i,s_{i+1}]\)</span>, <span class="math notranslate nohighlight">\(i=0,\ldots,k-1\)</span>. This means that</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}f(s_{i+1}) - f(s_i) &amp;= \int_{s_i}^{s_{i+1}} f'(s) \, ds\\&amp;= \int_{s_i}^{s_{i+1}} \nabla u(y+s(x-y)) \, ds,\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}f(s_{i+1}) - f(s_i) &amp;= \int_{s_i}^{s_{i+1}} f'(s) \, ds\\&amp;= \int_{s_i}^{s_{i+1}} (x-y)\cdot\nabla u(y+s(x-y)) \, ds,\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\(\nabla u\)</span> is the finite element derivative of <span class="math notranslate nohighlight">\(u\)</span>. Summing
 this up from <span class="math notranslate nohighlight">\(i=0\)</span> to <span class="math notranslate nohighlight">\(i=k-1\)</span>, we obtain</p>
 <div class="math notranslate nohighlight">
@@ -717,12 +900,25 @@ under this transformation. Then,</p>
 \[\|u-\bar{u}\|^2_{L^2(\Omega)} \leq C(I + II) = \frac{3C|\Omega|}{2}
 |u|_{H^1(\Omega)}^2,\]</div>
 <p>which has the required form.</p>
-</div></div><p>The mean estimate can now be used to show solvability for the Poisson
+</div></div><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490670236"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9652e5bd-ef4a-45e8-9a41-ac8f00ceae9d">watch this video on Panopto</a></p>
+</div>
+</details><p>The mean estimate can now be used to show solvability for the Poisson
 problem with pure Neumann conditions.</p>
-<div class="proof proof-type-theorem" id="id34">
+<div class="proof proof-type-theorem" id="id38">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 4.34</span>
+        <span class="proof-type">Theorem 4.38</span>
         
             <span class="proof-title-name">(Solving the Poisson problem with pure Neumann conditions)</span>
         
@@ -751,14 +947,27 @@ discretisation is stable in the <span class="math notranslate nohighlight">\(H^1
 <div class="math notranslate nohighlight">
 \[|b(u,v)| \leq |u|_{H^1}|v|_{H^1} \leq \|u\|_{H^1}\|v\|_{H^1}.\]</div>
 </div></div><p>The coercivity constant is independent of <span class="math notranslate nohighlight">\(h\)</span>, so the approximation is stable.</p>
-<p>Proving the coercivity for the Poisson problem with Dirichlet or
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490669992"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=58a9dd17-1ae8-4b9e-9781-ac8f0101a3c3">watch this video on Panopto</a></p>
+</div>
+</details><p>Proving the coercivity for the Poisson problem with Dirichlet or
 partial Dirichlet boundary conditions requires some additional
 results. We start by showing that the divergence theorem also applies
 to finite element derivatives of <span class="math notranslate nohighlight">\(C^0\)</span> finite element functions.</p>
-<div class="proof proof-type-lemma" id="id35">
+<div class="proof proof-type-lemma" id="id39">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 4.35</span>
+        <span class="proof-type">Lemma 4.39</span>
         
             <span class="proof-title-name">(Finite element divergence theorem)</span>
         
@@ -782,10 +991,10 @@ and <span class="math notranslate nohighlight">\(u\in V\)</span> be a member of 
 </div></div><p>This allows us to prove the finite element trace theorem, which
 relates the <span class="math notranslate nohighlight">\(H^1\)</span> norm of a <span class="math notranslate nohighlight">\(C^0\)</span> finite element function to the <span class="math notranslate nohighlight">\(L^2\)</span>
 norm of the function restricted to the boundary.</p>
-<div class="proof proof-type-theorem" id="id36">
+<div class="proof proof-type-theorem" id="id40">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 4.36</span>
+        <span class="proof-type">Theorem 4.40</span>
         
             <span class="proof-title-name">(Trace theorem for continuous finite elements)</span>
         
@@ -818,12 +1027,25 @@ condition.</p>
 \left(\|u\|_{L^2}^2 + |u|_{H^1}^2\right),\\&amp;\leq C\|u\|_{H^1}^2,\end{aligned}\end{align} \]</div>
 <p>where we have used the geometric-arithmetic mean inequality <span class="math notranslate nohighlight">\(2ab \leq
 a^2+b^2\)</span>.</p>
-</div></div><p>We can now use the trace inequality to estabilish solvability for the
+</div></div><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490669782"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1bc37dc7-ef3e-43f5-b111-ac8f010287cf">watch this video on Panopto</a></p>
+</div>
+</details><p>We can now use the trace inequality to estabilish solvability for the
 Poisson problem with (full or partial) Dirichlet conditions.</p>
-<div class="proof proof-type-theorem" id="id37">
+<div class="proof proof-type-theorem" id="id41">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 4.37</span>
+        <span class="proof-type">Theorem 4.41</span>
         
             <span class="proof-title-name">(Solving the Poisson problem with partial Dirichlet conditions)</span>
         
@@ -858,7 +1080,34 @@ defined on a triangulation <span class="math notranslate nohighlight">\(\mathcal
 <div class="math notranslate nohighlight">
 \[\|v\|_{H^1(\Omega)}^2 \leq (1+C_1^2)b(v,v).\]</div>
 </div></div><p>The coercivity constant is independent of <span class="math notranslate nohighlight">\(h\)</span>, so the approximation is stable.</p>
-<p>In this section, We have developed some techniques for showing that
+<div class="proof proof-type-exercise" id="id42">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 4.42</span>
+        
+    </div><div class="proof-content">
+<p>For <span class="math notranslate nohighlight">\(f\in L^2(\Omega)\)</span>, <span class="math notranslate nohighlight">\(\sigma\in C^1(\Omega)\)</span>, find a finite element
+formulation of the problem</p>
+<div class="math notranslate nohighlight">
+\[-\sum_{i=1}^n \frac{\partial}{\partial x_i}\left(\sigma(x)\frac{\partial u}{\partial x_i}\right) = f,
+\quad \frac{\partial u}{\partial n}=0\mbox{ on }\partial\Omega.\]</div>
+<p>If there exist <span class="math notranslate nohighlight">\(0&lt;a&lt;b\)</span> such that <span class="math notranslate nohighlight">\(a&lt;\sigma(x)&lt;b\)</span> for all <span class="math notranslate nohighlight">\(x\in
+\Omega\)</span>, show continuity and coercive for your formulation
+with respect to the <span class="math notranslate nohighlight">\(H^1\)</span> norm.</p>
+</div></div><div class="proof proof-type-exercise" id="id43">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 4.43</span>
+        
+    </div><div class="proof-content">
+<p>Find a <span class="math notranslate nohighlight">\(C^0\)</span> finite element formulation for the Poisson equation</p>
+<div class="math notranslate nohighlight">
+\[-\nabla^2 u = f, \quad u=g \mbox{ on }\partial \Omega,\]</div>
+<p>for a function <span class="math notranslate nohighlight">\(g\)</span> which is <span class="math notranslate nohighlight">\(C^2\)</span> and whose restriction to
+<span class="math notranslate nohighlight">\(\partial\Omega\)</span> is in <span class="math notranslate nohighlight">\(L^2(\partial\Omega)\)</span>.
+Derive conditions under the discretisation
+has a unique solution.</p>
+</div></div><p>In this section, We have developed some techniques for showing that
 variational problems arising from finite element discretisations for
 Helmholtz and Poisson problems have unique solutions, that are stable
 in the <span class="math notranslate nohighlight">\(H^1\)</span>-norm. This means that we can be confident that we can
@@ -871,14 +1120,15 @@ refined. What are they converging to?</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

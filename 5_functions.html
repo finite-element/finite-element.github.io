@@ -1,22 +1,23 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>5. Functions in finite element spaces &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Functions in finite element spaces &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Assembling and solving finite element problems" href="6_finite_element_problems.html" />
@@ -50,7 +51,7 @@
           <div class="body" role="main">
             
   <div class="section" id="functions-in-finite-element-spaces">
-<h1>5. Functions in finite element spaces<a class="headerlink" href="#functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h1>
+<span id="secfunctions"></span><h1><span class="section-number">5. </span>Functions in finite element spaces<a class="headerlink" href="#functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h1>
 <p>Recall that the general form of a function in a finite element space is:</p>
 <div class="math notranslate nohighlight" id="equation-function">
 <span class="eqno">(5.1)<a class="headerlink" href="#equation-function" title="Permalink to this equation">¶</a></span>\[f(x) = \sum_i f_i \phi_i(x)\]</div>
@@ -58,12 +59,21 @@
 stitching together the local basis functions defined by the
 <a class="reference internal" href="2_finite_elements.html#secfinitelement"><span class="std std-ref">finite element</span></a>.</p>
 <div class="section" id="a-python-implementation-of-functions-in-finite-element-spaces">
-<h2>5.1. A python implementation of functions in finite element spaces<a class="headerlink" href="#a-python-implementation-of-functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/HTTCzLZw-ao">here</a></p>
+<h2><span class="section-number">5.1. </span>A python implementation of functions in finite element spaces<a class="headerlink" href="#a-python-implementation-of-functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495447092"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6e7570e9-cc2c-49d2-908b-aca000b63449">watch this video on Panopto</a></p>
 </div>
-<p>The <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class provides a
+</details><p>The <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class provides a
 simple implementation of function storage. The input is a
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> which defines the
 mesh and finite element to be employed, to which the
@@ -72,12 +82,21 @@ freedom values, one for each node in the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a>.</p>
 </div>
 <div class="section" id="interpolating-values-into-finite-element-spaces">
-<h2>5.2. Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/WXiE8Yx_m0Q">here</a></p>
+<h2><span class="section-number">5.2. </span>Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495447659"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6d13d669-dc8c-43d1-8aae-aca000b634ed">watch this video on Panopto</a></p>
 </div>
-<p>Suppose we have a function <span class="math notranslate nohighlight">\(g(x): \mathbb{R}^n \rightarrow \mathbb{R}\)</span>
+</details><p>Suppose we have a function <span class="math notranslate nohighlight">\(g(x): \mathbb{R}^n \rightarrow \mathbb{R}\)</span>
 which we wish to approximate as a function <span class="math notranslate nohighlight">\(f(x)\)</span> in some finite
 element space <span class="math notranslate nohighlight">\(V\)</span>. In other words, we want to find the <span class="math notranslate nohighlight">\(f_i\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-0">
@@ -95,7 +114,7 @@ concerned with point evaluation nodes, this is equivalent to:</p>
 node points, and so far we have only defined the node points in
 <em>local</em> coordinates on the reference element.</p>
 <div class="section" id="changing-coordinates-between-reference-and-physical-space">
-<span id="coordinates"></span><h3>5.2.1. Changing coordinates between reference and physical space<a class="headerlink" href="#changing-coordinates-between-reference-and-physical-space" title="Permalink to this headline">¶</a></h3>
+<span id="coordinates"></span><h3><span class="section-number">5.2.1. </span>Changing coordinates between reference and physical space<a class="headerlink" href="#changing-coordinates-between-reference-and-physical-space" title="Permalink to this headline">¶</a></h3>
 <p>We’ll refer to coordinates on the global mesh as being in <em>physical
 space</em> while those on the reference element are in <em>local
 space</em>. We’ll use case to distinguish local and global objects, so
@@ -125,8 +144,8 @@ element. We can then apply <span class="math notranslate nohighlight">\(g()\)</s
 the result as the <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> value
 for that node.</p>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">The observant reader will notice that this algorithm is inefficient
+<p class="admonition-title">Hint</p>
+<p>The observant reader will notice that this algorithm is inefficient
 because the function values at nodes on the boundaries of elements
 are evaluated more than once. This can be avoided with a little
 tedious bookkeeping but we will not concern ourselves with that
@@ -134,12 +153,21 @@ here.</p>
 </div>
 </div>
 <div class="section" id="looking-up-cell-coordinates-and-values">
-<h3>5.2.2. Looking up cell coordinates and values<a class="headerlink" href="#looking-up-cell-coordinates-and-values" title="Permalink to this headline">¶</a></h3>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/ZmUPyydAasY">here</a></p>
+<h3><span class="section-number">5.2.2. </span>Looking up cell coordinates and values<a class="headerlink" href="#looking-up-cell-coordinates-and-values" title="Permalink to this headline">¶</a></h3>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495715631"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=eb8b0e40-b476-4caa-a961-aca1009f6172">watch this video on Panopto</a></p>
 </div>
-<p>In the previous section we used the vertex coordinates of a cell to
+</details><p>In the previous section we used the vertex coordinates of a cell to
 find the node coordinates, and then we calculated
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> values at those
 points. The coordinates are stored in a single long list associated
@@ -173,30 +201,40 @@ associated with the nodes of element <code class="docutils literal notranslate">
 </div>
 </div>
 <div class="section" id="a-python-implementation-of-interpolation">
-<h3>5.2.3. A Python implementation of interpolation<a class="headerlink" href="#a-python-implementation-of-interpolation" title="Permalink to this headline">¶</a></h3>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/Bb_9iRsTUgc">here</a></p>
+<h3><span class="section-number">5.2.3. </span>A Python implementation of interpolation<a class="headerlink" href="#a-python-implementation-of-interpolation" title="Permalink to this headline">¶</a></h3>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495718032"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e74afdcc-7727-49cb-bf3d-aca100a2ec68">watch this video on Panopto</a></p>
 </div>
-<p>Putting together the change of coordinates with the right indirect
+</details><p>Putting together the change of coordinates with the right indirect
 addressing, we can provide the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class with a
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method which
 interpolates a user-provided function onto the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.</p>
-<div class="proof proof-type-exercise" id="id9">
+<div class="proof proof-type-exercise" id="id2">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 5.33</span>
+        <span class="proof-type">Exercise 5.37</span>
         
     </div><div class="proof-content">
-Read and understand the
+<p>Read and understand the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method. Use
 <code class="docutils literal notranslate"><span class="pre">plot_sin_function</span></code> to investigate interpolating different
 functions onto finite element spaces at differering resolutions and
-polynomial degrees.</div></div><div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">There is no implementation work associated with this exercise, but
+polynomial degrees.</p>
+</div></div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>There is no implementation work associated with this exercise, but
 the programming constructs used in
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> will be
 needed when you implement integration.</p>
@@ -204,12 +242,21 @@ needed when you implement integration.</p>
 </div>
 </div>
 <div class="section" id="integration">
-<span id="id4"></span><h2>5.3. Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/hvPR8CUwq3Q">here</a></p>
+<span id="id1"></span><h2><span class="section-number">5.3. </span>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495447232"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4b2f4755-0682-4e36-ad3e-aca000b634b9">watch this video on Panopto</a></p>
 </div>
-<p>We now come to one of the fundamental operations in the finite element
+</details><p>We now come to one of the fundamental operations in the finite element
 method: integrating a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over
 the domain. The full finite element method actually requires the
 integration of expressions of unknown test and trial functions, but we
@@ -238,8 +285,8 @@ matrix. <span class="math notranslate nohighlight">\(J\)</span> is given by:</p>
 <div class="math notranslate nohighlight" id="equation-jacobian-def">
 <span class="eqno">(5.11)<a class="headerlink" href="#equation-jacobian-def" title="Permalink to this equation">¶</a></span>\[J_{\alpha\beta} = \frac{\partial x_\alpha}{\partial X_\beta}.\]</div>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">We will generally adopt the convention of using Greek letters to
+<p class="admonition-title">Hint</p>
+<p>We will generally adopt the convention of using Greek letters to
 indicate indices in spatial dimensions, while we will use Roman
 letters in the sequence <span class="math notranslate nohighlight">\(i,j,\ldots\)</span> for basis function indices. We
 will continue to use <span class="math notranslate nohighlight">\(q\)</span> for the index over the quadrature points.</p>
@@ -259,8 +306,8 @@ basis functions are constant over the cell and so it does not matter
 at which point in the cell the Jacobian is evaluated. For example we
 might choose to evaluate the Jacobian at the cell origin <span class="math notranslate nohighlight">\(X=0\)</span>.</p>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">When using simplices with curved sides, and on all but the simplest
+<p class="admonition-title">Hint</p>
+<p>When using simplices with curved sides, and on all but the simplest
 quadrilateral or hexahedral meshes, the change of coordinates
 will not be affine. In that case, to preserve full accuracy it will be
 necessary to compute the Jacobian at every quadrature
@@ -268,80 +315,83 @@ point. However, non-affine coordinate transforms are beyond the
 scope of this course.</p>
 </div>
 <div class="section" id="expressing-the-function-in-the-finite-element-basis">
-<h3>5.3.1. Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Permalink to this headline">¶</a></h3>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/qKX3BGbbj58">here</a></p>
+<h3><span class="section-number">5.3.1. </span>Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Permalink to this headline">¶</a></h3>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495444345"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=005f670f-28ac-47c3-9cf1-aca000b7133d">watch this video on Panopto</a></p>
 </div>
-<p>Let <span class="math notranslate nohighlight">\(\{\Phi_i(X)\}\)</span> be a <strong>local</strong> basis for <span class="math notranslate nohighlight">\(V\)</span> on the reference element
+</details><p>Let <span class="math notranslate nohighlight">\(\{\Phi_i(X)\}\)</span> be a <strong>local</strong> basis for <span class="math notranslate nohighlight">\(V\)</span> on the reference element
 <span class="math notranslate nohighlight">\(c_0\)</span>. Then our integral becomes:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-5">
 <span class="eqno">(5.13)<a class="headerlink" href="#equation-5-functions-5" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \int_{c_0} \sum_i F(M(c,i))\,\Phi_i(X)\, |J|\,\mathrm{d} X\]</div>
 <p>where <span class="math notranslate nohighlight">\(F\)</span> is the vector of global coefficient values of <span class="math notranslate nohighlight">\(f\)</span>, and <span class="math notranslate nohighlight">\(M\)</span> is <a class="reference internal" href="4_function_spaces.html#cell-node"><span class="std std-ref">the cell node map</span></a>.</p>
 </div>
 <div class="section" id="numerical-quadrature">
-<h3>5.3.2. Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h3>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/5zby5uZUye0">here</a></p>
-</div>
+<h3><span class="section-number">5.3.2. </span>Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h3>
 <p>The actual evaluation of the integral will employ the quadrature rules
-we discussed in <a class="reference internal" href="1_quadrature.html"><span class="doc">a previous section</span></a>. Let <span class="math notranslate nohighlight">\(\{X_q\},
-\{w_q\}\)</span> be a quadrature rule of sufficient degree of precision that
+we discussed in <a class="reference internal" href="1_quadrature.html"><span class="doc">a previous section</span></a>. Let
+<span class="math notranslate nohighlight">\(\{X_q\}, \{w_q\}\)</span> be a quadrature rule of sufficient degree of precision that
 the quadrature is exact. Then:</p>
 <div class="math notranslate nohighlight" id="equation-integration">
 <span class="eqno">(5.14)<a class="headerlink" href="#equation-integration" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \sum_q \sum_i F(M(c,i))\,\Phi_i(X_q)\, |J|\,w_q\]</div>
 </div>
 <div class="section" id="implementing-integration">
-<h3>5.3.3. Implementing integration<a class="headerlink" href="#implementing-integration" title="Permalink to this headline">¶</a></h3>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video recording of this section is available <a class="reference external" href="https://www.youtube.com/embed/XTUc2VcWKMU">here</a></p>
-</div>
-<div class="proof proof-type-exercise" id="id10">
+<h3><span class="section-number">5.3.3. </span>Implementing integration<a class="headerlink" href="#implementing-integration" title="Permalink to this headline">¶</a></h3>
+<div class="proof proof-type-exercise" id="id3">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 5.34</span>
+        <span class="proof-type">Exercise 5.38</span>
         
     </div><div class="proof-content">
-Use <a class="reference internal" href="#equation-jacobian">(5.12)</a> to implement the
+<p>Use <a class="reference internal" href="#equation-jacobian">(5.12)</a> to implement the
 <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> method of
 <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>. <code class="docutils literal notranslate"><span class="pre">test/test_09_jacobian.py</span></code> is
-available for you to test your results.</div></div><div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">The <span class="math notranslate nohighlight">\(\nabla_\beta\Psi_j(X)\)</span> factor in <a class="reference internal" href="#equation-jacobian">(5.12)</a> is the same
+available for you to test your results.</p>
+</div></div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The <span class="math notranslate nohighlight">\(\nabla_\beta\Psi_j(X)\)</span> factor in <a class="reference internal" href="#equation-jacobian">(5.12)</a> is the same
 for every cell in the mesh. You could make your implementation more
 efficient by precalculating this term in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>
 method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>.</p>
 </div>
-<div class="proof proof-type-exercise" id="id11">
+<div class="proof proof-type-exercise" id="id4">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 5.35</span>
+        <span class="proof-type">Exercise 5.39</span>
         
     </div><div class="proof-content">
-Use <a class="reference internal" href="#equation-integral-sum">(5.9)</a> and <a class="reference internal" href="#equation-integration">(5.14)</a> to implement
+<p>Use <a class="reference internal" href="#equation-integral-sum">(5.9)</a> and <a class="reference internal" href="#equation-integration">(5.14)</a> to implement
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a>.
 <code class="docutils literal notranslate"><span class="pre">test/test_10_integrate_function.py</span></code> may be used to test your
-implementation.</div></div><div class="admonition hint">
-<p class="first admonition-title">Hint</p>
+implementation.</p>
+</div></div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p>Your method will need to:</p>
-<ol class="last arabic simple">
-<li>Construct a suitable <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a>.</li>
-<li><a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> the
-basis functions at each quadrature point.</li>
-<li>Visit each cell in turn.</li>
-<li>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> for that cell
-and take the absolute value of its determinant (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.17)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
-and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</li>
-<li>Sum all of the arrays you have constructed over the correct
-indices to a contribution to the integral (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
-may be useful for this).</li>
+<ol class="arabic simple">
+<li><p>Construct a suitable <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> the
+basis functions at each quadrature point.</p></li>
+<li><p>Visit each cell in turn.</p></li>
+<li><p>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> for that cell
+and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
+and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
+<li><p>Sum all of the arrays you have constructed over the correct
+indices to a contribution to the integral (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
+may be useful for this).</p></li>
 </ol>
 </div>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">You might choose to read ahead before implementing
+<p class="admonition-title">Hint</p>
+<p>You might choose to read ahead before implementing
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a>, since the
 <a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code></a> function is very similar and may provide a useful
 template for your work.</p>
@@ -351,14 +401,15 @@ template for your work.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

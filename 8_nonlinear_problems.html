@@ -1,25 +1,26 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>8. Nonlinear problems &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8. Nonlinear problems &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. References" href="zbibliography.html" />
+    <link rel="next" title="9. Mixed problems" href="9_mixed_problems.html" />
     <link rel="prev" title="7. Dirichlet boundary conditions" href="7_boundary_conditions.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
@@ -50,7 +51,7 @@
           <div class="body" role="main">
             
   <div class="section" id="nonlinear-problems">
-<h1>8. Nonlinear problems<a class="headerlink" href="#nonlinear-problems" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>Nonlinear problems<a class="headerlink" href="#nonlinear-problems" title="Permalink to this headline">¶</a></h1>
 <p>The finite element method may also be employed to numerically solve
 <em>nonlinear</em> PDEs. In order to do this, we can apply the classical
 technique for solving nonlinear systems: we employ an iterative scheme
@@ -58,15 +59,13 @@ such as Newton’s method to create a sequence of linear problems whose
 solutions converge to the correct solution to the
 nonlinear problem.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This section is the mastery exercise for this module. This exercise
-is explicitly intended to test whether you can bring together what
-has been learned in the rest of the module in order to go beyond
-what has been covered in lectures and labs.</p>
-<p class="last">This exercise is not a part of the third year version of this module.</p>
+<p class="admonition-title">Note</p>
+<p>This chapter forms the mastery component of the module in some years, but
+not 2020/2021. It is presented here for reference. None of the material here
+forms part of the module this year.</p>
 </div>
 <div class="section" id="a-model-problem">
-<h2>8.1. A model problem<a class="headerlink" href="#a-model-problem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1. </span>A model problem<a class="headerlink" href="#a-model-problem" title="Permalink to this headline">¶</a></h2>
 <p>As a simple case of a non-linear PDE, we can consider a steady
 non-linear diffusion equation. This is similar to the Poisson problem,
 except that the diffusion rate now depends on the value of the
@@ -89,7 +88,7 @@ we cannot simply substitute <span class="math notranslate nohighlight">\(u = u_i
 linear matrix system to solve.</p>
 </div>
 <div class="section" id="residual-form">
-<h2>8.2. Residual form<a class="headerlink" href="#residual-form" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.2. </span>Residual form<a class="headerlink" href="#residual-form" title="Permalink to this headline">¶</a></h2>
 <p>The general weak form of a non-linear problem is, find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-0">
 <span class="eqno">(8.3)<a class="headerlink" href="#equation-8-nonlinear-problems-0" title="Permalink to this equation">¶</a></span>\[f(u; v) = 0 \qquad \forall v \in V\]</div>
@@ -120,15 +119,15 @@ evaluated at that same point.</p>
    \phi^*_i(u) - \phi^*_i(b) &amp; \phi_i\in V_\Gamma
 \end{cases}\end{split}\]</div>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">Evaluating the residual requires that the boundary condition be
+<p class="admonition-title">Hint</p>
+<p>Evaluating the residual requires that the boundary condition be
 evaluated at the boundary nodes. A simple (if slightly inefficient)
 way to achieve this is to interpolate the boundary condition onto a
 function <span class="math notranslate nohighlight">\(\hat{b}\in V\)</span>.</p>
 </div>
 </div>
 <div class="section" id="linearisation-and-gateaux-derivatives">
-<h2>8.3. Linearisation and Gâteaux Derivatives<a class="headerlink" href="#linearisation-and-gateaux-derivatives" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3. </span>Linearisation and Gâteaux Derivatives<a class="headerlink" href="#linearisation-and-gateaux-derivatives" title="Permalink to this headline">¶</a></h2>
 <p>Having stated our PDE in residual form, we now need to linearise the
 problem and thereby employ a technique such as Newton’s method. In
 order to linearise the residual, we need to differentiate it with
@@ -161,7 +160,7 @@ then the definition of a nodal basis gives us:</p>
 <span class="eqno">(8.9)<a class="headerlink" href="#equation-8-nonlinear-problems-5" title="Permalink to this equation">¶</a></span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
 </div>
 <div class="section" id="a-taylor-expansion-and-newton-s-method">
-<h2>8.4. A Taylor expansion and Newton’s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.4. </span>A Taylor expansion and Newton’s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
 <p>Since we now have the derivative of the residual with respect to a
 perturbation to the prospective solution <span class="math notranslate nohighlight">\(u\)</span>, we can write the first
 terms of a Taylor series approximation for the value of the residual at a perturbed solution <span class="math notranslate nohighlight">\(u+\hat{u}\)</span>:</p>
@@ -191,7 +190,7 @@ terms of basis functions:</p>
 <p>and the right hand side vector <span class="math notranslate nohighlight">\(f\)</span> is given by <a class="reference internal" href="#equation-residual">(8.5)</a>. This
 matrix, <span class="math notranslate nohighlight">\(J\)</span>, is termed the <em>Jacobian matrix</em> of <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <div class="section" id="stopping-criteria-for-newton-s-method">
-<h3>8.4.1. Stopping criteria for Newton’s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.4.1. </span>Stopping criteria for Newton’s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
 <p>Since Newton’s method is an iterative algorithm, it creates a
 (hopefully convergent) sequence of approximations to the correct
 solution to the original nonlinear problem. How do we know when to
@@ -207,7 +206,7 @@ correction to that error. However, having calculated the error
 estimate, it is utterly unreasonable to not apply the corresponding
 correction.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Note!</p>
 <p>Another commonly employed stopping mechanism is to consider the
 size of the residual <span class="math notranslate nohighlight">\(f\)</span>. However, the residual is not actually a
@@ -223,28 +222,27 @@ coefficients. This would be legitimate were the inner product on
 is defined by an integral, the mesh resolution is effectively
 encoded into <span class="math notranslate nohighlight">\(f\)</span>. This means that this approach produces
 convergence rates which depend on the level of mesh refinement.</p>
-<p class="last">Avoiding this mesh dependency requires the evaluation of an
+<p>Avoiding this mesh dependency requires the evaluation of an
 operator norm or, equivalently, the solution of a linear system in
 order to find the Riesz representer of <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(V\)</span>. However, since
 the error-estimator approach given above is both an actual estimate
 of the error in the solution, and requires no additional linear
 solves, it should be regarded as a preferable approach. For a full
-treatment of Newton methods, see <a class="reference internal" href="zbibliography.html#deuflhard2011" id="id1">[Deu11]</a>.</p>
+treatment of Newton methods, see <span id="id1">[<a class="reference internal" href="zbibliography.html#id5">Deu11</a>]</span>.</p>
 </div>
 </div>
 <div class="section" id="stopping-threshold-values">
-<h3>8.4.2. Stopping threshold values<a class="headerlink" href="#stopping-threshold-values" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.4.2. </span>Stopping threshold values<a class="headerlink" href="#stopping-threshold-values" title="Permalink to this headline">¶</a></h3>
 <p>What, then, qualifies as a sufficiently small value of our error
 estimate? There are two usual approaches:</p>
-<dl class="docutils">
-<dt>relative tolerance</dt>
-<dd>Convergence is deemed to occur when the estimate
+<dl class="simple">
+<dt>relative tolerance</dt><dd><p>Convergence is deemed to occur when the estimate
 becomes sufficiently small compared with the first error estimate
 calculated.  This is generally the more defensible approach since
 it takes into account the overall scale of the solution. <span class="math notranslate nohighlight">\(10^{-6}\)</span>
-would be a reasonably common relative tolerance.</dd>
-<dt>absolute tolerance</dt>
-<dd>Computers employ finite precision arithmetic, so there is a limit
+would be a reasonably common relative tolerance.</p>
+</dd>
+<dt>absolute tolerance</dt><dd><p>Computers employ finite precision arithmetic, so there is a limit
 to the accuracy which can ever be achieved. This is a difficult
 value to estimate, since it depends on the number and nature of
 operations undertaken in the algorithm. A common approach is to set
@@ -252,7 +250,8 @@ this to a very small value (e.g. <span class="math notranslate nohighlight">\(10
 attempt to ensure that the relative tolerance threshold is
 hit. Only if it becomes apparent that the problem being solved is
 in a regime for which machine precision is a problem is a higher
-absolute tolerance set.</dd>
+absolute tolerance set.</p>
+</dd>
 </dl>
 <p>It is important to realise that both of these criteria involve making
 essentially arbitrary judgements about the scale of error which is
@@ -269,7 +268,7 @@ a level which will be swamped by a larger error occurring somewhere
 else in the process.</p>
 </div>
 <div class="section" id="failure-modes">
-<h3>8.4.3. Failure modes<a class="headerlink" href="#failure-modes" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.4.3. </span>Failure modes<a class="headerlink" href="#failure-modes" title="Permalink to this headline">¶</a></h3>
 <p>Just as with the Newton method for scalar problems, Newton iteration
 is not guaranteed to converge for all nonlinear problems or for all
 initial guesses. If Newton’s method fails to converge, then the
@@ -277,19 +276,19 @@ algorithm presented so far constitutes an infinite loop. It is
 therefore necessary to define some circumstances in which the
 algorithm should terminate having failed to find a solution. Two such
 circumstances are commonly employed:</p>
-<dl class="docutils">
-<dt>maximum iterations</dt>
-<dd>It is a reasonable heuristic that Newton’s method has failed if it
+<dl class="simple">
+<dt>maximum iterations</dt><dd><p>It is a reasonable heuristic that Newton’s method has failed if it
 takes a very large number of iterations. What constitutes “too
 many” is once again a somewhat arbitrary judgement, although if the
 approach takes many tens of iterations this should always be cause
-for reconsideration!</dd>
-<dt>diverged error estimate</dt>
-<dd>Newton’s method is not guaranteed to produce a sequence of
+for reconsideration!</p>
+</dd>
+<dt>diverged error estimate</dt><dd><p>Newton’s method is not guaranteed to produce a sequence of
 iterations which monotonically decrease the error, however if the
 error estimate has increased to, say, hundreds or thousands of
 times its initial value, this would once again be grounds for the
-algorithm to fail.</dd>
+algorithm to fail.</p>
+</dd>
 </dl>
 <p>Note that these failure modes are heuristic: having the algorithm
 terminate for these reasons is really an instruction to the user to
@@ -297,10 +296,10 @@ think again about the problem, the solver, and the initial guess.</p>
 </div>
 </div>
 <div class="section" id="implementing-a-nonlinear-problem">
-<h2>8.5. Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.5. </span>Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This problem is intentionally stated in more general terms than the
+<p class="admonition-title">Note</p>
+<p>This problem is intentionally stated in more general terms than the
 previous ones. It is your responsibility to decide on a code
 structure, to derive a method of manufactured solutions answer, and
 to create the convergence tests which demonstrate that your
@@ -330,16 +329,16 @@ therefore to solve Poisson’s equation first to obtain a good
 initial guess for the 4-laplacian problem.</p>
 <p>Your submitted answer will consist of:</p>
 <ol class="arabic">
-<li><p class="first">A written component containing your derivation of:</p>
+<li><p>A written component containing your derivation of:</p>
 <ol class="loweralpha simple">
-<li>The weak form of <a class="reference internal" href="#equation-mastery">(8.15)</a>; and</li>
-<li>the Jacobian; and</li>
-<li>the forcing term implied by the specified manufactured solution; and</li>
-<li>an explanation of why the zero function cannot be used as an initial guess for the solution.</li>
+<li><p>The weak form of <a class="reference internal" href="#equation-mastery">(8.15)</a>; and</p></li>
+<li><p>the Jacobian; and</p></li>
+<li><p>the forcing term implied by the specified manufactured solution; and</p></li>
+<li><p>an explanation of why the zero function cannot be used as an initial guess for the solution.</p></li>
 </ol>
 <p>A neatly hand-written or a typed submission are equally acceptable.</p>
 </li>
-<li><p class="first">The code to implement the solution. This should be in
+<li><p>The code to implement the solution. This should be in
 <code class="docutils literal notranslate"><span class="pre">fe_utils.solvers.mastery.py</span></code> in your implementation. A
 convergence test for your code is provided in
 <code class="docutils literal notranslate"><span class="pre">test/test_12_mastery_convergence.py</span></code>.</p>
@@ -350,16 +349,16 @@ commit you would like to have marked.</p>
 </li>
 </ol>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">It is an exceptionally useful aid to debugging to have your
+<p class="admonition-title">Hint</p>
+<p>It is an exceptionally useful aid to debugging to have your
 Newton iteration print out the value of the error norm and the
 iteration number for each iteration. If you wish to see the
 printed output while running the test, you can pass the <code class="docutils literal notranslate"><span class="pre">-s</span></code>
 option to <code class="docutils literal notranslate"><span class="pre">py.test</span></code>.</p>
 </div>
 <div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">You could parametrise your code by <span class="math notranslate nohighlight">\(p\)</span>. By setting <span class="math notranslate nohighlight">\(p=2\)</span>, you
+<p class="admonition-title">Hint</p>
+<p>You could parametrise your code by <span class="math notranslate nohighlight">\(p\)</span>. By setting <span class="math notranslate nohighlight">\(p=2\)</span>, you
 reduce your problem to the linear case. You can use the linear
 case to test your code initially, before setting <span class="math notranslate nohighlight">\(p=4\)</span> for the
 actual exercise. Note that, in the linear case, Newton’s method
@@ -371,14 +370,15 @@ convergence has occurred).</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

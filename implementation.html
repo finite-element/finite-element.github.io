@@ -1,26 +1,26 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>The implementation exercise &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The implementation exercise &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. Numerical quadrature" href="1_quadrature.html" />
-    <link rel="prev" title="Computational tools" href="tools.html" />
+    <link rel="prev" title="Software tools" href="tools.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
@@ -56,40 +56,50 @@ of the finite element method by producing a working one and two
 dimensional finite element solver library. Along the way you will have
 the opportunity to pick up valuable scientific computing skills in
 coding, software engineering and rigorous testing.</p>
-<p>There will be no conventional lectures for this part of the
-module. Instead, there will be twice weekly 1 hour computer lab sessions
-during the term. Some of this time will involve explanations at the
-board, but much of the time will be an opportunity to develop your
-finite element implementation and receive help on how to do so.</p>
+<p>This part of the module is very practical, and there are never conventional
+lectures for it, even when everything is taught on campus. Each week you should
+work through the notes and videos until you come to an exercise. Each exercise
+will invite you to implement another part of a finite element implementation, so
+that by the end of the term we will be solving finite element problems.</p>
+<p>Along the way, there will be the opportunity to get help and feedback through
+the module Piazza board, weekly online labs, and through pull requests for
+feedback in weeks 4 and 7.</p>
 <div class="section" id="formalities-and-marking-scheme">
 <h2>Formalities and marking scheme<a class="headerlink" href="#formalities-and-marking-scheme" title="Permalink to this headline">¶</a></h2>
-<p>The implementation exercise is due at the end of term. That is, by
-1600 on Friday 22 March. You must submit your work uploading the git
-commit code on Blackboard. You can convenently find this code on the
-commits page for your repository on github. For the avoidance of
-doubt, the commit you submit must date from before the deadline!</p>
+<p>The implementation exercise is due at the end of term. That is, by 1600 on
+Friday 22 March. You must submit your work uploading the git hash on Blackboard.
+You can conveniently <a class="reference external" href="https://imperial-fons-computing.github.io/git.html#git-hash" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">find this hash on the commits page for your
+repository on GitHub</span></a>. For the avoidance of doubt, the commit
+you submit must date from before the deadline!</p>
 <p>The marking scheme will be as follows:</p>
-<dl class="docutils">
-<dt>First/distinction (70-100)</dt>
-<dd>All parts of the implementation are correct and all tests pass. The
+<dl class="simple">
+<dt>First/distinction (70-100)</dt><dd><p>All parts of the implementation are correct and all tests pass. The
 code style is always very clear and the implementation of every
-exercise is transparent and elegant.</dd>
-<dt>Upper second/merit (60-70)</dt>
-<dd>The implementation is correct but let down somewhat by poor coding
+exercise is transparent and elegant.</p>
+</dd>
+<dt>Upper second/merit (60-70)</dt><dd><p>The implementation is correct but let down somewhat by poor coding
 style. Alternatively, submissions which are correct and well
 written up to and including solving the Helmholtz problem but
 which do not include a correct solution to boundary conditions will
-earn an upper second.</dd>
-<dt>Lower second/pass (50-60)</dt>
-<dd>There are significant failings in the implementation resulting in
+earn an upper second.</p>
+</dd>
+<dt>Lower second/pass (50-60)</dt><dd><p>There are significant failings in the implementation resulting in
 many test failures, and/or the coding style is
-sufficiently poor that the code is hard to understand.</dd>
-<dt>Fail (0-50)</dt>
-<dd>The implementation is substantially incomplete. Correct
+sufficiently poor that the code is hard to understand.</p>
+</dd>
+<dt>Fail (0-50)</dt><dd><p>The implementation is substantially incomplete. Correct
 implementations may have been provided for some of the earlier exercises but
 the more advanced parts of the implementation exercise have not been
-attempted or do not work.</dd>
+attempted or do not work.</p>
+</dd>
 </dl>
+<p>Code execution performance is not a primary concern of this module, however the
+code must still be algorithmically correct. This means not just returning the
+correct answer but also having the correct algorithmic complexity. Occasionally
+students submit code that uses quadratic algorithms where linear ones would be
+possible. The result is that examples that should run in seconds and take
+megabytes of memory instead take gigabytes of memory and many hours to complete.
+Such submissions are incorrect, and will be marked as such.</p>
 </div>
 <div class="section" id="extension-mastery-exercise">
 <h2>Extension (mastery) exercise<a class="headerlink" href="#extension-mastery-exercise" title="Permalink to this headline">¶</a></h2>
@@ -100,16 +110,53 @@ the same scheme as above.</p>
 </div>
 <div class="section" id="obtaining-the-skeleton-code">
 <h2>Obtaining the skeleton code<a class="headerlink" href="#obtaining-the-skeleton-code" title="Permalink to this headline">¶</a></h2>
-<p>This section assumes you’ve already done the <a class="reference internal" href="tools.html#bitbucket-git"><span class="std std-ref">Git tutorial</span></a>.</p>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+A video recording of the following material is available here.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495157536"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=c92e73b4-b383-4412-b5f9-ac9f00b08789">watch this video on Panopto</a></p>
+</div>
+</details><p>This section assumes you’ve already done everything to <a class="reference internal" href="tools.html"><span class="doc">set up the software
+tools you need</span></a>.</p>
+<div class="section" id="set-up-a-folder-to-hold-the-repository-and-virtual-environment">
+<h3>Set up a folder to hold the repository and virtual environment<a class="headerlink" href="#set-up-a-folder-to-hold-the-repository-and-virtual-environment" title="Permalink to this headline">¶</a></h3>
+<p>You can call this folder anything you like, and store it anywhere that suits
+you, though don’t move it once you’ve created it as this will break the virtual
+environment. Suppose you would like to keep the new folder in a folder called
+<code class="file docutils literal notranslate"><span class="pre">docs</span></code> in your home directory. We first <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">open a
+terminal</span></a> and switch to the folder:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> docs
+</pre></div>
+</div>
+<p>Note that <cite>$</cite> is the command prompt (which might be a different character such
+as <cite>%</cite> or <cite>&gt;</cite> for you). You don’t type the prompt. Start with <cite>cd</cite>. Next we
+create the folder we’ll use for this course. Suppose we choose to call it
+<code class="file docutils literal notranslate"><span class="pre">finite-element</span></code>, then we would type:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir finite-element
+</pre></div>
+</div>
+<p><cite>mkdir</cite> stands for “make directory”. <em>Directory</em> is an alternative term to
+<em>folder</em>. Finally we switch (“change directory”) into that folder:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> finite-element
+</pre></div>
+</div>
+</div>
 <div class="section" id="setting-up-your-repository">
 <h3>Setting up your repository<a class="headerlink" href="#setting-up-your-repository" title="Permalink to this headline">¶</a></h3>
 <p>We’re using a tool called <a class="reference external" href="https://classroom.github.com">GitHub classroom</a> to automate the creation of your
-copies of the repository. To create your repository, <a class="reference external" href="https://classroom.github.com/a/yIPAQZ6_">click here</a>.</p>
+copies of the repository. To create your repository, <a class="reference external" href="https://classroom.github.com/a/m9wBgJ90">click here</a>.</p>
 </div>
 <div class="section" id="cloning-a-local-copy">
 <h3>Cloning a local copy<a class="headerlink" href="#cloning-a-local-copy" title="Permalink to this headline">¶</a></h3>
 <p>At the command line on your working machine type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone &lt;url&gt; finite-element-course
 </pre></div>
 </div>
 <p>Substituting your git repository url for &lt;url&gt;. Your git repository
@@ -122,14 +169,14 @@ in which we’ll install the packages we need, including our own
 implementation exercise. This minimises interference between this
 project and anything else which might be using Python on the
 system. We can run a script from the git repository to make the venv:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv</span> <span class="n">venv</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./finite-element-course/scripts/fe_install_venv fe_venv
 </pre></div>
 </div>
 <p>This has to install several packages in the venv, so it might take a
 few minutes to run.</p>
 <p>On Windows, the set of commands is somewhat different. In this case
 you would run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">fe_install_venv_win</span> <span class="n">venv</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; ./finite-element-course/scripts/fe_install_venv_win fe_venv</span>
 </pre></div>
 </div>
 </div>
@@ -137,64 +184,15 @@ you would run:</p>
 <h3>Activating your venv<a class="headerlink" href="#activating-your-venv" title="Permalink to this headline">¶</a></h3>
 <p><strong>Every time</strong> you want to work on the implementation exercise, you need
 to activate the venv. On Linux or Mac do this with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span> fe_venv/bin/activate
 </pre></div>
 </div>
 <p>while on Windows the command is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="n">Scripts</span><span class="o">/</span><span class="n">activate</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; source fe_venv/Scripts/activate</span>
 </pre></div>
 </div>
 <p>Obviously if you are typing this in a directory other than the one
 containing the venv, you need to modify the path accordingly.</p>
-</div>
-<div class="section" id="setting-up-an-implementation-branch">
-<h3>Setting up an implementation branch<a class="headerlink" href="#setting-up-an-implementation-branch" title="Permalink to this headline">¶</a></h3>
-<p>We’ll keep the master branch of your repository in the original
-condition so we can compare to it later, and collect any updates which
-occur during the term. Instead, we’ll create an implementation branch
-to actually work on:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span>
-<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">implementation</span>
-</pre></div>
-</div>
-<p>Your working directory is now a current checkout of your
-implementation branch. You’ll also want to push this branch to GitHub:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">origin</span> <span class="n">implementation</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="watching-for-updates-and-issues">
-<h3>Watching for updates and issues<a class="headerlink" href="#watching-for-updates-and-issues" title="Permalink to this headline">¶</a></h3>
-<p>You should make sure you are notified of all updates on the main
-repository and all issues anyone raises. For this, you should navigate
-to <a class="reference external" href="https://github.com/finite-element/finite-element-course">the main repository</a>. On the
-top right there is an eye icon. Select the drop-down box and switch to
-<code class="docutils literal notranslate"><span class="pre">watching</span></code>.</p>
-</div>
-<div class="section" id="updating-your-fork">
-<h3>Updating your fork<a class="headerlink" href="#updating-your-fork" title="Permalink to this headline">¶</a></h3>
-<p>When you see that the main repository has been updated, you’ll need to
-update your repository to incorporate those changes. <em>Just this once</em>,
-you need to tell your local git repo about the main repository:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">/</span><span class="n">finite</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">course</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-</div>
-<p>Now, <em>every time</em> you want to update you do the following:</p>
-<ol class="arabic">
-<li><p class="first">Make sure you have commited all your local changes <strong>and</strong> pushed
-them to GitHub.</p>
-</li>
-<li><p class="first">Execute the following commands:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>          <span class="c1"># Switch to the master branch.</span>
-<span class="n">git</span> <span class="n">pull</span> <span class="n">upstream</span> <span class="n">master</span>     <span class="c1"># Update from the main repository.</span>
-<span class="n">git</span> <span class="n">push</span>                     <span class="c1"># Push the updated master branch to GitHub.</span>
-<span class="n">git</span> <span class="n">checkout</span> <span class="n">implementation</span>  <span class="c1"># Switch back to the implementation branch.</span>
-<span class="n">git</span> <span class="n">merge</span> <span class="n">master</span>             <span class="c1"># Merge the new changes from master into implementation.</span>
-<span class="n">git</span> <span class="n">push</span>                     <span class="c1"># Push the updated implementation branch to GitHub.</span>
-</pre></div>
-</div>
-</li>
-</ol>
 </div>
 </div>
 <div class="section" id="skeleton-code-documentation">
@@ -216,35 +214,7 @@ build the <a class="reference internal" href="fe_utils.html"><span class="doc">f
 <p>As you do the exercises, <strong>commit your code</strong> to your repository. This
 will build up your finite element library. You should commit code
 early and often - small commits are easier to understand and debug
-than large ones. <strong>Never</strong> commit back to the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of your
-fork, that should always remain a clean copy of the main repository.</p>
-</div>
-<div class="section" id="pull-requests-for-feedback">
-<h2>Pull requests for feedback<a class="headerlink" href="#pull-requests-for-feedback" title="Permalink to this headline">¶</a></h2>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">A video about creating pull requests is available <a class="reference external" href="https://www.youtube.com/embed/JPCG-kcfQHE">here</a></p>
-</div>
-<p>There will be a formal opportunity to recieve feedback on your code
-progress twice during the term. To take part, you should set up a pull
-request from your <code class="docutils literal notranslate"><span class="pre">implementation</span></code> branch to the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch
-of your repository. This will enable the lecturer to write line by
-line comments on your code.</p>
-<div class="section" id="creating-your-pull-request">
-<h3>Creating your pull request<a class="headerlink" href="#creating-your-pull-request" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic simple">
-<li>Click on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">pull</span> <span class="pre">request</span></code> button at the top of your
-repository page on GitHub.</li>
-<li>Make sure <strong>left</strong> dropdown box (“base”) is set to <code class="docutils literal notranslate"><span class="pre">master</span></code>.</li>
-<li>Make sure <strong>right</strong> dropdown box (“compare”) is set to <code class="docutils literal notranslate"><span class="pre">implementation</span></code>.</li>
-<li>Type a suitable title in the title box. For example
-<code class="docutils literal notranslate"><span class="pre">Request</span> <span class="pre">for</span> <span class="pre">feedback</span> <span class="pre">30/1/19</span></code>.</li>
-<li>If you have any comments you would like to pass on to the lecturer
-(for example questions about how you should have done a particular
-exercise) then type these in the <code class="docutils literal notranslate"><span class="pre">Description</span></code> box.</li>
-<li>Click <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</li>
-</ol>
-</div>
+than large ones.</p>
 </div>
 <div class="section" id="testing-your-work">
 <h2>Testing your work<a class="headerlink" href="#testing-your-work" title="Permalink to this headline">¶</a></h2>
@@ -252,7 +222,7 @@ exercise) then type these in the <code class="docutils literal notranslate"><spa
 exercise the code you have just written. These are located in the
 <code class="docutils literal notranslate"><span class="pre">test</span></code> directory and employ the <a class="reference external" href="http://pytest.org/">pytest</a>
 testing framework. You run the tests with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">test_script</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>py.test test_script.py
 </pre></div>
 </div>
 <p>from the bash command line, replacing <code class="docutils literal notranslate"><span class="pre">test_script.py</span></code> with the appropriate
@@ -265,7 +235,7 @@ error.</p>
 directory. This works particularly well with the -x option, resulting
 in the tests being run in course order and stopping at the first
 failing test:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">x</span> <span class="n">tests</span><span class="o">/</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>py.test -x tests/
 </pre></div>
 </div>
 </div>
@@ -282,39 +252,98 @@ a more experienced programmer, to follow PEP8 in your
 implementation. However nobody is going to lose marks for PEP8
 failures.</p>
 </div>
+<div class="section" id="getting-help">
+<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>It’s expected that you will find there are tasks in the implementation exercise
+that you don’t know how to do. Your first port of call should be the Piazza
+forum, followed by the weekly live lab sessions.</p>
+<div class="section" id="using-piazza">
+<h3>Using Piazza<a class="headerlink" href="#using-piazza" title="Permalink to this headline">¶</a></h3>
+<p>The key advantage of asking for help on Piazza is that you can do this at any
+point during the week, whenever you are stuck. The whole class can see Piazza,
+but you can choose to publish anonymously so nobody need know who asked the
+question. You should also watch the other questions as they appear on Piazza,
+because you will find that you learn a lot from what other people ask, as well
+as the answers they get. Other students might notice issues that didn’t even
+occur to you! Also do please try to answer other students’ questions. Doing so
+is actually a really effective way of understanding the work better, since you
+will be looking at the tasks from another student’s perspective.</p>
+<p>I will attempt to check and respond to Piazza at least once every work day, so
+you should get a response at the latest by the end of the work day following the
+one on which you post your question.</p>
+</div>
+<div class="section" id="formulating-a-good-question">
+<h3>Formulating a good question<a class="headerlink" href="#formulating-a-good-question" title="Permalink to this headline">¶</a></h3>
+<p>One of the key skills in getting help with code is to ask the question in a
+structured way which provides all the information required by the person helping
+you. Not only does this radically increase the chances of getting a useful
+response first time, but often the process of thinking through how to ask the
+question leads you to its solution before you even ask. Please review the
+information from the second year Principles of Programming <a class="reference external" href="https://object-oriented-python.github.io/1_introduction.html#issue-report" title="(in Object oriented programming in Python for mathematicians v2021.0)"><span class="xref std std-ref">instructions on
+raising an issue</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please don’t post large pieces of code to Piazza. Just post minimal examples
+if they help. However always commit and push your work, and post the
+<a class="reference external" href="https://imperial-fons-computing.github.io/git.html#git-hash" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">git commit hash</span></a> in the repository. The lecturer can
+always find your work from the git hash, so long as you’ve pushed to GitHub.</p>
+</div>
+</div>
+<div class="section" id="participating-in-the-live-labs">
+<h3>Participating in the live labs<a class="headerlink" href="#participating-in-the-live-labs" title="Permalink to this headline">¶</a></h3>
+<p>The lab sessions will use in the module’s Microsoft Team. Just like
+in an in-person lab, I will go from person to person providing the help you need
+with your work. The way this will work is that participants who want help should
+post in the Teams meeting asking for help. Before posting:</p>
+<ol class="arabic simple">
+<li><p>Make sure you know what it is you need help with.</p></li>
+<li><p>Have the right files open in Visual Studio Code, and the failing test(s) open
+in the terminal window.</p></li>
+<li><p>Have already launched a Live Share session and be ready to provide the
+me with the code to join your session.</p></li>
+</ol>
+<p>I will then go down the list of requests for help in order. I will use Teams to call the
+person asking for help one-to-one and answer your questions. Usually I’ll need
+to see what you are working on, which is where the Live Share will come in
+useful, as I will be able to see both your code and the error you are seeing.</p>
+<p>I will mark the request for help as I complete them so that those waiting have
+an indication of progress.</p>
+</div>
+</div>
 <div class="section" id="tips-and-tricks-for-the-implementation-exercise">
 <h2>Tips and tricks for the implementation exercise<a class="headerlink" href="#tips-and-tricks-for-the-implementation-exercise" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Work from the documentation.</dt>
-<dd>The notes, and particularly the exercise specifications, contain
+<dl class="simple">
+<dt>Work from the documentation.</dt><dd><p>The notes, and particularly the exercise specifications, contain
 important information about how and what to implement. If you just
 read the source code then you will miss out on important
-information.</dd>
-<dt>Read the hints</dt>
-<dd>The pink sections in the notes starting with a lightbulb are
+information.</p>
+</dd>
+<dt>Read the hints</dt><dd><p>The pink sections in the notes starting with a lightbulb are
 hints. Usually they contain suggestions about how to go about
 writing your answer, or suggest Python functions which you might
-find useful.</dd>
-<dt>Don’t forget the 1D case</dt>
-<dd>Your finite element library needs to work in one and two dimensions.</dd>
-<dt>Return a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array()</span></code></a></dt>
-<dd>Many of the functions you have to write return arrays. Make sure
+find useful.</p>
+</dd>
+<dt>Don’t forget the 1D case</dt><dd><p>Your finite element library needs to work in one and two dimensions.</p>
+</dd>
+<dt>Return a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array()</span></code></a></dt><dd><p>Many of the functions you have to write return arrays. Make sure
 you actually return an array and not a list (it’s usually fine to
 build the answer as a list, but convert it to an array before you
-return it).</dd>
+return it).</p>
+</dd>
 </dl>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

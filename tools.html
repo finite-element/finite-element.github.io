@@ -1,26 +1,26 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Computational tools &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Software tools &#8212; Finite element course 2021.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/proof.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The implementation exercise" href="implementation.html" />
-    <link rel="prev" title="5. Convergence of finite element approximations" href="L5_convergence.html" />
+    <link rel="prev" title="Practical matters" href="practicalities.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
@@ -49,70 +49,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="computational-tools">
-<h1>Computational tools<a class="headerlink" href="#computational-tools" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="access-to-computers">
-<h2>Access to computers<a class="headerlink" href="#access-to-computers" title="Permalink to this headline">¶</a></h2>
-<p>You’ll need access to a suitable computer for the implementation
-work. You can either use the machines in the maths department labs, or you can use your own laptop running Windows, Linux, or macOS.
-The core requirements are Python 3, git, and a Python-aware text editor.</p>
-<div class="section" id="using-the-windows-machines-in-the-computer-labs">
-<h3>Using the Windows machines in the computer labs<a class="headerlink" href="#using-the-windows-machines-in-the-computer-labs" title="Permalink to this headline">¶</a></h3>
-<p>Imperial’s lab machines have the software you need installed, in some
-cases via the <cite>Software Hub</cite>. To get started, double click the
-<cite>Software Hub</cite> icon on the desktop or <a class="reference external" href="https://softwarehub.imperial.ac.uk/">click here</a>. From there you can run <cite>git</cite>,
-which will give you a terminal to run git and Python commands, and
-<cite>atom</cite>, which will provide you with an editor.</p>
-</div>
-<div class="section" id="using-your-own-windows-machine">
-<h3>Using your own Windows machine<a class="headerlink" href="#using-your-own-windows-machine" title="Permalink to this headline">¶</a></h3>
-<p>In order to use your own Windows machine, you’ll simply need Python 3
-(with the right packages) and git. One option is to install Anaconda, but other Windows Python distributions should also work.</p>
-<ol class="arabic simple">
-<li>Download and install <cite>Anaconda</cite> from <a class="reference external" href="https://www.anaconda.com">here</a>.</li>
-<li>Download and install <cite>git</cite> from <a class="reference external" href="https://git-scm.com/download/win">here</a>.</li>
+  <div class="section" id="software-tools">
+<h1>Software tools<a class="headerlink" href="#software-tools" title="Permalink to this headline">¶</a></h1>
+<p>In order to do this module, you’ll need some core software tools. As the module
+proceeds we’ll also install several more Python packages, but you don’t need to
+install those right now. The core tools you will need are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Python version 3.6 or later.</p></li>
+<li><p>Git (the revision control system we’re going to use).</p></li>
+<li><p>A Python-aware text editor. Visual Studio Code is recommended, and all
+the instructions in this course will assume that this is what you are using.</p></li>
 </ol>
-</div>
-<div class="section" id="using-your-own-linux-machine">
-<h3>Using your own Linux machine<a class="headerlink" href="#using-your-own-linux-machine" title="Permalink to this headline">¶</a></h3>
-<p>If you plan to use your own machine for the module, you will need a
-basic  Python toolchain. On Ubuntu and its relatives, this can be achieved with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">git</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="using-your-own-mac">
-<h3>Using your own Mac<a class="headerlink" href="#using-your-own-mac" title="Permalink to this headline">¶</a></h3>
-<p>We recommend using <a class="reference external" href="http://brew.sh">Homebrew</a> as a package manager
-for the required packages on Mac OS systems, however other ways of getting Python 3 may well work.</p>
-<ol class="arabic">
-<li><p class="first">Install homebrew, following the instructions at <a class="reference external" href="http://brew.sh">http://brew.sh</a>.</p>
-</li>
-<li><p class="first">Install an up-to-date Python via homebrew:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
-<div class="section" id="editing-code">
-<h3>Editing code<a class="headerlink" href="#editing-code" title="Permalink to this headline">¶</a></h3>
-<p>In order to write the code required for the implementation exercise,
-you’ll need to use a Python-aware text editor. There are many such
-editors available and you can use any you like. One good option is
-called <cite>atom</cite> which is available on the <a class="reference external" href="https://softwarehub.imperial.ac.uk/">software hub</a> At Imperial or can be
-downloaded <a class="reference external" href="http://atom.io">here</a>.</p>
-</div>
-</div>
-<div class="section" id="the-command-line">
-<h2>The command line<a class="headerlink" href="#the-command-line" title="Permalink to this headline">¶</a></h2>
-<p>A lot of the routine activity involved in this module revolves around
-executing commands on the Bash command line. For example you use the
-command line to work with the revision control system. If you’re not
-familiar with the Linux command line, then a brief guide <a class="reference external" href="http://www.tuxarena.com/static/intro_linux_cli.php">is available
-here</a>. That
-guide focusses on the Bash shell, which is the one we will use.</p>
-</div>
+</div></blockquote>
+<p>The Faculty of Natural Sciences at Imperial has
+<a class="reference external" href="https://imperial-fons-computing.github.io/index.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">centralised instructions for installing all of these tools</span></a>, and we’ll follow those.</p>
 <div class="section" id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>Your implementation will be written in Python based on a code skeleton
@@ -124,13 +75,31 @@ Python tutorial</a>. If
 you have done a little Python, one feature we will be using a lot is
 classes, so if that is new to you you should at least review <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">the
 classes chapter</a>.</p>
-<p>The Matlab-like array features of Python are provided by <a class="reference external" href="http://www.numpy.org/">Numpy</a> for which there is a <a class="reference external" href="http://wiki.scipy.org/Tentative_NumPy_Tutorial">helpful tutorial</a>. There is also a
-handy <a class="reference external" href="http://wiki.scipy.org/NumPy_for_Matlab_Users">guide for Matlab users</a>. In that context, the
+<p>The Matlab-like array features of Python are provided by <a class="reference external" href="https://www.numpy.org/">Numpy</a> for which there is a <a class="reference external" href="https://numpy.org/devdocs/user/quickstart.html">helpful tutorial</a>. There is also a
+handy <a class="reference external" href="https://numpy.org/devdocs/user/numpy-for-matlab-users.html">guide for Matlab users</a>. In that context, the
 code provided in this course will always use Numpy arrays, and never
 Numpy matrices.</p>
+<div class="proof proof-type-exercise" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 1</span>
+        
+    </div><div class="proof-content">
+<p>If you don’t already have Python 3.6 or later installed on your computer, follow
+the <a class="reference external" href="https://imperial-fons-computing.github.io/python.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">FoNS Python instructions</span></a>. We will exclusively use
+<a class="reference external" href="https://imperial-fons-computing.github.io/python.html#python-virtual-environments" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">virtual environments</span></a> so it doesn’t
+matter at all whether you use Python from Anaconda or from another source. Mac
+users should note, though that the built-in Python will not do, so you should
+use either Homebrew or Anaconda.</p>
+</div></div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The example code in the exercises uses <a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings" title="(in Python v3.9)"><span class="xref std std-ref">f-strings</span></a>
+which were introduced in Python 3.6, so the code will not work in earlier
+versions of Python.</p>
 </div>
-<div class="section" id="github-and-git">
-<span id="bitbucket-git"></span><h2>GitHub and git<a class="headerlink" href="#github-and-git" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="git">
+<h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
 <p>Revision control is a mechanism for recording and managing different
 versions of changing software. This enables changes to be tracked and
 helps in the process of debugging code, and in managing conflicts when
@@ -143,85 +112,81 @@ use the same revision control system to record the edits you make over
 time and to submit your work for feedback and, eventually, marking.</p>
 <p>We will be using the revision control system <a class="reference external" href="http://git-scm.com/">git</a>, which is the current state of the art and is
 widely adopted. We’ll be combining git with the online hosting service <a class="reference external" href="http://github.org">GitHub</a>.</p>
-<div class="section" id="getting-started-with-git-and-github">
-<h3>Getting started with git and GitHub<a class="headerlink" href="#getting-started-with-git-and-github" title="Permalink to this headline">¶</a></h3>
-<p>The very first thing you’ll need is a GitHub account. Navigate to <a class="reference external" href="https://github.com/">GitHub</a> and sign up.
-.. note:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Make sure you use your Imperial College email address on
-GitHub. This enables you to request unlimited free private GitHub
-repositories and other goodies by `applying here
-&lt;https://education.github.com/pack&gt;`_. You don&#39;t strictly need this
-for this module, but there are some nice things in there that you
-might want anyway.
-</pre></div>
-</div>
-<p>Next you need to do just a little Git setup. At the <cite>Git Bash</cite> command
-line, type the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Jane Bloggs&quot;</span>
-</pre></div>
-</div>
-<p>Obviously you put in your own name rather than “Jane Bloggs”. Similarly, you need to set your email:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;Jane.Bloggs12@imperial.ac.uk&quot;</span>
-</pre></div>
-</div>
-<p>Once again, you obviously use your own email address. Now there is a
-small setting which makes the output of git colourful and therefore a
-lot easier to read:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">color</span><span class="o">.</span><span class="n">ui</span> <span class="s2">&quot;auto&quot;</span>
-</pre></div>
-</div>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">If you are a more confident computer user, you could go ahead and
+<div class="proof proof-type-exercise" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2</span>
+        
+    </div><div class="proof-content">
+<p>Install Git and work through the entire Git,
+GitHub, and GitHub Classroom tutorial on the <a class="reference external" href="https://imperial-fons-computing.github.io/git.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">FoNS Git instructions webpage</span></a>.</p>
+<p>Next, go and do the <a class="reference external" href="https://swcarpentry.github.io/git-novice/">git tutorial</a>
+over at Software Carpentry.</p>
+</div></div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you are a more confident computer user, you could go ahead and
 set up git to work with ssh, the secure shell. This will save a lot
 of password typing but it’s not essential so if you are not so
-confident with computers, you can skip this bit. The instructions
-are <a class="reference external" href="https://help.github.com/articles/generating-an-ssh-key/">here</a>.</p>
-</div>
-<p>Now go and do the <a class="reference external" href="https://swcarpentry.github.io/git-novice/">git tutorial</a> over at Software Carpentry.</p>
+confident with computers, you can skip this bit. GitHub provide
+<a class="reference external" href="https://help.github.com/articles/generating-an-ssh-key/">instructions for using ssh with git</a>.</p>
 </div>
 </div>
-<div class="section" id="sharing-your-problems-with-gists">
-<h2>Sharing your problems with gists<a class="headerlink" href="#sharing-your-problems-with-gists" title="Permalink to this headline">¶</a></h2>
-<p>At some points during the module, you’re sure to create bugs in your
-code that you don’t know how to fix. If you’re not in class at the
-time, you’ll need a convenient way to share a piece of code or output
-with the lecturer and the class. GitHub
-provides this facility, which they call <cite>gists</cite>.</p>
-<p>Once you’ve signed up and logged in, you can navigate to <a class="reference external" href="https://gist.github.com">https://gist.github.com</a> and there’s a very simple webpage into which
-you can paste your code or output. You should also set the language so
-that GitHub formats your gist correctly. Click <cite>create public gist</cite>
-and you’re done. You can then paste the URL of your gist page into an
-email or into a GitHub issue.</p>
-</div>
-<div class="section" id="raising-hell-issues">
-<h2>Raising <span class="strikethrough">hell</span> issues<a class="headerlink" href="#raising-hell-issues" title="Permalink to this headline">¶</a></h2>
-<p>If you have problems you can’t solve yourself, you can share them with
-the class by <a class="reference external" href="https://github.com/finite-element/finite-element-course/issues">raising an issue on GitHub</a>. When you do this, here are
-some tips which will help get your problem fixed:</p>
-<dl class="docutils">
-<dt>Be precise</dt>
-<dd>“It didn’t work” is useless. “I typed <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">fe_utils</span></code> and
-recieved the following error.” is much better.</dd>
-<dt>Provide a minimal failing example</dt>
-<dd>Post the smallest piece of code which exhibits the problem. This
-makes finding the issue much easier.</dd>
-<dt>Use gists</dt>
-<dd>Copy exactly what happened, complete with error messages,
-into a gist and post the link in the issue.</dd>
-</dl>
-</div>
+<div class="section" id="visual-studio-code">
+<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">¶</a></h2>
+<p>Visual Studio Code is a Python-aware Integrated Development Environment (IDE).
+This means that it incorporates editing files with other programming features
+such as <a class="reference external" href="https://object-oriented-python.github.io/9_debugging.html#debugging" title="(in Object oriented programming in Python for mathematicians v2021.0)"><span>Debugging and testing</span></a>, Git support, and built-in <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html#terminal-vscode" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">terminal</span></a>. Visual Studio Code also provides an incredibly useful remote
+collaborative coding feature called Live Share. This will be very useful for
+getting remote help from an instructor.</p>
+<div class="proof proof-type-exercise" id="id4">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 3</span>
+        
+    </div><div class="proof-content">
+<p>Install Visual Studio Code using the
+<a class="reference external" href="https://imperial-fons-computing.github.io/vscode.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">FoNS Visual Studio Code installation instructions</span></a>.</p>
+</div></div><div class="proof proof-type-exercise" id="id5">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 4</span>
+        
+    </div><div class="proof-content">
+<p>Follow the <a class="reference external" href="https://imperial-fons-computing.github.io/vscode.html#vscode-liveshare" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">FoNS Visual Studio Live Share instructions</span></a> instructions to learn how to set up a Live Share.
+Pair up with someone else taking the module to ensure that you can share
+your Visual Studio Code session with them, and they with you. If you need to
+find someone else taking the module to do this exercise with, you can use
+<cite>this Piazza post &lt;https://piazza.com/class/kiujdiwgpk5su?cid=1&gt;</cite>.</p>
+</div></div></div>
+<div class="section" id="the-command-line">
+<h2>The command line<a class="headerlink" href="#the-command-line" title="Permalink to this headline">¶</a></h2>
+<p>A lot of the routine activity involved in this module revolves around
+executing commands on the command line. For example you use the
+command line to work with the revision control system.</p>
+<div class="proof proof-type-exercise" id="id6">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 5</span>
+        
+    </div><div class="proof-content">
+<p>If you’re not
+familiar with the Linux command line, then follow at least the first two
+sections of the <cite>Software Carpentry Unix Shell lesson</cite>. That
+guide focusses on the Bash shell, but zsh and the Windows Powershell use very
+similar commands.</p>
+</div></div></div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>
