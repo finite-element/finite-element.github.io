@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>3. Interpolation operators &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="interpolation-operators">
+  <section id="interpolation-operators">
 <h1><span class="section-number">3. </span>Interpolation operators<a class="headerlink" href="#interpolation-operators" title="Permalink to this headline">¶</a></h1>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -69,7 +70,7 @@ allowfullscreen></iframe></div>
 approximated by finite element functions. We start locally,
 looking at a single finite element, and then move globally to
 function spaces on a triangulation.</p>
-<div class="section" id="local-and-global-interpolation-operators">
+<section id="local-and-global-interpolation-operators">
 <h2><span class="section-number">3.1. </span>Local and global interpolation operators<a class="headerlink" href="#local-and-global-interpolation-operators" title="Permalink to this headline">¶</a></h2>
 <div class="proof proof-type-definition" id="id1">
 
@@ -149,8 +150,8 @@ decomposition. The global interpolator <span class="math notranslate nohighlight
 <div class="math notranslate nohighlight">
 \[\mathcal{I}_hu|_K = I_Ku\]</div>
 <p>for each <span class="math notranslate nohighlight">\(K \in \mathcal{T}_h\)</span>.</p>
-</div></div></div>
-<div class="section" id="measuring-interpolation-errors">
+</div></div></section>
+<section id="measuring-interpolation-errors">
 <h2><span class="section-number">3.2. </span>Measuring interpolation errors<a class="headerlink" href="#measuring-interpolation-errors" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -276,8 +277,8 @@ Let
         
     </div><div class="proof-content">
 <p>Just apply Sobolev’s inequality to the <span class="math notranslate nohighlight">\(m\)</span> derivatives of <span class="math notranslate nohighlight">\(u\)</span>.</p>
-</div></div></div>
-<div class="section" id="approximation-by-averaged-taylor-polynomials">
+</div></div></section>
+<section id="approximation-by-averaged-taylor-polynomials">
 <h2><span class="section-number">3.3. </span>Approximation by averaged Taylor polynomials<a class="headerlink" href="#approximation-by-averaged-taylor-polynomials" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -451,8 +452,8 @@ There exists a constant <span class="math notranslate nohighlight">\(C(k,n)\)</s
     </div><div class="proof-content">
 <p>Take the maximum over the constants for the derivative contributions
 of the left-hand side with <span class="math notranslate nohighlight">\(d=1\)</span> and use the previous result.</p>
-</div></div></div>
-<div class="section" id="local-and-global-interpolation-errors">
+</div></div></section>
+<section id="local-and-global-interpolation-errors">
 <h2><span class="section-number">3.4. </span>Local and global interpolation errors<a class="headerlink" href="#local-and-global-interpolation-errors" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -481,8 +482,8 @@ results of this section without directly using the previous estimate
 \[\int_0^1 w(x)^2 \,d x \leq c\int_0^1 (w''(x))^2 \,d x.\]</div>
 <p>Hints: use the Schwarz inequality,</p>
 <div class="math notranslate nohighlight">
-\[(\int_0^1 f(x)g(x) \, dx)^2 \leq (\int_0^1 f(x)^2 \, dx)
-(\int_0^1 g(x)^2 \, dx)^2,\]</div>
+\[\left(\int_0^1 f(x)g(x) \, dx\right)^2 \leq \left(\int_0^1 f(x)^2 \, dx\right)
+\left(\int_0^1 g(x)^2 \, dx\right),\]</div>
 <p>(which we shall discuss in more generality in Section 4), together
 with Rolle’s theorem.</p>
 </div></div><div class="proof proof-type-exercise" id="id18">
@@ -713,8 +714,8 @@ lower bound in the aspect ratio.</p>
 interpolation of functions to finite element spaces. In the
 next section, we move on to studying the solveability of finite
 element approximations.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -725,7 +726,7 @@ element approximations.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

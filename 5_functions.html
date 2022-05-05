@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5. Functions in finite element spaces &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="functions-in-finite-element-spaces">
+  <section id="functions-in-finite-element-spaces">
 <span id="secfunctions"></span><h1><span class="section-number">5. </span>Functions in finite element spaces<a class="headerlink" href="#functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h1>
 <p>Recall that the general form of a function in a finite element space is:</p>
 <div class="math notranslate nohighlight" id="equation-function">
@@ -58,7 +59,7 @@
 <p>Where the <span class="math notranslate nohighlight">\(\phi_i(x)\)</span> are now the global basis functions achieved by
 stitching together the local basis functions defined by the
 <a class="reference internal" href="2_finite_elements.html#secfinitelement"><span class="std std-ref">finite element</span></a>.</p>
-<div class="section" id="a-python-implementation-of-functions-in-finite-element-spaces">
+<section id="a-python-implementation-of-functions-in-finite-element-spaces">
 <h2><span class="section-number">5.1. </span>A python implementation of functions in finite element spaces<a class="headerlink" href="#a-python-implementation-of-functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -80,8 +81,8 @@ mesh and finite element to be employed, to which the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> adds an array of degree of
 freedom values, one for each node in the
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a>.</p>
-</div>
-<div class="section" id="interpolating-values-into-finite-element-spaces">
+</section>
+<section id="interpolating-values-into-finite-element-spaces">
 <h2><span class="section-number">5.2. </span>Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -113,7 +114,7 @@ concerned with point evaluation nodes, this is equivalent to:</p>
 <span class="math notranslate nohighlight">\(n_i\)</span>. This looks straightforward, however the <span class="math notranslate nohighlight">\(x_i\)</span> are the <em>global</em>
 node points, and so far we have only defined the node points in
 <em>local</em> coordinates on the reference element.</p>
-<div class="section" id="changing-coordinates-between-reference-and-physical-space">
+<section id="changing-coordinates-between-reference-and-physical-space">
 <span id="coordinates"></span><h3><span class="section-number">5.2.1. </span>Changing coordinates between reference and physical space<a class="headerlink" href="#changing-coordinates-between-reference-and-physical-space" title="Permalink to this headline">¶</a></h3>
 <p>We’ll refer to coordinates on the global mesh as being in <em>physical
 space</em> while those on the reference element are in <em>local
@@ -151,8 +152,8 @@ are evaluated more than once. This can be avoided with a little
 tedious bookkeeping but we will not concern ourselves with that
 here.</p>
 </div>
-</div>
-<div class="section" id="looking-up-cell-coordinates-and-values">
+</section>
+<section id="looking-up-cell-coordinates-and-values">
 <h3><span class="section-number">5.2.2. </span>Looking up cell coordinates and values<a class="headerlink" href="#looking-up-cell-coordinates-and-values" title="Permalink to this headline">¶</a></h3>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -199,8 +200,8 @@ associated with the nodes of element <code class="docutils literal notranslate">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="a-python-implementation-of-interpolation">
+</section>
+<section id="a-python-implementation-of-interpolation">
 <h3><span class="section-number">5.2.3. </span>A Python implementation of interpolation<a class="headerlink" href="#a-python-implementation-of-interpolation" title="Permalink to this headline">¶</a></h3>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -239,9 +240,9 @@ the programming constructs used in
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> will be
 needed when you implement integration.</p>
 </div>
-</div>
-</div>
-<div class="section" id="integration">
+</section>
+</section>
+<section id="integration">
 <span id="id1"></span><h2><span class="section-number">5.3. </span>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -314,7 +315,7 @@ necessary to compute the Jacobian at every quadrature
 point. However, non-affine coordinate transforms are beyond the
 scope of this course.</p>
 </div>
-<div class="section" id="expressing-the-function-in-the-finite-element-basis">
+<section id="expressing-the-function-in-the-finite-element-basis">
 <h3><span class="section-number">5.3.1. </span>Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Permalink to this headline">¶</a></h3>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -334,8 +335,8 @@ allowfullscreen></iframe></div>
 <div class="math notranslate nohighlight" id="equation-5-functions-5">
 <span class="eqno">(5.13)<a class="headerlink" href="#equation-5-functions-5" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \int_{c_0} \sum_i F(M(c,i))\,\Phi_i(X)\, |J|\,\mathrm{d} X\]</div>
 <p>where <span class="math notranslate nohighlight">\(F\)</span> is the vector of global coefficient values of <span class="math notranslate nohighlight">\(f\)</span>, and <span class="math notranslate nohighlight">\(M\)</span> is <a class="reference internal" href="4_function_spaces.html#cell-node"><span class="std std-ref">the cell node map</span></a>.</p>
-</div>
-<div class="section" id="numerical-quadrature">
+</section>
+<section id="numerical-quadrature">
 <h3><span class="section-number">5.3.2. </span>Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h3>
 <p>The actual evaluation of the integral will employ the quadrature rules
 we discussed in <a class="reference internal" href="1_quadrature.html"><span class="doc">a previous section</span></a>. Let
@@ -343,8 +344,8 @@ we discussed in <a class="reference internal" href="1_quadrature.html"><span cla
 the quadrature is exact. Then:</p>
 <div class="math notranslate nohighlight" id="equation-integration">
 <span class="eqno">(5.14)<a class="headerlink" href="#equation-integration" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \sum_q \sum_i F(M(c,i))\,\Phi_i(X_q)\, |J|\,w_q\]</div>
-</div>
-<div class="section" id="implementing-integration">
+</section>
+<section id="implementing-integration">
 <h3><span class="section-number">5.3.3. </span>Implementing integration<a class="headerlink" href="#implementing-integration" title="Permalink to this headline">¶</a></h3>
 <div class="proof proof-type-exercise" id="id3">
 
@@ -382,10 +383,10 @@ implementation.</p>
 basis functions at each quadrature point.</p></li>
 <li><p>Visit each cell in turn.</p></li>
 <li><p>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> for that cell
-and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
-and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
+and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.22)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
+and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
 <li><p>Sum all of the arrays you have constructed over the correct
-indices to a contribution to the integral (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
+indices to a contribution to the integral (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
 may be useful for this).</p></li>
 </ol>
 </div>
@@ -396,9 +397,9 @@ may be useful for this).</p></li>
 <a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code></a> function is very similar and may provide a useful
 template for your work.</p>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -409,7 +410,7 @@ template for your work.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

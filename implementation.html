@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>The implementation exercise &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -33,7 +34,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -49,7 +50,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="the-implementation-exercise">
+  <section id="the-implementation-exercise">
 <h1>The implementation exercise<a class="headerlink" href="#the-implementation-exercise" title="Permalink to this headline">¶</a></h1>
 <p>The object of the implementation exercise is to gain an understanding
 of the finite element method by producing a working one and two
@@ -64,7 +65,7 @@ that by the end of the term we will be solving finite element problems.</p>
 <p>Along the way, there will be the opportunity to get help and feedback through
 the module Piazza board, weekly online labs, and through pull requests for
 feedback in weeks 4 and 7.</p>
-<div class="section" id="formalities-and-marking-scheme">
+<section id="formalities-and-marking-scheme">
 <h2>Formalities and marking scheme<a class="headerlink" href="#formalities-and-marking-scheme" title="Permalink to this headline">¶</a></h2>
 <p>The implementation exercise is due at the end of term. That is, by 1600 on
 Friday 22 March. You must submit your work uploading the git hash on Blackboard.
@@ -100,15 +101,15 @@ students submit code that uses quadratic algorithms where linear ones would be
 possible. The result is that examples that should run in seconds and take
 megabytes of memory instead take gigabytes of memory and many hours to complete.
 Such submissions are incorrect, and will be marked as such.</p>
-</div>
-<div class="section" id="extension-mastery-exercise">
+</section>
+<section id="extension-mastery-exercise">
 <h2>Extension (mastery) exercise<a class="headerlink" href="#extension-mastery-exercise" title="Permalink to this headline">¶</a></h2>
 <p>Fourth year and masters students must also complete the mastery
 exercise, which will be issued half way through the term. This will be
 worth 20% of the implementation exercise marks and will be marked on
 the same scheme as above.</p>
-</div>
-<div class="section" id="obtaining-the-skeleton-code">
+</section>
+<section id="obtaining-the-skeleton-code">
 <h2>Obtaining the skeleton code<a class="headerlink" href="#obtaining-the-skeleton-code" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -125,7 +126,7 @@ allowfullscreen></iframe></div>
 </div>
 </details><p>This section assumes you’ve already done everything to <a class="reference internal" href="tools.html"><span class="doc">set up the software
 tools you need</span></a>.</p>
-<div class="section" id="set-up-a-folder-to-hold-the-repository-and-virtual-environment">
+<section id="set-up-a-folder-to-hold-the-repository-and-virtual-environment">
 <h3>Set up a folder to hold the repository and virtual environment<a class="headerlink" href="#set-up-a-folder-to-hold-the-repository-and-virtual-environment" title="Permalink to this headline">¶</a></h3>
 <p>You can call this folder anything you like, and store it anywhere that suits
 you, though don’t move it once you’ve created it as this will break the virtual
@@ -147,13 +148,13 @@ create the folder we’ll use for this course. Suppose we choose to call it
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> finite-element
 </pre></div>
 </div>
-</div>
-<div class="section" id="setting-up-your-repository">
+</section>
+<section id="setting-up-your-repository">
 <h3>Setting up your repository<a class="headerlink" href="#setting-up-your-repository" title="Permalink to this headline">¶</a></h3>
 <p>We’re using a tool called <a class="reference external" href="https://classroom.github.com">GitHub classroom</a> to automate the creation of your
-copies of the repository. To create your repository, <a class="reference external" href="https://classroom.github.com/a/m9wBgJ90">click here</a>.</p>
-</div>
-<div class="section" id="cloning-a-local-copy">
+copies of the repository. To create your repository, <a class="reference external" href="https://classroom.github.com/a/XifNjyLs">click here</a>.</p>
+</section>
+<section id="cloning-a-local-copy">
 <h3>Cloning a local copy<a class="headerlink" href="#cloning-a-local-copy" title="Permalink to this headline">¶</a></h3>
 <p>At the command line on your working machine type:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone &lt;url&gt; finite-element-course
@@ -161,8 +162,8 @@ copies of the repository. To create your repository, <a class="reference externa
 </div>
 <p>Substituting your git repository url for &lt;url&gt;. Your git repository
 url can be found by clicking on <cite>clone or download</cite> at the top right of your repository page on GitHub.</p>
-</div>
-<div class="section" id="setting-up-your-venv">
+</section>
+<section id="setting-up-your-venv">
 <h3>Setting up your venv<a class="headerlink" href="#setting-up-your-venv" title="Permalink to this headline">¶</a></h3>
 <p>We’re going to use a Python venv. This is a private Python environment
 in which we’ll install the packages we need, including our own
@@ -179,8 +180,8 @@ you would run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; ./finite-element-course/scripts/fe_install_venv_win fe_venv</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="activating-your-venv">
+</section>
+<section id="activating-your-venv">
 <h3>Activating your venv<a class="headerlink" href="#activating-your-venv" title="Permalink to this headline">¶</a></h3>
 <p><strong>Every time</strong> you want to work on the implementation exercise, you need
 to activate the venv. On Linux or Mac do this with:</p>
@@ -193,14 +194,14 @@ to activate the venv. On Linux or Mac do this with:</p>
 </div>
 <p>Obviously if you are typing this in a directory other than the one
 containing the venv, you need to modify the path accordingly.</p>
-</div>
-</div>
-<div class="section" id="skeleton-code-documentation">
+</section>
+</section>
+<section id="skeleton-code-documentation">
 <h2>Skeleton code documentation<a class="headerlink" href="#skeleton-code-documentation" title="Permalink to this headline">¶</a></h2>
 <p>There is web documentation for the complete <a class="reference internal" href="fe_utils.html"><span class="doc">fe_utils package</span></a>. There is
 also an <a class="reference internal" href="genindex.html"><span class="std std-ref">alphabetical index</span></a> and a <a class="reference internal" href="search.html"><span class="std std-ref">search page</span></a>.</p>
-</div>
-<div class="section" id="how-to-do-the-implementation-exercises">
+</section>
+<section id="how-to-do-the-implementation-exercises">
 <h2>How to do the implementation exercises<a class="headerlink" href="#how-to-do-the-implementation-exercises" title="Permalink to this headline">¶</a></h2>
 <p>The implementation exercises build up a finite element library from
 its component parts. Quite a lot of the coding infrastructure you will
@@ -215,8 +216,8 @@ build the <a class="reference internal" href="fe_utils.html"><span class="doc">f
 will build up your finite element library. You should commit code
 early and often - small commits are easier to understand and debug
 than large ones.</p>
-</div>
-<div class="section" id="testing-your-work">
+</section>
+<section id="testing-your-work">
 <h2>Testing your work<a class="headerlink" href="#testing-your-work" title="Permalink to this headline">¶</a></h2>
 <p>As you complete the exercises, there will often be test scripts which
 exercise the code you have just written. These are located in the
@@ -238,8 +239,8 @@ failing test:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>py.test -x tests/
 </pre></div>
 </div>
-</div>
-<div class="section" id="coding-style-and-commenting">
+</section>
+<section id="coding-style-and-commenting">
 <h2>Coding style and commenting<a class="headerlink" href="#coding-style-and-commenting" title="Permalink to this headline">¶</a></h2>
 <p>Computer code is not just functional, it also conveys information to
 the reader. It is important to write clear, intelligible code. <strong>The
@@ -251,13 +252,13 @@ follows PEP8 quite closely. You are encouraged, especially if you are
 a more experienced programmer, to follow PEP8 in your
 implementation. However nobody is going to lose marks for PEP8
 failures.</p>
-</div>
-<div class="section" id="getting-help">
+</section>
+<section id="getting-help">
 <h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
 <p>It’s expected that you will find there are tasks in the implementation exercise
 that you don’t know how to do. Your first port of call should be the Piazza
 forum, followed by the weekly live lab sessions.</p>
-<div class="section" id="using-piazza">
+<section id="using-piazza">
 <h3>Using Piazza<a class="headerlink" href="#using-piazza" title="Permalink to this headline">¶</a></h3>
 <p>The key advantage of asking for help on Piazza is that you can do this at any
 point during the week, whenever you are stuck. The whole class can see Piazza,
@@ -271,15 +272,15 @@ will be looking at the tasks from another student’s perspective.</p>
 <p>I will attempt to check and respond to Piazza at least once every work day, so
 you should get a response at the latest by the end of the work day following the
 one on which you post your question.</p>
-</div>
-<div class="section" id="formulating-a-good-question">
+</section>
+<section id="formulating-a-good-question">
 <h3>Formulating a good question<a class="headerlink" href="#formulating-a-good-question" title="Permalink to this headline">¶</a></h3>
 <p>One of the key skills in getting help with code is to ask the question in a
 structured way which provides all the information required by the person helping
 you. Not only does this radically increase the chances of getting a useful
 response first time, but often the process of thinking through how to ask the
 question leads you to its solution before you even ask. Please review the
-information from the second year Principles of Programming <a class="reference external" href="https://object-oriented-python.github.io/1_introduction.html#issue-report" title="(in Object oriented programming in Python for mathematicians v2021.0)"><span class="xref std std-ref">instructions on
+information from the second year Principles of Programming <a class="reference external" href="https://object-oriented-python.github.io/a1_help.html#issue-report" title="(in Object-oriented Programming v2021.0)"><span class="xref std std-ref">instructions on
 raising an issue</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -288,8 +289,8 @@ if they help. However always commit and push your work, and post the
 <a class="reference external" href="https://imperial-fons-computing.github.io/git.html#git-hash" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">git commit hash</span></a> in the repository. The lecturer can
 always find your work from the git hash, so long as you’ve pushed to GitHub.</p>
 </div>
-</div>
-<div class="section" id="participating-in-the-live-labs">
+</section>
+<section id="participating-in-the-live-labs">
 <h3>Participating in the live labs<a class="headerlink" href="#participating-in-the-live-labs" title="Permalink to this headline">¶</a></h3>
 <p>The lab sessions will use in the module’s Microsoft Team. Just like
 in an in-person lab, I will go from person to person providing the help you need
@@ -308,9 +309,9 @@ to see what you are working on, which is where the Live Share will come in
 useful, as I will be able to see both your code and the error you are seeing.</p>
 <p>I will mark the request for help as I complete them so that those waiting have
 an indication of progress.</p>
-</div>
-</div>
-<div class="section" id="tips-and-tricks-for-the-implementation-exercise">
+</section>
+</section>
+<section id="tips-and-tricks-for-the-implementation-exercise">
 <h2>Tips and tricks for the implementation exercise<a class="headerlink" href="#tips-and-tricks-for-the-implementation-exercise" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>Work from the documentation.</dt><dd><p>The notes, and particularly the exercise specifications, contain
@@ -325,14 +326,14 @@ find useful.</p>
 </dd>
 <dt>Don’t forget the 1D case</dt><dd><p>Your finite element library needs to work in one and two dimensions.</p>
 </dd>
-<dt>Return a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array()</span></code></a></dt><dd><p>Many of the functions you have to write return arrays. Make sure
+<dt>Return a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array()</span></code></a></dt><dd><p>Many of the functions you have to write return arrays. Make sure
 you actually return an array and not a list (it’s usually fine to
 build the answer as a list, but convert it to an array before you
 return it).</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -343,7 +344,7 @@ return it).</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

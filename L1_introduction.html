@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>1. Introduction &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="introduction">
+  <section id="introduction">
 <h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -75,7 +76,7 @@ accuracy, and match the numerical discretisation to the physical
 problem being modelled. It has an elegant mathematical formulation
 that lends itself both to mathematical analysis and to flexible code
 implementation. In this course we blend these two directions together.</p>
-<div class="section" id="poisson-s-equation-in-the-unit-square">
+<section id="poisson-s-equation-in-the-unit-square">
 <h2><span class="section-number">1.1. </span>Poisson’s equation in the unit square<a class="headerlink" href="#poisson-s-equation-in-the-unit-square" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -116,8 +117,8 @@ two types of boundary conditions are treated differently in the finite
 element method, and we would like to expose both treatments in the
 same example. The treatment of boundary conditions is one of the
 strengths of the finite element method.</p>
-</div>
-<div class="section" id="triangulations">
+</section>
+<section id="triangulations">
 <h2><span class="section-number">1.2. </span>Triangulations<a class="headerlink" href="#triangulations" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -151,8 +152,8 @@ that:</p>
 <span class="math notranslate nohighlight">\(\Omega\)</span>).</p></li>
 <li><p>No vertex of any triangle is located in the interior of any other triangle in <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> (triangle vertices only meet other triangle vertices).</p></li>
 </ol>
-</div></div></div>
-<div class="section" id="our-first-finite-element-space">
+</div></div></section>
+<section id="our-first-finite-element-space">
 <h2><span class="section-number">1.3. </span>Our first finite element space<a class="headerlink" href="#our-first-finite-element-space" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -198,8 +199,8 @@ amongst <span class="math notranslate nohighlight">\(\mathring{V}_h\)</span> for
 equation. This is referred to as strong boundary conditions. Note that
 we do not consider any subspaces related to the Neumann
 conditions. These will emerge later.</p>
-</div>
-<div class="section" id="integral-formulations-and-l-2">
+</section>
+<section id="integral-formulations-and-l-2">
 <h2><span class="section-number">1.4. </span>Integral formulations and <span class="math notranslate nohighlight">\(L_2\)</span><a class="headerlink" href="#integral-formulations-and-l-2" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -267,8 +268,8 @@ g(x,y) = \left\{\begin{array}{cc}
 \end{array}\right.\end{split}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> only differ on the line <span class="math notranslate nohighlight">\(x=0.5\)</span> which has zero
 area, then <span class="math notranslate nohighlight">\(\|f-g\|_{L^2(\Omega)}=0\)</span>, and so <span class="math notranslate nohighlight">\(f\equiv g\)</span> in <span class="math notranslate nohighlight">\(L^2\)</span>.</p>
-</div></div></div>
-<div class="section" id="finite-element-derivative">
+</div></div></section>
+<section id="finite-element-derivative">
 <h2><span class="section-number">1.5. </span>Finite element derivative<a class="headerlink" href="#finite-element-derivative" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -326,8 +327,8 @@ equal in <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span>.</p>
 derivatives to be finite element derivatives. In later sections we
 shall consider an even more general definition of the derivative which
 contains both of these definitions.</p>
-</div>
-<div class="section" id="towards-the-finite-element-discretisation">
+</section>
+<section id="towards-the-finite-element-discretisation">
 <h2><span class="section-number">1.6. </span>Towards the finite element discretisation<a class="headerlink" href="#towards-the-finite-element-discretisation" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -415,25 +416,33 @@ allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f4cb8c0c-4664-4a21-8043-ac2c010738da">watch this video on Panopto</a></p>
 </div>
 </details><p>We now present some numerical results for the case <span class="math notranslate nohighlight">\(f = 2\pi^2\sin(\pi
-x)\sin(\pi y)\)</span>.</p>
-<div class="figure align-default" id="id11">
+x)\sin(2\pi y)\)</span>.</p>
+<figure class="align-default" id="id11">
 <span id="figplots"></span><a class="reference internal image-reference" href="_images/level2.png"><img alt="_images/level2.png" src="_images/level2.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(4\times 4\)</span> mesh.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="id12">
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(4\times 4\)</span> mesh.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id12">
 <a class="reference internal image-reference" href="_images/level4.png"><img alt="_images/level4.png" src="_images/level4.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(16\times 16\)</span> mesh.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="id13">
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(16\times 16\)</span> mesh.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id13">
 <a class="reference internal image-reference" href="_images/level7.png"><img alt="_images/level7.png" src="_images/level7.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(128\times 128\)</span> mesh.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="id14">
+<figcaption>
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Numerical solution on a <span class="math notranslate nohighlight">\(128\times 128\)</span> mesh.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id14">
 <a class="reference internal image-reference" href="_images/poisson_error.png"><img alt="_images/poisson_error.png" src="_images/poisson_error.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Plot showing error versus mesh resolution. We observe
+<figcaption>
+<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Plot showing error versus mesh resolution. We observe
 the error decreases proportionally to <span class="math notranslate nohighlight">\(h^2\)</span>, where <span class="math notranslate nohighlight">\(h\)</span> is
 the maximum triangle edge size in the triangulation.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>We see that for this example, the error is decreasing as we increase
 the number of triangles, for the meshes considered.</p>
 <details class="sphinx-bs dropdown card mb-3">
@@ -501,7 +510,7 @@ areas.</p>
 <p>in the <span class="math notranslate nohighlight">\(1\times 1\)</span> square region as above, with boundary conditions
 <span class="math notranslate nohighlight">\(u=x(1-x)\)</span> on the entire boundary.</p>
 </div></div><div class="proof proof-type-exercise" id="id17">
-
+<span id="def-robin"></span>
     <div class="proof-title">
         <span class="proof-type">Exercise 1.13</span>
         
@@ -513,9 +522,9 @@ areas.</p>
 \[-\nabla^2 u = \frac{1}{1 + x^2 + y^2},\]</div>
 </div></blockquote>
 <p>in the <span class="math notranslate nohighlight">\(1\times 1\)</span> square region, with boundary conditions
-<span class="math notranslate nohighlight">\(u-\frac{\partial u}{\partial n}=x(1-x)\)</span> on the entire boundary.</p>
-</div></div></div>
-<div class="section" id="practical-implementation">
+<span class="math notranslate nohighlight">\(u+\frac{\partial u}{\partial n}=x(1-x)\)</span> on the entire boundary.</p>
+</div></div></section>
+<section id="practical-implementation">
 <h2><span class="section-number">1.7. </span>Practical implementation<a class="headerlink" href="#practical-implementation" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -621,8 +630,8 @@ algorithms that can exploit this sparsity.</p>
 <p>Having set out the main challenges of the computational
 implementation, we now move on to define and discuss a broader
 range of possible finite element spaces.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -633,7 +642,7 @@ range of possible finite element spaces.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

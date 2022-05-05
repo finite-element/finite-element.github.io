@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4. Finite element problems: solvability and stability &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="finite-element-problems-solvability-and-stability">
+  <section id="finite-element-problems-solvability-and-stability">
 <span id="fe-problems"></span><h1><span class="section-number">4. </span>Finite element problems: solvability and stability<a class="headerlink" href="#finite-element-problems-solvability-and-stability" title="Permalink to this headline">¶</a></h1>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -87,7 +88,7 @@ will use some general mathematical machinery about linear problems
 defined on Hilbert spaces. It will turn out that this machinery will
 also help us show that the approximation <span class="math notranslate nohighlight">\(u_h\)</span> converges to the exact
 solution <span class="math notranslate nohighlight">\(u\)</span> (and in what sense).</p>
-<div class="section" id="finite-element-spaces-and-other-hilbert-spaces">
+<section id="finite-element-spaces-and-other-hilbert-spaces">
 <h2><span class="section-number">4.1. </span>Finite element spaces and other Hilbert spaces<a class="headerlink" href="#finite-element-spaces-and-other-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <p>In the previous sections, we introduced the concept of finite element
 spaces, which contain certain functions defined on a domain <span class="math notranslate nohighlight">\(\Omega\)</span>.
@@ -351,8 +352,8 @@ the corresponding normed space <span class="math notranslate nohighlight">\((V,\
 finite element spaces equipped with <span class="math notranslate nohighlight">\(L^2\)</span> or <span class="math notranslate nohighlight">\(H^1\)</span> inner products are
 Hilbert spaces. Later we shall understand our finite element
 spaces as subspaces of infinite dimensional Hilbert spaces.</p>
-</div>
-<div class="section" id="linear-forms-on-hilbert-spaces">
+</section>
+<section id="linear-forms-on-hilbert-spaces">
 <span id="sec-linearforms"></span><h2><span class="section-number">4.2. </span>Linear forms on Hilbert spaces<a class="headerlink" href="#linear-forms-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -489,8 +490,8 @@ C|u-0|_H = C|u|_H\)</span>, i.e. <span class="math notranslate nohighlight">\(L\
         
     </div><div class="proof-content">
 <p>See a course or textbook on Hilbert spaces.</p>
-</div></div></div>
-<div class="section" id="variational-problems-on-hilbert-spaces">
+</div></div></section>
+<section id="variational-problems-on-hilbert-spaces">
 <h2><span class="section-number">4.3. </span>Variational problems on Hilbert spaces<a class="headerlink" href="#variational-problems-on-hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -652,8 +653,8 @@ we say that the finite element discretisation is stable.</p>
 </div></div><p>With this in mind it is useful to consider <span class="math notranslate nohighlight">\(h\)</span>-independent definitions
 of <span class="math notranslate nohighlight">\(\|\cdot\|_V\)</span> (such as the <span class="math notranslate nohighlight">\(L^2\)</span> and <span class="math notranslate nohighlight">\(H^1\)</span> norms), which is why we
 introduced them.</p>
-</div>
-<div class="section" id="solvability-and-stability-of-some-finite-element-discretisations">
+</section>
+<section id="solvability-and-stability-of-some-finite-element-discretisations">
 <h2><span class="section-number">4.4. </span>Solvability and stability of some finite element discretisations<a class="headerlink" href="#solvability-and-stability-of-some-finite-element-discretisations" title="Permalink to this headline">¶</a></h2>
 <p>In this section we will introduce some tools for showing coercivity
 and continuity of bilinear forms, illustrated with finite element
@@ -1116,8 +1117,8 @@ singular as the mesh is refined. Now we would like to go further and
 ask what is happening to the numerical solutions as the mesh is
 refined. What are they converging to?</p>
 <p>We will address these questions in the next section.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1128,7 +1129,7 @@ refined. What are they converging to?</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

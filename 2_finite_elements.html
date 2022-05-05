@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2. Constructing finite elements &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="constructing-finite-elements">
+  <section id="constructing-finite-elements">
 <span id="secfinitelement"></span><h1><span class="section-number">2. </span>Constructing finite elements<a class="headerlink" href="#constructing-finite-elements" title="Permalink to this headline">¶</a></h1>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -67,7 +68,7 @@ allowfullscreen></iframe></div>
 </div>
 </details><p>At the core of the finite element method is the representation of
 finite-dimensional function spaces over elements. This concept was
-formalised by <span id="id1">[<a class="reference internal" href="zbibliography.html#id4">Cia02</a>]</span>:</p>
+formalised by <span id="id1">[<a class="reference internal" href="zbibliography.html#id4" title="Philippe G Ciarlet. The finite element method for elliptic problems. Elsevier, 2002. doi:10.1137/1.9780898719208.">Cia02</a>]</span>:</p>
 <div class="proof proof-type-definition" id="id5">
 <span id="def-ciarlet"></span>
     <div class="proof-title">
@@ -90,7 +91,7 @@ of nodes for an element, and then derive an appropriate basis for
 <p>Let <span class="math notranslate nohighlight">\(N = \{\phi^*_j\}\)</span> be a basis for <span class="math notranslate nohighlight">\(P^*\)</span>.  A <em>nodal
 basis</em>, <span class="math notranslate nohighlight">\(\{\phi_i\}\)</span> for <span class="math notranslate nohighlight">\(P\)</span> is a basis for <span class="math notranslate nohighlight">\(P\)</span>
 with the property that <span class="math notranslate nohighlight">\(\phi^*_j(\phi_i) = \delta_{ij}\)</span>.</p>
-</div></div><div class="section" id="a-worked-example">
+</div></div><section id="a-worked-example">
 <h2><span class="section-number">2.1. </span>A worked example<a class="headerlink" href="#a-worked-example" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -171,8 +172,8 @@ c_0 &amp; c_1 &amp; c_2\\
 <p>By which we establish that the full basis is given by:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-2">
 <span class="eqno">(2.5)<a class="headerlink" href="#equation-2-finite-elements-2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\phi_0 = 1 - x - y\\\phi_1 = x\\\phi_2 = y\end{aligned}\end{align} \]</div>
-</div>
-<div class="section" id="types-of-node">
+</section>
+<section id="types-of-node">
 <h2><span class="section-number">2.2. </span>Types of node<a class="headerlink" href="#types-of-node" title="Permalink to this headline">¶</a></h2>
 <p>We have just encountered nodes given by the evaluation of the function
 at a given point. Other forms of functional are also suitable for use
@@ -181,9 +182,9 @@ over the cell or some sub-entity and the evaluation of the gradient
 of the function at some point. For some vector-valued function spaces,
 the nodes may be given by the evaluation of the components of the
 function normal or tangent to the boundary of the cell at some point.</p>
-<p>In this course we will only consider point evaluation nodes. The implementation of several other forms of node are covered in <span id="id2">[<a class="reference internal" href="zbibliography.html#id2">Kir04</a>]</span>.</p>
-</div>
-<div class="section" id="the-lagrange-element-nodes">
+<p>In this course we will only consider point evaluation nodes. The implementation of several other forms of node are covered in <span id="id2">[<a class="reference internal" href="zbibliography.html#id2" title="R.C. Kirby. Algorithm 839: fiat, a new paradigm for computing finite element basis functions. ACM Transactions on Mathematical Software (TOMS), 30(4):502–516, 2004. doi:10.1145/1039813.1039820.">Kir04</a>]</span>.</p>
+</section>
+<section id="the-lagrange-element-nodes">
 <h2><span class="section-number">2.3. </span>The Lagrange element nodes<a class="headerlink" href="#the-lagrange-element-nodes" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -233,8 +234,8 @@ points on the triangle by running:</p>
 </pre></div>
 </div>
 <p>Where <code class="xref py py-data docutils literal notranslate"><span class="pre">degree</span></code> is the degree of the points to plot.</p>
-</div></div></div>
-<div class="section" id="solving-for-basis-functions">
+</div></div></section>
+<section id="solving-for-basis-functions">
 <span id="sec-vandermonde"></span><h2><span class="section-number">2.4. </span>Solving for basis functions<a class="headerlink" href="#solving-for-basis-functions" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -281,7 +282,7 @@ to include powers of <span class="math notranslate nohighlight">\(z\)</span>.</p
 <p>The monomial basis for polynomial spaces employed here becomes
 increasingly ill-conditioned at higher order, so it may be
 advantageous to employ a different basis in the construction of the
-Vandermonde matrix. See <span id="id4">[<a class="reference internal" href="zbibliography.html#id2">Kir04</a>]</span> for an example.</p>
+Vandermonde matrix. See <span id="id4">[<a class="reference internal" href="zbibliography.html#id2" title="R.C. Kirby. Algorithm 839: fiat, a new paradigm for computing finite element basis functions. ACM Transactions on Mathematical Software (TOMS), 30(4):502–516, 2004. doi:10.1145/1039813.1039820.">Kir04</a>]</span> for an example.</p>
 </div>
 <div class="proof proof-type-exercise" id="id8">
 <span id="ex-vandermonde"></span>
@@ -300,8 +301,8 @@ ignore the <code class="docutils literal notranslate"><span class="pre">grad</sp
 <p>You can use numpy array operations to construct whole columns of
 the matrix at once.</p>
 </div>
-</div>
-<div class="section" id="implementing-finite-elements-in-python">
+</section>
+<section id="implementing-finite-elements-in-python">
 <h2><span class="section-number">2.5. </span>Implementing finite elements in Python<a class="headerlink" href="#implementing-finite-elements-in-python" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -340,11 +341,11 @@ invert it to create the basis function coefs. Store these as
 <code class="docutils literal notranslate"><span class="pre">test/test_04_init_finite_element.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
 used to invert the matrix.</p>
 </div>
-</div>
-<div class="section" id="implementing-the-lagrange-elements">
+</section>
+<section id="implementing-the-lagrange-elements">
 <h2><span class="section-number">2.6. </span>Implementing the Lagrange Elements<a class="headerlink" href="#implementing-the-lagrange-elements" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -382,8 +383,8 @@ nodes. For the purpose of this exercise, you may ignore the
 next exercise, you can use
 <code class="docutils literal notranslate"><span class="pre">plot_lagrange_basis_functions</span></code> to visualise your
 Lagrange basis functions.</p>
-</div></div></div>
-<div class="section" id="tabulating-basis-functions">
+</div></div></section>
+<section id="tabulating-basis-functions">
 <h2><span class="section-number">2.7. </span>Tabulating basis functions<a class="headerlink" href="#tabulating-basis-functions" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -428,8 +429,8 @@ lines. For the purposes of this exercise, ignore the <code class="docutils liter
 argument.</p>
 <p>The test file <code class="docutils literal notranslate"><span class="pre">test/test_05_tabulate.py</span></code> checks that tabulating the
 nodes of a finite element produces the identity matrix.</p>
-</div></div></div>
-<div class="section" id="gradients-of-basis-functions">
+</div></div></section>
+<section id="gradients-of-basis-functions">
 <h2><span class="section-number">2.8. </span>Gradients of basis functions<a class="headerlink" href="#gradients-of-basis-functions" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -486,7 +487,7 @@ extension. You should also ensure that you still pass
 <code class="docutils literal notranslate"><span class="pre">test/test_03_vandermonde_matrix.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.20)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.22)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
 generalised transposes swapping any dimensions.</p>
 </div>
 <div class="admonition hint">
@@ -494,7 +495,7 @@ generalised transposes swapping any dimensions.</p>
 <p>At least one of the natural ways of implementing this function
 results in a whole load of <code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code> values in the generalised
 Vandermonde matrix. In this case, you might find
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
 </div>
 <div class="proof proof-type-exercise" id="id13">
 
@@ -531,7 +532,7 @@ allowfullscreen></iframe></div>
 </div>
 </details><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
 contractions using <a class="reference external" href="http://mathworld.wolfram.com/EinsteinSummation.html">Einstein summation notation</a>. For
 example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ijk,jl-&gt;ilk&quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
@@ -539,8 +540,8 @@ example:</p>
 </div>
 <p>is equivalent to <span class="math notranslate nohighlight">\(A_{ilk} = \sum_j T_{ijk} C_{jl}\)</span>.</p>
 </div>
-</div>
-<div class="section" id="interpolating-functions-to-the-finite-element-nodes">
+</section>
+<section id="interpolating-functions-to-the-finite-element-nodes">
 <h2><span class="section-number">2.9. </span>Interpolating functions to the finite element nodes<a class="headerlink" href="#interpolating-functions-to-the-finite-element-nodes" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -595,8 +596,8 @@ matrix</a>
 is the one-dimensional case of the generalised Vandermonde matrix.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -607,7 +608,7 @@ is the one-dimensional case of the generalised Vandermonde matrix.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2. Finite element spaces: local to global &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="finite-element-spaces-local-to-global">
+  <section id="finite-element-spaces-local-to-global">
 <h1><span class="section-number">2. </span>Finite element spaces: local to global<a class="headerlink" href="#finite-element-spaces-local-to-global" title="Permalink to this headline">¶</a></h1>
 <p>In this section, we discuss the construction of general finite element
 spaces. Given a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> of a domain <span class="math notranslate nohighlight">\(\Omega\)</span>, finite
@@ -63,7 +64,7 @@ element spaces are defined according to</p>
 element space. We first do this by looking at a single cell, which we
 call the local perspective. Later we will take the global perspective,
 seeing how function continuity is enforced between cells.</p>
-<div class="section" id="ciarlet-s-finite-element">
+<section id="ciarlet-s-finite-element">
 <h2><span class="section-number">2.1. </span>Ciarlet’s finite element<a class="headerlink" href="#ciarlet-s-finite-element" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -172,8 +173,8 @@ i=0,\ldots,k.\]</div>
 <p>Show that the nodal basis for <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[\phi_i(x) = \frac{\prod_{j=0,j\ne i}^k (x-x_j)}{\prod_{j=0,j\ne i}^k (x_i-x_j)}, \quad i=0,\ldots,k.\]</div>
-</div></div></div>
-<div class="section" id="vandermonde-matrix-and-unisolvence">
+</div></div></section>
+<section id="vandermonde-matrix-and-unisolvence">
 <h2><span class="section-number">2.2. </span>Vandermonde matrix and unisolvence<a class="headerlink" href="#vandermonde-matrix-and-unisolvence" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -376,8 +377,8 @@ of algebra.</p>
 </li>
 </ul>
 <p>Is this finite element unisolvent? Explain your answer.</p>
-</div></div></div>
-<div class="section" id="d-and-3d-finite-elements">
+</div></div></section>
+<section id="d-and-3d-finite-elements">
 <h2><span class="section-number">2.3. </span>2D and 3D finite elements<a class="headerlink" href="#d-and-3d-finite-elements" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -635,8 +636,8 @@ are arranged in a smaller triangle <span class="math notranslate nohighlight">\(
 points for a degree <span class="math notranslate nohighlight">\(k-3\)</span> Lagrange finite element on <span class="math notranslate nohighlight">\(K'\)</span>. From
 the inductive hypothesis, and using the results for <span class="math notranslate nohighlight">\(k=1,2,3\)</span>, we conclude
 that <span class="math notranslate nohighlight">\(Q_3\equiv=0\)</span>, and therefore <span class="math notranslate nohighlight">\(p\equiv0\)</span> as required.</p>
-</div></div></div>
-<div class="section" id="some-more-exotic-elements">
+</div></div></section>
+<section id="some-more-exotic-elements">
 <h2><span class="section-number">2.4. </span>Some more exotic elements<a class="headerlink" href="#some-more-exotic-elements" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -698,8 +699,8 @@ is solved by the Argyris element.</p>
 </ul>
 </li>
 </ol>
-</div></div></div>
-<div class="section" id="global-continuity">
+</div></div></section>
+<section id="global-continuity">
 <h2><span class="section-number">2.5. </span>Global continuity<a class="headerlink" href="#global-continuity" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -1046,8 +1047,8 @@ element space.</p>
 construction of finite element spaces. In the next section, we move on
 to studying how well we can approximate continuous functions as finite
 element functions.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1058,7 +1059,7 @@ element functions.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

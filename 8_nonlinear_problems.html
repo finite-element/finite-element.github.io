@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>8. Nonlinear problems &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="nonlinear-problems">
+  <section id="nonlinear-problems">
 <h1><span class="section-number">8. </span>Nonlinear problems<a class="headerlink" href="#nonlinear-problems" title="Permalink to this headline">¶</a></h1>
 <p>The finite element method may also be employed to numerically solve
 <em>nonlinear</em> PDEs. In order to do this, we can apply the classical
@@ -64,7 +65,7 @@ nonlinear problem.</p>
 not 2020/2021. It is presented here for reference. None of the material here
 forms part of the module this year.</p>
 </div>
-<div class="section" id="a-model-problem">
+<section id="a-model-problem">
 <h2><span class="section-number">8.1. </span>A model problem<a class="headerlink" href="#a-model-problem" title="Permalink to this headline">¶</a></h2>
 <p>As a simple case of a non-linear PDE, we can consider a steady
 non-linear diffusion equation. This is similar to the Poisson problem,
@@ -86,8 +87,8 @@ corresponds directly with the weak form of the Poisson equation we
 already met. However, <a class="reference internal" href="#equation-weakdiffusion">(8.2)</a> is still nonlinear in <span class="math notranslate nohighlight">\(u\)</span> so
 we cannot simply substitute <span class="math notranslate nohighlight">\(u = u_i\phi_i\)</span> in order to obtain a
 linear matrix system to solve.</p>
-</div>
-<div class="section" id="residual-form">
+</section>
+<section id="residual-form">
 <h2><span class="section-number">8.2. </span>Residual form<a class="headerlink" href="#residual-form" title="Permalink to this headline">¶</a></h2>
 <p>The general weak form of a non-linear problem is, find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-0">
@@ -125,8 +126,8 @@ evaluated at the boundary nodes. A simple (if slightly inefficient)
 way to achieve this is to interpolate the boundary condition onto a
 function <span class="math notranslate nohighlight">\(\hat{b}\in V\)</span>.</p>
 </div>
-</div>
-<div class="section" id="linearisation-and-gateaux-derivatives">
+</section>
+<section id="linearisation-and-gateaux-derivatives">
 <h2><span class="section-number">8.3. </span>Linearisation and Gâteaux Derivatives<a class="headerlink" href="#linearisation-and-gateaux-derivatives" title="Permalink to this headline">¶</a></h2>
 <p>Having stated our PDE in residual form, we now need to linearise the
 problem and thereby employ a technique such as Newton’s method. In
@@ -158,8 +159,8 @@ we choose <span class="math notranslate nohighlight">\(\hat{u} = \phi_j\)</span>
 then the definition of a nodal basis gives us:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-5">
 <span class="eqno">(8.9)<a class="headerlink" href="#equation-8-nonlinear-problems-5" title="Permalink to this equation">¶</a></span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
-</div>
-<div class="section" id="a-taylor-expansion-and-newton-s-method">
+</section>
+<section id="a-taylor-expansion-and-newton-s-method">
 <h2><span class="section-number">8.4. </span>A Taylor expansion and Newton’s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
 <p>Since we now have the derivative of the residual with respect to a
 perturbation to the prospective solution <span class="math notranslate nohighlight">\(u\)</span>, we can write the first
@@ -189,7 +190,7 @@ terms of basis functions:</p>
 \end{cases}\end{split}\]</div>
 <p>and the right hand side vector <span class="math notranslate nohighlight">\(f\)</span> is given by <a class="reference internal" href="#equation-residual">(8.5)</a>. This
 matrix, <span class="math notranslate nohighlight">\(J\)</span>, is termed the <em>Jacobian matrix</em> of <span class="math notranslate nohighlight">\(f\)</span>.</p>
-<div class="section" id="stopping-criteria-for-newton-s-method">
+<section id="stopping-criteria-for-newton-s-method">
 <h3><span class="section-number">8.4.1. </span>Stopping criteria for Newton’s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
 <p>Since Newton’s method is an iterative algorithm, it creates a
 (hopefully convergent) sequence of approximations to the correct
@@ -228,10 +229,10 @@ order to find the Riesz representer of <span class="math notranslate nohighlight
 the error-estimator approach given above is both an actual estimate
 of the error in the solution, and requires no additional linear
 solves, it should be regarded as a preferable approach. For a full
-treatment of Newton methods, see <span id="id1">[<a class="reference internal" href="zbibliography.html#id5">Deu11</a>]</span>.</p>
+treatment of Newton methods, see <span id="id1">[<a class="reference internal" href="zbibliography.html#id5" title="Peter Deuflhard. Newton Methods for Nonlinear Problems. Springer, 2011. doi:10.1007/978-3-642-23899-4.">Deu11</a>]</span>.</p>
 </div>
-</div>
-<div class="section" id="stopping-threshold-values">
+</section>
+<section id="stopping-threshold-values">
 <h3><span class="section-number">8.4.2. </span>Stopping threshold values<a class="headerlink" href="#stopping-threshold-values" title="Permalink to this headline">¶</a></h3>
 <p>What, then, qualifies as a sufficiently small value of our error
 estimate? There are two usual approaches:</p>
@@ -266,8 +267,8 @@ a calculation. It is pointless to expend computational effort in an
 attempt to drive the level of error in this component of the solver to
 a level which will be swamped by a larger error occurring somewhere
 else in the process.</p>
-</div>
-<div class="section" id="failure-modes">
+</section>
+<section id="failure-modes">
 <h3><span class="section-number">8.4.3. </span>Failure modes<a class="headerlink" href="#failure-modes" title="Permalink to this headline">¶</a></h3>
 <p>Just as with the Newton method for scalar problems, Newton iteration
 is not guaranteed to converge for all nonlinear problems or for all
@@ -293,9 +294,9 @@ algorithm to fail.</p>
 <p>Note that these failure modes are heuristic: having the algorithm
 terminate for these reasons is really an instruction to the user to
 think again about the problem, the solver, and the initial guess.</p>
-</div>
-</div>
-<div class="section" id="implementing-a-nonlinear-problem">
+</section>
+</section>
+<section id="implementing-a-nonlinear-problem">
 <h2><span class="section-number">8.5. </span>Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -366,8 +367,8 @@ will converge in exactly one iteration (although your algorithm
 will have to actually calculate two steps in order to know that
 convergence has occurred).</p>
 </div>
-</div></div></div>
-</div>
+</div></div></section>
+</section>
 
 
             <div class="clearer"></div>
@@ -378,7 +379,7 @@ convergence has occurred).</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>1. Numerical quadrature &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="numerical-quadrature">
+  <section id="numerical-quadrature">
 <span id="quadrature"></span><h1><span class="section-number">1. </span>Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h1>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -98,7 +99,7 @@ quadrature rule of degree <span class="math notranslate nohighlight">\(n\)</span
 <p>The <em>degree of precision</em> of a quadrature rule is the largest <span class="math notranslate nohighlight">\(p\)</span>
 such that the quadrature rule integrates all polynomials of degree
 <span class="math notranslate nohighlight">\(p\)</span> without error.</p>
-</div></div><div class="section" id="exact-and-incomplete-quadrature">
+</div></div><section id="exact-and-incomplete-quadrature">
 <h2><span class="section-number">1.1. </span>Exact and incomplete quadrature<a class="headerlink" href="#exact-and-incomplete-quadrature" title="Permalink to this headline">¶</a></h2>
 <p>In the finite element method, integrands are very frequently
 polynomial. If the quadrature rule employed for a particular interval
@@ -114,8 +115,8 @@ that rule. Complete quadrature results in lower errors, but if the
 error due to incomplete quadrature is small compared with other errors
 in the simulation, particularly compared with the discretisation
 error, then incomplete quadrature may be advantageous.</p>
-</div>
-<div class="section" id="examples-in-one-dimension">
+</section>
+<section id="examples-in-one-dimension">
 <h2><span class="section-number">1.2. </span>Examples in one dimension<a class="headerlink" href="#examples-in-one-dimension" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -147,8 +148,8 @@ the interval, then we arrive at the trapezoidal (or trapezium) rule:</p>
 <p>while if we employ a quadratic function then we arrive at Simpson’s rule:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-0">
 <span class="eqno">(1.7)<a class="headerlink" href="#equation-1-quadrature-0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
-</div>
-<div class="section" id="reference-elements">
+</section>
+<section id="reference-elements">
 <h2><span class="section-number">1.3. </span>Reference elements<a class="headerlink" href="#reference-elements" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -181,8 +182,8 @@ reference interval implies a natural choice of reference triangle. For
 the unit interval the natural correspondence is with the triangle with
 vertices <span class="math notranslate nohighlight">\([(0,0), (1,0), (0,1)]\)</span>, though different choices of
 vertex numbering are possible.</p>
-</div>
-<div class="section" id="python-implementations-of-reference-elements">
+</section>
+<section id="python-implementations-of-reference-elements">
 <h2><span class="section-number">1.4. </span>Python implementations of reference elements<a class="headerlink" href="#python-implementations-of-reference-elements" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> class provides
 Python objects encoding the geometry and topology of the reference
@@ -192,8 +193,8 @@ important when we consider <a class="reference internal" href="3_meshes.html"><s
 require for this course are the
 <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceInterval" title="fe_utils.reference_elements.ReferenceInterval"><code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceInterval</span></code></a> and
 <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceTriangle" title="fe_utils.reference_elements.ReferenceTriangle"><code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceTriangle</span></code></a>.</p>
-</div>
-<div class="section" id="quadrature-rules-on-reference-elements">
+</section>
+<section id="quadrature-rules-on-reference-elements">
 <h2><span class="section-number">1.5. </span>Quadrature rules on reference elements<a class="headerlink" href="#quadrature-rules-on-reference-elements" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -226,8 +227,8 @@ quadrature:</p>
 <p>The weights of a quadrature rule always sum to the volume of the
 reference element. Why is this?</p>
 </div>
-</div>
-<div class="section" id="legendre-gausz-quadrature-in-one-dimension">
+</section>
+<section id="legendre-gausz-quadrature-in-one-dimension">
 <h2><span class="section-number">1.6. </span>Legendre-Gauß quadrature in one dimension<a class="headerlink" href="#legendre-gausz-quadrature-in-one-dimension" title="Permalink to this headline">¶</a></h2>
 <p>The finite element method will result in integrands of different
 polynomial degrees, so it is convenient if we have access to
@@ -245,8 +246,8 @@ interval:</p>
 <span class="math notranslate nohighlight">\([-1, 1]\)</span> and <span class="math notranslate nohighlight">\((\{X_q\}, \{w_q\})\)</span> is the rule on the unit interval.</p>
 <p>Legendre-Gauß quadrature on the interval is optimal in the sense that it uses the
 minimum possible number of points for each degree of precision.</p>
-</div>
-<div class="section" id="extending-legendre-gausz-quadrature-to-two-dimensions">
+</section>
+<section id="extending-legendre-gausz-quadrature-to-two-dimensions">
 <h2><span class="section-number">1.7. </span>Extending Legendre-Gauß quadrature to two dimensions<a class="headerlink" href="#extending-legendre-gausz-quadrature-to-two-dimensions" title="Permalink to this headline">¶</a></h2>
 <p>We can form a unit square by taking the Cartesian product of two unit
 intervals: <span class="math notranslate nohighlight">\((0, 1)\otimes (0, 1)\)</span>. Similarly, we can form a quadrature
@@ -263,10 +264,12 @@ edge. The Duffy transform maps the unit square to the unit triangle:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-4">
 <span class="eqno">(1.12)<a class="headerlink" href="#equation-1-quadrature-4" title="Permalink to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
   \left(x_\textrm{sq},\ y_\textrm{sq}(1 - x_\textrm{sq})\right)\]</div>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <span id="figduffy"></span><a class="reference internal image-reference" href="_images/duffy.svg"><img alt="_images/duffy.svg" src="_images/duffy.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.5 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>By composing the Duffy transform with <a class="reference internal" href="#equation-squarequad">(1.11)</a> we can arrive
 at a quadrature rule for the triangle:</p>
 <div class="math notranslate nohighlight" id="equation-triquad">
@@ -278,8 +281,8 @@ rule with degree of precision <span class="math notranslate nohighlight">\(n+1\)
 degree of precision required for <span class="math notranslate nohighlight">\((X_h, w_h)\)</span> is because the Duffy
 transform effectively increases the polynomial degree of the integrand
 by one.</p>
-</div>
-<div class="section" id="implementing-quadrature-rules-in-python">
+</section>
+<section id="implementing-quadrature-rules-in-python">
 <h2><span class="section-number">1.8. </span>Implementing quadrature rules in Python<a class="headerlink" href="#implementing-quadrature-rules-in-python" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -321,7 +324,7 @@ to your fork of the course repository.</p>
 <p>You can implement
 <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a> in one line
 using a <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list
-comprehension</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.dot()</span></code></a>.</p>
+comprehension</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.dot()</span></code></a>.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -340,8 +343,8 @@ frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a2b1c67a-a9d3-485b-8784-ac9f00c1dad5">watch this video on Panopto</a></p>
 </div>
-</details></div>
-</div>
+</details></section>
+</section>
 
 
             <div class="clearer"></div>
@@ -352,7 +355,7 @@ allowfullscreen></iframe></div>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

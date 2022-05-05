@@ -371,7 +371,7 @@ this equation holds for all `v\in \mathring{V}_h` and when we approximate
     Imperial students can also `watch this video on Panopto <https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f4cb8c0c-4664-4a21-8043-ac2c010738da>`__
       
 We now present some numerical results for the case `f = 2\pi^2\sin(\pi
-x)\sin(\pi y)`.
+x)\sin(2\pi y)`.
 
 .. _figplots:
 
@@ -463,6 +463,8 @@ areas.
    in the `1\times 1` square region as above, with boundary conditions
    `u=x(1-x)` on the entire boundary.
 
+.. _def-robin:
+   
 .. proof:exercise::
 
    Derive a finite element approximation for the following problem.
@@ -474,7 +476,7 @@ areas.
 	 -\nabla^2 u = \frac{1}{1 + x^2 + y^2},
 
    in the `1\times 1` square region, with boundary conditions
-   `u-\frac{\partial u}{\partial n}=x(1-x)` on the entire boundary.
+   `u+\frac{\partial u}{\partial n}=x(1-x)` on the entire boundary.
    
 Practical implementation
 ------------------------

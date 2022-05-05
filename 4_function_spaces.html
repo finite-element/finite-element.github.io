@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4. Function spaces: associating data with meshes &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="function-spaces-associating-data-with-meshes">
+  <section id="function-spaces-associating-data-with-meshes">
 <span id="secfunctionspaces"></span><h1><span class="section-number">4. </span>Function spaces: associating data with meshes<a class="headerlink" href="#function-spaces-associating-data-with-meshes" title="Permalink to this headline">¶</a></h1>
 <p>A finite element space over a mesh is constructed by associating a
 finite element with each cell of the mesh. We will refer to the basis
@@ -65,7 +66,7 @@ topological entities of the reference cell. This is often referred to
 as <em>local numbering</em>. Then we associate the correct number of degrees
 of freedom with each global mesh entity. This is the <em>global
 numbering</em>.</p>
-<div class="section" id="local-numbering-and-continuity">
+<section id="local-numbering-and-continuity">
 <h2><span class="section-number">4.1. </span>Local numbering and continuity<a class="headerlink" href="#local-numbering-and-continuity" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -125,15 +126,17 @@ reference entities for Lagrange elements on triangles. The numbering
 of nodes will depend on how
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code></a> is implemented. The
 numbering used here is just one of the obvious choices.</p>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <span id="figlagrange-nodes"></span><a class="reference internal image-reference" href="_images/lagrange_nodes.svg"><img alt="_images/lagrange_nodes.svg" src="_images/lagrange_nodes.svg" width="70%" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Association of nodes with reference entities for the degree 1, 2,
+<figcaption>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Association of nodes with reference entities for the degree 1, 2,
 and 3 equispaced Lagrange elements on triangles. Black nodes are
 associated with vertices, red nodes with edges and blue nodes with
 the cell (face). The numbering of the nodes is arbitrary.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="implementing-local-numbering">
+</figcaption>
+</figure>
+</section>
+<section id="implementing-local-numbering">
 <h2><span class="section-number">4.2. </span>Implementing local numbering<a class="headerlink" href="#implementing-local-numbering" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -172,7 +175,7 @@ interpret the nodes. In this case this has been achieved by listing
 the nodes in order given by the direction of the orientation of each edge.</p>
 <p>The following animation illustrates the construction of the <code class="docutils literal notranslate"><span class="pre">entity_node</span></code> dictionary.</p>
 <div class="youtube docutils container">
-<div class="youtube_wrapper" style="padding-bottom: 56.250000%; padding-top: 30px; position: relative; width: 100%">
+<div class="video_wrapper" style="padding-bottom: 56.250000%; padding-top: 30px; position: relative; width: 100%">
 <iframe allowfullscreen="true" src="https://www.youtube.com/embed/dTWoTjARi2w?modestbranding=1;controls=0;rel=0" style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%">
 </iframe></div></div>
 <div class="proof proof-type-exercise" id="id3">
@@ -198,8 +201,8 @@ produces the nodes in entity order, thus making the construction of
 method of the <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>
 class useful.</p>
 </div>
-</div>
-<div class="section" id="global-numbering">
+</section>
+<section id="global-numbering">
 <h2><span class="section-number">4.3. </span>Global numbering<a class="headerlink" href="#global-numbering" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -229,8 +232,8 @@ of dimension <span class="math notranslate nohighlight">\(d\)</span> entities in
 associated with entity <span class="math notranslate nohighlight">\((d, i)\)</span> is therefore:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-0">
 <span class="eqno">(4.2)<a class="headerlink" href="#equation-4-function-spaces-0" title="Permalink to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
-</div>
-<div class="section" id="the-cell-node-map">
+</section>
+<section id="the-cell-node-map">
 <span id="cell-node"></span><h2><span class="section-number">4.4. </span>The cell-node map<a class="headerlink" href="#the-cell-node-map" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -277,8 +280,8 @@ requires a trivial extension to adjacency:</p>
 equation sets the value of zero, one, or more defined entries in row <span class="math notranslate nohighlight">\(c\)</span>
 of <span class="math notranslate nohighlight">\(M\)</span> for each <span class="math notranslate nohighlight">\(\delta\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
 </div>
-</div>
-<div class="section" id="implementing-function-spaces-in-python">
+</section>
+<section id="implementing-function-spaces-in-python">
 <h2><span class="section-number">4.5. </span>Implementing function spaces in Python<a class="headerlink" href="#implementing-function-spaces-in-python" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -331,11 +334,11 @@ index:</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p><a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> needs to
-be integer-valued. If you choose to use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>
+be integer-valued. If you choose to use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>
 to create a matrix which you then populate with values, you
 need to explicitly specify that you want a matrix of
 integers. This can be achieved by passing the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument
-to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>. For example <code class="docutils literal notranslate"><span class="pre">numpy.zeros((nrows,</span> <span class="pre">ncols),</span> <span class="pre">dtype=int)</span></code>.</p>
+to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>. For example <code class="docutils literal notranslate"><span class="pre">numpy.zeros((nrows,</span> <span class="pre">ncols),</span> <span class="pre">dtype=int)</span></code>.</p>
 </div>
 <p class="rubric">Footnotes</p>
 <dl class="footnote brackets">
@@ -346,8 +349,8 @@ optimal from the perspective of the memory
 layout of the resulting data.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -358,7 +361,7 @@ layout of the resulting data.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

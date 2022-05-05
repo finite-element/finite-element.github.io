@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Software tools &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -33,7 +34,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -49,7 +50,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="software-tools">
+  <section id="software-tools">
 <h1>Software tools<a class="headerlink" href="#software-tools" title="Permalink to this headline">¶</a></h1>
 <p>In order to do this module, you’ll need some core software tools. As the module
 proceeds we’ll also install several more Python packages, but you don’t need to
@@ -64,7 +65,7 @@ the instructions in this course will assume that this is what you are using.</p>
 </div></blockquote>
 <p>The Faculty of Natural Sciences at Imperial has
 <a class="reference external" href="https://imperial-fons-computing.github.io/index.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">centralised instructions for installing all of these tools</span></a>, and we’ll follow those.</p>
-<div class="section" id="python">
+<section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>Your implementation will be written in Python based on a code skeleton
 provided. This means that you’ll need a certain familiarity with the
@@ -72,9 +73,10 @@ Python language. But don’t panic! Python is a very easy language to
 work with. This module will use Python 3.</p>
 <p>If you haven’t done any Python before, then go through <a class="reference external" href="https://docs.python.org/3/tutorial/index.html">the official
 Python tutorial</a>. If
-you have done a little Python, one feature we will be using a lot is
-classes, so if that is new to you you should at least review <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">the
-classes chapter</a>.</p>
+you have done a little Python but perhaps are not so familiar with the
+object-oriented features such as classes, then you might like to refer to the
+online book <a class="reference external" href="https://object-oriented-python.github.io">Object-oriented Programming in Python for Mathematicians</a>. We will be using classes
+extensively in this course.</p>
 <p>The Matlab-like array features of Python are provided by <a class="reference external" href="https://www.numpy.org/">Numpy</a> for which there is a <a class="reference external" href="https://numpy.org/devdocs/user/quickstart.html">helpful tutorial</a>. There is also a
 handy <a class="reference external" href="https://numpy.org/devdocs/user/numpy-for-matlab-users.html">guide for Matlab users</a>. In that context, the
 code provided in this course will always use Numpy arrays, and never
@@ -93,12 +95,12 @@ users should note, though that the built-in Python will not do, so you should
 use either Homebrew or Anaconda.</p>
 </div></div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The example code in the exercises uses <a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings" title="(in Python v3.9)"><span class="xref std std-ref">f-strings</span></a>
+<p>The example code in the exercises uses <a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings" title="(in Python v3.10)"><span class="xref std std-ref">f-strings</span></a>
 which were introduced in Python 3.6, so the code will not work in earlier
 versions of Python.</p>
 </div>
-</div>
-<div class="section" id="git">
+</section>
+<section id="git">
 <h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
 <p>Revision control is a mechanism for recording and managing different
 versions of changing software. This enables changes to be tracked and
@@ -130,12 +132,12 @@ of password typing but it’s not essential so if you are not so
 confident with computers, you can skip this bit. GitHub provide
 <a class="reference external" href="https://help.github.com/articles/generating-an-ssh-key/">instructions for using ssh with git</a>.</p>
 </div>
-</div>
-<div class="section" id="visual-studio-code">
+</section>
+<section id="visual-studio-code">
 <h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">¶</a></h2>
 <p>Visual Studio Code is a Python-aware Integrated Development Environment (IDE).
 This means that it incorporates editing files with other programming features
-such as <a class="reference external" href="https://object-oriented-python.github.io/9_debugging.html#debugging" title="(in Object oriented programming in Python for mathematicians v2021.0)"><span>Debugging and testing</span></a>, Git support, and built-in <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html#terminal-vscode" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">terminal</span></a>. Visual Studio Code also provides an incredibly useful remote
+such as <a class="reference external" href="https://object-oriented-python.github.io/8_debugging.html#debugging" title="(in Object-oriented Programming v2021.0)"><span>Debugging and testing</span></a>, Git support, and built-in <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html#terminal-vscode" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">terminal</span></a>. Visual Studio Code also provides an incredibly useful remote
 collaborative coding feature called Live Share. This will be very useful for
 getting remote help from an instructor.</p>
 <div class="proof proof-type-exercise" id="id4">
@@ -157,8 +159,8 @@ Pair up with someone else taking the module to ensure that you can share
 your Visual Studio Code session with them, and they with you. If you need to
 find someone else taking the module to do this exercise with, you can use
 <cite>this Piazza post &lt;https://piazza.com/class/kiujdiwgpk5su?cid=1&gt;</cite>.</p>
-</div></div></div>
-<div class="section" id="the-command-line">
+</div></div></section>
+<section id="the-command-line">
 <h2>The command line<a class="headerlink" href="#the-command-line" title="Permalink to this headline">¶</a></h2>
 <p>A lot of the routine activity involved in this module revolves around
 executing commands on the command line. For example you use the
@@ -174,8 +176,8 @@ familiar with the Linux command line, then follow at least the first two
 sections of the <cite>Software Carpentry Unix Shell lesson</cite>. That
 guide focusses on the Bash shell, but zsh and the Windows Powershell use very
 similar commands.</p>
-</div></div></div>
-</div>
+</div></div></section>
+</section>
 
 
             <div class="clearer"></div>
@@ -186,7 +188,7 @@ similar commands.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

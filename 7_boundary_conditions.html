@@ -4,15 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>7. Dirichlet boundary conditions &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -34,7 +35,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -50,7 +51,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dirichlet-boundary-conditions">
+  <section id="dirichlet-boundary-conditions">
 <span id="secdirichlet"></span><h1><span class="section-number">7. </span>Dirichlet boundary conditions<a class="headerlink" href="#dirichlet-boundary-conditions" title="Permalink to this headline">¶</a></h1>
 <p>The Helmholtz problem we solved in the previous part was chosen to
 have homogeneous Neumann or <em>natural</em> boundary conditions, which can
@@ -95,7 +96,7 @@ everywhere, since all of the nodes in <span class="math notranslate nohighlight"
 <span class="eqno">(7.4)<a class="headerlink" href="#equation-weakpoisson" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla u \, \mathrm{d} x
  = \int_\Omega v_0\, f\, \mathrm{d} x
 \qquad \forall v_0 \in V_0\\u_\Gamma = 0\end{aligned}\end{align} \]</div>
-<div class="section" id="an-algorithm-for-homogeneous-dirichlet-conditions">
+<section id="an-algorithm-for-homogeneous-dirichlet-conditions">
 <h2><span class="section-number">7.1. </span>An algorithm for homogeneous Dirichlet conditions<a class="headerlink" href="#an-algorithm-for-homogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
 <p>The implementation of homogeneous Dirichlet conditions is actually
 rather straightforward.</p>
@@ -117,8 +118,8 @@ example in order to use a symmetric solver), then forward
 substition can be used to zero the boundary columns in the matrix,
 but that is beyond the scope of this module.</p>
 </div>
-</div>
-<div class="section" id="implementing-boundary-conditions">
+</section>
+<section id="implementing-boundary-conditions">
 <h2><span class="section-number">7.2. </span>Implementing boundary conditions<a class="headerlink" href="#implementing-boundary-conditions" title="Permalink to this headline">¶</a></h2>
 <p>Let:</p>
 <div class="math notranslate nohighlight">
@@ -147,16 +148,16 @@ before, run:</p>
 <code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/helmholtz.py</span></code>). Similarly,
 <code class="docutils literal notranslate"><span class="pre">test/test_12_poisson_convergence.py</span></code> contains convergence tests
 for this problem.</p>
-</div></div></div>
-<div class="section" id="inhomogeneous-dirichlet-conditions">
+</div></div></section>
+<section id="inhomogeneous-dirichlet-conditions">
 <h2><span class="section-number">7.3. </span>Inhomogeneous Dirichlet conditions<a class="headerlink" href="#inhomogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
 <p>The algorithm described here can be extended to inhomogeneous systems
 by setting the entries in the global vector to the value of the
 boundary condition at the corresponding boundary node. This additional
 step is required for the mastery exercise, but will be explained in
 more detail in the next section.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -167,7 +168,7 @@ more detail in the next section.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>
