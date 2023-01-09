@@ -341,7 +341,7 @@ invert it to create the basis function coefs. Store these as
 <code class="docutils literal notranslate"><span class="pre">test/test_04_init_finite_element.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
 used to invert the matrix.</p>
 </div>
 </section>
@@ -487,7 +487,7 @@ extension. You should also ensure that you still pass
 <code class="docutils literal notranslate"><span class="pre">test/test_03_vandermonde_matrix.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.22)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.24)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
 generalised transposes swapping any dimensions.</p>
 </div>
 <div class="admonition hint">
@@ -495,7 +495,7 @@ generalised transposes swapping any dimensions.</p>
 <p>At least one of the natural ways of implementing this function
 results in a whole load of <code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code> values in the generalised
 Vandermonde matrix. In this case, you might find
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
 </div>
 <div class="proof proof-type-exercise" id="id13">
 
@@ -532,7 +532,7 @@ allowfullscreen></iframe></div>
 </div>
 </details><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.22)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
 contractions using <a class="reference external" href="http://mathworld.wolfram.com/EinsteinSummation.html">Einstein summation notation</a>. For
 example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ijk,jl-&gt;ilk&quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
