@@ -1,22 +1,22 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>fe_utils.finite_elements &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/fenics.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fe_utils.finite_elements &#8212; Finite element course 2021.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script type="text/javascript" src="../../_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/proof.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 <!--[if lte IE 6]>
@@ -31,7 +31,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="../../index.html"><img src="../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="../../index.html"><img src="../../_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -49,9 +49,9 @@
             
   <h1>Source code for fe_utils.finite_elements</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Cause division to always mean floating point division.</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="k">import</span> <span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">ReferenceTriangle</span>
+<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="kn">import</span> <span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">ReferenceTriangle</span>
 <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
 
@@ -91,7 +91,7 @@
 
 
 <div class="viewcode-block" id="FiniteElement"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement">[docs]</a><span class="k">class</span> <span class="nc">FiniteElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">entity_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">entity_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;A finite element defined over cell.</span>
 
 <span class="sd">        :param cell: the :class:`~.reference_elements.ReferenceCell`</span>
@@ -100,9 +100,10 @@
 <span class="sd">            polynomial degree of the element. We assume the element</span>
 <span class="sd">            spans the complete polynomial space.</span>
 <span class="sd">        :param nodes: a list of coordinate tuples corresponding to</span>
-<span class="sd">            the nodes of the element.</span>
+<span class="sd">            point evaluation node locations on the element.</span>
 <span class="sd">        :param entity_nodes: a dictionary of dictionaries such that</span>
-<span class="sd">            entity_nodes[d][i] is the list of nodes associated with entity `(d, i)`.</span>
+<span class="sd">            entity_nodes[d][i] is the list of nodes associated with</span>
+<span class="sd">            entity `(d, i)` of dimension `d` and index `i`.</span>
 
 <span class="sd">        Most of the implementation of this class is left as exercises.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -174,14 +175,14 @@
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                                <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span>
                                <span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="LagrangeElement"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.LagrangeElement">[docs]</a><span class="k">class</span> <span class="nc">LagrangeElement</span><span class="p">(</span><span class="n">FiniteElement</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;An equispaced Lagrange finite element.</span>
 
 <span class="sd">        :param cell: the :class:`~.reference_elements.ReferenceCell`</span>
@@ -202,14 +203,15 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">LagrangeElement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

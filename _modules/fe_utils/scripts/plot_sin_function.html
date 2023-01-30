@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fe_utils.scripts.plot_sin_function &#8212; Finite element course 2021.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/fenics.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/proof.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../../../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="../../../_static/featured.css">
+
+
+<link rel="shortcut icon" href="../../../_static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="../../../index.html"><img src="../../../_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fe_utils.scripts.plot_sin_function</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="kn">from</span> <span class="nn">fe_utils</span> <span class="kn">import</span> <span class="p">(</span><span class="n">UnitSquareMesh</span><span class="p">,</span> <span class="n">LagrangeElement</span><span class="p">,</span> <span class="n">ReferenceTriangle</span><span class="p">,</span>
+                      <span class="n">FunctionSpace</span><span class="p">,</span> <span class="n">Function</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+
+
+<div class="viewcode-block" id="plot_sin_function"><a class="viewcode-back" href="../../../fe_utils.scripts.html#fe_utils.scripts.plot_sin_function.plot_sin_function">[docs]</a><span class="k">def</span> <span class="nf">plot_sin_function</span><span class="p">():</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">UnitSquareMesh</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">fe</span> <span class="o">=</span> <span class="n">LagrangeElement</span><span class="p">(</span><span class="n">ReferenceTriangle</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">fe</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

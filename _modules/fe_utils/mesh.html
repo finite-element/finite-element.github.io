@@ -1,22 +1,22 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>fe_utils.mesh &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/fenics.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fe_utils.mesh &#8212; Finite element course 2021.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script type="text/javascript" src="../../_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/proof.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 <!--[if lte IE 6]>
@@ -31,7 +31,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="../../index.html"><img src="../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="../../index.html"><img src="../../_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -48,21 +48,20 @@
           <div class="body" role="main">
             
   <h1>Source code for fe_utils.mesh</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">Delaunay</span>
+<span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">Delaunay</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">from</span> <span class="nn">.finite_elements</span> <span class="k">import</span> <span class="n">LagrangeElement</span>
-<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="k">import</span> <span class="n">ReferenceTriangle</span><span class="p">,</span> <span class="n">ReferenceInterval</span>
+<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="kn">import</span> <span class="n">ReferenceTriangle</span><span class="p">,</span> <span class="n">ReferenceInterval</span>
 
 
 <div class="viewcode-block" id="Mesh"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.Mesh">[docs]</a><span class="k">class</span> <span class="nc">Mesh</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A one or two dimensional mesh composed of intervals or triangles</span>
 <span class="sd">    respectively.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex_coords</span><span class="p">,</span> <span class="n">cell_vertices</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex_coords</span><span class="p">,</span> <span class="n">cell_vertices</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param vertex_coords: an vertex_count x dim array of the coordinates of</span>
+<span class="sd">        :param vertex_coords: a vertex_count x dim array of the coordinates of</span>
 <span class="sd">          the vertices in the mesh.</span>
-<span class="sd">        :param cell_vertices: an cell_count x (dim+1) array of the</span>
+<span class="sd">        :param cell_vertices: a cell_count x (dim+1) array of the</span>
 <span class="sd">          indices of the vertices of which each cell is made up.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -81,9 +80,11 @@
         <span class="sd">&quot;&quot;&quot;The indices of the vertices incident to cell.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">edge_vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                                                   <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">cell_vertices</span>
-                                                   <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge_vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">cell_vertices</span>
+                         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+            <span class="p">)</span>
             <span class="sd">&quot;&quot;&quot;The indices of the vertices incident to edge (only for 2D</span>
 <span class="sd">            meshes).&quot;&quot;&quot;</span>
 
@@ -166,7 +167,7 @@
 
 <div class="viewcode-block" id="UnitIntervalMesh"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.UnitIntervalMesh">[docs]</a><span class="k">class</span> <span class="nc">UnitIntervalMesh</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A mesh of the unit interval.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param nx: The number of cells.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -181,7 +182,7 @@
 
 <div class="viewcode-block" id="UnitSquareMesh"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.UnitSquareMesh">[docs]</a><span class="k">class</span> <span class="nc">UnitSquareMesh</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A triangulated :class:`Mesh` of the unit square.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param nx: The number of cells in the x direction.</span>
 <span class="sd">        :param ny: The number of cells in the y direction.</span>
@@ -196,14 +197,15 @@
                                              <span class="n">mesh</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

@@ -346,14 +346,14 @@ constraint, this system has the following form:</p>
     0
 \end{bmatrix}\end{split}\]</div>
 <p>where:</p>
-<div class="math notranslate nohighlight" id="equation-9-mixed-problems-10">
-<span id="blocks"></span><span class="eqno">(9.14)<a class="headerlink" href="#equation-9-mixed-problems-10" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}A_{ij} = a(\phi_j, \phi_i),\\B_{ij} = b(\phi_j, \psi_i),\\F_i = \int_\Omega f\cdot v\, d\, x,\\U_i = u_i = w_i,\\P_i = p_i = w_{i+m}.\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight" id="equation-blocks">
+<span class="eqno">(9.14)<a class="headerlink" href="#equation-blocks" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}A_{ij} = a(\phi_j, \phi_i),\\B_{ij} = b(\phi_j, \psi_i),\\F_i = \int_\Omega f\cdot v\, d\, x,\\U_i = u_i = w_i,\\P_i = p_i = w_{i+m}.\end{aligned}\end{align} \]</div>
 <p>This means that the assembly of the mixed problem comes down to the assembly of
 several finite operators of the form that we have already encountered. These
 then need to be assembled into the full block matrix and right hand side
 vector, before the system is solved and the resulting solution vector pulled
 appart and interpreted as the coefficients of <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(p\)</span>. Observe in
-<code class="xref eq docutils literal notranslate"><span class="pre">blocks</span></code> that the order of the indices <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is reversed on the right
+<a class="reference internal" href="#equation-blocks">(9.14)</a> that the order of the indices <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is reversed on the right
 hand side of the equations. This reflects the differing conventions for matrix
 indices and bilinear form arguments, and is a source of unending confusion in
 this field.</p>
@@ -380,7 +380,7 @@ This is most easily understood through an example:</p>
 </div>
 <p>This means that one can first create a full vector of length <span class="math notranslate nohighlight">\(n+m\)</span> and then
 slice it to create subvectors that can be used for assembly.</p>
-<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
+<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
 function which will stitch together a larger sparse matrix from blocks. In
 order to have the full indexing options you are likely to want for imposing the
 boundary conditions, you will probably want to specify that the resulting
@@ -408,15 +408,15 @@ that subspace is one-dimensional.</p>
 <p>The block matrix system that you eventually produce will be larger than many of
 those we have previously encountered, and will have non-zero entries further
 from the diagonal. This can cause the matrix solver to become expensive in both
-time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
+time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
 interface to <a class="reference external" href="https://portal.nersc.gov/project/sparse/superlu/">SuperLU</a>,
 which is a high-performance direct sparse solver. The recommended solution
 strategy is therefore:</p>
 <ol class="arabic simple">
-<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
+<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
 format that SuperLU requires.</p></li>
-<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
-<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
+<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
+<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
 the system.</p></li>
 </ol>
 </section>
@@ -424,16 +424,16 @@ the system.</p></li>
 <h3><span class="section-number">9.4.4. </span>Computing the error<a class="headerlink" href="#computing-the-error" title="Permalink to this headline">¶</a></h3>
 <p>We will wish to compute the convergence of our solution in the <span class="math notranslate nohighlight">\(L^2\)</span> norm. For
 <span class="math notranslate nohighlight">\(w\in W\)</span>, this is given by:</p>
-<div class="math notranslate nohighlight" id="equation-9-mixed-problems-11">
-<span class="eqno">(9.15)<a class="headerlink" href="#equation-9-mixed-problems-11" title="Permalink to this equation">¶</a></span>\[\|w\|_{L^2} = \sqrt{\int_\Omega w\cdot w\,\mathrm{dx}}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-mixed-problems-10">
+<span class="eqno">(9.15)<a class="headerlink" href="#equation-9-mixed-problems-10" title="Permalink to this equation">¶</a></span>\[\|w\|_{L^2} = \sqrt{\int_\Omega w\cdot w\,\mathrm{dx}}\]</div>
 <p>When we expand this in terms of the basis of <span class="math notranslate nohighlight">\(W\)</span>, it will be useful to note
 that basis functions from the different component spaces are orthogonal. That
 is to say:</p>
-<div class="math notranslate nohighlight" id="equation-9-mixed-problems-12">
-<span class="eqno">(9.16)<a class="headerlink" href="#equation-9-mixed-problems-12" title="Permalink to this equation">¶</a></span>\[(\phi, 0) \cdot (0, \psi) = 0 \quad \forall \phi\in V,\, \psi \in Q.\]</div>
+<div class="math notranslate nohighlight" id="equation-9-mixed-problems-11">
+<span class="eqno">(9.16)<a class="headerlink" href="#equation-9-mixed-problems-11" title="Permalink to this equation">¶</a></span>\[(\phi, 0) \cdot (0, \psi) = 0 \quad \forall \phi\in V,\, \psi \in Q.\]</div>
 <p>The direct result of this is that if <span class="math notranslate nohighlight">\(w = (u, p)\)</span> then:</p>
-<div class="math notranslate nohighlight" id="equation-9-mixed-problems-13">
-<span class="eqno">(9.17)<a class="headerlink" href="#equation-9-mixed-problems-13" title="Permalink to this equation">¶</a></span>\[\|w\|_{L^2}^2 = \|u\|_{L^2}^2 + \|p\|_{L^2}^2.\]</div>
+<div class="math notranslate nohighlight" id="equation-9-mixed-problems-12">
+<span class="eqno">(9.17)<a class="headerlink" href="#equation-9-mixed-problems-12" title="Permalink to this equation">¶</a></span>\[\|w\|_{L^2}^2 = \|u\|_{L^2}^2 + \|p\|_{L^2}^2.\]</div>
 </section>
 </section>
 <section id="manufacturing-a-solution-to-the-stokes-equations">
@@ -474,7 +474,7 @@ to be interpolated into vector-valued functions, and to create quiver plots.</p>
 <li><p>Compute the <span class="math notranslate nohighlight">\(L^2\)</span> error of the mixed solution from the analytic solution.</p></li>
 </ol>
 <p>A convergence test for your code is provided in
-<code class="docutils literal notranslate"><span class="pre">test/test_12_mastery_convergence.py</span></code>. In order to be compatible with
+<code class="docutils literal notranslate"><span class="pre">test/test_13_mastery_convergence.py</span></code>. In order to be compatible with
 this code, your implementation of
 <a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery" title="fe_utils.solvers.mastery.solve_mastery"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a> should return its results
 as a tuple of the form <code class="xref py py-data docutils literal notranslate"><span class="pre">(u,</span> <span class="pre">p),</span> <span class="pre">error</span></code>. This is a slight change from

@@ -59,11 +59,10 @@ technique for solving nonlinear systems: we employ an iterative scheme
 such as Newton’s method to create a sequence of linear problems whose
 solutions converge to the correct solution to the
 nonlinear problem.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This chapter forms the mastery component of the module in some years, but
-not 2020/2021. It is presented here for reference. None of the material here
-forms part of the module this year.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This chapter formed the content of the mastery material in some years, but
+does not currently do so. It is presented for reference only.</p>
 </div>
 <section id="a-model-problem">
 <h2><span class="section-number">8.1. </span>A model problem<a class="headerlink" href="#a-model-problem" title="Permalink to this headline">¶</a></h2>
@@ -81,8 +80,8 @@ find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-weakdiffusion">
 <span class="eqno">(8.2)<a class="headerlink" href="#equation-weakdiffusion" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot (u + 1) \nabla u \, \mathrm{d} x = \int_\Omega v_0g \, \mathrm{d} x \qquad \forall v_0 \in V_0\\u_\Gamma = b.\end{aligned}\end{align} \]</div>
 <p>Once more, <span class="math notranslate nohighlight">\(V_0\)</span> is the subspace of <span class="math notranslate nohighlight">\(V\)</span> spanned by basis functions which
-vanish on the boundary, <span class="math notranslate nohighlight">\(V = V_0 \oplus V_\Gamma\)</span>, and <span class="math notranslate nohighlight">\(u = u_0 +
-u_\Gamma\)</span> with <span class="math notranslate nohighlight">\(u_0\in V_0\)</span> and <span class="math notranslate nohighlight">\(u_\Gamma\in V_\Gamma\)</span>. This is
+vanish on the boundary, <span class="math notranslate nohighlight">\(V = V_0 \oplus V_\Gamma\)</span>, and <span class="math notranslate nohighlight">\(u = u_0 + u_\Gamma\)</span>
+with <span class="math notranslate nohighlight">\(u_0\in V_0\)</span> and <span class="math notranslate nohighlight">\(u_\Gamma\in V_\Gamma\)</span>. This is
 corresponds directly with the weak form of the Poisson equation we
 already met. However, <a class="reference internal" href="#equation-weakdiffusion">(8.2)</a> is still nonlinear in <span class="math notranslate nohighlight">\(u\)</span> so
 we cannot simply substitute <span class="math notranslate nohighlight">\(u = u_i\phi_i\)</span> in order to obtain a
@@ -178,12 +177,15 @@ words:</p>
 <span class="eqno">(8.12)<a class="headerlink" href="#equation-newton-update" title="Permalink to this equation">¶</a></span>\[J(u^n; v, \hat{u}) = - f(u^n; v) \qquad \forall v \in V.\]</div>
 <p>In fact, <a class="reference internal" href="#equation-newton-update">(8.12)</a> is simply a linear finite element
 problem! To make this explicit, we can expand <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(\hat{u}\)</span> in
-terms of basis functions:</p>
+terms of basis functions <span class="math notranslate nohighlight">\(\{\phi_i\}_{i=0}^{n-1} \in V\)</span> such that
+<span class="math notranslate nohighlight">\(v = \sum_{i}v_i\phi_i\)</span> and <span class="math notranslate nohighlight">\(\hat{u} = \sum_{j}\hat{u}_j\phi_j\)</span>. We
+note, as previously, that we we can drop the coefficients <span class="math notranslate nohighlight">\(v_i\)</span> giving:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-8">
-<span class="eqno">(8.13)<a class="headerlink" href="#equation-8-nonlinear-problems-8" title="Permalink to this equation">¶</a></span>\[J(u^n; \phi_i, \phi_j) \hat{u}_j = - f(u^n; \phi_i).\]</div>
+<span class="eqno">(8.13)<a class="headerlink" href="#equation-8-nonlinear-problems-8" title="Permalink to this equation">¶</a></span>\[\sum_{j} J(u^n; \phi_i, \phi_j) \hat{u}_j = - f(u^n; \phi_i) \qquad \forall\, 0\leq i &lt; n .\]</div>
 <p>For our nonlinear diffusion problem, the matrix <span class="math notranslate nohighlight">\(J\)</span> is given by:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-9">
-<span class="eqno">(8.14)<a class="headerlink" href="#equation-8-nonlinear-problems-9" title="Permalink to this equation">¶</a></span>\[\begin{split}J(u^n; \phi_i, \phi_j) =
+<span class="eqno">(8.14)<a class="headerlink" href="#equation-8-nonlinear-problems-9" title="Permalink to this equation">¶</a></span>\[\begin{split}J_{ij} =
+J(u^n; \phi_i, \phi_j) =
 \begin{cases}
 \displaystyle\int_\Omega \nabla \phi_i \cdot \left(\phi_j \nabla u^n + (u^n + 1) \nabla \phi_j \right) \, \mathrm{d} x &amp; \phi_i\in V_0\\
 \delta_{ij} &amp; \phi_i \in V_\Gamma,
@@ -305,6 +307,11 @@ previous ones. It is your responsibility to decide on a code
 structure, to derive a method of manufactured solutions answer, and
 to create the convergence tests which demonstrate that your
 solution is correct.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This problem is not currently an assessable part of the module at Imperial
+College. It is presented here for reference.</p>
 </div>
 <div class="proof proof-type-exercise" id="id2">
 

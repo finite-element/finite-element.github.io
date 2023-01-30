@@ -106,8 +106,9 @@ element space <span class="math notranslate nohighlight">\(V\)</span>. In other 
 other words, we evaluate:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-1">
 <span class="eqno">(5.3)<a class="headerlink" href="#equation-5-functions-1" title="Permalink to this equation">¶</a></span>\[f_i = n_i(g(x))\]</div>
-<p>where <span class="math notranslate nohighlight">\(n_i\)</span> is the node associated with <span class="math notranslate nohighlight">\(\phi_i\)</span>. Since we are only
-concerned with point evaluation nodes, this is equivalent to:</p>
+<p>where <span class="math notranslate nohighlight">\(n_i\)</span> is the  node associated with <span class="math notranslate nohighlight">\(\phi_i\)</span> as considered over the
+entire mesh (<em>globally</em>). Since we are only concerned with point
+evaluation nodes, this is equivalent to:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-2">
 <span class="eqno">(5.4)<a class="headerlink" href="#equation-5-functions-2" title="Permalink to this equation">¶</a></span>\[f_i = g(x_i)\]</div>
 <p>where <span class="math notranslate nohighlight">\(x_i\)</span> is the coordinate vector of the point defining the node
@@ -135,11 +136,12 @@ evaluate all the basis functions of an element at a known set of
 points. So if we write:</p>
 <div class="math notranslate nohighlight" id="equation-foo0">
 <span class="eqno">(5.6)<a class="headerlink" href="#equation-foo0" title="Permalink to this equation">¶</a></span>\[A_{i,j} = \Psi_j(X_i)\]</div>
-<p>where {X_i} are the node points of our finite element, then:</p>
+<p>where <span class="math notranslate nohighlight">\(\{X_i\}\)</span> are the local node points of our finite element, then
+the corresponding global node points <span class="math notranslate nohighlight">\(\{x_i\}\)</span> are given by</p>
 <div class="math notranslate nohighlight" id="equation-foo1">
 <span class="eqno">(5.7)<a class="headerlink" href="#equation-foo1" title="Permalink to this equation">¶</a></span>\[x = A\cdot \hat{x}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\hat{x}\)</span> is the <span class="math notranslate nohighlight">\((\dim+1, \dim)\)</span> array whose rows are the current
-element vertex coordinates, and <span class="math notranslate nohighlight">\(x\)</span> is the <span class="math notranslate nohighlight">\((\textrm{nodes}, \dim)\)</span> array whose
+<p>where <span class="math notranslate nohighlight">\(\hat{x}\)</span> is the <span class="math notranslate nohighlight">\((\dim+1, \dim)\)</span> array whose rows are the current
+element vertex coordinates. Specifically, <span class="math notranslate nohighlight">\(x\)</span> is the <span class="math notranslate nohighlight">\((\textrm{nodes}, \dim)\)</span> array whose
 rows are the global coordinates of the nodes in the current
 element. We can then apply <span class="math notranslate nohighlight">\(g()\)</span> to each row of <span class="math notranslate nohighlight">\(x\)</span> in turn and record
 the result as the <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> value

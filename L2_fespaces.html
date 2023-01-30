@@ -306,7 +306,7 @@ equivalent to (2).</p>
 <p>Then</p>
 <div class="math notranslate nohighlight">
 \[N_i(v)=0 \iff \sum_{j=0}^k f_jN_i(\psi_j) = 0, \quad i=0,1,\ldots,k,\]</div>
-<p>by linearity of <span class="math notranslate nohighlight">\(N_i\)</span>. So (2) is equivalent to</p>
+<p>by linearity of <span class="math notranslate nohighlight">\(N_i\)</span>. So (3) is equivalent to</p>
 <div class="math notranslate nohighlight">
 \[  \sum_{j=0}^k f_jN_i(\psi_j) = 0, \quad i=0,1,\ldots,k \implies
 f_j=0, \, j=0,1,\ldots,k,\]</div>
@@ -881,22 +881,34 @@ geometric decomposition.</p>
             <span class="proof-title-name">((C^m) geometric decomposition)</span>
         
     </div><div class="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be a finite element with
-geometric decomposition <span class="math notranslate nohighlight">\(W\)</span>. We say that <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\(C^m\)</span> geometric
-decomposition, if for each local mesh entity <span class="math notranslate nohighlight">\(w\)</span>, for any <span class="math notranslate nohighlight">\(f\in
-\mathcal{P}\)</span>, the restriction <span class="math notranslate nohighlight">\(f|_w\)</span> of <span class="math notranslate nohighlight">\(f\)</span> (and the restriction
-<span class="math notranslate nohighlight">\(D^kf|_w\)</span> of the <span class="math notranslate nohighlight">\(k\)</span>-th derivative of <span class="math notranslate nohighlight">\(f\)</span> to <span class="math notranslate nohighlight">\(w\)</span> for <span class="math notranslate nohighlight">\(k\leq m\)</span>) can
-be obtained from the set of dual basis functions associated with
-entities in the closure of <span class="math notranslate nohighlight">\(w\)</span>, applied to <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<blockquote>
+<div><p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be a finite element with
+geometric decomposition <span class="math notranslate nohighlight">\(W\)</span>. We say that <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\(C^0\)</span> geometric
+decomposition if, for each local mesh entity <span class="math notranslate nohighlight">\(w\)</span>, there exists
+<span class="math notranslate nohighlight">\(\mathcal{N}_w \subset \mathcal{N}\)</span> such that</p>
+<ol class="arabic simple">
+<li><p>All <span class="math notranslate nohighlight">\(N\in \mathcal{N}_w\)</span> are associated to elements in the closure of <span class="math notranslate nohighlight">\(w\)</span> in <span class="math notranslate nohighlight">\(W\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\((w,\mathcal{P}|_w,\mathcal{N}_w)\)</span> is a finite element, where <span class="math notranslate nohighlight">\(\mathcal{P}|_w\)</span> is the restriction of <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> to <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
+</ol>
+<p>We additionally say that <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\(C^1\)</span> geometric decomposition if
+for each local mesh entity <span class="math notranslate nohighlight">\(w\)</span>, there exists
+<span class="math notranslate nohighlight">\(\mathcal{N}_w \subset \mathcal{N}\)</span> such that</p>
+<ol class="arabic simple">
+<li><p>All <span class="math notranslate nohighlight">\(N\in \mathcal{N}_w\)</span> are associated to elements in the closure of <span class="math notranslate nohighlight">\(w\)</span> in <span class="math notranslate nohighlight">\(W\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\((w,\nabla\mathcal{P}|_w,\mathcal{N}_w)\)</span> is a finite element,</p></li>
+</ol>
+<p>where <span class="math notranslate nohighlight">\(\nabla\mathcal{P}|_w\)</span> is the restriction of <span class="math notranslate nohighlight">\(\nabla\mathcal{P}\)</span> to <span class="math notranslate nohighlight">\(w\)</span>, and</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\nabla\mathcal{P} = \{ u : u = \nabla v, \, v \in \mathcal{P}\}.\]</div>
+<p>This idea extends to <span class="math notranslate nohighlight">\(C^m\)</span> finite elements in an analogous way.</p>
 </div></div><p>The idea behind this definition is that if two triangles <span class="math notranslate nohighlight">\(K_1\)</span> and
-<span class="math notranslate nohighlight">\(K_2\)</span> are joined at a vertex, with finite elements
+<span class="math notranslate nohighlight">\(K_2\)</span> are joined at a vertex $v$, with finite elements
 <span class="math notranslate nohighlight">\((K_1,\mathcal{P}_1, \mathcal{N}_1)\)</span> and <span class="math notranslate nohighlight">\((K_2, \mathcal{P}_2,
-\mathcal{N}_2)\)</span>, then if the <span class="math notranslate nohighlight">\(\mathcal{N}_1\)</span> variables associated with
-the vertex applied to a function <span class="math notranslate nohighlight">\(u\)</span> agree with the corresponding
-<span class="math notranslate nohighlight">\(\mathcal{N}_2\)</span> variables also associated with that vertex also
-applied to <span class="math notranslate nohighlight">\(u\)</span>, then the function <span class="math notranslate nohighlight">\(u\)</span> will be <span class="math notranslate nohighlight">\(C^m\)</span> continuous through
-the vertex. Similarly, if <span class="math notranslate nohighlight">\(K_1\)</span> and <span class="math notranslate nohighlight">\(K_2\)</span> are joined at an edge, then
-if the corresponding <span class="math notranslate nohighlight">\(\mathcal{N}_1\)</span> and <span class="math notranslate nohighlight">\(\mathcal{N}_2\)</span> nodal
+\mathcal{N}_2)\)</span>, then the nodal variables <span class="math notranslate nohighlight">\(\mathcal{N}_{1,v}\)</span> and
+<span class="math notranslate nohighlight">\(\mathcal{N}_{1,v}\)</span> can be chosen so that <span class="math notranslate nohighlight">\(f\)</span> (and for <span class="math notranslate nohighlight">\(m=1\)</span>, the derivatives of <span class="math notranslate nohighlight">\(f\)</span>) has the same values at <span class="math notranslate nohighlight">\(v\)</span> in both <span class="math notranslate nohighlight">\(K_1\)</span> and <span class="math notranslate nohighlight">\(K_2\)</span>.</p>
+<p>Similarly, if <span class="math notranslate nohighlight">\(K_1\)</span> and <span class="math notranslate nohighlight">\(K_2\)</span> are joined at an edge <span class="math notranslate nohighlight">\(e\)</span>, then
+if the corresponding <span class="math notranslate nohighlight">\(\mathcal{N}_{1,e}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{N}_{2,e}\)</span> nodal
 variables associated with that edge agree when applied to <span class="math notranslate nohighlight">\(u\)</span>, then
 <span class="math notranslate nohighlight">\(u\)</span> will be <span class="math notranslate nohighlight">\(C^m\)</span> continuous through that edge. We just need to define
 these correspondences.</p>

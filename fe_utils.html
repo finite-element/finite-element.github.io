@@ -55,6 +55,17 @@
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="fe_utils.scripts.html">fe_utils.scripts package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#module-fe_utils.scripts.plot_function_space_nodes">fe_utils.scripts.plot_function_space_nodes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#module-fe_utils.scripts.plot_interpolate_lagrange">fe_utils.scripts.plot_interpolate_lagrange module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#module-fe_utils.scripts.plot_lagrange_basis_functions">fe_utils.scripts.plot_lagrange_basis_functions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#module-fe_utils.scripts.plot_lagrange_points">fe_utils.scripts.plot_lagrange_points module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#module-fe_utils.scripts.plot_mesh">fe_utils.scripts.plot_mesh module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#module-fe_utils.scripts.plot_sin_function">fe_utils.scripts.plot_sin_function module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fe_utils.scripts.html#module-fe_utils.scripts">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="fe_utils.solvers.html">fe_utils.solvers package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.helmholtz">fe_utils.solvers.helmholtz module</a></li>
@@ -85,9 +96,10 @@ over which the element is defined.</p></li>
 polynomial degree of the element. We assume the element
 spans the complete polynomial space.</p></li>
 <li><p><strong>nodes</strong> – a list of coordinate tuples corresponding to
-the nodes of the element.</p></li>
+point evaluation node locations on the element.</p></li>
 <li><p><strong>entity_nodes</strong> – a dictionary of dictionaries such that
-entity_nodes[d][i] is the list of nodes associated with entity <cite>(d, i)</cite>.</p></li>
+entity_nodes[d][i] is the list of nodes associated with
+entity <cite>(d, i)</cite> of dimension <cite>d</cite> and index <cite>i</cite>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -329,7 +341,8 @@ which render more slowly!</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mesh</strong> – The <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> on which this space is built.</p></li>
-<li><p><strong>element</strong> – The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> of this space.</p></li>
+<li><p><strong>element</strong> – The <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> of this
+space.</p></li>
 </ul>
 </dd>
 </dl>
@@ -375,9 +388,9 @@ respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>vertex_coords</strong> – an vertex_count x dim array of the coordinates of
+<li><p><strong>vertex_coords</strong> – a vertex_count x dim array of the coordinates of
 the vertices in the mesh.</p></li>
-<li><p><strong>cell_vertices</strong> – an cell_count x (dim+1) array of the
+<li><p><strong>cell_vertices</strong> – a cell_count x (dim+1) array of the
 indices of the vertices of which each cell is made up.</p></li>
 </ul>
 </dd>
@@ -583,7 +596,8 @@ of this quadrature rule.</p></li>
 <li><p><strong>vertices</strong> – a list of coordinate vectors corresponding to
 the coordinates of the vertices of the cell.</p></li>
 <li><p><strong>topology</strong> – a dictionary of dictionaries such that topology[d][i]
-is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.</p></li>
+is the list of vertices incident to the <cite>i</cite>-th entity of dimension
+<cite>d</cite>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -607,7 +621,8 @@ is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> – The coordinate vector of the point.</p></li>
-<li><p><strong>e</strong> – The (d, i) pair describing the entity.</p></li>
+<li><p><strong>e</strong> – The (d, i) pair describing the entity of dimension <cite>d</cite> and
+index <cite>i</cite>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -616,7 +631,8 @@ is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.
 <dl class="py attribute">
 <dt class="sig sig-object py" id="fe_utils.reference_elements.ReferenceCell.topology">
 <span class="sig-name descname"><span class="pre">topology</span></span><a class="headerlink" href="#fe_utils.reference_elements.ReferenceCell.topology" title="Permalink to this definition">¶</a></dt>
-<dd><p>The vertices making up each topological entity of the reference cell.</p>
+<dd><p>The vertices making up each topological entity of the reference
+cell.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -630,7 +646,8 @@ is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.
 <dl class="py data">
 <dt class="sig sig-object py" id="fe_utils.reference_elements.ReferenceInterval">
 <span class="sig-prename descclassname"><span class="pre">fe_utils.reference_elements.</span></span><span class="sig-name descname"><span class="pre">ReferenceInterval</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">ReferenceInterval</span></em><a class="headerlink" href="#fe_utils.reference_elements.ReferenceInterval" title="Permalink to this definition">¶</a></dt>
-<dd><p>A <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> storing the geometry and topology of the interval [0, 1].</p>
+<dd><p>A <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> storing the geometry and topology of the
+interval [0, 1].</p>
 </dd></dl>
 
 <dl class="py data">

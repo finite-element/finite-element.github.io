@@ -117,7 +117,7 @@ continuity between elements, the dual basis we need to use is the
 evaluation of the function at each of the cell vertices. That is:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-0">
 <span class="eqno">(2.1)<a class="headerlink" href="#equation-2-finite-elements-0" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\phi^*_0(f) = f\left((0,0)\right)\\\phi^*_1(f) = f\left((1,0)\right)\\\phi^*_2(f) = f\left((0,1)\right)\end{aligned}\end{align} \]</div>
-<p>We know that <span class="math notranslate nohighlight">\(\phi_i\)</span> has the form <span class="math notranslate nohighlight">\(a + bx + cy\)</span> so now we can
+<p>We know that <span class="math notranslate nohighlight">\(\phi_i((x,y))\)</span> has the form <span class="math notranslate nohighlight">\(a_i + b_ix + c_iy\)</span> so now we can
 use the definition of the nodal basis to determine the unknown
 coefficients:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-1">
@@ -134,7 +134,25 @@ coefficients:</p>
 \end{pmatrix}\end{split}\]</div>
 <p>So for <span class="math notranslate nohighlight">\(\phi_0\)</span> we have:</p>
 <div class="math notranslate nohighlight" id="equation-phimat">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-phimat" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-phimat" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{pmatrix}
+\phi^*_0(\phi_0)\\
+\phi^*_1(\phi_0)\\
+\phi^*_2(\phi_0)
+\end{pmatrix}
+=
+\begin{pmatrix}
+\phi_0((0,0))\\
+\phi_0((1,0))\\
+\phi_0((0,1))\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+a_0 + b_0(0) + c_0(0)\\
+a_0 + b_0(1) + c_0(0)\\
+a_0 + b_0(0) + c_0(1)\\
+\end{pmatrix}
+=
+\begin{bmatrix}
 1 &amp; 0 &amp; 0\\
 1 &amp; 1 &amp; 0\\
 1 &amp; 0 &amp; 1\\
@@ -200,7 +218,7 @@ allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d845a6c8-017b-4b50-92f0-ac9f00e00796">watch this video on Panopto</a></p>
 </div>
 </details><p>The number of coefficients of a degree <span class="math notranslate nohighlight">\(p\)</span> polynomial in <span class="math notranslate nohighlight">\(d\)</span>
-dimensions is given by <span class="math notranslate nohighlight">\(\begin{pmatrix}p+d\\ d\end{pmatrix}\)</span>. The
+dimensions is given by the combination <span class="math notranslate nohighlight">\(\binom{p+d}{d}\)</span>. The
 simplest set of nodes which we can employ is simply to place these
 nodes in a regular grid over the reference cell. Given the classical
 relationship between binomial coefficients and <a class="reference external" href="http://mathworld.wolfram.com/PascalsTriangle.html">Pascal’s triangle</a> (and between
@@ -279,10 +297,12 @@ matrix must be modified to exclude powers of <span class="math notranslate nohig
 to include powers of <span class="math notranslate nohighlight">\(z\)</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The monomial basis for polynomial spaces employed here becomes
-increasingly ill-conditioned at higher order, so it may be
-advantageous to employ a different basis in the construction of the
-Vandermonde matrix. See <span id="id4">[<a class="reference internal" href="zbibliography.html#id2" title="R.C. Kirby. Algorithm 839: fiat, a new paradigm for computing finite element basis functions. ACM Transactions on Mathematical Software (TOMS), 30(4):502–516, 2004. doi:10.1145/1039813.1039820.">Kir04</a>]</span> for an example.</p>
+<p>Here we employ a monomial basis to represent polynomial spaces: any
+polynomial is given as a linear sum of monomials such as <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(xy\)</span>
+or <span class="math notranslate nohighlight">\(x^2\)</span>. This basis becomes increasingly ill-conditioned at higher
+order, so it may be advantageous to employ a different basis in the
+construction of the Vandermonde matrix. See <span id="id4">[<a class="reference internal" href="zbibliography.html#id2" title="R.C. Kirby. Algorithm 839: fiat, a new paradigm for computing finite element basis functions. ACM Transactions on Mathematical Software (TOMS), 30(4):502–516, 2004. doi:10.1145/1039813.1039820.">Kir04</a>]</span> for an
+example.</p>
 </div>
 <div class="proof proof-type-exercise" id="id8">
 <span id="ex-vandermonde"></span>

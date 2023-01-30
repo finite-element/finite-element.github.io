@@ -90,7 +90,8 @@ each function in the basis then the problem is now, find coefficients <span clas
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-0">
 <span class="eqno">(6.63)<a class="headerlink" href="#equation-6-finite-element-problems-0" title="Permalink to this equation">¶</a></span>\[\int_\Omega \sum_{j}\left(\nabla \phi_i \cdot \nabla (u_j\phi_j) + \phi_i u_j\phi_j\right)\, \mathrm{d} x
 = \int_\Omega \phi_i\, \sum_k f_k\phi_k\, \mathrm{d} x \qquad \forall\, 0\leq i &lt; n\]</div>
-<p>Since the left hand side is linear in the scalar coefficients <span class="math notranslate nohighlight">\(u_j\)</span>, we can move them out of the integral:</p>
+<p>Note that since <a class="reference internal" href="#equation-weak-helmholtz">(6.62)</a> is linear in <span class="math notranslate nohighlight">\(v = \sum_{i}v_i\phi_i\)</span> we are able to drop the coefficients <span class="math notranslate nohighlight">\(v_i\)</span>.
+Since the left hand side is linear in the scalar coefficients <span class="math notranslate nohighlight">\(u_j\)</span>, we can move them out of the integral:</p>
 <div class="math notranslate nohighlight" id="equation-6-finite-element-problems-1">
 <span class="eqno">(6.64)<a class="headerlink" href="#equation-6-finite-element-problems-1" title="Permalink to this equation">¶</a></span>\[\sum_{j}\left(\int_\Omega \nabla \phi_i \cdot \nabla \phi_j + \phi_i\phi_j\, \mathrm{d} x\, u_j\right)
 = \int_\Omega \phi_i\,\sum_k f_k\phi_k\, \mathrm{d} x \qquad \forall\, 0\leq i &lt; n\]</div>
@@ -122,17 +123,17 @@ allowfullscreen></iframe></div>
 </details><p>The assembly of these integrals exploits the same decomposition
 property we exploited previously to integrate functions in finite
 element spaces. For example, <a class="reference internal" href="#equation-eq-rhs">(6.68)</a> can be rewritten as:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-4">
-<span class="eqno">(6.69)<a class="headerlink" href="#equation-6-finite-element-problems-4" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = \sum_c \int_c \phi_i \,\sum_k f_k\phi_k\,  \mathrm{d} x\]</div>
+<div class="math notranslate nohighlight" id="equation-rhs-init">
+<span class="eqno">(6.69)<a class="headerlink" href="#equation-rhs-init" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = \sum_c \int_c \phi_i \,\sum_k f_k\phi_k\,  \mathrm{d} x\]</div>
 <p>This has a practical impact once we realise that only a few basis
 functions are non-zero in each element. This enables us to write an
 efficient algorithm for right hand side assembly. Assume that at the
 start of our algorithm:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-5">
-<span class="eqno">(6.70)<a class="headerlink" href="#equation-6-finite-element-problems-5" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = 0.\]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-4">
+<span class="eqno">(6.70)<a class="headerlink" href="#equation-6-finite-element-problems-4" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_i = 0.\]</div>
 <p>Now for each cell <span class="math notranslate nohighlight">\(c\)</span>, we execute:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-6">
-<span class="eqno">(6.71)<a class="headerlink" href="#equation-6-finite-element-problems-6" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_{M(c, \hat{i})} \stackrel{+}{=} \int_c \Phi_{\hat{i}}\, \left(\sum_{\hat{k}}\,f_{M(c,\hat{k})}\,\Phi_{\hat{k}}\right)\,|J|\,\mathrm{d} X \qquad \forall 0 \leq \hat{i} &lt; N\]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-5">
+<span class="eqno">(6.71)<a class="headerlink" href="#equation-6-finite-element-problems-5" title="Permalink to this equation">¶</a></span>\[\mathbf{f}_{M(c, \hat{i})} \stackrel{+}{=} \int_c \Phi_{\hat{i}}\, \left(\sum_{\hat{k}}\,f_{M(c,\hat{k})}\,\Phi_{\hat{k}}\right)\,|J|\,\mathrm{d} X \qquad \forall 0 \leq \hat{i} &lt; N\]</div>
 <p>Where <span class="math notranslate nohighlight">\(M\)</span> is the cell-node map for the finite element space <span class="math notranslate nohighlight">\(V\)</span>, <span class="math notranslate nohighlight">\(N\)</span>
 is the number of nodes per element in <span class="math notranslate nohighlight">\(V\)</span>, and
 <span class="math notranslate nohighlight">\(\{\Phi_{\hat{i}}\}_{\hat{i}=0}^{N-1}\)</span> are the local basis
@@ -173,22 +174,22 @@ local and global bases:</p>
 coordinate <span class="math notranslate nohighlight">\(x\)</span> in terms of the local coordinate <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p>What about <span class="math notranslate nohighlight">\(\nabla\phi\)</span>? We can write the gradient operator in
 component form and apply <a class="reference internal" href="#equation-pullback">(6.73)</a>:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-7">
-<span class="eqno">(6.74)<a class="headerlink" href="#equation-6-finite-element-problems-7" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-6">
+<span class="eqno">(6.74)<a class="headerlink" href="#equation-6-finite-element-problems-6" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
 \frac{\partial\Phi_i(X)}{\partial{x_\alpha}}\quad \forall\, 0\leq \alpha &lt; \dim\]</div>
 <p>However, the expression on the right involves the gradient of a local
 basis function with respect to the global coordinate variable <span class="math notranslate nohighlight">\(x\)</span>. We
 employ the chain rule to express this gradient with respect to the
 local coordinates, <span class="math notranslate nohighlight">\(X\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-8">
-<span class="eqno">(6.75)<a class="headerlink" href="#equation-6-finite-element-problems-8" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-7">
+<span class="eqno">(6.75)<a class="headerlink" href="#equation-6-finite-element-problems-7" title="Permalink to this equation">¶</a></span>\[\frac{\partial\phi_{M(c,i)}(x)}{\partial x_\alpha} =
 \sum_{\beta=0}^{\dim-1}\frac{\partial X_\beta}{\partial x_\alpha}\frac{\partial\Phi_i(X)}{\partial{X_\beta}}\quad \forall\, 0\leq \alpha &lt; \dim\]</div>
 <p>Using the <a class="reference internal" href="5_functions.html#integration"><span class="std std-ref">definition of the Jacobian</span></a>, and
 using <span class="math notranslate nohighlight">\(\nabla_x\)</span> and <span class="math notranslate nohighlight">\(\nabla_X\)</span> to indicate the global and local
 gradient operators respectively, we can equivalently write this
 expression as:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-9">
-<span class="eqno">(6.76)<a class="headerlink" href="#equation-6-finite-element-problems-9" title="Permalink to this equation">¶</a></span>\[\nabla_x \phi_{M(c,i)}(x) = J^{-\mathrm{T}}\nabla_X\Phi_i(X)\]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-8">
+<span class="eqno">(6.76)<a class="headerlink" href="#equation-6-finite-element-problems-8" title="Permalink to this equation">¶</a></span>\[\nabla_x \phi_{M(c,i)}(x) = J^{-\mathrm{T}}\nabla_X\Phi_i(X)\]</div>
 <p>where <span class="math notranslate nohighlight">\(J^{-\mathrm{T}} = (J^{-1})^\mathrm{T}\)</span> is the transpose of the
 inverse of the cell Jacobian matrix.</p>
 </section>
@@ -207,9 +208,9 @@ frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=546633aa-7816-4084-b77f-aca000b64bbd">watch this video on Panopto</a></p>
 </div>
-</details><p>We can start by pulling back <a class="reference internal" href="#equation-eq-lhs">(6.66)</a> to local coordinates:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-10">
-<span class="eqno">(6.77)<a class="headerlink" href="#equation-6-finite-element-problems-10" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathrm{A}_{ij} = 0.\\\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
+</details><p>We can start by transforming <a class="reference internal" href="#equation-eq-lhs">(6.66)</a> to local coordinates (referred to as <em>pulling back</em>) and considering it in the algorithmic form used for the right hand side in <a class="reference internal" href="#equation-rhs-init">(6.69)</a> to <a class="reference internal" href="#equation-rhs-index">(6.72)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-9">
+<span class="eqno">(6.77)<a class="headerlink" href="#equation-6-finite-element-problems-9" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathrm{A}_{ij} = 0.\\\mathrm{A}_{M(c, \hat{i}),M(c, \hat{j})} \stackrel{+}{=}
  \int_c\left( \left(J^{-T}\nabla_X \Phi_{\hat{i}}\right)
    \cdot \left(J^{-T}\nabla_X \Phi_{\hat{j}}\right) + \Phi_{\hat{i}}\Phi_{\hat{j}}\right)|J|\, \mathrm{d} X
    \quad\forall 0\leq \hat{i},\hat{j}&lt; N,\, \forall c\end{aligned}\end{align} \]</div>
@@ -316,13 +317,13 @@ matrix system will also be vastly reduced since operations on zeros
 are avoided.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
+<p>The <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
 which enable Python code to employ a variety of sparse matrix
 formats using essentially identical operations to the dense matrix
 case. The skeleton code already contains commands to construct
 empty sparse matrices and to solve the resulting linear system. You
 may, if you wish, experiment with choosing other sparse formats
-from <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1253.fdc32b8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
+from <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1388.e6c27e5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
 you do <strong>not</strong> switch to a dense numpy array; unless, that is, you
 particularly enjoy running out of memory on your computer!</p>
 </div>
@@ -346,12 +347,14 @@ conditions of the PDE.</p></li>
 and now <span class="math notranslate nohighlight">\(\tilde{u}\)</span> is a solution to <a class="reference internal" href="#equation-helmholtz">(6.61)</a>.</p></li>
 </ol>
 <p>To illustrate this algorithm, suppose we wish to construct <span class="math notranslate nohighlight">\(f\)</span> such that:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-11">
-<span class="eqno">(6.80)<a class="headerlink" href="#equation-6-finite-element-problems-11" title="Permalink to this equation">¶</a></span>\[\tilde{u} = \cos(4\pi x_0) x_1^2(1 - x_1)^2\]</div>
-<p>is a solution to <a class="reference internal" href="#equation-helmholtz">(6.61)</a>. It is simple to verify that
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-10">
+<span class="eqno">(6.80)<a class="headerlink" href="#equation-6-finite-element-problems-10" title="Permalink to this equation">¶</a></span>\[\tilde{u} = \cos(4\pi x_0) x_1^2(1 - x_1)^2\]</div>
+<p>is a solution to <a class="reference internal" href="#equation-helmholtz">(6.61)</a> defined on a domain <span class="math notranslate nohighlight">\(\Gamma\)</span> bounded
+by the unit square (a square with vertices at the points <span class="math notranslate nohighlight">\((0,0)\)</span>,
+<span class="math notranslate nohighlight">\((0,1)\)</span>, <span class="math notranslate nohighlight">\((1,0)\)</span> and <span class="math notranslate nohighlight">\((1,1)\)</span>). It is simple to verify that
 <span class="math notranslate nohighlight">\(\tilde{u}\)</span> satisfies the boundary conditions. We then note that:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-12">
-<span class="eqno">(6.81)<a class="headerlink" href="#equation-6-finite-element-problems-12" title="Permalink to this equation">¶</a></span>\[- \nabla^2 \tilde{u} + \tilde{u} = \left((16 \pi^2 + 1) (x_1 - 1)^2 x_1^2 - 12 x_1^2  +12 x_1  - 2\right) \cos(4 \pi x_0)\]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-11">
+<span class="eqno">(6.81)<a class="headerlink" href="#equation-6-finite-element-problems-11" title="Permalink to this equation">¶</a></span>\[- \nabla^2 \tilde{u} + \tilde{u} = \left((16 \pi^2 + 1) (x_1 - 1)^2 x_1^2 - 12 x_1^2  +12 x_1  - 2\right) \cos(4 \pi x_0)\]</div>
 <p>If we choose:</p>
 <div class="math notranslate nohighlight" id="equation-f-def">
 <span class="eqno">(6.82)<a class="headerlink" href="#equation-f-def" title="Permalink to this equation">¶</a></span>\[f = \left((16 \pi^2 + 1) (x_1 - 1)^2 x_1^2 - 12 x_1^2  +12 x_1  - 2\right) \cos(4 \pi x_0)\]</div>
@@ -365,8 +368,8 @@ and now <span class="math notranslate nohighlight">\(\tilde{u}\)</span> is a sol
 convergence in the <span class="math notranslate nohighlight">\(L^2\)</span> norm. That is to say, if <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are
 finite element spaces defined over the same mesh, and <span class="math notranslate nohighlight">\(f\in V, g\in W\)</span>
 then we need to calculate:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-13">
-<span class="eqno">(6.83)<a class="headerlink" href="#equation-6-finite-element-problems-13" title="Permalink to this equation">¶</a></span>\[\sqrt{\int_\Omega (f-g)^2 \mathrm{d} x} = \sqrt{\sum_c\int_c \left(\left(\sum_i f_{M_V(c,i)}\Phi_i\right) - \left(\sum_j g_{M_W(c,j)}\Psi_j\right)\right)^2|J|\mathrm{d} X}\]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-12">
+<span class="eqno">(6.83)<a class="headerlink" href="#equation-6-finite-element-problems-12" title="Permalink to this equation">¶</a></span>\[\sqrt{\int_\Omega (f-g)^2 \mathrm{d} x} = \sqrt{\sum_c\int_c \left(\left(\sum_i f_{M_V(c,i)}\Phi_i\right) - \left(\sum_j g_{M_W(c,j)}\Psi_j\right)\right)^2|J|\mathrm{d} X}\]</div>
 <p>where <span class="math notranslate nohighlight">\(M_V\)</span> is the cell-node map for the space <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(M_W\)</span> is the
 cell-node map for the space <span class="math notranslate nohighlight">\(W\)</span>. Likewise <span class="math notranslate nohighlight">\(\{\Phi_i\}\)</span> is the local
 basis for <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(\{\Psi_j\}\)</span> is the local basis for <span class="math notranslate nohighlight">\(W\)</span>.</p>
@@ -383,25 +386,25 @@ where <span class="math notranslate nohighlight">\(h\)</span> is the mesh spacin
 finite element space employed. That is to say if <span class="math notranslate nohighlight">\(\tilde{u}\)</span> is the
 exact solution to our PDE and <span class="math notranslate nohighlight">\(u_h\)</span> is the solution to our finite
 element problem, then for sufficiently small <span class="math notranslate nohighlight">\(h\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-14">
-<span class="eqno">(6.84)<a class="headerlink" href="#equation-6-finite-element-problems-14" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} &lt; c h^{p+1}\]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-13">
+<span class="eqno">(6.84)<a class="headerlink" href="#equation-6-finite-element-problems-13" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} &lt; c h^{p+1}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(c&gt;0\)</span> not dependent on <span class="math notranslate nohighlight">\(h\)</span>. Indeed, for sufficiently small
 <span class="math notranslate nohighlight">\(h\)</span>, there is a <span class="math notranslate nohighlight">\(c\)</span> such that we can write:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-15">
-<span class="eqno">(6.85)<a class="headerlink" href="#equation-6-finite-element-problems-15" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} \approx c h^{p+1}\]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-14">
+<span class="eqno">(6.85)<a class="headerlink" href="#equation-6-finite-element-problems-14" title="Permalink to this equation">¶</a></span>\[\|u_h - \tilde{u}\|_{L^2} \approx c h^{p+1}\]</div>
 <p>Suppose we solve the finite element problem for two different (fine)
 mesh spacings, <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span>. Then we have:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-16">
-<span class="eqno">(6.86)<a class="headerlink" href="#equation-6-finite-element-problems-16" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_{h_1} - \tilde{u}\|_{L^2} \approx c h_1^{p+1}\\\|u_{h_2} - \tilde{u}\|_{L^2} \approx c h_2^{p+1}\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-15">
+<span class="eqno">(6.86)<a class="headerlink" href="#equation-6-finite-element-problems-15" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_{h_1} - \tilde{u}\|_{L^2} \approx c h_1^{p+1}\\\|u_{h_2} - \tilde{u}\|_{L^2} \approx c h_2^{p+1}\end{aligned}\end{align} \]</div>
 <p>or equivalently:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-17">
-<span class="eqno">(6.87)<a class="headerlink" href="#equation-6-finite-element-problems-17" title="Permalink to this equation">¶</a></span>\[\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-16">
+<span class="eqno">(6.87)<a class="headerlink" href="#equation-6-finite-element-problems-16" title="Permalink to this equation">¶</a></span>\[\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}
 \approx \left(\frac{h_1}{h_2}\right)^{p+1}\]</div>
 <p>By taking logarithms and rearranging this equation, we can produce a
 formula which, given the analytic solution and two numerical
 solutions, produces an estimate of the rate of convergence:</p>
-<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-18">
-<span class="eqno">(6.88)<a class="headerlink" href="#equation-6-finite-element-problems-18" title="Permalink to this equation">¶</a></span>\[q = \frac{\ln\left(\displaystyle\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}\right)}
+<div class="math notranslate nohighlight" id="equation-6-finite-element-problems-17">
+<span class="eqno">(6.88)<a class="headerlink" href="#equation-6-finite-element-problems-17" title="Permalink to this equation">¶</a></span>\[q = \frac{\ln\left(\displaystyle\frac{\|u_{h_1} - \tilde{u}\|_{L^2}}{\|u_{h_2} - \tilde{u}\|_{L^2}}\right)}
 {\ln\left(\displaystyle\frac{h_1}{h_2}\right)}\]</div>
 </section>
 </section>

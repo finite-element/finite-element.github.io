@@ -64,8 +64,8 @@ topological entities of the mesh. This is a two stage process. First,
 we associate the nodes of the finite element with the local
 topological entities of the reference cell. This is often referred to
 as <em>local numbering</em>. Then we associate the correct number of degrees
-of freedom with each global mesh entity. This is the <em>global
-numbering</em>.</p>
+of freedom (i.e. number of basis functions) with each global mesh
+entity. This is the <em>global numbering</em>.</p>
 <section id="local-numbering-and-continuity">
 <h2><span class="section-number">4.1. </span>Local numbering and continuity<a class="headerlink" href="#local-numbering-and-continuity" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
@@ -115,12 +115,12 @@ degree <span class="math notranslate nohighlight">\(p\)</span> polynomial. Howev
 already have nodes associated with them, so the number of nodes
 required to be associated with the face itself is actually the
 number required to represent a degree <span class="math notranslate nohighlight">\(p-2\)</span> polynomial in two
-dimensions: <span class="math notranslate nohighlight">\(\begin{pmatrix}p-1\\ 2\end{pmatrix}\)</span>.</p>
+dimensions given by the combination <span class="math notranslate nohighlight">\(\binom{p-1}{2}\)</span>.</p>
 </dd>
 </dl>
 <p>This pattern holds more generally: for a <span class="math notranslate nohighlight">\(C_0\)</span> function space, the
 number of nodes which must be associated with a local topological
-entity of degree <span class="math notranslate nohighlight">\(d\)</span> is <span class="math notranslate nohighlight">\(\begin{pmatrix}p-1\\ d\end{pmatrix}\)</span>.</p>
+entity of dimension <span class="math notranslate nohighlight">\(d\)</span> is <span class="math notranslate nohighlight">\(\binom{p-1}{d}\)</span>.</p>
 <p><a class="reference internal" href="#figlagrange-nodes"><span class="std std-numref">Fig. 4.1</span></a> illustrates the association of nodes with
 reference entities for Lagrange elements on triangles. The numbering
 of nodes will depend on how
@@ -224,14 +224,14 @@ allocate global numbers in ascending entity dimension order, and
 within each dimension in order of the index of each global topological
 entity. The formula for the first global node associated with entity
 <span class="math notranslate nohighlight">\((d, i)\)</span> is then:</p>
-<div class="math notranslate nohighlight">
-\[G(d, i) = \left(\sum_{\delta &lt; d} N_\delta E_\delta\right) + iN_d\]</div>
+<div class="math notranslate nohighlight" id="equation-4-function-spaces-0">
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-4-function-spaces-0" title="Permalink to this equation">¶</a></span>\[G(d, i) = \left(\sum_{\delta &lt; d} N_\delta E_\delta\right) + iN_d\]</div>
 <p>where <span class="math notranslate nohighlight">\(N_d\)</span> is the number of nodes which this finite element
-associates with each entity of dimension <span class="math notranslate nohighlight">\(d\)</span>, and <span class="math notranslate nohighlight">\(E_d\)</span> is the number
+associates with a single entity of dimension <span class="math notranslate nohighlight">\(d\)</span>, and <span class="math notranslate nohighlight">\(E_d\)</span> is the number
 of dimension <span class="math notranslate nohighlight">\(d\)</span> entities in the mesh. The full list of nodes
 associated with entity <span class="math notranslate nohighlight">\((d, i)\)</span> is therefore:</p>
-<div class="math notranslate nohighlight" id="equation-4-function-spaces-0">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-4-function-spaces-0" title="Permalink to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
+<div class="math notranslate nohighlight" id="equation-4-function-spaces-1">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-4-function-spaces-1" title="Permalink to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
 </section>
 <section id="the-cell-node-map">
 <span id="cell-node"></span><h2><span class="section-number">4.4. </span>The cell-node map<a class="headerlink" href="#the-cell-node-map" title="Permalink to this headline">¶</a></h2>
@@ -261,21 +261,21 @@ from cells to adjacent nodes as a two-dimensional array with one row
 corresponding to each cell, and with columns corresponding to the
 local node numbers. The entries in this map will have the following values:</p>
 <div class="math notranslate nohighlight" id="equation-eqcellnode">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-eqcellnode" title="Permalink to this equation">¶</a></span>\[M[c, e(\delta, \epsilon)] = [G(\delta, i), \ldots, G(\delta,i) + N_\delta - 1] \qquad\forall 0\leq\delta\leq\dim(c), \forall 0\leq\epsilon &lt; \hat{E}_\delta\]</div>
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-eqcellnode" title="Permalink to this equation">¶</a></span>\[M[c, e(\delta, \epsilon)] = [G(\delta, i), \ldots, G(\delta,i) + N_\delta - 1] \qquad\forall 0\leq\delta\leq\dim(c), \forall 0\leq\epsilon &lt; \hat{E}_\delta\]</div>
 <p>where:</p>
-<div class="math notranslate nohighlight" id="equation-4-function-spaces-1">
-<span class="eqno">(4.4)<a class="headerlink" href="#equation-4-function-spaces-1" title="Permalink to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
+<div class="math notranslate nohighlight" id="equation-4-function-spaces-2">
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-4-function-spaces-2" title="Permalink to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
 <p><span class="math notranslate nohighlight">\(e(\delta, \epsilon)\)</span> is the local entity-node list for this finite
 element for the <span class="math notranslate nohighlight">\((\delta, \epsilon)\)</span> local entity,
 <span class="math notranslate nohighlight">\(\operatorname{Adj}\)</span> has the meaning given under <a class="reference internal" href="3_meshes.html#secadjacency"><span class="std std-ref">Adjacency</span></a>,
 <span class="math notranslate nohighlight">\(\hat{E}_\delta\)</span> is the number of dimension <span class="math notranslate nohighlight">\(\delta\)</span> entities in each
 cell, and <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(N\)</span> have the meanings given above. This algorithm
 requires a trivial extension to adjacency:</p>
-<div class="math notranslate nohighlight" id="equation-4-function-spaces-2">
-<span class="eqno">(4.5)<a class="headerlink" href="#equation-4-function-spaces-2" title="Permalink to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
+<div class="math notranslate nohighlight" id="equation-4-function-spaces-3">
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-4-function-spaces-3" title="Permalink to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>In <a class="reference internal" href="#equation-eqcellnode">(4.3)</a>, notice that for each value of <span class="math notranslate nohighlight">\(\delta\)</span> and
+<p>In <a class="reference internal" href="#equation-eqcellnode">(4.4)</a>, notice that for each value of <span class="math notranslate nohighlight">\(\delta\)</span> and
 <span class="math notranslate nohighlight">\(\epsilon\)</span>, <span class="math notranslate nohighlight">\(e(\delta, \epsilon)\)</span> is a vector of indices, so the
 equation sets the value of zero, one, or more defined entries in row <span class="math notranslate nohighlight">\(c\)</span>
 of <span class="math notranslate nohighlight">\(M\)</span> for each <span class="math notranslate nohighlight">\(\delta\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
@@ -308,14 +308,14 @@ element, and contains (in some form) a global numbering of the nodes.</p>
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.function_spaces.FunctionSpace</span></code></a>. The key operation
 is to set
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> using
-<a class="reference internal" href="#equation-eqcellnode">(4.3)</a>.</p>
+<a class="reference internal" href="#equation-eqcellnode">(4.4)</a>.</p>
 <p>You can plot the numbering you have created with the
 <code class="docutils literal notranslate"><span class="pre">plot_function_space_nodes</span></code> script. As usual, run the
 script passing the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to discover the required
 arguments.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Many of the terms in <a class="reference internal" href="#equation-eqcellnode">(4.3)</a> are implemented in the
+<p>Many of the terms in <a class="reference internal" href="#equation-eqcellnode">(4.4)</a> are implemented in the
 objects in <a class="reference internal" href="fe_utils.html#module-fe_utils" title="fe_utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils</span></code></a>. For example:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\operatorname{Adj}_{\dim(c), \delta}\)</span> is implemented by the

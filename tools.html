@@ -57,14 +57,17 @@ proceeds we’ll also install several more Python packages, but you don’t need
 install those right now. The core tools you will need are:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Python version 3.6 or later.</p></li>
+<li><p>Python version 3.7 or later. Python 3.11 is recommended as the feedback
+that the interpreter provides if your code crashes has improved
+considerably.</p></li>
 <li><p>Git (the revision control system we’re going to use).</p></li>
 <li><p>A Python-aware text editor. Visual Studio Code is recommended, and all
 the instructions in this course will assume that this is what you are using.</p></li>
 </ol>
 </div></blockquote>
-<p>The Faculty of Natural Sciences at Imperial has
-<a class="reference external" href="https://imperial-fons-computing.github.io/index.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">centralised instructions for installing all of these tools</span></a>, and we’ll follow those.</p>
+<p>Links to installation instructions for all of these packages on a variety of
+operating systems are available on the website of the textbook <a class="reference external" href="https://object-oriented-python.github.io/installation.html" title="(in Object-oriented Programming v2023.0)"><span class="xref std std-doc">Object-oriented
+Programming in Python for Mathematicians</span></a>.</p>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>Your implementation will be written in Python based on a code skeleton
@@ -81,24 +84,6 @@ extensively in this course.</p>
 handy <a class="reference external" href="https://numpy.org/devdocs/user/numpy-for-matlab-users.html">guide for Matlab users</a>. In that context, the
 code provided in this course will always use Numpy arrays, and never
 Numpy matrices.</p>
-<div class="proof proof-type-exercise" id="id2">
-
-    <div class="proof-title">
-        <span class="proof-type">Exercise 1</span>
-        
-    </div><div class="proof-content">
-<p>If you don’t already have Python 3.6 or later installed on your computer, follow
-the <a class="reference external" href="https://imperial-fons-computing.github.io/python.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">FoNS Python instructions</span></a>. We will exclusively use
-<a class="reference external" href="https://imperial-fons-computing.github.io/python.html#python-virtual-environments" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">virtual environments</span></a> so it doesn’t
-matter at all whether you use Python from Anaconda or from another source. Mac
-users should note, though that the built-in Python will not do, so you should
-use either Homebrew or Anaconda.</p>
-</div></div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The example code in the exercises uses <a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings" title="(in Python v3.11)"><span class="xref std std-ref">f-strings</span></a>
-which were introduced in Python 3.6, so the code will not work in earlier
-versions of Python.</p>
-</div>
 </section>
 <section id="git">
 <h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
@@ -112,16 +97,17 @@ enable you to work on code from different locations.</p>
 files, and to update those files if and when they change. You’ll also
 use the same revision control system to record the edits you make over
 time and to submit your work for feedback and, eventually, marking.</p>
-<p>We will be using the revision control system <a class="reference external" href="http://git-scm.com/">git</a>, which is the current state of the art and is
-widely adopted. We’ll be combining git with the online hosting service <a class="reference external" href="http://github.org">GitHub</a>.</p>
-<div class="proof proof-type-exercise" id="id3">
+<p>We will be using the revision control system <a class="reference external" href="http://git-scm.com/">git</a>,
+which is the current state of the art and is widely adopted. We’ll be combining
+git with the online hosting service <a class="reference external" href="http://github.org">GitHub</a>.</p>
+<div class="proof proof-type-exercise" id="id2">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2</span>
+        <span class="proof-type">Exercise 1</span>
         
     </div><div class="proof-content">
-<p>Install Git and work through the entire Git,
-GitHub, and GitHub Classroom tutorial on the <a class="reference external" href="https://imperial-fons-computing.github.io/git.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">FoNS Git instructions webpage</span></a>.</p>
+<p>Install Git and work through the <a class="reference external" href="https://object-oriented-python.github.io/a2_git.html" title="(in Object-oriented Programming v2023.0)"><span class="xref std std-doc">git appendix of Object-oriented
+Programming in Python for Mathematicians</span></a>.</p>
 <p>Next, go and do the <a class="reference external" href="https://swcarpentry.github.io/git-novice/">git tutorial</a>
 over at Software Carpentry.</p>
 </div></div><div class="admonition hint">
@@ -137,45 +123,23 @@ confident with computers, you can skip this bit. GitHub provide
 <h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">¶</a></h2>
 <p>Visual Studio Code is a Python-aware Integrated Development Environment (IDE).
 This means that it incorporates editing files with other programming features
-such as <a class="reference external" href="https://object-oriented-python.github.io/8_debugging.html#debugging" title="(in Object-oriented Programming v2023.0)"><span>Debugging and testing</span></a>, Git support, and built-in <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html#terminal-vscode" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">terminal</span></a>. Visual Studio Code also provides an incredibly useful remote
-collaborative coding feature called Live Share. This will be very useful for
-getting remote help from an instructor.</p>
-<div class="proof proof-type-exercise" id="id4">
-
-    <div class="proof-title">
-        <span class="proof-type">Exercise 3</span>
-        
-    </div><div class="proof-content">
-<p>Install Visual Studio Code using the
-<a class="reference external" href="https://imperial-fons-computing.github.io/vscode.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">FoNS Visual Studio Code installation instructions</span></a>.</p>
-</div></div><div class="proof proof-type-exercise" id="id5">
-
-    <div class="proof-title">
-        <span class="proof-type">Exercise 4</span>
-        
-    </div><div class="proof-content">
-<p>Follow the <a class="reference external" href="https://imperial-fons-computing.github.io/vscode.html#vscode-liveshare" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">FoNS Visual Studio Live Share instructions</span></a> instructions to learn how to set up a Live Share.
-Pair up with someone else taking the module to ensure that you can share
-your Visual Studio Code session with them, and they with you. If you need to
-find someone else taking the module to do this exercise with, you can use
-<cite>this Piazza post &lt;https://piazza.com/class/kiujdiwgpk5su?cid=1&gt;</cite>.</p>
-</div></div></section>
+such as <a class="reference external" href="https://object-oriented-python.github.io/8_debugging.html#debugging" title="(in Object-oriented Programming v2023.0)"><span>Debugging and testing</span></a>, Git support, and built-in <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html#terminal-vscode" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">terminal</span></a>.</p>
+</section>
 <section id="the-command-line">
 <h2>The command line<a class="headerlink" href="#the-command-line" title="Permalink to this headline">¶</a></h2>
 <p>A lot of the routine activity involved in this module revolves around
 executing commands on the command line. For example you use the
 command line to work with the revision control system.</p>
-<div class="proof proof-type-exercise" id="id6">
+<div class="proof proof-type-exercise" id="id3">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 5</span>
+        <span class="proof-type">Exercise 2</span>
         
     </div><div class="proof-content">
-<p>If you’re not
-familiar with the Linux command line, then follow at least the first two
-sections of the <cite>Software Carpentry Unix Shell lesson</cite>. That
-guide focusses on the Bash shell, but zsh and the Windows Powershell use very
-similar commands.</p>
+<p>If you’re not familiar with the Linux command line, then follow at least
+the first two sections of the <a class="reference external" href="https://swcarpentry.github.io/shell-novice/">Software Carpentry Unix Shell lesson</a>. That guide focusses on
+the Bash shell, but zsh and the Windows Powershell use very similar
+commands.</p>
 </div></div></section>
 </section>
 
