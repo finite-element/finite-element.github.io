@@ -562,22 +562,11 @@ allowfullscreen></iframe></div>
 <span class="math notranslate nohighlight">\(\{1, x, y, xy\}\)</span>, let <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> be the set of dual elements
 corresponding to point evaluation at each vertex of the
 rectangle. Show that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines the finite element.</p>
-</div></div><div class="proof proof-type-exercise" id="id21">
-
-    <div class="proof-title">
-        <span class="proof-type">Exercise 2.21</span>
-        
-    </div><div class="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(K\)</span> be a triangle, and <span class="math notranslate nohighlight">\(P\)</span> be the space of quadratic
-polynomials. Let <span class="math notranslate nohighlight">\(N\)</span> be the set of nodal variables given by point
-evaluation at each edge midpoint together with the nodal variables
-given by integral of the function along each edge. Show that <span class="math notranslate nohighlight">\(N\)</span>
-determines <span class="math notranslate nohighlight">\(P\)</span>.</p>
 </div></div><p>This technique can then be extended to degree 2.</p>
-<div class="proof proof-type-lemma" id="id22">
+<div class="proof proof-type-lemma" id="id21">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 2.22</span>
+        <span class="proof-type">Lemma 2.21</span>
         
     </div><div class="proof-content">
 <p>The degree <span class="math notranslate nohighlight">\(2\)</span> Lagrange element is a finite element.</p>
@@ -597,20 +586,20 @@ at 3 points, and therefore <span class="math notranslate nohighlight">\(p=0\)</s
 <span class="math notranslate nohighlight">\(p(x)=cL_1(x)L_2(x)\)</span>. Finally, <span class="math notranslate nohighlight">\(p\)</span> also vanishes at the midpoint of
 <span class="math notranslate nohighlight">\(L_3\)</span>, so we conclude that <span class="math notranslate nohighlight">\(c=0\)</span> as required.</p>
 </div></div><p>The technique extends further to degree 3.</p>
-<div class="proof proof-type-exercise" id="id23">
+<div class="proof proof-type-exercise" id="id22">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.23</span>
+        <span class="proof-type">Exercise 2.22</span>
         
     </div><div class="proof-content">
 <p>Show that the degree <span class="math notranslate nohighlight">\(3\)</span> Lagrange element is a finite element.</p>
 </div></div><p>Going beyond degree 3, we have more than 1 nodal variable taking point
 evaluation inside the triangle. To deal with this, we use the nested
 triangular structure of the Lagrange triangle.</p>
-<div class="proof proof-type-lemma" id="id24">
+<div class="proof proof-type-lemma" id="id23">
 <span id="lem-degk-unisolve"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma 2.24</span>
+        <span class="proof-type">Lemma 2.23</span>
         
     </div><div class="proof-content">
 <p>The degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange element is a finite element for <span class="math notranslate nohighlight">\(k&gt;3\)</span>.</p>
@@ -655,10 +644,10 @@ allowfullscreen></iframe></div>
 </details><p>We now consider some finite elements that involve derivative
 evaluation. The Hermite elements involve evaluation of first
 derivatives as well as point evaluations.</p>
-<div class="proof proof-type-definition" id="id25">
+<div class="proof proof-type-definition" id="id24">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.25</span>
+        <span class="proof-type">Definition 2.24</span>
         
             <span class="proof-title-name">(Cubic Hermite elements on triangles)</span>
         
@@ -678,10 +667,10 @@ derivatives as well as point evaluations.</p>
 </div></div><p>It turns out that the Hermite element is insufficient to guarantee
 functions with continuous derivatives between triangles. This problem
 is solved by the Argyris element.</p>
-<div class="proof proof-type-definition" id="id26">
+<div class="proof proof-type-definition" id="id25">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.26</span>
+        <span class="proof-type">Definition 2.25</span>
         
             <span class="proof-title-name">(Quintic Argyris elements on triangles)</span>
         
@@ -719,10 +708,10 @@ allowfullscreen></iframe></div>
 spaces defined over a triangulation (mesh). To do this we need to
 develop a language for specifying connections between finite element
 functions between element domains.</p>
-<div class="proof proof-type-definition" id="id27">
+<div class="proof proof-type-definition" id="id26">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.27</span>
+        <span class="proof-type">Definition 2.26</span>
         
             <span class="proof-title-name">(Finite element space)</span>
         
@@ -735,10 +724,10 @@ each <span class="math notranslate nohighlight">\(u\in V\)</span>, and for each 
 </div></div><p>Note that the set of finite elements do not uniquely determine a
 finite element space, since we also need to specify continuity
 requirements between triangles, which we will do in this chapter.</p>
-<div class="proof proof-type-definition" id="id28">
+<div class="proof proof-type-definition" id="id27">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.28</span>
+        <span class="proof-type">Definition 2.27</span>
         
             <span class="proof-title-name">(Finite element space)</span>
         
@@ -747,10 +736,10 @@ requirements between triangles, which we will do in this chapter.</p>
 C^m\)</span> for all <span class="math notranslate nohighlight">\(u\in V\)</span>.</p>
 </div></div><p>The following lemma guides use in how to inspect the continuity of
 finite element functions.</p>
-<div class="proof proof-type-lemma" id="id29">
+<div class="proof proof-type-lemma" id="id28">
 <span id="cty"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma 2.29</span>
+        <span class="proof-type">Lemma 2.28</span>
         
             <span class="proof-title-name">(Continuity lemma)</span>
         
@@ -798,10 +787,10 @@ frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=22aab3d8-2041-4c42-9d18-ac8e00be66ab">watch this video on Panopto</a></p>
 </div>
-</details><div class="proof proof-type-definition" id="id30">
+</details><div class="proof proof-type-definition" id="id29">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.30</span>
+        <span class="proof-type">Definition 2.29</span>
         
             <span class="proof-title-name">(local and global mesh entities)</span>
         
@@ -812,10 +801,10 @@ triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> 
 comprising <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>.</p>
 </div></div><p>Having made this definition, we can now talk about how nodal variables
 can be assigned to local mesh entities in a geometric decomposition.</p>
-<div class="proof proof-type-definition" id="id31">
+<div class="proof proof-type-definition" id="id30">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.31</span>
+        <span class="proof-type">Definition 2.30</span>
         
             <span class="proof-title-name">(local geometric decomposition)</span>
         
@@ -825,10 +814,10 @@ the finite element has a (local) geometric decomposition if each
 dual basis function <span class="math notranslate nohighlight">\(N_i\)</span> can be associated with a single mesh
 entity <span class="math notranslate nohighlight">\(w\in W\)</span> such that for any <span class="math notranslate nohighlight">\(f\in\mathcal{P}\)</span>, <span class="math notranslate nohighlight">\(N_i(f)\)</span> can be
 calculated from <span class="math notranslate nohighlight">\(f\)</span> and derivatives of <span class="math notranslate nohighlight">\(f\)</span> evaluated on <span class="math notranslate nohighlight">\(w\)</span>.</p>
-</div></div><div class="proof proof-type-exercise" id="id32">
+</div></div><div class="proof proof-type-exercise" id="id31">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.32</span>
+        <span class="proof-type">Exercise 2.31</span>
         
     </div><div class="proof-content">
 <blockquote>
@@ -860,10 +849,10 @@ allowfullscreen></iframe></div>
 </div>
 </details><p>To discuss <span class="math notranslate nohighlight">\(C^m\)</span> continuity, we need to introduce some further
 vocabulary about the topology of <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<div class="proof proof-type-definition" id="id33">
+<div class="proof proof-type-definition" id="id32">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.33</span>
+        <span class="proof-type">Definition 2.32</span>
         
             <span class="proof-title-name">(closure of a local mesh entity)</span>
         
@@ -873,10 +862,10 @@ the set of local mesh entities contained in <span class="math notranslate nohigh
 itself).</p>
 </div></div><p>This allows us to define the degree of continuity of the local
 geometric decomposition.</p>
-<div class="proof proof-type-definition" id="id34">
+<div class="proof proof-type-definition" id="id33">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.34</span>
+        <span class="proof-type">Definition 2.33</span>
         
             <span class="proof-title-name">((C^m) geometric decomposition)</span>
         
@@ -913,17 +902,17 @@ variables associated with that edge agree when applied to <span class="math notr
 <span class="math notranslate nohighlight">\(u\)</span> will be <span class="math notranslate nohighlight">\(C^m\)</span> continuous through that edge. We just need to define
 these correspondences.</p>
 <p>We explore this definition through a couple of exercises.</p>
-<div class="proof proof-type-exercise" id="id35">
+<div class="proof proof-type-exercise" id="id34">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.35</span>
+        <span class="proof-type">Exercise 2.34</span>
         
     </div><div class="proof-content">
 <p>Show that the Lagrange elements of degree <span class="math notranslate nohighlight">\(k\)</span> have <span class="math notranslate nohighlight">\(C^0\)</span> geometric decompositions.</p>
-</div></div><div class="proof proof-type-exercise" id="id36">
+</div></div><div class="proof proof-type-exercise" id="id35">
 <span id="exer-argyris"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.36</span>
+        <span class="proof-type">Exercise 2.35</span>
         
     </div><div class="proof-content">
 <p>Show that the Argyris element has a <span class="math notranslate nohighlight">\(C^1\)</span> geometric decomposition.</p>
@@ -945,10 +934,10 @@ define what it means for elements of the nodal variables from the
 finite elements of two neighbouring triangles to “correspond”.</p>
 <p>We start by considering spaces of functions that are discontinuous
 between triangles, before defining <span class="math notranslate nohighlight">\(C^m\)</span> continuous subspaces.</p>
-<div class="proof proof-type-definition" id="id37">
+<div class="proof proof-type-definition" id="id36">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.37</span>
+        <span class="proof-type">Definition 2.36</span>
         
             <span class="proof-title-name">(Discontinuous finite element space)</span>
         
@@ -959,10 +948,10 @@ discontinuous finite element space <span class="math notranslate nohighlight">\(
 <div class="math notranslate nohighlight">
 \[V = \left\{u: u|_{K_i} \in P_i, \, \forall K_i \in \mathcal{T}\right\}.\]</div>
 <p>This defines families of discontinuous finite element spaces.</p>
-</div></div><div class="proof proof-type-example" id="id38">
+</div></div><div class="proof proof-type-example" id="id37">
 
     <div class="proof-title">
-        <span class="proof-type">Example 2.38</span>
+        <span class="proof-type">Example 2.37</span>
         
             <span class="proof-title-name">(Discontinuous Lagrange finite element space)</span>
         
@@ -976,10 +965,10 @@ space of degree <span class="math notranslate nohighlight">\(k\)</span>.</p>
 vertex, edge or triangle of the triangulation <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span>,
 i.e. the global mesh entitles. The following definition explains how
 to choose this association.</p>
-<div class="proof proof-type-definition" id="id39">
+<div class="proof proof-type-definition" id="id38">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.39</span>
+        <span class="proof-type">Definition 2.38</span>
         
             <span class="proof-title-name">(Global (C^m) geometric decomposition)</span>
         
@@ -1000,10 +989,10 @@ the above enumeration of dual basis functions on global mesh
 entities is called a global <span class="math notranslate nohighlight">\(C^m\)</span> geometric decomposition.</p>
 </div></div><p>Now we use this global <span class="math notranslate nohighlight">\(C^m\)</span> geometric decomposition to build a
 finite element space on the triangulation.</p>
-<div class="proof proof-type-definition" id="id40">
+<div class="proof proof-type-definition" id="id39">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 2.40</span>
+        <span class="proof-type">Definition 2.39</span>
         
             <span class="proof-title-name">(Finite element space from a global (C^m) geometric decomposition)</span>
         
@@ -1017,10 +1006,10 @@ consisting of all functions that <span class="math notranslate nohighlight">\(u\
 <span class="math notranslate nohighlight">\(N^w_{1,j}(u|_{K_1})=N^w_{2,j}(u|_{K_2})=\ldots = N^w_{n_w,j}(u|_{K_{n_w}}), \quad j=1,\ldots,M_w\)</span> for all mesh entities <span class="math notranslate nohighlight">\(w\in\mathcal{T}\)</span>.</p>
 </div></div><p>The following result shows that the global <span class="math notranslate nohighlight">\(C^m\)</span> geometric
 decomposition is a useful definition.</p>
-<div class="proof proof-type-lemma" id="id41">
+<div class="proof proof-type-lemma" id="id40">
 
     <div class="proof-title">
-        <span class="proof-type">Lemma 2.41</span>
+        <span class="proof-type">Lemma 2.40</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a finite element space defined from a global <span class="math notranslate nohighlight">\(C^m\)</span> geometric decomposition. Then <span class="math notranslate nohighlight">\(V\)</span> is a <span class="math notranslate nohighlight">\(C^m\)</span> finite element space.</p>
@@ -1036,20 +1025,20 @@ dual basis elements associated with those vertices and edges, and
 from the global <span class="math notranslate nohighlight">\(C^m\)</span> decomposition, the agreement of dual basis
 elements means that functions and derivatives up to degree <span class="math notranslate nohighlight">\(m\)</span>
 agree on vertices and edges, and hence the functions
-are in <span class="math notranslate nohighlight">\(C^m\)</span> from <a class="reference internal" href="#cty"><span class="std std-numref">Lemma 2.29</span></a>.</p>
+are in <span class="math notranslate nohighlight">\(C^m\)</span> from <a class="reference internal" href="#cty"><span class="std std-numref">Lemma 2.28</span></a>.</p>
 </div></div><p>We now apply this to a few examples, which can be proved as exercises.</p>
-<div class="proof proof-type-example" id="id42">
+<div class="proof proof-type-example" id="id41">
 
     <div class="proof-title">
-        <span class="proof-type">Example 2.42</span>
+        <span class="proof-type">Example 2.41</span>
         
     </div><div class="proof-content">
 <p>The finite element space built from the <span class="math notranslate nohighlight">\(C^0\)</span> global decomposition
 built from degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange element is called the degree <span class="math notranslate nohighlight">\(k\)</span> continuous Lagrange finite element space, denoted <span class="math notranslate nohighlight">\(Pk\)</span>.</p>
-</div></div><div class="proof proof-type-example" id="id43">
+</div></div><div class="proof proof-type-example" id="id42">
 
     <div class="proof-title">
-        <span class="proof-type">Example 2.43</span>
+        <span class="proof-type">Example 2.42</span>
         
     </div><div class="proof-content">
 <p>The finite element space built from the <span class="math notranslate nohighlight">\(C^1\)</span> global decomposition
