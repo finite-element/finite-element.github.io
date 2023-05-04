@@ -74,13 +74,13 @@ frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6e7570e9-cc2c-49d2-908b-aca000b63449">watch this video on Panopto</a></p>
 </div>
-</details><p>The <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class provides a
+</details><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> class provides a
 simple implementation of function storage. The input is a
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> which defines the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code> which defines the
 mesh and finite element to be employed, to which the
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> adds an array of degree of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> adds an array of degree of
 freedom values, one for each node in the
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code>.</p>
 </section>
 <section id="interpolating-values-into-finite-element-spaces">
 <h2><span class="section-number">5.2. </span>Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
@@ -131,7 +131,7 @@ then:</p>
 <span class="eqno">(5.5)<a class="headerlink" href="#equation-change" title="Permalink to this equation">¶</a></span>\[x = \sum_j \hat{x}_j \Psi_j(X) \quad \forall x \in c.\]</div>
 <p>Remember that we know the location of the nodes in local coordinates,
 and we have the
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> method to
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code> method to
 evaluate all the basis functions of an element at a known set of
 points. So if we write:</p>
 <div class="math notranslate nohighlight" id="equation-foo0">
@@ -144,7 +144,7 @@ the corresponding global node points <span class="math notranslate nohighlight">
 element vertex coordinates. Specifically, <span class="math notranslate nohighlight">\(x\)</span> is the <span class="math notranslate nohighlight">\((\textrm{nodes}, \dim)\)</span> array whose
 rows are the global coordinates of the nodes in the current
 element. We can then apply <span class="math notranslate nohighlight">\(g()\)</span> to each row of <span class="math notranslate nohighlight">\(x\)</span> in turn and record
-the result as the <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> value
+the result as the <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> value
 for that node.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -172,17 +172,17 @@ allowfullscreen></iframe></div>
 </div>
 </details><p>In the previous section we used the vertex coordinates of a cell to
 find the node coordinates, and then we calculated
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> values at those
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> values at those
 points. The coordinates are stored in a single long list associated
-with the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>, and the
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> contains a single long
+with the <code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code>, and the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> contains a single long
 list of values. We need to use <em>indirect addressing</em> to access these
 values. This is best illustrated using some Python code.</p>
-<p>Suppose <code class="docutils literal notranslate"><span class="pre">f</span></code> is a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">f</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code>.
 For brevity, we write <code class="docutils literal notranslate"><span class="pre">fs</span> <span class="pre">=</span> <span class="pre">f.function_space</span></code>, the
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> associated with
+<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code> associated with
 <code class="docutils literal notranslate"><span class="pre">f</span></code>. Now, we first need a linear element and a corresponding
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a>:</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cg1</span> <span class="o">=</span> <span class="n">fe_utils</span><span class="o">.</span><span class="n">LagrangeElement</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">cg1fs</span> <span class="o">=</span> <span class="n">fe_utils</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cg1</span><span class="p">)</span>
 </pre></div>
@@ -220,10 +220,10 @@ allowfullscreen></iframe></div>
 </div>
 </details><p>Putting together the change of coordinates with the right indirect
 addressing, we can provide the
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class with a
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method which
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> class with a
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code> method which
 interpolates a user-provided function onto the
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code>.</p>
 <div class="proof proof-type-exercise" id="id2">
 
     <div class="proof-title">
@@ -231,7 +231,7 @@ interpolates a user-provided function onto the
         
     </div><div class="proof-content">
 <p>Read and understand the
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method. Use
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code> method. Use
 <code class="docutils literal notranslate"><span class="pre">plot_sin_function</span></code> to investigate interpolating different
 functions onto finite element spaces at differering resolutions and
 polynomial degrees.</p>
@@ -239,7 +239,7 @@ polynomial degrees.</p>
 <p class="admonition-title">Hint</p>
 <p>There is no implementation work associated with this exercise, but
 the programming constructs used in
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> will be
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code> will be
 needed when you implement integration.</p>
 </div>
 </section>
@@ -260,11 +260,11 @@ allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4b2f4755-0682-4e36-ad3e-aca000b634b9">watch this video on Panopto</a></p>
 </div>
 </details><p>We now come to one of the fundamental operations in the finite element
-method: integrating a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over
+method: integrating a <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> over
 the domain. The full finite element method actually requires the
 integration of expressions of unknown test and trial functions, but we
 will start with the more straightforward case of integrating a single,
-known, <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over a domain
+known, <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> over a domain
 <span class="math notranslate nohighlight">\(\Omega\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-3">
 <span class="eqno">(5.8)<a class="headerlink" href="#equation-5-functions-3" title="Permalink to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x \quad f \in V\]</div>
@@ -356,15 +356,15 @@ the quadrature is exact. Then:</p>
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-jacobian">(5.12)</a> to implement the
-<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> method of
-<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>. <code class="docutils literal notranslate"><span class="pre">test/test_09_jacobian.py</span></code> is
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code> method of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code>. <code class="docutils literal notranslate"><span class="pre">test/test_09_jacobian.py</span></code> is
 available for you to test your results.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>The <span class="math notranslate nohighlight">\(\nabla_\beta\Psi_j(X)\)</span> factor in <a class="reference internal" href="#equation-jacobian">(5.12)</a> is the same
 for every cell in the mesh. You could make your implementation more
 efficient by precalculating this term in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>
-method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>.</p>
+method of <code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code>.</p>
 </div>
 <div class="proof proof-type-exercise" id="id4">
 
@@ -373,18 +373,18 @@ method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" 
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-integral-sum">(5.9)</a> and <a class="reference internal" href="#equation-integration">(5.14)</a> to implement
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a>.
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code>.
 <code class="docutils literal notranslate"><span class="pre">test/test_10_integrate_function.py</span></code> may be used to test your
 implementation.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Your method will need to:</p>
 <ol class="arabic simple">
-<li><p>Construct a suitable <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a>.</p></li>
-<li><p><a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> the
+<li><p>Construct a suitable <code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code>.</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code> the
 basis functions at each quadrature point.</p></li>
 <li><p>Visit each cell in turn.</p></li>
-<li><p>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> for that cell
+<li><p>Construct the <code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code> for that cell
 and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.24)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
 and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
 <li><p>Sum all of the arrays you have constructed over the correct
@@ -395,8 +395,8 @@ may be useful for this).</p></li>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You might choose to read ahead before implementing
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a>, since the
-<a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code></a> function is very similar and may provide a useful
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code>, since the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code> function is very similar and may provide a useful
 template for your work.</p>
 </div>
 </section>
@@ -412,7 +412,7 @@ template for your work.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>

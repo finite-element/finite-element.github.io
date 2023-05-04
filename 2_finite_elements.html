@@ -243,7 +243,7 @@ this course Lagrange elements will be sufficient.</p>
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-lattice">(2.6)</a> to implement
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code></a>. Make sure your
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code>. Make sure your
 algorithm also works for one-dimensional elements. Some basic tests
 for your code are to be found in
 <code class="docutils literal notranslate"><span class="pre">test/test_02_lagrange_points.py</span></code>. You can also test your lagrange
@@ -311,7 +311,7 @@ example.</p>
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-vandermonde">(2.7)</a> to implement
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code></a>. Think
+<code class="xref py py-func docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code>. Think
 carefully about how to loop over each row to construct the correct
 powers of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. For the purposes of this exercise you should
 ignore the <code class="docutils literal notranslate"><span class="pre">grad</span></code> argument.</p>
@@ -340,7 +340,7 @@ allowfullscreen></iframe></div>
 </details><p>The <a class="reference internal" href="#def-ciarlet"><span class="std std-ref">Ciarlet triple</span></a> <span class="math notranslate nohighlight">\((K, P, N)\)</span> also provides a
 good abstraction for the implementation of software objects
 corresponding to finite elements. In our case <span class="math notranslate nohighlight">\(K\)</span> will be a
-<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>. In this course we
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code>. In this course we
 will only implement finite element spaces consisting of complete
 polynomial spaces so we will specify <span class="math notranslate nohighlight">\(P\)</span> by providing the maximum
 degree of the polynomials in the space. Since we will only deal with
@@ -353,7 +353,7 @@ which the evaluation should occur.</p>
         
     </div><div class="proof-content">
 <p>Implement the rest of the
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>
 method. You should construct a Vandermonde matrix for the nodes and
 invert it to create the basis function coefs. Store these as
 <code class="docutils literal notranslate"><span class="pre">self.basis_coefs</span></code>.</p>
@@ -380,12 +380,12 @@ frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d78e85a7-fa59-433c-ac4c-ac9f00e02668">watch this video on Panopto</a></p>
 </div>
-</details><p>The <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> class implements
+</details><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> class implements
 a general finite element object assuming we have provided the cell,
 polynomial, degree and nodes. The
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.LagrangeElement" title="fe_utils.finite_elements.LagrangeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">LagrangeElement</span></code></a> class is a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LagrangeElement</span></code> class is a
 <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#inheritance">subclass</a> of
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> which will implement
+<code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> which will implement
 the particular case of the equispaced Lagrange elements.</p>
 <div class="proof proof-type-exercise" id="id10">
 <span id="ex-lagrange-element"></span>
@@ -394,12 +394,12 @@ the particular case of the equispaced Lagrange elements.</p>
         
     </div><div class="proof-content">
 <p>Implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method of
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.LagrangeElement" title="fe_utils.finite_elements.LagrangeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">LagrangeElement</span></code></a>. Use
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code></a> to obtain the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LagrangeElement</span></code>. Use
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code> to obtain the
 nodes. For the purpose of this exercise, you may ignore the
 <code class="docutils literal notranslate"><span class="pre">entity_nodes</span></code> argument.</p>
 <p><strong>After</strong> you have implemented
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> in the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code> in the
 next exercise, you can use
 <code class="docutils literal notranslate"><span class="pre">plot_lagrange_basis_functions</span></code> to visualise your
 Lagrange basis functions.</p>
@@ -441,7 +441,7 @@ basis given by the matrix <span class="math notranslate nohighlight">\(C\)</span
         <span class="proof-type">Exercise 2.49</span>
         
     </div><div class="proof-content">
-<p>Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a>.
+<p>Implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code>.
 You can use a Vandermonde matrix to evaluate the polynomial terms
 and take the matrix product of this with the basis function
 coefficients. The method should have at most two executable
@@ -492,7 +492,7 @@ of the gradient of the Vandermonde matrix.</p>
         <span class="proof-type">Exercise 2.50</span>
         
     </div><div class="proof-content">
-<p>Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code></a> so that
+<p>Extend <code class="xref py py-meth docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code> so that
 setting <code class="docutils literal notranslate"><span class="pre">grad</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> produces a rank 3 generalised
 Vandermonde tensor whose indices represent points, monomial basis function,
 and gradient component respectively. That is:</p>
@@ -523,11 +523,11 @@ Vandermonde matrix. In this case, you might find
         <span class="proof-type">Exercise 2.51</span>
         
     </div><div class="proof-content">
-<p>Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> to
+<p>Extend <code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code> to
 pass the <code class="docutils literal notranslate"><span class="pre">grad</span></code> argument through to
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code></a>. Then
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code>. Then
 generalise the matrix product in
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> so that
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code> so that
 the result of this function (when <code class="docutils literal notranslate"><span class="pre">grad</span></code> is true) is a rank 3
 tensor:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-8">
@@ -594,7 +594,7 @@ evaluation of their function input, we know that:</p>
         <span class="proof-type">Exercise 2.52</span>
         
     </div><div class="proof-content">
-<p>Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate" title="fe_utils.finite_elements.FiniteElement.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a>.</p>
+<p>Implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code>.</p>
 </div></div><p>Once you have done this, you can use the script provided to plot
 functions of your choice interpolated onto any of the finite
 elements you can make:</p>
@@ -628,7 +628,7 @@ is the one-dimensional case of the generalised Vandermonde matrix.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>

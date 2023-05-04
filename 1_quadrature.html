@@ -185,14 +185,14 @@ vertex numbering are possible.</p>
 </section>
 <section id="python-implementations-of-reference-elements">
 <h2><span class="section-number">1.4. </span>Python implementations of reference elements<a class="headerlink" href="#python-implementations-of-reference-elements" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> class provides
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code> class provides
 Python objects encoding the geometry and topology of the reference
 cell. At this stage, the relevant information is the dimension of the
 reference cell and the list of vertices. The topology will become
 important when we consider <a class="reference internal" href="3_meshes.html"><span class="doc">meshes</span></a>. The reference cells we will
 require for this course are the
-<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceInterval" title="fe_utils.reference_elements.ReferenceInterval"><code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceInterval</span></code></a> and
-<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceTriangle" title="fe_utils.reference_elements.ReferenceTriangle"><code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceTriangle</span></code></a>.</p>
+<code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceInterval</span></code> and
+<code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceTriangle</span></code>.</p>
 </section>
 <section id="quadrature-rules-on-reference-elements">
 <h2><span class="section-number">1.5. </span>Quadrature rules on reference elements<a class="headerlink" href="#quadrature-rules-on-reference-elements" title="Permalink to this headline">¶</a></h2>
@@ -297,11 +297,11 @@ frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e5f1084f-c163-46d3-b317-ac9f00c1c772">watch this video on Panopto</a></p>
 </div>
-</details><p>The <a class="reference internal" href="fe_utils.html#module-fe_utils.quadrature" title="fe_utils.quadrature"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils.quadrature</span></code></a> module provides the
-<a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a> class which records
+</details><p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils.quadrature</span></code> module provides the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code> class which records
 quadrature points and weights for a given
-<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>. The
-<a class="reference internal" href="fe_utils.html#fe_utils.quadrature.gauss_quadrature" title="fe_utils.quadrature.gauss_quadrature"><code class="xref py py-func docutils literal notranslate"><span class="pre">gauss_quadrature()</span></code></a> function creates
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code>. The
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gauss_quadrature()</span></code> function creates
 quadrature rules for a prescribed degree of precision and reference
 cell.</p>
 <div class="proof proof-type-exercise" id="id3">
@@ -310,7 +310,7 @@ cell.</p>
         <span class="proof-type">Exercise 1.16</span>
         
     </div><div class="proof-content">
-<p>The <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a> method is
+<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code> method is
 left unimplemented. Using <a class="reference internal" href="#equation-quadrature">(1.4)</a>, implement this method.</p>
 <p>A test script for your method is provided in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory
 as <code class="docutils literal notranslate"><span class="pre">test_01_integrate.py</span></code>. Run this script to test your code:</p>
@@ -322,7 +322,7 @@ to your fork of the course repository.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can implement
-<a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a> in one line
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code> in one line
 using a <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list
 comprehension</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.dot()</span></code></a>.</p>
 </div>
@@ -355,7 +355,7 @@ allowfullscreen></iframe></div>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>

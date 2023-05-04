@@ -317,13 +317,13 @@ matrix system will also be vastly reduced since operations on zeros
 are avoided.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1680.2fc01be)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
+<p>The <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> package provides convenient interfaces
 which enable Python code to employ a variety of sparse matrix
 formats using essentially identical operations to the dense matrix
 case. The skeleton code already contains commands to construct
 empty sparse matrices and to solve the resulting linear system. You
 may, if you wish, experiment with choosing other sparse formats
-from <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1680.2fc01be)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
+from <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a>, but it is very strongly suggested that
 you do <strong>not</strong> switch to a dense numpy array; unless, that is, you
 particularly enjoy running out of memory on your computer!</p>
 </div>
@@ -419,10 +419,10 @@ solutions, produces an estimate of the rate of convergence:</p>
 <p><code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/helmholtz.py</span></code> contains a partial implementation of
 the finite element method to solve <a class="reference internal" href="#equation-weak-helmholtz">(6.62)</a> with <span class="math notranslate nohighlight">\(f\)</span>
 chosen as in <a class="reference internal" href="#equation-f-def">(6.82)</a>. Your task is to implement the
-<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble" title="fe_utils.solvers.helmholtz.assemble"><code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code></a> function using <a class="reference internal" href="#equation-rhs-index">(6.72)</a>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code> function using <a class="reference internal" href="#equation-rhs-index">(6.72)</a>, and
 <a class="reference internal" href="#equation-lhs-assemble">(6.78)</a> or <a class="reference internal" href="#equation-lhs-index">(6.79)</a>. The comments in the
-<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.helmholtz.assemble" title="fe_utils.solvers.helmholtz.assemble"><code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code></a> function provide some guidance as to the steps
-involved. You may also wish to consult the <a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code></a>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code> function provide some guidance as to the steps
+involved. You may also wish to consult the <code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code>
 function as a guide to the
 structure of the code required.</p>
 <p>Run:</p>
@@ -461,7 +461,7 @@ harder to solve.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>

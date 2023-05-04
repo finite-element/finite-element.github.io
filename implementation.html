@@ -131,19 +131,19 @@ you, though don’t move it once you’ve created it as this will break the virt
 environment. Suppose you would like to keep the new folder in a folder called
 <code class="file docutils literal notranslate"><span class="pre">docs</span></code> in your home directory. We first <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-doc">open a
 terminal</span></a> and switch to the folder:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> docs
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>docs
 </pre></div>
 </div>
 <p>Note that <cite>$</cite> is the command prompt (which might be a different character such
 as <cite>%</cite> or <cite>&gt;</cite> for you). You don’t type the prompt. Start with <cite>cd</cite>. Next we
 create the folder we’ll use for this course. Suppose we choose to call it
 <code class="file docutils literal notranslate"><span class="pre">finite-element</span></code>, then we would type:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir finite-element
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>finite-element
 </pre></div>
 </div>
 <p><cite>mkdir</cite> stands for “make directory”. <em>Directory</em> is an alternative term to
 <em>folder</em>. Finally we switch (“change directory”) into that folder:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> finite-element
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>finite-element
 </pre></div>
 </div>
 </section>
@@ -154,7 +154,7 @@ in which we’ll install the packages we need, including our own
 implementation exercise. This minimises interference between this
 project and anything else which might be using Python on the
 system. With your current working folder set to the course folder, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3 -m venv fe_venv
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>fe_venv
 </pre></div>
 </div>
 <p>If your Python interpreter has a different name (e.g. <cite>python3.11</cite> or <cite>py</cite>)
@@ -164,7 +164,7 @@ then you type that instead.</p>
 <h3>Activating your venv<a class="headerlink" href="#activating-your-venv" title="Permalink to this headline">¶</a></h3>
 <p><strong>Every time</strong> you want to work on the implementation exercise, you need
 to activate the venv. On Linux or Mac do this with:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span> fe_venv/bin/activate
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span><span class="w"> </span>fe_venv/bin/activate
 </pre></div>
 </div>
 <p>while on Windows the command is:</p>
@@ -182,7 +182,7 @@ copies of the repository. To create your repository, <a class="reference externa
 <section id="cloning-a-local-copy">
 <h3>Cloning a local copy<a class="headerlink" href="#cloning-a-local-copy" title="Permalink to this headline">¶</a></h3>
 <p>At the command line on your working machine type:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone &lt;url&gt; finite-element-course
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>&lt;url&gt;<span class="w"> </span>finite-element-course
 </pre></div>
 </div>
 <p>Substituting your git repository url for &lt;url&gt;. Your git repository
@@ -222,7 +222,7 @@ than large ones.</p>
 exercise the code you have just written. These are located in the
 <code class="docutils literal notranslate"><span class="pre">test</span></code> directory and employ the <a class="reference external" href="http://pytest.org/">pytest</a>
 testing framework. You run the tests with:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>py.test test_script.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>py.test<span class="w"> </span>test_script.py
 </pre></div>
 </div>
 <p>from the bash command line, replacing <code class="docutils literal notranslate"><span class="pre">test_script.py</span></code> with the appropriate
@@ -235,7 +235,7 @@ error.</p>
 directory. This works particularly well with the -x option, resulting
 in the tests being run in course order and stopping at the first
 failing test:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>py.test -x tests/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>py.test<span class="w"> </span>-x<span class="w"> </span>tests/
 </pre></div>
 </div>
 </section>
@@ -321,7 +321,7 @@ return it).</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>
