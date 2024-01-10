@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2. Finite element spaces: local to global &#8212; Finite element course 2024.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css?v=2a6c4383" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css?v=45cf7dbc" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css?v=d290406d" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -52,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="finite-element-spaces-local-to-global">
-<h1><span class="section-number">2. </span>Finite element spaces: local to global<a class="headerlink" href="#finite-element-spaces-local-to-global" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>Finite element spaces: local to global<a class="headerlink" href="#finite-element-spaces-local-to-global" title="Link to this heading">¶</a></h1>
 <p>In this section, we discuss the construction of general finite element
 spaces. Given a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> of a domain <span class="math notranslate nohighlight">\(\Omega\)</span>, finite
 element spaces are defined according to</p>
@@ -65,7 +63,7 @@ element space. We first do this by looking at a single cell, which we
 call the local perspective. Later we will take the global perspective,
 seeing how function continuity is enforced between cells.</p>
 <section id="ciarlet-s-finite-element">
-<h2><span class="section-number">2.1. </span>Ciarlet’s finite element<a class="headerlink" href="#ciarlet-s-finite-element" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Ciarlet’s finite element<a class="headerlink" href="#ciarlet-s-finite-element" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -175,7 +173,7 @@ i=0,\ldots,k.\]</div>
 \[\phi_i(x) = \frac{\prod_{j=0,j\ne i}^k (x-x_j)}{\prod_{j=0,j\ne i}^k (x_i-x_j)}, \quad i=0,\ldots,k.\]</div>
 </div></div></section>
 <section id="vandermonde-matrix-and-unisolvence">
-<h2><span class="section-number">2.2. </span>Vandermonde matrix and unisolvence<a class="headerlink" href="#vandermonde-matrix-and-unisolvence" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Vandermonde matrix and unisolvence<a class="headerlink" href="#vandermonde-matrix-and-unisolvence" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -379,7 +377,7 @@ of algebra.</p>
 <p>Is this finite element unisolvent? Explain your answer.</p>
 </div></div></section>
 <section id="d-and-3d-finite-elements">
-<h2><span class="section-number">2.3. </span>2D and 3D finite elements<a class="headerlink" href="#d-and-3d-finite-elements" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>2D and 3D finite elements<a class="headerlink" href="#d-and-3d-finite-elements" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -627,7 +625,7 @@ the inductive hypothesis, and using the results for <span class="math notranslat
 that <span class="math notranslate nohighlight">\(Q_3\equiv=0\)</span>, and therefore <span class="math notranslate nohighlight">\(p\equiv0\)</span> as required.</p>
 </div></div></section>
 <section id="some-more-exotic-elements">
-<h2><span class="section-number">2.4. </span>Some more exotic elements<a class="headerlink" href="#some-more-exotic-elements" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Some more exotic elements<a class="headerlink" href="#some-more-exotic-elements" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -690,7 +688,7 @@ is solved by the Argyris element.</p>
 </ol>
 </div></div></section>
 <section id="global-continuity">
-<h2><span class="section-number">2.5. </span>Global continuity<a class="headerlink" href="#global-continuity" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.5. </span>Global continuity<a class="headerlink" href="#global-continuity" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -1059,8 +1057,8 @@ element functions.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

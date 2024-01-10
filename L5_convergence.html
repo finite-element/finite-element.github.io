@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>5. Convergence of finite element approximations &#8212; Finite element course 2024.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css?v=2a6c4383" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css?v=45cf7dbc" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css?v=d290406d" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -52,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="convergence-of-finite-element-approximations">
-<span id="convergence"></span><h1><span class="section-number">5. </span>Convergence of finite element approximations<a class="headerlink" href="#convergence-of-finite-element-approximations" title="Permalink to this headline">¶</a></h1>
+<span id="convergence"></span><h1><span class="section-number">5. </span>Convergence of finite element approximations<a class="headerlink" href="#convergence-of-finite-element-approximations" title="Link to this heading">¶</a></h1>
 <p>In this section we develop tools to prove convergence of finite
 element approximations to the exact solutions of PDEs.</p>
 <details class="sphinx-bs dropdown card mb-3">
@@ -69,7 +67,7 @@ allowfullscreen></iframe></div>
 <p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5d2d1721-725f-43ef-bcdd-ac8f01056006">watch this video on Panopto</a></p>
 </div>
 </details><section id="weak-derivatives">
-<h2><span class="section-number">5.1. </span>Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Link to this heading">¶</a></h2>
 <p>Consider a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> with recursively refined
 triangulations <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span> and corresponding finite element spaces
 <span class="math notranslate nohighlight">\(V_h\)</span>.  Given stable finite element variational problems, we have a
@@ -205,7 +203,7 @@ strong, weak and finite element first derivatives for <span class="math notransl
 element functions. All derivatives are assumed to be weak from now on.</p>
 </section>
 <section id="sobolev-spaces">
-<h2><span class="section-number">5.2. </span>Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.2. </span>Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -337,7 +335,7 @@ equivalence class of <span class="math notranslate nohighlight">\(u\)</span>.</p
 <p>Just apply Sobolev’s inequality to the <span class="math notranslate nohighlight">\(m\)</span> derivatives of <span class="math notranslate nohighlight">\(u\)</span>.</p>
 </div></div></section>
 <section id="variational-formulations-of-pdes">
-<h2><span class="section-number">5.3. </span>Variational formulations of PDEs<a class="headerlink" href="#variational-formulations-of-pdes" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.3. </span>Variational formulations of PDEs<a class="headerlink" href="#variational-formulations-of-pdes" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -529,7 +527,7 @@ We have</p>
 <span class="math notranslate nohighlight">\(\|\frac{\partial u}{\partial n}\|_{L^2(\partial\Omega)}=0\)</span>.</p>
 </div></div></section>
 <section id="galerkin-approximations-of-linear-variational-problems">
-<h2><span class="section-number">5.4. </span>Galerkin approximations of linear variational problems<a class="headerlink" href="#galerkin-approximations-of-linear-variational-problems" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.4. </span>Galerkin approximations of linear variational problems<a class="headerlink" href="#galerkin-approximations-of-linear-variational-problems" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -628,7 +626,7 @@ condition</p>
 <p>Minimising over all <span class="math notranslate nohighlight">\(v\)</span> completes the proof.</p>
 </div></div></section>
 <section id="interpolation-error-in-h-k-spaces">
-<h2><span class="section-number">5.5. </span>Interpolation error in <span class="math notranslate nohighlight">\(H^k\)</span> spaces<a class="headerlink" href="#interpolation-error-in-h-k-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.5. </span>Interpolation error in <span class="math notranslate nohighlight">\(H^k\)</span> spaces<a class="headerlink" href="#interpolation-error-in-h-k-spaces" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -827,7 +825,7 @@ global interpolation operator satisfies</p>
 <p>Identical to <a class="reference internal" href="L3_interpolation.html#iherr"><span class="std std-numref">Theorem 3.25</span></a>.</p>
 </div></div></section>
 <section id="convergence-of-the-finite-element-approximation-to-the-helmholtz-problem">
-<h2><span class="section-number">5.6. </span>Convergence of the finite element approximation to the Helmholtz problem<a class="headerlink" href="#convergence-of-the-finite-element-approximation-to-the-helmholtz-problem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6. </span>Convergence of the finite element approximation to the Helmholtz problem<a class="headerlink" href="#convergence-of-the-finite-element-approximation-to-the-helmholtz-problem" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -1010,7 +1008,7 @@ parts),</p>
 the <span class="math notranslate nohighlight">\(L^2\)</span> norm instead of the <span class="math notranslate nohighlight">\(H^1\)</span> norm.</p>
 </section>
 <section id="epilogue">
-<h2><span class="section-number">5.7. </span>Epilogue<a class="headerlink" href="#epilogue" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.7. </span>Epilogue<a class="headerlink" href="#epilogue" title="Link to this heading">¶</a></h2>
 <p>This completes our analysis of the convergence of the Galerkin finite
 element approximation to the Helmholtz problem. Similar approaches can be
 applied to analysis of other elliptic PDEs, using the following programme.</p>
@@ -1108,8 +1106,8 @@ areas of the domain.</p></li>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>4. Function spaces: associating data with meshes &#8212; Finite element course 2024.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css?v=2a6c4383" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css?v=45cf7dbc" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css?v=d290406d" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -52,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="function-spaces-associating-data-with-meshes">
-<span id="secfunctionspaces"></span><h1><span class="section-number">4. </span>Function spaces: associating data with meshes<a class="headerlink" href="#function-spaces-associating-data-with-meshes" title="Permalink to this headline">¶</a></h1>
+<span id="secfunctionspaces"></span><h1><span class="section-number">4. </span>Function spaces: associating data with meshes<a class="headerlink" href="#function-spaces-associating-data-with-meshes" title="Link to this heading">¶</a></h1>
 <p>A finite element space over a mesh is constructed by associating a
 finite element with each cell of the mesh. We will refer to the basis
 functions of this finite element space as <em>global</em> basis functions,
@@ -67,7 +65,7 @@ as <em>local numbering</em>. Then we associate the correct number of degrees
 of freedom (i.e. number of basis functions) with each global mesh
 entity. This is the <em>global numbering</em>.</p>
 <section id="local-numbering-and-continuity">
-<h2><span class="section-number">4.1. </span>Local numbering and continuity<a class="headerlink" href="#local-numbering-and-continuity" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.1. </span>Local numbering and continuity<a class="headerlink" href="#local-numbering-and-continuity" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -129,12 +127,12 @@ reference entities for Lagrange elements on triangles.</p>
 <p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Association of nodes with reference entities for the degree 1, 2,
 and 3 equispaced Lagrange elements on triangles. Black nodes are
 associated with vertices, red nodes with edges and blue nodes with
-the cell (face). This is the same figure as <a class="reference internal" href="2_finite_elements.html#figlagrange-nodes"><span class="std std-numref">Fig. 2.1</span></a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+the cell (face). This is the same figure as <a class="reference internal" href="2_finite_elements.html#figlagrange-nodes"><span class="std std-numref">Fig. 2.1</span></a>.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="implementing-local-numbering">
-<h2><span class="section-number">4.2. </span>Implementing local numbering<a class="headerlink" href="#implementing-local-numbering" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Implementing local numbering<a class="headerlink" href="#implementing-local-numbering" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -183,7 +181,7 @@ passes the correct <code class="docutils literal notranslate"><span class="pre">
 <p>The <code class="docutils literal notranslate"><span class="pre">test/test_08_entity_nodes.py</span></code> script tests this functionality.</p>
 </div></div></section>
 <section id="global-numbering">
-<h2><span class="section-number">4.3. </span>Global numbering<a class="headerlink" href="#global-numbering" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.3. </span>Global numbering<a class="headerlink" href="#global-numbering" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -199,22 +197,22 @@ allowfullscreen></iframe></div>
 </div>
 </details><p>Given a mesh and a finite element, the global numbering task is to
 uniquely associate the appropriate number of global node numbers with
-each global entity. One such numbering <a class="footnote-reference brackets" href="#globalnumbering" id="id1">1</a> is to
+each global entity. One such numbering <a class="footnote-reference brackets" href="#globalnumbering" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is to
 allocate global numbers in ascending entity dimension order, and
 within each dimension in order of the index of each global topological
 entity. The formula for the first global node associated with entity
 <span class="math notranslate nohighlight">\((d, i)\)</span> is then:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-0">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-4-function-spaces-0" title="Permalink to this equation">¶</a></span>\[G(d, i) = \left(\sum_{\delta &lt; d} N_\delta E_\delta\right) + iN_d\]</div>
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-4-function-spaces-0" title="Link to this equation">¶</a></span>\[G(d, i) = \left(\sum_{\delta &lt; d} N_\delta E_\delta\right) + iN_d\]</div>
 <p>where <span class="math notranslate nohighlight">\(N_d\)</span> is the number of nodes which this finite element
 associates with a single entity of dimension <span class="math notranslate nohighlight">\(d\)</span>, and <span class="math notranslate nohighlight">\(E_d\)</span> is the number
 of dimension <span class="math notranslate nohighlight">\(d\)</span> entities in the mesh. The full list of nodes
 associated with entity <span class="math notranslate nohighlight">\((d, i)\)</span> is therefore:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-1">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-4-function-spaces-1" title="Permalink to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-4-function-spaces-1" title="Link to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
 </section>
 <section id="the-cell-node-map">
-<span id="cell-node"></span><h2><span class="section-number">4.4. </span>The cell-node map<a class="headerlink" href="#the-cell-node-map" title="Permalink to this headline">¶</a></h2>
+<span id="cell-node"></span><h2><span class="section-number">4.4. </span>The cell-node map<a class="headerlink" href="#the-cell-node-map" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -241,10 +239,10 @@ from cells to adjacent nodes as a two-dimensional array with one row
 corresponding to each cell, and with columns corresponding to the
 local node numbers. The entries in this map will have the following values:</p>
 <div class="math notranslate nohighlight" id="equation-eqcellnode">
-<span class="eqno">(4.4)<a class="headerlink" href="#equation-eqcellnode" title="Permalink to this equation">¶</a></span>\[M[c, e(\delta, \epsilon)] = [G(\delta, i), \ldots, G(\delta,i) + N_\delta - 1] \qquad\forall 0\leq\delta\leq\dim(c), \forall 0\leq\epsilon &lt; \hat{E}_\delta\]</div>
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-eqcellnode" title="Link to this equation">¶</a></span>\[M[c, e(\delta, \epsilon)] = [G(\delta, i), \ldots, G(\delta,i) + N_\delta - 1] \qquad\forall 0\leq\delta\leq\dim(c), \forall 0\leq\epsilon &lt; \hat{E}_\delta\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-2">
-<span class="eqno">(4.5)<a class="headerlink" href="#equation-4-function-spaces-2" title="Permalink to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-4-function-spaces-2" title="Link to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
 <p><span class="math notranslate nohighlight">\(e(\delta, \epsilon)\)</span> is the local entity-node list for this finite
 element for the <span class="math notranslate nohighlight">\((\delta, \epsilon)\)</span> local entity,
 <span class="math notranslate nohighlight">\(\operatorname{Adj}\)</span> has the meaning given under <a class="reference internal" href="1_quadrature.html#secadjacency"><span class="std std-ref">Python implementations of reference elements</span></a>,
@@ -252,7 +250,7 @@ element for the <span class="math notranslate nohighlight">\((\delta, \epsilon)\
 cell, and <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(N\)</span> have the meanings given above. This algorithm
 requires a trivial extension to adjacency:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-3">
-<span class="eqno">(4.6)<a class="headerlink" href="#equation-4-function-spaces-3" title="Permalink to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-4-function-spaces-3" title="Link to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>In <a class="reference internal" href="#equation-eqcellnode">(4.4)</a>, notice that for each value of <span class="math notranslate nohighlight">\(\delta\)</span> and
@@ -262,7 +260,7 @@ of <span class="math notranslate nohighlight">\(M\)</span> for each <span class=
 </div>
 </section>
 <section id="implementing-function-spaces-in-python">
-<h2><span class="section-number">4.5. </span>Implementing function spaces in Python<a class="headerlink" href="#implementing-function-spaces-in-python" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.5. </span>Implementing function spaces in Python<a class="headerlink" href="#implementing-function-spaces-in-python" title="Link to this heading">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -321,14 +319,15 @@ integers. This can be achieved by passing the <code class="docutils literal notr
 to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>. For example <code class="docutils literal notranslate"><span class="pre">numpy.zeros((nrows,</span> <span class="pre">ncols),</span> <span class="pre">dtype=int)</span></code>.</p>
 </div>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="globalnumbering"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Many correct global numberings are possible,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="globalnumbering" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Many correct global numberings are possible,
 that presented here is simple and correct, but not
 optimal from the perspective of the memory
 layout of the resulting data.</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -340,8 +339,8 @@ layout of the resulting data.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>
