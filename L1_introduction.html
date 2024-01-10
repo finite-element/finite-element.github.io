@@ -147,10 +147,10 @@ a triangulation.</p>
 <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> of <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of triangles <span class="math notranslate nohighlight">\(\{K_i\}_{i=1}^N\)</span>, such
 that:</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\mathrm{int}\, K_i \cap K_j = \emptyset, \quad i\neq j\)</span>, where <span class="math notranslate nohighlight">\(\mathrm{int }\)</span> denotes the interior of a set (no overlaps).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathrm{int}\, K_i \cap \mathrm{int}\, K_j = \emptyset, \quad i\neq j\)</span>, where <span class="math notranslate nohighlight">\(\mathrm{int }\)</span> denotes the interior of a set (no overlaps).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\cup K_i = \bar{\Omega}\)</span>, the closure of <span class="math notranslate nohighlight">\(\Omega\)</span> (triangulation covers
 <span class="math notranslate nohighlight">\(\Omega\)</span>).</p></li>
-<li><p>No vertex of any triangle is located in the interior of any other triangle in <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> (triangle vertices only meet other triangle vertices).</p></li>
+<li><p>No vertex of any triangle lies in the interior of an edge of another triangle (triangle vertices only meet other triangle vertices).</p></li>
 </ol>
 </div></div></section>
 <section id="our-first-finite-element-space">

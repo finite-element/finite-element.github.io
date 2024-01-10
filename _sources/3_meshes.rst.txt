@@ -30,7 +30,7 @@ Mesh entities
 Like a cell, a mesh is composed of *topological entities*, such as vertices,
 edges, polygons and polyhedra. The distinction is that a mesh is made of
 potentially many cells, and a commensurate number of lower-dimensional
-entities. 
+entities.
 
 .. proof:definition:: 
 

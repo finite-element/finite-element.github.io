@@ -81,7 +81,7 @@ number of nodes which must be associated with a local topological
 entity of dimension `d` is `\binom{p-1}{d}`.
 
 :numref:`figlagrange-nodes-association` illustrates the association of nodes with
-reference entities for Lagrange elements on triangles. 
+reference entities for Lagrange elements on triangles.
 
 .. _figlagrange-nodes-association:
 
