@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2. Constructing finite elements &#8212; Finite element course 2021.0 documentation</title>
+    <title>2. Constructing finite elements &#8212; Finite element course 2024.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -72,7 +72,7 @@ formalised by <span id="id1">[<a class="reference internal" href="zbibliography.
 <div class="proof proof-type-definition" id="id5">
 <span id="def-ciarlet"></span>
     <div class="proof-title">
-        <span class="proof-type">Definition 2.44</span>
+        <span class="proof-type">Definition 2.43</span>
         
     </div><div class="proof-content">
 <p>A <em>finite element</em> is a triple <span class="math notranslate nohighlight">\((K, P, N)\)</span> in which <span class="math notranslate nohighlight">\(K\)</span> is a cell,
@@ -85,7 +85,7 @@ of nodes for an element, and then derive an appropriate basis for
 <div class="proof proof-type-definition" id="id6">
 <span id="nodalbasis"></span>
     <div class="proof-title">
-        <span class="proof-type">Definition 2.45</span>
+        <span class="proof-type">Definition 2.44</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(N = \{\phi^*_j\}\)</span> be a basis for <span class="math notranslate nohighlight">\(P^*\)</span>.  A <em>nodal
@@ -204,20 +204,7 @@ function normal or tangent to the boundary of the cell at some point.</p>
 </section>
 <section id="the-lagrange-element-nodes">
 <h2><span class="section-number">2.3. </span>The Lagrange element nodes<a class="headerlink" href="#the-lagrange-element-nodes" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<div class="vimeo docutils container">
-<iframe src="https://player.vimeo.com/video/495194534"
-frameborder="0" allow="autoplay; fullscreen"
-allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d845a6c8-017b-4b50-92f0-ac9f00e00796">watch this video on Panopto</a></p>
-</div>
-</details><p>The number of coefficients of a degree <span class="math notranslate nohighlight">\(p\)</span> polynomial in <span class="math notranslate nohighlight">\(d\)</span>
+<p>The number of coefficients of a degree <span class="math notranslate nohighlight">\(p\)</span> polynomial in <span class="math notranslate nohighlight">\(d\)</span>
 dimensions is given by the combination <span class="math notranslate nohighlight">\(\binom{p+d}{d}\)</span>. The
 simplest set of nodes which we can employ is simply to place these
 nodes in a regular grid over the reference cell. Given the classical
@@ -230,19 +217,40 @@ this produces the correct number of nodes.</p>
 <p>The finite elements with this set of nodes are called the <em>equispaced
 Lagrange</em> elements and are the most commonly used elements for
 relatively low order computations.</p>
+<p>While this is the simplest node ordering to construct, when we come to
+build finite element spaces over a whole computational mesh in
+<a class="reference internal" href="4_function_spaces.html#secfunctionspaces"><span class="std std-numref">Section 4</span></a>, it will be much more straightforward if the nodes
+are numbered in topological order. That is to say, the lowest numbered nodes
+are those associated with the vertices, followed by those associated with the
+edges and finally, in two dimensions, those associated with the cell. For
+reasons that will become apparent when we consider the continuity of finite
+element spaces, the nodes associated with the edges need to be in edge
+orientation order. That is to say, the node number increases as one moves along
+the edge in the direction of the arrow. In two dimensions, the ordering of
+nodes in the cell interior is arbitrary.</p>
+<figure class="align-default" id="id7">
+<span id="figlagrange-nodes"></span><a class="reference internal image-reference" href="_images/lagrange_nodes.svg"><img alt="_images/lagrange_nodes.svg" src="_images/lagrange_nodes.svg" width="70%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">The numbering of nodes for the degree 1, 2, and 3 equispaced Lagrange
+elements on triangles. Black nodes are associated with vertices, red nodes
+with edges and blue nodes with the cell (face). Note that the numbering of
+nodes on edges follows the numbering of the edges in
+<a class="reference internal" href="1_quadrature.html#figreferenceentities"><span class="std std-numref">Fig. 1.5</span></a>.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At higher order the equispaced Lagrange basis is poorly conditioned
 and creates unwanted oscillations in the solutions. However for
 this course Lagrange elements will be sufficient.</p>
 </div>
-<div class="proof proof-type-exercise" id="id7">
+<div class="proof proof-type-exercise" id="id8">
 <span id="ex-lagrange-points"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.46</span>
+        <span class="proof-type">Exercise 2.45</span>
         
     </div><div class="proof-content">
-<p>Use <a class="reference internal" href="#equation-lattice">(2.6)</a> to implement
+<p>Implement
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code></a>. Make sure your
 algorithm also works for one-dimensional elements. Some basic tests
 for your code are to be found in
@@ -304,10 +312,10 @@ order, so it may be advantageous to employ a different basis in the
 construction of the Vandermonde matrix. See <span id="id4">[<a class="reference internal" href="zbibliography.html#id2" title="R.C. Kirby. Algorithm 839: fiat, a new paradigm for computing finite element basis functions. ACM Transactions on Mathematical Software (TOMS), 30(4):502–516, 2004. doi:10.1145/1039813.1039820.">Kir04</a>]</span> for an
 example.</p>
 </div>
-<div class="proof proof-type-exercise" id="id8">
+<div class="proof proof-type-exercise" id="id9">
 <span id="ex-vandermonde"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.47</span>
+        <span class="proof-type">Exercise 2.46</span>
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-vandermonde">(2.7)</a> to implement
@@ -346,10 +354,10 @@ polynomial spaces so we will specify <span class="math notranslate nohighlight">
 degree of the polynomials in the space. Since we will only deal with
 point evaluation nodes, we can represent <span class="math notranslate nohighlight">\(N\)</span> by a series of points at
 which the evaluation should occur.</p>
-<div class="proof proof-type-exercise" id="id9">
+<div class="proof proof-type-exercise" id="id10">
 <span id="ex-finite-element"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.48</span>
+        <span class="proof-type">Exercise 2.47</span>
         
     </div><div class="proof-content">
 <p>Implement the rest of the
@@ -361,7 +369,7 @@ invert it to create the basis function coefs. Store these as
 <code class="docutils literal notranslate"><span class="pre">test/test_04_init_finite_element.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv()</span></code></a> function may be
 used to invert the matrix.</p>
 </div>
 </section>
@@ -387,10 +395,10 @@ polynomial, degree and nodes. The
 <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#inheritance">subclass</a> of
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> which will implement
 the particular case of the equispaced Lagrange elements.</p>
-<div class="proof proof-type-exercise" id="id10">
+<div class="proof proof-type-exercise" id="id11">
 <span id="ex-lagrange-element"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.49</span>
+        <span class="proof-type">Exercise 2.48</span>
         
     </div><div class="proof-content">
 <p>Implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method of
@@ -435,10 +443,10 @@ functions <span class="math notranslate nohighlight">\(\{\phi_j\}\)</span> with 
 basis given by the matrix <span class="math notranslate nohighlight">\(C\)</span>. Then the tabulation matrix is given by:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-3">
 <span class="eqno">(2.10)<a class="headerlink" href="#equation-2-finite-elements-3" title="Permalink to this equation">¶</a></span>\[   T_{ij} = \phi_j(X_i) = \sum_b V(X_i)_b C_{bj} = (V(X_:) \cdot C)_{ij}\]</div>
-<div class="proof proof-type-exercise" id="id11">
+<div class="proof proof-type-exercise" id="id12">
 <span id="ex-tabulate"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.50</span>
+        <span class="proof-type">Exercise 2.49</span>
         
     </div><div class="proof-content">
 <p>Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a>.
@@ -486,10 +494,10 @@ coefficients. Hence:</p>
 through <span class="math notranslate nohighlight">\(\nabla\)</span>. The effect of this is that evaluating the gradient
 of a function in a finite element field just requires the evaluation
 of the gradient of the Vandermonde matrix.</p>
-<div class="proof proof-type-exercise" id="id12">
+<div class="proof proof-type-exercise" id="id13">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.51</span>
+        <span class="proof-type">Exercise 2.50</span>
         
     </div><div class="proof-content">
 <p>Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code></a> so that
@@ -507,7 +515,7 @@ extension. You should also ensure that you still pass
 <code class="docutils literal notranslate"><span class="pre">test/test_03_vandermonde_matrix.py</span></code>.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.24)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="(in NumPy v1.26)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transpose()</span></code></a> method of numpy arrays enables
 generalised transposes swapping any dimensions.</p>
 </div>
 <div class="admonition hint">
@@ -515,12 +523,12 @@ generalised transposes swapping any dimensions.</p>
 <p>At least one of the natural ways of implementing this function
 results in a whole load of <code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code> values in the generalised
 Vandermonde matrix. In this case, you might find
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.nan_to_num.html#numpy.nan_to_num" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.nan_to_num()</span></code></a> useful.</p>
 </div>
-<div class="proof proof-type-exercise" id="id13">
+<div class="proof proof-type-exercise" id="id14">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.52</span>
+        <span class="proof-type">Exercise 2.51</span>
         
     </div><div class="proof-content">
 <p>Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> to
@@ -552,7 +560,7 @@ allowfullscreen></iframe></div>
 </div>
 </details><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a> function implements generalised tensor
 contractions using <a class="reference external" href="http://mathworld.wolfram.com/EinsteinSummation.html">Einstein summation notation</a>. For
 example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ijk,jl-&gt;ilk&quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
@@ -588,10 +596,10 @@ evaluation of their function input, we know that:</p>
 <div class="math notranslate nohighlight" id="equation-2-finite-elements-11">
 <span class="eqno">(2.18)<a class="headerlink" href="#equation-2-finite-elements-11" title="Permalink to this equation">¶</a></span>\[f_i = f(X_i)\]</div>
 <p>where <span class="math notranslate nohighlight">\(X_i\)</span> is the point associated with the <span class="math notranslate nohighlight">\(i\)</span>-th node.</p>
-<div class="proof proof-type-exercise" id="id14">
+<div class="proof proof-type-exercise" id="id15">
 <span id="ex-interpolate"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.53</span>
+        <span class="proof-type">Exercise 2.52</span>
         
     </div><div class="proof-content">
 <p>Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate" title="fe_utils.finite_elements.FiniteElement.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a>.</p>
@@ -627,7 +635,7 @@ is the one-dimensional case of the generalised Vandermonde matrix.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>

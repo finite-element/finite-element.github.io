@@ -50,9 +50,10 @@
   <h1>Source code for fe_utils.function_spaces</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">ReferenceTriangle</span><span class="p">,</span> <span class="n">ReferenceInterval</span>
-<span class="kn">from</span> <span class="nn">.finite_elements</span> <span class="kn">import</span> <span class="n">LagrangeElement</span><span class="p">,</span> <span class="n">lagrange_points</span>
+<span class="kn">from</span> <span class="nn">.finite_elements</span> <span class="kn">import</span> <span class="n">LagrangeElement</span><span class="p">,</span> <span class="n">lagrange_points</span><span class="p">,</span> <span class="n">FiniteElement</span><span class="p">,</span> <span class="n">VectorFiniteElement</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib.tri</span> <span class="kn">import</span> <span class="n">Triangulation</span>
+<span class="kn">from</span> <span class="nn">.quadrature</span> <span class="kn">import</span> <span class="n">gauss_quadrature</span>
 
 
 <div class="viewcode-block" id="FunctionSpace"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.FunctionSpace">[docs]</a><span class="k">class</span> <span class="nc">FunctionSpace</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -73,15 +74,40 @@
         <span class="c1">#: The :class:`~.finite_elements.FiniteElement` of this space.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">element</span> <span class="o">=</span> <span class="n">element</span>
 
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
         <span class="c1"># Implement global numbering in order to produce the global</span>
         <span class="c1"># cell node list for this space.</span>
         <span class="c1">#: The global cell node list. This is a two-dimensional array in</span>
         <span class="c1">#: which each row lists the global nodes incident to the corresponding</span>
         <span class="c1">#: cell. The implementation of this member is left as an</span>
         <span class="c1">#: :ref:`exercise &lt;ex-function-space&gt;`</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cell_nodes</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">global_index</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+            <span class="c1"># G(d, i) = sum_{\delta &lt; d} N_{\delta}E_{\delta} + iN_d</span>
+            <span class="c1"># N_{\delta} = nodes per entity of dimension \delta</span>
+            <span class="c1"># E_{\delta} = number of entities in mesh of dimension \delta  </span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">element</span><span class="o">.</span><span class="n">nodes_per_entity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">nodes_per_entity</span><span class="p">[:</span><span class="n">d</span><span class="p">],</span> <span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">[:</span><span class="n">d</span><span class="p">])</span>
+
+        <span class="c1"># Initialise map with correct dimensions (cells x nodes per cell)</span>
+        <span class="n">cell_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">cell_vertices</span><span class="p">)</span>
+        <span class="n">node_count</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">node_count</span> 
+        <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">cell_count</span><span class="p">,</span> <span class="n">node_count</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="c1"># Enumerate through cells of mesh to populate rows of map</span>
+        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cell_count</span><span class="p">):</span>
+            <span class="c1"># Iterate through dimensions</span>
+            <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="n">mesh</span><span class="o">.</span><span class="n">dim</span><span class="p">:</span>
+                    <span class="c1"># Adj_{x, x} = id</span>
+                    <span class="n">global_adj</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="p">]</span> 
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">global_adj</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">adjacency</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">)[</span><span class="n">cell</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="c1"># Iterate through entites of dimension dim</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">entity_nodes</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">global_adj</span><span class="p">[</span><span class="n">eps</span><span class="p">]</span>
+                    <span class="c1"># Iterate through nodes of entity</span>
+                    <span class="n">m</span><span class="p">[</span><span class="n">cell</span><span class="p">,</span> <span class="n">nodes</span><span class="p">]</span> <span class="o">=</span> <span class="n">global_index</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell_nodes</span> <span class="o">=</span> <span class="n">m</span>
 
         <span class="c1">#: The total number of nodes in the function space.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">nodes_per_entity</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">)</span>
@@ -126,16 +152,38 @@
 
         <span class="c1"># Create a map from the vertices to the element nodes on the</span>
         <span class="c1"># reference cell.</span>
+
+        <span class="c1"># Linear lagrange elements are the vertices of a cell</span>
         <span class="n">cg1</span> <span class="o">=</span> <span class="n">LagrangeElement</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Evaluate lagrange basis (vertices of cell) at *local* node points </span>
+        <span class="c1"># of element. coord_map \equiv A_{i, j} = \Psi_j(X_i) </span>
         <span class="n">coord_map</span> <span class="o">=</span> <span class="n">cg1</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+        <span class="c1"># New function space with same mesh but linear lagrange points</span>
         <span class="n">cg1fs</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cg1</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
             <span class="c1"># Interpolate the coordinates to the cell nodes.</span>
+
+			<span class="c1"># mesh.vertex_coords are *global* coordinates of cell vertices</span>
+            <span class="c1"># cg1fs.cell_nodes is the global ordering of vertices of the mesh</span>
+            <span class="c1"># look up corresponding global vertex coordinate to local node location </span>
             <span class="n">vertex_coords</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">vertex_coords</span><span class="p">[</span><span class="n">cg1fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:],</span> <span class="p">:]</span>
+
+            <span class="c1"># Interpolate. This is x = A . x^</span>
             <span class="n">node_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">coord_map</span><span class="p">,</span> <span class="n">vertex_coords</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">node_coords</span><span class="p">]</span></div>
+            <span class="c1"># Evaluate</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="p">,</span> <span class="n">FiniteElement</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">node_coords</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="p">,</span> <span class="n">VectorFiniteElement</span><span class="p">):</span>
+                <span class="c1"># Include canonical basis vector in case of vector finite element</span>
+                <span class="n">node_direction</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">node_weights</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">node_coords</span><span class="p">,</span> <span class="n">node_direction</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Unknown finite element class&quot;</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="Function.plot"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.Function.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subdivisions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Plot the value of this :class:`Function`. This is quite a low</span>
@@ -153,6 +201,17 @@
 
         <span class="n">fs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_space</span>
 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="p">,</span> <span class="n">VectorFiniteElement</span><span class="p">):</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+            <span class="n">coords</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">return</span>
+
         <span class="n">d</span> <span class="o">=</span> <span class="n">subdivisions</span> <span class="ow">or</span> <span class="p">(</span>
             <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">degree</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span>
         <span class="p">)</span>
@@ -165,7 +224,7 @@
 
         <span class="k">elif</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceTriangle</span><span class="p">:</span>
             <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
             <span class="n">local_coords</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lagrange_triangles</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
@@ -222,7 +281,36 @@
 
 <span class="sd">        :result: The integral (a scalar).&quot;&quot;&quot;</span>
 
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+        <span class="n">fs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_space</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span>
+        <span class="n">mesh</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">mesh</span>
+        <span class="n">cell_nodes</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span>
+
+        <span class="c1"># Quadrature rule</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">gauss_quadrature</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Tabulate basis functions at each quadrature point</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+
+        <span class="c1"># Integrate each cell adding up contribution</span>
+        <span class="n">int_sum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+
+            <span class="c1"># Compute |J| for cell</span>
+            <span class="n">J</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">detJ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">J</span><span class="p">))</span>
+
+            <span class="c1"># F(M(c, i))</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            <span class="n">node_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">])</span>
+
+            <span class="c1"># Sum contributions</span>
+            <span class="n">cell_cont</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;i,qi,q&quot;</span><span class="p">,</span> <span class="n">node_coeffs</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">Q</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+
+            <span class="c1"># Cell contribution</span>
+            <span class="n">int_sum</span> <span class="o">+=</span> <span class="n">detJ</span> <span class="o">*</span> <span class="n">cell_cont</span>
+
+        <span class="k">return</span> <span class="n">int_sum</span></div></div>
 </pre></div>
 
             <div class="clearer"></div>

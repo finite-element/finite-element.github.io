@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>9. Mixed problems &#8212; Finite element course 2021.0 documentation</title>
+    <title>9. Mixed problems &#8212; Finite element course 2024.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -115,8 +115,8 @@ interleave <span class="math notranslate nohighlight">\(x\)</span> and <span cla
 </figcaption>
 </figure>
 <p>We can practically implement vector function spaces by implementing a new class
-<code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.finite_elements.VectorFiniteElement</span></code>. The constructor
-(<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__" title="(in Python v3.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>) of this new class should take a
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.VectorFiniteElement" title="fe_utils.finite_elements.VectorFiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.finite_elements.VectorFiniteElement</span></code></a>. The constructor
+(<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>) of this new class should take a
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> and construct the
 corresponding vector element. For current purposes we can assume that the
 vector element will always have a vector dimension equal to the element
@@ -174,7 +174,7 @@ tabulation.</p>
 <h3><span class="section-number">9.1.3. </span>Nodes<a class="headerlink" href="#nodes" title="Permalink to this headline">¶</a></h3>
 <p>Even though we didn’t need the nodes of the <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code> to
 construct its basis, we will need them to implement interpolation. In
-<a class="reference internal" href="2_finite_elements.html#nodalbasis"><span class="std std-numref">Definition 2.45</span></a> we learned that
+<a class="reference internal" href="2_finite_elements.html#nodalbasis"><span class="std std-numref">Definition 2.44</span></a> we learned that
 the nodes of a finite element are related to the corresponding nodal basis by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-3">
 <span class="eqno">(9.6)<a class="headerlink" href="#equation-9-mixed-problems-3" title="Permalink to this equation">¶</a></span>\[\mathbf{\Phi}^*_i(\mathbf{\Phi}_j) = \delta_{ij}\]</div>
@@ -253,7 +253,7 @@ definition of <code class="xref py py-data docutils literal notranslate"><span c
 <span class="linenos"> 2</span>    <span class="n">coords</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
 <span class="linenos"> 3</span>    <span class="n">coords</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
 <span class="linenos"> 4</span>    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="linenos"> 5</span>    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="linenos"> 5</span>    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
 <span class="linenos"> 6</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="linenos"> 7</span>    <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="linenos"> 8</span>    <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
@@ -364,7 +364,7 @@ block vectors is the one you are familiar with, but we will need to do
 something new to assemble the block structures. What is required differs
 slightly between the matrix and the vectors.</p>
 <p>In the case of the vectors, then it is sufficient to know that a slice into a
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> returns a view on the same memory as the full vector.
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> returns a view on the same memory as the full vector.
 This is most easily understood through an example:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -380,7 +380,7 @@ This is most easily understood through an example:</p>
 </div>
 <p>This means that one can first create a full vector of length <span class="math notranslate nohighlight">\(n+m\)</span> and then
 slice it to create subvectors that can be used for assembly.</p>
-<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+1378.e63cc01)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.11.0.dev0+1378.e63cc01)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
+<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.13.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.13.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
 function which will stitch together a larger sparse matrix from blocks. In
 order to have the full indexing options you are likely to want for imposing the
 boundary conditions, you will probably want to specify that the resulting
@@ -408,15 +408,15 @@ that subspace is one-dimensional.</p>
 <p>The block matrix system that you eventually produce will be larger than many of
 those we have previously encountered, and will have non-zero entries further
 from the diagonal. This can cause the matrix solver to become expensive in both
-time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.11.0.dev0+1378.e63cc01)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
+time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.13.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
 interface to <a class="reference external" href="https://portal.nersc.gov/project/sparse/superlu/">SuperLU</a>,
 which is a high-performance direct sparse solver. The recommended solution
 strategy is therefore:</p>
 <ol class="arabic simple">
-<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.11.0.dev0+1378.e63cc01)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
+<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.13.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
 format that SuperLU requires.</p></li>
-<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.11.0.dev0+1378.e63cc01)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
-<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.11.0.dev0+1378.e63cc01)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
+<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.13.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
+<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.13.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
 the system.</p></li>
 </ol>
 </section>
@@ -492,7 +492,7 @@ The obvious consequential change will be needed at the end of
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>

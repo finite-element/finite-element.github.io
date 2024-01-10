@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. Function spaces: associating data with meshes &#8212; Finite element course 2021.0 documentation</title>
+    <title>4. Function spaces: associating data with meshes &#8212; Finite element course 2024.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -121,18 +121,15 @@ dimensions given by the combination <span class="math notranslate nohighlight">\
 <p>This pattern holds more generally: for a <span class="math notranslate nohighlight">\(C_0\)</span> function space, the
 number of nodes which must be associated with a local topological
 entity of dimension <span class="math notranslate nohighlight">\(d\)</span> is <span class="math notranslate nohighlight">\(\binom{p-1}{d}\)</span>.</p>
-<p><a class="reference internal" href="#figlagrange-nodes"><span class="std std-numref">Fig. 4.1</span></a> illustrates the association of nodes with
-reference entities for Lagrange elements on triangles. The numbering
-of nodes will depend on how
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code></a> is implemented. The
-numbering used here is just one of the obvious choices.</p>
+<p><a class="reference internal" href="#figlagrange-nodes-association"><span class="std std-numref">Fig. 4.1</span></a> illustrates the association of nodes with
+reference entities for Lagrange elements on triangles.</p>
 <figure class="align-default" id="id2">
-<span id="figlagrange-nodes"></span><a class="reference internal image-reference" href="_images/lagrange_nodes.svg"><img alt="_images/lagrange_nodes.svg" src="_images/lagrange_nodes.svg" width="70%" /></a>
+<span id="figlagrange-nodes-association"></span><a class="reference internal image-reference" href="_images/lagrange_nodes.svg"><img alt="_images/lagrange_nodes.svg" src="_images/lagrange_nodes.svg" width="70%" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Association of nodes with reference entities for the degree 1, 2,
 and 3 equispaced Lagrange elements on triangles. Black nodes are
 associated with vertices, red nodes with edges and blue nodes with
-the cell (face). The numbering of the nodes is arbitrary.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+the cell (face). This is the same figure as <a class="reference internal" href="2_finite_elements.html#figlagrange-nodes"><span class="std std-numref">Fig. 2.1</span></a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
@@ -156,16 +153,16 @@ structure to the <a class="reference internal" href="fe_utils.html#fe_utils.fini
 class. For each local entity this must record the local nodes
 associated with that entity. This can be achieved using a dictionary
 of dictionaries structure. For example employing the local numbering
-of nodes employed in <a class="reference internal" href="#figlagrange-nodes"><span class="std std-numref">Fig. 4.1</span></a>, the <code class="docutils literal notranslate"><span class="pre">entity_node</span></code>
+of nodes employed in <a class="reference internal" href="2_finite_elements.html#figlagrange-nodes"><span class="std std-numref">Fig. 2.1</span></a>, the <code class="docutils literal notranslate"><span class="pre">entity_node</span></code>
 dictionary for the degree three equispaced Lagrange element on a triangle is
 given by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entity_node</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span>
-                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">]},</span>
-               <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
-                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
-                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]},</span>
-               <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">]}}</span>
+                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]},</span>
+               <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]},</span>
+               <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">]}}</span>
 </pre></div>
 </div>
 <p>Note that the order of the nodes in each list is important: it must
@@ -173,11 +170,6 @@ always consistently reflect the orientation of the relevant entity in
 order that all the cells which share that entity consistently
 interpret the nodes. In this case this has been achieved by listing
 the nodes in order given by the direction of the orientation of each edge.</p>
-<p>The following animation illustrates the construction of the <code class="docutils literal notranslate"><span class="pre">entity_node</span></code> dictionary.</p>
-<div class="youtube docutils container">
-<div class="video_wrapper" style="padding-bottom: 56.250000%; padding-top: 30px; position: relative; width: 100%">
-<iframe allowfullscreen="true" src="https://www.youtube.com/embed/dTWoTjARi2w?modestbranding=1;controls=0;rel=0" style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%">
-</iframe></div></div>
 <div class="proof proof-type-exercise" id="id3">
 <span id="ex-local"></span>
     <div class="proof-title">
@@ -189,19 +181,7 @@ the nodes in order given by the direction of the orientation of each edge.</p>
 passes the correct <code class="docutils literal notranslate"><span class="pre">entity_node</span></code> dictionary to the
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> it creates.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">test/test_08_entity_nodes.py</span></code> script tests this functionality.</p>
-</div></div><div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>You can either work out the right algorithm to generate
-<code class="docutils literal notranslate"><span class="pre">entity_nodes</span></code> with the right node indices, or you can modify
-<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.lagrange_points" title="fe_utils.finite_elements.lagrange_points"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code></a> so that it
-produces the nodes in entity order, thus making the construction of
-<code class="docutils literal notranslate"><span class="pre">entity_nodes</span></code> straightforward.</p>
-<p>You may find the
-<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell.point_in_entity" title="fe_utils.reference_elements.ReferenceCell.point_in_entity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">point_in_entity()</span></code></a>
-method of the <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>
-class useful.</p>
-</div>
-</section>
+</div></div></section>
 <section id="global-numbering">
 <h2><span class="section-number">4.3. </span>Global numbering<a class="headerlink" href="#global-numbering" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
@@ -267,7 +247,7 @@ local node numbers. The entries in this map will have the following values:</p>
 <span class="eqno">(4.5)<a class="headerlink" href="#equation-4-function-spaces-2" title="Permalink to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
 <p><span class="math notranslate nohighlight">\(e(\delta, \epsilon)\)</span> is the local entity-node list for this finite
 element for the <span class="math notranslate nohighlight">\((\delta, \epsilon)\)</span> local entity,
-<span class="math notranslate nohighlight">\(\operatorname{Adj}\)</span> has the meaning given under <a class="reference internal" href="3_meshes.html#secadjacency"><span class="std std-ref">Adjacency</span></a>,
+<span class="math notranslate nohighlight">\(\operatorname{Adj}\)</span> has the meaning given under <a class="reference internal" href="1_quadrature.html#secadjacency"><span class="std std-ref">Python implementations of reference elements</span></a>,
 <span class="math notranslate nohighlight">\(\hat{E}_\delta\)</span> is the number of dimension <span class="math notranslate nohighlight">\(\delta\)</span> entities in each
 cell, and <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(N\)</span> have the meanings given above. This algorithm
 requires a trivial extension to adjacency:</p>
@@ -307,7 +287,7 @@ element, and contains (in some form) a global numbering of the nodes.</p>
 <p>Implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method of
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.function_spaces.FunctionSpace</span></code></a>. The key operation
 is to set
-<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> using
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code> using
 <a class="reference internal" href="#equation-eqcellnode">(4.4)</a>.</p>
 <p>You can plot the numbering you have created with the
 <code class="docutils literal notranslate"><span class="pre">plot_function_space_nodes</span></code> script. As usual, run the
@@ -333,12 +313,12 @@ index:</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p><a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> needs to
-be integer-valued. If you choose to use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>
+<p><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code> needs to
+be integer-valued. If you choose to use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>
 to create a matrix which you then populate with values, you
 need to explicitly specify that you want a matrix of
 integers. This can be achieved by passing the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument
-to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>. For example <code class="docutils literal notranslate"><span class="pre">numpy.zeros((nrows,</span> <span class="pre">ncols),</span> <span class="pre">dtype=int)</span></code>.</p>
+to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>. For example <code class="docutils literal notranslate"><span class="pre">numpy.zeros((nrows,</span> <span class="pre">ncols),</span> <span class="pre">dtype=int)</span></code>.</p>
 </div>
 <p class="rubric">Footnotes</p>
 <dl class="footnote brackets">
@@ -360,7 +340,7 @@ layout of the resulting data.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>

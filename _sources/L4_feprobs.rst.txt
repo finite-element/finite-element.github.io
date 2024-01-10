@@ -323,7 +323,7 @@ and continuity.
 
    On the other hand, `L` continuous `\implies |L(u-v)| \leq C\|u-v\|_{H}
    \quad \forall u,v\in H`. Pick `v=0`, then `|L(u)| = |L(u-0)| \leq
-   C|u-0|_H = C|u|_H`, i.e. `L` is bounded.
+   C\|u-0\|_H = C\|u\|_H`, i.e. `L` is bounded.
 
 We can also interpret bounded linear functionals as elements of a vector space.
 
@@ -359,7 +359,7 @@ There is a simple mapping from `H` to `H'`.
 
    .. math::
 
-      L_u(v+\alpha w) = (u,v+\alpha w) = (u,v) + \alpha(u,v) = L_u(v)
+      L_u(v+\alpha w) = (u,v+\alpha w) = (u,v) + \alpha(u,w) = L_u(v)
       + \alpha L_u(w).
 
    Hence `L_u` is linear.
@@ -661,7 +661,7 @@ For the Helmholtz problem, we have
    
    b(u,v) = \int_\Omega uv + \nabla u\cdot \nabla v \, d x = (u,v)_{H^1},
 
-i.e. `b(u,v)` is the `H^1` inner of `u` and `v`, which makes the
+i.e. `b(u,v)` is the `H^1` inner product of `u` and `v`, which makes the
 continuity and coercivity immediate.
   
 For the Poisson problem, we have
@@ -1033,8 +1033,8 @@ Poisson problem with (full or partial) Dirichlet conditions.
       &\leq C|v|_{H^1(\Omega)} + \frac{|\Omega|^{1/2}}{|\Gamma_0|}
       \left|\int_{\Gamma_0}\bar{v}\, d S\right|,
  
-      &\leq C|v|_{H^1(\Omega)} + \frac{|\Omega|^{1/2}}{|\Gamma_0|}
-      \left(\left|\int_{\Gamma_0}v\, d S + \int_{\Gamma_0}\bar{v}-v\, d S\right|\right).
+      &= C|v|_{H^1(\Omega)} + \frac{|\Omega|^{1/2}}{|\Gamma_0|}
+      \left(\left|\int_{\Gamma_0}\bar{v} - \underbrace{v}_{=0}\, d S\right|\right).
 
    We have
 
@@ -1042,7 +1042,11 @@ Poisson problem with (full or partial) Dirichlet conditions.
    
       \left|
       \int_{\Gamma_0} (v-\bar{v})\, d s
-      \right|  \leq |\Gamma_0|^{1/2}\|v-\bar{v}\|_{L^2(\partial\Omega)},
+      \right|
+      =\left|
+      \int_{\Gamma_0} 1 \times (v-\bar{v})\, d s
+      \right|
+      \leq |\Gamma_0|^{1/2}\|v-\bar{v}\|_{L^2(\partial\Omega)},
       
       \leq |\Gamma_0|^{1/2}C |v|_{H^1(\Omega)}.
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The implementation exercise &#8212; Finite element course 2021.0 documentation</title>
+    <title>The implementation exercise &#8212; Finite element course 2024.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -193,6 +193,9 @@ url can be found by clicking on <cite>clone or download</cite> at the top right 
 <p>Your git repository contains a Python package. Installing this will cause the
 other Python packages on which it depends to be installed into your venv, and
 will create various visualisation scripts you’ll need later in the module. Run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>finite-element-course/
+</pre></div>
+</div>
 </section>
 </section>
 <section id="skeleton-code-documentation">
@@ -303,7 +306,7 @@ find useful.</p>
 </dd>
 <dt>Don’t forget the 1D case</dt><dd><p>Your finite element library needs to work in one and two dimensions.</p>
 </dd>
-<dt>Return a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array()</span></code></a></dt><dd><p>Many of the functions you have to write return arrays. Make sure
+<dt>Return a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array()</span></code></a></dt><dd><p>Many of the functions you have to write return arrays. Make sure
 you actually return an array and not a list (it’s usually fine to
 build the answer as a list, but convert it to an array before you
 return it).</p>
@@ -320,7 +323,7 @@ return it).</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Meshes &#8212; Finite element course 2021.0 documentation</title>
+    <title>3. Meshes &#8212; Finite element course 2024.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -74,8 +74,10 @@ those in <span id="id1">[<a class="reference internal" href="zbibliography.html#
 finite element method.</p>
 <section id="mesh-entities">
 <h2><span class="section-number">3.1. </span>Mesh entities<a class="headerlink" href="#mesh-entities" title="Permalink to this headline">¶</a></h2>
-<p>A mesh is composed of <em>topological entities</em>, such as vertices, edges,
-polygons and polyhedra.</p>
+<p>Like a cell, a mesh is composed of <em>topological entities</em>, such as vertices,
+edges, polygons and polyhedra. The distinction is that a mesh is made of
+potentially many cells, and a commensurate number of lower-dimensional
+entities.</p>
 <div class="proof proof-type-definition" id="id3">
 
     <div class="proof-title">
@@ -89,97 +91,20 @@ higher dimensional spaces (for example the surface of a sphere
 immersed in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>) so the topological dimension of the
 mesh will always match the geometric dimension of space in which we
 are working, so we will simply refer to the <em>dimension</em> of the mesh.</p>
-<div class="proof proof-type-definition" id="id4">
-
-    <div class="proof-title">
-        <span class="proof-type">Definition 3.27</span>
-        
-    </div><div class="proof-content">
-<p>A topological entity of <em>codimension</em> <span class="math notranslate nohighlight">\(n\)</span> is a topological
-entity of dimension <span class="math notranslate nohighlight">\(d-n\)</span> where <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the
-mesh.</p>
-</div></div><p>Armed with these definitions we are able to define names for
-topological entities of various dimension and codimension:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 35%" />
-<col style="width: 29%" />
-<col style="width: 35%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>entity name</p></th>
-<th class="head"><p>dimension</p></th>
-<th class="head"><p>codimension</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>vertex</p></td>
-<td><p>0</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>edge</p></td>
-<td><p>1</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>face</p></td>
-<td><p>2</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>facet</p></td>
-<td></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>cell</p></td>
-<td></td>
-<td><p>0</p></td>
-</tr>
-</tbody>
-</table>
-<p>The cells of a mesh can be polygons or polyhedra of any shape, however
-in this course we will restrict ourselves to meshes whose cells are
-intervals or triangles. The only other two-dimensional cells
-frequently employed are quadrilaterals.</p>
-<p>The topological entities of each dimension will be given unique
-numbers in order that degrees of freedom can later be associated with
-them. We will identify topological entities by an index pair <span class="math notranslate nohighlight">\((d, i)\)</span>
-where <span class="math notranslate nohighlight">\(i\)</span> is the index of the entity within the set of <span class="math notranslate nohighlight">\(d\)</span>-dimensional
-entities. For example, entity <span class="math notranslate nohighlight">\((0, 10)\)</span> is vertex number 10, and
-entity <span class="math notranslate nohighlight">\((1, 10)\)</span> is edge 10. <a class="reference internal" href="#figmesh"><span class="std std-numref">Fig. 3.1</span></a> shows an example
-mesh with the topological entities labelled.</p>
-<figure class="align-default" id="id5">
+<p>The numbering of mesh entities is similar to that of cell entities, except that
+the indices range over all of the entities of that dimension in the mesh. For
+example, entity <span class="math notranslate nohighlight">\((0, 10)\)</span> is vertex number 10, and entity <span class="math notranslate nohighlight">\((1, 10)\)</span> is edge 10.
+<a class="reference internal" href="#figmesh"><span class="std std-numref">Fig. 3.1</span></a> shows an example mesh with the topological entities labelled.</p>
+<figure class="align-default" id="id4">
 <span id="figmesh"></span><a class="reference internal image-reference" href="_images/mesh.svg"><img alt="_images/mesh.svg" src="_images/mesh.svg" width="80%" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">A triangular mesh showing labelled topological entities: vertices
-(black), edges (red), and cells (blue).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="reference-cell-entities">
-<h2><span class="section-number">3.2. </span>Reference cell entities<a class="headerlink" href="#reference-cell-entities" title="Permalink to this headline">¶</a></h2>
-<p>The reference cells similarly have locally numbered topological
-entities, these are shown in <a class="reference internal" href="#figreferenceentities"><span class="std std-numref">Fig. 3.2</span></a>. The
-numbering is a matter of convention: that adopted here is that edges
-share the number of the opposite vertex. The orientation of the edges
-is also shown, this is always from the lower numbered vertex to the
-higher numbered one.</p>
-<p>The <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> class stores the
-local topology of the reference cell. <a class="reference external" href="_modules/fe_utils/reference_elements.html">Read the source</a> and ensure that you
-understand the way in which this information is encoded.</p>
-<p>The following animation of the numbering of the topological entities
-on the reference cell may help in understanding this.</p>
-<div class="youtube docutils container">
-<div class="video_wrapper" style="">
-<iframe allowfullscreen="true" src="https://www.youtube.com/embed/7A7JU7bGw0E?modestbranding=1;controls=0;rel=0" style="border: 0; height: 367px; width: 600px">
-</iframe></div></div>
-<figure class="align-default" id="id6">
-<span id="figreferenceentities"></span><a class="reference internal image-reference" href="_images/entities.svg"><img alt="_images/entities.svg" src="_images/entities.svg" width="50%" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Local numbering and orientation of the reference entities.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+(black), edges (red), and cells (blue).</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="adjacency">
-<span id="secadjacency"></span><h2><span class="section-number">3.3. </span>Adjacency<a class="headerlink" href="#adjacency" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>Adjacency<a class="headerlink" href="#adjacency" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -202,10 +127,10 @@ vertices, edges and (in 3D) the faces making up the cell, as well as
 the cell itself. One of the roles of the mesh is therefore to provide
 a lookup facility for the lower-dimensional mesh entities adjacent to
 a given cell.</p>
-<div class="proof proof-type-definition" id="id7">
+<div class="proof proof-type-definition" id="id5">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.28</span>
+        <span class="proof-type">Definition 3.27</span>
         
     </div><div class="proof-content">
 <p>Given a mesh <span class="math notranslate nohighlight">\(M\)</span>, then for each <span class="math notranslate nohighlight">\(\dim(M) \geq d_1 &gt; d_2 \geq 0\)</span>
@@ -227,10 +152,10 @@ any entity <span class="math notranslate nohighlight">\((d_1, i)\)</span>:</p>
 <p>A consequence of this convention is that the global orientation of
 all the entities making up a cell also matches their local
 orientation.</p>
-</div></div><div class="proof proof-type-example" id="id8">
+</div></div><div class="proof proof-type-example" id="id6">
 
     <div class="proof-title">
-        <span class="proof-type">Example 3.29</span>
+        <span class="proof-type">Example 3.28</span>
         
     </div><div class="proof-content">
 <p>In the mesh shown in <a class="reference internal" href="#figmesh"><span class="std std-numref">Fig. 3.1</span></a> we have:</p>
@@ -242,7 +167,7 @@ orientation.</p>
 <p>Edges 11, 5, and 9 are local edges 0, 1, and 2 of cell 3.</p>
 </div></div></section>
 <section id="mesh-geometry">
-<h2><span class="section-number">3.4. </span>Mesh geometry<a class="headerlink" href="#mesh-geometry" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.3. </span>Mesh geometry<a class="headerlink" href="#mesh-geometry" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -268,7 +193,7 @@ observe that this is equivalent to representing the geometry in a
 vector-valued piecewise linear finite element space.</p>
 </section>
 <section id="a-mesh-implementation-in-python">
-<h2><span class="section-number">3.5. </span>A mesh implementation in Python<a class="headerlink" href="#a-mesh-implementation-in-python" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.4. </span>A mesh implementation in Python<a class="headerlink" href="#a-mesh-implementation-in-python" title="Permalink to this headline">¶</a></h2>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 A video recording of the following material is available here.<div class="summary-down docutils">
@@ -320,7 +245,7 @@ meshes.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
+        &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
