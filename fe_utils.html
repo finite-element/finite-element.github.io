@@ -92,8 +92,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.mastery">fe_utils.solvers.mastery module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.assemble"><code class="docutils literal notranslate"><span class="pre">assemble()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.boundary_nodes"><code class="docutils literal notranslate"><span class="pre">boundary_nodes()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery"><code class="docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a></li>
 </ul>
 </li>
@@ -242,83 +240,6 @@ spans the complete polynomial space.</p></li>
 <p>The implementation of this class is left as an <a class="reference internal" href="2_finite_elements.html#ex-lagrange-element"><span class="std std-ref">exercise</span></a>.</p>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></span><span class="sig-name descname"><span class="pre">VectorFiniteElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scalar_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#VectorFiniteElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>A vector finite element defined over cell.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>scalar_element</strong> – the <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a>
-from which the vector finite element is extended.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement.cell">
-<span class="sig-name descname"><span class="pre">cell</span></span><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement.cell" title="Link to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>
-over which the element is defined.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement.degree">
-<span class="sig-name descname"><span class="pre">degree</span></span><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement.degree" title="Link to this definition">¶</a></dt>
-<dd><p>The polynomial degree of the element. We assume the element
-spans the complete polynomial space.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement.dim">
-<span class="sig-name descname"><span class="pre">dim</span></span><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement.dim" title="Link to this definition">¶</a></dt>
-<dd><p>Vector dimension (assumed to be equal to element geometric and topologcal dimension)</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement.entity_nodes">
-<span class="sig-name descname"><span class="pre">entity_nodes</span></span><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement.entity_nodes" title="Link to this definition">¶</a></dt>
-<dd><p>A dictionary of dictionaries such that <code class="docutils literal notranslate"><span class="pre">entity_nodes[d][i]</span></code>
-is the list of nodes associated with entity <cite>(d, i)</cite>.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement.node_count">
-<span class="sig-name descname"><span class="pre">node_count</span></span><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement.node_count" title="Link to this definition">¶</a></dt>
-<dd><p>The number of nodes in this element.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement.scalar_element">
-<span class="sig-name descname"><span class="pre">scalar_element</span></span><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement.scalar_element" title="Link to this definition">¶</a></dt>
-<dd><p>Reference to scalar finite element this vector finite element was extended from</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="fe_utils.finite_elements.VectorFiniteElement.tabulate">
-<span class="sig-name descname"><span class="pre">tabulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#VectorFiniteElement.tabulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.VectorFiniteElement.tabulate" title="Link to this definition">¶</a></dt>
-<dd><p>Evaluate the basis functions of this vector finite element at the 
-points provided.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>points</strong> – a list of coordinate tuples at which to
-tabulate the basis.</p></li>
-<li><p><strong>grad</strong> – whether to return the tabulation of the basis or the
-tabulation of the gradient of the basis.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Result<span class="colon">:</span></dt>
-<dd class="field-even"><p>an array containing the value of each basis function
-at each point. If <cite>grad</cite> is <cite>True</cite>, the gradient vector of
-each basis vector at each point is returned as a rank 4
-array. The shape of the array is (points, nodes, dim) if
-<code class="docutils literal notranslate"><span class="pre">grad</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> and (points, nodes, dim, dim) if <code class="docutils literal notranslate"><span class="pre">grad</span></code>
-is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="fe_utils.finite_elements.lagrange_points">
 <span class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></span><span class="sig-name descname"><span class="pre">lagrange_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#lagrange_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.lagrange_points" title="Link to this definition">¶</a></dt>
@@ -456,6 +377,15 @@ space.</p></li>
 </dd>
 </dl>
 <p>Most of the implementation of this class is left as an <a class="reference internal" href="4_function_spaces.html#ex-function-space"><span class="std std-ref">exercise</span></a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fe_utils.function_spaces.FunctionSpace.cell_nodes">
+<span class="sig-name descname"><span class="pre">cell_nodes</span></span><a class="headerlink" href="#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="Link to this definition">¶</a></dt>
+<dd><p>The global cell node list. This is a two-dimensional array in
+which each row lists the global nodes incident to the corresponding
+cell. The implementation of this member is left as an
+<a class="reference internal" href="4_function_spaces.html#ex-function-space"><span class="std std-ref">exercise</span></a></p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="fe_utils.function_spaces.FunctionSpace.element">
 <span class="sig-name descname"><span class="pre">element</span></span><a class="headerlink" href="#fe_utils.function_spaces.FunctionSpace.element" title="Link to this definition">¶</a></dt>

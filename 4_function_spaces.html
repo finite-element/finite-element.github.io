@@ -285,7 +285,7 @@ element, and contains (in some form) a global numbering of the nodes.</p>
 <p>Implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method of
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.function_spaces.FunctionSpace</span></code></a>. The key operation
 is to set
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code> using
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> using
 <a class="reference internal" href="#equation-eqcellnode">(4.4)</a>.</p>
 <p>You can plot the numbering you have created with the
 <code class="docutils literal notranslate"><span class="pre">plot_function_space_nodes</span></code> script. As usual, run the
@@ -311,7 +311,7 @@ index:</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code> needs to
+<p><a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> needs to
 be integer-valued. If you choose to use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>
 to create a matrix which you then populate with values, you
 need to explicitly specify that you want a matrix of

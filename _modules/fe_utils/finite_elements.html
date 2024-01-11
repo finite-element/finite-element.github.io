@@ -1,21 +1,19 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fe_utils.finite_elements &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/fenics.css" />
+    <title>fe_utils.finite_elements &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css?v=2a6c4383" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css?v=45cf7dbc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css?v=d290406d" />
+    <script src="../../_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/proof.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -48,16 +46,14 @@
           <div class="body" role="main">
             
   <h1>Source code for fe_utils.finite_elements</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Cause division to always mean floating point division.</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="kn">import</span> <span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">ReferenceTriangle</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="lagrange_points"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.lagrange_points">[docs]</a><span class="k">def</span> <span class="nf">lagrange_points</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
+<div class="viewcode-block" id="lagrange_points">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.lagrange_points">[docs]</a>
+<span class="k">def</span> <span class="nf">lagrange_points</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct the locations of the equispaced Lagrange nodes on cell.</span>
 
 <span class="sd">    :param cell: the :class:`~.reference_elements.ReferenceCell`</span>
@@ -70,23 +66,14 @@
 <span class="sd">    &lt;ex-lagrange-points&gt;`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceInterval</span><span class="p">:</span>
 
-        <span class="c1"># x_i = a + (b - a) * (i / k) </span>
-        <span class="c1"># a = 0, b = 1 for ReferenceInterval </span>
-        <span class="c1"># k = degree =&gt; x_i = i / degree</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">i</span> <span class="o">/</span> <span class="n">degree</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
-        
-    <span class="k">elif</span> <span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceTriangle</span><span class="p">:</span>
-        
-        <span class="c1"># x_{i,j} = (i / degree, j / degree) for 0 &lt;= i + j &lt;= degree</span>
-        <span class="c1"># swap i and j for lexicographical ordering of vertices</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">j</span> <span class="o">/</span> <span class="n">degree</span><span class="p">,</span> <span class="n">i</span> <span class="o">/</span> <span class="n">degree</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown reference cell&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="vandermonde_matrix"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.vandermonde_matrix">[docs]</a><span class="k">def</span> <span class="nf">vandermonde_matrix</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="vandermonde_matrix">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.vandermonde_matrix">[docs]</a>
+<span class="k">def</span> <span class="nf">vandermonde_matrix</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct the generalised Vandermonde matrix for polynomials of the</span>
 <span class="sd">    specified degree on the cell provided.</span>
 
@@ -101,108 +88,13 @@
 <span class="sd">    &lt;ex-vandermonde&gt;`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># Ensure points are an array</span>
-    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceInterval</span><span class="p">:</span>
-
-        <span class="c1"># number of points</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">grad</span><span class="p">:</span>
-            <span class="c1"># initialise tensor</span>
-            <span class="n">v_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-
-            <span class="c1"># derivative of constant is 0</span>
-            <span class="n">v_g</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-
-                <span class="c1"># derivative of (x_j)^i = i(x_j)^{i - 1}</span>
-                <span class="n">derv</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="n">v_g</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">derv</span>
-
-            <span class="k">return</span> <span class="n">v_g</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># initialise matrix</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">v</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">i</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span>
-
-            <span class="k">return</span> <span class="n">v</span> 
-
-    <span class="k">elif</span> <span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceTriangle</span><span class="p">:</span>
-
-        <span class="c1"># number of points </span>
-        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-
-        <span class="c1"># number of nodes is (degree + dimension) C (dimension)</span>
-        <span class="n">num_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">comb</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="n">cell</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">grad</span><span class="p">:</span>
-            <span class="c1"># initialise tensor</span>
-            <span class="n">v_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-
-            <span class="c1"># &#39;unzip&#39; points into x and y coordinates</span>
-            <span class="n">vec_x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-            <span class="n">vec_y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-            <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="c1"># simultaneously count down and up for power of x and y to get binomial expansion</span>
-                <span class="k">for</span> <span class="nb">pow</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                    <span class="c1"># grad (x^a)(y^b) = [(ax^{a-1})(y^b), (x^a)(by^{b-1})]</span>
-
-                    <span class="c1"># partial x component</span>
-                    <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">pow</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">x_contribution_x</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">x_contribution_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">pow</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-                    <span class="n">y_contribution_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">vec_y</span><span class="p">,</span> <span class="nb">pow</span><span class="p">)</span>
-                    <span class="n">partial_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">x_contribution_x</span><span class="p">,</span> <span class="n">y_contribution_x</span><span class="p">)</span>
-
-                    <span class="c1"># partial y component</span>
-                    <span class="n">x_contribution_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="nb">pow</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">y_contribution_y</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">y_contribution_y</span> <span class="o">=</span> <span class="nb">pow</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">vec_y</span><span class="p">,</span> <span class="nb">pow</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="n">partial_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">x_contribution_y</span><span class="p">,</span> <span class="n">y_contribution_y</span><span class="p">)</span>
-
-                    <span class="n">v_g</span><span class="p">[:,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">partial_x</span><span class="p">,</span> <span class="n">partial_y</span><span class="p">))</span>
-                    <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
-
-            <span class="k">return</span> <span class="n">v_g</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># initialise matrix</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">))</span>
-
-            <span class="c1"># &#39;unzip&#39; points into x and y coordinates</span>
-            <span class="n">vec_x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-            <span class="n">vec_y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-            <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="c1"># simultaneously count down and up for power of x and y to get binomial expansion</span>
-                <span class="k">for</span> <span class="nb">pow</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                    <span class="n">x_contribution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">)</span>
-                    <span class="n">y_contribution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">vec_y</span><span class="p">,</span> <span class="nb">pow</span><span class="p">)</span>
-                    <span class="n">v</span><span class="p">[:,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">x_contribution</span><span class="p">,</span> <span class="n">y_contribution</span><span class="p">)</span>
-                    <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
-
-            <span class="k">return</span> <span class="n">v</span> 
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown reference cell&quot;</span><span class="p">)</span></div>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
 
-
-
-<div class="viewcode-block" id="FiniteElement"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement">[docs]</a><span class="k">class</span> <span class="nc">FiniteElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="FiniteElement">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement">[docs]</a>
+<span class="k">class</span> <span class="nc">FiniteElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">entity_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A finite element defined over cell.</span>
 
@@ -242,13 +134,14 @@
         <span class="c1"># Replace this exception with some code which sets</span>
         <span class="c1"># self.basis_coefs</span>
         <span class="c1"># to an array of polynomial coefficients defining the basis functions.</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">vandermonde_matrix</span><span class="p">(</span><span class="n">cell</span><span class="o">=</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="n">nodes</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">basis_coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
         <span class="c1">#: The number of nodes in this element.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_count</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<div class="viewcode-block" id="FiniteElement.tabulate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="FiniteElement.tabulate">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate">[docs]</a>
+    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the basis functions of this finite element at the points</span>
 <span class="sd">        provided.</span>
 
@@ -268,17 +161,13 @@
 <span class="sd">        &lt;ex-tabulate&gt;`.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">vandermonde_matrix</span><span class="p">(</span><span class="n">cell</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="n">grad</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">grad</span><span class="p">:</span>
-            <span class="c1"># grad phi_j(X_i)e_k = sum_b (grad(V))_{ibk}C_{bj}</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ibk,bj-&gt;ijk&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_coefs</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># T = VC</span>
-            <span class="k">return</span> <span class="n">v</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_coefs</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
-<div class="viewcode-block" id="FiniteElement.interpolate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate">[docs]</a>    <span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+<div class="viewcode-block" id="FiniteElement.interpolate">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate">[docs]</a>
+    <span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Interpolate fn onto this finite element by evaluating it</span>
 <span class="sd">        at each of the nodes.</span>
 
@@ -293,7 +182,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -302,7 +191,10 @@
                                <span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="LagrangeElement"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.LagrangeElement">[docs]</a><span class="k">class</span> <span class="nc">LagrangeElement</span><span class="p">(</span><span class="n">FiniteElement</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LagrangeElement">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.LagrangeElement">[docs]</a>
+<span class="k">class</span> <span class="nc">LagrangeElement</span><span class="p">(</span><span class="n">FiniteElement</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;An equispaced Lagrange finite element.</span>
 
@@ -316,130 +208,13 @@
 <span class="sd">        &lt;ex-lagrange-element&gt;`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
         <span class="c1"># Use lagrange_points to obtain the set of nodes.  Once you</span>
         <span class="c1"># have obtained nodes, the following line will call the</span>
         <span class="c1"># __init__ method on the FiniteElement class to set up the</span>
         <span class="c1"># basis coefficients.</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LagrangeElement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span></div>
 
-        <span class="n">nodes</span> <span class="o">=</span> <span class="n">lagrange_points</span><span class="p">(</span><span class="n">cell</span><span class="o">=</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
-
-        <span class="c1"># Instantiate entity node</span>
-        <span class="n">entity_node</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span> <span class="ow">in</span> <span class="n">cell</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">entity_node</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">entity_node</span><span class="p">[</span><span class="n">dim</span><span class="p">][</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">def</span> <span class="nf">find_associated_entity</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-            <span class="c1"># Iterate through topology</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span> <span class="ow">in</span> <span class="n">cell</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="c1"># Iterate through entity instances</span>
-                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">point_in_entity</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">index</span><span class="p">)):</span>
-                        <span class="n">entity_node</span><span class="p">[</span><span class="n">dim</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                        <span class="k">return</span> <span class="c1"># To avoid duplicating nodes part of several entities</span>
-
-        <span class="c1"># Iterate through nodes in order defined in lagrange points</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
-            <span class="n">find_associated_entity</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
-
-        <span class="nb">super</span><span class="p">(</span><span class="n">LagrangeElement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">entity_nodes</span><span class="o">=</span><span class="n">entity_node</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="VectorFiniteElement"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.VectorFiniteElement">[docs]</a><span class="k">class</span> <span class="nc">VectorFiniteElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar_element</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;A vector finite element defined over cell.</span>
-
-<span class="sd">        :param scalar_element: the :class:`~.finite_elements.FiniteElement`</span>
-<span class="sd">            from which the vector finite element is extended.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c1">#: Reference to scalar finite element this vector finite element was extended from</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scalar_element</span> <span class="o">=</span> <span class="n">scalar_element</span>
-        <span class="c1">#: The :class:`~.reference_elements.ReferenceCell`</span>
-        <span class="c1">#: over which the element is defined.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="n">scalar_element</span><span class="o">.</span><span class="n">cell</span>
-        <span class="c1">#: Vector dimension (assumed to be equal to element geometric and topologcal dimension)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">scalar_element</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">dim</span> 
-        <span class="c1">#: The polynomial degree of the element. We assume the element</span>
-        <span class="c1">#: spans the complete polynomial space.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">scalar_element</span><span class="o">.</span><span class="n">degree</span>
-
-        <span class="c1"># Extend entity nodes of finite element provided</span>
-        <span class="n">scalar_en</span> <span class="o">=</span> <span class="n">scalar_element</span><span class="o">.</span><span class="n">entity_nodes</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span> <span class="ow">in</span> <span class="n">scalar_en</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">scalar_en</span><span class="p">[</span><span class="n">dim</span><span class="p">][</span><span class="n">entity</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">))</span>
-
-        <span class="c1">#: A dictionary of dictionaries such that ``entity_nodes[d][i]``</span>
-        <span class="c1">#: is the list of nodes associated with entity `(d, i)`.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entity_nodes</span> <span class="o">=</span> <span class="n">scalar_en</span>
-        
-        <span class="c1">#: ``nodes_per_entity[d]`` is the number of entities</span>
-        <span class="c1">#: associated with an entity of dimension d.</span>
-        <span class="c1"># dimension d times more nodes per entity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nodes_per_entity</span> <span class="o">=</span> <span class="n">scalar_element</span><span class="o">.</span><span class="n">nodes_per_entity</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> 
-
-        <span class="c1">#: A list of coordinate tuples corresponding to point evaluation node </span>
-        <span class="c1">#: locations on the element.</span>
-        <span class="c1"># Same as list of nodal points from scalar element with each point</span>
-        <span class="c1"># repeated dimension d times</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">((</span><span class="n">n</span><span class="p">,)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">scalar_element</span><span class="o">.</span><span class="n">nodes</span><span class="p">))</span>
-
-        <span class="c1">#: The corresponding canonical basis vector to contract with the </span>
-        <span class="c1">#: the elements nodes defined above.</span>
-        <span class="n">basis_vectors</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">e</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">node_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">basis_vectors</span><span class="o">*</span><span class="n">scalar_element</span><span class="o">.</span><span class="n">node_count</span><span class="p">)</span>
-
-        <span class="c1">#: The number of nodes in this element.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">node_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="VectorFiniteElement.tabulate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.finite_elements.VectorFiniteElement.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the basis functions of this vector finite element at the </span>
-<span class="sd">        points provided.</span>
-
-<span class="sd">        :param points: a list of coordinate tuples at which to</span>
-<span class="sd">            tabulate the basis.</span>
-<span class="sd">        :param grad: whether to return the tabulation of the basis or the</span>
-<span class="sd">            tabulation of the gradient of the basis.</span>
-
-<span class="sd">        :result: an array containing the value of each basis function</span>
-<span class="sd">            at each point. If `grad` is `True`, the gradient vector of</span>
-<span class="sd">            each basis vector at each point is returned as a rank 4</span>
-<span class="sd">            array. The shape of the array is (points, nodes, dim) if</span>
-<span class="sd">            ``grad`` is ``False`` and (points, nodes, dim, dim) if ``grad``</span>
-<span class="sd">            is ``True``.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        
-        <span class="c1"># Tabulate over scalar version of element</span>
-        <span class="n">scalar_tab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scalar_element</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">grad</span><span class="p">)</span>
-
-        <span class="c1"># Create extended tabulate array</span>
-        <span class="n">num_points</span> <span class="o">=</span> <span class="n">scalar_tab</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c1"># &#39;dimension&#39; times as many nodes</span>
-        <span class="n">num_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">*</span> <span class="n">scalar_tab</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1"># If grad True then extra dimension </span>
-        <span class="k">if</span> <span class="n">grad</span><span class="p">:</span>
-            <span class="n">num_dir</span> <span class="o">=</span> <span class="n">scalar_tab</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">vector_tab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_points</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">num_dir</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">vector_tab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_points</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
-
-        <span class="c1"># Iterate and apply conversion formula</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
-                <span class="c1"># Check if node is pointing in x or y direction</span>
-                <span class="n">direction</span> <span class="o">=</span> <span class="n">j</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span>
-                <span class="k">if</span> <span class="n">grad</span><span class="p">:</span>
-                    <span class="c1"># Node in x direction gets corresponding gradient in x direction &amp; v.v</span>
-                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
-                        <span class="n">vector_tab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">direction</span><span class="p">]</span> <span class="o">=</span> <span class="n">scalar_tab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">vector_tab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">direction</span><span class="p">]</span> <span class="o">=</span> <span class="n">scalar_tab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">vector_tab</span></div></div>
 </pre></div>
 
             <div class="clearer"></div>
@@ -449,8 +224,8 @@
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>
