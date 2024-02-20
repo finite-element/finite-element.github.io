@@ -385,10 +385,10 @@ implementation.</p>
 basis functions at each quadrature point.</p></li>
 <li><p>Visit each cell in turn.</p></li>
 <li><p>Construct the <code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code> for that cell
-and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.24)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
-and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
+and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.26)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
+and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
 <li><p>Sum all of the arrays you have constructed over the correct
-indices to a contribution to the integral (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.24)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
+indices to a contribution to the integral (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
 may be useful for this).</p></li>
 </ol>
 </div>

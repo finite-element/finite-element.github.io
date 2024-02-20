@@ -116,7 +116,7 @@ interleave <span class="math notranslate nohighlight">\(x\)</span> and <span cla
 </figure>
 <p>We can practically implement vector function spaces by implementing a new class
 <code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.finite_elements.VectorFiniteElement</span></code>. The constructor
-(<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__" title="(in Python v3.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>) of this new class should take a
+(<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>) of this new class should take a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> and construct the
 corresponding vector element. For current purposes we can assume that the
 vector element will always have a vector dimension equal to the element
@@ -364,7 +364,7 @@ block vectors is the one you are familiar with, but we will need to do
 something new to assemble the block structures. What is required differs
 slightly between the matrix and the vectors.</p>
 <p>In the case of the vectors, then it is sufficient to know that a slice into a
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> returns a view on the same memory as the full vector.
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> returns a view on the same memory as the full vector.
 This is most easily understood through an example:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>In [1]: import numpy as np
 
@@ -380,7 +380,7 @@ Out[5]: array([0., 0., 1., 0., 0., 0., 0., 0., 0., 0.])
 </div>
 <p>This means that one can first create a full vector of length <span class="math notranslate nohighlight">\(n+m\)</span> and then
 slice it to create subvectors that can be used for assembly.</p>
-<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
+<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.13.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.13.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
 function which will stitch together a larger sparse matrix from blocks. In
 order to have the full indexing options you are likely to want for imposing the
 boundary conditions, you will probably want to specify that the resulting
@@ -408,15 +408,15 @@ that subspace is one-dimensional.</p>
 <p>The block matrix system that you eventually produce will be larger than many of
 those we have previously encountered, and will have non-zero entries further
 from the diagonal. This can cause the matrix solver to become expensive in both
-time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
+time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.13.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
 interface to <a class="reference external" href="https://portal.nersc.gov/project/sparse/superlu/">SuperLU</a>,
 which is a high-performance direct sparse solver. The recommended solution
 strategy is therefore:</p>
 <ol class="arabic simple">
-<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
+<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.13.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
 format that SuperLU requires.</p></li>
-<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
-<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.11.0.dev0+2027.1651835)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
+<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.13.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
+<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.13.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
 the system.</p></li>
 </ol>
 </section>
