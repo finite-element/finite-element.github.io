@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Functions in finite element spaces &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>5. Functions in finite element spaces &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,71 +49,71 @@
           <div class="body" role="main">
             
   <section id="functions-in-finite-element-spaces">
-<span id="secfunctions"></span><h1><span class="section-number">5. </span>Functions in finite element spaces<a class="headerlink" href="#functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h1>
+<span id="secfunctions"></span><h1><span class="section-number">5. </span>Functions in finite element spaces<a class="headerlink" href="#functions-in-finite-element-spaces" title="Link to this heading">¶</a></h1>
 <p>Recall that the general form of a function in a finite element space is:</p>
 <div class="math notranslate nohighlight" id="equation-function">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-function" title="Permalink to this equation">¶</a></span>\[f(x) = \sum_i f_i \phi_i(x)\]</div>
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-function" title="Link to this equation">¶</a></span>\[f(x) = \sum_i f_i \phi_i(x)\]</div>
 <p>Where the <span class="math notranslate nohighlight">\(\phi_i(x)\)</span> are now the global basis functions achieved by
 stitching together the local basis functions defined by the
 <a class="reference internal" href="2_finite_elements.html#secfinitelement"><span class="std std-ref">finite element</span></a>.</p>
 <section id="a-python-implementation-of-functions-in-finite-element-spaces">
-<h2><span class="section-number">5.1. </span>A python implementation of functions in finite element spaces<a class="headerlink" href="#a-python-implementation-of-functions-in-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">5.1. </span>A python implementation of functions in finite element spaces<a class="headerlink" href="#a-python-implementation-of-functions-in-finite-element-spaces" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495447092"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6e7570e9-cc2c-49d2-908b-aca000b63449">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6e7570e9-cc2c-49d2-908b-aca000b63449">watch this video on Panopto</a></p>
 </div>
-</details><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> class provides a
+</details><p>The <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class provides a
 simple implementation of function storage. The input is a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code> which defines the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> which defines the
 mesh and finite element to be employed, to which the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> adds an array of degree of
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> adds an array of degree of
 freedom values, one for each node in the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code>.</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a>.</p>
 </section>
 <section id="interpolating-values-into-finite-element-spaces">
-<h2><span class="section-number">5.2. </span>Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">5.2. </span>Interpolating values into finite element spaces<a class="headerlink" href="#interpolating-values-into-finite-element-spaces" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495447659"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6d13d669-dc8c-43d1-8aae-aca000b634ed">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6d13d669-dc8c-43d1-8aae-aca000b634ed">watch this video on Panopto</a></p>
 </div>
 </details><p>Suppose we have a function <span class="math notranslate nohighlight">\(g(x): \mathbb{R}^n \rightarrow \mathbb{R}\)</span>
 which we wish to approximate as a function <span class="math notranslate nohighlight">\(f(x)\)</span> in some finite
 element space <span class="math notranslate nohighlight">\(V\)</span>. In other words, we want to find the <span class="math notranslate nohighlight">\(f_i\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-0">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-5-functions-0" title="Permalink to this equation">¶</a></span>\[\sum_i f_i \phi_i(x) \approx g(x)\]</div>
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-5-functions-0" title="Link to this equation">¶</a></span>\[\sum_i f_i \phi_i(x) \approx g(x)\]</div>
 <p>The simplest way to do this is to <em>interpolate</em> <span class="math notranslate nohighlight">\(g(x)\)</span> onto <span class="math notranslate nohighlight">\(V\)</span>. In
 other words, we evaluate:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-1">
-<span class="eqno">(5.3)<a class="headerlink" href="#equation-5-functions-1" title="Permalink to this equation">¶</a></span>\[f_i = n_i(g(x))\]</div>
+<span class="eqno">(5.3)<a class="headerlink" href="#equation-5-functions-1" title="Link to this equation">¶</a></span>\[f_i = n_i(g(x))\]</div>
 <p>where <span class="math notranslate nohighlight">\(n_i\)</span> is the  node associated with <span class="math notranslate nohighlight">\(\phi_i\)</span> as considered over the
 entire mesh (<em>globally</em>). Since we are only concerned with point
 evaluation nodes, this is equivalent to:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-2">
-<span class="eqno">(5.4)<a class="headerlink" href="#equation-5-functions-2" title="Permalink to this equation">¶</a></span>\[f_i = g(x_i)\]</div>
+<span class="eqno">(5.4)<a class="headerlink" href="#equation-5-functions-2" title="Link to this equation">¶</a></span>\[f_i = g(x_i)\]</div>
 <p>where <span class="math notranslate nohighlight">\(x_i\)</span> is the coordinate vector of the point defining the node
 <span class="math notranslate nohighlight">\(n_i\)</span>. This looks straightforward, however the <span class="math notranslate nohighlight">\(x_i\)</span> are the <em>global</em>
 node points, and so far we have only defined the node points in
 <em>local</em> coordinates on the reference element.</p>
 <section id="changing-coordinates-between-reference-and-physical-space">
-<span id="coordinates"></span><h3><span class="section-number">5.2.1. </span>Changing coordinates between reference and physical space<a class="headerlink" href="#changing-coordinates-between-reference-and-physical-space" title="Permalink to this headline">¶</a></h3>
+<span id="coordinates"></span><h3><span class="section-number">5.2.1. </span>Changing coordinates between reference and physical space<a class="headerlink" href="#changing-coordinates-between-reference-and-physical-space" title="Link to this heading">¶</a></h3>
 <p>We’ll refer to coordinates on the global mesh as being in <em>physical
 space</em> while those on the reference element are in <em>local
 space</em>. We’ll use case to distinguish local and global objects, so
@@ -128,23 +125,23 @@ local basis for the <strong>linear</strong> lagrange elements on the reference c
 <span class="math notranslate nohighlight">\(\hat{x}_j\)</span> are the corresponding global vertex locations on a cell <span class="math notranslate nohighlight">\(c\)</span>
 then:</p>
 <div class="math notranslate nohighlight" id="equation-change">
-<span class="eqno">(5.5)<a class="headerlink" href="#equation-change" title="Permalink to this equation">¶</a></span>\[x = \sum_j \hat{x}_j \Psi_j(X) \quad \forall x \in c.\]</div>
+<span class="eqno">(5.5)<a class="headerlink" href="#equation-change" title="Link to this equation">¶</a></span>\[x = \sum_j \hat{x}_j \Psi_j(X) \quad \forall x \in c.\]</div>
 <p>Remember that we know the location of the nodes in local coordinates,
 and we have the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code> method to
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> method to
 evaluate all the basis functions of an element at a known set of
 points. So if we write:</p>
 <div class="math notranslate nohighlight" id="equation-foo0">
-<span class="eqno">(5.6)<a class="headerlink" href="#equation-foo0" title="Permalink to this equation">¶</a></span>\[A_{i,j} = \Psi_j(X_i)\]</div>
+<span class="eqno">(5.6)<a class="headerlink" href="#equation-foo0" title="Link to this equation">¶</a></span>\[A_{i,j} = \Psi_j(X_i)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{X_i\}\)</span> are the local node points of our finite element, then
 the corresponding global node points <span class="math notranslate nohighlight">\(\{x_i\}\)</span> are given by</p>
 <div class="math notranslate nohighlight" id="equation-foo1">
-<span class="eqno">(5.7)<a class="headerlink" href="#equation-foo1" title="Permalink to this equation">¶</a></span>\[x = A\cdot \hat{x}\]</div>
+<span class="eqno">(5.7)<a class="headerlink" href="#equation-foo1" title="Link to this equation">¶</a></span>\[x = A\cdot \hat{x}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{x}\)</span> is the <span class="math notranslate nohighlight">\((\dim+1, \dim)\)</span> array whose rows are the current
 element vertex coordinates. Specifically, <span class="math notranslate nohighlight">\(x\)</span> is the <span class="math notranslate nohighlight">\((\textrm{nodes}, \dim)\)</span> array whose
 rows are the global coordinates of the nodes in the current
 element. We can then apply <span class="math notranslate nohighlight">\(g()\)</span> to each row of <span class="math notranslate nohighlight">\(x\)</span> in turn and record
-the result as the <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> value
+the result as the <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> value
 for that node.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -156,33 +153,33 @@ here.</p>
 </div>
 </section>
 <section id="looking-up-cell-coordinates-and-values">
-<h3><span class="section-number">5.2.2. </span>Looking up cell coordinates and values<a class="headerlink" href="#looking-up-cell-coordinates-and-values" title="Permalink to this headline">¶</a></h3>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h3><span class="section-number">5.2.2. </span>Looking up cell coordinates and values<a class="headerlink" href="#looking-up-cell-coordinates-and-values" title="Link to this heading">¶</a></h3>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495715631"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=eb8b0e40-b476-4caa-a961-aca1009f6172">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=eb8b0e40-b476-4caa-a961-aca1009f6172">watch this video on Panopto</a></p>
 </div>
 </details><p>In the previous section we used the vertex coordinates of a cell to
 find the node coordinates, and then we calculated
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> values at those
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> values at those
 points. The coordinates are stored in a single long list associated
-with the <code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code>, and the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> contains a single long
+with the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>, and the
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> contains a single long
 list of values. We need to use <em>indirect addressing</em> to access these
 values. This is best illustrated using some Python code.</p>
-<p>Suppose <code class="docutils literal notranslate"><span class="pre">f</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code>.
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">f</span></code> is a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.
 For brevity, we write <code class="docutils literal notranslate"><span class="pre">fs</span> <span class="pre">=</span> <span class="pre">f.function_space</span></code>, the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code> associated with
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> associated with
 <code class="docutils literal notranslate"><span class="pre">f</span></code>. Now, we first need a linear element and a corresponding
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code>:</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cg1</span> <span class="o">=</span> <span class="n">fe_utils</span><span class="o">.</span><span class="n">LagrangeElement</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">cg1fs</span> <span class="o">=</span> <span class="n">fe_utils</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cg1</span><span class="p">)</span>
 </pre></div>
@@ -204,26 +201,26 @@ associated with the nodes of element <code class="docutils literal notranslate">
 </div>
 </section>
 <section id="a-python-implementation-of-interpolation">
-<h3><span class="section-number">5.2.3. </span>A Python implementation of interpolation<a class="headerlink" href="#a-python-implementation-of-interpolation" title="Permalink to this headline">¶</a></h3>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h3><span class="section-number">5.2.3. </span>A Python implementation of interpolation<a class="headerlink" href="#a-python-implementation-of-interpolation" title="Link to this heading">¶</a></h3>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495718032"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e74afdcc-7727-49cb-bf3d-aca100a2ec68">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e74afdcc-7727-49cb-bf3d-aca100a2ec68">watch this video on Panopto</a></p>
 </div>
 </details><p>Putting together the change of coordinates with the right indirect
 addressing, we can provide the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> class with a
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code> method which
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> class with a
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method which
 interpolates a user-provided function onto the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code>.</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.</p>
 <div class="proof proof-type-exercise" id="id2">
 
     <div class="proof-title">
@@ -231,7 +228,7 @@ interpolates a user-provided function onto the
         
     </div><div class="proof-content">
 <p>Read and understand the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code> method. Use
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method. Use
 <code class="docutils literal notranslate"><span class="pre">plot_sin_function</span></code> to investigate interpolating different
 functions onto finite element spaces at differering resolutions and
 polynomial degrees.</p>
@@ -239,41 +236,41 @@ polynomial degrees.</p>
 <p class="admonition-title">Hint</p>
 <p>There is no implementation work associated with this exercise, but
 the programming constructs used in
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code> will be
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> will be
 needed when you implement integration.</p>
 </div>
 </section>
 </section>
 <section id="integration">
-<span id="id1"></span><h2><span class="section-number">5.3. </span>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<span id="id1"></span><h2><span class="section-number">5.3. </span>Integration<a class="headerlink" href="#integration" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495447232"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4b2f4755-0682-4e36-ad3e-aca000b634b9">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4b2f4755-0682-4e36-ad3e-aca000b634b9">watch this video on Panopto</a></p>
 </div>
 </details><p>We now come to one of the fundamental operations in the finite element
-method: integrating a <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> over
+method: integrating a <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over
 the domain. The full finite element method actually requires the
 integration of expressions of unknown test and trial functions, but we
 will start with the more straightforward case of integrating a single,
-known, <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> over a domain
+known, <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over a domain
 <span class="math notranslate nohighlight">\(\Omega\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-3">
-<span class="eqno">(5.8)<a class="headerlink" href="#equation-5-functions-3" title="Permalink to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x \quad f \in V\]</div>
+<span class="eqno">(5.8)<a class="headerlink" href="#equation-5-functions-3" title="Link to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x \quad f \in V\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathrm{d}x\)</span> should be understood as being the volume measure
 with the correct dimension for the domain and <span class="math notranslate nohighlight">\(V\)</span> is some finite
 element space over <span class="math notranslate nohighlight">\(\Omega\)</span>. We can express this integral as a sum of
 integrals over individual cells:</p>
 <div class="math notranslate nohighlight" id="equation-integral-sum">
-<span class="eqno">(5.9)<a class="headerlink" href="#equation-integral-sum" title="Permalink to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x = \sum_{c\in\Omega} \int_c f \mathrm{d} x.\]</div>
+<span class="eqno">(5.9)<a class="headerlink" href="#equation-integral-sum" title="Link to this equation">¶</a></span>\[\int_\Omega f \mathrm{d} x = \sum_{c\in\Omega} \int_c f \mathrm{d} x.\]</div>
 <p>So we have in fact reduced the integration problem to the problem of
 integrating <span class="math notranslate nohighlight">\(f\)</span> over each cell. In <a class="reference internal" href="1_quadrature.html"><span class="doc">a previous part</span></a>
 of the module we implemented quadrature rules which enable us to
@@ -282,11 +279,11 @@ integral over some arbitrary cell <span class="math notranslate nohighlight">\(c
 cell <span class="math notranslate nohighlight">\(c_0\)</span> then we are done. In fact this simply requires us to employ
 the change of variables formula for integration:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-4">
-<span class="eqno">(5.10)<a class="headerlink" href="#equation-5-functions-4" title="Permalink to this equation">¶</a></span>\[\int_{c} f(x) \mathrm{d} x = \int_{c_0} f(X) |J|\mathrm{d} X\]</div>
+<span class="eqno">(5.10)<a class="headerlink" href="#equation-5-functions-4" title="Link to this equation">¶</a></span>\[\int_{c} f(x) \mathrm{d} x = \int_{c_0} f(X) |J|\mathrm{d} X\]</div>
 <p>where <span class="math notranslate nohighlight">\(|J|\)</span> is the absolute value of the determinant of the Jacobian
 matrix. <span class="math notranslate nohighlight">\(J\)</span> is given by:</p>
 <div class="math notranslate nohighlight" id="equation-jacobian-def">
-<span class="eqno">(5.11)<a class="headerlink" href="#equation-jacobian-def" title="Permalink to this equation">¶</a></span>\[J_{\alpha\beta} = \frac{\partial x_\alpha}{\partial X_\beta}.\]</div>
+<span class="eqno">(5.11)<a class="headerlink" href="#equation-jacobian-def" title="Link to this equation">¶</a></span>\[J_{\alpha\beta} = \frac{\partial x_\alpha}{\partial X_\beta}.\]</div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>We will generally adopt the convention of using Greek letters to
@@ -299,7 +296,7 @@ terms of <span class="math notranslate nohighlight">\(X\)</span>. Fortunately, <
 and applying the usual rule for differentiating functions in finite
 element spaces produces:</p>
 <div class="math notranslate nohighlight" id="equation-jacobian">
-<span class="eqno">(5.12)<a class="headerlink" href="#equation-jacobian" title="Permalink to this equation">¶</a></span>\[J_{\alpha\beta} = \sum_j (\tilde{x}_j)_\alpha \nabla_\beta\Psi_j(X)\]</div>
+<span class="eqno">(5.12)<a class="headerlink" href="#equation-jacobian" title="Link to this equation">¶</a></span>\[J_{\alpha\beta} = \sum_j (\tilde{x}_j)_\alpha \nabla_\beta\Psi_j(X)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{\Psi_j\}\)</span> is once again the degree 1 Lagrange basis and
 <span class="math notranslate nohighlight">\(\{\tilde{x}_j\}\)</span> are the coordinates of the corresponding vertices of
 cell <span class="math notranslate nohighlight">\(c\)</span>. The presence of <span class="math notranslate nohighlight">\(X\)</span> in <a class="reference internal" href="#equation-jacobian">(5.12)</a> implies that the
@@ -318,37 +315,37 @@ point. However, non-affine coordinate transforms are beyond the
 scope of this course.</p>
 </div>
 <section id="expressing-the-function-in-the-finite-element-basis">
-<h3><span class="section-number">5.3.1. </span>Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Permalink to this headline">¶</a></h3>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h3><span class="section-number">5.3.1. </span>Expressing the function in the finite element basis<a class="headerlink" href="#expressing-the-function-in-the-finite-element-basis" title="Link to this heading">¶</a></h3>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495444345"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=005f670f-28ac-47c3-9cf1-aca000b7133d">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=005f670f-28ac-47c3-9cf1-aca000b7133d">watch this video on Panopto</a></p>
 </div>
 </details><p>Let <span class="math notranslate nohighlight">\(\{\Phi_i(X)\}\)</span> be a <strong>local</strong> basis for <span class="math notranslate nohighlight">\(V\)</span> on the reference element
 <span class="math notranslate nohighlight">\(c_0\)</span>. Then our integral becomes:</p>
 <div class="math notranslate nohighlight" id="equation-5-functions-5">
-<span class="eqno">(5.13)<a class="headerlink" href="#equation-5-functions-5" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \int_{c_0} \sum_i F(M(c,i))\,\Phi_i(X)\, |J|\,\mathrm{d} X\]</div>
+<span class="eqno">(5.13)<a class="headerlink" href="#equation-5-functions-5" title="Link to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \int_{c_0} \sum_i F(M(c,i))\,\Phi_i(X)\, |J|\,\mathrm{d} X\]</div>
 <p>where <span class="math notranslate nohighlight">\(F\)</span> is the vector of global coefficient values of <span class="math notranslate nohighlight">\(f\)</span>, and <span class="math notranslate nohighlight">\(M\)</span> is <a class="reference internal" href="4_function_spaces.html#cell-node"><span class="std std-ref">the cell node map</span></a>.</p>
 </section>
 <section id="numerical-quadrature">
-<h3><span class="section-number">5.3.2. </span>Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.2. </span>Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Link to this heading">¶</a></h3>
 <p>The actual evaluation of the integral will employ the quadrature rules
 we discussed in <a class="reference internal" href="1_quadrature.html"><span class="doc">a previous section</span></a>. Let
 <span class="math notranslate nohighlight">\(\{X_q\}, \{w_q\}\)</span> be a quadrature rule of sufficient degree of precision that
 the quadrature is exact. Then:</p>
 <div class="math notranslate nohighlight" id="equation-integration">
-<span class="eqno">(5.14)<a class="headerlink" href="#equation-integration" title="Permalink to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \sum_q \sum_i F(M(c,i))\,\Phi_i(X_q)\, |J|\,w_q\]</div>
+<span class="eqno">(5.14)<a class="headerlink" href="#equation-integration" title="Link to this equation">¶</a></span>\[\int_c f(x)\mathrm{d}x  = \sum_q \sum_i F(M(c,i))\,\Phi_i(X_q)\, |J|\,w_q\]</div>
 </section>
 <section id="implementing-integration">
-<h3><span class="section-number">5.3.3. </span>Implementing integration<a class="headerlink" href="#implementing-integration" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.3. </span>Implementing integration<a class="headerlink" href="#implementing-integration" title="Link to this heading">¶</a></h3>
 <div class="proof proof-type-exercise" id="id3">
 
     <div class="proof-title">
@@ -356,15 +353,15 @@ the quadrature is exact. Then:</p>
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-jacobian">(5.12)</a> to implement the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code> method of
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code>. <code class="docutils literal notranslate"><span class="pre">test/test_09_jacobian.py</span></code> is
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> method of
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>. <code class="docutils literal notranslate"><span class="pre">test/test_09_jacobian.py</span></code> is
 available for you to test your results.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>The <span class="math notranslate nohighlight">\(\nabla_\beta\Psi_j(X)\)</span> factor in <a class="reference internal" href="#equation-jacobian">(5.12)</a> is the same
 for every cell in the mesh. You could make your implementation more
 efficient by precalculating this term in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>
-method of <code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code>.</p>
+method of <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>.</p>
 </div>
 <div class="proof proof-type-exercise" id="id4">
 
@@ -373,18 +370,18 @@ method of <code class="xref py py-class docutils literal notranslate"><span clas
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-integral-sum">(5.9)</a> and <a class="reference internal" href="#equation-integration">(5.14)</a> to implement
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code>.
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a>.
 <code class="docutils literal notranslate"><span class="pre">test/test_10_integrate_function.py</span></code> may be used to test your
 implementation.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Your method will need to:</p>
 <ol class="arabic simple">
-<li><p>Construct a suitable <code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code>.</p></li>
-<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code> the
+<li><p>Construct a suitable <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> the
 basis functions at each quadrature point.</p></li>
 <li><p>Visit each cell in turn.</p></li>
-<li><p>Construct the <code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code> for that cell
+<li><p>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> for that cell
 and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v1.26)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
 and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
 <li><p>Sum all of the arrays you have constructed over the correct
@@ -395,8 +392,8 @@ may be useful for this).</p></li>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You might choose to read ahead before implementing
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code>, since the
-<code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code> function is very similar and may provide a useful
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.integrate" title="fe_utils.function_spaces.Function.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a>, since the
+<a class="reference internal" href="fe_utils.html#fe_utils.utils.errornorm" title="fe_utils.utils.errornorm"><code class="xref py py-func docutils literal notranslate"><span class="pre">errornorm()</span></code></a> function is very similar and may provide a useful
 template for your work.</p>
 </div>
 </section>
@@ -411,8 +408,8 @@ template for your work.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

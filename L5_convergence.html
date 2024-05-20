@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Convergence of finite element approximations &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>5. Convergence of finite element approximations &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,24 +49,24 @@
           <div class="body" role="main">
             
   <section id="convergence-of-finite-element-approximations">
-<span id="convergence"></span><h1><span class="section-number">5. </span>Convergence of finite element approximations<a class="headerlink" href="#convergence-of-finite-element-approximations" title="Permalink to this headline">¶</a></h1>
+<span id="convergence"></span><h1><span class="section-number">5. </span>Convergence of finite element approximations<a class="headerlink" href="#convergence-of-finite-element-approximations" title="Link to this heading">¶</a></h1>
 <p>In this section we develop tools to prove convergence of finite
 element approximations to the exact solutions of PDEs.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490669563"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5d2d1721-725f-43ef-bcdd-ac8f01056006">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5d2d1721-725f-43ef-bcdd-ac8f01056006">watch this video on Panopto</a></p>
 </div>
 </details><section id="weak-derivatives">
-<h2><span class="section-number">5.1. </span>Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Weak derivatives<a class="headerlink" href="#weak-derivatives" title="Link to this heading">¶</a></h2>
 <p>Consider a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> with recursively refined
 triangulations <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span> and corresponding finite element spaces
 <span class="math notranslate nohighlight">\(V_h\)</span>.  Given stable finite element variational problems, we have a
@@ -205,19 +202,19 @@ strong, weak and finite element first derivatives for <span class="math notransl
 element functions. All derivatives are assumed to be weak from now on.</p>
 </section>
 <section id="sobolev-spaces">
-<h2><span class="section-number">5.2. </span>Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">5.2. </span>Sobolev spaces<a class="headerlink" href="#sobolev-spaces" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490880876"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ab4667ea-fb50-461e-940f-ac8f010c13fa">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ab4667ea-fb50-461e-940f-ac8f010c13fa">watch this video on Panopto</a></p>
 </div>
 </details><p>We are now in a position to define a space that contains all <span class="math notranslate nohighlight">\(C^0\)</span>
 finite element spaces. This means that we can consider the limit
@@ -337,19 +334,19 @@ equivalence class of <span class="math notranslate nohighlight">\(u\)</span>.</p
 <p>Just apply Sobolev’s inequality to the <span class="math notranslate nohighlight">\(m\)</span> derivatives of <span class="math notranslate nohighlight">\(u\)</span>.</p>
 </div></div></section>
 <section id="variational-formulations-of-pdes">
-<h2><span class="section-number">5.3. </span>Variational formulations of PDEs<a class="headerlink" href="#variational-formulations-of-pdes" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">5.3. </span>Variational formulations of PDEs<a class="headerlink" href="#variational-formulations-of-pdes" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490669306"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4ac5a081-3109-4b2f-86df-ac8f010fa52c">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4ac5a081-3109-4b2f-86df-ac8f010fa52c">watch this video on Panopto</a></p>
 </div>
 </details><p>We can now consider linear variational problems defined on <span class="math notranslate nohighlight">\(H^k\)</span>
 spaces, by taking a bilinear form <span class="math notranslate nohighlight">\(b(u,v)\)</span> and linear form
@@ -450,18 +447,18 @@ Then</p>
 to <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(u\)</span>, respectively, and <span class="math notranslate nohighlight">\(v_i\nabla u_i\in C^\infty(\Omega)\)</span> converges
 to <span class="math notranslate nohighlight">\(v\nabla u\)</span>. These satisfy the equation;
 we obtain the result by passing to the limit.</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490668791"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=11a1d9f5-c1e9-41c1-9207-ac8f01127eac">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=11a1d9f5-c1e9-41c1-9207-ac8f01127eac">watch this video on Panopto</a></p>
 </div>
 </details><p>Now we have everything we need to show that solutions of the strong
 form equation also solve the variational problem. It is just a matter
@@ -529,19 +526,19 @@ We have</p>
 <span class="math notranslate nohighlight">\(\|\frac{\partial u}{\partial n}\|_{L^2(\partial\Omega)}=0\)</span>.</p>
 </div></div></section>
 <section id="galerkin-approximations-of-linear-variational-problems">
-<h2><span class="section-number">5.4. </span>Galerkin approximations of linear variational problems<a class="headerlink" href="#galerkin-approximations-of-linear-variational-problems" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">5.4. </span>Galerkin approximations of linear variational problems<a class="headerlink" href="#galerkin-approximations-of-linear-variational-problems" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490668756"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=63ad7174-ffe3-44bf-bd94-ac8f011498d9">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=63ad7174-ffe3-44bf-bd94-ac8f011498d9">watch this video on Panopto</a></p>
 </div>
 </details><p>Going a bit more general again, assume that we have a well-posed
 linear variational problem on <span class="math notranslate nohighlight">\(H^k\)</span>, connected to a strong form
@@ -572,18 +569,18 @@ continuous and coercive on <span class="math notranslate nohighlight">\(V_h\)</s
 we know that the Galerkin approximation exists, is unique and is
 stable. This means that it will be possible to solve the matrix-vector
 equation.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490668557"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5c5e4671-ddb4-4cf2-afce-ac8f01165ff0">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5c5e4671-ddb4-4cf2-afce-ac8f01165ff0">watch this video on Panopto</a></p>
 </div>
 </details><p>Moving on, if we can solve the equation, we would like to know if it is
 useful. What is the size of the error <span class="math notranslate nohighlight">\(u-u_h\)</span>? For Galerkin approximations
@@ -624,23 +621,23 @@ condition</p>
 \[ \begin{align}\begin{aligned}\gamma\|u-u_h\|^2_V &amp;\leq b(u-u_h,u-u_h),\\&amp;= b(u-u_h,u-v) + \underbrace{b(u-u_h,v-u_h)}_{=0},\\&amp;\leq M\|u-u_h\|_V\|u-v\|_V.\end{aligned}\end{align} \]</div>
 <p>So,</p>
 <div class="math notranslate nohighlight">
-\[\gamma\|u-u_h\|_V \leq M|u-v\|_V.\]</div>
+\[\gamma\|u-u_h\|_V \leq M\|u-v\|_V.\]</div>
 <p>Minimising over all <span class="math notranslate nohighlight">\(v\)</span> completes the proof.</p>
 </div></div></section>
 <section id="interpolation-error-in-h-k-spaces">
-<h2><span class="section-number">5.5. </span>Interpolation error in <span class="math notranslate nohighlight">\(H^k\)</span> spaces<a class="headerlink" href="#interpolation-error-in-h-k-spaces" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">5.5. </span>Interpolation error in <span class="math notranslate nohighlight">\(H^k\)</span> spaces<a class="headerlink" href="#interpolation-error-in-h-k-spaces" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490668426"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b473bf39-8d5b-4d2f-b051-ac8f01192b68">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b473bf39-8d5b-4d2f-b051-ac8f01192b68">watch this video on Panopto</a></p>
 </div>
 </details><p>The interpretation of Céa’s lemma is that the error is proportional to
 the minimal error in approximating <span class="math notranslate nohighlight">\(u\)</span> in <span class="math notranslate nohighlight">\(V_h\)</span>. To do this, we can
@@ -827,19 +824,19 @@ global interpolation operator satisfies</p>
 <p>Identical to <a class="reference internal" href="L3_interpolation.html#iherr"><span class="std std-numref">Theorem 3.25</span></a>.</p>
 </div></div></section>
 <section id="convergence-of-the-finite-element-approximation-to-the-helmholtz-problem">
-<h2><span class="section-number">5.6. </span>Convergence of the finite element approximation to the Helmholtz problem<a class="headerlink" href="#convergence-of-the-finite-element-approximation-to-the-helmholtz-problem" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">5.6. </span>Convergence of the finite element approximation to the Helmholtz problem<a class="headerlink" href="#convergence-of-the-finite-element-approximation-to-the-helmholtz-problem" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490668331"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=913ad682-d5b9-4849-8dc8-ac8f0120d5e8">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=913ad682-d5b9-4849-8dc8-ac8f0120d5e8">watch this video on Panopto</a></p>
 </div>
 </details><p>Now that we have the required interpolation operator results, we
 can return to applying Céa’s lemma to the convergence of the
@@ -937,18 +934,18 @@ results hold. In the case of the Helmholtz problem, this is <span class="math no
 We would also like estimates of the error in the <span class="math notranslate nohighlight">\(L^2\)</span> norm, and
 it will turn out that these will have a more rapid convergence rate
 as <span class="math notranslate nohighlight">\(h\to 0\)</span>.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490668178"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=256886bb-d6bd-41fa-916a-ac8f0126b14b">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=256886bb-d6bd-41fa-916a-ac8f0126b14b">watch this video on Panopto</a></p>
 </div>
 </details><p>To do this we quote the following without proof.</p>
 <div class="proof proof-type-theorem" id="id35">
@@ -1010,7 +1007,7 @@ parts),</p>
 the <span class="math notranslate nohighlight">\(L^2\)</span> norm instead of the <span class="math notranslate nohighlight">\(H^1\)</span> norm.</p>
 </section>
 <section id="epilogue">
-<h2><span class="section-number">5.7. </span>Epilogue<a class="headerlink" href="#epilogue" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.7. </span>Epilogue<a class="headerlink" href="#epilogue" title="Link to this heading">¶</a></h2>
 <p>This completes our analysis of the convergence of the Galerkin finite
 element approximation to the Helmholtz problem. Similar approaches can be
 applied to analysis of other elliptic PDEs, using the following programme.</p>
@@ -1108,8 +1105,8 @@ areas of the domain.</p></li>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

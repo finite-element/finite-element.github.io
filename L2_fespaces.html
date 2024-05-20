@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Finite element spaces: local to global &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>2. Finite element spaces: local to global &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,7 +49,7 @@
           <div class="body" role="main">
             
   <section id="finite-element-spaces-local-to-global">
-<h1><span class="section-number">2. </span>Finite element spaces: local to global<a class="headerlink" href="#finite-element-spaces-local-to-global" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>Finite element spaces: local to global<a class="headerlink" href="#finite-element-spaces-local-to-global" title="Link to this heading">¶</a></h1>
 <p>In this section, we discuss the construction of general finite element
 spaces. Given a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> of a domain <span class="math notranslate nohighlight">\(\Omega\)</span>, finite
 element spaces are defined according to</p>
@@ -65,19 +62,19 @@ element space. We first do this by looking at a single cell, which we
 call the local perspective. Later we will take the global perspective,
 seeing how function continuity is enforced between cells.</p>
 <section id="ciarlet-s-finite-element">
-<h2><span class="section-number">2.1. </span>Ciarlet’s finite element<a class="headerlink" href="#ciarlet-s-finite-element" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">2.1. </span>Ciarlet’s finite element<a class="headerlink" href="#ciarlet-s-finite-element" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490693460"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e79807c3-c73b-42ec-b5f9-ac8d00c7b4c6">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e79807c3-c73b-42ec-b5f9-ac8d00c7b4c6">watch this video on Panopto</a></p>
 </div>
 </details><p>The first part of the definition is formalised by Ciarlet’s definition
 of a finite element.</p>
@@ -121,18 +118,18 @@ functional a nodal variable? Explain your answer.</p>
 <div class="math notranslate nohighlight">
 \[N_0(p) = \int_K p^2 \,d x.\]</div>
 </div></div><p>Ciarlet’s finite element provides us with a standard way to define a basis for the <span class="math notranslate nohighlight">\(P\)</span>, called the nodal basis.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490693258"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9d432870-a298-4e6e-b495-ac8d00cc6411">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9d432870-a298-4e6e-b495-ac8d00cc6411">watch this video on Panopto</a></p>
 </div>
 </details><div class="proof proof-type-definition" id="id4">
 
@@ -175,19 +172,19 @@ i=0,\ldots,k.\]</div>
 \[\phi_i(x) = \frac{\prod_{j=0,j\ne i}^k (x-x_j)}{\prod_{j=0,j\ne i}^k (x_i-x_j)}, \quad i=0,\ldots,k.\]</div>
 </div></div></section>
 <section id="vandermonde-matrix-and-unisolvence">
-<h2><span class="section-number">2.2. </span>Vandermonde matrix and unisolvence<a class="headerlink" href="#vandermonde-matrix-and-unisolvence" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">2.2. </span>Vandermonde matrix and unisolvence<a class="headerlink" href="#vandermonde-matrix-and-unisolvence" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490693083"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f3fb54fb-f83e-41b8-a537-ac8d00d03589">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f3fb54fb-f83e-41b8-a537-ac8d00d03589">watch this video on Panopto</a></p>
 </div>
 </details><p>More generally, It is useful computationally to write the nodal basis
 in terms of another arbitrary basis <span class="math notranslate nohighlight">\(\{\psi_i\}_{i=0}^k\)</span>. This
@@ -229,18 +226,18 @@ of another basis <span class="math notranslate nohighlight">\(\{\psi_i\}_{i=0}^k
 <div class="math notranslate nohighlight">
 \[\delta_{ij} =  N_j(\phi_i) = \sum_{l=0}^k\mu_{il}N_j(\psi_l) = \sum_{l=0}^k \mu_{il}V_{lj} = (\mu V)_{ij},\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the matrix with coefficients <span class="math notranslate nohighlight">\(\mu_{ij}\)</span>, and <span class="math notranslate nohighlight">\(V\)</span> is the matrix with coefficients <span class="math notranslate nohighlight">\(N_j(\psi_i)\)</span>.</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490692882"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6f9d4bb7-4a90-40f7-8eae-ac8d00ce8ac7">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6f9d4bb7-4a90-40f7-8eae-ac8d00ce8ac7">watch this video on Panopto</a></p>
 </div>
 </details><div class="proof proof-type-exercise" id="id9">
 
@@ -312,18 +309,18 @@ equivalent to (2).</p>
 f_j=0, \, j=0,1,\ldots,k,\]</div>
 <p>which is equivalent to <span class="math notranslate nohighlight">\(V^T\)</span> being invertible, which is equivalent to
 <span class="math notranslate nohighlight">\(V\)</span> being invertible, and so (3) is equivalent to (2).</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490692719"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=97d9a7b6-7837-4591-9180-ac8e0099484c">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=97d9a7b6-7837-4591-9180-ac8e0099484c">watch this video on Panopto</a></p>
 </div>
 </details><p>This result leads us to introducing the following terminology.</p>
 <div class="proof proof-type-definition" id="id11">
@@ -379,19 +376,19 @@ of algebra.</p>
 <p>Is this finite element unisolvent? Explain your answer.</p>
 </div></div></section>
 <section id="d-and-3d-finite-elements">
-<h2><span class="section-number">2.3. </span>2D and 3D finite elements<a class="headerlink" href="#d-and-3d-finite-elements" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">2.3. </span>2D and 3D finite elements<a class="headerlink" href="#d-and-3d-finite-elements" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490692347"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e5501a7d-81f1-47f1-8000-ac8d00ce89fb">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e5501a7d-81f1-47f1-8000-ac8d00ce89fb">watch this video on Panopto</a></p>
 </div>
 </details><p>We would like to construct some finite elements with 2D and 3D domains
 <span class="math notranslate nohighlight">\(K\)</span>. The fundamental theorem of algebra does not directly help us
@@ -436,18 +433,18 @@ so</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}P(x) = {L(x)}\underbrace{\left(\sum_{i_d=1}^k\sum_{|i_1+\ldots+i_{d-1}|\leq k - i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d-1}\prod_{l=1}^{d-1} x_{l}^{i_l}\right)},\\P(x) = \underbrace{x_d}_{L(x)}\underbrace{\left(\sum_{i_d=0}^{k-1}\sum_{|i_1+\ldots+i_{d-1}|\leq k - i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d-1}\prod_{l=1}^{d-1} x_{l}^{i_l}\right)}_{Q(x)},\end{aligned}\end{align} \]</div>
 <p>with <span class="math notranslate nohighlight">\(\deg(Q)=k-1\)</span>.</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490692245"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b2674f92-8a03-4685-98e7-ac8e00a15a88">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b2674f92-8a03-4685-98e7-ac8e00a15a88">watch this video on Panopto</a></p>
 </div>
 </details><div class="proof proof-type-exercise" id="id15">
 
@@ -499,18 +496,18 @@ dimensions.</p>
     </div><div class="proof-content">
 <p>The nodal basis for P2 elements is point evaluation at the three
 vertices, plus point evaluation at the three edge centres.</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490692065"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1d6a0060-361f-4c03-af32-ac8d00cc637e">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1d6a0060-361f-4c03-af32-ac8d00cc637e">watch this video on Panopto</a></p>
 </div>
 </details><p>We now need to check that that the degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange element is a
 finite element, i.e. that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>. We will
@@ -540,13 +537,13 @@ polynomial, i.e. a constant <span class="math notranslate nohighlight">\(c\)</sp
 \[0 = p(z_1) = cL_1(z_1) \implies c=0,\]</div>
 <p>since <span class="math notranslate nohighlight">\(L_1(z_1)\neq 0\)</span>, and hence <span class="math notranslate nohighlight">\(p(x)\equiv 0\)</span>. This means
 that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>.</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490691995"
 frameborder="0" allow="autoplay; fullscreen"
@@ -627,19 +624,19 @@ the inductive hypothesis, and using the results for <span class="math notranslat
 that <span class="math notranslate nohighlight">\(Q_3\equiv=0\)</span>, and therefore <span class="math notranslate nohighlight">\(p\equiv0\)</span> as required.</p>
 </div></div></section>
 <section id="some-more-exotic-elements">
-<h2><span class="section-number">2.4. </span>Some more exotic elements<a class="headerlink" href="#some-more-exotic-elements" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">2.4. </span>Some more exotic elements<a class="headerlink" href="#some-more-exotic-elements" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490691590"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=495e54dd-23b6-4d92-bcdb-ac8e00ab3829">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=495e54dd-23b6-4d92-bcdb-ac8e00ab3829">watch this video on Panopto</a></p>
 </div>
 </details><p>We now consider some finite elements that involve derivative
 evaluation. The Hermite elements involve evaluation of first
@@ -690,19 +687,19 @@ is solved by the Argyris element.</p>
 </ol>
 </div></div></section>
 <section id="global-continuity">
-<h2><span class="section-number">2.5. </span>Global continuity<a class="headerlink" href="#global-continuity" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">2.5. </span>Global continuity<a class="headerlink" href="#global-continuity" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490691454"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f384b387-f65a-4f9e-a582-ac8e00b8760e">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f384b387-f65a-4f9e-a582-ac8e00b8760e">watch this video on Panopto</a></p>
 </div>
 </details><p>Next we need to know how to glue finite elements together to form
 spaces defined over a triangulation (mesh). To do this we need to
@@ -774,18 +771,18 @@ ideas extend to higher dimensions). We achieve this by assigning nodal
 variables (and their associated nodal basis functions) appropriately
 to vertices, edges etc. of each triangle <span class="math notranslate nohighlight">\(K\)</span>. First we need to
 introduce this terminology.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490691352"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=22aab3d8-2041-4c42-9d18-ac8e00be66ab">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=22aab3d8-2041-4c42-9d18-ac8e00be66ab">watch this video on Panopto</a></p>
 </div>
 </details><div class="proof proof-type-definition" id="id29">
 
@@ -834,18 +831,18 @@ calculated from <span class="math notranslate nohighlight">\(f\)</span> and deri
 <p>Find the corresponding nodal basis for <span class="math notranslate nohighlight">\(P\)</span> in terms of the monomial
 basis <span class="math notranslate nohighlight">\(\{1, x, x^2\}\)</span>. Provide the <span class="math notranslate nohighlight">\(C^0\)</span> geometric decomposition for
 the finite element (demonstrating that it is indeed <span class="math notranslate nohighlight">\(C^0\)</span>).</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490691251"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9f363ae5-0174-4fe1-94e9-ac8e00e7f271">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9f363ae5-0174-4fe1-94e9-ac8e00e7f271">watch this video on Panopto</a></p>
 </div>
 </details><p>To discuss <span class="math notranslate nohighlight">\(C^m\)</span> continuity, we need to introduce some further
 vocabulary about the topology of <span class="math notranslate nohighlight">\(K\)</span>.</p>
@@ -916,13 +913,13 @@ these correspondences.</p>
         
     </div><div class="proof-content">
 <p>Show that the Argyris element has a <span class="math notranslate nohighlight">\(C^1\)</span> geometric decomposition.</p>
-</div></div><details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/490691153"
 frameborder="0" allow="autoplay; fullscreen"
@@ -1059,8 +1056,8 @@ element functions.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

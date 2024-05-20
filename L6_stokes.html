@@ -1,27 +1,24 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Stokes equation &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>6. Stokes equation &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Practical matters" href="practicalities.html" />
+    <link rel="next" title="Software tools" href="tools.html" />
     <link rel="prev" title="5. Convergence of finite element approximations" href="L5_convergence.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
@@ -52,7 +49,7 @@
           <div class="body" role="main">
             
   <section id="stokes-equation">
-<span id="stokes"></span><h1><span class="section-number">6. </span>Stokes equation<a class="headerlink" href="#stokes-equation" title="Permalink to this headline">¶</a></h1>
+<span id="stokes"></span><h1><span class="section-number">6. </span>Stokes equation<a class="headerlink" href="#stokes-equation" title="Link to this heading">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This section is the mastery topic for this module. It consists of
@@ -61,11 +58,11 @@ covered in the mastery question on the exam.</p>
 <p>This section is not a part of the third year version of this module.</p>
 </div>
 <section id="strong-form-of-the-equations">
-<h2><span class="section-number">6.1. </span>Strong form of the equations<a class="headerlink" href="#strong-form-of-the-equations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1. </span>Strong form of the equations<a class="headerlink" href="#strong-form-of-the-equations" title="Link to this heading">¶</a></h2>
 <p>In this section we consider finite element discretisations of the Stokes
 equation of a viscous fluid, given by</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-0">
-<span class="eqno">(6.1)<a class="headerlink" href="#equation-l6-stokes-0" title="Permalink to this equation">¶</a></span>\[-\mu\nabla\cdot\epsilon(u) + \nabla p = f, \quad \nabla\cdot u = 0,
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-l6-stokes-0" title="Link to this equation">¶</a></span>\[-2\mu\nabla\cdot\epsilon(u) + \nabla p = f, \quad \nabla\cdot u = 0,
  \quad \epsilon(u) = \frac{1}{2}\left( \nabla u + \nabla u^T\right),\]</div>
 <p>where <span class="math notranslate nohighlight">\(u\)</span> is the (vector-valued) fluid velocity, <span class="math notranslate nohighlight">\(p\)</span> is the pressure,
 <span class="math notranslate nohighlight">\(\mu\)</span> is the viscosity and <span class="math notranslate nohighlight">\(f\)</span> is a (vector-valued) external force
@@ -80,7 +77,7 @@ the Stokes equation, but for now we shall consider the “no slip”
 boundary condition <span class="math notranslate nohighlight">\(u=0\)</span> on the entire boundary <span class="math notranslate nohighlight">\(\partial\Omega\)</span>. Note
 that <span class="math notranslate nohighlight">\(\nabla u\)</span> is a 2-tensor (i.e. a matrix-valued function), with</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-1">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-l6-stokes-1" title="Permalink to this equation">¶</a></span>\[(\nabla u)_{ij} = \frac{\partial u_i}{\partial x_j},
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-l6-stokes-1" title="Link to this equation">¶</a></span>\[(\nabla u)_{ij} = \frac{\partial u_i}{\partial x_j},
 (\nabla u^T)_{ij} = (\nabla u)_{ji}.\]</div>
 <p>Note that under the incompressibility constraint <span class="math notranslate nohighlight">\(\nabla\cdot u =0\)</span>, we
 can write <span class="math notranslate nohighlight">\(\nabla\cdot\epsilon(u)=\nabla^2 u\)</span>. However, this leads to
@@ -91,10 +88,10 @@ Stokes equation inside a gradient, hence we can only expect to solve
 these equations for <span class="math notranslate nohighlight">\(p\)</span> up to an additive constant. To fix that constant,
 with no slip boundary conditions we additionally require</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-2">
-<span class="eqno">(6.3)<a class="headerlink" href="#equation-l6-stokes-2" title="Permalink to this equation">¶</a></span>\[\int_\Omega p d\,x = 0.\]</div>
+<span class="eqno">(6.3)<a class="headerlink" href="#equation-l6-stokes-2" title="Link to this equation">¶</a></span>\[\int_\Omega p d\,x = 0.\]</div>
 </section>
 <section id="variational-form-of-the-equations">
-<h2><span class="section-number">6.2. </span>Variational form of the equations<a class="headerlink" href="#variational-form-of-the-equations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.2. </span>Variational form of the equations<a class="headerlink" href="#variational-form-of-the-equations" title="Link to this heading">¶</a></h2>
 <p>To proceed to the finite element discretisation, we need to find an
 appropriate variational formulation of the Stokes equations. Defining
 <span class="math notranslate nohighlight">\(V=(\mathring{H}^1(\Omega))^n\)</span> (i.e. vector valued functions in physical
@@ -102,7 +99,7 @@ dimension <span class="math notranslate nohighlight">\(n\)</span> with each Cart
 which is the subspace of <span class="math notranslate nohighlight">\(H^1(\Omega)\)</span> consisting of functions that
 vanish on the boundary, and <span class="math notranslate nohighlight">\(Q=\mathring{L}^2(\Omega)\)</span>, with</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-3">
-<span class="eqno">(6.4)<a class="headerlink" href="#equation-l6-stokes-3" title="Permalink to this equation">¶</a></span>\[\mathring{L}^2(\Omega)=
+<span class="eqno">(6.4)<a class="headerlink" href="#equation-l6-stokes-3" title="Link to this equation">¶</a></span>\[\mathring{L}^2(\Omega)=
 \left\{p\in L^2(\Omega): \int_\Omega p = 0\right\}.\]</div>
 <div class="proof proof-type-definition" id="id1">
 <span id="weak-stokes"></span>
@@ -113,10 +110,10 @@ vanish on the boundary, and <span class="math notranslate nohighlight">\(Q=\math
 <p>The variational formulation of the Stokes equation seeks <span class="math notranslate nohighlight">\((u,p)\in
 V\times Q\)</span> such that</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-4">
-<span class="eqno">(6.5)<a class="headerlink" href="#equation-l6-stokes-4" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v, p) &amp; = \int_\Omega f\cdot v d\, x,\\b(u,q) &amp; = 0, \quad \forall (v,q) \in V\times Q,\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.5)<a class="headerlink" href="#equation-l6-stokes-4" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v, p) &amp; = \int_\Omega f\cdot v d\, x,\\b(u,q) &amp; = 0, \quad \forall (v,q) \in V\times Q,\end{aligned}\end{align} \]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-5">
-<span class="eqno">(6.6)<a class="headerlink" href="#equation-l6-stokes-5" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) = 2\mu\int_\Omega \epsilon(u):\epsilon(v)d\, x,\\b(v,q) = -\int_\Omega q \nabla\cdot v d\, x.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.6)<a class="headerlink" href="#equation-l6-stokes-5" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) = 2\mu\int_\Omega \epsilon(u):\epsilon(v)d\, x,\\b(v,q) = -\int_\Omega q \nabla\cdot v d\, x.\end{aligned}\end{align} \]</div>
 </div></div><div class="proof proof-type-exercise" id="id2">
 
     <div class="proof-title">
@@ -134,23 +131,23 @@ V\)</span> and <span class="math notranslate nohighlight">\(p\in Q\)</span>. If 
 problem as finding <span class="math notranslate nohighlight">\(U\in X\)</span> such that</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-eqn-general">
-<span class="eqno">(6.7)<a class="headerlink" href="#equation-eqn-general" title="Permalink to this equation">¶</a></span>\[c(U,W) = F(W),\]</div>
+<span class="eqno">(6.7)<a class="headerlink" href="#equation-eqn-general" title="Link to this equation">¶</a></span>\[c(U,W) = F(W),\]</div>
 </div></blockquote>
 <p>where for the case of Stokes equation,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-6">
-<span class="eqno">(6.8)<a class="headerlink" href="#equation-l6-stokes-6" title="Permalink to this equation">¶</a></span>\[c(U,W) = a(u,v) + b(v,p) + b(u,q), \quad F(W)=\int_{\Omega}f\cdot v d\, x.\]</div>
+<span class="eqno">(6.8)<a class="headerlink" href="#equation-l6-stokes-6" title="Link to this equation">¶</a></span>\[c(U,W) = a(u,v) + b(v,p) + b(u,q), \quad F(W)=\int_{\Omega}f\cdot v d\, x.\]</div>
 </div></blockquote>
 <p>There is a challenge with Stokes equation which is that it is not
 coercive, i.e. there does not exist a constant <span class="math notranslate nohighlight">\(C&gt;0\)</span> such that</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-7">
-<span class="eqno">(6.9)<a class="headerlink" href="#equation-l6-stokes-7" title="Permalink to this equation">¶</a></span>\[\|U\|^2_X \leq Cc(U,U), \quad \forall U\in X,\]</div>
+<span class="eqno">(6.9)<a class="headerlink" href="#equation-l6-stokes-7" title="Link to this equation">¶</a></span>\[\|U\|^2_X \leq Cc(U,U), \quad \forall U\in X,\]</div>
 </div></blockquote>
 <p>where here we use the product norm</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-8">
-<span class="eqno">(6.10)<a class="headerlink" href="#equation-l6-stokes-8" title="Permalink to this equation">¶</a></span>\[\|U\|^2_X = \|u\|_{H^1(\Omega)}^2 + \|p\|_{L^2(\Omega)}^2.\]</div>
+<span class="eqno">(6.10)<a class="headerlink" href="#equation-l6-stokes-8" title="Link to this equation">¶</a></span>\[\|U\|^2_X = \|u\|_{H^1(\Omega)}^2 + \|p\|_{L^2(\Omega)}^2.\]</div>
 </div></blockquote>
 <p>This means that we can’t use the Lax Milgram Theorem to show existence
 and uniqueness of solutions for the variational formulation or any
@@ -167,7 +164,7 @@ Instead we have to use a more general tool, the inf-sup theorem.</p>
 the case <span class="math notranslate nohighlight">\(v=0\)</span>.</p>
 </div></div></section>
 <section id="the-inf-sup-condition">
-<h2><span class="section-number">6.3. </span>The inf-sup condition<a class="headerlink" href="#the-inf-sup-condition" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.3. </span>The inf-sup condition<a class="headerlink" href="#the-inf-sup-condition" title="Link to this heading">¶</a></h2>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>The key to understanding this section and the following one is to
@@ -181,7 +178,7 @@ bilinear form on <span class="math notranslate nohighlight">\(V\times Q\)</span>
 such that</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-9">
-<span class="eqno">(6.11)<a class="headerlink" href="#equation-l6-stokes-9" title="Permalink to this equation">¶</a></span>\[\inf_{0\neq q\in Q}\sup_{0 \neq v\in V} \frac{b(v,q)}{\|v\|_V\|q\|_Q}
+<span class="eqno">(6.11)<a class="headerlink" href="#equation-l6-stokes-9" title="Link to this equation">¶</a></span>\[\inf_{0\neq q\in Q}\sup_{0 \neq v\in V} \frac{b(v,q)}{\|v\|_V\|q\|_Q}
 \geq \beta.\]</div>
 </div></blockquote>
 <p>For brevity, we will drop the <span class="math notranslate nohighlight">\(\neq 0\)</span> condition in subsequent formulae.
@@ -189,12 +186,12 @@ To understand this condition, we consider the map <span class="math notranslate 
 given by</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-10">
-<span class="eqno">(6.12)<a class="headerlink" href="#equation-l6-stokes-10" title="Permalink to this equation">¶</a></span>\[Bv[p] = b(v,p), \, \forall p \in Q,\]</div>
+<span class="eqno">(6.12)<a class="headerlink" href="#equation-l6-stokes-10" title="Link to this equation">¶</a></span>\[Bv[p] = b(v,p), \, \forall p \in Q,\]</div>
 </div></blockquote>
 <p>and the transpose operator <span class="math notranslate nohighlight">\(B^*:Q\to V'\)</span>, by</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-11">
-<span class="eqno">(6.13)<a class="headerlink" href="#equation-l6-stokes-11" title="Permalink to this equation">¶</a></span>\[B^*p[v] = b(v,p), \quad \forall v \in V.\]</div>
+<span class="eqno">(6.13)<a class="headerlink" href="#equation-l6-stokes-11" title="Link to this equation">¶</a></span>\[B^*p[v] = b(v,p), \quad \forall v \in V.\]</div>
 </div></blockquote>
 <p>Here, <span class="math notranslate nohighlight">\(Bv\)</span> is the map <span class="math notranslate nohighlight">\(B\)</span> applied to <span class="math notranslate nohighlight">\(v\)</span>: <span class="math notranslate nohighlight">\(Bv\)</span> is an element of the
 dual space <span class="math notranslate nohighlight">\(Q'\)</span> which itself maps elements of <span class="math notranslate nohighlight">\(Q\)</span> to
@@ -204,17 +201,17 @@ of <span class="math notranslate nohighlight">\(V\)</span> to <span class="math 
 <p>The norm of <span class="math notranslate nohighlight">\(B^*q\)</span> is</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-12">
-<span class="eqno">(6.14)<a class="headerlink" href="#equation-l6-stokes-12" title="Permalink to this equation">¶</a></span>\[\|B^*q\|_{V'} = \sup_{v\in V}\frac{b(v,q)}{\|v\|_V}.\]</div>
+<span class="eqno">(6.14)<a class="headerlink" href="#equation-l6-stokes-12" title="Link to this equation">¶</a></span>\[\|B^*q\|_{V'} = \sup_{v\in V}\frac{b(v,q)}{\|v\|_V}.\]</div>
 </div></blockquote>
 <p>This allows us to rewrite the inf-sup condition as</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-13">
-<span class="eqno">(6.15)<a class="headerlink" href="#equation-l6-stokes-13" title="Permalink to this equation">¶</a></span>\[\inf_{q\in Q} \frac{\|B^*q\|_{V'}}{\|q\|_Q} \geq \beta,\]</div>
+<span class="eqno">(6.15)<a class="headerlink" href="#equation-l6-stokes-13" title="Link to this equation">¶</a></span>\[\inf_{q\in Q} \frac{\|B^*q\|_{V'}}{\|q\|_Q} \geq \beta,\]</div>
 </div></blockquote>
 <p>which is also equivalent to</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-14">
-<span class="eqno">(6.16)<a class="headerlink" href="#equation-l6-stokes-14" title="Permalink to this equation">¶</a></span>\[\|B^*q\|_{V'} \geq \beta\|q\|_Q, \, \forall q\in Q.\]</div>
+<span class="eqno">(6.16)<a class="headerlink" href="#equation-l6-stokes-14" title="Link to this equation">¶</a></span>\[\|B^*q\|_{V'} \geq \beta\|q\|_Q, \, \forall q\in Q.\]</div>
 </div></blockquote>
 <p>This tells us that the map <span class="math notranslate nohighlight">\(B^*\)</span> is injective, since if there
 exist <span class="math notranslate nohighlight">\(q_1,q_2\)</span> such that <span class="math notranslate nohighlight">\(B^*q_1=B^*q_2\)</span>, then <span class="math notranslate nohighlight">\(B^*(q_1-q_2)=0
@@ -243,8 +240,8 @@ spaces.</p>
 perpendicular space <span class="math notranslate nohighlight">\(Z^\perp\)</span> of <span class="math notranslate nohighlight">\(Z\)</span> in <span class="math notranslate nohighlight">\(Q\)</span> is</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-15">
-<span class="eqno">(6.17)<a class="headerlink" href="#equation-l6-stokes-15" title="Permalink to this equation">¶</a></span>\[Z^{\perp} = \left\{ q\in Q: \langle q,p \rangle_Q = 0, \,
-\forall p \in Q\right\}.\]</div>
+<span class="eqno">(6.17)<a class="headerlink" href="#equation-l6-stokes-15" title="Link to this equation">¶</a></span>\[Z^{\perp} = \left\{ q\in Q: \langle q,p \rangle_Q = 0, \,
+\forall p \in Z\right\}.\]</div>
 </div></blockquote>
 </div></div><p>In finite dimensions, we have that <span class="math notranslate nohighlight">\(B^*\)</span> defines a one-to-one mapping
 from <span class="math notranslate nohighlight">\((\mathrm{Ker}B^*)^\perp\subset Q\)</span> (the perpendicular space to
@@ -255,7 +252,7 @@ the conditions of the Closed Range Theorem.</p>
 \in (\mathrm{Ker}B^*)^\perp\)</span> such that <span class="math notranslate nohighlight">\(B^*q=F\)</span>. Further, we have</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-16">
-<span class="eqno">(6.18)<a class="headerlink" href="#equation-l6-stokes-16" title="Permalink to this equation">¶</a></span>\[\|F\|_{V'} \geq \beta\|q\|_Q,\]</div>
+<span class="eqno">(6.18)<a class="headerlink" href="#equation-l6-stokes-16" title="Link to this equation">¶</a></span>\[\|F\|_{V'} \geq \beta\|q\|_Q,\]</div>
 </div></blockquote>
 <p>via the inf-sup condition.</p>
 <p>Finally, it is useful to characterise <span class="math notranslate nohighlight">\(\mathrm{Im}(B^*)\)</span>. In
@@ -277,19 +274,19 @@ is the subspace of <span class="math notranslate nohighlight">\(Q'\)</span> of c
 vanish on <span class="math notranslate nohighlight">\(Z\)</span> i.e.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-17">
-<span class="eqno">(6.19)<a class="headerlink" href="#equation-l6-stokes-17" title="Permalink to this equation">¶</a></span>\[Z^0 = \left\{ F\in Q': F[q]=0\, \forall q\in Z\right\}.\]</div>
+<span class="eqno">(6.19)<a class="headerlink" href="#equation-l6-stokes-17" title="Link to this equation">¶</a></span>\[Z^0 = \left\{ F\in Q': F[q]=0\, \forall q\in Z\right\}.\]</div>
 </div></blockquote>
 </div></div><p>Then the dual space version of the rank-nullity theorem (and the
 Closed Range Theorem for infinity dimensional Hilbert spaces) tells
 us that</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-18">
-<span class="eqno">(6.20)<a class="headerlink" href="#equation-l6-stokes-18" title="Permalink to this equation">¶</a></span>\[\mathrm{Im}(B^*) = (\mathrm{Ker} B^*)^0.\]</div>
+<span class="eqno">(6.20)<a class="headerlink" href="#equation-l6-stokes-18" title="Link to this equation">¶</a></span>\[\mathrm{Im}(B^*) = (\mathrm{Ker} B)^0.\]</div>
 </div></blockquote>
 <p>Equipped with this tool, we can look at solveability of mixed problems.</p>
 </section>
 <section id="solveability-of-mixed-problems">
-<h2><span class="section-number">6.4. </span>Solveability of mixed problems<a class="headerlink" href="#solveability-of-mixed-problems" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.4. </span>Solveability of mixed problems<a class="headerlink" href="#solveability-of-mixed-problems" title="Link to this heading">¶</a></h2>
 <p>For symmetric, mixed problems in two variables, sufficient conditions
 for existence are given by the following result of Franco Brezzi.</p>
 <div class="proof proof-type-theorem" id="id6">
@@ -304,12 +301,12 @@ for existence are given by the following result of Franco Brezzi.</p>
 and <span class="math notranslate nohighlight">\(b(v,q)\)</span> be a continuous bilinear form defined on <span class="math notranslate nohighlight">\(V\times Q\)</span>.
 Consider the variational problem for <span class="math notranslate nohighlight">\((u,p)\in V\times Q\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-19">
-<span class="eqno">(6.21)<a class="headerlink" href="#equation-l6-stokes-19" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v,p) = F[v], \, \forall v \in V,\\b(u,q) = G[q], \, \forall q\in Q,\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.21)<a class="headerlink" href="#equation-l6-stokes-19" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v,p) = F[v], \, \forall v \in V,\\b(u,q) = G[q], \, \forall q\in Q,\end{aligned}\end{align} \]</div>
 <p>for <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(G\)</span> continuous linear forms on <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> respectively.</p>
 <p>Define the kernel
 <span class="math notranslate nohighlight">\(Z\)</span> by</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-20">
-<span class="eqno">(6.22)<a class="headerlink" href="#equation-l6-stokes-20" title="Permalink to this equation">¶</a></span>\[Z = \left\{u\in V: b(u,q)=0 \forall q\in Q\right\}.\]</div>
+<span class="eqno">(6.22)<a class="headerlink" href="#equation-l6-stokes-20" title="Link to this equation">¶</a></span>\[Z = \left\{u\in V: b(u,q)=0 \forall q\in Q\right\}.\]</div>
 <p>Assume the following conditions:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(a(u,v)\)</span> is coercive on the kernel <span class="math notranslate nohighlight">\(Z\)</span> with coercivity constant
@@ -321,7 +318,7 @@ Consider the variational problem for <span class="math notranslate nohighlight">
 problem and we have the stability bound</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-21">
-<span class="eqno">(6.23)<a class="headerlink" href="#equation-l6-stokes-21" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u\|_V  \leq \frac{1}{\alpha}\|F\|_{V'}
+<span class="eqno">(6.23)<a class="headerlink" href="#equation-l6-stokes-21" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u\|_V  \leq \frac{1}{\alpha}\|F\|_{V'}
 + \frac{2M}{\alpha\beta}\|G\|_{Q'},\\\|p\|_Q \leq \frac{2M}{\alpha\beta}\|F\|_{V'} +
 \frac{2M^2}{\alpha\beta^2} \|G\|_{Q'},\end{aligned}\end{align} \]</div>
 </div></blockquote>
@@ -338,19 +335,19 @@ that <span class="math notranslate nohighlight">\(B\)</span> is surjective, so w
 mixed problem,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-22">
-<span class="eqno">(6.24)<a class="headerlink" href="#equation-l6-stokes-22" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u_Z,v) + b(v,p) = F[v] - a(u_g, v), \, \forall v \in V,\\b(u_Z,q) = 0.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.24)<a class="headerlink" href="#equation-l6-stokes-22" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u_Z,v) + b(v,p) = F[v] - a(u_g, v), \, \forall v \in V,\\b(u_Z,q) = 0.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>Thus, <span class="math notranslate nohighlight">\(Bu_Z=0\)</span>, i.e. <span class="math notranslate nohighlight">\(u_Z\in Z\)</span>. Choosing <span class="math notranslate nohighlight">\(v\in Z\subset V\)</span>, we get</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-uz">
-<span class="eqno">(6.25)<a class="headerlink" href="#equation-uz" title="Permalink to this equation">¶</a></span>\[a(u_Z,v) = F'[v] = F[v] - a(u_g,v), \, \forall v\in Z,\]</div>
+<span class="eqno">(6.25)<a class="headerlink" href="#equation-uz" title="Link to this equation">¶</a></span>\[a(u_Z,v) = F'[v] = F[v] - a(u_g,v), \, \forall v\in Z,\]</div>
 </div></blockquote>
 <p>for <span class="math notranslate nohighlight">\(u_Z \in Z\)</span>. Since <span class="math notranslate nohighlight">\(a(u,v)\)</span> is coercive on <span class="math notranslate nohighlight">\(Z\)</span>, and <span class="math notranslate nohighlight">\(F'\)</span> is
 continuous (from continuity of <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(a(u,v)\)</span>), Lax Milgram tells
 us that <span class="math notranslate nohighlight">\(u_Z\in Z\)</span> exists and is unique. We now notice that</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-23">
-<span class="eqno">(6.26)<a class="headerlink" href="#equation-l6-stokes-23" title="Permalink to this equation">¶</a></span>\[L[v] = F[v] - a(u_g+u_Z,v) = 0 \forall v\in Z,\]</div>
+<span class="eqno">(6.26)<a class="headerlink" href="#equation-l6-stokes-23" title="Link to this equation">¶</a></span>\[L[v] = F[v] - a(u_g+u_Z,v) = 0 \forall v\in Z,\]</div>
 </div></blockquote>
 <p>so <span class="math notranslate nohighlight">\(L[v]\in Z^0 = (\mathrm{Ker} B)^0=\mathrm{Im} B^*\)</span>. This means that there
 exists <span class="math notranslate nohighlight">\(p\in Q\)</span> such that <span class="math notranslate nohighlight">\(B^*p = L\)</span>. Hence, we have found <span class="math notranslate nohighlight">\((u,p)\)</span>
@@ -361,18 +358,18 @@ then <span class="math notranslate nohighlight">\((u,p)=(u_1-u_2,p_1-p_2)=0\)</s
 of the equations for the two solutions, and get</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-24">
-<span class="eqno">(6.27)<a class="headerlink" href="#equation-l6-stokes-24" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v,p) = 0, \, \forall v\in V,\\b(u,q) = 0, \forall q\in Q.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.27)<a class="headerlink" href="#equation-l6-stokes-24" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v,p) = 0, \, \forall v\in V,\\b(u,q) = 0, \forall q\in Q.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>It is our goal to show that <span class="math notranslate nohighlight">\((u,p)=0\)</span>. We have again that <span class="math notranslate nohighlight">\(u\in Z\)</span>,
 and taking <span class="math notranslate nohighlight">\(v=u\)</span> gives</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-25">
-<span class="eqno">(6.28)<a class="headerlink" href="#equation-l6-stokes-25" title="Permalink to this equation">¶</a></span>\[0 = a(u,u) \geq \alpha\|u\|_V^2 \implies u=0.\]</div>
+<span class="eqno">(6.28)<a class="headerlink" href="#equation-l6-stokes-25" title="Link to this equation">¶</a></span>\[0 = a(u,u) \geq \alpha\|u\|_V^2 \implies u=0.\]</div>
 </div></blockquote>
 <p>Substituting this into the problem for <span class="math notranslate nohighlight">\((u,p)\)</span> gives</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-26">
-<span class="eqno">(6.29)<a class="headerlink" href="#equation-l6-stokes-26" title="Permalink to this equation">¶</a></span>\[b(v,p) = 0, \, \forall v\in V.\]</div>
+<span class="eqno">(6.29)<a class="headerlink" href="#equation-l6-stokes-26" title="Link to this equation">¶</a></span>\[b(v,p) = 0, \, \forall v\in V.\]</div>
 </div></blockquote>
 <p>Since <span class="math notranslate nohighlight">\(b\)</span> is injective, this means that <span class="math notranslate nohighlight">\(p=0\)</span> as required.</p>
 <p>Having shown existence and uniqueness of <span class="math notranslate nohighlight">\((u,p)\)</span>, we want to
@@ -380,22 +377,22 @@ develop the stability bounds. We now assume that <span class="math notranslate n
 the variational problem. We first use the surjectivity of
 <span class="math notranslate nohighlight">\(B\)</span> to find <span class="math notranslate nohighlight">\(u_g\)</span> such that <span class="math notranslate nohighlight">\(Bu_g=G\)</span>. This means that</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-27">
-<span class="eqno">(6.30)<a class="headerlink" href="#equation-l6-stokes-27" title="Permalink to this equation">¶</a></span>\[b(q,u_g) = G[q], \forall q \in Q,\]</div>
+<span class="eqno">(6.30)<a class="headerlink" href="#equation-l6-stokes-27" title="Link to this equation">¶</a></span>\[b(q,u_g) = G[q], \forall q \in Q,\]</div>
 <p>Then, for all <span class="math notranslate nohighlight">\(q\in Q\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-l6-stokes-28">
-<span class="eqno">(6.31)<a class="headerlink" href="#equation-l6-stokes-28" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|G\|_{Q'} = \sup_{q\in Q}\frac{b(q,u_g)}{\|q\|_Q}\\= \sup_{q\in Q}\frac{b(q,u_g)}{\|q\|_Q\|u_g\|_V}\|u_g\|_V\\\geq \beta \|u_g\|,\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.31)<a class="headerlink" href="#equation-l6-stokes-28" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|G\|_{Q'} = \sup_{q\in Q}\frac{b(q,u_g)}{\|q\|_Q}\\= \sup_{q\in Q}\frac{b(q,u_g)}{\|q\|_Q\|u_g\|_V}\|u_g\|_V\\\geq \beta \|u_g\|,\end{aligned}\end{align} \]</div>
 <p>by the inf-sup condition.</p>
 <p>From the Lax Milgram theorem applied to <a class="reference internal" href="#equation-uz">(6.25)</a>, we get</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-29">
-<span class="eqno">(6.32)<a class="headerlink" href="#equation-l6-stokes-29" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_Z\|_V \leq \frac{1}{\alpha}\left(\|F\|_{V'} -
+<span class="eqno">(6.32)<a class="headerlink" href="#equation-l6-stokes-29" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_Z\|_V \leq \frac{1}{\alpha}\left(\|F\|_{V'} +
 \sup_{v\in V}\frac{a(u_g,\cdot)}{\|v\|_V}\right)\\\leq \frac{1}{\alpha} \|F\|_{V'} + \frac{M}{\alpha}\|u_g\|_{V},\\\leq \frac{1}{\alpha}\|F\|_{V'} + \frac{M}{\alpha\beta}\|G\|_{Q'},\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(M\)</span> is the continuity constant of <span class="math notranslate nohighlight">\(a(\cdot,\cdot)\)</span>.</p>
 <p>Then we have</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-30">
-<span class="eqno">(6.33)<a class="headerlink" href="#equation-l6-stokes-30" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u\|_V = \|u_Z + u_g \|_V \leq \|u_Z\|_V + \|u_g\|_V,\\\leq \frac{1}{\alpha}\|F\|_{V'} + \frac{M}{\alpha\beta}\|G\|_{Q'}
+<span class="eqno">(6.33)<a class="headerlink" href="#equation-l6-stokes-30" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u\|_V = \|u_Z + u_g \|_V \leq \|u_Z\|_V + \|u_g\|_V,\\\leq \frac{1}{\alpha}\|F\|_{V'} + \frac{M}{\alpha\beta}\|G\|_{Q'}
 + \frac{1}{\beta}\|G\|_{Q'},\\\leq \frac{1}{\alpha}\|F\|_{V'} + \frac{2M}{\alpha\beta}\|G\|_{Q'},\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>making use of <span class="math notranslate nohighlight">\(M&gt;\alpha\)</span> (we have <span class="math notranslate nohighlight">\(\alpha \|u\|^2 \leq a(u,u) \leq M\|u\|^2\)</span> for any <span class="math notranslate nohighlight">\(u \in V\)</span>).  This gives the estimate for
@@ -403,18 +400,18 @@ the variational problem. We first use the surjectivity of
 <p>To estimate <span class="math notranslate nohighlight">\(\|p\|_Q\)</span>, we rearrange the variational problem to get</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-31">
-<span class="eqno">(6.34)<a class="headerlink" href="#equation-l6-stokes-31" title="Permalink to this equation">¶</a></span>\[b(p,v) = F'[v] = F[v] - a(u, v), \quad \forall v \in V.\]</div>
+<span class="eqno">(6.34)<a class="headerlink" href="#equation-l6-stokes-31" title="Link to this equation">¶</a></span>\[b(p,v) = F'[v] = F[v] - a(u, v), \quad \forall v \in V.\]</div>
 </div></blockquote>
 <p>As discussed previously, <span class="math notranslate nohighlight">\(F'\in Z^0\)</span>, hence this equation is solveable
 for <span class="math notranslate nohighlight">\(p\)</span> and we have</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-32">
-<span class="eqno">(6.35)<a class="headerlink" href="#equation-l6-stokes-32" title="Permalink to this equation">¶</a></span>\[\|F'\|_{V'} \geq \beta\|p\|_Q,\]</div>
+<span class="eqno">(6.35)<a class="headerlink" href="#equation-l6-stokes-32" title="Link to this equation">¶</a></span>\[\|F'\|_{V'} \geq \beta\|p\|_Q,\]</div>
 </div></blockquote>
 <p>Hence,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-33">
-<span class="eqno">(6.36)<a class="headerlink" href="#equation-l6-stokes-33" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|p\|_Q\leq \frac{1}{\beta}\|F\|_{V'} + \frac{M}{\beta}\|u\|_V,\\\leq \frac{1}{\beta}\|F\|_{V'} + \frac{M}{\beta}
+<span class="eqno">(6.36)<a class="headerlink" href="#equation-l6-stokes-33" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|p\|_Q\leq \frac{1}{\beta}\|F\|_{V'} + \frac{M}{\beta}\|u\|_V,\\\leq \frac{1}{\beta}\|F\|_{V'} + \frac{M}{\beta}
 \left(\frac{1}{\alpha}\|F\|_{V'} + \frac{2M}{\alpha\beta}\|G\|_{V'}
 \right),\\\leq \frac{2M}{\alpha\beta}\|F\|_{V'} + \frac{2M^2}{\alpha\beta^2}
 \|G\|_{Q'},\end{aligned}\end{align} \]</div>
@@ -422,7 +419,7 @@ for <span class="math notranslate nohighlight">\(p\)</span> and we have</p>
 <p>as required, having used <span class="math notranslate nohighlight">\(M&gt;\alpha\)</span> again.</p>
 </div></div></section>
 <section id="solveability-of-stokes-equation">
-<h2><span class="section-number">6.5. </span>Solveability of Stokes equation<a class="headerlink" href="#solveability-of-stokes-equation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.5. </span>Solveability of Stokes equation<a class="headerlink" href="#solveability-of-stokes-equation" title="Link to this heading">¶</a></h2>
 <p>Now we return to our variational formulation of Stokes equation and
 consider the Brezzi conditions for it. In the case of Stokes, the
 operator <span class="math notranslate nohighlight">\(B^*\)</span> is the divergence operator. It can be shown (beyond
@@ -432,7 +429,7 @@ that <span class="math notranslate nohighlight">\(a\)</span> is coercive on the 
 such that</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-34">
-<span class="eqno">(6.37)<a class="headerlink" href="#equation-l6-stokes-34" title="Permalink to this equation">¶</a></span>\[a(v,v) \geq \alpha \|v\|^2_V.\]</div>
+<span class="eqno">(6.37)<a class="headerlink" href="#equation-l6-stokes-34" title="Link to this equation">¶</a></span>\[a(v,v) \geq \alpha \|v\|^2_V.\]</div>
 </div></blockquote>
 <p>This result is called Korn’s identity (also beyond our scope). Then
 of course, <span class="math notranslate nohighlight">\(a\)</span> is in particular coercive on the divergence-free
@@ -440,7 +437,7 @@ subspace <span class="math notranslate nohighlight">\(Z\)</span>. Then we immedi
 Stokes problem.</p>
 </section>
 <section id="discretisation-of-stokes-equations">
-<h2><span class="section-number">6.6. </span>Discretisation of Stokes equations<a class="headerlink" href="#discretisation-of-stokes-equations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.6. </span>Discretisation of Stokes equations<a class="headerlink" href="#discretisation-of-stokes-equations" title="Link to this heading">¶</a></h2>
 <p>To discretise the Stokes equations, we need to choose finite element
 spaces <span class="math notranslate nohighlight">\(V_h \subset V\)</span> and <span class="math notranslate nohighlight">\(Q_h \subset Q\)</span>. Then we apply the Galerkin
 approximation, restricting the numerical solution <span class="math notranslate nohighlight">\((u_h,p_h)\)</span> to
@@ -452,7 +449,7 @@ with the uniqueness of <span class="math notranslate nohighlight">\(p_h\)</span>
 <span class="math notranslate nohighlight">\(V_h\)</span> and <span class="math notranslate nohighlight">\(Q_h\)</span> such that we have the discrete inf-sup condition</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-35">
-<span class="eqno">(6.38)<a class="headerlink" href="#equation-l6-stokes-35" title="Permalink to this equation">¶</a></span>\[\inf_{q\in {Q_h}}\sup_{v\in {V_h}}
+<span class="eqno">(6.38)<a class="headerlink" href="#equation-l6-stokes-35" title="Link to this equation">¶</a></span>\[\inf_{q\in {Q_h}}\sup_{v\in {V_h}}
 \frac{b(v,q)}{\|v\|_{V}\|q\|_{Q}} \geq \beta_h,\]</div>
 </div></blockquote>
 <p>with <span class="math notranslate nohighlight">\(\beta_h&gt;0\)</span>. Note that <span class="math notranslate nohighlight">\(\beta_h\neq \beta\)</span> in general,
@@ -463,7 +460,7 @@ also check whether <span class="math notranslate nohighlight">\(a(\cdot,\cdot)\)
 <span class="math notranslate nohighlight">\(Z_h\)</span> defined by</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-36">
-<span class="eqno">(6.39)<a class="headerlink" href="#equation-l6-stokes-36" title="Permalink to this equation">¶</a></span>\[Z_h = \left\{u\in V_h:b(u,q)=0 \,\forall q\in Q_h\right\}.\]</div>
+<span class="eqno">(6.39)<a class="headerlink" href="#equation-l6-stokes-36" title="Link to this equation">¶</a></span>\[Z_h = \left\{u\in V_h:b(u,q)=0 \,\forall q\in Q_h\right\}.\]</div>
 </div></blockquote>
 <p>Note that <span class="math notranslate nohighlight">\(Z_h\not\subset Z\)</span> in general (unless <span class="math notranslate nohighlight">\(V_h\)</span> and <span class="math notranslate nohighlight">\(Q_h\)</span> have
 been specially chosen to allow that). However, the details do not
@@ -487,15 +484,15 @@ spaces satisfying the discrete inf-sup condition for some
 <span class="math notranslate nohighlight">\(\beta_h&gt;0\)</span>. Then,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-37">
-<span class="eqno">(6.40)<a class="headerlink" href="#equation-l6-stokes-37" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_h - u\|_V \leq  \frac{4MM_b}{\alpha\beta}E_u + \frac{M_b}{\alpha}E_p,\\\|p_h - p\|_V \leq \frac{3M^2M_b}{\alpha\beta^2}E_u
-+ \frac{3MM_b}{\alpha\beta}E_p.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.40)<a class="headerlink" href="#equation-l6-stokes-37" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_h - u\|_V \leq  \frac{4MM_b}{\alpha\beta_h}E_u + \frac{M_b}{\alpha}E_p,\\\|p_h - p\|_V \leq \frac{3M^2M_b}{\alpha\beta_h^2}E_u
++ \frac{3MM_b}{\alpha\beta_h}E_p.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(M_b\)</span> is the continuity constant of <span class="math notranslate nohighlight">\(b(\cdot,\cdot)\)</span>, and
 where we have the best approximation errors of <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(p\)</span> in <span class="math notranslate nohighlight">\(V_h\)</span>
 and <span class="math notranslate nohighlight">\(Q_h\)</span> respectively,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-38">
-<span class="eqno">(6.41)<a class="headerlink" href="#equation-l6-stokes-38" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}E_u = \inf_{u_I\in V_h}\|u-u_I\|_V,\\E_p = \inf_{p_I\in Q_h}\|p-p_I\|_Q.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.41)<a class="headerlink" href="#equation-l6-stokes-38" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}E_u = \inf_{u_I\in V_h}\|u-u_I\|_V,\\E_p = \inf_{p_I\in Q_h}\|p-p_I\|_Q.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 </div></div><div class="proof proof-type-proof">
 
@@ -509,7 +506,7 @@ finite element variational problem and subtract one from the other,
 to obtain</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-39">
-<span class="eqno">(6.42)<a class="headerlink" href="#equation-l6-stokes-39" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u_h-u,v) + b(v,p_h-p) = 0, \quad \forall v\in V_h,\\b(u_h-u,q) = 0, \quad \forall q\in Q_h.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.42)<a class="headerlink" href="#equation-l6-stokes-39" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u_h-u,v) + b(v,p_h-p) = 0, \quad \forall v\in V_h,\\b(u_h-u,q) = 0, \quad \forall q\in Q_h.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>This is the mixed finite element version of Galerkin orthogonality
 that we saw earlier in the course. Replacing <span class="math notranslate nohighlight">\(u=u-u_I+u_I\)</span> and
@@ -517,53 +514,61 @@ that we saw earlier in the course. Replacing <span class="math notranslate nohig
 we get</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-40">
-<span class="eqno">(6.43)<a class="headerlink" href="#equation-l6-stokes-40" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u_h-u_I,v) + b(v,p_h-p_I) = F_{u_I,p_I}[v] := a(u-u_I,v) + b(v,p-p_I), \quad \forall v\in V_h,\\b(u_h-u_I,q) = G_{u_I}[q] := b(u-u_I,q), \quad \forall q\in Q_h.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.43)<a class="headerlink" href="#equation-l6-stokes-40" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u_h-u_I,v) + b(v,p_h-p_I) = F_{u_I,p_I}[v] := a(u-u_I,v) + b(v,p-p_I), \quad \forall v\in V_h,\\b(u_h-u_I,q) = G_{u_I}[q] := b(u-u_I,q), \quad \forall q\in Q_h.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>Hence, from the stability bound,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-41">
-<span class="eqno">(6.44)<a class="headerlink" href="#equation-l6-stokes-41" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_h-u_I\|_V  \leq \frac{1}{\alpha}\|F_{u_I,p_I}\|_{V'}
-+ \frac{2M}{\alpha\beta}\|G_{u_I}\|_{Q'},\\\|p_h-p_I\|_Q \leq \frac{2M}{\alpha\beta}\|F_{u_I,p_I}\|_{V'} +
-\frac{2M^2}{\alpha\beta^2} \|G_{u_I}\|_{Q'}.\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.44)<a class="headerlink" href="#equation-l6-stokes-41" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_h-u_I\|_V  \leq \frac{1}{\alpha}\|F_{u_I,p_I}\|_{V'}
++ \frac{2M}{\alpha\beta_h}\|G_{u_I}\|_{Q'},\\\|p_h-p_I\|_Q \leq \frac{2M}{\alpha\beta_h}\|F_{u_I,p_I}\|_{V'} +
+\frac{2M^2}{\alpha\beta_h^2} \|G_{u_I}\|_{Q'}.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>Using continuity of <span class="math notranslate nohighlight">\(a(\cdot,\cdot)\)</span> and <span class="math notranslate nohighlight">\(b(\cdot,\cdot)\)</span>, we have</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-42">
-<span class="eqno">(6.45)<a class="headerlink" href="#equation-l6-stokes-42" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|F_{u_I,p_I}\|_{V'} = \sup_{v\in V}\frac{a(u-u_I,v)}{\|v\|_{V}}
+<span class="eqno">(6.45)<a class="headerlink" href="#equation-l6-stokes-42" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|F_{u_I,p_I}\|_{V'} \leq \sup_{v\in V}\frac{a(u-u_I,v)}{\|v\|_{V}}
 + \sup_{v\in V}\frac{b(v,p-p_I)}{\|v\|_V}
-\leq M\|u-u_I\|_V + M_b\|p-p_I\|,\\\|G_{u_I}\|_{Q'} = \sup_{p\in Q}\frac{b(u-u_I,p)}{\|p\|_Q}
+\leq M\|u-u_I\|_V + M_b\|p-p_I\|_Q,\\\|G_{u_I}\|_{Q'} = \sup_{p\in Q}\frac{b(u-u_I,p)}{\|p\|_Q}
 \leq M_b\|u-u_I\|_V.\end{aligned}\end{align} \]</div>
 </div></blockquote>
-<p>Substitution then gives (making use of <span class="math notranslate nohighlight">\(M_b\geq\beta\)</span>, which comes
-from the fact that for any <span class="math notranslate nohighlight">\(u\in V\)</span> there exists <span class="math notranslate nohighlight">\(q \in Q\)</span> such that
-<span class="math notranslate nohighlight">\(\beta\|u\|_V\|q\|_Q\leq b(u,q)\leq M_b\|u\|_V\|q\|_Q\)</span>, hence the result)</p>
+<p>Substitution then gives</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-l6-stokes-43">
-<span class="eqno">(6.46)<a class="headerlink" href="#equation-l6-stokes-43" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u_h-u_I\|_V  \leq \frac{1}{\alpha}\left(M\|u-u_I\|_V +
-M_b\|p-p_I\|\right)
-+ \frac{2M}{\alpha\beta}M_b\|u-u_I\|_V,\\\leq \frac{3MM_b}{\alpha\beta}\|u-u_I\|_V + \frac{M_b}{\alpha}
-\|p-p_I\|_V,\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.46)<a class="headerlink" href="#equation-l6-stokes-43" title="Link to this equation">¶</a></span>\[\|u_h-u_I\|_V  \leq \frac{1}{\alpha}\left(M\|u-u_I\|_V +
+M_b\|p-p_I\|_Q\right)
++ \frac{2M}{\alpha\beta_h}M_b\|u-u_I\|_V.\]</div>
+</div></blockquote>
+<p>We have</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\beta_h \leq \inf_{q\in Q_h}\sup_{v\in V_h}\frac{b(v,q)}{\|q\|_Q\|v\|_V} \leq M_b,\]</div>
+</div></blockquote>
+<p>and hence,</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-44">
+<span class="eqno">(6.47)<a class="headerlink" href="#equation-l6-stokes-44" title="Link to this equation">¶</a></span>\[\|u_h-u_I\|_V\leq \frac{3MM_b}{\alpha\beta_h}\|u-u_I\|_V + \frac{M_b}{\alpha}
+\|p-p_I\|_Q,\]</div>
 </div></blockquote>
 <p>and</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-44">
-<span class="eqno">(6.47)<a class="headerlink" href="#equation-l6-stokes-44" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|p_h-p_I\|_Q \leq \frac{2M}{\alpha\beta}
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-45">
+<span class="eqno">(6.48)<a class="headerlink" href="#equation-l6-stokes-45" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|p_h-p_I\|_Q \leq \frac{2M}{\alpha\beta_h}
 \left(M\|u-u_I\|_V +
-M_b\|p-p_I\|\right)
+M_b\|p-p_I\|_Q\right)
 +
-\frac{2M^2}{\alpha\beta^2}M_b\|u-u_I\|_V\\\leq \frac{3M^2M_b}{\alpha\beta^2}\|u-u_I\|_V
-+ \frac{2MM_b}{\alpha\beta}\|p-p_I\|_V.\end{aligned}\end{align} \]</div>
+\frac{2M^2}{\alpha\beta_h^2}M_b\|u-u_I\|_V\\\leq \frac{3M^2M_b}{\alpha\beta_h^2}\|u-u_I\|_V
++ \frac{2MM_b}{\alpha\beta_h}\|p-p_I\|_Q.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>We then use the triangle inequality to write</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-45">
-<span class="eqno">(6.48)<a class="headerlink" href="#equation-l6-stokes-45" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u-u_h\|_V \leq \|u-u_I\|_V + \|u_h-u_I\|_V,\\\leq  \frac{4MM_b}{\alpha\beta}\|u-u_I\|_V + \frac{M_b}{\alpha}
-\|p-p_I\|_V,\end{aligned}\end{align} \]</div>
-<div class="math notranslate nohighlight" id="equation-l6-stokes-46">
-<span class="eqno">(6.49)<a class="headerlink" href="#equation-l6-stokes-46" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|p-p_h\|_Q \leq \|p-p_I\|_V + \|p_h-p_I\|_V,\\\leq \frac{3M^2M_b}{\alpha\beta^2}\|u-u_I\|_V
-+ \frac{3MM_b}{\alpha\beta}\|p-p_I\|_V.\end{aligned}\end{align} \]</div>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-46">
+<span class="eqno">(6.49)<a class="headerlink" href="#equation-l6-stokes-46" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|u-u_h\|_V \leq \|u-u_I\|_V + \|u_h-u_I\|_V,\\\leq  \frac{4MM_b}{\alpha\beta_h}\|u-u_I\|_V + \frac{M_b}{\alpha}
+\|p-p_I\|_Q,\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight" id="equation-l6-stokes-47">
+<span class="eqno">(6.50)<a class="headerlink" href="#equation-l6-stokes-47" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|p-p_h\|_Q \leq \|p-p_I\|_Q + \|p_h-p_I\|_Q,\\\leq \frac{3M^2M_b}{\alpha\beta_h^2}\|u-u_I\|_V
++ \frac{3MM_b}{\alpha\beta_h}\|p-p_I\|_Q.\end{aligned}\end{align} \]</div>
 </div></blockquote>
-<p>Finally, taking the infimum over the all <span class="math notranslate nohighlight">\(u_I\in V\)</span> and all <span class="math notranslate nohighlight">\(p_I\in V\)</span>
+<p>Finally, taking the infimum over the all <span class="math notranslate nohighlight">\(u_I\in V\)</span> and all <span class="math notranslate nohighlight">\(p_I\in Q\)</span>
 gives the result.</p>
 </div></div><p>This theorem tells us that if we can approximate the solution <span class="math notranslate nohighlight">\((u,p)\)</span>
 well in <span class="math notranslate nohighlight">\(V_h\times Q_h\)</span>, then the finite element approximation error
@@ -595,7 +600,7 @@ does not hold.</p>
 the inf-sup condition with <span class="math notranslate nohighlight">\(\beta_h&gt;0\)</span> independent of <span class="math notranslate nohighlight">\(h\)</span>.</p>
 </section>
 <section id="the-mini-element">
-<h2><span class="section-number">6.7. </span>The MINI element<a class="headerlink" href="#the-mini-element" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.7. </span>The MINI element<a class="headerlink" href="#the-mini-element" title="Link to this heading">¶</a></h2>
 <p>In general, the choice P1-P1 produces <span class="math notranslate nohighlight">\(\beta_h\to 0\)</span> as <span class="math notranslate nohighlight">\(h\to 0\)</span>: the
 discretisation is not stable. This means that the image of the
 divergence applied to <span class="math notranslate nohighlight">\(V_h\)</span> does not converge to <span class="math notranslate nohighlight">\(Q\)</span> as <span class="math notranslate nohighlight">\(h\to 0\)</span>. The
@@ -631,10 +636,12 @@ the following result.</p>
             <span class="proof-title-name">(Fortin’s trick)</span>
         
     </div><div class="proof-content">
-<p>If there exists a linear operator <span class="math notranslate nohighlight">\(\Pi_h:V\to V_h\)</span> such that</p>
+<p>Assume that the inf-sup condition holds for $b(v,q)$ over $Vtimes Q$
+with inf-sup constant $beta&gt;0$.
+If there exists a linear operator <span class="math notranslate nohighlight">\(\Pi_h:V\to V_h\)</span> such that</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-47">
-<span class="eqno">(6.50)<a class="headerlink" href="#equation-l6-stokes-47" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}b(v-\Pi_hv,q) = 0, \quad \forall v\in V,\,q\in Q_h,\\\|\Pi_hv\|_V \leq C_{\Pi}\|v\|_V,\end{aligned}\end{align} \]</div>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-48">
+<span class="eqno">(6.51)<a class="headerlink" href="#equation-l6-stokes-48" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}b(v-\Pi_hv,q) = 0, \quad \forall v\in V,\,q\in Q_h,\\\|\Pi_hv\|_V \leq C_{\Pi}\|v\|_V,\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>then the discrete inf-sup condition holds.</p>
 </div></div><div class="proof proof-type-proof">
@@ -645,8 +652,8 @@ the following result.</p>
     </div><div class="proof-content">
 <p>For any <span class="math notranslate nohighlight">\(q_h\in Q_h\)</span>, we have</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-48">
-<span class="eqno">(6.51)<a class="headerlink" href="#equation-l6-stokes-48" title="Permalink to this equation">¶</a></span>\[\sup_{v_h\in V_h}\frac{b(v_h,q_h)}{\|v_h\|_V}
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-49">
+<span class="eqno">(6.52)<a class="headerlink" href="#equation-l6-stokes-49" title="Link to this equation">¶</a></span>\[\sup_{v_h\in V_h}\frac{b(v_h,q_h)}{\|v_h\|_V}
 \geq \sup_{v\in V}\frac{b(\Pi_hv,q_h)}{\|\Pi_h v\|_V}
 = \sup_{v\in V}\frac{b(v,q_h)}{\|\Pi_hv\|_V}
 \geq \sup_{v\in V}\frac{b(v,q_h)}{C_{\Pi}\|v\|_V}
@@ -654,8 +661,8 @@ the following result.</p>
 </div></blockquote>
 <p>and rearranging and taking the infimum over <span class="math notranslate nohighlight">\(q_h\in Q_h\)</span> gives</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-49">
-<span class="eqno">(6.52)<a class="headerlink" href="#equation-l6-stokes-49" title="Permalink to this equation">¶</a></span>\[\inf_{q_h\in Q_h}\sup_{v_h\in V_h}\frac{b(v_h,q_h)}{\|q_h\|_Q\|v_h\|_V}
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-50">
+<span class="eqno">(6.53)<a class="headerlink" href="#equation-l6-stokes-50" title="Link to this equation">¶</a></span>\[\inf_{q_h\in Q_h}\sup_{v_h\in V_h}\frac{b(v_h,q_h)}{\|q_h\|_Q\|v_h\|_V}
 =\beta_h := \frac{\beta}{C_\Pi}.\]</div>
 </div></blockquote>
 </div></div><p>The following lemma gives a practical way to find <span class="math notranslate nohighlight">\(\Pi_h\)</span>.</p>
@@ -668,13 +675,13 @@ the following result.</p>
 <p>Assume that there exist two maps <span class="math notranslate nohighlight">\(\Pi_1,\Pi_2:V\to V_h\)</span>, with</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-pi1pi2">
-<span class="eqno">(6.53)<a class="headerlink" href="#equation-pi1pi2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|\Pi_1v\|_V \leq c_1\|v\|_V, \, \forall v\in V,\\\|\Pi_2(I-\Pi_1)v\|_V \leq c_2\|v\|_V, \, \forall v\in V,\\b(v-\Pi_2v,q_h) = 0,\, \forall v\in V,\,q_h\in Q_h,\end{aligned}\end{align} \]</div>
+<span class="eqno">(6.54)<a class="headerlink" href="#equation-pi1pi2" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\|\Pi_1v\|_V \leq c_1\|v\|_V, \, \forall v\in V,\\\|\Pi_2(I-\Pi_1)v\|_V \leq c_2\|v\|_V, \, \forall v\in V,\\b(v-\Pi_2v,q_h) = 0,\, \forall v\in V,\,q_h\in Q_h,\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>where the constants <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> are independent of <span class="math notranslate nohighlight">\(h\)</span>. Then
 the operator <span class="math notranslate nohighlight">\(\Pi_h\)</span>, defined by</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-50">
-<span class="eqno">(6.54)<a class="headerlink" href="#equation-l6-stokes-50" title="Permalink to this equation">¶</a></span>\[\Pi_hu = \Pi_1 u + \Pi_2(u - \Pi_1u),\]</div>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-51">
+<span class="eqno">(6.55)<a class="headerlink" href="#equation-l6-stokes-51" title="Link to this equation">¶</a></span>\[\Pi_hu = \Pi_1 u + \Pi_2(u - \Pi_1u),\]</div>
 </div></blockquote>
 <p>satisfies the conditions of Fortin’s trick.</p>
 </div></div><div class="proof proof-type-proof">
@@ -685,13 +692,13 @@ the operator <span class="math notranslate nohighlight">\(\Pi_h\)</span>, define
     </div><div class="proof-content">
 <p>We have</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-51">
-<span class="eqno">(6.55)<a class="headerlink" href="#equation-l6-stokes-51" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}b(\Pi_hw, q_h) = b(\Pi_2(w-\Pi_1)w, q_h) + b(\Pi_1w,q_h),\\= b(w-\Pi_1w,q_h) + b(\Pi_1w,q_h)\\= b(w,q_h),\end{aligned}\end{align} \]</div>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-52">
+<span class="eqno">(6.56)<a class="headerlink" href="#equation-l6-stokes-52" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}b(\Pi_hw, q_h) = b(\Pi_2(w-\Pi_1)w, q_h) + b(\Pi_1w,q_h),\\= b(w-\Pi_1w,q_h) + b(\Pi_1w,q_h)\\= b(w,q_h),\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>which gives the second condition of Fortin’s trick, and</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-52">
-<span class="eqno">(6.56)<a class="headerlink" href="#equation-l6-stokes-52" title="Permalink to this equation">¶</a></span>\[\|\Pi_hw\|_V \leq
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-53">
+<span class="eqno">(6.57)<a class="headerlink" href="#equation-l6-stokes-53" title="Link to this equation">¶</a></span>\[\|\Pi_hw\|_V \leq
 \|\Pi_2(w-\Pi_1w)\|_V + \|\Pi_1w\|_V \leq (c_1+c_2)\|w\|_V.\]</div>
 </div></blockquote>
 </div></div><p>For continuous finite element spaces, the Clement operator (which
@@ -699,7 +706,7 @@ we shall not describe here) satifies the condition on <span class="math notransl
 In fact, the Clement operator generally satisfies</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-clement">
-<span class="eqno">(6.57)<a class="headerlink" href="#equation-clement" title="Permalink to this equation">¶</a></span>\[|v-\Pi_1v|_{H^m(K)} \leq c\left(\sum_{\bar{K'} \cap \bar{K}\neq
+<span class="eqno">(6.58)<a class="headerlink" href="#equation-clement" title="Link to this equation">¶</a></span>\[|v-\Pi_1v|_{H^m(K)} \leq c\left(\sum_{\bar{K'} \cap \bar{K}\neq
 0}h_{K'}^{1-m} \|v\|_{H^1(K)}\right)\]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(\bar{K}\)</span> is the closure of any triangle <span class="math notranslate nohighlight">\(K\)</span>, and the sum is
@@ -724,26 +731,31 @@ the MINI element.</p>
 (B_3)^2\subset V_h\)</span> (i.e. the subspace of <span class="math notranslate nohighlight">\(V_h\)</span> of functions that
 vanish on all vertices (and hence all edges) is defined via</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-53">
-<span class="eqno">(6.58)<a class="headerlink" href="#equation-l6-stokes-53" title="Permalink to this equation">¶</a></span>\[0 = b(\Pi_2v-v,q_h), \, \forall q_h\in Q_h.\]</div>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-54">
+<span class="eqno">(6.59)<a class="headerlink" href="#equation-l6-stokes-54" title="Link to this equation">¶</a></span>\[0 = b(\Pi_2v-v,q_h), \, \forall q_h\in Q_h.\]</div>
 </div></blockquote>
 <p>This is well defined since</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-54">
-<span class="eqno">(6.59)<a class="headerlink" href="#equation-l6-stokes-54" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}b(\Pi_2v-v,q_h) = \int_{\Omega} q_h\nabla\cdot(\Pi_2v-v)d\,x\\= \int_\Omega (v-\Pi_2v)\nabla q_h d\, x,\end{aligned}\end{align} \]</div>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-55">
+<span class="eqno">(6.60)<a class="headerlink" href="#equation-l6-stokes-55" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}b(\Pi_2v-v,q_h) = \int_{\Omega} q_h\nabla\cdot(\Pi_2v-v)d\,x\\= \int_\Omega (v-\Pi_2v)\nabla q_h d\, x,\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>where we were allowed to integrate by parts since <span class="math notranslate nohighlight">\(v,\Pi_2v,q_h\)</span>
 are all in <span class="math notranslate nohighlight">\(H^1(\Omega)\)</span>. We see that our definition can be
-satisfied by picking <span class="math notranslate nohighlight">\(\Pi_2v\)</span> to have the same average over a
-triangle <span class="math notranslate nohighlight">\(K\)</span> as <span class="math notranslate nohighlight">\(v\)</span> for each triangle.</p>
+satisfied by picking <span class="math notranslate nohighlight">\(\Pi_2v\)</span> to be the function in $(B_3)^2$ such
+that</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-56">
+<span class="eqno">(6.61)<a class="headerlink" href="#equation-l6-stokes-56" title="Link to this equation">¶</a></span>\[\int_K \Phi_2v d\, x x = \int_K v d\, x x,\]</div>
+</div></blockquote>
+<p>for each triangle $K$.</p>
 <p>It can be shown using an inverse inequality (we will take it
 as read here) that</p>
 <blockquote>
-<div><div class="math notranslate nohighlight" id="equation-l6-stokes-55">
-<span class="eqno">(6.60)<a class="headerlink" href="#equation-l6-stokes-55" title="Permalink to this equation">¶</a></span>\[\|\Pi_2v\|_{H^r(K)} \leq ch_K^{-r}\|v\|_{L^2(K)}, \,
+<div><div class="math notranslate nohighlight" id="equation-l6-stokes-57">
+<span class="eqno">(6.62)<a class="headerlink" href="#equation-l6-stokes-57" title="Link to this equation">¶</a></span>\[\|\Pi_2v\|_{H^r(K)} \leq ch_K^{-r}\|v\|_{L^2(K)}, \,
 \forall v \in V, \, r=0,1.\]</div>
 </div></blockquote>
-<p>Combining this with Equation <a class="reference internal" href="#equation-clement">(6.57)</a> gives Equation <a class="reference internal" href="#equation-pi1pi2">(6.53)</a>
+<p>Combining this with Equation <a class="reference internal" href="#equation-clement">(6.58)</a> gives Equation <a class="reference internal" href="#equation-pi1pi2">(6.54)</a>
 and hence we have shown that <span class="math notranslate nohighlight">\(\Pi_h\)</span> has the properties needed for
 Fortin’s trick.</p>
 </div></div></section>
@@ -757,8 +769,8 @@ Fortin’s trick.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

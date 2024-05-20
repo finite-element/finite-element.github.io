@@ -1,27 +1,24 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Software tools &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>Software tools &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The implementation exercise" href="implementation.html" />
-    <link rel="prev" title="Practical matters" href="practicalities.html" />
+    <link rel="prev" title="6. Stokes equation" href="L6_stokes.html" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
@@ -51,7 +48,7 @@
           <div class="body" role="main">
             
   <section id="software-tools">
-<h1>Software tools<a class="headerlink" href="#software-tools" title="Permalink to this headline">¶</a></h1>
+<h1>Software tools<a class="headerlink" href="#software-tools" title="Link to this heading">¶</a></h1>
 <p>In order to do this module, you’ll need some core software tools. As the module
 proceeds we’ll also install several more Python packages, but you don’t need to
 install those right now. The core tools you will need are:</p>
@@ -69,7 +66,7 @@ the instructions in this course will assume that this is what you are using.</p>
 operating systems are available on the website of the textbook <a class="reference external" href="https://object-oriented-python.github.io/installation.html" title="(in Object-oriented Programming v2023.0)"><span class="xref std std-doc">Object-oriented
 Programming in Python for Mathematicians</span></a>.</p>
 <section id="python">
-<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<h2>Python<a class="headerlink" href="#python" title="Link to this heading">¶</a></h2>
 <p>Your implementation will be written in Python based on a code skeleton
 provided. This means that you’ll need a certain familiarity with the
 Python language. But don’t panic! Python is a very easy language to
@@ -86,7 +83,7 @@ code provided in this course will always use Numpy arrays, and never
 Numpy matrices.</p>
 </section>
 <section id="git">
-<h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
+<h2>Git<a class="headerlink" href="#git" title="Link to this heading">¶</a></h2>
 <p>Revision control is a mechanism for recording and managing different
 versions of changing software. This enables changes to be tracked and
 helps in the process of debugging code, and in managing conflicts when
@@ -120,13 +117,13 @@ confident with computers, you can skip this bit. GitHub provide
 </div>
 </section>
 <section id="visual-studio-code">
-<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">¶</a></h2>
+<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Link to this heading">¶</a></h2>
 <p>Visual Studio Code is a Python-aware Integrated Development Environment (IDE).
 This means that it incorporates editing files with other programming features
 such as <a class="reference external" href="https://object-oriented-python.github.io/8_debugging.html#debugging" title="(in Object-oriented Programming v2023.0)"><span>Debugging and testing</span></a>, Git support, and built-in <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html#terminal-vscode" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">terminal</span></a>.</p>
 </section>
 <section id="the-command-line">
-<h2>The command line<a class="headerlink" href="#the-command-line" title="Permalink to this headline">¶</a></h2>
+<h2>The command line<a class="headerlink" href="#the-command-line" title="Link to this heading">¶</a></h2>
 <p>A lot of the routine activity involved in this module revolves around
 executing commands on the command line. For example you use the
 command line to work with the revision control system.</p>
@@ -151,8 +148,8 @@ commands.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

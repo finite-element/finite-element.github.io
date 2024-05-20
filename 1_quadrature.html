@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Numerical quadrature &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>1. Numerical quadrature &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,19 +49,19 @@
           <div class="body" role="main">
             
   <section id="numerical-quadrature">
-<span id="quadrature"></span><h1><span class="section-number">1. </span>Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Permalink to this headline">¶</a></h1>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<span id="quadrature"></span><h1><span class="section-number">1. </span>Numerical quadrature<a class="headerlink" href="#numerical-quadrature" title="Link to this heading">¶</a></h1>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495171130"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=62cf7d17-d154-4450-b540-ac9f00c206d6">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=62cf7d17-d154-4450-b540-ac9f00c206d6">watch this video on Panopto</a></p>
 </div>
 </details><p>The core computational operation with which we are concerned in the
 finite element method is the integration of a function over a known
@@ -79,7 +76,7 @@ integration.</p>
 <span class="math notranslate nohighlight">\(f(X)\)</span> over an element <span class="math notranslate nohighlight">\(e\)</span> can be approximated as
 a weighted sum of function values evaluated at particular points:</p>
 <div class="math notranslate nohighlight" id="equation-quadrature">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-quadrature" title="Permalink to this equation">¶</a></span>\[\int_e f(X)  = \sum_{q} f(X_q) w_q + O(h^n)\]</div>
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-quadrature" title="Link to this equation">¶</a></span>\[\int_e f(X)  = \sum_{q} f(X_q) w_q + O(h^n)\]</div>
 <p>we term the set <span class="math notranslate nohighlight">\(\{X_q\}\)</span> the set of <em>quadrature points</em> and the
 corresponding set <span class="math notranslate nohighlight">\(\{w_q\}\)</span> the set of <em>quadrature weights</em>. A set of
 quadrature points and their corresponding quadrature weights together
@@ -100,7 +97,7 @@ quadrature rule of degree <span class="math notranslate nohighlight">\(n\)</span
 such that the quadrature rule integrates all polynomials of degree
 <span class="math notranslate nohighlight">\(p\)</span> without error.</p>
 </div></div><section id="exact-and-incomplete-quadrature">
-<h2><span class="section-number">1.1. </span>Exact and incomplete quadrature<a class="headerlink" href="#exact-and-incomplete-quadrature" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Exact and incomplete quadrature<a class="headerlink" href="#exact-and-incomplete-quadrature" title="Link to this heading">¶</a></h2>
 <p>In the finite element method, integrands are very frequently
 polynomial. If the quadrature rule employed for a particular interval
 has a sufficiently high degree of precision such that there is no
@@ -117,25 +114,25 @@ in the simulation, particularly compared with the discretisation
 error, then incomplete quadrature may be advantageous.</p>
 </section>
 <section id="examples-in-one-dimension">
-<h2><span class="section-number">1.2. </span>Examples in one dimension<a class="headerlink" href="#examples-in-one-dimension" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">1.2. </span>Examples in one dimension<a class="headerlink" href="#examples-in-one-dimension" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495171317"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=74f63ac3-31ab-457d-9f45-ac9f00c1c738">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=74f63ac3-31ab-457d-9f45-ac9f00c1c738">watch this video on Panopto</a></p>
 </div>
 </details><p>We noted above that a few one dimensional quadrature rules are commonly
 taught in introductory integration courses. The first of these is the
 midpoint rule:</p>
 <div class="math notranslate nohighlight" id="equation-midpoint">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-midpoint" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = hf(0.5h) + O(h^3)\]</div>
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-midpoint" title="Link to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = hf(0.5h) + O(h^3)\]</div>
 <p>In other words, an approximation to the integral of
 <span class="math notranslate nohighlight">\(f\)</span> over an interval can be calculated by multiplying the value
 of <span class="math notranslate nohighlight">\(f\)</span> at the mid-point of the interval by the length of the
@@ -144,30 +141,30 @@ by a constant value.</p>
 <p>If we improve our approximation of <span class="math notranslate nohighlight">\(f\)</span> to a straight line over
 the interval, then we arrive at the trapezoidal (or trapezium) rule:</p>
 <div class="math notranslate nohighlight" id="equation-trapezoidal">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-trapezoidal" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-trapezoidal" title="Link to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{2}f(0) + \frac{h}{2}f(h) + O(h^4)\]</div>
 <p>while if we employ a quadratic function then we arrive at Simpson’s rule:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-0">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-1-quadrature-0" title="Permalink to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-1-quadrature-0" title="Link to this equation">¶</a></span>\[\int_0^h f(X) \mathrm{d} X = \frac{h}{6}f(0) + \frac{2h}{3}f\left(\frac{h}{2}\right) + \frac{h}{6}f(h) + O(h^5)\]</div>
 </section>
-<section id="reference-elements">
-<h2><span class="section-number">1.3. </span>Reference elements<a class="headerlink" href="#reference-elements" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<section id="reference-cells">
+<h2><span class="section-number">1.3. </span>Reference cells<a class="headerlink" href="#reference-cells" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495171380"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b2e8bfb6-89c2-4d92-8e3a-ac9f00c1c7a3">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b2e8bfb6-89c2-4d92-8e3a-ac9f00c1c7a3">watch this video on Panopto</a></p>
 </div>
 </details><p>As a practical matter, we wish to write down quadrature rules as
 arrays of numbers, independent of <span class="math notranslate nohighlight">\(h\)</span>. In order to achieve this,
 we will write the quadrature rules for a single, <em>reference
-element</em>. When we wish to actually integrate a function over cell, we
+cell</em>. When we wish to actually integrate a function over cell, we
 will change coordinates to the reference cell. We will return to the
 mechanics of this process later, but for now it means that we need
 only consider quadrature rules on the reference cells we choose.</p>
@@ -182,45 +179,132 @@ reference interval implies a natural choice of reference triangle. For
 the unit interval the natural correspondence is with the triangle with
 vertices <span class="math notranslate nohighlight">\([(0,0), (1,0), (0,1)]\)</span>, though different choices of
 vertex numbering are possible.</p>
+<section id="reference-cell-topology">
+<h3><span class="section-number">1.3.1. </span>Reference cell topology<a class="headerlink" href="#reference-cell-topology" title="Link to this heading">¶</a></h3>
+<p>A cell is composed of <em>topological entities</em>, that is to say vertices, edges,
+faces and so forth. The topology of the cell is given by the connectivity of
+its entities, for example which vertices make up each edge. It is useful to
+define some terms to describe the cell topology:</p>
+<div class="proof proof-type-definition" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.16</span>
+        
+    </div><div class="proof-content">
+<p>The <em>dimension</em> of a cell is the maximal dimension of the topological
+entities that make up the cell.</p>
+</div></div><div class="proof proof-type-definition" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 1.17</span>
+        
+    </div><div class="proof-content">
+<p>A topological entity of <em>codimension</em> <span class="math notranslate nohighlight">\(n\)</span> is a topological
+entity of dimension <span class="math notranslate nohighlight">\(d-n\)</span> where <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the
+cell.</p>
+</div></div><p>Armed with these definitions we are able to define names for
+topological entities of various dimension and codimension:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>entity name</p></th>
+<th class="head"><p>dimension</p></th>
+<th class="head"><p>codimension</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>vertex</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>edge</p></td>
+<td><p>1</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>face</p></td>
+<td><p>2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>facet</p></td>
+<td></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>cell</p></td>
+<td></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<p>The cells can be polygons or polyhedra of any shape, however
+in this course we will restrict ourselves to
+intervals and triangles. The only other two-dimensional cells
+frequently employed are quadrilaterals.</p>
+</section>
+<section id="reference-cell-entities">
+<h3><span class="section-number">1.3.2. </span>Reference cell entities<a class="headerlink" href="#reference-cell-entities" title="Link to this heading">¶</a></h3>
+<p>The topological entities of each dimension in a cell are distinguished by
+giving them unique numbers. We will identify topological entities by an index
+pair <span class="math notranslate nohighlight">\((d, i)\)</span> where <span class="math notranslate nohighlight">\(i\)</span> is the index of the entity within the set of
+<span class="math notranslate nohighlight">\(d\)</span>-dimensional entities.</p>
+<p>The particular choices of numbering we will use are shown in
+<a class="reference internal" href="#figreferenceentities"><span class="std std-numref">Fig. 1.5</span></a>. The numbering is a matter of convention: that
+adopted here is that edges share the number of the opposite vertex. The
+orientation of the edges is also shown, this is always from the lower numbered
+vertex to the higher numbered one.</p>
+<p>The <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> class stores the
+local topology of the reference cell. <a class="reference external" href="_modules/fe_utils/reference_elements.html">Read the source</a> and ensure that you
+understand the way in which this information is encoded.</p>
+<p>The following animation of the numbering of the topological entities
+on the reference cell may help in understanding this.</p>
+<div class="youtube docutils container">
+<div class="video_wrapper" style="">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/7A7JU7bGw0E?modestbranding=1;controls=0;rel=0" style="border: 0; height: 367px; width: 600px">
+</iframe></div></div>
+<figure class="align-default" id="id4">
+<span id="figreferenceentities"></span><a class="reference internal image-reference" href="_images/entities.svg"><img alt="_images/entities.svg" src="_images/entities.svg" width="50%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">Local numbering and orientation of the reference entities.</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="python-implementations-of-reference-elements">
-<h2><span class="section-number">1.4. </span>Python implementations of reference elements<a class="headerlink" href="#python-implementations-of-reference-elements" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code> class provides
+<span id="secadjacency"></span><h3><span class="section-number">1.3.3. </span>Python implementations of reference elements<a class="headerlink" href="#python-implementations-of-reference-elements" title="Link to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a> class provides
 Python objects encoding the geometry and topology of the reference
 cell. At this stage, the relevant information is the dimension of the
 reference cell and the list of vertices. The topology will become
-important when we consider <a class="reference internal" href="3_meshes.html"><span class="doc">meshes</span></a>. The reference cells we will
+important in the following chapters. The reference cells we will
 require for this course are the
-<code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceInterval</span></code> and
-<code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceTriangle</span></code>.</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceInterval" title="fe_utils.reference_elements.ReferenceInterval"><code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceInterval</span></code></a> and
+<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceTriangle" title="fe_utils.reference_elements.ReferenceTriangle"><code class="xref py py-data docutils literal notranslate"><span class="pre">ReferenceTriangle</span></code></a>.</p>
+</section>
 </section>
 <section id="quadrature-rules-on-reference-elements">
-<h2><span class="section-number">1.5. </span>Quadrature rules on reference elements<a class="headerlink" href="#quadrature-rules-on-reference-elements" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">1.4. </span>Quadrature rules on reference elements<a class="headerlink" href="#quadrature-rules-on-reference-elements" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495171523"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=adcb767d-5c36-4a7e-92d2-ac9f00c1c7d3">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=adcb767d-5c36-4a7e-92d2-ac9f00c1c7d3">watch this video on Panopto</a></p>
 </div>
 </details><p>Having adopted a convention for the reference element, we can simply
 express quadrature rules as lists of quadrature points with
 corresponding quadrature weights. For example Simpson’s rule becomes:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-1">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-1-quadrature-1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-1-quadrature-1" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{6}, \frac{2}{3}, \frac{1}{6} \right]\\X = \left[ (0), (0.5), (1)\right].\end{aligned}\end{align} \]</div>
 <p>We choose to write the quadrature points as 1-tuples for consistency
 with the <span class="math notranslate nohighlight">\(n\)</span>-dimensional case, in which the points will be
 <span class="math notranslate nohighlight">\(n\)</span>-tuples.</p>
 <p>The lowest order quadrature rule on the reference triangle is a single point
 quadrature:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-2">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-1-quadrature-2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{2} \right]\\X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-1-quadrature-2" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}w = \left[ \frac{1}{2} \right]\\X = \left[ \left(\frac{1}{3}, \frac{1}{3}  \right) \right]\end{aligned}\end{align} \]</div>
 <p>This rule has a degree of precision of 1.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -229,7 +313,7 @@ reference element. Why is this?</p>
 </div>
 </section>
 <section id="legendre-gausz-quadrature-in-one-dimension">
-<h2><span class="section-number">1.6. </span>Legendre-Gauß quadrature in one dimension<a class="headerlink" href="#legendre-gausz-quadrature-in-one-dimension" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.5. </span>Legendre-Gauß quadrature in one dimension<a class="headerlink" href="#legendre-gausz-quadrature-in-one-dimension" title="Link to this heading">¶</a></h2>
 <p>The finite element method will result in integrands of different
 polynomial degrees, so it is convenient if we have access to
 quadrature rules of arbitrary degree on demand. In one dimension the
@@ -241,20 +325,20 @@ usually defined for the interval <span class="math notranslate nohighlight">\([-
 coordinates in order to arrive at a quadrature rule for our reference
 interval:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-3">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-1-quadrature-3" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_q = \frac{X'_q + 1}{2}\\w_q = \frac{w'_q}{2}\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-1-quadrature-3" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_q = \frac{X'_q + 1}{2}\\w_q = \frac{w'_q}{2}\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\((\{X'_q\}, \{w'_q\})\)</span> is the quadrature rule on the interval
 <span class="math notranslate nohighlight">\([-1, 1]\)</span> and <span class="math notranslate nohighlight">\((\{X_q\}, \{w_q\})\)</span> is the rule on the unit interval.</p>
 <p>Legendre-Gauß quadrature on the interval is optimal in the sense that it uses the
 minimum possible number of points for each degree of precision.</p>
 </section>
 <section id="extending-legendre-gausz-quadrature-to-two-dimensions">
-<h2><span class="section-number">1.7. </span>Extending Legendre-Gauß quadrature to two dimensions<a class="headerlink" href="#extending-legendre-gausz-quadrature-to-two-dimensions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.6. </span>Extending Legendre-Gauß quadrature to two dimensions<a class="headerlink" href="#extending-legendre-gausz-quadrature-to-two-dimensions" title="Link to this heading">¶</a></h2>
 <p>We can form a unit square by taking the Cartesian product of two unit
 intervals: <span class="math notranslate nohighlight">\((0, 1)\otimes (0, 1)\)</span>. Similarly, we can form a quadrature
 rule on a unit square by taking the product of two interval quadrature
 rules:</p>
 <div class="math notranslate nohighlight" id="equation-squarequad">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-squarequad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{sq} = \left\{ (x_p, x_q)\ \middle|\ x_p, x_q \in X \right\}\\w_\textrm{sq} = \left\{ w_p w_q\ \middle|\ w_p, w_q \in w \right\}\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-squarequad" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{sq} = \left\{ (x_p, x_q)\ \middle|\ x_p, x_q \in X \right\}\\w_\textrm{sq} = \left\{ w_p w_q\ \middle|\ w_p, w_q \in w \right\}\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\((X, w)\)</span> is an interval quadrature rule. Furthermore, the degree
 of accuracy of <span class="math notranslate nohighlight">\((X_\textrm{sq}, w_\textrm{sq})\)</span> will be the same as
 that of the one-dimensional rule.</p>
@@ -262,18 +346,18 @@ that of the one-dimensional rule.</p>
 achieve this by treating the triangle as a square with a zero length
 edge. The Duffy transform maps the unit square to the unit triangle:</p>
 <div class="math notranslate nohighlight" id="equation-1-quadrature-4">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-1-quadrature-4" title="Permalink to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-1-quadrature-4" title="Link to this equation">¶</a></span>\[(x_\textrm{tri},\ y_\textrm{tri}) =
   \left(x_\textrm{sq},\ y_\textrm{sq}(1 - x_\textrm{sq})\right)\]</div>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id5">
 <span id="figduffy"></span><a class="reference internal image-reference" href="_images/duffy.svg"><img alt="_images/duffy.svg" src="_images/duffy.svg" width="60%" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">The Duffy transform maps a square to a triangle by collapsing one side.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>By composing the Duffy transform with <a class="reference internal" href="#equation-squarequad">(1.11)</a> we can arrive
 at a quadrature rule for the triangle:</p>
 <div class="math notranslate nohighlight" id="equation-triquad">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-triquad" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{tri} =\left\{ \left(x_p, x_q(1 - x_p)\right)\ \middle|\ x_p \in X_h, x_q \in X_v \right\}\\w_\textrm{tri} = \left\{ w_p w_q(1 - x_p)\ \middle|\ w_p \in w_h, w_q \in w_v \right\}\end{aligned}\end{align} \]</div>
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-triquad" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}X_\textrm{tri} =\left\{ \left(x_p, x_q(1 - x_p)\right)\ \middle|\ x_p \in X_h, x_q \in X_v \right\}\\w_\textrm{tri} = \left\{ w_p w_q(1 - x_p)\ \middle|\ w_p \in w_h, w_q \in w_v \right\}\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\((X_v, w_v)\)</span> is a reference interval quadrature rule with degree
 of precision <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\((X_h, w_h)\)</span> is a reference interval quadrature
 rule with degree of precision <span class="math notranslate nohighlight">\(n+1\)</span>. The combined quadrature rule
@@ -283,34 +367,34 @@ transform effectively increases the polynomial degree of the integrand
 by one.</p>
 </section>
 <section id="implementing-quadrature-rules-in-python">
-<h2><span class="section-number">1.8. </span>Implementing quadrature rules in Python<a class="headerlink" href="#implementing-quadrature-rules-in-python" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording about how to do this exercise is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">1.7. </span>Implementing quadrature rules in Python<a class="headerlink" href="#implementing-quadrature-rules-in-python" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording about how to do this exercise is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495171661"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e5f1084f-c163-46d3-b317-ac9f00c1c772">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e5f1084f-c163-46d3-b317-ac9f00c1c772">watch this video on Panopto</a></p>
 </div>
-</details><p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils.quadrature</span></code> module provides the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code> class which records
+</details><p>The <a class="reference internal" href="fe_utils.html#module-fe_utils.quadrature" title="fe_utils.quadrature"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils.quadrature</span></code></a> module provides the
+<a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a> class which records
 quadrature points and weights for a given
-<code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code>. The
-<code class="xref py py-func docutils literal notranslate"><span class="pre">gauss_quadrature()</span></code> function creates
+<a class="reference internal" href="fe_utils.html#fe_utils.reference_elements.ReferenceCell" title="fe_utils.reference_elements.ReferenceCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code></a>. The
+<a class="reference internal" href="fe_utils.html#fe_utils.quadrature.gauss_quadrature" title="fe_utils.quadrature.gauss_quadrature"><code class="xref py py-func docutils literal notranslate"><span class="pre">gauss_quadrature()</span></code></a> function creates
 quadrature rules for a prescribed degree of precision and reference
 cell.</p>
-<div class="proof proof-type-exercise" id="id3">
+<div class="proof proof-type-exercise" id="id6">
 <span id="ex-integrate"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 1.16</span>
+        <span class="proof-type">Exercise 1.18</span>
         
     </div><div class="proof-content">
-<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code> method is
+<p>The <a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a> method is
 left unimplemented. Using <a class="reference internal" href="#equation-quadrature">(1.4)</a>, implement this method.</p>
 <p>A test script for your method is provided in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory
 as <code class="docutils literal notranslate"><span class="pre">test_01_integrate.py</span></code>. Run this script to test your code:</p>
@@ -322,7 +406,7 @@ to your fork of the course repository.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can implement
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code> in one line
+<a class="reference internal" href="fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate" title="fe_utils.quadrature.QuadratureRule.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate()</span></code></a> in one line
 using a <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list
 comprehension</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.dot()</span></code></a>.</p>
 </div>
@@ -330,18 +414,18 @@ comprehension</a> and <a class="reference external" href="https://numpy.org/doc/
 <p class="admonition-title">Hint</p>
 <p>Don’t forget to activate your Python venv!</p>
 </div>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the solution to this exercise is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the solution to this exercise is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495171917"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a2b1c67a-a9d3-485b-8784-ac9f00c1dad5">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a2b1c67a-a9d3-485b-8784-ac9f00c1dad5">watch this video on Panopto</a></p>
 </div>
 </details></section>
 </section>
@@ -354,8 +438,8 @@ allowfullscreen></iframe></div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

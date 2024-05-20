@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>9. Mixed problems &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>9. Mixed problems &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,7 +49,7 @@
           <div class="body" role="main">
             
   <section id="mixed-problems">
-<span id="mixed"></span><h1><span class="section-number">9. </span>Mixed problems<a class="headerlink" href="#mixed-problems" title="Permalink to this headline">¶</a></h1>
+<span id="mixed"></span><h1><span class="section-number">9. </span>Mixed problems<a class="headerlink" href="#mixed-problems" title="Link to this heading">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This section is the mastery exercise for this module. This exercise
@@ -66,10 +63,10 @@ what has been covered in lectures and labs.</p>
 Stokes problem presented in <a class="reference internal" href="L6_stokes.html#weak-stokes"><span class="std std-numref">Definition 6.1</span></a> is find
 <span class="math notranslate nohighlight">\((u,p)\in V\times Q\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-stokes-ch9">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-stokes-ch9" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v, p) &amp; = \int_\Omega f\cdot v\,\mathrm{d}\, x,\\b(u,q) &amp; = 0, \quad \forall (v,q) \in V\times Q,\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-stokes-ch9" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v, p) &amp; = \int_\Omega f\cdot v\,\mathrm{d}\, x,\\b(u,q) &amp; = 0, \quad \forall (v,q) \in V\times Q,\end{aligned}\end{align} \]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-0">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-9-mixed-problems-0" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) &amp; = \mu\int_\Omega \epsilon(u):\epsilon(v)\,\mathrm{d}\, x,\\b(v,q) &amp; = \int_\Omega q \nabla\cdot v\,\mathrm{d}\, x,\\V &amp; =(\mathring{H}^1(\Omega))^d,\\Q &amp; =\mathring{L}^2(\Omega),\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-9-mixed-problems-0" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) &amp; = \mu\int_\Omega \epsilon(u):\epsilon(v)\,\mathrm{d}\, x,\\b(v,q) &amp; = \int_\Omega q \nabla\cdot v\,\mathrm{d}\, x,\\V &amp; =(\mathring{H}^1(\Omega))^d,\\Q &amp; =\mathring{L}^2(\Omega),\end{aligned}\end{align} \]</div>
 <p>and where <span class="math notranslate nohighlight">\((\mathring{H}^1(\Omega))^d\)</span> is the subspace of <span class="math notranslate nohighlight">\(H^1(\Omega)^d\)</span> for
 which all components vanish on the boundary, and <span class="math notranslate nohighlight">\(\mathring{L}^2(\Omega)\)</span> is
 the subspace of <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> for which the integral of the function over the
@@ -83,13 +80,13 @@ effective way to remove the nullspace, but it is simpler to implement. We will
 implement the two-dimensional case (<span class="math notranslate nohighlight">\(d=2\)</span>) and, for simplicity, we will assume <span class="math notranslate nohighlight">\(\mu=1\)</span>.</p>
 <p>The colon (<span class="math notranslate nohighlight">\(:\)</span>) indicates an inner product so:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-1">
-<span class="eqno">(9.3)<a class="headerlink" href="#equation-9-mixed-problems-1" title="Permalink to this equation">¶</a></span>\[\epsilon(u):\epsilon(v) = \sum_{\alpha\beta} \epsilon(u)_{\alpha\beta}\epsilon(v)_{\alpha\beta}\]</div>
+<span class="eqno">(9.3)<a class="headerlink" href="#equation-9-mixed-problems-1" title="Link to this equation">¶</a></span>\[\epsilon(u):\epsilon(v) = \sum_{\alpha\beta} \epsilon(u)_{\alpha\beta}\epsilon(v)_{\alpha\beta}\]</div>
 <p>In choosing a finite element subspace of <span class="math notranslate nohighlight">\(V \times Q\)</span> we will similarly choose
 a simpler to implement, yet still stable, space than was chosen in
 <a class="reference internal" href="L6_stokes.html#stokes"><span class="std std-numref">Analysis Section 6</span></a>. The space we will use is the lowest order
 Taylor-Hood space <span id="id1">[<a class="reference internal" href="zbibliography.html#id6" title="C. Taylor and P. Hood. A numerical solution of the navier-stokes equations using the finite element technique. Computers &amp; Fluids, 1(1):73-100, 1973. URL: https://www.sciencedirect.com/science/article/pii/0045793073900273, doi:https://doi.org/10.1016/0045-7930(73)90027-3.">TH73</a>]</span>. This has:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-2">
-<span class="eqno">(9.4)<a class="headerlink" href="#equation-9-mixed-problems-2" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}V^h &amp; = P2(\Omega)^2\\Q^h &amp; = P1(\Omega)\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.4)<a class="headerlink" href="#equation-9-mixed-problems-2" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}V^h &amp; = P2(\Omega)^2\\Q^h &amp; = P1(\Omega)\end{aligned}\end{align} \]</div>
 <p>i.e. quadratic velocity and linear pressure on each cell. We note that
 <span class="math notranslate nohighlight">\(Q^h\in H^1(\Omega)\)</span> but since <span class="math notranslate nohighlight">\(H^1(\Omega) \subset L^2(\Omega)\)</span>, this is not
 itself a problem. We will impose further constraints on the spaces in the
@@ -97,38 +94,39 @@ form of Dirichlet boundary conditions to ensure that the solutions found are in
 fact in <span class="math notranslate nohighlight">\(V \times Q\)</span>.</p>
 <p>In addition to the finite element functionality we have already implemented,
 there are two further challenges we need to address. First, the implementation
-of the vector-valued space <span class="math notranslate nohighlight">\(P2(\Omega)^2\)</span>.</p>
+of the vector-valued space <span class="math notranslate nohighlight">\(P2(\Omega)^2`m and second, the implementation of
+functions and matrices defined over the mixed space `V^h \times Q^h\)</span>.</p>
 <section id="vector-valued-finite-elements">
-<h2><span class="section-number">9.1. </span>Vector-valued finite elements<a class="headerlink" href="#vector-valued-finite-elements" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.1. </span>Vector-valued finite elements<a class="headerlink" href="#vector-valued-finite-elements" title="Link to this heading">¶</a></h2>
 <p>Consider the local representation of <span class="math notranslate nohighlight">\(P2(\Omega)^2\)</span> on one element. The scalar
 <span class="math notranslate nohighlight">\(P2\)</span> element on one triangle has 6 nodes, one at each vertex and one at each
 edge. If we write <span class="math notranslate nohighlight">\(\{\Phi_i\}_{i=0}^{5}\)</span> for the scalar basis, then a basis
 <span class="math notranslate nohighlight">\(\{\mathbf{\Phi}_i\}_{i=0}^{11}\)</span> for the vector-valued space is given by:</p>
 <div class="math notranslate nohighlight" id="equation-vector-basis">
-<span class="eqno">(9.5)<a class="headerlink" href="#equation-vector-basis" title="Permalink to this equation">¶</a></span>\[\mathbf{\Phi}_i(X) = \Phi_{i\,//\,2}(X)\,\mathbf{e}_{i\,\%\,2}\]</div>
+<span class="eqno">(9.5)<a class="headerlink" href="#equation-vector-basis" title="Link to this equation">¶</a></span>\[\mathbf{\Phi}_i(X) = \Phi_{i\,//\,2}(X)\,\mathbf{e}_{i\,\%\,2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(//\)</span> is the integer division operator, <span class="math notranslate nohighlight">\(\%\)</span> is the modulus operator, and
 <span class="math notranslate nohighlight">\({\mathbf{e}_0, \mathbf{e}_1}\)</span> is the standard basis for <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span>. That is to say, we
 interleave <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> component basis functions.</p>
 <figure class="align-default" id="id2">
 <img alt="_images/p2vec.svg" src="_images/p2vec.svg" /><figcaption>
-<p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">The local numbering of vector degrees of freedom.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">The local numbering of vector degrees of freedom.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>We can practically implement vector function spaces by implementing a new class
 <code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.finite_elements.VectorFiniteElement</span></code>. The constructor
 (<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>) of this new class should take a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> and construct the
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> and construct the
 corresponding vector element. For current purposes we can assume that the
 vector element will always have a vector dimension equal to the element
 geometric and topological dimension (i.e. 2 if the element is defined on a
 triangle). We’ll refer to this dimension as <span class="math notranslate nohighlight">\(d\)</span>.</p>
 <section id="implementing-vectorfiniteelement">
-<h3><span class="section-number">9.1.1. </span>Implementing <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code><a class="headerlink" href="#implementing-vectorfiniteelement" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.1.1. </span>Implementing <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code><a class="headerlink" href="#implementing-vectorfiniteelement" title="Link to this heading">¶</a></h3>
 <p><code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code> needs to implement as far as possible the same
-interface as <code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code>. Let’s think
+interface as <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a>. Let’s think
 about how to do that.</p>
 <dl>
-<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">cell</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">degree</span></code></dt><dd><p>Same as for the input <code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code>.</p>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">cell</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">degree</span></code></dt><dd><p>Same as for the input <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a>.</p>
 </dd>
 <dt><code class="xref py py-data docutils literal notranslate"><span class="pre">entity_nodes</span></code></dt><dd><p>There will be twice as many nodes, and the node ordering is such that each
 node is replaced by a <span class="math notranslate nohighlight">\(d\)</span>-tuple. For example the scalar triangle P1
@@ -151,15 +149,15 @@ returning a mapping with the pair <span class="math notranslate nohighlight">\(2
 </div>
 </dd>
 <dt><code class="xref py py-data docutils literal notranslate"><span class="pre">nodes_per_entity</span></code>:</dt><dd><p>Each entry will be <span class="math notranslate nohighlight">\(d\)</span> times that on the input
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code>.</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a>.</p>
 </dd>
 </dl>
 </section>
 <section id="tabulation">
-<h3><span class="section-number">9.1.2. </span>Tabulation<a class="headerlink" href="#tabulation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.1.2. </span>Tabulation<a class="headerlink" href="#tabulation" title="Link to this heading">¶</a></h3>
 <p>In order to tabulate the element, we can use <a class="reference internal" href="#equation-vector-basis">(9.5)</a>. We first
 call the tabulate method from the input
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code>, and we use this and
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a>, and we use this and
 <a class="reference internal" href="#equation-vector-basis">(9.5)</a> to produce the array to return. Notice that the array
 will both have a basis functions dimension which is <span class="math notranslate nohighlight">\(d\)</span> times longer than the
 input element, and will also have an extra dimension to account for the
@@ -167,24 +165,24 @@ multiplication by <span class="math notranslate nohighlight">\(\mathbf{e}_{i\,\%
 with <code class="xref py py-data docutils literal notranslate"><span class="pre">grad=False</span></code> will now be rank 3, and that with <code class="xref py py-data docutils literal notranslate"><span class="pre">grad=True</span></code>
 will be rank 4. Make sure you keep track of which rank is which!
 The <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code> will need to keep a reference to the
-input <code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> in order to facilitate
+input <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> in order to facilitate
 tabulation.</p>
 </section>
 <section id="nodes">
-<h3><span class="section-number">9.1.3. </span>Nodes<a class="headerlink" href="#nodes" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.1.3. </span>Nodes<a class="headerlink" href="#nodes" title="Link to this heading">¶</a></h3>
 <p>Even though we didn’t need the nodes of the <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code> to
 construct its basis, we will need them to implement interpolation. In
 <a class="reference internal" href="2_finite_elements.html#nodalbasis"><span class="std std-numref">Definition 2.44</span></a> we learned that
 the nodes of a finite element are related to the corresponding nodal basis by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-3">
-<span class="eqno">(9.6)<a class="headerlink" href="#equation-9-mixed-problems-3" title="Permalink to this equation">¶</a></span>\[\mathbf{\Phi}^*_i(\mathbf{\Phi}_j) = \delta_{ij}\]</div>
+<span class="eqno">(9.6)<a class="headerlink" href="#equation-9-mixed-problems-3" title="Link to this equation">¶</a></span>\[\mathbf{\Phi}^*_i(\mathbf{\Phi}_j) = \delta_{ij}\]</div>
 <p>From <a class="reference internal" href="#equation-vector-basis">(9.5)</a> and assuming, as we have throughout the course,
 that the scalar finite element has point evaluation nodes given by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-4">
-<span class="eqno">(9.7)<a class="headerlink" href="#equation-9-mixed-problems-4" title="Permalink to this equation">¶</a></span>\[\Phi_i(v) = v(X_i),\]</div>
+<span class="eqno">(9.7)<a class="headerlink" href="#equation-9-mixed-problems-4" title="Link to this equation">¶</a></span>\[\Phi_i(v) = v(X_i),\]</div>
 <p>it follows that:</p>
 <div class="math notranslate nohighlight" id="equation-vectornodes">
-<span class="eqno">(9.8)<a class="headerlink" href="#equation-vectornodes" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathbf{\Phi}^*_i(v) &amp; = \Phi^*_{i\,//\,d}(\mathbf{e}_{i\,\%\,d}\cdot v)\\&amp; = \mathbf{e}_{i\,\%\,d}\cdot v(X_{i\,//\,d})\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.8)<a class="headerlink" href="#equation-vectornodes" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathbf{\Phi}^*_i(v) &amp; = \Phi^*_{i\,//\,d}(\mathbf{e}_{i\,\%\,d}\cdot v)\\&amp; = \mathbf{e}_{i\,\%\,d}\cdot v(X_{i\,//\,d})\end{aligned}\end{align} \]</div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>To see that this is the correct nodal basis, choose
@@ -193,36 +191,36 @@ that the scalar finite element has point evaluation nodes given by:</p>
 </div>
 <p>This means that the correct <code class="xref py py-data docutils literal notranslate"><span class="pre">VectorFiniteElement.nodes</span></code> attribute is
 the list of nodal points from the input
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> but with each point repeated
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> but with each point repeated
 <span class="math notranslate nohighlight">\(d\)</span> times. It will also be necessary to add another attribute, perhaps
 <code class="xref py py-data docutils literal notranslate"><span class="pre">node_weights</span></code> which is a rank 2 array whose <span class="math notranslate nohighlight">\(i\)</span>-th row is the correct
 canonical basis vector to contract with the function value at the <span class="math notranslate nohighlight">\(i\)</span>-th node (<span class="math notranslate nohighlight">\(\mathbf{e}_{i\,\%\,d}\)</span>).</p>
 </section>
 </section>
 <section id="vector-valued-function-spaces">
-<h2><span class="section-number">9.2. </span>Vector-valued function spaces<a class="headerlink" href="#vector-valued-function-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.2. </span>Vector-valued function spaces<a class="headerlink" href="#vector-valued-function-spaces" title="Link to this heading">¶</a></h2>
 <p>Assuming we correctly implement <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code>,
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code> should work out of the box.
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionSpace</span></code></a> should work out of the box.
 In particular, the global numbering algorithm only depends on having a correct
 local numbering so this should work unaltered.</p>
 </section>
 <section id="functions-in-vector-valued-spaces">
-<h2><span class="section-number">9.3. </span>Functions in vector-valued spaces<a class="headerlink" href="#functions-in-vector-valued-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.3. </span>Functions in vector-valued spaces<a class="headerlink" href="#functions-in-vector-valued-spaces" title="Link to this heading">¶</a></h2>
 <p>The general form of a function in a vector-valued function space is:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-5">
-<span class="eqno">(9.9)<a class="headerlink" href="#equation-9-mixed-problems-5" title="Permalink to this equation">¶</a></span>\[f = f_i \mathbf{\Phi}_i(X).\]</div>
+<span class="eqno">(9.9)<a class="headerlink" href="#equation-9-mixed-problems-5" title="Link to this equation">¶</a></span>\[f = f_i \mathbf{\Phi}_i(X).\]</div>
 <p>That is to say, the basis functions are vector valued and their coefficients
 are still scalar. This means that if the <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code> had a
 correct entity-node list then the core functionality of the existing
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> will automatically be correct. In
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> will automatically be correct. In
 particular, the array of values will have the correct extent. However,
 interpolation and plotting of vector valued fields will require some
 adjustment.</p>
 <section id="interpolating-into-vector-valued-spaces">
-<h3><span class="section-number">9.3.1. </span>Interpolating into vector-valued spaces<a class="headerlink" href="#interpolating-into-vector-valued-spaces" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.3.1. </span>Interpolating into vector-valued spaces<a class="headerlink" href="#interpolating-into-vector-valued-spaces" title="Link to this heading">¶</a></h3>
 <p>Since the form of the nodes of a <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code> is different from
 that of a scalar element, there will be some changes required in the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code> method. Specifically:</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.interpolate" title="fe_utils.function_spaces.Function.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> method. Specifically:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">cell_nodes</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">node_coords</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -233,7 +231,7 @@ conditional on the class of finite element passed in, so that the code doesn’t
 break in the scalar element case.</p>
 </section>
 <section id="plotting-functions-in-vector-valued-spaces">
-<h3><span class="section-number">9.3.2. </span>Plotting functions in vector-valued spaces<a class="headerlink" href="#plotting-functions-in-vector-valued-spaces" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.3.2. </span>Plotting functions in vector-valued spaces<a class="headerlink" href="#plotting-functions-in-vector-valued-spaces" title="Link to this heading">¶</a></h3>
 <p>The coloured surface plots that we’ve used thus far for two-dimensional scalar
 functions don’t extend easily to vector quantities. Instead, a frequently used
 visualisation technique is the quiver plot. This draws a set of
@@ -247,13 +245,13 @@ list of basis function coefficients.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <span id="qplot"></span><div class="code-block-caption"><span class="caption-number">Listing 9.1 </span><span class="caption-text">Code implementing quiver plots to visualise functions in vector
 function spaces. This code should be added to
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code> immediately after the
-definition of <code class="xref py py-data docutils literal notranslate"><span class="pre">fs</span></code>.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function.plot" title="fe_utils.function_spaces.Function.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> immediately after the
+definition of <code class="xref py py-data docutils literal notranslate"><span class="pre">fs</span></code>.</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="p">,</span> <span class="n">VectorFiniteElement</span><span class="p">):</span>
 <span class="linenos"> 2</span>    <span class="n">coords</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
 <span class="linenos"> 3</span>    <span class="n">coords</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
 <span class="linenos"> 4</span>    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="linenos"> 5</span>    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="linenos"> 5</span>    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
 <span class="linenos"> 6</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="linenos"> 7</span>    <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="linenos"> 8</span>    <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
@@ -267,7 +265,7 @@ definition of <code class="xref py py-data docutils literal notranslate"><span c
 <a class="reference internal" href="#quiverplot"><span class="std std-numref">Fig. 9.2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <span id="quiverplotcode"></span><div class="code-block-caption"><span class="caption-number">Listing 9.2 </span><span class="caption-text">Creation of a vector function space, interpolation of a given
-function into it, and subsequent plot creation.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+function into it, and subsequent plot creation.</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">fe_utils</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
 <span class="linenos"> 3</span>
@@ -285,12 +283,12 @@ function into it, and subsequent plot creation.</span><a class="headerlink" href
 <figure class="align-default" id="id5">
 <span id="quiverplot"></span><a class="reference internal image-reference" href="_images/quiver.png"><img alt="_images/quiver.png" src="_images/quiver.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 9.2 </span><span class="caption-text">The quiver plot resulting from <a class="reference internal" href="#quiverplotcode"><span class="std std-numref">Listing 9.2</span></a>.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 9.2 </span><span class="caption-text">The quiver plot resulting from <a class="reference internal" href="#quiverplotcode"><span class="std std-numref">Listing 9.2</span></a>.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="solving-vector-valued-systems">
-<h3><span class="section-number">9.3.3. </span>Solving vector-valued systems<a class="headerlink" href="#solving-vector-valued-systems" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.3.3. </span>Solving vector-valued systems<a class="headerlink" href="#solving-vector-valued-systems" title="Link to this heading">¶</a></h3>
 <p>Solving a finite element problem in a vector-valued space is essentially
 similar to the scalar problems you have already solved. It does, nonetheless,
 provide a useful check on the correctness of your code before adding in the
@@ -299,12 +297,12 @@ computing vector-valued field which is the gradient of a known function. For
 some suitable finite element space <span class="math notranslate nohighlight">\(V\subset H^1(\Omega)^2\)</span> and
 <span class="math notranslate nohighlight">\(f:\Omega\rightarrow \mathbb{R}\)</span>, find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-6">
-<span class="eqno">(9.10)<a class="headerlink" href="#equation-9-mixed-problems-6" title="Permalink to this equation">¶</a></span>\[\int_\Omega u\cdot v\,\mathrm{d}x = \int_\Omega \nabla f\cdot v\,\mathrm{d}x\quad \forall v\in V.\]</div>
+<span class="eqno">(9.10)<a class="headerlink" href="#equation-9-mixed-problems-6" title="Link to this equation">¶</a></span>\[\int_\Omega u\cdot v\,\mathrm{d}x = \int_\Omega \nabla f\cdot v\,\mathrm{d}x\quad \forall v\in V.\]</div>
 <p>If <span class="math notranslate nohighlight">\(f\)</span> is chosen such that <span class="math notranslate nohighlight">\(\nabla f\in V\)</span> then this projection is exact up to
 roundoff, and the following calculation should result in a good approximation
 to zero:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-7">
-<span class="eqno">(9.11)<a class="headerlink" href="#equation-9-mixed-problems-7" title="Permalink to this equation">¶</a></span>\[e = \int_\Omega (u -\nabla f)\cdot(u -\nabla f)\,\mathrm{d}x\]</div>
+<span class="eqno">(9.11)<a class="headerlink" href="#equation-9-mixed-problems-7" title="Link to this equation">¶</a></span>\[e = \int_\Omega (u -\nabla f)\cdot(u -\nabla f)\,\mathrm{d}x\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The computations in this subsection are not required to complete the
@@ -314,14 +312,14 @@ mechanism for checking your implementation thus far.</p>
 </section>
 </section>
 <section id="mixed-function-spaces">
-<h2><span class="section-number">9.4. </span>Mixed function spaces<a class="headerlink" href="#mixed-function-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.4. </span>Mixed function spaces<a class="headerlink" href="#mixed-function-spaces" title="Link to this heading">¶</a></h2>
 <p>The Stokes equations are defined over the mixed function space <span class="math notranslate nohighlight">\(W = V \times Q\)</span>.
 Here “mixed” simply means that there are two solution variables, and therefore
 two solution spaces. Functions in <span class="math notranslate nohighlight">\(W\)</span> are pairs <span class="math notranslate nohighlight">\((u, p)\)</span> where <span class="math notranslate nohighlight">\(u\in V\)</span> and
 <span class="math notranslate nohighlight">\(p\in Q\)</span>. If <span class="math notranslate nohighlight">\(\{\phi_i\}_{i=0}^{m-1}\)</span> is a basis for <span class="math notranslate nohighlight">\(V\)</span> and
 <span class="math notranslate nohighlight">\(\{\psi_j\}_{j=0}^{n-1}\)</span> then a basis for <span class="math notranslate nohighlight">\(W\)</span> is given by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-8">
-<span class="eqno">(9.12)<a class="headerlink" href="#equation-9-mixed-problems-8" title="Permalink to this equation">¶</a></span>\[\{\omega_i\}_{i=0}^{m+n-1}=\{(\phi_i, 0)\}_{i=0}^{m-1} \cup \{(0,
+<span class="eqno">(9.12)<a class="headerlink" href="#equation-9-mixed-problems-8" title="Link to this equation">¶</a></span>\[\{\omega_i\}_{i=0}^{m+n-1}=\{(\phi_i, 0)\}_{i=0}^{m-1} \cup \{(0,
 \psi_{j-n})\}_{j=m}^{m+n-1}.\]</div>
 <p>This in turn enables us to write <span class="math notranslate nohighlight">\(w\in W\)</span> in the form <span class="math notranslate nohighlight">\(w=w_i\omega_i\)</span> as we
 would expect for a function in a finite element space. The Cartesian product
@@ -332,7 +330,7 @@ mixed finite element system is simply a linear system of block matrices and
 block vectors. If we disregard boundary conditions, including the pressure
 constraint, this system has the following form:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-9">
-<span class="eqno">(9.13)<a class="headerlink" href="#equation-9-mixed-problems-9" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
+<span class="eqno">(9.13)<a class="headerlink" href="#equation-9-mixed-problems-9" title="Link to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
     A &amp; B^\mathrm{T} \\
     B &amp; 0
 \end{bmatrix}
@@ -347,7 +345,7 @@ constraint, this system has the following form:</p>
 \end{bmatrix}\end{split}\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight" id="equation-blocks">
-<span class="eqno">(9.14)<a class="headerlink" href="#equation-blocks" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}A_{ij} = a(\phi_j, \phi_i),\\B_{ij} = b(\phi_j, \psi_i),\\F_i = \int_\Omega f\cdot v\, d\, x,\\U_i = u_i = w_i,\\P_i = p_i = w_{i+m}.\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.14)<a class="headerlink" href="#equation-blocks" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}A_{ij} = a(\phi_j, \phi_i),\\B_{ij} = b(\phi_j, \psi_i),\\F_i = \int_\Omega f\cdot v\, d\, x,\\U_i = u_i = w_i,\\P_i = p_i = w_{i+m}.\end{aligned}\end{align} \]</div>
 <p>This means that the assembly of the mixed problem comes down to the assembly of
 several finite operators of the form that we have already encountered. These
 then need to be assembled into the full block matrix and right hand side
@@ -358,7 +356,7 @@ hand side of the equations. This reflects the differing conventions for matrix
 indices and bilinear form arguments, and is a source of unending confusion in
 this field.</p>
 <section id="assembling-block-systems">
-<h3><span class="section-number">9.4.1. </span>Assembling block systems<a class="headerlink" href="#assembling-block-systems" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.4.1. </span>Assembling block systems<a class="headerlink" href="#assembling-block-systems" title="Link to this heading">¶</a></h3>
 <p>The procedure for assembling the individual blocks of the block matrix and the
 block vectors is the one you are familiar with, but we will need to do
 something new to assemble the block structures. What is required differs
@@ -366,28 +364,28 @@ slightly between the matrix and the vectors.</p>
 <p>In the case of the vectors, then it is sufficient to know that a slice into a
 <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> returns a view on the same memory as the full vector.
 This is most easily understood through an example:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>In [1]: import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-In [2]: a = np.zeros(10)
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-In [3]: b = a[:5]
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 
-In [4]: b[2] = 1
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-In [5]: a
-Out[5]: array([0., 0., 1., 0., 0., 0., 0., 0., 0., 0.])
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">a</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>This means that one can first create a full vector of length <span class="math notranslate nohighlight">\(n+m\)</span> and then
 slice it to create subvectors that can be used for assembly.</p>
-<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.13.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.13.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
+<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.14.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.14.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
 function which will stitch together a larger sparse matrix from blocks. In
 order to have the full indexing options you are likely to want for imposing the
 boundary conditions, you will probably want to specify that the resulting
 matrix is in <code class="xref py py-data docutils literal notranslate"><span class="pre">&quot;lil&quot;</span></code> format.</p>
 </section>
 <section id="boundary-conditions">
-<h3><span class="section-number">9.4.2. </span>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.4.2. </span>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">¶</a></h3>
 <p>The imposition of the constraint in <span class="math notranslate nohighlight">\((\mathring{H}^1(\Omega))^2\)</span> that solutions
 vanish on the boundary is a Dirichlet condition of the type that you have
 encountered before. Observe that the condition changes the test space, which
@@ -404,40 +402,40 @@ the solution is prescribed rather than solved for. In this particular case,
 that subspace is one-dimensional.</p>
 </section>
 <section id="solving-the-matrix-system">
-<h3><span class="section-number">9.4.3. </span>Solving the matrix system<a class="headerlink" href="#solving-the-matrix-system" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.4.3. </span>Solving the matrix system<a class="headerlink" href="#solving-the-matrix-system" title="Link to this heading">¶</a></h3>
 <p>The block matrix system that you eventually produce will be larger than many of
 those we have previously encountered, and will have non-zero entries further
 from the diagonal. This can cause the matrix solver to become expensive in both
-time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.13.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
+time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.14.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
 interface to <a class="reference external" href="https://portal.nersc.gov/project/sparse/superlu/">SuperLU</a>,
 which is a high-performance direct sparse solver. The recommended solution
 strategy is therefore:</p>
 <ol class="arabic simple">
-<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.13.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
+<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.14.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
 format that SuperLU requires.</p></li>
-<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.13.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
-<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.13.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
+<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.14.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
+<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.14.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
 the system.</p></li>
 </ol>
 </section>
 <section id="computing-the-error">
-<h3><span class="section-number">9.4.4. </span>Computing the error<a class="headerlink" href="#computing-the-error" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.4.4. </span>Computing the error<a class="headerlink" href="#computing-the-error" title="Link to this heading">¶</a></h3>
 <p>We will wish to compute the convergence of our solution in the <span class="math notranslate nohighlight">\(L^2\)</span> norm. For
 <span class="math notranslate nohighlight">\(w\in W\)</span>, this is given by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-10">
-<span class="eqno">(9.15)<a class="headerlink" href="#equation-9-mixed-problems-10" title="Permalink to this equation">¶</a></span>\[\|w\|_{L^2} = \sqrt{\int_\Omega w\cdot w\,\mathrm{dx}}\]</div>
+<span class="eqno">(9.15)<a class="headerlink" href="#equation-9-mixed-problems-10" title="Link to this equation">¶</a></span>\[\|w\|_{L^2} = \sqrt{\int_\Omega w\cdot w\,\mathrm{dx}}\]</div>
 <p>When we expand this in terms of the basis of <span class="math notranslate nohighlight">\(W\)</span>, it will be useful to note
 that basis functions from the different component spaces are orthogonal. That
 is to say:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-11">
-<span class="eqno">(9.16)<a class="headerlink" href="#equation-9-mixed-problems-11" title="Permalink to this equation">¶</a></span>\[(\phi, 0) \cdot (0, \psi) = 0 \quad \forall \phi\in V,\, \psi \in Q.\]</div>
+<span class="eqno">(9.16)<a class="headerlink" href="#equation-9-mixed-problems-11" title="Link to this equation">¶</a></span>\[(\phi, 0) \cdot (0, \psi) = 0 \quad \forall \phi\in V,\, \psi \in Q.\]</div>
 <p>The direct result of this is that if <span class="math notranslate nohighlight">\(w = (u, p)\)</span> then:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-12">
-<span class="eqno">(9.17)<a class="headerlink" href="#equation-9-mixed-problems-12" title="Permalink to this equation">¶</a></span>\[\|w\|_{L^2}^2 = \|u\|_{L^2}^2 + \|p\|_{L^2}^2.\]</div>
+<span class="eqno">(9.17)<a class="headerlink" href="#equation-9-mixed-problems-12" title="Link to this equation">¶</a></span>\[\|w\|_{L^2}^2 = \|u\|_{L^2}^2 + \|p\|_{L^2}^2.\]</div>
 </section>
 </section>
 <section id="manufacturing-a-solution-to-the-stokes-equations">
-<h2><span class="section-number">9.5. </span>Manufacturing a solution to the Stokes equations<a class="headerlink" href="#manufacturing-a-solution-to-the-stokes-equations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.5. </span>Manufacturing a solution to the Stokes equations<a class="headerlink" href="#manufacturing-a-solution-to-the-stokes-equations" title="Link to this heading">¶</a></h2>
 <p>As previously, we will wish to check our code using the method of manufactured
 solutions. The Stokes equations represent a form of incompressible fluid
 mechanics, so it is usually preferable to select a target solution for which
@@ -450,10 +448,10 @@ conditions, which amounts to choosing <span class="math notranslate nohighlight"
 on the domain boundary. The following function is a suitable choice on a unit
 square domain:</p>
 <div class="math notranslate nohighlight" id="equation-stream">
-<span class="eqno">(9.18)<a class="headerlink" href="#equation-stream" title="Permalink to this equation">¶</a></span>\[\gamma(x,y) = \big(1-\cos(2\pi x)\big)\big(1-\cos(2\pi y)\big)\]</div>
+<span class="eqno">(9.18)<a class="headerlink" href="#equation-stream" title="Link to this equation">¶</a></span>\[\gamma(x,y) = \big(1-\cos(2\pi x)\big)\big(1-\cos(2\pi y)\big)\]</div>
 </section>
 <section id="implementing-the-stokes-problem">
-<h2><span class="section-number">9.6. </span>Implementing the Stokes problem<a class="headerlink" href="#implementing-the-stokes-problem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.6. </span>Implementing the Stokes problem<a class="headerlink" href="#implementing-the-stokes-problem" title="Link to this heading">¶</a></h2>
 <div class="proof proof-type-exercise" id="id6">
 
     <div class="proof-title">
@@ -462,13 +460,13 @@ square domain:</p>
     </div><div class="proof-content">
 <p>The goal of this exercise is to implement a solver for the Stokes
 equations, on a unit square. Implement
-<code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code> so that it solves
+<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery" title="fe_utils.solvers.mastery.solve_mastery"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a> so that it solves
 <a class="reference internal" href="#equation-stokes-ch9">(9.1)</a> using the forcing function derived from <a class="reference internal" href="#equation-stream">(9.18)</a>.</p>
 <p>Your full solution should:</p>
 <ol class="arabic simple">
 <li><p>Implement <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code>.</p></li>
 <li><p>Make the consequential changes to
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code> to enable values
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> to enable values
 to be interpolated into vector-valued functions, and to create quiver plots.</p></li>
 <li><p>Assemble and solve the required mixed system.</p></li>
 <li><p>Compute the <span class="math notranslate nohighlight">\(L^2\)</span> error of the mixed solution from the analytic solution.</p></li>
@@ -476,11 +474,11 @@ to be interpolated into vector-valued functions, and to create quiver plots.</p>
 <p>A convergence test for your code is provided in
 <code class="docutils literal notranslate"><span class="pre">test/test_13_mastery_convergence.py</span></code>. In order to be compatible with
 this code, your implementation of
-<code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code> should return its results
+<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery" title="fe_utils.solvers.mastery.solve_mastery"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a> should return its results
 as a tuple of the form <code class="xref py py-data docutils literal notranslate"><span class="pre">(u,</span> <span class="pre">p),</span> <span class="pre">error</span></code>. This is a slight change from
 the comment in the code which takes into account that the problem is mixed.
 The obvious consequential change will be needed at the end of
-<code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils.solvers.mastery</span></code>.</p>
+<a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.mastery" title="fe_utils.solvers.mastery"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils.solvers.mastery</span></code></a>.</p>
 </div></div></section>
 </section>
 
@@ -492,8 +490,8 @@ The obvious consequential change will be needed at the end of
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

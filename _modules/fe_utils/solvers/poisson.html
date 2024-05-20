@@ -1,22 +1,19 @@
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" data-content_root="../../../">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>fe_utils.solvers.poisson &#8212; Finite element course 2020.0 documentation</title>
-    <link rel="stylesheet" href="../../../_static/fenics.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fe_utils.solvers.poisson &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script type="text/javascript" src="../../../_static/proof.js"></script>
-    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="../../../_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/proof.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
 <!--[if lte IE 6]>
@@ -31,7 +28,7 @@
 
   </head><body>
 <div class="wrapper">
-  <a href="../../../index.html"><img src="../../../_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="../../../index.html"><img src="../../../_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -48,31 +45,34 @@
           <div class="body" role="main">
             
   <h1>Source code for fe_utils.solvers.poisson</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Solve a model poisson problem with Dirichlet boundary conditions</span>
-<span class="sd">using the finite element method.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Solve a model Poisson problem with Dirichlet boundary conditions.</span>
 
 <span class="sd">If run as a script, the result is plotted. This file can also be</span>
 <span class="sd">imported as a module and convergence tests run on the solver.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
-<span class="kn">from</span> <span class="nn">fe_utils</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fe_utils</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
 <span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
 <span class="kn">import</span> <span class="nn">scipy.sparse.linalg</span> <span class="k">as</span> <span class="nn">splinalg</span>
-<span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
 
 
-<div class="viewcode-block" id="assemble"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.poisson.assemble">[docs]</a><span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Assemble the finite element system for the Poisson problem given</span>
+<div class="viewcode-block" id="assemble">
+<a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.poisson.assemble">[docs]</a>
+<span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assemble the finite element system for the Poisson problem given</span>
 <span class="sd">    the function space in which to solve and the right hand side</span>
 <span class="sd">    function.&quot;&quot;&quot;</span>
 
     <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
-<div class="viewcode-block" id="boundary_nodes"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.poisson.boundary_nodes">[docs]</a><span class="k">def</span> <span class="nf">boundary_nodes</span><span class="p">(</span><span class="n">fs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the list of boundary nodes in fs. This is a</span>
+
+<div class="viewcode-block" id="boundary_nodes">
+<a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.poisson.boundary_nodes">[docs]</a>
+<span class="k">def</span> <span class="nf">boundary_nodes</span><span class="p">(</span><span class="n">fs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the list of boundary nodes in fs. This is a</span>
 <span class="sd">    unit-square-specific solution. A more elegant solution would employ</span>
 <span class="sd">    the mesh topology and numbering.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -81,7 +81,7 @@
     <span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_boundary</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return 1 if on the boundary, 0. otherwise.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return 1 if on the boundary, 0. otherwise.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="ow">or</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">eps</span> <span class="ow">or</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="ow">or</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">eps</span><span class="p">:</span>
             <span class="k">return</span> <span class="mf">1.</span>
         <span class="k">else</span><span class="p">:</span>
@@ -92,8 +92,11 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="solve_poisson"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.poisson.solve_poisson">[docs]</a><span class="k">def</span> <span class="nf">solve_poisson</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solve a model Poisson problem on a unit square mesh with</span>
+
+<div class="viewcode-block" id="solve_poisson">
+<a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.poisson.solve_poisson">[docs]</a>
+<span class="k">def</span> <span class="nf">solve_poisson</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solve a model Poisson problem on a unit square mesh with</span>
 <span class="sd">    ``resolution`` elements in each direction, using equispaced</span>
 <span class="sd">    Lagrange elements of degree ``degree``.&quot;&quot;&quot;</span>
 
@@ -137,6 +140,8 @@
     <span class="c1"># Return the solution and the error in the solution.</span>
     <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">error</span></div>
 
+
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
@@ -160,14 +165,15 @@
     <span class="n">u</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

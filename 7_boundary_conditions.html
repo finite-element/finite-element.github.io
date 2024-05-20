@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7. Dirichlet boundary conditions &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>7. Dirichlet boundary conditions &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,7 +49,7 @@
           <div class="body" role="main">
             
   <section id="dirichlet-boundary-conditions">
-<span id="secdirichlet"></span><h1><span class="section-number">7. </span>Dirichlet boundary conditions<a class="headerlink" href="#dirichlet-boundary-conditions" title="Permalink to this headline">¶</a></h1>
+<span id="secdirichlet"></span><h1><span class="section-number">7. </span>Dirichlet boundary conditions<a class="headerlink" href="#dirichlet-boundary-conditions" title="Link to this heading">¶</a></h1>
 <p>The Helmholtz problem we solved in the previous part was chosen to
 have homogeneous Neumann or <em>natural</em> boundary conditions, which can
 be implemented simply by cancelling the zero surface integral. We can
@@ -61,11 +58,11 @@ conditions. Instead of the Helmholtz problem we solved before, let us
 now specify a Poisson problem with homogeneous Dirichlet conditions, find <span class="math notranslate nohighlight">\(u\)</span> in
 some finite element space <span class="math notranslate nohighlight">\(V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-poisson">
-<span class="eqno">(7.1)<a class="headerlink" href="#equation-poisson" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla^2 u = f\\u = 0  \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
+<span class="eqno">(7.1)<a class="headerlink" href="#equation-poisson" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla^2 u = f\\u = 0  \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
 <p>In order to implement the Dirichlet conditions, we need to decompose
 <span class="math notranslate nohighlight">\(V\)</span> into two parts:</p>
 <div class="math notranslate nohighlight" id="equation-7-boundary-conditions-0">
-<span class="eqno">(7.2)<a class="headerlink" href="#equation-7-boundary-conditions-0" title="Permalink to this equation">¶</a></span>\[V = V_0 \oplus V_\Gamma\]</div>
+<span class="eqno">(7.2)<a class="headerlink" href="#equation-7-boundary-conditions-0" title="Link to this equation">¶</a></span>\[V = V_0 \oplus V_\Gamma\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_\Gamma\)</span> is the space spanned by those functions in the basis
 of <span class="math notranslate nohighlight">\(V\)</span> which are non-zero on <span class="math notranslate nohighlight">\(\Gamma\)</span>, and <span class="math notranslate nohighlight">\(V_0\)</span> is the space spanned
 by the remaining basis functions (i.e.  those basis functions which
@@ -76,7 +73,7 @@ composed of all the other functions.</p>
 <p>We now write the weak form of <a class="reference internal" href="#equation-poisson">(7.1)</a>, find <span class="math notranslate nohighlight">\(u=u_0 + u_\Gamma\)</span>
 with <span class="math notranslate nohighlight">\(u_0 \in V_0\)</span> and <span class="math notranslate nohighlight">\(u_\Gamma \in V_\Gamma\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-7-boundary-conditions-1">
-<span class="eqno">(7.3)<a class="headerlink" href="#equation-7-boundary-conditions-1" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla (u_0+u_\Gamma) \, \mathrm{d} x
+<span class="eqno">(7.3)<a class="headerlink" href="#equation-7-boundary-conditions-1" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla (u_0+u_\Gamma) \, \mathrm{d} x
 - \underbrace{\int_\Gamma v_0 \nabla (u_0+u_\Gamma) \cdot
 \mathbf{n}\, \mathrm{d} s}_{=0} = \int_\Omega v_0\, f\, \mathrm{d} x
 \qquad \forall v_0 \in V_0\\u_\Gamma = 0 \qquad \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
@@ -93,11 +90,11 @@ everywhere, since all of the nodes in <span class="math notranslate nohighlight"
 </ol>
 <p>This means that the weak form is actually:</p>
 <div class="math notranslate nohighlight" id="equation-weakpoisson">
-<span class="eqno">(7.4)<a class="headerlink" href="#equation-weakpoisson" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla u \, \mathrm{d} x
+<span class="eqno">(7.4)<a class="headerlink" href="#equation-weakpoisson" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla u \, \mathrm{d} x
  = \int_\Omega v_0\, f\, \mathrm{d} x
 \qquad \forall v_0 \in V_0\\u_\Gamma = 0\end{aligned}\end{align} \]</div>
 <section id="an-algorithm-for-homogeneous-dirichlet-conditions">
-<h2><span class="section-number">7.1. </span>An algorithm for homogeneous Dirichlet conditions<a class="headerlink" href="#an-algorithm-for-homogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.1. </span>An algorithm for homogeneous Dirichlet conditions<a class="headerlink" href="#an-algorithm-for-homogeneous-dirichlet-conditions" title="Link to this heading">¶</a></h2>
 <p>The implementation of homogeneous Dirichlet conditions is actually
 rather straightforward.</p>
 <ol class="arabic simple">
@@ -120,7 +117,7 @@ but that is beyond the scope of this module.</p>
 </div>
 </section>
 <section id="implementing-boundary-conditions">
-<h2><span class="section-number">7.2. </span>Implementing boundary conditions<a class="headerlink" href="#implementing-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2. </span>Implementing boundary conditions<a class="headerlink" href="#implementing-boundary-conditions" title="Link to this heading">¶</a></h2>
 <p>Let:</p>
 <div class="math notranslate nohighlight">
 \[f = \left(16 \pi^2 (x_1 - 1)^2 x_1^2 - 2 (x_1 - 1)^2 - 8 (x_1 - 1) x_1 - 2 x_1^2\right) \sin(4 \pi x_0)\]</div>
@@ -138,7 +135,7 @@ this problem. You need to implement the <code class="xref py py-func docutils li
 function. You should base your implementation on your
 <code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/helmholtz.py</span></code> but take into account the difference
 in the equation, and the boundary conditions. The
-<code class="xref py py-func docutils literal notranslate"><span class="pre">fe_utils.solvers.poisson.boundary_nodes()</span></code> function in <code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/poisson.py</span></code> is
+<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.poisson.boundary_nodes" title="fe_utils.solvers.poisson.boundary_nodes"><code class="xref py py-func docutils literal notranslate"><span class="pre">fe_utils.solvers.poisson.boundary_nodes()</span></code></a> function in <code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/poisson.py</span></code> is
 likely to be helpful in implementing the boundary conditions. As
 before, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">fe_utils</span><span class="o">/</span><span class="n">solvers</span><span class="o">/</span><span class="n">poisson</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
@@ -150,7 +147,7 @@ before, run:</p>
 for this problem.</p>
 </div></div></section>
 <section id="inhomogeneous-dirichlet-conditions">
-<h2><span class="section-number">7.3. </span>Inhomogeneous Dirichlet conditions<a class="headerlink" href="#inhomogeneous-dirichlet-conditions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.3. </span>Inhomogeneous Dirichlet conditions<a class="headerlink" href="#inhomogeneous-dirichlet-conditions" title="Link to this heading">¶</a></h2>
 <p>The algorithm described here can be extended to inhomogeneous systems
 by setting the entries in the global vector to the value of the
 boundary condition at the corresponding boundary node. This additional
@@ -167,8 +164,8 @@ more detail in the next section.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

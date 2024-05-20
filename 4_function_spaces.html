@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. Function spaces: associating data with meshes &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>4. Function spaces: associating data with meshes &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,7 +49,7 @@
           <div class="body" role="main">
             
   <section id="function-spaces-associating-data-with-meshes">
-<span id="secfunctionspaces"></span><h1><span class="section-number">4. </span>Function spaces: associating data with meshes<a class="headerlink" href="#function-spaces-associating-data-with-meshes" title="Permalink to this headline">¶</a></h1>
+<span id="secfunctionspaces"></span><h1><span class="section-number">4. </span>Function spaces: associating data with meshes<a class="headerlink" href="#function-spaces-associating-data-with-meshes" title="Link to this heading">¶</a></h1>
 <p>A finite element space over a mesh is constructed by associating a
 finite element with each cell of the mesh. We will refer to the basis
 functions of this finite element space as <em>global</em> basis functions,
@@ -67,19 +64,19 @@ as <em>local numbering</em>. Then we associate the correct number of degrees
 of freedom (i.e. number of basis functions) with each global mesh
 entity. This is the <em>global numbering</em>.</p>
 <section id="local-numbering-and-continuity">
-<h2><span class="section-number">4.1. </span>Local numbering and continuity<a class="headerlink" href="#local-numbering-and-continuity" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">4.1. </span>Local numbering and continuity<a class="headerlink" href="#local-numbering-and-continuity" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495269291"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=69f99985-13ba-4151-8e5a-ac9f01303711">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=69f99985-13ba-4151-8e5a-ac9f01303711">watch this video on Panopto</a></p>
 </div>
 </details><p>Which nodes should be associated with which topological entities? The
 answer to this question depends on the degree of continuity required
@@ -121,51 +118,48 @@ dimensions given by the combination <span class="math notranslate nohighlight">\
 <p>This pattern holds more generally: for a <span class="math notranslate nohighlight">\(C_0\)</span> function space, the
 number of nodes which must be associated with a local topological
 entity of dimension <span class="math notranslate nohighlight">\(d\)</span> is <span class="math notranslate nohighlight">\(\binom{p-1}{d}\)</span>.</p>
-<p><a class="reference internal" href="#figlagrange-nodes"><span class="std std-numref">Fig. 4.1</span></a> illustrates the association of nodes with
-reference entities for Lagrange elements on triangles. The numbering
-of nodes will depend on how
-<code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code> is implemented. The
-numbering used here is just one of the obvious choices.</p>
+<p><a class="reference internal" href="#figlagrange-nodes-association"><span class="std std-numref">Fig. 4.1</span></a> illustrates the association of nodes with
+reference entities for Lagrange elements on triangles.</p>
 <figure class="align-default" id="id2">
-<span id="figlagrange-nodes"></span><a class="reference internal image-reference" href="_images/lagrange_nodes.svg"><img alt="_images/lagrange_nodes.svg" src="_images/lagrange_nodes.svg" width="70%" /></a>
+<span id="figlagrange-nodes-association"></span><a class="reference internal image-reference" href="_images/lagrange_nodes.svg"><img alt="_images/lagrange_nodes.svg" src="_images/lagrange_nodes.svg" width="70%" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Association of nodes with reference entities for the degree 1, 2,
 and 3 equispaced Lagrange elements on triangles. Black nodes are
 associated with vertices, red nodes with edges and blue nodes with
-the cell (face). The numbering of the nodes is arbitrary.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+the cell (face). This is the same figure as <a class="reference internal" href="2_finite_elements.html#figlagrange-nodes"><span class="std std-numref">Fig. 2.1</span></a>.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="implementing-local-numbering">
-<h2><span class="section-number">4.2. </span>Implementing local numbering<a class="headerlink" href="#implementing-local-numbering" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">4.2. </span>Implementing local numbering<a class="headerlink" href="#implementing-local-numbering" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495269640"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ea5c76aa-db4c-45b8-a0f9-ac9f01303687">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ea5c76aa-db4c-45b8-a0f9-ac9f01303687">watch this video on Panopto</a></p>
 </div>
 </details><p>Local numbering can be implemented by adding an additional data
-structure to the <code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code>
+structure to the <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a>
 class. For each local entity this must record the local nodes
 associated with that entity. This can be achieved using a dictionary
 of dictionaries structure. For example employing the local numbering
-of nodes employed in <a class="reference internal" href="#figlagrange-nodes"><span class="std std-numref">Fig. 4.1</span></a>, the <code class="docutils literal notranslate"><span class="pre">entity_node</span></code>
+of nodes employed in <a class="reference internal" href="2_finite_elements.html#figlagrange-nodes"><span class="std std-numref">Fig. 2.1</span></a>, the <code class="docutils literal notranslate"><span class="pre">entity_node</span></code>
 dictionary for the degree three equispaced Lagrange element on a triangle is
 given by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entity_node</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span>
-                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">]},</span>
-               <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
-                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
-                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]},</span>
-               <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">]}}</span>
+                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]},</span>
+               <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                   <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+                   <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]},</span>
+               <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">]}}</span>
 </pre></div>
 </div>
 <p>Note that the order of the nodes in each list is important: it must
@@ -173,11 +167,6 @@ always consistently reflect the orientation of the relevant entity in
 order that all the cells which share that entity consistently
 interpret the nodes. In this case this has been achieved by listing
 the nodes in order given by the direction of the orientation of each edge.</p>
-<p>The following animation illustrates the construction of the <code class="docutils literal notranslate"><span class="pre">entity_node</span></code> dictionary.</p>
-<div class="youtube docutils container">
-<div class="video_wrapper" style="padding-bottom: 56.250000%; padding-top: 30px; position: relative; width: 100%">
-<iframe allowfullscreen="true" src="https://www.youtube.com/embed/dTWoTjARi2w?modestbranding=1;controls=0;rel=0" style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%">
-</iframe></div></div>
 <div class="proof proof-type-exercise" id="id3">
 <span id="ex-local"></span>
     <div class="proof-title">
@@ -185,68 +174,56 @@ the nodes in order given by the direction of the orientation of each edge.</p>
         
     </div><div class="proof-content">
 <p>Extend the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method of
-<code class="xref py py-class docutils literal notranslate"><span class="pre">LagrangeElement</span></code> so that it
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.LagrangeElement" title="fe_utils.finite_elements.LagrangeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">LagrangeElement</span></code></a> so that it
 passes the correct <code class="docutils literal notranslate"><span class="pre">entity_node</span></code> dictionary to the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code> it creates.</p>
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> it creates.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">test/test_08_entity_nodes.py</span></code> script tests this functionality.</p>
-</div></div><div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>You can either work out the right algorithm to generate
-<code class="docutils literal notranslate"><span class="pre">entity_nodes</span></code> with the right node indices, or you can modify
-<code class="xref py py-func docutils literal notranslate"><span class="pre">lagrange_points()</span></code> so that it
-produces the nodes in entity order, thus making the construction of
-<code class="docutils literal notranslate"><span class="pre">entity_nodes</span></code> straightforward.</p>
-<p>You may find the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">point_in_entity()</span></code>
-method of the <code class="xref py py-class docutils literal notranslate"><span class="pre">ReferenceCell</span></code>
-class useful.</p>
-</div>
-</section>
+</div></div></section>
 <section id="global-numbering">
-<h2><span class="section-number">4.3. </span>Global numbering<a class="headerlink" href="#global-numbering" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">4.3. </span>Global numbering<a class="headerlink" href="#global-numbering" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495269832"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=930f2ddb-fe7b-4286-b82b-ac9f013036e5">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=930f2ddb-fe7b-4286-b82b-ac9f013036e5">watch this video on Panopto</a></p>
 </div>
 </details><p>Given a mesh and a finite element, the global numbering task is to
 uniquely associate the appropriate number of global node numbers with
-each global entity. One such numbering <a class="footnote-reference brackets" href="#globalnumbering" id="id1">1</a> is to
+each global entity. One such numbering <a class="footnote-reference brackets" href="#globalnumbering" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is to
 allocate global numbers in ascending entity dimension order, and
 within each dimension in order of the index of each global topological
 entity. The formula for the first global node associated with entity
 <span class="math notranslate nohighlight">\((d, i)\)</span> is then:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-0">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-4-function-spaces-0" title="Permalink to this equation">¶</a></span>\[G(d, i) = \left(\sum_{\delta &lt; d} N_\delta E_\delta\right) + iN_d\]</div>
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-4-function-spaces-0" title="Link to this equation">¶</a></span>\[G(d, i) = \left(\sum_{\delta &lt; d} N_\delta E_\delta\right) + iN_d\]</div>
 <p>where <span class="math notranslate nohighlight">\(N_d\)</span> is the number of nodes which this finite element
 associates with a single entity of dimension <span class="math notranslate nohighlight">\(d\)</span>, and <span class="math notranslate nohighlight">\(E_d\)</span> is the number
 of dimension <span class="math notranslate nohighlight">\(d\)</span> entities in the mesh. The full list of nodes
 associated with entity <span class="math notranslate nohighlight">\((d, i)\)</span> is therefore:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-1">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-4-function-spaces-1" title="Permalink to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-4-function-spaces-1" title="Link to this equation">¶</a></span>\[[G(d, i), \ldots, G(d,i) + N_d - 1]\]</div>
 </section>
 <section id="the-cell-node-map">
-<span id="cell-node"></span><h2><span class="section-number">4.4. </span>The cell-node map<a class="headerlink" href="#the-cell-node-map" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<span id="cell-node"></span><h2><span class="section-number">4.4. </span>The cell-node map<a class="headerlink" href="#the-cell-node-map" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495271441"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=bddd29be-60eb-43f3-b487-ac9f013036b7">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=bddd29be-60eb-43f3-b487-ac9f013036b7">watch this video on Panopto</a></p>
 </div>
 </details><p>The primary use to which we wish to put the finite element spaces we
 are constructing is, naturally, the solution of finite element
@@ -261,18 +238,18 @@ from cells to adjacent nodes as a two-dimensional array with one row
 corresponding to each cell, and with columns corresponding to the
 local node numbers. The entries in this map will have the following values:</p>
 <div class="math notranslate nohighlight" id="equation-eqcellnode">
-<span class="eqno">(4.4)<a class="headerlink" href="#equation-eqcellnode" title="Permalink to this equation">¶</a></span>\[M[c, e(\delta, \epsilon)] = [G(\delta, i), \ldots, G(\delta,i) + N_\delta - 1] \qquad\forall 0\leq\delta\leq\dim(c), \forall 0\leq\epsilon &lt; \hat{E}_\delta\]</div>
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-eqcellnode" title="Link to this equation">¶</a></span>\[M[c, e(\delta, \epsilon)] = [G(\delta, i), \ldots, G(\delta,i) + N_\delta - 1] \qquad\forall 0\leq\delta\leq\dim(c), \forall 0\leq\epsilon &lt; \hat{E}_\delta\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-2">
-<span class="eqno">(4.5)<a class="headerlink" href="#equation-4-function-spaces-2" title="Permalink to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-4-function-spaces-2" title="Link to this equation">¶</a></span>\[i = \operatorname{Adj}_{\dim(c), \delta}[c, \epsilon],\]</div>
 <p><span class="math notranslate nohighlight">\(e(\delta, \epsilon)\)</span> is the local entity-node list for this finite
 element for the <span class="math notranslate nohighlight">\((\delta, \epsilon)\)</span> local entity,
-<span class="math notranslate nohighlight">\(\operatorname{Adj}\)</span> has the meaning given under <a class="reference internal" href="3_meshes.html#secadjacency"><span class="std std-ref">Adjacency</span></a>,
+<span class="math notranslate nohighlight">\(\operatorname{Adj}\)</span> has the meaning given under <a class="reference internal" href="1_quadrature.html#secadjacency"><span class="std std-ref">Python implementations of reference elements</span></a>,
 <span class="math notranslate nohighlight">\(\hat{E}_\delta\)</span> is the number of dimension <span class="math notranslate nohighlight">\(\delta\)</span> entities in each
 cell, and <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(N\)</span> have the meanings given above. This algorithm
 requires a trivial extension to adjacency:</p>
 <div class="math notranslate nohighlight" id="equation-4-function-spaces-3">
-<span class="eqno">(4.6)<a class="headerlink" href="#equation-4-function-spaces-3" title="Permalink to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-4-function-spaces-3" title="Link to this equation">¶</a></span>\[\operatorname{Adj}_{\dim(c),\dim(c)}[c, 0] = c\]</div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>In <a class="reference internal" href="#equation-eqcellnode">(4.4)</a>, notice that for each value of <span class="math notranslate nohighlight">\(\delta\)</span> and
@@ -282,19 +259,19 @@ of <span class="math notranslate nohighlight">\(M\)</span> for each <span class=
 </div>
 </section>
 <section id="implementing-function-spaces-in-python">
-<h2><span class="section-number">4.5. </span>Implementing function spaces in Python<a class="headerlink" href="#implementing-function-spaces-in-python" title="Permalink to this headline">¶</a></h2>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-A video recording of the following material is available here.<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
+<h2><span class="section-number">4.5. </span>Implementing function spaces in Python<a class="headerlink" href="#implementing-function-spaces-in-python" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+A video recording of the following material is available here.<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="vimeo docutils container">
 <iframe src="https://player.vimeo.com/video/495272295"
 frameborder="0" allow="autoplay; fullscreen"
 allowfullscreen></iframe></div>
-<p class="card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=55f96f95-c934-4756-b75e-ac9f01305188">watch this video on Panopto</a></p>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=55f96f95-c934-4756-b75e-ac9f01305188">watch this video on Panopto</a></p>
 </div>
 </details><p>As noted above, a finite element space associates a mesh and a finite
 element, and contains (in some form) a global numbering of the nodes.</p>
@@ -305,9 +282,9 @@ element, and contains (in some form) a global numbering of the nodes.</p>
         
     </div><div class="proof-content">
 <p>Implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method of
-<code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.function_spaces.FunctionSpace</span></code>. The key operation
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace" title="fe_utils.function_spaces.FunctionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.function_spaces.FunctionSpace</span></code></a>. The key operation
 is to set
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code> using
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> using
 <a class="reference internal" href="#equation-eqcellnode">(4.4)</a>.</p>
 <p>You can plot the numbering you have created with the
 <code class="docutils literal notranslate"><span class="pre">plot_function_space_nodes</span></code> script. As usual, run the
@@ -316,13 +293,13 @@ arguments.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Many of the terms in <a class="reference internal" href="#equation-eqcellnode">(4.4)</a> are implemented in the
-objects in <code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils</span></code>. For example:</p>
+objects in <a class="reference internal" href="fe_utils.html#module-fe_utils" title="fe_utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils</span></code></a>. For example:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\operatorname{Adj}_{\dim(c), \delta}\)</span> is implemented by the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">adjacency()</span></code> method of the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code>.</p></li>
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.adjacency" title="fe_utils.mesh.Mesh.adjacency"><code class="xref py py-meth docutils literal notranslate"><span class="pre">adjacency()</span></code></a> method of the
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a>.</p></li>
 <li><p>You have <span class="math notranslate nohighlight">\(e(\delta, \epsilon)\)</span> as
-<code class="xref py py-data docutils literal notranslate"><span class="pre">entity_nodes</span></code>. Note
+<a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.entity_nodes" title="fe_utils.finite_elements.FiniteElement.entity_nodes"><code class="xref py py-data docutils literal notranslate"><span class="pre">entity_nodes</span></code></a>. Note
 that in this case you need separate square brackets for each
 index:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">element</span><span class="o">.</span><span class="n">entity_nodes</span><span class="p">[</span><span class="n">delta</span><span class="p">][</span><span class="n">epsilon</span><span class="p">]</span>
@@ -333,7 +310,7 @@ index:</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code> needs to
+<p><a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.FunctionSpace.cell_nodes" title="fe_utils.function_spaces.FunctionSpace.cell_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cell_nodes</span></code></a> needs to
 be integer-valued. If you choose to use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>
 to create a matrix which you then populate with values, you
 need to explicitly specify that you want a matrix of
@@ -341,14 +318,15 @@ integers. This can be achieved by passing the <code class="docutils literal notr
 to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.26)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>. For example <code class="docutils literal notranslate"><span class="pre">numpy.zeros((nrows,</span> <span class="pre">ncols),</span> <span class="pre">dtype=int)</span></code>.</p>
 </div>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="globalnumbering"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Many correct global numberings are possible,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="globalnumbering" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Many correct global numberings are possible,
 that presented here is simple and correct, but not
 optimal from the perspective of the memory
 layout of the resulting data.</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -360,8 +338,8 @@ layout of the resulting data.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

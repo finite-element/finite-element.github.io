@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>8. Nonlinear problems &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/fenics.css" />
+    <title>8. Nonlinear problems &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,7 +49,7 @@
           <div class="body" role="main">
             
   <section id="nonlinear-problems">
-<h1><span class="section-number">8. </span>Nonlinear problems<a class="headerlink" href="#nonlinear-problems" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>Nonlinear problems<a class="headerlink" href="#nonlinear-problems" title="Link to this heading">¶</a></h1>
 <p>The finite element method may also be employed to numerically solve
 <em>nonlinear</em> PDEs. In order to do this, we can apply the classical
 technique for solving nonlinear systems: we employ an iterative scheme
@@ -65,20 +62,20 @@ nonlinear problem.</p>
 does not currently do so. It is presented for reference only.</p>
 </div>
 <section id="a-model-problem">
-<h2><span class="section-number">8.1. </span>A model problem<a class="headerlink" href="#a-model-problem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1. </span>A model problem<a class="headerlink" href="#a-model-problem" title="Link to this heading">¶</a></h2>
 <p>As a simple case of a non-linear PDE, we can consider a steady
 non-linear diffusion equation. This is similar to the Poisson problem,
 except that the diffusion rate now depends on the value of the
 solution:</p>
 <div class="math notranslate nohighlight" id="equation-diffusion">
-<span class="eqno">(8.1)<a class="headerlink" href="#equation-diffusion" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla\cdot\left((u+1)\nabla u\right) = g\\u = b \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
+<span class="eqno">(8.1)<a class="headerlink" href="#equation-diffusion" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla\cdot\left((u+1)\nabla u\right) = g\\u = b \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are given functions defined over <span class="math notranslate nohighlight">\(\Omega\)</span> and
 <span class="math notranslate nohighlight">\(\Gamma\)</span> respectively.</p>
 <p>We can create the weak form of <a class="reference internal" href="#equation-diffusion">(8.1)</a> by integrating by parts
 and taking the boundary conditions into account. The problem becomes,
 find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-weakdiffusion">
-<span class="eqno">(8.2)<a class="headerlink" href="#equation-weakdiffusion" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot (u + 1) \nabla u \, \mathrm{d} x = \int_\Omega v_0g \, \mathrm{d} x \qquad \forall v_0 \in V_0\\u_\Gamma = b.\end{aligned}\end{align} \]</div>
+<span class="eqno">(8.2)<a class="headerlink" href="#equation-weakdiffusion" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot (u + 1) \nabla u \, \mathrm{d} x = \int_\Omega v_0g \, \mathrm{d} x \qquad \forall v_0 \in V_0\\u_\Gamma = b.\end{aligned}\end{align} \]</div>
 <p>Once more, <span class="math notranslate nohighlight">\(V_0\)</span> is the subspace of <span class="math notranslate nohighlight">\(V\)</span> spanned by basis functions which
 vanish on the boundary, <span class="math notranslate nohighlight">\(V = V_0 \oplus V_\Gamma\)</span>, and <span class="math notranslate nohighlight">\(u = u_0 + u_\Gamma\)</span>
 with <span class="math notranslate nohighlight">\(u_0\in V_0\)</span> and <span class="math notranslate nohighlight">\(u_\Gamma\in V_\Gamma\)</span>. This is
@@ -88,10 +85,10 @@ we cannot simply substitute <span class="math notranslate nohighlight">\(u = u_i
 linear matrix system to solve.</p>
 </section>
 <section id="residual-form">
-<h2><span class="section-number">8.2. </span>Residual form<a class="headerlink" href="#residual-form" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.2. </span>Residual form<a class="headerlink" href="#residual-form" title="Link to this heading">¶</a></h2>
 <p>The general weak form of a non-linear problem is, find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-0">
-<span class="eqno">(8.3)<a class="headerlink" href="#equation-8-nonlinear-problems-0" title="Permalink to this equation">¶</a></span>\[f(u; v) = 0 \qquad \forall v \in V\]</div>
+<span class="eqno">(8.3)<a class="headerlink" href="#equation-8-nonlinear-problems-0" title="Link to this equation">¶</a></span>\[f(u; v) = 0 \qquad \forall v \in V\]</div>
 <p>The use of a semicolon is a common convention to indicate that <span class="math notranslate nohighlight">\(f\)</span> is
 assumed to be linear in the arguments after the semicolon, but might
 be nonlinear in the arguments before the semicolon. In this case,
@@ -107,14 +104,14 @@ a linear functional which is zero if the boundary condition is
 satisfied at this test function, and nonzero otherwise. The simplest
 example of such a functional is:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-1">
-<span class="eqno">(8.4)<a class="headerlink" href="#equation-8-nonlinear-problems-1" title="Permalink to this equation">¶</a></span>\[f(u; \phi_i) = \phi^*_i(u) - \phi^*_i(b)\]</div>
+<span class="eqno">(8.4)<a class="headerlink" href="#equation-8-nonlinear-problems-1" title="Link to this equation">¶</a></span>\[f(u; \phi_i) = \phi^*_i(u) - \phi^*_i(b)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi^*_i\)</span> is the node associated with basis function <span class="math notranslate nohighlight">\(\phi_i\)</span>. For
 point evaluation nodes, <span class="math notranslate nohighlight">\(\phi^*_i(u)\)</span> is the value of the proposed solution
 at node point <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(\phi^*_i(b)\)</span> is just the boundary condition
 evaluated at that same point.</p>
 <p>So for our model problem, we now have a full statement of the residual in terms of a basis function <span class="math notranslate nohighlight">\(\phi_i\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-residual">
-<span class="eqno">(8.5)<a class="headerlink" href="#equation-residual" title="Permalink to this equation">¶</a></span>\[\begin{split}f(u; \phi_i) = \begin{cases}
+<span class="eqno">(8.5)<a class="headerlink" href="#equation-residual" title="Link to this equation">¶</a></span>\[\begin{split}f(u; \phi_i) = \begin{cases}
    \displaystyle\int_\Omega \nabla \phi_i \cdot \left((u + 1) \nabla u\right) - \phi_i g \, \mathrm{d} x &amp; \phi_i\in V_0\\
    \phi^*_i(u) - \phi^*_i(b) &amp; \phi_i\in V_\Gamma
 \end{cases}\end{split}\]</div>
@@ -127,7 +124,7 @@ function <span class="math notranslate nohighlight">\(\hat{b}\in V\)</span>.</p>
 </div>
 </section>
 <section id="linearisation-and-gateaux-derivatives">
-<h2><span class="section-number">8.3. </span>Linearisation and Gâteaux Derivatives<a class="headerlink" href="#linearisation-and-gateaux-derivatives" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3. </span>Linearisation and Gâteaux Derivatives<a class="headerlink" href="#linearisation-and-gateaux-derivatives" title="Link to this heading">¶</a></h2>
 <p>Having stated our PDE in residual form, we now need to linearise the
 problem and thereby employ a technique such as Newton’s method. In
 order to linearise the residual, we need to differentiate it with
@@ -135,13 +132,13 @@ respect to <span class="math notranslate nohighlight">\(u\)</span>. Since <span 
 instead a function in <span class="math notranslate nohighlight">\(V\)</span>, the appropriate form of differentiation is
 the Gâteaux Derivative, given by:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-2">
-<span class="eqno">(8.6)<a class="headerlink" href="#equation-8-nonlinear-problems-2" title="Permalink to this equation">¶</a></span>\[J(u; v, \hat{u}) = \lim_{\epsilon\rightarrow 0}\frac{f(u+\epsilon\hat{u}; v)-f(u; v)}{\epsilon}.\]</div>
+<span class="eqno">(8.6)<a class="headerlink" href="#equation-8-nonlinear-problems-2" title="Link to this equation">¶</a></span>\[J(u; v, \hat{u}) = \lim_{\epsilon\rightarrow 0}\frac{f(u+\epsilon\hat{u}; v)-f(u; v)}{\epsilon}.\]</div>
 <p>Here, the new argument <span class="math notranslate nohighlight">\(\hat{u}\in V\)</span> indicates the “direction” in
 which the derivative is to be taken. Let’s work through the Gâteaux
 Derivative for the residual of our model problem. Assume first that
 <span class="math notranslate nohighlight">\(v\in V_0\)</span>. Then:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-3">
-<span class="eqno">(8.7)<a class="headerlink" href="#equation-8-nonlinear-problems-3" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(8.7)<a class="headerlink" href="#equation-8-nonlinear-problems-3" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
 J(u; v, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Omega \nabla v \cdot \left((u +\epsilon\hat{u} + 1) \nabla (u + \epsilon\hat{u})\right) - vg \, \mathrm{d} x - \displaystyle\int_\Omega \nabla v \cdot \left((u + 1) \nabla u\right) - vg \, \mathrm{d} x}{\epsilon}\\
 &amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Omega \nabla v \cdot \left(\epsilon\hat{u} \nabla u + (u + 1) \nabla (\epsilon\hat{u}) + \epsilon\hat{u} \nabla (\epsilon\hat{u})\right) \, \mathrm{d} x}{\epsilon}\\
 &amp;= \int_\Omega \nabla v \cdot \left(\hat{u} \nabla u + (u + 1) \nabla \hat{u} \right) \, \mathrm{d} x.\\
@@ -149,7 +146,7 @@ J(u; v, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\displaystyle\int_\Ome
 <p>Note that, as expected, <span class="math notranslate nohighlight">\(J\)</span> is linear in <span class="math notranslate nohighlight">\(\hat{u}\)</span>.</p>
 <p>Next, we can work out the boundary case by assuming <span class="math notranslate nohighlight">\(v=\phi_i\)</span>, one of the basis functions of <span class="math notranslate nohighlight">\(V_\Gamma\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-4">
-<span class="eqno">(8.8)<a class="headerlink" href="#equation-8-nonlinear-problems-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(8.8)<a class="headerlink" href="#equation-8-nonlinear-problems-4" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
 J(u; \phi_i, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\phi^*_i(u+\epsilon\hat{u}) - \phi^*_i(b) - \left(\phi^*_i(u) - \phi^*_i(b)\right)}{\epsilon}\\
 &amp;= \phi^*_i(\hat{u}) \qquad \textrm{since } \phi^*_i(\cdot) \textrm{ is linear.}
 \end{split}\end{split}\]</div>
@@ -157,34 +154,34 @@ J(u; \phi_i, \hat{u}) &amp;= \lim_{\epsilon\rightarrow 0}\frac{\phi^*_i(u+\epsil
 we choose <span class="math notranslate nohighlight">\(\hat{u} = \phi_j\)</span> for some <span class="math notranslate nohighlight">\(\phi_j\)</span> in the basis if <span class="math notranslate nohighlight">\(V\)</span>
 then the definition of a nodal basis gives us:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-5">
-<span class="eqno">(8.9)<a class="headerlink" href="#equation-8-nonlinear-problems-5" title="Permalink to this equation">¶</a></span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
+<span class="eqno">(8.9)<a class="headerlink" href="#equation-8-nonlinear-problems-5" title="Link to this equation">¶</a></span>\[J(u; \phi_i, \phi_j) = \delta_{ij}\]</div>
 </section>
 <section id="a-taylor-expansion-and-newton-s-method">
-<h2><span class="section-number">8.4. </span>A Taylor expansion and Newton’s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.4. </span>A Taylor expansion and Newton’s method<a class="headerlink" href="#a-taylor-expansion-and-newton-s-method" title="Link to this heading">¶</a></h2>
 <p>Since we now have the derivative of the residual with respect to a
 perturbation to the prospective solution <span class="math notranslate nohighlight">\(u\)</span>, we can write the first
 terms of a Taylor series approximation for the value of the residual at a perturbed solution <span class="math notranslate nohighlight">\(u+\hat{u}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-6">
-<span class="eqno">(8.10)<a class="headerlink" href="#equation-8-nonlinear-problems-6" title="Permalink to this equation">¶</a></span>\[f(u+\hat{u}; v) = f(u; v) + J(u; v, \hat{u}) +\ldots \qquad \forall v\in V.\]</div>
+<span class="eqno">(8.10)<a class="headerlink" href="#equation-8-nonlinear-problems-6" title="Link to this equation">¶</a></span>\[f(u+\hat{u}; v) = f(u; v) + J(u; v, \hat{u}) +\ldots \qquad \forall v\in V.\]</div>
 <p>Now, just as in the scalar case, Newton’s method consists of
 approximating the function (the residual) by the first two terms and
 solving for the update that will set these terms to zero. In other
 words:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-7">
-<span class="eqno">(8.11)<a class="headerlink" href="#equation-8-nonlinear-problems-7" title="Permalink to this equation">¶</a></span>\[u^{n+1} = u^n + \hat{u}\]</div>
+<span class="eqno">(8.11)<a class="headerlink" href="#equation-8-nonlinear-problems-7" title="Link to this equation">¶</a></span>\[u^{n+1} = u^n + \hat{u}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{u} \in V\)</span> is the solution to:</p>
 <div class="math notranslate nohighlight" id="equation-newton-update">
-<span class="eqno">(8.12)<a class="headerlink" href="#equation-newton-update" title="Permalink to this equation">¶</a></span>\[J(u^n; v, \hat{u}) = - f(u^n; v) \qquad \forall v \in V.\]</div>
+<span class="eqno">(8.12)<a class="headerlink" href="#equation-newton-update" title="Link to this equation">¶</a></span>\[J(u^n; v, \hat{u}) = - f(u^n; v) \qquad \forall v \in V.\]</div>
 <p>In fact, <a class="reference internal" href="#equation-newton-update">(8.12)</a> is simply a linear finite element
 problem! To make this explicit, we can expand <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(\hat{u}\)</span> in
 terms of basis functions <span class="math notranslate nohighlight">\(\{\phi_i\}_{i=0}^{n-1} \in V\)</span> such that
 <span class="math notranslate nohighlight">\(v = \sum_{i}v_i\phi_i\)</span> and <span class="math notranslate nohighlight">\(\hat{u} = \sum_{j}\hat{u}_j\phi_j\)</span>. We
 note, as previously, that we we can drop the coefficients <span class="math notranslate nohighlight">\(v_i\)</span> giving:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-8">
-<span class="eqno">(8.13)<a class="headerlink" href="#equation-8-nonlinear-problems-8" title="Permalink to this equation">¶</a></span>\[\sum_{j} J(u^n; \phi_i, \phi_j) \hat{u}_j = - f(u^n; \phi_i) \qquad \forall\, 0\leq i &lt; n .\]</div>
+<span class="eqno">(8.13)<a class="headerlink" href="#equation-8-nonlinear-problems-8" title="Link to this equation">¶</a></span>\[\sum_{j} J(u^n; \phi_i, \phi_j) \hat{u}_j = - f(u^n; \phi_i) \qquad \forall\, 0\leq i &lt; n .\]</div>
 <p>For our nonlinear diffusion problem, the matrix <span class="math notranslate nohighlight">\(J\)</span> is given by:</p>
 <div class="math notranslate nohighlight" id="equation-8-nonlinear-problems-9">
-<span class="eqno">(8.14)<a class="headerlink" href="#equation-8-nonlinear-problems-9" title="Permalink to this equation">¶</a></span>\[\begin{split}J_{ij} =
+<span class="eqno">(8.14)<a class="headerlink" href="#equation-8-nonlinear-problems-9" title="Link to this equation">¶</a></span>\[\begin{split}J_{ij} =
 J(u^n; \phi_i, \phi_j) =
 \begin{cases}
 \displaystyle\int_\Omega \nabla \phi_i \cdot \left(\phi_j \nabla u^n + (u^n + 1) \nabla \phi_j \right) \, \mathrm{d} x &amp; \phi_i\in V_0\\
@@ -193,7 +190,7 @@ J(u^n; \phi_i, \phi_j) =
 <p>and the right hand side vector <span class="math notranslate nohighlight">\(f\)</span> is given by <a class="reference internal" href="#equation-residual">(8.5)</a>. This
 matrix, <span class="math notranslate nohighlight">\(J\)</span>, is termed the <em>Jacobian matrix</em> of <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <section id="stopping-criteria-for-newton-s-method">
-<h3><span class="section-number">8.4.1. </span>Stopping criteria for Newton’s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.4.1. </span>Stopping criteria for Newton’s method<a class="headerlink" href="#stopping-criteria-for-newton-s-method" title="Link to this heading">¶</a></h3>
 <p>Since Newton’s method is an iterative algorithm, it creates a
 (hopefully convergent) sequence of approximations to the correct
 solution to the original nonlinear problem. How do we know when to
@@ -235,7 +232,7 @@ treatment of Newton methods, see <span id="id1">[<a class="reference internal" h
 </div>
 </section>
 <section id="stopping-threshold-values">
-<h3><span class="section-number">8.4.2. </span>Stopping threshold values<a class="headerlink" href="#stopping-threshold-values" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.4.2. </span>Stopping threshold values<a class="headerlink" href="#stopping-threshold-values" title="Link to this heading">¶</a></h3>
 <p>What, then, qualifies as a sufficiently small value of our error
 estimate? There are two usual approaches:</p>
 <dl class="simple">
@@ -271,7 +268,7 @@ a level which will be swamped by a larger error occurring somewhere
 else in the process.</p>
 </section>
 <section id="failure-modes">
-<h3><span class="section-number">8.4.3. </span>Failure modes<a class="headerlink" href="#failure-modes" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.4.3. </span>Failure modes<a class="headerlink" href="#failure-modes" title="Link to this heading">¶</a></h3>
 <p>Just as with the Newton method for scalar problems, Newton iteration
 is not guaranteed to converge for all nonlinear problems or for all
 initial guesses. If Newton’s method fails to converge, then the
@@ -299,7 +296,7 @@ think again about the problem, the solver, and the initial guess.</p>
 </section>
 </section>
 <section id="implementing-a-nonlinear-problem">
-<h2><span class="section-number">8.5. </span>Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.5. </span>Implementing a nonlinear problem<a class="headerlink" href="#implementing-a-nonlinear-problem" title="Link to this heading">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This problem is intentionally stated in more general terms than the
@@ -322,11 +319,11 @@ College. It is presented here for reference.</p>
 <p>The <span class="math notranslate nohighlight">\(p\)</span>-laplacian is a generalisation of the laplacian from
 a second derivative to an arbitrary derivative. It is nonlinear for
 <span class="math notranslate nohighlight">\(p\neq2\)</span>.</p>
-<p>Implement <code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code> so that it solves
+<p>Implement <a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery" title="fe_utils.solvers.mastery.solve_mastery"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a> so that it solves
 the following problem using degree 1 Lagrange elements over the
 unit square domain:</p>
 <div class="math notranslate nohighlight" id="equation-mastery">
-<span class="eqno">(8.15)<a class="headerlink" href="#equation-mastery" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla\cdot\left(|\nabla u|^{p-2} \nabla u\right) = g\\u = b \textrm{ on } \Gamma\\p = 4\end{aligned}\end{align} \]</div>
+<span class="eqno">(8.15)<a class="headerlink" href="#equation-mastery" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla\cdot\left(|\nabla u|^{p-2} \nabla u\right) = g\\u = b \textrm{ on } \Gamma\\p = 4\end{aligned}\end{align} \]</div>
 <p>Select the solution <span class="math notranslate nohighlight">\(u=e^{xy}\)</span> and compute the required forcing function <span class="math notranslate nohighlight">\(g\)</span> so
 that your solution solves the equations. Make sure your boundary
 condition function <span class="math notranslate nohighlight">\(b\)</span> is consistent with your chosen solution!</p>
@@ -385,8 +382,8 @@ convergence has occurred).</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

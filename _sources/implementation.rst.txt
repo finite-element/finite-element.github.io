@@ -20,7 +20,7 @@ feedback in weeks 4 and 7.
 Formalities and marking scheme
 ------------------------------
 
-The implementation exercise is due at 1300 on Monday 20 March 2023. Submission
+The implementation exercise is due at 1300 on Friday 22 March 2024. Submission
 is via GitHub: the last commit pushed to GitHub and dated before the deadline
 will be marked.
 
@@ -150,7 +150,7 @@ Setting up your repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We're using a tool called `GitHub classroom <https://classroom.github.com>`_ to automate the creation of your
-copies of the repository. To create your repository, `click here <https://classroom.github.com/a/y6zvqAa5>`_.
+copies of the repository. To create your repository, `click here <https://classroom.github.com/a/ZEeJSgi5>`_.
 
 Cloning a local copy
 ~~~~~~~~~~~~~~~~~~~~
@@ -171,7 +171,7 @@ Your git repository contains a Python package. Installing this will cause the
 other Python packages on which it depends to be installed into your venv, and
 will create various visualisation scripts you'll need later in the module. Run:
 
-.. console::
+.. code-block:: console
 
     $ python -m pip install -e finite-element-course/
 
