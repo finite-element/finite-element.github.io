@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Introduction &#8212; Finite element course 2025.0 documentation</title>
+    <title>1. Introduction &#8212; Finite element course 2024.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <script src="_static/documentation_options.js?v=0e25812e"></script>
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
@@ -270,9 +270,9 @@ learn when it does and does not work).</p>
     </div><div class="proof-content">
 <p>The finite element partial derivative
 <span class="math notranslate nohighlight">\(\frac{\partial^{FE}}{\partial x_i}u\)</span> of <span class="math notranslate nohighlight">\(u\)</span> is defined in
-<span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> such that restricted to <span class="math notranslate nohighlight">\(K_i\)</span>, we have</p>
+<span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> such that restricted to each triangle <span class="math notranslate nohighlight">\(K \in \mathcal{T}\)</span>, we have</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial^{FE}u}{\partial x_i}|_{K_i}= \frac{\partial u}{\partial x_i}.\]</div>
+\[\frac{\partial^{FE}u}{\partial x_i}|_{K}= \frac{\partial u}{\partial x_i}|_K, \quad \forall K \in \mathcal{T}.\]</div>
 </div></div><p>Here we see why we needed to introduce <span class="math notranslate nohighlight">\(L^2\)</span>: we have a definition
 that does not have a unique value on the edge between two adjacent
 triangles. This is verified in the following exercises.</p>
@@ -594,7 +594,7 @@ range of possible finite element spaces.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2014-2025, David A. Ham and Colin J. Cotter.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>

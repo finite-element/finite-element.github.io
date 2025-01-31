@@ -4,12 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fe_utils.function_spaces &#8212; Finite element course 2025.0 documentation</title>
+    <title>fe_utils.function_spaces &#8212; Finite element course 2024.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <script src="../../_static/documentation_options.js?v=0e25812e"></script>
+    <script src="../../_static/documentation_options.js?v=7ff0cb77"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/proof.js"></script>
@@ -86,7 +86,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">node_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">nodes_per_entity</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="p">)</span></div>
 
 
 
@@ -170,7 +172,7 @@
 
         <span class="k">elif</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceTriangle</span><span class="p">:</span>
             <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
             <span class="n">local_coords</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lagrange_triangles</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
@@ -192,12 +194,11 @@
 
             <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceInterval</span><span class="p">:</span>
 
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
 
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span>
-                    <span class="n">Triangulation</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">triangles</span><span class="p">),</span> <span class="n">v</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span>
-                <span class="p">)</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">triangles</span><span class="p">),</span>
+                                <span class="n">v</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
@@ -206,35 +207,23 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_lagrange_triangles</span><span class="p">(</span><span class="n">degree</span><span class="p">):</span>
         <span class="c1"># Triangles linking the Lagrange points.</span>
 
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                <span class="p">[</span>
-                    <span class="p">[</span><span class="n">i</span> <span class="o">/</span> <span class="n">degree</span><span class="p">,</span> <span class="n">j</span> <span class="o">/</span> <span class="n">degree</span><span class="p">]</span>
-                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span>
-                <span class="p">]</span>
-            <span class="p">),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                <span class="c1"># Up triangles</span>
-                <span class="p">[</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-                        <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)),</span>
-                        <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">),</span>
-                    <span class="p">)</span>
-                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span>
-                <span class="p">]</span>
-                <span class="c1"># Down triangles.</span>
-                <span class="o">+</span> <span class="p">[</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-                        <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)),</span>
-                        <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">),</span>
-                    <span class="p">)</span>
-                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span>
-                <span class="p">]</span>
-            <span class="p">),</span>
-        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">i</span> <span class="o">/</span> <span class="n">degree</span><span class="p">,</span> <span class="n">j</span> <span class="o">/</span> <span class="n">degree</span><span class="p">]</span>
+                          <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">)]),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                    <span class="c1"># Up triangles</span>
+                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)),</span>
+                            <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">))</span>
+                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="n">j</span><span class="p">)]</span>
+                    <span class="c1"># Down triangles.</span>
+                    <span class="o">+</span> <span class="p">[</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)),</span>
+                            <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span>
+                    <span class="p">]))</span>
 
 <div class="viewcode-block" id="Function.integrate">
 <a class="viewcode-back" href="../../fe_utils.html#fe_utils.function_spaces.Function.integrate">[docs]</a>
@@ -255,7 +244,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2014-2025, David A. Ham and Colin J. Cotter.
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
