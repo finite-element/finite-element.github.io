@@ -18,53 +18,53 @@ fe\_utils.finite\_elements module
 
 .. automodule:: fe_utils.finite_elements
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fe\_utils.function\_spaces module
 ---------------------------------
 
 .. automodule:: fe_utils.function_spaces
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fe\_utils.mesh module
 ---------------------
 
 .. automodule:: fe_utils.mesh
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fe\_utils.quadrature module
 ---------------------------
 
 .. automodule:: fe_utils.quadrature
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fe\_utils.reference\_elements module
 ------------------------------------
 
 .. automodule:: fe_utils.reference_elements
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fe\_utils.utils module
 ----------------------
 
 .. automodule:: fe_utils.utils
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: fe_utils
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

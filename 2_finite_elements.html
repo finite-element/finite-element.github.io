@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <script src="_static/documentation_options.js?v=7ff0cb77"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
     <script src="_static/design-tabs.js?v=36754332"></script>
@@ -65,7 +65,7 @@ formalised by <span id="id1">[<a class="reference internal" href="zbibliography.
 <div class="proof proof-type-definition" id="id5">
 <span id="def-ciarlet"></span>
     <div class="proof-title">
-        <span class="proof-type">Definition 2.43</span>
+        <span class="proof-type">Definition </span>
         
     </div><div class="proof-content">
 <p>A <em>finite element</em> is a triple <span class="math notranslate nohighlight">\((K, P, N)\)</span> in which <span class="math notranslate nohighlight">\(K\)</span> is a cell,
@@ -78,7 +78,7 @@ of nodes for an element, and then derive an appropriate basis for
 <div class="proof proof-type-definition" id="id6">
 <span id="nodalbasis"></span>
     <div class="proof-title">
-        <span class="proof-type">Definition 2.44</span>
+        <span class="proof-type">Definition </span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(N = \{\phi^*_j\}\)</span> be a basis for <span class="math notranslate nohighlight">\(P^*\)</span>.  A <em>nodal
@@ -237,7 +237,7 @@ this course Lagrange elements will be sufficient.</p>
 <div class="proof proof-type-exercise" id="id8">
 <span id="ex-lagrange-points"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.45</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Implement
@@ -250,7 +250,13 @@ points on the triangle by running:</p>
 </pre></div>
 </div>
 <p>Where <code class="xref py py-data docutils literal notranslate"><span class="pre">degree</span></code> is the degree of the points to plot.</p>
-</div></div></section>
+</div></div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It should not be necessary to special-case your code for different
+dimensions of cell: the same code should produce the points on the interval
+and the triangle.</p>
+</div>
+</section>
 <section id="solving-for-basis-functions">
 <span id="sec-vandermonde"></span><h2><span class="section-number">2.4. </span>Solving for basis functions<a class="headerlink" href="#solving-for-basis-functions" title="Link to this heading">¶</a></h2>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -301,7 +307,7 @@ example.</p>
 <div class="proof proof-type-exercise" id="id9">
 <span id="ex-vandermonde"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.46</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Use <a class="reference internal" href="#equation-vandermonde">(2.7)</a> to implement
@@ -339,7 +345,7 @@ which the evaluation should occur.</p>
 <div class="proof proof-type-exercise" id="id10">
 <span id="ex-finite-element"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.47</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Implement the rest of the
@@ -376,7 +382,7 @@ the particular case of the equispaced Lagrange elements.</p>
 <div class="proof proof-type-exercise" id="id11">
 <span id="ex-lagrange-element"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.48</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method of
@@ -420,7 +426,7 @@ basis given by the matrix <span class="math notranslate nohighlight">\(C\)</span
 <div class="proof proof-type-exercise" id="id12">
 <span id="ex-tabulate"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.49</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a>.
@@ -467,7 +473,7 @@ of the gradient of the Vandermonde matrix.</p>
 <div class="proof proof-type-exercise" id="id13">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.50</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.vandermonde_matrix" title="fe_utils.finite_elements.vandermonde_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vandermonde_matrix()</span></code></a> so that
@@ -498,7 +504,7 @@ Vandermonde matrix. In this case, you might find
 <div class="proof proof-type-exercise" id="id14">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.51</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Extend <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.tabulate" title="fe_utils.finite_elements.FiniteElement.tabulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabulate()</span></code></a> to
@@ -561,7 +567,7 @@ evaluation of their function input, we know that:</p>
 <div class="proof proof-type-exercise" id="id15">
 <span id="ex-interpolate"></span>
     <div class="proof-title">
-        <span class="proof-type">Exercise 2.52</span>
+        <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>Implement <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement.interpolate" title="fe_utils.finite_elements.FiniteElement.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a>.</p>
@@ -599,7 +605,7 @@ is the one-dimensional case of the generalised Vandermonde matrix.</p>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     </div>
   </body>
 </html>
