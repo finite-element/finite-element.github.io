@@ -9,29 +9,29 @@ fe\_utils.solvers.helmholtz module
 
 .. automodule:: fe_utils.solvers.helmholtz
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 fe\_utils.solvers.mastery module
 --------------------------------
 
 .. automodule:: fe_utils.solvers.mastery
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 fe\_utils.solvers.poisson module
 --------------------------------
 
 .. automodule:: fe_utils.solvers.poisson
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------
 
 .. automodule:: fe_utils.solvers
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
