@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Finite element spaces: local to global &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Interpolation operators" href="L3_interpolation.html" />
+    <link rel="prev" title="1. Introduction" href="L1_introduction.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="finite-element-spaces-local-to-global">
+<h1><span class="section-number">2. </span>Finite element spaces: local to global<a class="headerlink" href="#finite-element-spaces-local-to-global" title="Link to this heading">¶</a></h1>
+<p>In this section, we discuss the construction of general finite element
+spaces. Given a triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> of a domain <span class="math notranslate nohighlight">\(\Omega\)</span>, finite
+element spaces are defined according to</p>
+<ol class="arabic simple">
+<li><p>the form the functions take (usually polynomial) when restricted to each cell (a triangle, in the case considered so far),</p></li>
+<li><p>the continuity of the functions between cells.</p></li>
+</ol>
+<p>We also need a mechanism to explicitly build a basis for the finite
+element space. We first do this by looking at a single cell, which we
+call the local perspective. Later we will take the global perspective,
+seeing how function continuity is enforced between cells.</p>
+<section id="ciarlet-s-finite-element">
+<h2><span class="section-number">2.1. </span>Ciarlet’s finite element<a class="headerlink" href="#ciarlet-s-finite-element" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490693460"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e79807c3-c73b-42ec-b5f9-ac8d00c7b4c6">watch this video on Panopto</a></p>
+</div>
+</details><p>The first part of the definition is formalised by Ciarlet’s definition
+of a finite element.</p>
+<div class="proof proof-type-definition" id="id1">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.1</span>
+        
+            <span class="proof-title-name">(Ciarlet’s finite element)</span>
+        
+    </div><div class="proof-content">
+<p>Let</p>
+<ol class="arabic simple">
+<li><p>the element domain <span class="math notranslate nohighlight">\(K\subset \mathbb{R}^n\)</span> be some bounded closed set with piecewise smooth boundary,</p></li>
+<li><p>the space of shape functions <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> be a finite dimensional space of functions on <span class="math notranslate nohighlight">\(K\)</span>, and</p></li>
+<li><p>the set of nodal variables <span class="math notranslate nohighlight">\(\mathcal{N}=(N_0,\ldots,N_k)\)</span> be a basis for the dual space <span class="math notranslate nohighlight">\(P'\)</span>.</p></li>
+</ol>
+<p>Then <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> is called a finite element.</p>
+</div></div><p>For the cases considered in this course, <span class="math notranslate nohighlight">\(K\)</span> will be a polygon such as a triangle, square, tetrahedron or cube, and <span class="math notranslate nohighlight">\(P\)</span> will be a space of polynomials. Here, <span class="math notranslate nohighlight">\(P'\)</span> is the dual space to <span class="math notranslate nohighlight">\(P\)</span>, defined as the space of linear functions from <span class="math notranslate nohighlight">\(P\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>. Examples of dual functions to <span class="math notranslate nohighlight">\(P\)</span> include:</p>
+<ol class="arabic simple">
+<li><p>The evaluation of <span class="math notranslate nohighlight">\(p\in P\)</span> at a point <span class="math notranslate nohighlight">\(x\in K\)</span>.</p></li>
+<li><p>The integral of <span class="math notranslate nohighlight">\(p\in P\)</span> over a line <span class="math notranslate nohighlight">\(l\in K\)</span>.</p></li>
+<li><p>The integral of <span class="math notranslate nohighlight">\(p\in P\)</span> over <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p>The evaluation of a component of the derivative of <span class="math notranslate nohighlight">\(p\in P\)</span> at a point <span class="math notranslate nohighlight">\(x\in K\)</span>.</p></li>
+</ol>
+<div class="proof proof-type-exercise" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.2</span>
+        
+    </div><div class="proof-content">
+<p>Show that the four examples above are all linear functions from <span class="math notranslate nohighlight">\(P\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.3</span>
+        
+    </div><div class="proof-content">
+<p>For a domain <span class="math notranslate nohighlight">\(K\)</span> and shape space <span class="math notranslate nohighlight">\(P\)</span>, is the following
+functional a nodal variable? Explain your answer.</p>
+<div class="math notranslate nohighlight">
+\[N_0(p) = \int_K p^2 \,d x.\]</div>
+</div></div><p>Ciarlet’s finite element provides us with a standard way to define a basis for the <span class="math notranslate nohighlight">\(P\)</span>, called the nodal basis.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490693258"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9d432870-a298-4e6e-b495-ac8d00cc6411">watch this video on Panopto</a></p>
+</div>
+</details><div class="proof proof-type-definition" id="id4">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.4</span>
+        
+            <span class="proof-title-name">((local) nodal basis)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be a finite element. The nodal basis is the basis <span class="math notranslate nohighlight">\(\{\phi_0,\phi_1,\ldots,\phi_k\}\)</span> of <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> that is dual to <span class="math notranslate nohighlight">\(\mathcal{N}\)</span>, i.e.</p>
+<div class="math notranslate nohighlight">
+\[N_i(\phi_j) = \delta_{ij}, \quad 0\leq i,j \leq k.\]</div>
+</div></div><p>We now introduce our first example of a Ciarlet element.</p>
+<div class="proof proof-type-definition" id="id5">
+<span id="d-lagrange"></span>
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.5</span>
+        
+            <span class="proof-title-name">(The 1-dimensional Lagrange element)</span>
+        
+    </div><div class="proof-content">
+<p>The 1-dimensional Lagrange element <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> of
+degree <span class="math notranslate nohighlight">\(k\)</span> is defined by</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is the interval <span class="math notranslate nohighlight">\([a,b]\)</span> for <span class="math notranslate nohighlight">\(-\infty&lt;a&lt;b&lt;\infty\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is the (<span class="math notranslate nohighlight">\(k+1\)</span>)-dimensional space of degree <span class="math notranslate nohighlight">\(k\)</span> polynomials on <span class="math notranslate nohighlight">\(K\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{N}=\{N_0,\ldots,N_k\}\)</span> with</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[N_i(v) = v(x_i), \, x_i = a + (b-a)i/k, \quad \forall v\in \mathcal{P},\,
+i=0,\ldots,k.\]</div>
+</div></div><div class="proof proof-type-exercise" id="id6">
+<span id="exe-1d-lagrange-basis"></span>
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.6</span>
+        
+    </div><div class="proof-content">
+<p>Show that the nodal basis for <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\phi_i(x) = \frac{\prod_{j=0,j\ne i}^k (x-x_j)}{\prod_{j=0,j\ne i}^k (x_i-x_j)}, \quad i=0,\ldots,k.\]</div>
+</div></div></section>
+<section id="vandermonde-matrix-and-unisolvence">
+<h2><span class="section-number">2.2. </span>Vandermonde matrix and unisolvence<a class="headerlink" href="#vandermonde-matrix-and-unisolvence" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490693083"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f3fb54fb-f83e-41b8-a537-ac8d00d03589">watch this video on Panopto</a></p>
+</div>
+</details><p>More generally, It is useful computationally to write the nodal basis
+in terms of another arbitrary basis <span class="math notranslate nohighlight">\(\{\psi_i\}_{i=0}^k\)</span>. This
+transformation is represented by the Vandermonde matrix.</p>
+<div class="proof proof-type-definition" id="id7">
+<span id="def-vandermonde"></span>
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.7</span>
+        
+            <span class="proof-title-name">(Vandermonde matrix)</span>
+        
+    </div><div class="proof-content">
+<p>Given a dual basis <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> and a basis <span class="math notranslate nohighlight">\(\{\psi_i\}_{i=0}^k\)</span>,
+the Vandermonde matrix is the matrix <span class="math notranslate nohighlight">\(V\)</span> with coefficients</p>
+<div class="math notranslate nohighlight">
+\[V_{ij} = N_j(\psi_i).\]</div>
+</div></div><p>This relationship is made clear by the following lemma.</p>
+<div class="proof proof-type-lemma" id="id8">
+<span id="lemma-vandermonde"></span>
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.8</span>
+        
+    </div><div class="proof-content">
+<p>The expansion of the nodal basis <span class="math notranslate nohighlight">\(\{\phi_i\}_{i=0}^k\)</span> in terms
+of another basis <span class="math notranslate nohighlight">\(\{\psi_i\}_{i=0}^k\)</span> for <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\phi_i(x) = \sum_{j=0}^k \mu_{ij}\psi_j(x),\]</div>
+<p>has coefficients <span class="math notranslate nohighlight">\(\mu_{ij}\)</span>, <span class="math notranslate nohighlight">\(0\leq i,j\leq k\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\mu = V^{-1},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the corresponding matrix.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>The nodal basis definition becomes</p>
+<div class="math notranslate nohighlight">
+\[\delta_{ij} =  N_j(\phi_i) = \sum_{l=0}^k\mu_{il}N_j(\psi_l) = \sum_{l=0}^k \mu_{il}V_{lj} = (\mu V)_{ij},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the matrix with coefficients <span class="math notranslate nohighlight">\(\mu_{ij}\)</span>, and <span class="math notranslate nohighlight">\(V\)</span> is the matrix with coefficients <span class="math notranslate nohighlight">\(N_j(\psi_i)\)</span>.</p>
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490692882"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6f9d4bb7-4a90-40f7-8eae-ac8d00ce8ac7">watch this video on Panopto</a></p>
+</div>
+</details><div class="proof proof-type-exercise" id="id9">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.9</span>
+        
+    </div><div class="proof-content">
+<p>Consider the following finite element.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is the interval <span class="math notranslate nohighlight">\([0,1]\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span> is the quadratic polynomials on <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p>The nodal variables are:</p>
+<div class="math notranslate nohighlight">
+\[N_0[p] = p(0), \, N_1[p]=p(1), \, N_2=\int_0^1 p(x) \,d x.\]</div>
+</li>
+</ul>
+<p>Find the corresponding nodal basis.</p>
+</div></div><p>Given a triple <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span>, it is necessary to
+verify that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> is indeed a basis for <span class="math notranslate nohighlight">\(\mathcal{P}'\)</span>,
+i.e. that the Ciarlet element is well-defined. Then the nodal basis is
+indeed a basis for <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> by construction. The following lemma
+provides a useful tool for checking this.</p>
+<div class="proof proof-type-lemma" id="id10">
+<span id="dual-condition"></span>
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.10</span>
+        
+            <span class="proof-title-name">(dual condition)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(K,\mathcal{P}\)</span> be as defined above, and let <span class="math notranslate nohighlight">\(\{N_0,N_1,\ldots,N_k\}\in \mathcal{P}'\)</span>. Let <span class="math notranslate nohighlight">\(\{\psi_0,\psi_1,\ldots,\psi_k\}\)</span> be a basis for <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>.</p>
+<p>Then the following three statements are equivalent.</p>
+<ol class="arabic">
+<li><p><span class="math notranslate nohighlight">\(\{N_0,N_1,\ldots,N_k\}\)</span> is a basis for <span class="math notranslate nohighlight">\(\mathcal{P}'\)</span>.</p></li>
+<li><p>The Vandermonde matrix with coefficients</p>
+<div class="math notranslate nohighlight">
+\[V_{ij} = N_j(\psi_i), \, 0\leq i,j\leq k,\]</div>
+<p>is invertible.</p>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(v\in\mathcal{P}\)</span> satisfies <span class="math notranslate nohighlight">\(N_i(v)=0\)</span> for <span class="math notranslate nohighlight">\(i=0,\ldots,k\)</span>, then <span class="math notranslate nohighlight">\(v\equiv 0\)</span>.</p></li>
+</ol>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{N_0,N_1,\ldots,N_k\}\)</span> be a basis for <span class="math notranslate nohighlight">\(\mathcal{P}'\)</span>. This is
+equivalent to saying that given element <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(\mathcal{P}'\)</span>, we
+can find basis coefficients <span class="math notranslate nohighlight">\(\{e_i\}_{i=0}^k\in \mathbb{R}\)</span> such
+that</p>
+<div class="math notranslate nohighlight">
+\[E = \sum_{i=0}^k e_iN_i.\]</div>
+<p>This in turn is equivalent to being able to find a vector
+<span class="math notranslate nohighlight">\(e=(e_0,e_1,\ldots,e_k)^T\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[b_i = E(\psi_i) = \sum_{j=0}^k e_j N_j(\psi_i) = \sum_{j=0}^k e_jV_{ij},\]</div>
+<p>i.e. the equation <span class="math notranslate nohighlight">\(V{e}={b}\)</span> is solvable. This means that (1) is
+equivalent to (2).</p>
+<p>On the other hand, we may expand any <span class="math notranslate nohighlight">\(v\in \mathcal{P}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[v(x) = \sum_{i=0}^k f_i \psi_i(x).\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[N_i(v)=0 \iff \sum_{j=0}^k f_jN_i(\psi_j) = 0, \quad i=0,1,\ldots,k,\]</div>
+<p>by linearity of <span class="math notranslate nohighlight">\(N_i\)</span>. So (3) is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[  \sum_{j=0}^k f_jN_i(\psi_j) = 0, \quad i=0,1,\ldots,k \implies
+f_j=0, \, j=0,1,\ldots,k,\]</div>
+<p>which is equivalent to <span class="math notranslate nohighlight">\(V^T\)</span> being invertible, which is equivalent to
+<span class="math notranslate nohighlight">\(V\)</span> being invertible, and so (3) is equivalent to (2).</p>
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490692719"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=97d9a7b6-7837-4591-9180-ac8e0099484c">watch this video on Panopto</a></p>
+</div>
+</details><p>This result leads us to introducing the following terminology.</p>
+<div class="proof proof-type-definition" id="id11">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.11</span>
+        
+            <span class="proof-title-name">(Unisolvence.)</span>
+        
+    </div><div class="proof-content">
+<p>We say that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> if it satisfies
+condition 3 of <a class="reference internal" href="#dual-condition"><span class="std std-numref">Lemma 2.10</span></a>. If
+this is the case, we say that <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> is
+unisolvent.</p>
+</div></div><p>We can now go and directly apply this lemma to the 1D Lagrange elements.</p>
+<div class="proof proof-type-corollary" id="id12">
+
+    <div class="proof-title">
+        <span class="proof-type">Corollary 2.12</span>
+        
+    </div><div class="proof-content">
+<p>The 1D degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange element is a finite element.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be the degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange
+element. We need to check that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines
+<span class="math notranslate nohighlight">\(\mathcal{P}\)</span>. Let <span class="math notranslate nohighlight">\(v\in \mathcal{P}\)</span> with <span class="math notranslate nohighlight">\(N_i(v)=0\)</span> for all
+<span class="math notranslate nohighlight">\(N_i\in \mathcal{N}\)</span>. This means that</p>
+<div class="math notranslate nohighlight">
+\[v(a+(b-a)i/k)=0, \, i=,0,1,\ldots,k,\]</div>
+<p>which means that <span class="math notranslate nohighlight">\(v\)</span> vanishes at <span class="math notranslate nohighlight">\(k+1\)</span> points in <span class="math notranslate nohighlight">\(K\)</span>. Since <span class="math notranslate nohighlight">\(v\)</span> is
+a degree <span class="math notranslate nohighlight">\(k\)</span> polynomial, it must be zero by the fundamental theorem
+of algebra.</p>
+</div></div><div class="proof proof-type-exercise" id="id13">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.13</span>
+        
+    </div><div class="proof-content">
+<p>Consider the following proposed finite element.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is the interval <span class="math notranslate nohighlight">\([0,1]\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span> is the linear polynomials on <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p>The nodal variables are:</p>
+<div class="math notranslate nohighlight">
+\[N_0[p] = p(0.5), N_1=\int_0^1 p(x) \,d x.\]</div>
+</li>
+</ul>
+<p>Is this finite element unisolvent? Explain your answer.</p>
+</div></div></section>
+<section id="d-and-3d-finite-elements">
+<h2><span class="section-number">2.3. </span>2D and 3D finite elements<a class="headerlink" href="#d-and-3d-finite-elements" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490692347"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e5501a7d-81f1-47f1-8000-ac8d00ce89fb">watch this video on Panopto</a></p>
+</div>
+</details><p>We would like to construct some finite elements with 2D and 3D domains
+<span class="math notranslate nohighlight">\(K\)</span>. The fundamental theorem of algebra does not directly help us
+there, but the following lemma is useful when checking that
+<span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> in those cases.</p>
+<div class="proof proof-type-lemma" id="id14">
+
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.14</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(p(x):\mathbb{R}^d\to\mathbb{R}\)</span> be a polynomial of degree <span class="math notranslate nohighlight">\(k\geq 1\)</span>
+that vanishes on a hyperplane <span class="math notranslate nohighlight">\(\Pi_L\)</span> defined by</p>
+<div class="math notranslate nohighlight">
+\[\Pi_L = \left\{ x: L(x)=0\right\},\]</div>
+<p>for a non-degenerate affine function <span class="math notranslate nohighlight">\(L(x):\mathbb{R}^d\to
+\mathbb{R}\)</span>.  Then <span class="math notranslate nohighlight">\(p(x)=L(x)q(x)\)</span> where <span class="math notranslate nohighlight">\(q(x)\)</span> is a polynomial of
+degree <span class="math notranslate nohighlight">\(k-1\)</span>.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>Choose coordinates (by shifting the origin and applying a linear
+transformation) such that <span class="math notranslate nohighlight">\(x=(x_1,\ldots,x_d)\)</span> with <span class="math notranslate nohighlight">\(L(x)=x_d\)</span>, so
+<span class="math notranslate nohighlight">\(\Pi_L\)</span> is defined by <span class="math notranslate nohighlight">\(x_d=0\)</span>.  Then the general form for a
+polynomial is</p>
+<div class="math notranslate nohighlight">
+\[P(x_1,\ldots,x_d) = \sum_{i_d=0}^k
+\left(\sum_{|i_1+\ldots+i_{d-1}|\leq
+  k-i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d}\prod_{l=1}^{d-1}
+x_{l}^{i_l}\right),\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(p(x_1,\ldots,x_{d-1},0)=0\)</span> for all <span class="math notranslate nohighlight">\((x_1,\ldots,x_{d-1})\)</span>,
+so</p>
+<div class="math notranslate nohighlight">
+\[0 = \left(\sum_{|i_1+\ldots+i_{d-1}|\leq k}c_{i_1,\ldots,i_{d-1},0} \prod_{l=1}^{d-1}x_{l}^{i_l}\right)\]</div>
+<p>which means that</p>
+<div class="math notranslate nohighlight">
+\[c_{i_1,\ldots,i_{d-1},0} = 0, \quad \forall |i_1+\ldots+i_{d-1}|\leq k.\]</div>
+<p>This means we may rewrite</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}P(x) = {L(x)}\underbrace{\left(\sum_{i_d=1}^k\sum_{|i_1+\ldots+i_{d-1}|\leq k - i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d-1}\prod_{l=1}^{d-1} x_{l}^{i_l}\right)},\\P(x) = \underbrace{x_d}_{L(x)}\underbrace{\left(\sum_{i_d=0}^{k-1}\sum_{|i_1+\ldots+i_{d-1}|\leq k - i_d}c_{i_1,\ldots,i_{d-1},i_d} x_d^{i_d-1}\prod_{l=1}^{d-1} x_{l}^{i_l}\right)}_{Q(x)},\end{aligned}\end{align} \]</div>
+<p>with <span class="math notranslate nohighlight">\(\deg(Q)=k-1\)</span>.</p>
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490692245"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b2674f92-8a03-4685-98e7-ac8e00a15a88">watch this video on Panopto</a></p>
+</div>
+</details><div class="proof proof-type-exercise" id="id15">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.15</span>
+        
+    </div><div class="proof-content">
+<p>The following polynomial vanishes on the line <span class="math notranslate nohighlight">\(y=1-x\)</span>. Show that
+it satisfies the result of the previous theorem.</p>
+<div class="math notranslate nohighlight">
+\[x^{5} + 5 x^{4} y - x^{4} + 6 x^{3} y^{2} - 4 x^{3} y - 2 x^{2}
+y^{3} - 2 x^{2} y^{2} - 3 x y^{4} + 4 x y^{3} + y^{5} - y^{4}\]</div>
+</div></div><p>Equipped with this tool we can consider some finite elements in two
+dimensions.</p>
+<div class="proof proof-type-definition" id="id16">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.16</span>
+        
+            <span class="proof-title-name">(Lagrange elements on triangles)</span>
+        
+    </div><div class="proof-content">
+<p>The triangular Lagrange element of degree <span class="math notranslate nohighlight">\(k\)</span>
+<span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span>, denoted <span class="math notranslate nohighlight">\(Pk\)</span>, is defined as follows.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is a (non-degenerate) triangle with vertices <span class="math notranslate nohighlight">\(z_1\)</span>, <span class="math notranslate nohighlight">\(z_2\)</span>, <span class="math notranslate nohighlight">\(z_3\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is the space of degree <span class="math notranslate nohighlight">\(k\)</span> polynomials on <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{N}=\left\{N_{i,j}:0\leq i \leq k, \, 0\leq j \leq i\right\}\)</span> defined by <span class="math notranslate nohighlight">\(N_{i,j}(v)=v(x_{i,j})\)</span> where</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[x_{i,j} = z_1 + (z_2-z_1)\frac{i}{k} + (z_3-z_1)\frac{j}{k}.\]</div>
+</div></div><p>We illustrate this for the cases <span class="math notranslate nohighlight">\(k=1,2\)</span>.</p>
+<div class="proof proof-type-example" id="id17">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 2.17</span>
+        
+            <span class="proof-title-name">(P1 elements on triangles)</span>
+        
+    </div><div class="proof-content">
+<p>The nodal basis for P1 elements is point evaluation at the three vertices.</p>
+</div></div><div class="proof proof-type-example" id="id18">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 2.18</span>
+        
+            <span class="proof-title-name">(P2 elements on triangles)</span>
+        
+    </div><div class="proof-content">
+<p>The nodal basis for P2 elements is point evaluation at the three
+vertices, plus point evaluation at the three edge centres.</p>
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490692065"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1d6a0060-361f-4c03-af32-ac8d00cc637e">watch this video on Panopto</a></p>
+</div>
+</details><p>We now need to check that that the degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange element is a
+finite element, i.e. that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>. We will
+first do this for <span class="math notranslate nohighlight">\(P1\)</span>.</p>
+<div class="proof proof-type-lemma" id="id19">
+<span id="p1unisolve"></span>
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.19</span>
+        
+    </div><div class="proof-content">
+<p>The degree <span class="math notranslate nohighlight">\(1\)</span> Lagrange element on a triangle <span class="math notranslate nohighlight">\(K\)</span> is a finite element.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Pi_1\)</span>, <span class="math notranslate nohighlight">\(\Pi_2\)</span>, <span class="math notranslate nohighlight">\(\Pi_3\)</span> be the three lines containing the
+vertices <span class="math notranslate nohighlight">\(z_2\)</span> and <span class="math notranslate nohighlight">\(z_3\)</span>, <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_3\)</span>, and <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_3\)</span>
+respectively, and defined by <span class="math notranslate nohighlight">\(L_1=0\)</span>, <span class="math notranslate nohighlight">\(L_2=0\)</span>, and <span class="math notranslate nohighlight">\(L_3=0\)</span>
+respectively. Consider a linear polynomial <span class="math notranslate nohighlight">\(p\)</span> vanishing at <span class="math notranslate nohighlight">\(z_1\)</span>,
+<span class="math notranslate nohighlight">\(z_2\)</span>, and <span class="math notranslate nohighlight">\(z_3\)</span>. The restriction <span class="math notranslate nohighlight">\(p|_{\Pi_1}\)</span> of <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(\Pi_1\)</span> is
+a linear function vanishing at two points, and therefore <span class="math notranslate nohighlight">\(p=0\)</span> on
+<span class="math notranslate nohighlight">\(\Pi_1\)</span>, and so <span class="math notranslate nohighlight">\(p=L_1(x)Q(x)\)</span>, where <span class="math notranslate nohighlight">\(Q(x)\)</span> is a degree 0
+polynomial, i.e. a constant <span class="math notranslate nohighlight">\(c\)</span>. We also have</p>
+<div class="math notranslate nohighlight">
+\[0 = p(z_1) = cL_1(z_1) \implies c=0,\]</div>
+<p>since <span class="math notranslate nohighlight">\(L_1(z_1)\neq 0\)</span>, and hence <span class="math notranslate nohighlight">\(p(x)\equiv 0\)</span>. This means
+that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>.</p>
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490691995"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+</div>
+</details><div class="proof proof-type-exercise" id="id20">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.20</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(K\)</span> be a rectangle, <span class="math notranslate nohighlight">\(P\)</span> be the polynomial space spanned by
+<span class="math notranslate nohighlight">\(\{1, x, y, xy\}\)</span>, let <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> be the set of dual elements
+corresponding to point evaluation at each vertex of the
+rectangle. Show that <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> determines the finite element.</p>
+</div></div><p>This technique can then be extended to degree 2.</p>
+<div class="proof proof-type-lemma" id="id21">
+
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.21</span>
+        
+    </div><div class="proof-content">
+<p>The degree <span class="math notranslate nohighlight">\(2\)</span> Lagrange element is a finite element.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(p\)</span> be a degree <span class="math notranslate nohighlight">\(2\)</span> polynomial with <span class="math notranslate nohighlight">\(N_i(p)\)</span> for all of the
+degree <span class="math notranslate nohighlight">\(2\)</span> dual basis elements. Let <span class="math notranslate nohighlight">\(\Pi_1\)</span>, <span class="math notranslate nohighlight">\(\Pi_2\)</span>, <span class="math notranslate nohighlight">\(\Pi_3\)</span>,
+<span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2\)</span> and <span class="math notranslate nohighlight">\(L_3\)</span> be defined as for the proof of Lemma
+. <span class="math notranslate nohighlight">\(p|_{\Pi_1}\)</span> is a degree 2 scalar polynomial vanishing
+at 3 points, and therefore <span class="math notranslate nohighlight">\(p=0\)</span> on <span class="math notranslate nohighlight">\(\Pi_1\)</span>, and so
+<span class="math notranslate nohighlight">\(p(x)=L_1(x)Q_1(x)\)</span> with <span class="math notranslate nohighlight">\(\deg(Q_1)=1\)</span>. We also have <span class="math notranslate nohighlight">\(0=p|_{\Pi_2}
+=L_1Q_1|_{\Pi_2}\)</span>, so <span class="math notranslate nohighlight">\(Q_1|_{\Pi_2}=0\)</span> and we conclude that
+<span class="math notranslate nohighlight">\(p(x)=cL_1(x)L_2(x)\)</span>. Finally, <span class="math notranslate nohighlight">\(p\)</span> also vanishes at the midpoint of
+<span class="math notranslate nohighlight">\(L_3\)</span>, so we conclude that <span class="math notranslate nohighlight">\(c=0\)</span> as required.</p>
+</div></div><p>The technique extends further to degree 3.</p>
+<div class="proof proof-type-exercise" id="id22">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.22</span>
+        
+    </div><div class="proof-content">
+<p>Show that the degree <span class="math notranslate nohighlight">\(3\)</span> Lagrange element is a finite element.</p>
+</div></div><p>Going beyond degree 3, we have more than 1 nodal variable taking point
+evaluation inside the triangle. To deal with this, we use the nested
+triangular structure of the Lagrange triangle.</p>
+<div class="proof proof-type-lemma" id="id23">
+<span id="lem-degk-unisolve"></span>
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.23</span>
+        
+    </div><div class="proof-content">
+<p>The degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange element is a finite element for <span class="math notranslate nohighlight">\(k&gt;3\)</span>.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>We prove by induction. Assume that the degree <span class="math notranslate nohighlight">\(k-3\)</span> Lagrange
+element is a finite element. Let <span class="math notranslate nohighlight">\(p\)</span> be a degree <span class="math notranslate nohighlight">\(k\)</span> polynomial
+with <span class="math notranslate nohighlight">\(N_i(p)\)</span> for all of the degree <span class="math notranslate nohighlight">\(k\)</span> dual basis elements. Let
+<span class="math notranslate nohighlight">\(\Pi_1\)</span>, <span class="math notranslate nohighlight">\(\Pi_2\)</span>, <span class="math notranslate nohighlight">\(\Pi_3\)</span>, <span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2\)</span> and <span class="math notranslate nohighlight">\(L_3\)</span> be defined as for
+the proof of <a class="reference internal" href="#p1unisolve"><span class="std std-numref">lemma 2.19</span></a>. The restriction
+<span class="math notranslate nohighlight">\(p|_{\Pi_1}\)</span> is a degree <span class="math notranslate nohighlight">\(k\)</span> polynomial in one variable that
+vanishes at <span class="math notranslate nohighlight">\(k+1\)</span> points, and therefore <span class="math notranslate nohighlight">\(p(x)=L_1(x)Q_1(x)\)</span>, with
+<span class="math notranslate nohighlight">\(\deg(Q_1)=k-1\)</span>. <span class="math notranslate nohighlight">\(p\)</span> and therefore <span class="math notranslate nohighlight">\(Q\)</span> also vanishes on <span class="math notranslate nohighlight">\(\Pi_2\)</span>, so
+<span class="math notranslate nohighlight">\(Q_1(x)=L_2(x)Q_2(x)\)</span>.</p>
+<p>Repeating the argument
+again means that <span class="math notranslate nohighlight">\(p(x)=L_1(x)L_2(x)L_3(x)Q_3(x)\)</span>, with <span class="math notranslate nohighlight">\(\deg(Q_3)=k-3\)</span>.
+<span class="math notranslate nohighlight">\(Q_3\)</span> must vanish on the remaining points in the interior of <span class="math notranslate nohighlight">\(K\)</span>, which
+are arranged in a smaller triangle <span class="math notranslate nohighlight">\(K'\)</span> and correspond to the evaluation
+points for a degree <span class="math notranslate nohighlight">\(k-3\)</span> Lagrange finite element on <span class="math notranslate nohighlight">\(K'\)</span>. From
+the inductive hypothesis, and using the results for <span class="math notranslate nohighlight">\(k=1,2,3\)</span>, we conclude
+that <span class="math notranslate nohighlight">\(Q_3\equiv=0\)</span>, and therefore <span class="math notranslate nohighlight">\(p\equiv0\)</span> as required.</p>
+</div></div></section>
+<section id="some-more-exotic-elements">
+<h2><span class="section-number">2.4. </span>Some more exotic elements<a class="headerlink" href="#some-more-exotic-elements" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490691590"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=495e54dd-23b6-4d92-bcdb-ac8e00ab3829">watch this video on Panopto</a></p>
+</div>
+</details><p>We now consider some finite elements that involve derivative
+evaluation. The Hermite elements involve evaluation of first
+derivatives as well as point evaluations.</p>
+<div class="proof proof-type-definition" id="id24">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.24</span>
+        
+            <span class="proof-title-name">(Cubic Hermite elements on triangles)</span>
+        
+    </div><div class="proof-content">
+<p>The cubic Hermite element is defined as follows:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is a (nondegenerate) triangle,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is the space of cubic polynomials on <span class="math notranslate nohighlight">\(K\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{N}=\{N_1,N_2,\ldots,N_{10}\}\)</span> defined as follows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((N_1,\ldots,N_3)\)</span>: evaluation of <span class="math notranslate nohighlight">\(p\)</span> at vertices,</p></li>
+<li><p><span class="math notranslate nohighlight">\((N_4,\ldots,N_9)\)</span>: evaluation of the gradient of <span class="math notranslate nohighlight">\(p\)</span> at the 3 triangle vertices.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_{10}\)</span>: evaluation of <span class="math notranslate nohighlight">\(p\)</span> at the centre of the triangle.</p></li>
+</ul>
+</li>
+</ol>
+</div></div><p>It turns out that the Hermite element is insufficient to guarantee
+functions with continuous derivatives between triangles. This problem
+is solved by the Argyris element.</p>
+<div class="proof proof-type-definition" id="id25">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.25</span>
+        
+            <span class="proof-title-name">(Quintic Argyris elements on triangles)</span>
+        
+    </div><div class="proof-content">
+<p>The quintic Argyris element is defined as follows:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is a (nondegenerate) triangle,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is the space of quintic polynomials on <span class="math notranslate nohighlight">\(K\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{N}\)</span> defined as follows:</p>
+<ul class="simple">
+<li><p>evaluation of <span class="math notranslate nohighlight">\(p\)</span> at 3 vertices,</p></li>
+<li><p>evaluation of gradient of <span class="math notranslate nohighlight">\(p\)</span> at 3 vertices,</p></li>
+<li><p>evaluation of Hessian of <span class="math notranslate nohighlight">\(p\)</span> at 3 vertices,</p></li>
+<li><p>evaluation of the gradient normal to 3 triangle edges.</p></li>
+</ul>
+</li>
+</ol>
+</div></div></section>
+<section id="global-continuity">
+<h2><span class="section-number">2.5. </span>Global continuity<a class="headerlink" href="#global-continuity" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490691454"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f384b387-f65a-4f9e-a582-ac8e00b8760e">watch this video on Panopto</a></p>
+</div>
+</details><p>Next we need to know how to glue finite elements together to form
+spaces defined over a triangulation (mesh). To do this we need to
+develop a language for specifying connections between finite element
+functions between element domains.</p>
+<div class="proof proof-type-definition" id="id26">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.26</span>
+        
+            <span class="proof-title-name">(Finite element space)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation made of triangles <span class="math notranslate nohighlight">\(K_i\)</span>, with
+finite elements <span class="math notranslate nohighlight">\((K_i,\mathcal{P}_i,\mathcal{N}_i)\)</span>. A space <span class="math notranslate nohighlight">\(V\)</span> of
+functions on <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> is called a finite element space if for
+each <span class="math notranslate nohighlight">\(u\in V\)</span>, and for each <span class="math notranslate nohighlight">\(K_i\in\mathcal{T}\)</span>, <span class="math notranslate nohighlight">\(u|_{K_i}\in
+\mathcal{P}_i\)</span>.</p>
+</div></div><p>Note that the set of finite elements do not uniquely determine a
+finite element space, since we also need to specify continuity
+requirements between triangles, which we will do in this chapter.</p>
+<div class="proof proof-type-definition" id="id27">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.27</span>
+        
+            <span class="proof-title-name">(Finite element space)</span>
+        
+    </div><div class="proof-content">
+<p>A finite element space <span class="math notranslate nohighlight">\(V\)</span> is a <span class="math notranslate nohighlight">\(C^m\)</span> finite element space if <span class="math notranslate nohighlight">\(u\in
+C^m\)</span> for all <span class="math notranslate nohighlight">\(u\in V\)</span>.</p>
+</div></div><p>The following lemma guides use in how to inspect the continuity of
+finite element functions.</p>
+<div class="proof proof-type-lemma" id="id28">
+<span id="cty"></span>
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.28</span>
+        
+            <span class="proof-title-name">(Continuity lemma)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation on <span class="math notranslate nohighlight">\(\Omega\)</span>, and let
+<span class="math notranslate nohighlight">\(V\)</span> be a finite element space defined on <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>.
+The following two statements are equivalent.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(V\)</span> is a <span class="math notranslate nohighlight">\(C^m\)</span> finite element space.</p></li>
+<li><p>The following two conditions hold.</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>For each vertex <span class="math notranslate nohighlight">\(z\)</span> in <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>, let <span class="math notranslate nohighlight">\(\{K_i\}_{i=1}^m\)</span> be the set of triangles that contain <span class="math notranslate nohighlight">\(z\)</span>. Then <span class="math notranslate nohighlight">\(u|_{K_1}(z)=u|_{K_2}(z)=\ldots = u|_{K_m}(z)\)</span>, for all functions <span class="math notranslate nohighlight">\(u\in V\)</span>, and similarly for all of the partial derivatives of degrees up to <span class="math notranslate nohighlight">\(m\)</span>.</p></li>
+<li><p>For each edge <span class="math notranslate nohighlight">\(e\)</span> in <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>, let <span class="math notranslate nohighlight">\(K_1\)</span>, <span class="math notranslate nohighlight">\(K_2\)</span> be the two triangles containing <span class="math notranslate nohighlight">\(e\)</span>. Then <span class="math notranslate nohighlight">\(u|_{K_1}(z) = u|_{K_2}(z)\)</span>, for all points <span class="math notranslate nohighlight">\(z\)</span> on the interior of <span class="math notranslate nohighlight">\(e\)</span>, and similarly for all of the partial derivatives of degrees up to <span class="math notranslate nohighlight">\(m\)</span>.</p></li>
+</ul>
+</div></blockquote>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p><span class="math notranslate nohighlight">\(V\)</span> is polynomial on each triangle <span class="math notranslate nohighlight">\(K\)</span>, so continuity at points on
+the interior of each triangle <span class="math notranslate nohighlight">\(K\)</span> is immediate. We just need to
+check continuity at points on vertices, and points on the interior
+of edges, which is equivalent to the two parts of the second
+condition.</p>
+</div></div><p>This means that we just need to guarantee that the polynomial
+functions and their derivatives agree at vertices and edges (similar
+ideas extend to higher dimensions). We achieve this by assigning nodal
+variables (and their associated nodal basis functions) appropriately
+to vertices, edges etc. of each triangle <span class="math notranslate nohighlight">\(K\)</span>. First we need to
+introduce this terminology.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490691352"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=22aab3d8-2041-4c42-9d18-ac8e00be66ab">watch this video on Panopto</a></p>
+</div>
+</details><div class="proof proof-type-definition" id="id29">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.29</span>
+        
+            <span class="proof-title-name">(local and global mesh entities)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(K\)</span> be a triangle. The local mesh entities of <span class="math notranslate nohighlight">\(K\)</span> are the
+vertices, the edges, and <span class="math notranslate nohighlight">\(K\)</span> itself. The global mesh entities of a
+triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> are the vertices, edges and triangles
+comprising <span class="math notranslate nohighlight">\(\mathcal{T}\)</span>.</p>
+</div></div><p>Having made this definition, we can now talk about how nodal variables
+can be assigned to local mesh entities in a geometric decomposition.</p>
+<div class="proof proof-type-definition" id="id30">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.30</span>
+        
+            <span class="proof-title-name">(local geometric decomposition)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be a finite element. We say that
+the finite element has a (local) geometric decomposition if each
+dual basis function <span class="math notranslate nohighlight">\(N_i\)</span> can be associated with a single mesh
+entity <span class="math notranslate nohighlight">\(w\in W\)</span> such that for any <span class="math notranslate nohighlight">\(f\in\mathcal{P}\)</span>, <span class="math notranslate nohighlight">\(N_i(f)\)</span> can be
+calculated from <span class="math notranslate nohighlight">\(f\)</span> and derivatives of <span class="math notranslate nohighlight">\(f\)</span> evaluated on <span class="math notranslate nohighlight">\(w\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id31">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.31</span>
+        
+    </div><div class="proof-content">
+<blockquote>
+<div><p>Consider the finite element defined by:</p>
+<ol class="arabic">
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is the unit interval <span class="math notranslate nohighlight">\([0,1]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span> is the space of quadratic polynomials on <span class="math notranslate nohighlight">\(K\)</span>,</p></li>
+<li><p>The nodal variables are:</p>
+<div class="math notranslate nohighlight">
+\[N_0[v] = v(0), N_1[v] = v(1), N_2[v] = \int_0^1 v(x)\,d x.\]</div>
+</li>
+</ol>
+</div></blockquote>
+<p>Find the corresponding nodal basis for <span class="math notranslate nohighlight">\(P\)</span> in terms of the monomial
+basis <span class="math notranslate nohighlight">\(\{1, x, x^2\}\)</span>. Provide the <span class="math notranslate nohighlight">\(C^0\)</span> geometric decomposition for
+the finite element (demonstrating that it is indeed <span class="math notranslate nohighlight">\(C^0\)</span>).</p>
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490691251"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9f363ae5-0174-4fe1-94e9-ac8e00e7f271">watch this video on Panopto</a></p>
+</div>
+</details><p>To discuss <span class="math notranslate nohighlight">\(C^m\)</span> continuity, we need to introduce some further
+vocabulary about the topology of <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<div class="proof proof-type-definition" id="id32">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.32</span>
+        
+            <span class="proof-title-name">(closure of a local mesh entity)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(w\)</span> be a local mesh entity for a triangle. The closure of <span class="math notranslate nohighlight">\(w\)</span> is
+the set of local mesh entities contained in <span class="math notranslate nohighlight">\(w\)</span> (including <span class="math notranslate nohighlight">\(w\)</span>
+itself).</p>
+</div></div><p>This allows us to define the degree of continuity of the local
+geometric decomposition.</p>
+<div class="proof proof-type-definition" id="id33">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.33</span>
+        
+            <span class="proof-title-name">((C^m) geometric decomposition)</span>
+        
+    </div><div class="proof-content">
+<blockquote>
+<div><p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be a finite element with
+geometric decomposition <span class="math notranslate nohighlight">\(W\)</span>. We say that <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\(C^0\)</span> geometric
+decomposition if, for each local mesh entity <span class="math notranslate nohighlight">\(w\)</span>, there exists
+<span class="math notranslate nohighlight">\(\mathcal{N}_w \subset \mathcal{N}\)</span> such that</p>
+<ol class="arabic simple">
+<li><p>All <span class="math notranslate nohighlight">\(N\in \mathcal{N}_w\)</span> are associated to elements in the closure of <span class="math notranslate nohighlight">\(w\)</span> in <span class="math notranslate nohighlight">\(W\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\((w,\mathcal{P}|_w,\mathcal{N}_w)\)</span> is a finite element, where <span class="math notranslate nohighlight">\(\mathcal{P}|_w\)</span> is the restriction of <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> to <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
+</ol>
+<p>We additionally say that <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\(C^1\)</span> geometric decomposition if
+for each local mesh entity <span class="math notranslate nohighlight">\(w\)</span>, there exists
+<span class="math notranslate nohighlight">\(\mathcal{N}_w \subset \mathcal{N}\)</span> such that</p>
+<ol class="arabic simple">
+<li><p>All <span class="math notranslate nohighlight">\(N\in \mathcal{N}_w\)</span> are associated to elements in the closure of <span class="math notranslate nohighlight">\(w\)</span> in <span class="math notranslate nohighlight">\(W\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\((w,\nabla\mathcal{P}|_w,\mathcal{N}_w)\)</span> is a finite element,</p></li>
+</ol>
+<p>where <span class="math notranslate nohighlight">\(\nabla\mathcal{P}|_w\)</span> is the restriction of <span class="math notranslate nohighlight">\(\nabla\mathcal{P}\)</span> to <span class="math notranslate nohighlight">\(w\)</span>, and</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\nabla\mathcal{P} = \{ u : u = \nabla v, \, v \in \mathcal{P}\}.\]</div>
+<p>This idea extends to <span class="math notranslate nohighlight">\(C^m\)</span> finite elements in an analogous way.</p>
+</div></div><p>The idea behind this definition is that if two triangles <span class="math notranslate nohighlight">\(K_1\)</span> and
+<span class="math notranslate nohighlight">\(K_2\)</span> are joined at a vertex $v$, with finite elements
+<span class="math notranslate nohighlight">\((K_1,\mathcal{P}_1, \mathcal{N}_1)\)</span> and <span class="math notranslate nohighlight">\((K_2, \mathcal{P}_2,
+\mathcal{N}_2)\)</span>, then the nodal variables <span class="math notranslate nohighlight">\(\mathcal{N}_{1,v}\)</span> and
+<span class="math notranslate nohighlight">\(\mathcal{N}_{1,v}\)</span> can be chosen so that <span class="math notranslate nohighlight">\(f\)</span> (and for <span class="math notranslate nohighlight">\(m=1\)</span>, the derivatives of <span class="math notranslate nohighlight">\(f\)</span>) has the same values at <span class="math notranslate nohighlight">\(v\)</span> in both <span class="math notranslate nohighlight">\(K_1\)</span> and <span class="math notranslate nohighlight">\(K_2\)</span>.</p>
+<p>Similarly, if <span class="math notranslate nohighlight">\(K_1\)</span> and <span class="math notranslate nohighlight">\(K_2\)</span> are joined at an edge <span class="math notranslate nohighlight">\(e\)</span>, then
+if the corresponding <span class="math notranslate nohighlight">\(\mathcal{N}_{1,e}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{N}_{2,e}\)</span> nodal
+variables associated with that edge agree when applied to <span class="math notranslate nohighlight">\(u\)</span>, then
+<span class="math notranslate nohighlight">\(u\)</span> will be <span class="math notranslate nohighlight">\(C^m\)</span> continuous through that edge. We just need to define
+these correspondences.</p>
+<p>We explore this definition through a couple of exercises.</p>
+<div class="proof proof-type-exercise" id="id34">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.34</span>
+        
+    </div><div class="proof-content">
+<p>Show that the Lagrange elements of degree <span class="math notranslate nohighlight">\(k\)</span> have <span class="math notranslate nohighlight">\(C^0\)</span> geometric decompositions.</p>
+</div></div><div class="proof proof-type-exercise" id="id35">
+<span id="exer-argyris"></span>
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2.35</span>
+        
+    </div><div class="proof-content">
+<p>Show that the Argyris element has a <span class="math notranslate nohighlight">\(C^1\)</span> geometric decomposition.</p>
+</div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/490691153"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+</div>
+</details><p>We now use the geometric decomposition to construct global finite
+element spaces over the whole triangulation (mesh). We just need to
+define what it means for elements of the nodal variables from the
+finite elements of two neighbouring triangles to “correspond”.</p>
+<p>We start by considering spaces of functions that are discontinuous
+between triangles, before defining <span class="math notranslate nohighlight">\(C^m\)</span> continuous subspaces.</p>
+<div class="proof proof-type-definition" id="id36">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.36</span>
+        
+            <span class="proof-title-name">(Discontinuous finite element space)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation, with finite elements
+<span class="math notranslate nohighlight">\((K_i,P_i,\mathcal{N}_i)\)</span> for each triangle <span class="math notranslate nohighlight">\(K_i\)</span>.  The associated
+discontinuous finite element space <span class="math notranslate nohighlight">\(V\)</span>, is defined as</p>
+<div class="math notranslate nohighlight">
+\[V = \left\{u: u|_{K_i} \in P_i, \, \forall K_i \in \mathcal{T}\right\}.\]</div>
+<p>This defines families of discontinuous finite element spaces.</p>
+</div></div><div class="proof proof-type-example" id="id37">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 2.37</span>
+        
+            <span class="proof-title-name">(Discontinuous Lagrange finite element space)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation, with Lagrange elements of
+degree <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\((K_i,P_i,\mathcal{N}_i)\)</span>, for each triangle <span class="math notranslate nohighlight">\(K_i\in
+\mathcal{T}\)</span>. The corresponding discontinuous finite element space,
+denoted <span class="math notranslate nohighlight">\(Pk\)</span> DG, is called the discontinuous Lagrange finite element
+space of degree <span class="math notranslate nohighlight">\(k\)</span>.</p>
+</div></div><p>Next we need to associate each nodal variable in each element to a
+vertex, edge or triangle of the triangulation <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span>,
+i.e. the global mesh entitles. The following definition explains how
+to choose this association.</p>
+<div class="proof proof-type-definition" id="id38">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.38</span>
+        
+            <span class="proof-title-name">(Global (C^m) geometric decomposition)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation with finite elements
+<span class="math notranslate nohighlight">\((K_i,\mathcal{P}_i,\mathcal{N}_i)\)</span>, each with a <span class="math notranslate nohighlight">\(C^m\)</span> geometric
+decomposition. Assume that for each global mesh entity <span class="math notranslate nohighlight">\(w\)</span>, the
+<span class="math notranslate nohighlight">\(n_w\)</span> triangles containing <span class="math notranslate nohighlight">\(w\)</span> have finite elements
+<span class="math notranslate nohighlight">\((K_i,\mathcal{P}_i,\mathcal{N}_i)\)</span> each with <span class="math notranslate nohighlight">\(M_w\)</span> dual basis
+functions associated with <span class="math notranslate nohighlight">\(w\)</span>.  Further, each of these basis
+functions can be enumerated <span class="math notranslate nohighlight">\(N^w_{i,j}\in\mathcal{N}_i\)</span>,
+<span class="math notranslate nohighlight">\(j=1,\ldots,M_w\)</span>, such that
+<span class="math notranslate nohighlight">\(N^w_{1,j}(u|_{K_1})=N^w_{2,j}(u|_{K_2})=\ldots =
+N^w_{n_w,j}(u|_{K_n}), \quad, j=1,\ldots,M_w\)</span>, for all functions
+<span class="math notranslate nohighlight">\(u\in C^m(\Omega)\)</span>.</p>
+<p>This combination of finite elements on <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> together with
+the above enumeration of dual basis functions on global mesh
+entities is called a global <span class="math notranslate nohighlight">\(C^m\)</span> geometric decomposition.</p>
+</div></div><p>Now we use this global <span class="math notranslate nohighlight">\(C^m\)</span> geometric decomposition to build a
+finite element space on the triangulation.</p>
+<div class="proof proof-type-definition" id="id39">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 2.39</span>
+        
+            <span class="proof-title-name">(Finite element space from a global (C^m) geometric decomposition)</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation with finite elements
+<span class="math notranslate nohighlight">\((K_i,\mathcal{P}_i,\mathcal{N}_i)\)</span>, each with a <span class="math notranslate nohighlight">\(C^m\)</span> geometric
+decomposition, and let <span class="math notranslate nohighlight">\(\hat{V}\)</span> be the corresponding
+discontinuous finite element space. Then the global <span class="math notranslate nohighlight">\(C^m\)</span>
+geometric decomposition defines a subspace <span class="math notranslate nohighlight">\(V\)</span> of <span class="math notranslate nohighlight">\(\hat{V}\)</span>
+consisting of all functions that <span class="math notranslate nohighlight">\(u\)</span> satisfy
+<span class="math notranslate nohighlight">\(N^w_{1,j}(u|_{K_1})=N^w_{2,j}(u|_{K_2})=\ldots = N^w_{n_w,j}(u|_{K_{n_w}}), \quad j=1,\ldots,M_w\)</span> for all mesh entities <span class="math notranslate nohighlight">\(w\in\mathcal{T}\)</span>.</p>
+</div></div><p>The following result shows that the global <span class="math notranslate nohighlight">\(C^m\)</span> geometric
+decomposition is a useful definition.</p>
+<div class="proof proof-type-lemma" id="id40">
+
+    <div class="proof-title">
+        <span class="proof-type">Lemma 2.40</span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a finite element space defined from a global <span class="math notranslate nohighlight">\(C^m\)</span> geometric decomposition. Then <span class="math notranslate nohighlight">\(V\)</span> is a <span class="math notranslate nohighlight">\(C^m\)</span> finite element space.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>From the local <span class="math notranslate nohighlight">\(C^m\)</span> decomposition, functions and derivatives up
+to degree <span class="math notranslate nohighlight">\(m\)</span> on vertices and edges are uniquely determined from
+dual basis elements associated with those vertices and edges, and
+from the global <span class="math notranslate nohighlight">\(C^m\)</span> decomposition, the agreement of dual basis
+elements means that functions and derivatives up to degree <span class="math notranslate nohighlight">\(m\)</span>
+agree on vertices and edges, and hence the functions
+are in <span class="math notranslate nohighlight">\(C^m\)</span> from <a class="reference internal" href="#cty"><span class="std std-numref">Lemma 2.28</span></a>.</p>
+</div></div><p>We now apply this to a few examples, which can be proved as exercises.</p>
+<div class="proof proof-type-example" id="id41">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 2.41</span>
+        
+    </div><div class="proof-content">
+<p>The finite element space built from the <span class="math notranslate nohighlight">\(C^0\)</span> global decomposition
+built from degree <span class="math notranslate nohighlight">\(k\)</span> Lagrange element is called the degree <span class="math notranslate nohighlight">\(k\)</span> continuous Lagrange finite element space, denoted <span class="math notranslate nohighlight">\(Pk\)</span>.</p>
+</div></div><div class="proof proof-type-example" id="id42">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 2.42</span>
+        
+    </div><div class="proof-content">
+<p>The finite element space built from the <span class="math notranslate nohighlight">\(C^1\)</span> global decomposition
+built from the quintic Argyris element is called the Argyris finite
+element space.</p>
+</div></div><p>In this section, we have built a theoretical toolbox for the
+construction of finite element spaces. In the next section, we move on
+to studying how well we can approximate continuous functions as finite
+element functions.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

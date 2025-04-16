@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7. Dirichlet boundary conditions &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. Nonlinear problems" href="8_nonlinear_problems.html" />
+    <link rel="prev" title="6. Assembling and solving finite element problems" href="6_finite_element_problems.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="dirichlet-boundary-conditions">
+<span id="secdirichlet"></span><h1><span class="section-number">7. </span>Dirichlet boundary conditions<a class="headerlink" href="#dirichlet-boundary-conditions" title="Link to this heading">¶</a></h1>
+<p>The Helmholtz problem we solved in the previous part was chosen to
+have homogeneous Neumann or <em>natural</em> boundary conditions, which can
+be implemented simply by cancelling the zero surface integral. We can
+now instead consider the case of Dirichlet, or <em>essential</em> boundary
+conditions. Instead of the Helmholtz problem we solved before, let us
+now specify a Poisson problem with homogeneous Dirichlet conditions, find <span class="math notranslate nohighlight">\(u\)</span> in
+some finite element space <span class="math notranslate nohighlight">\(V\)</span> such that:</p>
+<div class="math notranslate nohighlight" id="equation-poisson">
+<span class="eqno">(7.1)<a class="headerlink" href="#equation-poisson" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}-\nabla^2 u = f\\u = 0  \textrm{ on }\Gamma\end{aligned}\end{align} \]</div>
+<p>In order to implement the Dirichlet conditions, we need to decompose
+<span class="math notranslate nohighlight">\(V\)</span> into two parts:</p>
+<div class="math notranslate nohighlight" id="equation-7-boundary-conditions-0">
+<span class="eqno">(7.2)<a class="headerlink" href="#equation-7-boundary-conditions-0" title="Link to this equation">¶</a></span>\[V = V_0 \oplus V_\Gamma\]</div>
+<p>where <span class="math notranslate nohighlight">\(V_\Gamma\)</span> is the space spanned by those functions in the basis
+of <span class="math notranslate nohighlight">\(V\)</span> which are non-zero on <span class="math notranslate nohighlight">\(\Gamma\)</span>, and <span class="math notranslate nohighlight">\(V_0\)</span> is the space spanned
+by the remaining basis functions (i.e.  those basis functions which
+vanish on <span class="math notranslate nohighlight">\(\Gamma\)</span>). It is a direct consequence of the nodal nature of
+the basis that the basis functions for <span class="math notranslate nohighlight">\(V_\Gamma\)</span> are those
+corresponding to the nodes on <span class="math notranslate nohighlight">\(\Gamma\)</span> while the basis for <span class="math notranslate nohighlight">\(V_0\)</span> is
+composed of all the other functions.</p>
+<p>We now write the weak form of <a class="reference internal" href="#equation-poisson">(7.1)</a>, find <span class="math notranslate nohighlight">\(u=u_0 + u_\Gamma\)</span>
+with <span class="math notranslate nohighlight">\(u_0 \in V_0\)</span> and <span class="math notranslate nohighlight">\(u_\Gamma \in V_\Gamma\)</span> such that:</p>
+<div class="math notranslate nohighlight" id="equation-7-boundary-conditions-1">
+<span class="eqno">(7.3)<a class="headerlink" href="#equation-7-boundary-conditions-1" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla (u_0+u_\Gamma) \, \mathrm{d} x
+- \underbrace{\int_\Gamma v_0 \nabla (u_0+u_\Gamma) \cdot
+\mathbf{n}\, \mathrm{d} s}_{=0} = \int_\Omega v_0\, f\, \mathrm{d} x
+\qquad \forall v_0 \in V_0\\u_\Gamma = 0 \qquad \textrm{ on } \Gamma\end{aligned}\end{align} \]</div>
+<p>There are a number of features of this equation which require some explanation:</p>
+<ol class="arabic simple">
+<li><p>We only test with functions from <span class="math notranslate nohighlight">\(V_0\)</span>. This is because it is only
+necessary that the differential equation is satisfied on the interior
+of the domain: on the boundary of the domain we need only satisfy the
+boundary conditions.</p></li>
+<li><p>The surface integral now cancels because <span class="math notranslate nohighlight">\(v_0\)</span> is guaranteed to be
+zero everywhere on the boundary.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(u_\Gamma\)</span> definition actually implies that <span class="math notranslate nohighlight">\(u_\Gamma=0\)</span>
+everywhere, since all of the nodes in <span class="math notranslate nohighlight">\(V_\Gamma\)</span> lie on the boundary.</p></li>
+</ol>
+<p>This means that the weak form is actually:</p>
+<div class="math notranslate nohighlight" id="equation-weakpoisson">
+<span class="eqno">(7.4)<a class="headerlink" href="#equation-weakpoisson" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\int_\Omega \nabla v_0 \cdot \nabla u \, \mathrm{d} x
+ = \int_\Omega v_0\, f\, \mathrm{d} x
+\qquad \forall v_0 \in V_0\\u_\Gamma = 0\end{aligned}\end{align} \]</div>
+<section id="an-algorithm-for-homogeneous-dirichlet-conditions">
+<h2><span class="section-number">7.1. </span>An algorithm for homogeneous Dirichlet conditions<a class="headerlink" href="#an-algorithm-for-homogeneous-dirichlet-conditions" title="Link to this heading">¶</a></h2>
+<p>The implementation of homogeneous Dirichlet conditions is actually
+rather straightforward.</p>
+<ol class="arabic simple">
+<li><p>The system is assembled completely ignoring the Dirichlet conditions.
+This results in a global matrix and vector which are correct on the rows
+corresponding to test functions in <span class="math notranslate nohighlight">\(V_0\)</span>, but incorrect on the <span class="math notranslate nohighlight">\(V_\Gamma\)</span> rows.</p></li>
+<li><p>The global vector rows corresponding to boundary nodes are set to 0.</p></li>
+<li><p>The global matrix rows corresponding to boundary nodes are set to 0.</p></li>
+<li><p>The diagonal entry on each matrix row corresponding to a boundary node is set to 1.</p></li>
+</ol>
+<p>This has the effect of replacing the incorrect boundary rows of the
+system with the equation <span class="math notranslate nohighlight">\(u_i = 0\)</span> for all boundary node numbers <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This algorithm has the unfortunate side effect of making the global
+matrix non-symmetric. If a symmetric matrix is required (for
+example in order to use a symmetric solver), then forward
+substition can be used to zero the boundary columns in the matrix,
+but that is beyond the scope of this module.</p>
+</div>
+</section>
+<section id="implementing-boundary-conditions">
+<h2><span class="section-number">7.2. </span>Implementing boundary conditions<a class="headerlink" href="#implementing-boundary-conditions" title="Link to this heading">¶</a></h2>
+<p>Let:</p>
+<div class="math notranslate nohighlight">
+\[f = \left(16 \pi^2 (x_1 - 1)^2 x_1^2 - 2 (x_1 - 1)^2 - 8 (x_1 - 1) x_1 - 2 x_1^2\right) \sin(4 \pi x_0)\]</div>
+<p>With this definition, <a class="reference internal" href="#equation-weakpoisson">(7.4)</a> has solution:</p>
+<div class="math notranslate nohighlight">
+\[u = \sin(4 \pi x_0) (x_1 - 1)^2 x_1^2\]</div>
+<div class="proof proof-type-exercise" id="id1">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 7.1</span>
+        
+    </div><div class="proof-content">
+<p><code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/poisson.py</span></code> contains a partial implementation of
+this problem. You need to implement the <code class="xref py py-func docutils literal notranslate"><span class="pre">assemble()</span></code>
+function. You should base your implementation on your
+<code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/helmholtz.py</span></code> but take into account the difference
+in the equation, and the boundary conditions. The
+<a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.poisson.boundary_nodes" title="fe_utils.solvers.poisson.boundary_nodes"><code class="xref py py-func docutils literal notranslate"><span class="pre">fe_utils.solvers.poisson.boundary_nodes()</span></code></a> function in <code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/poisson.py</span></code> is
+likely to be helpful in implementing the boundary conditions. As
+before, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">fe_utils</span><span class="o">/</span><span class="n">solvers</span><span class="o">/</span><span class="n">poisson</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>for instructions (they are the same as for
+<code class="docutils literal notranslate"><span class="pre">fe_utils/solvers/helmholtz.py</span></code>). Similarly,
+<code class="docutils literal notranslate"><span class="pre">test/test_12_poisson_convergence.py</span></code> contains convergence tests
+for this problem.</p>
+</div></div></section>
+<section id="inhomogeneous-dirichlet-conditions">
+<h2><span class="section-number">7.3. </span>Inhomogeneous Dirichlet conditions<a class="headerlink" href="#inhomogeneous-dirichlet-conditions" title="Link to this heading">¶</a></h2>
+<p>The algorithm described here can be extended to inhomogeneous systems
+by setting the entries in the global vector to the value of the
+boundary condition at the corresponding boundary node. This additional
+step is required for the mastery exercise, but will be explained in
+more detail in the next section.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Meshes &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Function spaces: associating data with meshes" href="4_function_spaces.html" />
+    <link rel="prev" title="2. Constructing finite elements" href="2_finite_elements.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="meshes">
+<h1><span class="section-number">3. </span>Meshes<a class="headerlink" href="#meshes" title="Link to this heading">¶</a></h1>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495204015"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6965d603-79d9-43be-a9e6-ac9f00eb4b73">watch this video on Panopto</a></p>
+</div>
+</details><p>When employing the finite element method, we represent the domain on
+which we wish to solve our PDE as a mesh. In order to work with
+meshes, we need to have a somewhat more formal mathematical notion of
+a mesh. The mesh concepts we will employ here are loosely based on
+those in <span id="id1">[<a class="reference internal" href="zbibliography.html#id3" title="A. Logg. Efficient representation of computational meshes. International Journal of Computational Science and Engineering, 4(4):283 – 295, 2009. doi:10.1504/IJCSE.2009.029164.">Log09</a>]</span>, and are typical of mesh representations for the
+finite element method.</p>
+<section id="mesh-entities">
+<h2><span class="section-number">3.1. </span>Mesh entities<a class="headerlink" href="#mesh-entities" title="Link to this heading">¶</a></h2>
+<p>Like a cell, a mesh is composed of <em>topological entities</em>, such as vertices,
+edges, polygons and polyhedra. The distinction is that a mesh is made of
+potentially many cells, and a commensurate number of lower-dimensional
+entities.</p>
+<div class="proof proof-type-definition" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 3.26</span>
+        
+    </div><div class="proof-content">
+<p>The <em>(topological) dimension</em> of a mesh is the largest
+dimension among all of the topological entities in a mesh.</p>
+</div></div><p>In this course we will not consider meshes of manifolds immersed in
+higher dimensional spaces (for example the surface of a sphere
+immersed in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>) so the topological dimension of the
+mesh will always match the geometric dimension of space in which we
+are working, so we will simply refer to the <em>dimension</em> of the mesh.</p>
+<p>The numbering of mesh entities is similar to that of cell entities, except that
+the indices range over all of the entities of that dimension in the mesh. For
+example, entity <span class="math notranslate nohighlight">\((0, 10)\)</span> is vertex number 10, and entity <span class="math notranslate nohighlight">\((1, 10)\)</span> is edge 10.
+<a class="reference internal" href="#figmesh"><span class="std std-numref">Fig. 3.1</span></a> shows an example mesh with the topological entities labelled.</p>
+<figure class="align-default" id="id4">
+<span id="figmesh"></span><a class="reference internal image-reference" href="_images/mesh.svg"><img alt="_images/mesh.svg" src="_images/mesh.svg" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">A triangular mesh showing labelled topological entities: vertices
+(black), edges (red), and cells (blue).</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="adjacency">
+<h2><span class="section-number">3.2. </span>Adjacency<a class="headerlink" href="#adjacency" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495204218"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e524a811-b08b-4379-b821-ac9f00eb4b0e">watch this video on Panopto</a></p>
+</div>
+</details><p>In order to implement the finite element method, we need to integrate
+functions over cells, which means knowing which basis functions are
+nonzero in a given cell. For the function spaces used in the finite
+element method, these basis functions will be the ones whose nodes lie
+on the topological entities adjacent to the cell. That is, the
+vertices, edges and (in 3D) the faces making up the cell, as well as
+the cell itself. One of the roles of the mesh is therefore to provide
+a lookup facility for the lower-dimensional mesh entities adjacent to
+a given cell.</p>
+<div class="proof proof-type-definition" id="id5">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 3.27</span>
+        
+    </div><div class="proof-content">
+<p>Given a mesh <span class="math notranslate nohighlight">\(M\)</span>, then for each <span class="math notranslate nohighlight">\(\dim(M) \geq d_1 &gt; d_2 \geq 0\)</span>
+the <em>adjacency</em> function
+<span class="math notranslate nohighlight">\(\operatorname{Adj}_{d_1,d_2}:\, \mathbb{N}\rightarrow \mathbb{N}^k\)</span>
+is the function such that:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{Adj}_{d_1,d_2}(i) = (i_0, \ldots i_k)\]</div>
+<p>where <span class="math notranslate nohighlight">\((d_1, i)\)</span> is a topological entity and <span class="math notranslate nohighlight">\((d_2, i_0), \ldots, (d_2, i_k)\)</span>
+are the adjacent <span class="math notranslate nohighlight">\(d_2\)</span>-dimensional topological entities numbered in the
+corresponding reference cell order. If every cell in the mesh has the same
+topology then <span class="math notranslate nohighlight">\(k\)</span> will be fixed for each <span class="math notranslate nohighlight">\((d_1, d_2)\)</span> pair. The
+correspondence between the orientation of the entity <span class="math notranslate nohighlight">\((d_1, i)\)</span> and the
+reference cell of dimension <span class="math notranslate nohighlight">\(d_1\)</span> is established by specifying that the
+vertices are numbered in ascending order <a class="footnote-reference brackets" href="#simplexnumbering" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. That is, for
+any entity <span class="math notranslate nohighlight">\((d_1, i)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[(i_0, \ldots i_k) = \operatorname{Adj}_{d_1,0}(i) \quad \Longrightarrow \quad i_0 &lt; \ldots &lt;i_k\]</div>
+<p>A consequence of this convention is that the global orientation of
+all the entities making up a cell also matches their local
+orientation.</p>
+</div></div><div class="proof proof-type-example" id="id6">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 3.28</span>
+        
+    </div><div class="proof-content">
+<p>In the mesh shown in <a class="reference internal" href="#figmesh"><span class="std std-numref">Fig. 3.1</span></a> we have:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{Adj}_{2,0}(3) = (1,5,8).\]</div>
+<p>In other words, vertices 1, 5 and 8 are adjacent to cell 3. Similarly:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{Adj}_{2,1}(3) = (11,5,9).\]</div>
+<p>Edges 11, 5, and 9 are local edges 0, 1, and 2 of cell 3.</p>
+</div></div></section>
+<section id="mesh-geometry">
+<h2><span class="section-number">3.3. </span>Mesh geometry<a class="headerlink" href="#mesh-geometry" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495204381"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=aa4f119b-c23e-487d-aa38-ac9f00eb4ae0">watch this video on Panopto</a></p>
+</div>
+</details><p>The features of meshes we have so far considered are purely
+topological: they deal with the adjacency relationships between
+topological entities, but do not describe the locations of those
+entities in space. Provided we restrict our attention to meshes in
+which the element edges are straight (ie not curved), we can represent
+the geometry of the mesh by simply recording the coordinates of the
+vertices. The positions of the higher dimensional entities then just
+interpolate the vertices of which they are composed. We will later
+observe that this is equivalent to representing the geometry in a
+vector-valued piecewise linear finite element space.</p>
+</section>
+<section id="a-mesh-implementation-in-python">
+<h2><span class="section-number">3.4. </span>A mesh implementation in Python<a class="headerlink" href="#a-mesh-implementation-in-python" title="Link to this heading">¶</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">A video recording of the following material is available here.</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="vimeo docutils container">
+<iframe src="https://player.vimeo.com/video/495204532"
+frameborder="0" allow="autoplay; fullscreen"
+allowfullscreen></iframe></div>
+<p class="sd-card-text">Imperial students can also <a class="reference external" href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=8cc7003a-5e13-4be3-b853-ac9f00eb4b40">watch this video on Panopto</a></p>
+</div>
+</details><p>The <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> class provides an implementation of
+mesh objects in 1 and 2 dimensions. Given the list of vertices making
+up each cell, it constructs the rest of the adjacency function. It
+also records the coordinates of the vertices.</p>
+<p>The <a class="reference internal" href="fe_utils.html#fe_utils.mesh.UnitSquareMesh" title="fe_utils.mesh.UnitSquareMesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitSquareMesh</span></code></a> class creates a
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> object corresponding to a regular
+triangular mesh of a unit square. Similarly, the
+<a class="reference internal" href="fe_utils.html#fe_utils.mesh.UnitIntervalMesh" title="fe_utils.mesh.UnitIntervalMesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitIntervalMesh</span></code></a> class performs the
+corresponding (rather trivial) function for a unit one dimensional
+mesh.</p>
+<p>You can observe the numbering of mesh entities in these meshes using
+the <code class="docutils literal notranslate"><span class="pre">plot_mesh</span></code> script. Run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_mesh</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>for usage instructions.</p>
+<p class="rubric">Footnotes</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="simplexnumbering" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>The numbering convention adopted here is very
+convenient, but only works for meshes composed
+of simplices (vertices, intervals, triangles
+and tetrahedra). A more complex convention
+would be required to support quadrilateral
+meshes.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

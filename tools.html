@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Software tools &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The implementation exercise" href="implementation.html" />
+    <link rel="prev" title="6. Stokes equation" href="L6_stokes.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="software-tools">
+<h1>Software tools<a class="headerlink" href="#software-tools" title="Link to this heading">¶</a></h1>
+<p>In order to do this module, you’ll need some core software tools. As the module
+proceeds we’ll also install several more Python packages, but you don’t need to
+install those right now. The core tools you will need are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Python version 3.7 or later. Python 3.11 is recommended as the feedback
+that the interpreter provides if your code crashes has improved
+considerably.</p></li>
+<li><p>Git (the revision control system we’re going to use).</p></li>
+<li><p>A Python-aware text editor. Visual Studio Code is recommended, and all
+the instructions in this course will assume that this is what you are using.</p></li>
+</ol>
+</div></blockquote>
+<p>Links to installation instructions for all of these packages on a variety of
+operating systems are available on the website of the textbook <a class="reference external" href="https://object-oriented-python.github.io/installation.html" title="(in Object-oriented Programming v2023.0)"><span class="xref std std-doc">Object-oriented
+Programming in Python for Mathematicians</span></a>.</p>
+<section id="python">
+<h2>Python<a class="headerlink" href="#python" title="Link to this heading">¶</a></h2>
+<p>Your implementation will be written in Python based on a code skeleton
+provided. This means that you’ll need a certain familiarity with the
+Python language. But don’t panic! Python is a very easy language to
+work with. This module will use Python 3.</p>
+<p>If you haven’t done any Python before, then go through <a class="reference external" href="https://docs.python.org/3/tutorial/index.html">the official
+Python tutorial</a>. If
+you have done a little Python but perhaps are not so familiar with the
+object-oriented features such as classes, then you might like to refer to the
+online book <a class="reference external" href="https://object-oriented-python.github.io">Object-oriented Programming in Python for Mathematicians</a>. We will be using classes
+extensively in this course.</p>
+<p>The Matlab-like array features of Python are provided by <a class="reference external" href="https://www.numpy.org/">Numpy</a> for which there is a <a class="reference external" href="https://numpy.org/devdocs/user/quickstart.html">helpful tutorial</a>. There is also a
+handy <a class="reference external" href="https://numpy.org/devdocs/user/numpy-for-matlab-users.html">guide for Matlab users</a>. In that context, the
+code provided in this course will always use Numpy arrays, and never
+Numpy matrices.</p>
+</section>
+<section id="git">
+<h2>Git<a class="headerlink" href="#git" title="Link to this heading">¶</a></h2>
+<p>Revision control is a mechanism for recording and managing different
+versions of changing software. This enables changes to be tracked and
+helps in the process of debugging code, and in managing conflicts when
+more than one person is working on the same project. Revision control
+can be combined with online hosting to provide secure backups and to
+enable you to work on code from different locations.</p>
+<p>In this module, you’ll use revision control to access the skeleton
+files, and to update those files if and when they change. You’ll also
+use the same revision control system to record the edits you make over
+time and to submit your work for feedback and, eventually, marking.</p>
+<p>We will be using the revision control system <a class="reference external" href="http://git-scm.com/">git</a>,
+which is the current state of the art and is widely adopted. We’ll be combining
+git with the online hosting service <a class="reference external" href="http://github.org">GitHub</a>.</p>
+<div class="proof proof-type-exercise" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 1</span>
+        
+    </div><div class="proof-content">
+<p>Install Git and work through the <a class="reference external" href="https://object-oriented-python.github.io/a2_git.html" title="(in Object-oriented Programming v2023.0)"><span class="xref std std-doc">git appendix of Object-oriented
+Programming in Python for Mathematicians</span></a>.</p>
+<p>Next, go and do the <a class="reference external" href="https://swcarpentry.github.io/git-novice/">git tutorial</a>
+over at Software Carpentry.</p>
+</div></div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you are a more confident computer user, you could go ahead and
+set up git to work with ssh, the secure shell. This will save a lot
+of password typing but it’s not essential so if you are not so
+confident with computers, you can skip this bit. GitHub provide
+<a class="reference external" href="https://help.github.com/articles/generating-an-ssh-key/">instructions for using ssh with git</a>.</p>
+</div>
+</section>
+<section id="visual-studio-code">
+<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Link to this heading">¶</a></h2>
+<p>Visual Studio Code is a Python-aware Integrated Development Environment (IDE).
+This means that it incorporates editing files with other programming features
+such as <a class="reference external" href="https://object-oriented-python.github.io/8_debugging.html#debugging" title="(in Object-oriented Programming v2023.0)"><span>Debugging and testing</span></a>, Git support, and built-in <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html#terminal-vscode" title="(in Installation instructions for FoNS v2020.0)"><span class="xref std std-ref">terminal</span></a>.</p>
+</section>
+<section id="the-command-line">
+<h2>The command line<a class="headerlink" href="#the-command-line" title="Link to this heading">¶</a></h2>
+<p>A lot of the routine activity involved in this module revolves around
+executing commands on the command line. For example you use the
+command line to work with the revision control system.</p>
+<div class="proof proof-type-exercise" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise 2</span>
+        
+    </div><div class="proof-content">
+<p>If you’re not familiar with the Linux command line, then follow at least
+the first two sections of the <a class="reference external" href="https://swcarpentry.github.io/shell-novice/">Software Carpentry Unix Shell lesson</a>. That guide focusses on
+the Bash shell, but zsh and the Windows Powershell use very similar
+commands.</p>
+</div></div></section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

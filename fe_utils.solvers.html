@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>fe_utils.solvers package &#8212; Finite element course 2024.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/proof.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="fe_utils.scripts package" href="fe_utils.scripts.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="_static/featured.css">
+
+
+<link rel="shortcut icon" href="_static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="index.html"><img src="_static/banner.svg" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="fe-utils-solvers-package">
+<h1>fe_utils.solvers package<a class="headerlink" href="#fe-utils-solvers-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-fe_utils.solvers.helmholtz">
+<span id="fe-utils-solvers-helmholtz-module"></span><h2>fe_utils.solvers.helmholtz module<a class="headerlink" href="#module-fe_utils.solvers.helmholtz" title="Link to this heading">¶</a></h2>
+<p>Solve a model helmholtz problem using the finite element method.
+If run as a script, the result is plotted. This file can also be
+imported as a module and convergence tests run on the solver.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fe_utils.solvers.helmholtz.assemble">
+<span class="sig-prename descclassname"><span class="pre">fe_utils.solvers.helmholtz.</span></span><span class="sig-name descname"><span class="pre">assemble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/helmholtz.html#assemble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.helmholtz.assemble" title="Link to this definition">¶</a></dt>
+<dd><p>Assemble the finite element system for the Helmholtz problem given
+the function space in which to solve and the right hand side
+function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fe_utils.solvers.helmholtz.solve_helmholtz">
+<span class="sig-prename descclassname"><span class="pre">fe_utils.solvers.helmholtz.</span></span><span class="sig-name descname"><span class="pre">solve_helmholtz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/helmholtz.html#solve_helmholtz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.helmholtz.solve_helmholtz" title="Link to this definition">¶</a></dt>
+<dd><p>Solve a model Helmholtz problem on a unit square mesh with
+<code class="docutils literal notranslate"><span class="pre">resolution</span></code> elements in each direction, using equispaced
+Lagrange elements of degree <code class="docutils literal notranslate"><span class="pre">degree</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="module-fe_utils.solvers.mastery">
+<span id="fe-utils-solvers-mastery-module"></span><h2>fe_utils.solvers.mastery module<a class="headerlink" href="#module-fe_utils.solvers.mastery" title="Link to this heading">¶</a></h2>
+<p>Solve a nonlinear problem using the finite element method.
+If run as a script, the result is plotted. This file can also be
+imported as a module and convergence tests run on the solver.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fe_utils.solvers.mastery.solve_mastery">
+<span class="sig-prename descclassname"><span class="pre">fe_utils.solvers.mastery.</span></span><span class="sig-name descname"><span class="pre">solve_mastery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/mastery.html#solve_mastery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.mastery.solve_mastery" title="Link to this definition">¶</a></dt>
+<dd><p>This function should solve the mastery problem with the given
+resolution. It should return both the solution
+<a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> and the <span class="math notranslate nohighlight">\(L^2\)</span> error in
+the solution.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">analytic</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> then it should not solve the equation
+but instead return the analytic solution. If <code class="docutils literal notranslate"><span class="pre">return_error</span></code> is
+true then the difference between the analytic solution and the
+numerical solution should be returned in place of the solution.</p>
+</dd></dl>
+
+</section>
+<section id="module-fe_utils.solvers.poisson">
+<span id="fe-utils-solvers-poisson-module"></span><h2>fe_utils.solvers.poisson module<a class="headerlink" href="#module-fe_utils.solvers.poisson" title="Link to this heading">¶</a></h2>
+<p>Solve a model Poisson problem with Dirichlet boundary conditions.</p>
+<p>If run as a script, the result is plotted. This file can also be
+imported as a module and convergence tests run on the solver.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fe_utils.solvers.poisson.assemble">
+<span class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></span><span class="sig-name descname"><span class="pre">assemble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/poisson.html#assemble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.assemble" title="Link to this definition">¶</a></dt>
+<dd><p>Assemble the finite element system for the Poisson problem given
+the function space in which to solve and the right hand side
+function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fe_utils.solvers.poisson.boundary_nodes">
+<span class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></span><span class="sig-name descname"><span class="pre">boundary_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/poisson.html#boundary_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.boundary_nodes" title="Link to this definition">¶</a></dt>
+<dd><p>Find the list of boundary nodes in fs. This is a
+unit-square-specific solution. A more elegant solution would employ
+the mesh topology and numbering.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fe_utils.solvers.poisson.solve_poisson">
+<span class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></span><span class="sig-name descname"><span class="pre">solve_poisson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/poisson.html#solve_poisson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.solve_poisson" title="Link to this definition">¶</a></dt>
+<dd><p>Solve a model Poisson problem on a unit square mesh with
+<code class="docutils literal notranslate"><span class="pre">resolution</span></code> elements in each direction, using equispaced
+Lagrange elements of degree <code class="docutils literal notranslate"><span class="pre">degree</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="module-fe_utils.solvers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-fe_utils.solvers" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>
