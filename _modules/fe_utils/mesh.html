@@ -1,22 +1,19 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fe_utils.mesh &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/fenics.css" />
+    <title>fe_utils.mesh &#8212; Finite element course 2026.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <script src="../../_static/documentation_options.js?v=9c5a5fc5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/proof.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 <!--[if lte IE 6]>
@@ -48,17 +45,20 @@
           <div class="body" role="main">
             
   <h1>Source code for fe_utils.mesh</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">Delaunay</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="kn">import</span> <span class="n">ReferenceTriangle</span><span class="p">,</span> <span class="n">ReferenceInterval</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">Delaunay</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.reference_elements</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReferenceTriangle</span><span class="p">,</span> <span class="n">ReferenceInterval</span>
 
 
-<div class="viewcode-block" id="Mesh"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.Mesh">[docs]</a><span class="k">class</span> <span class="nc">Mesh</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A one or two dimensional mesh composed of intervals or triangles</span>
+<div class="viewcode-block" id="Mesh">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.Mesh">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mesh</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A one or two dimensional mesh composed of intervals or triangles</span>
 <span class="sd">    respectively.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex_coords</span><span class="p">,</span> <span class="n">cell_vertices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex_coords</span><span class="p">,</span> <span class="n">cell_vertices</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param vertex_coords: a vertex_count x dim array of the coordinates of</span>
 <span class="sd">          the vertices in the mesh.</span>
 <span class="sd">        :param cell_vertices: a cell_count x (dim+1) array of the</span>
@@ -66,7 +66,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">vertex_coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="sd">&quot;&quot;&quot;The geometric and topological dimension of the mesh. Immersed</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The geometric and topological dimension of the mesh. Immersed</span>
 <span class="sd">        manifolds are not supported.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -74,56 +74,72 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only 1D and 2D meshes are supported&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coords</span> <span class="o">=</span> <span class="n">vertex_coords</span>
-        <span class="sd">&quot;&quot;&quot;The coordinates of all the vertices in the mesh.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The coordinates of all the vertices in the mesh.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">cell_vertices</span><span class="p">)</span>
-        <span class="sd">&quot;&quot;&quot;The indices of the vertices incident to cell.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The indices of the vertices incident to cell.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge_vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">cell_vertices</span>
-                         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+                <span class="nb">list</span><span class="p">(</span>
+                    <span class="nb">set</span><span class="p">(</span>
+                        <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">cell_vertices</span>
+                        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
             <span class="p">)</span>
-            <span class="sd">&quot;&quot;&quot;The indices of the vertices incident to edge (only for 2D</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;The indices of the vertices incident to edge (only for 2D</span>
 <span class="sd">            meshes).&quot;&quot;&quot;</span>
 
             <span class="c1"># Invert self.edge_vertices so that it is possible to look up</span>
             <span class="c1"># the edge index given the vertex indices.</span>
-            <span class="n">edge_dict</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">e</span><span class="p">):</span> <span class="n">i</span>
-                         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_vertices</span><span class="p">)</span>
-                         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">(</span><span class="n">e_</span><span class="p">,</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">e_</span><span class="p">))}</span>
+            <span class="n">edge_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="nb">tuple</span><span class="p">(</span><span class="n">e</span><span class="p">):</span> <span class="n">i</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_vertices</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">(</span><span class="n">e_</span><span class="p">,</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">e_</span><span class="p">))</span>
+            <span class="p">}</span>
 
             <span class="c1"># List the local vertex indices associated with</span>
             <span class="c1"># each local edge index.</span>
             <span class="n">local_edge_vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">cell_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromiter</span><span class="p">(</span>
-                <span class="p">(</span><span class="n">edge_dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">local_edge_vertices</span><span class="p">[</span><span class="n">e</span><span class="p">]))]</span>
-                 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span>
-                 <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span>
+                <span class="p">(</span>
+                    <span class="n">edge_dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">local_edge_vertices</span><span class="p">[</span><span class="n">e</span><span class="p">]))]</span>
+                    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span>
+                    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+                <span class="p">),</span>
                 <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
-                <span class="n">count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-            <span class="sd">&quot;&quot;&quot;The indices of the edges incident to each cell (only for 2D</span>
+                <span class="n">count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;The indices of the edges incident to each cell (only for 2D</span>
 <span class="sd">            meshes).&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">entity_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">vertex_coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                           <span class="bp">self</span><span class="o">.</span><span class="n">edge_vertices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                           <span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-            <span class="sd">&quot;&quot;&quot;The number of entities of each dimension in the mesh. So</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">entity_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">(</span>
+                    <span class="n">vertex_coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">edge_vertices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;The number of entities of each dimension in the mesh. So</span>
 <span class="sd">            :attr:`entity_counts[0]` is the number of vertices in the</span>
 <span class="sd">            mesh.&quot;&quot;&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">entity_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">vertex_coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                           <span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">entity_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">vertex_coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_vertices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
 
         <span class="c1">#: The :class:`~.reference_elements.ReferenceCell` of which this</span>
         <span class="c1">#: :class:`Mesh` is composed.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">ReferenceTriangle</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">]</span>
 
-<div class="viewcode-block" id="Mesh.adjacency"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.Mesh.adjacency">[docs]</a>    <span class="k">def</span> <span class="nf">adjacency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the set of `dim2` entities adjacent to each `dim1`</span>
+<div class="viewcode-block" id="Mesh.adjacency">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.Mesh.adjacency">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">adjacency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the set of `dim2` entities adjacent to each `dim1`</span>
 <span class="sd">        entity. For example if `dim1==2` and `dim2==1` then return the list of</span>
 <span class="sd">        edges (1D entities) adjacent to each triangle (2D entity).</span>
 
@@ -155,46 +171,59 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_edges</span></div>
 
-<div class="viewcode-block" id="Mesh.jacobian"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.Mesh.jacobian">[docs]</a>    <span class="k">def</span> <span class="nf">jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the Jacobian matrix for the specified cell.</span>
+
+<div class="viewcode-block" id="Mesh.jacobian">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.Mesh.jacobian">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the Jacobian matrix for the specified cell.</span>
 
 <span class="sd">        :param c: The number of the cell for which to return the Jacobian.</span>
 <span class="sd">        :result: The Jacobian for cell ``c``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+</div>
 
 
-<div class="viewcode-block" id="UnitIntervalMesh"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.UnitIntervalMesh">[docs]</a><span class="k">class</span> <span class="nc">UnitIntervalMesh</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A mesh of the unit interval.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="UnitIntervalMesh">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.UnitIntervalMesh">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnitIntervalMesh</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A mesh of the unit interval.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param nx: The number of cells.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="n">x</span><span class="p">,)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
         <span class="n">points</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">)))</span>
+        <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">)))</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">UnitIntervalMesh</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">points</span><span class="p">,</span>
-                                               <span class="n">cells</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UnitIntervalMesh</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="UnitSquareMesh"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.UnitSquareMesh">[docs]</a><span class="k">class</span> <span class="nc">UnitSquareMesh</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A triangulated :class:`Mesh` of the unit square.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="UnitSquareMesh">
+<a class="viewcode-back" href="../../fe_utils.html#fe_utils.mesh.UnitSquareMesh">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnitSquareMesh</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A triangulated :class:`Mesh` of the unit square.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param nx: The number of cells in the x direction.</span>
 <span class="sd">        :param ny: The number of cells in the y direction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">points</span> <span class="o">=</span> <span class="nb">list</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-                      <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                      <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="n">mesh</span> <span class="o">=</span> <span class="n">Delaunay</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">UnitSquareMesh</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">points</span><span class="p">,</span>
-                                             <span class="n">mesh</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UnitSquareMesh</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -204,8 +233,8 @@
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    &#169; Copyright 2014-2026, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>

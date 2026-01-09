@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>9. Mixed problems &#8212; Finite element course 2024.0 documentation</title>
+    <title>9. Mixed problems &#8212; Finite element course 2026.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/documentation_options.js?v=9c5a5fc5"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
@@ -58,35 +58,48 @@ has been learned in the rest of the module in order to go beyond
 what has been covered in lectures and labs.</p>
 <p>This exercise is not a part of the third year version of this module.</p>
 </div>
-<p>As an example of a mixed problem, let’s take the Stokes problem presented in
-<a class="reference internal" href="L6_stokes.html#stokes"><span class="std std-numref">Section 6</span></a> of the analysis part of the course. The weak form of the
-Stokes problem presented in <a class="reference internal" href="L6_stokes.html#weak-stokes"><span class="std std-numref">Definition 6.1</span></a> is find
-<span class="math notranslate nohighlight">\((u,p)\in V\times Q\)</span> such that:</p>
+<p>As an example of a mixed problem, we’ll consider the Stokes equations. In order
+to make the treatment of boundary conditions somewhat simpler, we’ll employ a
+slightly different formulation of the equation than was presented in
+<a class="reference internal" href="L6_stokes.html#stokes"><span class="std std-numref">Section 6</span></a> of the analysis part of the course. Rather than the symmetric
+gradient form of the equations, we employ the laplacian form:</p>
 <div class="math notranslate nohighlight" id="equation-stokes-ch9">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-stokes-ch9" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v, p) &amp; = \int_\Omega f\cdot v\,\mathrm{d}\, x,\\b(u,q) &amp; = 0, \quad \forall (v,q) \in V\times Q,\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-stokes-ch9" title="Link to this equation">¶</a></span>\[-\mu\nabla\cdot\nabla u + \nabla p = f, \quad \nabla\cdot u = 0,\]</div>
+<p>Where <span class="math notranslate nohighlight">\(u\)</span> is the velocity, <span class="math notranslate nohighlight">\(p\)</span> is the pressure, <span class="math notranslate nohighlight">\(\mu\)</span> is the viscosity, and <span class="math notranslate nohighlight">\(f\)</span>
+is a vector-valued forcing term. We will consider two forms of boundary
+condition. First, Dirichlet conditions on the velocity:</p>
+<div class="math notranslate nohighlight">
+\[u = g(x) \quad \textrm{on}\ \Gamma_D\]</div>
+<p>for a given vector-valued function of space <span class="math notranslate nohighlight">\(g\)</span>. This can be used to impose
+zero slip conditions or a prescribed inflow. Second, the natural outflow
+condition:</p>
+<div class="math notranslate nohighlight">
+\[(pI - \mu\nabla u)\cdot n = 0 \quad \textrm{on}\ \Gamma\setminus\Gamma_D\]</div>
+<p>The weak form of this equation is find
+<span class="math notranslate nohighlight">\((u,p)\in V\times Q\)</span> such that:</p>
+<div class="math notranslate nohighlight" id="equation-weak-stokes-ch9">
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-weak-stokes-ch9" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) + b(v, p) &amp; = \int_\Omega f\cdot v\,\mathrm{d}\, x,\\b(u,q) &amp; = 0, \quad \forall (v,q) \in V_0\times Q,\end{aligned}\end{align} \]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-0">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-9-mixed-problems-0" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) &amp; = \mu\int_\Omega \epsilon(u):\epsilon(v)\,\mathrm{d}\, x,\\b(v,q) &amp; = \int_\Omega q \nabla\cdot v\,\mathrm{d}\, x,\\V &amp; =(\mathring{H}^1(\Omega))^d,\\Q &amp; =\mathring{L}^2(\Omega),\end{aligned}\end{align} \]</div>
-<p>and where <span class="math notranslate nohighlight">\((\mathring{H}^1(\Omega))^d\)</span> is the subspace of <span class="math notranslate nohighlight">\(H^1(\Omega)^d\)</span> for
-which all components vanish on the boundary, and <span class="math notranslate nohighlight">\(\mathring{L}^2(\Omega)\)</span> is
-the subspace of <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> for which the integral of the function over the
-domain vanishes. This last constraint was introduced to remove the null space
-of constant pressure functions from the system. This constraint introduces a
-little complexity into the implementation. So instead, we will redefine
-<span class="math notranslate nohighlight">\(\mathring{L}^2(\Omega)\)</span> to be the subspace of <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> constrained to
-take the value 0 at some arbitrary but specified point. For example, one might
-choose to require the pressure at the origin to vanish. This is also an
-effective way to remove the nullspace, but it is simpler to implement. We will
-implement the two-dimensional case (<span class="math notranslate nohighlight">\(d=2\)</span>) and, for simplicity, we will assume <span class="math notranslate nohighlight">\(\mu=1\)</span>.</p>
+<span class="eqno">(9.3)<a class="headerlink" href="#equation-9-mixed-problems-0" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}a(u,v) &amp; = \mu\int_\Omega \nabla u:\nabla v\,\mathrm{d}\, x,\\b(v,q) &amp; = \int_\Omega q \nabla\cdot v\,\mathrm{d}\, x,\\u &amp;= g\quad \textrm{on}\ \Gamma_D,\\V &amp; = V_0 \oplus V_D = H^1(\Omega)^d,\\Q &amp; = L^2(\Omega),\end{aligned}\end{align} \]</div>
+<p>and where <span class="math notranslate nohighlight">\(V_0\)</span> is the subspace of <span class="math notranslate nohighlight">\(H^1(\Omega)^d\)</span> for which all components
+vanish on <span class="math notranslate nohighlight">\(\Gamma\)</span>. The outflow condition is the “do nothing” condition which
+is imposed simply by not including the surface terms created by integrating the
+velocity equation by parts when formulating the weak form.</p>
+<p>These equations are well posed so long as $Gammasetminus Gamma_D neq
+emptyset$. That is to say, there must be some outflow boundary. If $Gamma
+=Gamma_D$ then there will be a null space comprising all of the constant
+pressure functions. We will implement the two-dimensional case (<span class="math notranslate nohighlight">\(d=2\)</span>) and, for
+simplicity, we will assume <span class="math notranslate nohighlight">\(\mu=1\)</span>.</p>
 <p>The colon (<span class="math notranslate nohighlight">\(:\)</span>) indicates an inner product so:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-1">
-<span class="eqno">(9.3)<a class="headerlink" href="#equation-9-mixed-problems-1" title="Link to this equation">¶</a></span>\[\epsilon(u):\epsilon(v) = \sum_{\alpha\beta} \epsilon(u)_{\alpha\beta}\epsilon(v)_{\alpha\beta}\]</div>
+<span class="eqno">(9.4)<a class="headerlink" href="#equation-9-mixed-problems-1" title="Link to this equation">¶</a></span>\[\nabla u:\nabla v = \sum_{\alpha\beta} \nabla_{\alpha} u_{\beta}\nabla{\alpha} v_{\beta}\]</div>
 <p>In choosing a finite element subspace of <span class="math notranslate nohighlight">\(V \times Q\)</span> we will similarly choose
 a simpler to implement, yet still stable, space than was chosen in
 <a class="reference internal" href="L6_stokes.html#stokes"><span class="std std-numref">Analysis Section 6</span></a>. The space we will use is the lowest order
 Taylor-Hood space <span id="id1">[<a class="reference internal" href="zbibliography.html#id6" title="C. Taylor and P. Hood. A numerical solution of the navier-stokes equations using the finite element technique. Computers &amp; Fluids, 1(1):73-100, 1973. URL: https://www.sciencedirect.com/science/article/pii/0045793073900273, doi:https://doi.org/10.1016/0045-7930(73)90027-3.">TH73</a>]</span>. This has:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-2">
-<span class="eqno">(9.4)<a class="headerlink" href="#equation-9-mixed-problems-2" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}V^h &amp; = P2(\Omega)^2\\Q^h &amp; = P1(\Omega)\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.5)<a class="headerlink" href="#equation-9-mixed-problems-2" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}V^h &amp; = P2(\Omega)^2\\Q^h &amp; = P1(\Omega)\end{aligned}\end{align} \]</div>
 <p>i.e. quadratic velocity and linear pressure on each cell. We note that
 <span class="math notranslate nohighlight">\(Q^h\in H^1(\Omega)\)</span> but since <span class="math notranslate nohighlight">\(H^1(\Omega) \subset L^2(\Omega)\)</span>, this is not
 itself a problem. We will impose further constraints on the spaces in the
@@ -94,8 +107,8 @@ form of Dirichlet boundary conditions to ensure that the solutions found are in
 fact in <span class="math notranslate nohighlight">\(V \times Q\)</span>.</p>
 <p>In addition to the finite element functionality we have already implemented,
 there are two further challenges we need to address. First, the implementation
-of the vector-valued space <span class="math notranslate nohighlight">\(P2(\Omega)^2`m and second, the implementation of
-functions and matrices defined over the mixed space `V^h \times Q^h\)</span>.</p>
+of the vector-valued space <span class="math notranslate nohighlight">\(P2(\Omega)^2\)</span> and second, the implementation of
+functions and matrices defined over the mixed space <span class="math notranslate nohighlight">\(V^h \times Q^h\)</span>.</p>
 <section id="vector-valued-finite-elements">
 <h2><span class="section-number">9.1. </span>Vector-valued finite elements<a class="headerlink" href="#vector-valued-finite-elements" title="Link to this heading">¶</a></h2>
 <p>Consider the local representation of <span class="math notranslate nohighlight">\(P2(\Omega)^2\)</span> on one element. The scalar
@@ -103,7 +116,7 @@ functions and matrices defined over the mixed space `V^h \times Q^h\)</span>.</p
 edge. If we write <span class="math notranslate nohighlight">\(\{\Phi_i\}_{i=0}^{5}\)</span> for the scalar basis, then a basis
 <span class="math notranslate nohighlight">\(\{\mathbf{\Phi}_i\}_{i=0}^{11}\)</span> for the vector-valued space is given by:</p>
 <div class="math notranslate nohighlight" id="equation-vector-basis">
-<span class="eqno">(9.5)<a class="headerlink" href="#equation-vector-basis" title="Link to this equation">¶</a></span>\[\mathbf{\Phi}_i(X) = \Phi_{i\,//\,2}(X)\,\mathbf{e}_{i\,\%\,2}\]</div>
+<span class="eqno">(9.6)<a class="headerlink" href="#equation-vector-basis" title="Link to this equation">¶</a></span>\[\mathbf{\Phi}_i(X) = \Phi_{i\,//\,2}(X)\,\mathbf{e}_{i\,\%\,2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(//\)</span> is the integer division operator, <span class="math notranslate nohighlight">\(\%\)</span> is the modulus operator, and
 <span class="math notranslate nohighlight">\({\mathbf{e}_0, \mathbf{e}_1}\)</span> is the standard basis for <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span>. That is to say, we
 interleave <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> component basis functions.</p>
@@ -115,7 +128,7 @@ interleave <span class="math notranslate nohighlight">\(x\)</span> and <span cla
 </figure>
 <p>We can practically implement vector function spaces by implementing a new class
 <code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.finite_elements.VectorFiniteElement</span></code>. The constructor
-(<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__" title="(in Python v3.13)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>) of this new class should take a
+(<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__" title="(in Python v3.14)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>) of this new class should take a
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a> and construct the
 corresponding vector element. For current purposes we can assume that the
 vector element will always have a vector dimension equal to the element
@@ -156,10 +169,10 @@ returning a mapping with the pair <span class="math notranslate nohighlight">\(2
 </section>
 <section id="tabulation">
 <h3><span class="section-number">9.1.2. </span>Tabulation<a class="headerlink" href="#tabulation" title="Link to this heading">¶</a></h3>
-<p>In order to tabulate the element, we can use <a class="reference internal" href="#equation-vector-basis">(9.5)</a>. We first
+<p>In order to tabulate the element, we can use <a class="reference internal" href="#equation-vector-basis">(9.6)</a>. We first
 call the tabulate method from the input
 <a class="reference internal" href="fe_utils.html#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteElement</span></code></a>, and we use this and
-<a class="reference internal" href="#equation-vector-basis">(9.5)</a> to produce the array to return. Notice that the array
+<a class="reference internal" href="#equation-vector-basis">(9.6)</a> to produce the array to return. Notice that the array
 will both have a basis functions dimension which is <span class="math notranslate nohighlight">\(d\)</span> times longer than the
 input element, and will also have an extra dimension to account for the
 multiplication by <span class="math notranslate nohighlight">\(\mathbf{e}_{i\,\%\,d}\)</span>. This means that the tabulation array
@@ -176,19 +189,19 @@ construct its basis, we will need them to implement interpolation. In
 <a class="reference internal" href="2_finite_elements.html#nodalbasis"><span class="std std-numref">Definition 2.44</span></a> we learned that
 the nodes of a finite element are related to the corresponding nodal basis by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-3">
-<span class="eqno">(9.6)<a class="headerlink" href="#equation-9-mixed-problems-3" title="Link to this equation">¶</a></span>\[\mathbf{\Phi}^*_i(\mathbf{\Phi}_j) = \delta_{ij}\]</div>
-<p>From <a class="reference internal" href="#equation-vector-basis">(9.5)</a> and assuming, as we have throughout the course,
+<span class="eqno">(9.7)<a class="headerlink" href="#equation-9-mixed-problems-3" title="Link to this equation">¶</a></span>\[\mathbf{\Phi}^*_i(\mathbf{\Phi}_j) = \delta_{ij}\]</div>
+<p>From <a class="reference internal" href="#equation-vector-basis">(9.6)</a> and assuming, as we have throughout the course,
 that the scalar finite element has point evaluation nodes given by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-4">
-<span class="eqno">(9.7)<a class="headerlink" href="#equation-9-mixed-problems-4" title="Link to this equation">¶</a></span>\[\Phi_i(v) = v(X_i),\]</div>
+<span class="eqno">(9.8)<a class="headerlink" href="#equation-9-mixed-problems-4" title="Link to this equation">¶</a></span>\[\Phi_i(v) = v(X_i),\]</div>
 <p>it follows that:</p>
 <div class="math notranslate nohighlight" id="equation-vectornodes">
-<span class="eqno">(9.8)<a class="headerlink" href="#equation-vectornodes" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathbf{\Phi}^*_i(v) &amp; = \Phi^*_{i\,//\,d}(\mathbf{e}_{i\,\%\,d}\cdot v)\\&amp; = \mathbf{e}_{i\,\%\,d}\cdot v(X_{i\,//\,d})\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.9)<a class="headerlink" href="#equation-vectornodes" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\mathbf{\Phi}^*_i(v) &amp; = \Phi^*_{i\,//\,d}(\mathbf{e}_{i\,\%\,d}\cdot v)\\&amp; = \mathbf{e}_{i\,\%\,d}\cdot v(X_{i\,//\,d})\end{aligned}\end{align} \]</div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>To see that this is the correct nodal basis, choose
-<span class="math notranslate nohighlight">\(v=\mathbf{\Phi}_j\)</span> in <a class="reference internal" href="#equation-vectornodes">(9.8)</a> and substitute
-<a class="reference internal" href="#equation-vector-basis">(9.5)</a> for <span class="math notranslate nohighlight">\(\mathbf{\Phi}_j\)</span>.</p>
+<span class="math notranslate nohighlight">\(v=\mathbf{\Phi}_j\)</span> in <a class="reference internal" href="#equation-vectornodes">(9.9)</a> and substitute
+<a class="reference internal" href="#equation-vector-basis">(9.6)</a> for <span class="math notranslate nohighlight">\(\mathbf{\Phi}_j\)</span>.</p>
 </div>
 <p>This means that the correct <code class="xref py py-data docutils literal notranslate"><span class="pre">VectorFiniteElement.nodes</span></code> attribute is
 the list of nodal points from the input
@@ -209,7 +222,7 @@ local numbering so this should work unaltered.</p>
 <h2><span class="section-number">9.3. </span>Functions in vector-valued spaces<a class="headerlink" href="#functions-in-vector-valued-spaces" title="Link to this heading">¶</a></h2>
 <p>The general form of a function in a vector-valued function space is:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-5">
-<span class="eqno">(9.9)<a class="headerlink" href="#equation-9-mixed-problems-5" title="Link to this equation">¶</a></span>\[f = f_i \mathbf{\Phi}_i(X).\]</div>
+<span class="eqno">(9.10)<a class="headerlink" href="#equation-9-mixed-problems-5" title="Link to this equation">¶</a></span>\[f = f_i \mathbf{\Phi}_i(X).\]</div>
 <p>That is to say, the basis functions are vector valued and their coefficients
 are still scalar. This means that if the <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code> had a
 correct entity-node list then the core functionality of the existing
@@ -226,7 +239,7 @@ that of a scalar element, there will be some changes required in the
 </pre></div>
 </div>
 <p>This line will need to take into account the dot product with the
-canonical basis from <a class="reference internal" href="#equation-vectornodes">(9.8)</a>, which you have implemented as
+canonical basis from <a class="reference internal" href="#equation-vectornodes">(9.9)</a>, which you have implemented as
 <code class="xref py py-data docutils literal notranslate"><span class="pre">VectorFiniteElement.node_weights</span></code>. This change will need to be made
 conditional on the class of finite element passed in, so that the code doesn’t
 break in the scalar element case.</p>
@@ -299,12 +312,12 @@ computing vector-valued field which is the gradient of a known function. For
 some suitable finite element space <span class="math notranslate nohighlight">\(V\subset H^1(\Omega)^2\)</span> and
 <span class="math notranslate nohighlight">\(f:\Omega\rightarrow \mathbb{R}\)</span>, find <span class="math notranslate nohighlight">\(u\in V\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-6">
-<span class="eqno">(9.10)<a class="headerlink" href="#equation-9-mixed-problems-6" title="Link to this equation">¶</a></span>\[\int_\Omega u\cdot v\,\mathrm{d}x = \int_\Omega \nabla f\cdot v\,\mathrm{d}x\quad \forall v\in V.\]</div>
+<span class="eqno">(9.11)<a class="headerlink" href="#equation-9-mixed-problems-6" title="Link to this equation">¶</a></span>\[\int_\Omega u\cdot v\,\mathrm{d}x = \int_\Omega \nabla f\cdot v\,\mathrm{d}x\quad \forall v\in V.\]</div>
 <p>If <span class="math notranslate nohighlight">\(f\)</span> is chosen such that <span class="math notranslate nohighlight">\(\nabla f\in V\)</span> then this projection is exact up to
 roundoff, and the following calculation should result in a good approximation
 to zero:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-7">
-<span class="eqno">(9.11)<a class="headerlink" href="#equation-9-mixed-problems-7" title="Link to this equation">¶</a></span>\[e = \int_\Omega (u -\nabla f)\cdot(u -\nabla f)\,\mathrm{d}x\]</div>
+<span class="eqno">(9.12)<a class="headerlink" href="#equation-9-mixed-problems-7" title="Link to this equation">¶</a></span>\[e = \int_\Omega (u -\nabla f)\cdot(u -\nabla f)\,\mathrm{d}x\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The computations in this subsection are not required to complete the
@@ -321,7 +334,7 @@ two solution spaces. Functions in <span class="math notranslate nohighlight">\(W
 <span class="math notranslate nohighlight">\(p\in Q\)</span>. If <span class="math notranslate nohighlight">\(\{\phi_i\}_{i=0}^{m-1}\)</span> is a basis for <span class="math notranslate nohighlight">\(V\)</span> and
 <span class="math notranslate nohighlight">\(\{\psi_j\}_{j=0}^{n-1}\)</span> then a basis for <span class="math notranslate nohighlight">\(W\)</span> is given by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-8">
-<span class="eqno">(9.12)<a class="headerlink" href="#equation-9-mixed-problems-8" title="Link to this equation">¶</a></span>\[\{\omega_i\}_{i=0}^{m+n-1}=\{(\phi_i, 0)\}_{i=0}^{m-1} \cup \{(0,
+<span class="eqno">(9.13)<a class="headerlink" href="#equation-9-mixed-problems-8" title="Link to this equation">¶</a></span>\[\{\omega_i\}_{i=0}^{m+n-1}=\{(\phi_i, 0)\}_{i=0}^{m-1} \cup \{(0,
 \psi_{j-n})\}_{j=m}^{m+n-1}.\]</div>
 <p>This in turn enables us to write <span class="math notranslate nohighlight">\(w\in W\)</span> in the form <span class="math notranslate nohighlight">\(w=w_i\omega_i\)</span> as we
 would expect for a function in a finite element space. The Cartesian product
@@ -332,7 +345,7 @@ mixed finite element system is simply a linear system of block matrices and
 block vectors. If we disregard boundary conditions, including the pressure
 constraint, this system has the following form:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-9">
-<span class="eqno">(9.13)<a class="headerlink" href="#equation-9-mixed-problems-9" title="Link to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
+<span class="eqno">(9.14)<a class="headerlink" href="#equation-9-mixed-problems-9" title="Link to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
     A &amp; B^\mathrm{T} \\
     B &amp; 0
 \end{bmatrix}
@@ -347,13 +360,13 @@ constraint, this system has the following form:</p>
 \end{bmatrix}\end{split}\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight" id="equation-blocks">
-<span class="eqno">(9.14)<a class="headerlink" href="#equation-blocks" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}A_{ij} = a(\phi_j, \phi_i),\\B_{ij} = b(\phi_j, \psi_i),\\F_i = \int_\Omega f\cdot v\, d\, x,\\U_i = u_i = w_i,\\P_i = p_i = w_{i+m}.\end{aligned}\end{align} \]</div>
+<span class="eqno">(9.15)<a class="headerlink" href="#equation-blocks" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}A_{ij} = a(\phi_j, \phi_i),\\B_{ij} = b(\phi_j, \psi_i),\\F_i = \int_\Omega f\cdot v\, d\, x,\\U_i = u_i = w_i,\\P_i = p_i = w_{i+m}.\end{aligned}\end{align} \]</div>
 <p>This means that the assembly of the mixed problem comes down to the assembly of
 several finite operators of the form that we have already encountered. These
 then need to be assembled into the full block matrix and right hand side
 vector, before the system is solved and the resulting solution vector pulled
 appart and interpreted as the coefficients of <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(p\)</span>. Observe in
-<a class="reference internal" href="#equation-blocks">(9.14)</a> that the order of the indices <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is reversed on the right
+<a class="reference internal" href="#equation-blocks">(9.15)</a> that the order of the indices <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is reversed on the right
 hand side of the equations. This reflects the differing conventions for matrix
 indices and bilinear form arguments, and is a source of unending confusion in
 this field.</p>
@@ -364,7 +377,7 @@ block vectors is the one you are familiar with, but we will need to do
 something new to assemble the block structures. What is required differs
 slightly between the matrix and the vectors.</p>
 <p>In the case of the vectors, then it is sufficient to know that a slice into a
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> returns a view on the same memory as the full vector.
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> returns a view on the same memory as the full vector.
 This is most easily understood through an example:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -380,7 +393,7 @@ This is most easily understood through an example:</p>
 </div>
 <p>This means that one can first create a full vector of length <span class="math notranslate nohighlight">\(n+m\)</span> and then
 slice it to create subvectors that can be used for assembly.</p>
-<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.16.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.16.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
+<p>Conversely, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.18.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> provides the <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.bmat.html#scipy.sparse.bmat" title="(in SciPy v1.18.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bmat()</span></code></a>
 function which will stitch together a larger sparse matrix from blocks. In
 order to have the full indexing options you are likely to want for imposing the
 boundary conditions, you will probably want to specify that the resulting
@@ -388,35 +401,27 @@ matrix is in <code class="xref py py-data docutils literal notranslate"><span cl
 </section>
 <section id="boundary-conditions">
 <h3><span class="section-number">9.4.2. </span>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">¶</a></h3>
-<p>The imposition of the constraint in <span class="math notranslate nohighlight">\((\mathring{H}^1(\Omega))^2\)</span> that solutions
+<p>The imposition of the constraint in <span class="math notranslate nohighlight">\(V_0\)</span> that solutions
 vanish on the boundary is a Dirichlet condition of the type that you have
 encountered before. Observe that the condition changes the test space, which
 affects whole rows of the block system, so you will want to impose the boundary
 condition <em>after</em> assembling the block matrix. You will also need to ensure
 that the constraint is applied to both the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> components of the space.</p>
-<p>The imposition of the constraint in <span class="math notranslate nohighlight">\(\mathring{L}^2(\Omega)\)</span> that the solution
-is zero at some prescribed point can be achieved by selecting an arbitrary
-basis function and applying a zero Dirichlet condition for that degree of
-freedom. In this regard we can observe that there is nothing about the
-implementation of Dirichlet conditions that constrains them to lie on the
-boundary. Rather, they should be understood as specifying a subspace on which
-the solution is prescribed rather than solved for. In this particular case,
-that subspace is one-dimensional.</p>
 </section>
 <section id="solving-the-matrix-system">
 <h3><span class="section-number">9.4.3. </span>Solving the matrix system<a class="headerlink" href="#solving-the-matrix-system" title="Link to this heading">¶</a></h3>
 <p>The block matrix system that you eventually produce will be larger than many of
 those we have previously encountered, and will have non-zero entries further
 from the diagonal. This can cause the matrix solver to become expensive in both
-time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.16.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
+time and memory. Fortunately, <a class="reference external" href="http://scipy.github.io/devdocs/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.18.0.dev)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> now incorporates an
 interface to <a class="reference external" href="https://portal.nersc.gov/project/sparse/superlu/">SuperLU</a>,
 which is a high-performance direct sparse solver. The recommended solution
 strategy is therefore:</p>
 <ol class="arabic simple">
-<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.16.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
+<li><p>Convert your block matrix to <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.csc_matrix.html#scipy.sparse.csc_matrix" title="(in SciPy v1.18.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code></a>, which is the
 format that SuperLU requires.</p></li>
-<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.16.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
-<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.16.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
+<li><p>Factorise the matrix using <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu" title="(in SciPy v1.18.0.dev)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu()</span></code></a>.</p></li>
+<li><p>Use the resulting <a class="reference external" href="http://scipy.github.io/devdocs/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU" title="(in SciPy v1.18.0.dev)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperLU</span></code></a> object to finally solve
 the system.</p></li>
 </ol>
 </section>
@@ -425,36 +430,65 @@ the system.</p></li>
 <p>We will wish to compute the convergence of our solution in the <span class="math notranslate nohighlight">\(L^2\)</span> norm. For
 <span class="math notranslate nohighlight">\(w\in W\)</span>, this is given by:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-10">
-<span class="eqno">(9.15)<a class="headerlink" href="#equation-9-mixed-problems-10" title="Link to this equation">¶</a></span>\[\|w\|_{L^2} = \sqrt{\int_\Omega w\cdot w\,\mathrm{dx}}\]</div>
+<span class="eqno">(9.16)<a class="headerlink" href="#equation-9-mixed-problems-10" title="Link to this equation">¶</a></span>\[\|w\|_{L^2} = \sqrt{\int_\Omega w\cdot w\,\mathrm{dx}}\]</div>
 <p>When we expand this in terms of the basis of <span class="math notranslate nohighlight">\(W\)</span>, it will be useful to note
 that basis functions from the different component spaces are orthogonal. That
 is to say:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-11">
-<span class="eqno">(9.16)<a class="headerlink" href="#equation-9-mixed-problems-11" title="Link to this equation">¶</a></span>\[(\phi, 0) \cdot (0, \psi) = 0 \quad \forall \phi\in V,\, \psi \in Q.\]</div>
+<span class="eqno">(9.17)<a class="headerlink" href="#equation-9-mixed-problems-11" title="Link to this equation">¶</a></span>\[(\phi, 0) \cdot (0, \psi) = 0 \quad \forall \phi\in V,\, \psi \in Q.\]</div>
 <p>The direct result of this is that if <span class="math notranslate nohighlight">\(w = (u, p)\)</span> then:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-12">
-<span class="eqno">(9.17)<a class="headerlink" href="#equation-9-mixed-problems-12" title="Link to this equation">¶</a></span>\[\|w\|_{L^2}^2 = \|u\|_{L^2}^2 + \|p\|_{L^2}^2.\]</div>
+<span class="eqno">(9.18)<a class="headerlink" href="#equation-9-mixed-problems-12" title="Link to this equation">¶</a></span>\[\|w\|_{L^2}^2 = \|u\|_{L^2}^2 + \|p\|_{L^2}^2.\]</div>
 </section>
+</section>
+<section id="plane-poiseuille-flow">
+<h2><span class="section-number">9.5. </span>Plane Poiseuille flow<a class="headerlink" href="#plane-poiseuille-flow" title="Link to this heading">¶</a></h2>
+<p>One scenario for which the Stokes equations have a unique solution is plane
+Poiseuille flow. In this scenario, the domain is a rectangle whose upper and
+lower boundaries are no-slip (i.e. velocity zero). The right hand boundary is
+an outflow and the left hand boundary is a prescribed (Dirichlet) parabolic
+inflow which is zero at the top and bottom and maximal at the midpoint.</p>
+<p>We can rescale the problem so that the domain is a unit square, in which case
+the boundary conditions are:</p>
+<div class="math notranslate nohighlight" id="equation-9-mixed-problems-13">
+<span class="eqno">(9.19)<a class="headerlink" href="#equation-9-mixed-problems-13" title="Link to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}u(0, y) = \begin{bmatrix}c y(1-y) \\ 0\end{bmatrix}\end{split}\\\begin{split}u(x, 0) = u(x, 1) = \begin{bmatrix} 0 \\ 0\end{bmatrix}\end{split}\\(pI - \nabla u)\cdot n = 0 \quad \textrm{on}\ x = 1\end{aligned}\end{align} \]</div>
+<p>the constant <span class="math notranslate nohighlight">\(c\)</span> is arbitrary.</p>
+<figure class="align-default" id="id6">
+<img alt="_images/poiseuille_bcs.svg" src="_images/poiseuille_bcs.svg" />
+<figcaption>
+<p><span class="caption-number">Fig. 9.3 </span><span class="caption-text">Schematic of boundary conditions for plane Poiseuille flow.</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>It is straightforward to show that the velocity part of this solution is:</p>
+<div class="math notranslate nohighlight" id="equation-9-mixed-problems-14">
+<span class="eqno">(9.20)<a class="headerlink" href="#equation-9-mixed-problems-14" title="Link to this equation">¶</a></span>\[\begin{split}u(x, y) = \begin{bmatrix}c y(1-y) \\ 0\end{bmatrix}\end{split}\]</div>
+<p>and that the pressure part is a linear function of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>When checking the correctness of the Poiseuille solution, don’t forget to
+check that the solution satisfies the outflow boundary condition.</p>
+</div>
 </section>
 <section id="manufacturing-a-solution-to-the-stokes-equations">
-<h2><span class="section-number">9.5. </span>Manufacturing a solution to the Stokes equations<a class="headerlink" href="#manufacturing-a-solution-to-the-stokes-equations" title="Link to this heading">¶</a></h2>
-<p>As previously, we will wish to check our code using the method of manufactured
-solutions. The Stokes equations represent a form of incompressible fluid
-mechanics, so it is usually preferable to select a target solution for which
-<span class="math notranslate nohighlight">\(\nabla\cdot u = 0\)</span>. The straightforward way to do this is to choose a scalar
-field <span class="math notranslate nohighlight">\(\gamma: \Omega\rightarrow \mathbb{R}\)</span> to use as a streamfunction. We can
-then define <span class="math notranslate nohighlight">\(u = \nabla^{\perp}\gamma\)</span> and rely on the vector calculus identity
-<span class="math notranslate nohighlight">\(\nabla\cdot\nabla^{\perp} \gamma = 0\)</span> to guarantee that the velocity field is
-divergence-free. We also need to ensure that <span class="math notranslate nohighlight">\(u\)</span> satisfies the boundary
-conditions, which amounts to choosing <span class="math notranslate nohighlight">\(\gamma\)</span> such that its gradient vanishes
-on the domain boundary. The following function is a suitable choice on a unit
-square domain:</p>
-<div class="math notranslate nohighlight" id="equation-stream">
-<span class="eqno">(9.18)<a class="headerlink" href="#equation-stream" title="Link to this equation">¶</a></span>\[\gamma(x,y) = \big(1-\cos(2\pi x)\big)\big(1-\cos(2\pi y)\big)\]</div>
+<span id="stokes-mms"></span><h2><span class="section-number">9.6. </span>Manufacturing a solution to the Stokes equations<a class="headerlink" href="#manufacturing-a-solution-to-the-stokes-equations" title="Link to this heading">¶</a></h2>
+<p>Because the Poiseuille flow solution is quadratic in <span class="math notranslate nohighlight">\(u\)</span> and linear in <span class="math notranslate nohighlight">\(p\)</span>, it
+actually lies exactly in the finite element space, so we expect the numerical
+finite element solution to be exact up to roundoff error. This sounds
+convenient, but actually it means that this scenario is not a very extensive
+test of an implementation.</p>
+<p>The simplest modification to this scenario which avoids this difficulty is to
+choose a different solution function for <span class="math notranslate nohighlight">\(u\)</span> still of the form:</p>
+<div class="math notranslate nohighlight" id="equation-9-mixed-problems-15">
+<span class="eqno">(9.21)<a class="headerlink" href="#equation-9-mixed-problems-15" title="Link to this equation">¶</a></span>\[\begin{split}u(x, y) = \begin{bmatrix} h(y) \\ 0\end{bmatrix}\end{split}\]</div>
+<p>but with <span class="math notranslate nohighlight">\(h(y)\)</span> not quadratic, so that it does not lie exactly in the finite
+element space. This form of solution ensures that <span class="math notranslate nohighlight">\(\nabla\cdot u = 0\)</span> and that
+the outflow boundary condition can be satisfied. It will be necessary to modify
+the Dirichlet conditions to conform to the chosen solution. As before, the
+forcing term <span class="math notranslate nohighlight">\(f\)</span> is computed using the method of manufactured solutions.</p>
 </section>
 <section id="implementing-the-stokes-problem">
-<h2><span class="section-number">9.6. </span>Implementing the Stokes problem<a class="headerlink" href="#implementing-the-stokes-problem" title="Link to this heading">¶</a></h2>
-<div class="proof proof-type-exercise" id="id6">
+<h2><span class="section-number">9.7. </span>Implementing the Stokes problem<a class="headerlink" href="#implementing-the-stokes-problem" title="Link to this heading">¶</a></h2>
+<div class="proof proof-type-exercise" id="id7">
 
     <div class="proof-title">
         <span class="proof-type">Exercise 9.1</span>
@@ -463,24 +497,23 @@ square domain:</p>
 <p>The goal of this exercise is to implement a solver for the Stokes
 equations, on a unit square. Implement
 <a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery" title="fe_utils.solvers.mastery.solve_mastery"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a> so that it solves
-<a class="reference internal" href="#equation-stokes-ch9">(9.1)</a> using the forcing function derived from <a class="reference internal" href="#equation-stream">(9.18)</a>.</p>
+<a class="reference internal" href="#equation-weak-stokes-ch9">(9.2)</a> for a forcing function and boundary conditions
+manufactured as described in section <a class="reference internal" href="#stokes-mms"><span class="std std-ref">Manufacturing a solution to the Stokes equations</span></a>.</p>
 <p>Your full solution should:</p>
 <ol class="arabic simple">
 <li><p>Implement <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorFiniteElement</span></code>.</p></li>
 <li><p>Make the consequential changes to
 <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> to enable values
 to be interpolated into vector-valued functions, and to create quiver plots.</p></li>
-<li><p>Assemble and solve the required mixed system.</p></li>
+<li><p>Assemble and solve the required mixed system for your chosen
+manufactured solution to the Stokes equation.</p></li>
 <li><p>Compute the <span class="math notranslate nohighlight">\(L^2\)</span> error of the mixed solution from the analytic solution.</p></li>
 </ol>
 <p>A convergence test for your code is provided in
 <code class="docutils literal notranslate"><span class="pre">test/test_13_mastery_convergence.py</span></code>. In order to be compatible with
 this code, your implementation of
 <a class="reference internal" href="fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery" title="fe_utils.solvers.mastery.solve_mastery"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_mastery()</span></code></a> should return its results
-as a tuple of the form <code class="xref py py-data docutils literal notranslate"><span class="pre">(u,</span> <span class="pre">p),</span> <span class="pre">error</span></code>. This is a slight change from
-the comment in the code which takes into account that the problem is mixed.
-The obvious consequential change will be needed at the end of
-<a class="reference internal" href="fe_utils.solvers.html#module-fe_utils.solvers.mastery" title="fe_utils.solvers.mastery"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fe_utils.solvers.mastery</span></code></a>.</p>
+as a tuple of the form <code class="xref py py-data docutils literal notranslate"><span class="pre">(u,</span> <span class="pre">p),</span> <span class="pre">error</span></code>.</p>
 </div></div></section>
 </section>
 
@@ -492,7 +525,7 @@ The obvious consequential change will be needed at the end of
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+    &#169; Copyright 2014-2026, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
