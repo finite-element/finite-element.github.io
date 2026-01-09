@@ -86,14 +86,14 @@ condition:</p>
 vanish on <span class="math notranslate nohighlight">\(\Gamma\)</span>. The outflow condition is the “do nothing” condition which
 is imposed simply by not including the surface terms created by integrating the
 velocity equation by parts when formulating the weak form.</p>
-<p>These equations are well posed so long as $Gammasetminus Gamma_D neq
-emptyset$. That is to say, there must be some outflow boundary. If $Gamma
-=Gamma_D$ then there will be a null space comprising all of the constant
+<p>These equations are well posed so long as <span class="math notranslate nohighlight">\(\Gamma\setminus \Gamma_D \neq
+\emptyset\)</span>. That is to say, there must be some outflow boundary. If <span class="math notranslate nohighlight">\(\Gamma
+=\Gamma_D\)</span> then there will be a null space comprising all of the constant
 pressure functions. We will implement the two-dimensional case (<span class="math notranslate nohighlight">\(d=2\)</span>) and, for
 simplicity, we will assume <span class="math notranslate nohighlight">\(\mu=1\)</span>.</p>
 <p>The colon (<span class="math notranslate nohighlight">\(:\)</span>) indicates an inner product so:</p>
 <div class="math notranslate nohighlight" id="equation-9-mixed-problems-1">
-<span class="eqno">(9.4)<a class="headerlink" href="#equation-9-mixed-problems-1" title="Link to this equation">¶</a></span>\[\nabla u:\nabla v = \sum_{\alpha\beta} \nabla_{\alpha} u_{\beta}\nabla{\alpha} v_{\beta}\]</div>
+<span class="eqno">(9.4)<a class="headerlink" href="#equation-9-mixed-problems-1" title="Link to this equation">¶</a></span>\[\nabla u:\nabla v = \sum_{\alpha\beta} \nabla_{\alpha} u_{\beta}\nabla_{\alpha} v_{\beta}\]</div>
 <p>In choosing a finite element subspace of <span class="math notranslate nohighlight">\(V \times Q\)</span> we will similarly choose
 a simpler to implement, yet still stable, space than was chosen in
 <a class="reference internal" href="L6_stokes.html#stokes"><span class="std std-numref">Analysis Section 6</span></a>. The space we will use is the lowest order
