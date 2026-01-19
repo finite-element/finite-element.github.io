@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Functions in finite element spaces &#8212; Finite element course 2024.0 documentation</title>
+    <title>5. Functions in finite element spaces &#8212; Finite element course 2026.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
+    <script src="_static/documentation_options.js?v=9c5a5fc5"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
@@ -358,10 +358,10 @@ implementation.</p>
 basis functions at each quadrature point.</p></li>
 <li><p>Visit each cell in turn.</p></li>
 <li><p>Construct the <a class="reference internal" href="fe_utils.html#fe_utils.mesh.Mesh.jacobian" title="fe_utils.mesh.Mesh.jacobian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jacobian()</span></code></a> for that cell
-and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v2.2)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
-and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
+and take the absolute value of its determinant (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.absolute.html#numpy.absolute" title="(in NumPy v2.4)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.absolute</span></code></a>
+and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.det.html#numpy.linalg.det" title="(in NumPy v2.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.det()</span></code></a> will be useful here).</p></li>
 <li><p>Sum all of the arrays you have constructed over the correct
-indices to a contribution to the integral (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
+indices to a contribution to the integral (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v2.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.einsum()</span></code></a>
 may be useful for this).</p></li>
 </ol>
 </div>
@@ -384,7 +384,7 @@ template for your work.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
+    &#169; Copyright 2014-2026, David A. Ham and Colin J. Cotter.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>

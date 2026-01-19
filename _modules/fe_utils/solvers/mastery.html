@@ -1,22 +1,19 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fe_utils.solvers.mastery &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/fenics.css" />
+    <title>fe_utils.solvers.mastery &#8212; Finite element course 2026.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <script src="../../../_static/documentation_options.js?v=9c5a5fc5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/proof.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
 <!--[if lte IE 6]>
@@ -52,11 +49,14 @@
 <span class="sd">If run as a script, the result is plotted. This file can also be</span>
 <span class="sd">imported as a module and convergence tests run on the solver.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">argparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArgumentParser</span>
 
 
-<div class="viewcode-block" id="solve_mastery"><a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery">[docs]</a><span class="k">def</span> <span class="nf">solve_mastery</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function should solve the mastery problem with the given</span>
+<div class="viewcode-block" id="solve_mastery">
+<a class="viewcode-back" href="../../../fe_utils.solvers.html#fe_utils.solvers.mastery.solve_mastery">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_mastery</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function should solve the mastery problem with the given</span>
 <span class="sd">    resolution. It should return both the solution</span>
 <span class="sd">    :class:`~fe_utils.function_spaces.Function` and the :math:`L^2` error in</span>
 <span class="sd">    the solution.</span>
@@ -68,29 +68,36 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
-    <span class="c1"># return (u, p) error</span>
+
+    <span class="c1"># return (u, p), error</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Solve the mastery problem.&quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Solve the mastery problem.&quot;&quot;&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--analytic&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--analytic&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the analytic solution instead of solving the finite&quot;</span>
-        <span class="s2">&quot; element problem.&quot;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--error&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the error instead of the solution.&quot;</span><span class="p">)</span>
+        <span class="s2">&quot; element problem.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;resolution&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The number of cells in each direction on the mesh.&quot;</span>
+        <span class="s2">&quot;--error&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the error instead of the solution.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The number of cells in each direction on the mesh.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
     <span class="n">resolution</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">resolution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">analytic</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">analytic</span>
     <span class="n">plot_error</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">error</span>
 
-    <span class="n">u</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">solve_mastery</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="p">,</span> <span class="n">plot_error</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">error</span> <span class="o">=</span> <span class="n">solve_mastery</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">analytic</span><span class="p">,</span> <span class="n">plot_error</span><span class="p">)</span>
 
     <span class="n">u</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
@@ -102,8 +109,8 @@
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2021, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    &#169; Copyright 2014-2026, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>
