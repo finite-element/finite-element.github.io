@@ -9,53 +9,53 @@ fe\_utils.scripts.plot\_function\_space\_nodes module
 
 .. automodule:: fe_utils.scripts.plot_function_space_nodes
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 fe\_utils.scripts.plot\_interpolate\_lagrange module
 ----------------------------------------------------
 
 .. automodule:: fe_utils.scripts.plot_interpolate_lagrange
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 fe\_utils.scripts.plot\_lagrange\_basis\_functions module
 ---------------------------------------------------------
 
 .. automodule:: fe_utils.scripts.plot_lagrange_basis_functions
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 fe\_utils.scripts.plot\_lagrange\_points module
 -----------------------------------------------
 
 .. automodule:: fe_utils.scripts.plot_lagrange_points
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 fe\_utils.scripts.plot\_mesh module
 -----------------------------------
 
 .. automodule:: fe_utils.scripts.plot_mesh
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 fe\_utils.scripts.plot\_sin\_function module
 --------------------------------------------
 
 .. automodule:: fe_utils.scripts.plot_sin_function
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------
 
 .. automodule:: fe_utils.scripts
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

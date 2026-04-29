@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Interpolation operators &#8212; Finite element course 2024.0 documentation</title>
+    <title>3. Interpolation operators &#8212; Finite element course 2026.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/fenics.css?v=7793b76c" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <script src="_static/documentation_options.js?v=7ff0cb77"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/documentation_options.js?v=9c5a5fc5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
     <script src="_static/design-tabs.js?v=36754332"></script>
@@ -84,21 +84,21 @@ mapping <span class="math notranslate nohighlight">\(v\)</span> to <span class="
 <div class="proof proof-type-lemma" id="id2">
 <span id="ilinear"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma </span>
+        <span class="proof-type">Lemma 3.2</span>
         
     </div><div class="proof-content">
 <p>The operator <span class="math notranslate nohighlight">\(I_K\)</span> is linear.</p>
 </div></div><div class="proof proof-type-exercise" id="id3">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.3</span>
         
     </div><div class="proof-content">
-<p>Prove <code class="xref std std-numref docutils literal notranslate"><span class="pre">Lemma</span> <span class="pre">{number}</span></code>.</p>
+<p>Prove <a class="reference internal" href="#ilinear"><span class="std std-numref">Lemma 3.2</span></a>.</p>
 </div></div><div class="proof proof-type-lemma" id="id4">
 <span id="i-same-nodes"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma </span>
+        <span class="proof-type">Lemma 3.4</span>
         
     </div><div class="proof-content">
 <div class="math notranslate nohighlight">
@@ -106,31 +106,31 @@ mapping <span class="math notranslate nohighlight">\(v\)</span> to <span class="
 </div></div><div class="proof proof-type-exercise" id="id5">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.5</span>
         
     </div><div class="proof-content">
-<p>Prove <code class="xref std std-numref docutils literal notranslate"><span class="pre">Lemma</span> <span class="pre">{number}</span></code>.</p>
+<p>Prove <a class="reference internal" href="#i-same-nodes"><span class="std std-numref">Lemma 3.4</span></a>.</p>
 </div></div><div class="proof proof-type-lemma" id="id6">
 <span id="i-projection"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma </span>
+        <span class="proof-type">Lemma 3.6</span>
         
     </div><div class="proof-content">
 <p><span class="math notranslate nohighlight">\(I_K\)</span> is the identity when restricted to <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>.</p>
 </div></div><div class="proof proof-type-exercise" id="id7">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.7</span>
         
     </div><div class="proof-content">
-<p>Prove <code class="xref std std-numref docutils literal notranslate"><span class="pre">Lemma</span> <span class="pre">{number}</span></code>.</p>
+<p>Prove <a class="reference internal" href="#i-projection"><span class="std std-numref">Lemma 3.6</span></a>.</p>
 </div></div><p>By combining together the local interpolators in each triangle of the
 triangulation, we obtain the global interpolator into the finite
 element space.</p>
 <div class="proof proof-type-definition" id="id8">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.2</span>
+        <span class="proof-type">Definition 3.8</span>
         
             <span class="proof-title-name">(Global interpolator)</span>
         
@@ -165,7 +165,7 @@ order derivatives, we introduce the multi-index.</p>
 <div class="proof proof-type-definition" id="id9">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.3</span>
+        <span class="proof-type">Definition 3.9</span>
         
             <span class="proof-title-name">(Multi-index.)</span>
         
@@ -182,7 +182,7 @@ errors.</p>
 <div class="proof proof-type-definition" id="id10">
 
     <div class="proof-title">
-        <span class="proof-type">Definition 3.4</span>
+        <span class="proof-type">Definition 3.10</span>
         
             <span class="proof-title-name">((H^k) seminorm and norm)</span>
         
@@ -210,7 +210,7 @@ important result (which we will return to much later).</p>
 <div class="proof proof-type-theorem" id="id11">
 
     <div class="proof-title">
-        <span class="proof-type">Theorem 3.5</span>
+        <span class="proof-type">Theorem 3.11</span>
         
             <span class="proof-title-name">(Sobolev’s inequality (for continuous functions))</span>
         
@@ -241,7 +241,7 @@ derivatives.</p>
 <div class="proof proof-type-corollary" id="id12">
 
     <div class="proof-title">
-        <span class="proof-type">Corollary 3.6</span>
+        <span class="proof-type">Corollary 3.12</span>
         
             <span class="proof-title-name">(Sobolev’s inequality for derivatives (for continuous functions))</span>
         
@@ -284,7 +284,7 @@ integral sense.</p>
 <div class="proof proof-type-definition" id="id13">
 <span id="def-averaged-taylor"></span>
     <div class="proof-title">
-        <span class="proof-type">Definition 3.7</span>
+        <span class="proof-type">Definition 3.13</span>
         
             <span class="proof-title-name">(Averaged Taylor polynomial)</span>
         
@@ -302,7 +302,7 @@ as</p>
 </div></div><div class="proof proof-type-exercise" id="id14">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.14</span>
         
     </div><div class="proof-content">
 <blockquote>
@@ -335,7 +335,7 @@ allowfullscreen></iframe></div>
 </details><div class="proof proof-type-theorem" id="id15">
 <span id="taylorerror"></span>
     <div class="proof-title">
-        <span class="proof-type">Theorem </span>
+        <span class="proof-type">Theorem 3.15</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\Omega\subset \mathbb{R}^n\)</span> be a domain with diameter <span class="math notranslate nohighlight">\(d\)</span>,
@@ -394,13 +394,13 @@ into <span class="math notranslate nohighlight">\([0,1/2]\)</span> and <span cla
 \, d y,\\&amp;\leq  2^{n-1}|B|\int_\Omega |D^\alpha f(z)|^2\, d z.\end{aligned}\end{align} \]</div>
 <p>Similarly, for <span class="math notranslate nohighlight">\(II\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}II &amp;=  \int_B \int_{1/2}^1 \int_{\mathbb{R}^n} |g_\alpha(ty+(1-t)x)|^2
-\, d x \, d t\, d y,\\&amp;=  \int_B \int_{1/2}^1 \int_{\mathbb{R}^n} |g_\alpha(ty)|^2\, d x \, d t
-\, d y,\\&amp;=  \int_B \int_{1/2}^1 \int_{\mathbb{R}^n} |g_\alpha(z)|^2
+\[ \begin{align}\begin{aligned}II &amp;=  \int_\Omega \int_{1/2}^1 \int_{\mathbb{R}^n} |g_\alpha(ty+(1-t)x)|^2
+\, d x \, d t\, d y,\\&amp;=  \int_\Omega \int_{1/2}^1 \int_{\mathbb{R}^n} |g_\alpha(ty)|^2\, d x \, d t
+\, d y,\\&amp;=  \int_\Omega \int_{1/2}^1 \int_{\mathbb{R}^n} |g_\alpha(z)|^2
 t^{-n}
 \, d z \, d t
-\, d y,\\&amp;\leq  2^{n-1}|B|\int_\Omega |D^\alpha f(z)|^2\, d z.\end{aligned}\end{align} \]</div>
-<p>Hence, we obtain the required bounds for <span class="math notranslate nohighlight">\(|\beta|=0\)</span>. For higher
+\, d y,\\&amp;\leq  2^{n-1}|\Omega|\int_\Omega |D^\alpha f(z)|^2\, d z.\end{aligned}\end{align} \]</div>
+<p>Hence, we obtain the required bounds for <span class="math notranslate nohighlight">\(|\beta|=0\)</span>, after using <span class="math notranslate nohighlight">\(|\Omega|\geq |B|\)</span>. For higher
 derivatives we use the fact that</p>
 <div class="math notranslate nohighlight">
 \[D^\beta Q_{k,B} f(x) = Q_{k-|\beta|,B}D^\beta f(x),\]</div>
@@ -410,7 +410,7 @@ of the triangle we are interpolating to.</p>
 <div class="proof proof-type-corollary" id="id16">
 <span id="unittaylorerr"></span>
     <div class="proof-title">
-        <span class="proof-type">Corollary </span>
+        <span class="proof-type">Corollary 3.16</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(K_1\)</span> be a triangle with diameter <span class="math notranslate nohighlight">\(1\)</span>.
@@ -443,7 +443,7 @@ results of this section without directly using the previous estimate
 <div class="proof proof-type-exercise" id="id17">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.17</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(w\in C^2([0,1])\)</span>, with <span class="math notranslate nohighlight">\(w(0)=w(1)=0\)</span>. Show that</p>
@@ -458,7 +458,7 @@ with Rolle’s theorem.</p>
 </div></div><div class="proof proof-type-exercise" id="id18">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.18</span>
         
     </div><div class="proof-content">
 <p>Using the previous exercise, show that for all <span class="math notranslate nohighlight">\(u\in C^2([0,1])\)</span>, there
@@ -472,7 +472,7 @@ variables are <span class="math notranslate nohighlight">\(N_0[p]=p(0)\)</span> 
 </div></div><div class="proof proof-type-exercise" id="id19">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.19</span>
         
     </div><div class="proof-content">
 <p>Using the previous exercise, show that for all <span class="math notranslate nohighlight">\(u\in C^2([a,b])\)</span>, there
@@ -486,7 +486,7 @@ variables are <span class="math notranslate nohighlight">\(N_0[p]=p(a)\)</span> 
 </div></div><div class="proof proof-type-exercise" id="id20">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.20</span>
         
     </div><div class="proof-content">
 <p>Using the previous exercise, show that for a P1 finite element space
@@ -500,7 +500,7 @@ finite element space.</p>
 </div></div><div class="proof proof-type-exercise" id="id21">
 
     <div class="proof-title">
-        <span class="proof-type">Exercise </span>
+        <span class="proof-type">Exercise 3.21</span>
         
     </div><div class="proof-content">
 <p>Under the same assumptions as the previous exercise, prove the following
@@ -518,7 +518,7 @@ a scaling argument to obtain error estimates in terms of the diameter
 <div class="proof proof-type-lemma" id="id22">
 <span id="ibound"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma </span>
+        <span class="proof-type">Lemma 3.22</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((K_1,\mathcal{P},\mathcal{N})\)</span> be a finite element such that
@@ -559,7 +559,7 @@ adding and subtracting something, in this case the Taylor polynomial.</p>
 <div class="proof proof-type-lemma" id="id23">
 <span id="ierrk1"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma </span>
+        <span class="proof-type">Lemma 3.23</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((K_1,\mathcal{P},\mathcal{N})\)</span> be a finite element such that
@@ -578,8 +578,8 @@ local interpolation operator satisfies</p>
         
     </div><div class="proof-content">
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}|\mathcal{I}_{K_1}u-u|_{H^i(K_1)}^2 &amp;\leq \|\mathcal{I}_{K_1}u-u\|_{H^k(K_1)}^2\\&amp;=
-\|\mathcal{I}_{K_1}u-Q_{k,B}u + Q_{k,B}u - u\|_{H^k(K_1)}^2\\&amp;\leq \|Q_{k,B}u-u\|_{H^k(K_1)}^2 + \|\mathcal{I}(u-Q_{k,B}u)\|_{H^k(K_1)}^2,\\&amp;\leq \|Q_{k,B}u-u\|_{H^k(K_1)}^2 + C^2\|Q_{k,B}u-u\|_{H^k(K_1)}^2,\\&amp;\leq (1+C^2)|u|_{H^{k+1}(K_1)}^2,\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}|\mathcal{I}_{K_1}u-u|_{H^i(K_1)} &amp;\leq \|\mathcal{I}_{K_1}u-u\|_{H^k(K_1)}\\&amp;=
+\|\mathcal{I}_{K_1}u-Q_{k,B}u + Q_{k,B}u - u\|_{H^k(K_1)}\\&amp;\leq \|Q_{k,B}u-u\|_{H^k(K_1)} + \|\mathcal{I}(u-Q_{k,B}u)\|_{H^k(K_1)},\\&amp;\leq \|Q_{k,B}u-u\|_{H^k(K_1)} + C\|Q_{k,B}u-u\|_{H^k(K_1)},\\&amp;\leq (1+C)|u|_{H^{k+1}(K_1)},\end{aligned}\end{align} \]</div>
 <p>where we used the fact that <span class="math notranslate nohighlight">\(\mathcal{I}_{K_1}Q_{k,B}u = Q_{k,B}u\)</span> in the
 second line and the previous lemma in the third line.</p>
 </div></div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -595,7 +595,7 @@ with diameter <span class="math notranslate nohighlight">\(h\)</span>.</p>
 <div class="proof proof-type-lemma" id="id24">
 <span id="scaling"></span>
     <div class="proof-title">
-        <span class="proof-type">Lemma </span>
+        <span class="proof-type">Lemma 3.24</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((K,\mathcal{P},\mathcal{N})\)</span> be a finite element such that
@@ -639,7 +639,7 @@ spaces defined on the whole triangulation.</p>
 <div class="proof proof-type-theorem" id="id25">
 <span id="iherr"></span>
     <div class="proof-title">
-        <span class="proof-type">Theorem </span>
+        <span class="proof-type">Theorem 3.25</span>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> be a triangulation of <span class="math notranslate nohighlight">\(\Omega\)</span> with finite
@@ -682,8 +682,8 @@ element approximations.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2014-2024, David A. Ham and Colin J. Cotter.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    &#169; Copyright 2014-2026, David A. Ham and Colin J. Cotter.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>
